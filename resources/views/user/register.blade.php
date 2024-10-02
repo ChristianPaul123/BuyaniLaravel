@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
   @include ('layouts.head')
+  @include('user.styles.user_styles')
 
     <style>
         .custom-font-content {
@@ -59,13 +60,14 @@
         .message i:active{
         transform: rotate(90deg);
         }
-        
+
         .toggle-password {
             cursor: pointer;
         }
     </style>
 </head>
 <body style="overflow-x: hidden;">
+    @include ('user.includes.navbar');
 {{-- Display success or error messages --}}
 @if (session('message'))
     <div class="alert alert-success">
@@ -102,7 +104,7 @@
                       <div class="form-group my-3">
                           <label for="email">Email</label>
                           <input type="email" name="email" class="form-control" id="email" placeholder="Enter email" required>
-                      </div>                 
+                      </div>
                   </div>
                   <div class="col-lg-4 offset-lg-2 mb-4">
                       <div class="form-group my-3">
@@ -122,7 +124,7 @@
                           <label for="password2">Confirm Password:</label>
                           <div class="input-group">
                               <input type="password" name="password_confirmation" class="form-control" id="password2" placeholder="Re-enter password" required>
-                          </div>                       
+                          </div>
                       </div>
                   </div>
               </div>
@@ -175,7 +177,7 @@
                         <label for="password2">Confirm Password:</label>
                         <div class="input-group">
                             <input type="password" name="password_confirmation" class="form-control" placeholder="Re-enter password" required>
-                        </div>                      
+                        </div>
                     </div>
                 </div>
             </div>
@@ -193,8 +195,8 @@
 @endif
     <!--Sign Up-->
 
-
-    @include ('include.footer')
+    @include('layouts.script')
+    @include ('layouts.footer')
 
 </body>
 </html>

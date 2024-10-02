@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SubCategoryController;
 
 Route::get('/', function () {
     return view('user.index');
@@ -12,7 +15,7 @@ Route::get('/', function () {
 //admin logging
 Route::get('/admin', [AdminController::class, 'showForm'])->name('admin.login');
 Route::post('admin/login', [AdminController::class,'login' ]);
-Route::post('admin/logout', [AdminController::class,'logout' ])->name('admin.logout');
+Route::get('admin/logout', [AdminController::class,'logout' ])->name('admin.logout');
 
 Route::get('admin/dashboard', [AdminController::class, 'showdashboard'])->name('admin.dashboard');
 
@@ -28,23 +31,72 @@ Route::post('user/register', [UserController::class, 'register'])->name('user.re
 Route::get('user/consumer', [UserController::class, 'showCondashboard'])->name('user.consumer');
 Route::get('user/farmer', [UserController::class, 'showFarmDashboard'])->name('user.farmer');
 
-// Route::get('admin/dashboard', function () {
-//     return view('admin.dashboard');
-// })->middleware('auth:admin')->name('admin.dashboard');
+
+//Product Side
+//admin side
+ Route::get('admin/product', [ProductController::class, 'showProducts'])->name('admin.product');
+
+ Route::get('admin/order', function () {
+    return view('admin.order');
+});
+
+Route::get('admin/customization', function () {
+    return view('admin.customization');
+});
+
+Route::get('admin/report', function () {
+    return view('admin.report');
+});
+
+Route::get('admin/message', function () {
+    return view('admin.messenger');
+});
+
+Route::get('admin/subcategory', function () {
+    return view('admin.subcategory');
+});
+
+Route::get('admin/category', function () {
+    return view('admin.category');
+});
+
+Route::get('admin/blog', function () {
+    return view('admin.blog');
+});
+ //user side
+// Route::get('user/farmer', [UserController::class, 'showFarmDashboard'])->name('user.farmer');
+// Route::get('user/consumer', [UserController::class, 'showCondashboard'])->name('user.consumer');
+// Route::get('user/farmer', [UserController::class, 'showFarmDashboard'])->name('user.farmer');
+// Route::get('user/consumer', [UserController::class, 'showCondashboard'])->name('user.consumer');
+// Route::get('user/farmer', [UserController::class, 'showFarmDashboard'])->name('user.farmer');
 
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+//Order Side
+//admin side
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+//user side
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+//Category Side
+//admin side
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+//user side
+
+//SubCategory Side
+//admin side
+
+//user side
+
+//blog Side
+//admin side
+
+//user side
+
+//report Side
+
+
+//customization Side
+
+//message Side
+//admin side
+
+//user side

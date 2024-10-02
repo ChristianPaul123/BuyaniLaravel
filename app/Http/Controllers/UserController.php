@@ -16,7 +16,7 @@ class UserController extends Controller
         if ($user_type == 1) {
         return view('user.register')->with('user_type', $user_type);
         } else if ($user_type == 2) {
-        return view('user.register')->with('user_type', $user_type);   
+        return view('user.register')->with('user_type', $user_type);
         }
     }
 
@@ -27,7 +27,7 @@ class UserController extends Controller
         if ($user_type == 1) {
         return view('user.login')->with('user_type', $user_type);
         } else if ($user_type == 2) {
-        return view('user.login')->with('user_type', $user_type);;   
+        return view('user.login')->with('user_type', $user_type);;
         }
     }
 
@@ -43,8 +43,8 @@ class UserController extends Controller
         return view('user.farmer');
     }
 
-    
-    public function register (Request $request) {    
+
+    public function register (Request $request) {
         $fields = $request->validate([
             'username' => ['required',  Rule::unique('users','username')],
             'email' => ['required', Rule::unique('users','email')],
@@ -86,32 +86,34 @@ class UserController extends Controller
      ]);
 
     $user_type = $fields['user_type'];
- 
+
      // Attempt to authenticate the user
      if (auth()->guard('user')->attempt([
          'username' => $fields['username'],
          'password' => $fields['password'],
+         'user_type' => $fields['user_type'],
      ])) {
          $request->session()->regenerate();
          $user = auth()->guard('user')->user();
- 
+
          // Check user_type and redirect accordingly
          if ($user->user_type == 1) {
              return redirect()->route('user.consumer')->with('message', 'Login successful');
          } elseif ($user->user_type == 2) {
              return redirect()->route('user.farmer')->with('message', 'Login successful');
-         } else {
-             // Unknown user_type, return with an error message -- not readable
-             return redirect('/user/login?user_type=' . $user->user_type)
-                 ->with('message', 'User type not recognized! Please check properly.');
          }
+        //  else {
+        //      // Unknown user_type, return with an error message -- not readable
+        //      return redirect('/user/login?user_type=' . $user_type)
+        //          ->withErrors('message', 'User type not recognized! Please check properly.');
+        //  }
      } else {
          // Authentication failed, return error with user_type in URL
          return redirect('/user/login?user_type=' . $user_type)
             ->withErrors(['login' => 'Invalid username or password. Please try again.']);
      }
     }
-       
+
 
     public function logout(Request $request)
     {

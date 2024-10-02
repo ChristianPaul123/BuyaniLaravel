@@ -3,29 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+
     @include ('layouts.head')
-
-    <style>
-        .custom-font-content {
-            font-family: 'Poppins', sans-serif;
-            font-weight: bold;
-            color: aliceblue;
-        }
-
-        .login-card {
-            background-color: #3F6F23;
-            color: #fff;
-            padding: 20px;
-        }
-
-        .form-control:focus {
-            box-shadow: none;
-        }
-    </style>
+    @include('user.styles.user_styles')
 </head>
 <body style="overflow-x: hidden;">
-  @include('navBar.navbar-consumer')
+    @include ('user.includes.navbar');
   {{-- Display success or error messages --}}
     <!--CONTENT-->
     <div class="row custom-font-content">
@@ -39,12 +22,12 @@
                     @endforeach
                 </ul>
             </div>
-            @endif  
-            
+            @endif
+
         <div class="col-lg-6 login-card d-flex flex-column align-items-center justify-content-center" style="height: 500px;">
 
-            <div class="container d-flex align-items-center justify-content-center">  
-   
+            <div class="container d-flex align-items-center justify-content-center">
+
                 @if ($user_type == 1)
                     <h2 class="text-center my-3 mx-2" style="font-size: 40px; white-space: nowrap;" >Login as Consumer</h2>
                 @elseif ($user_type == 2)
@@ -58,7 +41,7 @@
                     <input type="text" name="username" class="form-control" id="username" placeholder="Enter username" required>
                 </div>
                 <div class="form-group my-3">
-                  
+
                     <label for="password">Password:</label>
                     <div class="input-group">
                         <input type="password" name="password" class="form-control" id="password" placeholder="Enter password" required>
@@ -83,7 +66,7 @@
                 <a href="../signUp/signUp-consumer.php">Create Account | Sign Up</a>
             </div>
         </div>
-@if($user_type == 1)      
+@if($user_type == 1)
         <div class="col-lg-6 d-flex align-items-center justify-content-center p-0">
             <img src="../img/consumerPhoto.jpg" alt="farmer logo" style="width: 100%; height: 500px;">
         </div>
@@ -93,7 +76,8 @@
     </div>
 @endif
     </div>
-    @include ('include.footer')
+    @include('layouts.script')
+    @include ('layouts.footer')
   </body>
 </html>
-    
+

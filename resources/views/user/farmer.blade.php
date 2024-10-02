@@ -6,23 +6,12 @@
 
     @include('layouts.head')
 
-    <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-            overflow-x: hidden; /* Prevent horizontal scrollbar */
-        }
+    @include ('user.styles.user_styles');
 
-        .custom-font-content {
-            font-family: 'Poppins', sans-serif;
-            font-weight: bold;
-            color: aliceblue;
-        }
-    </style>
 </head>
 <body class="body">
 @auth('user')
-     @include ('navBar.navbar-farmer');
+     @include ('user.includes.navbar');
      <form action="{{ route('user.logout') }}" method="POST">
         @csrf
         <button type="submit" class="btn btn-danger">Logout</button>
@@ -37,19 +26,18 @@
 
 
 @else
-            <p>not logged in</p>   
-            @session('message')
-            <div class="success-message">
-                {{ session('message') }}
-            </div>
-            @endsession
+            <p>not logged in</p>
+
 @endauth
 
 <script>
     window.addEventListener('popstate', function(event) {
-        // If the user presses the back button, log them out
+        // If the user press the back button, log them out
         window.location.href = "{{ route('user.logout') }}";
     });
   </script>
+
+@include('layouts.script')
+@include ('layouts.footer')
 </body>
 </html>

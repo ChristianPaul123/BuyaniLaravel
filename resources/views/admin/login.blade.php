@@ -7,6 +7,10 @@
     @include('layouts.head')
 
     <style>
+        html,body {
+            overflow: hidden;
+        }
+
         .wallpaper {
             background-image: url('../img/wallpaper.png');
             background-repeat: no-repeat;
@@ -35,9 +39,6 @@
     </style>
 </head>
 <body>
-
-
-  
 <!--CONTENT-->
 <div class="row custom-font-content d-flex align-items-center justify-content-center wallpaper" style="height: 100vh;">
   <div class="col-lg-4 login-card d-flex flex-column align-items-center pt-5">
@@ -94,5 +95,8 @@
         });
     });
     </script>
+
+@include('layouts.script')
+
 </body>
 </html>
