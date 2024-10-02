@@ -3,8 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+
     @include ('layouts.head')
+    @include('user.styles.user_styles')
 
     <style>
         .custom-font-content {
@@ -13,19 +14,11 @@
             color: aliceblue;
         }
 
-        .login-card {
-            background-color: #3F6F23;
-            color: #fff;
-            padding: 20px;
-        }
 
-        .form-control:focus {
-            box-shadow: none;
-        }
     </style>
 </head>
 <body style="overflow-x: hidden;">
-    @include('navBar.navbar-consumer')
+    @include ('user.includes.navbar');
     @if (session('message'))
     <div class="alert alert-success">
         {{ session('message') }}
@@ -37,7 +30,7 @@
           <form action="{{ route('user.register') }}" method="GET">
               <input type="hidden" name="user_type" value="1">
               <button type="submit" class="btn btn-primary">Register as Consumer</button>
-          </form>       
+          </form>
           <form action="{{ route('user.register') }}" method="GET">
               <input type="hidden" name="user_type" value="2">
               <button type="submit" class="btn btn-primary">Register as Farmer</button>
@@ -50,7 +43,7 @@
         <form action="{{ route('user.login') }}" method="GET">
             <input type="hidden" name="user_type" value="1">
             <button type="submit" class="btn btn-primary">login as Consumer</button>
-        </form>       
+        </form>
         <form action="{{ route('user.login') }}" method="GET">
             <input type="hidden" name="user_type" value="2">
             <button type="submit" class="btn btn-primary">login as Farmer</button>
