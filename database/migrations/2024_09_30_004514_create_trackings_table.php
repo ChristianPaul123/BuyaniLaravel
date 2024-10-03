@@ -13,7 +13,13 @@ return new class extends Migration
     {
         Schema::create('trackings', function (Blueprint $table) {
             $table->id();
+            $table->string('tracking_number');
+            $table->boolean('tracking_status');
+            $table->string('tracking_time');
+            $table->text('tracking_info');
+            $table->foreignId('order_id')->constrained('orders')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
+
         });
     }
 

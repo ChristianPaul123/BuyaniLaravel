@@ -15,6 +15,7 @@ class Tracking extends Model
         //'order_status',
         //'courier_id',
         'tracking_status',
+        'tracking_time',
         'tracking_info',
 
     ];

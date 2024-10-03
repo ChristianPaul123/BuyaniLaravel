@@ -21,8 +21,8 @@ class Product extends Model
         'product_details',
         'product_status',
         'product_kg',
-        'product_category',
-        'product_subcategory',
+        'category_id',
+        'sub_category_id',
         'product_deactivated',
     ];
 

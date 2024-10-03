@@ -15,8 +15,17 @@ class Order extends Model
         'overall_orderKG',
         'total_price',
         'payment_status',
-        'shipping_address',
         //'shipping_method',
         'order_status',
+        'shipping_address',
+        'customer_name',
+        'customer_phone',
+        'customer_email',
+        'customer_street',
+        'customer_city',
+        'customer_state',
+        'customer_zip_code',
+        'customer_country',
+        'customer_house_number',
     ];
 }

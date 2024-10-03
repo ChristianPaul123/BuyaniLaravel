@@ -8,15 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class ShippingAddress extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-        'user_id',
         'house_number',
         'street',
         'city',
         'state',
         'country',
-        'zip_code',
-        //'address_pic',
+        'user_id',
     ];
+
+
+    // protected $hidden = [
+    //     'user_id',
+    // ];
 }

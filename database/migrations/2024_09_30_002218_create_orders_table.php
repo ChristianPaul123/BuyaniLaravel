@@ -13,6 +13,22 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->string('total_amount');
+            $table->float('overall_orderKG');
+            $table->decimal('total_price',8,2);
+            $table->boolean('order_status')->default('0');
+            $table->string('customer_name');
+            $table->string('customer_email');
+            $table->string('customer_phone');
+            $table->string('customer_address');
+            $table->string('customer_city');
+            $table->string('customer_state');
+            $table->string('customer_zip');
+            $table->string('customer_country');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+
+            //make this migration
+            //$table->foreignId('shipping_address_id')->constrained('shipping_addresses')->onDelete('cascade')->nullable();
             $table->timestamps();
         });
     }

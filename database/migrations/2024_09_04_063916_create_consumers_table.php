@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('consumers_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrainedTo('users');
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }

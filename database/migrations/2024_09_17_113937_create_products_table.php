@@ -13,6 +13,17 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->string('product_name')->unique();
+            $table->string('product_pic')->nullable();
+            $table->integer('product_price')->nullable();
+            $table->string('product_details')->nullable();
+            $table->string('product_status')->nullable();
+            $table->float('product_kg')->nullable();
+            $table->string('product_deactivated')->nullable();
+
+            //make this foriegn key migration
+            //$table->foreignId('category_id')->nullable()->constrained('categories')->onDelete('cascade')->onUpdate('cascade');
+            //$table->foreignId('subcategory_id')->nullable()->constrained('sub_categories')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

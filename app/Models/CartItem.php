@@ -15,6 +15,6 @@ class CartItem extends Model
         'quantity',
         'price',
         'overall_kg',
-        'stock_status'
+        'product_status'
     ];
 }
