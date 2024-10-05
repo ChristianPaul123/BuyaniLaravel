@@ -13,82 +13,64 @@ class ProductController extends Controller
      */
     public function showProducts()
     {
-        return view('admin.product');
-    }
+        //$products = Product::all();
+        //return view('admin.product', compact('products'));
+        return view('admin.product.product');
 
-    public function DisplayProductsOnConsumer()
-    {
-        $products = Product::all();
-        return view('consumer.products', compact('products'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function AddProductOnAdmin()
-    {
-        return view('admin.add-product');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function DisplayProductOnAdmin
-    (Request $request)
-    {
-        $validatedData = $request->validate([
-            'name' => 'required|max:255',
-            'description' => 'required',
-            'price' => 'required|numeric',
-            'stock' => 'required|integer',
-        ]);
-
-        $product = new Product($validatedData);
-        $product->save();
-
-        return redirect()->route('admin.products')->with('success', 'Product added successfully.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function DisplaySpecificProductInfo(Product $product)
-    {
-        return view('consumer.product-info', compact('product'));
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function EditProductOnAdminPage(Product $product)
-    {
-        return view('admin.edit-product', compact('product'));
-    }
+     public function viewProduct(Product $product)
+      {
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function UpdateProductOnAdminPage(Request $request, Product $product)
-    {
++        $product = Product::findOrFail($product->id); // Retrieve the product by its ID
+         return view('admin.product', compact('product'));
+      }
+
+      public function showAddProduct() {
+        return view('admin.product.add-product');
+      }
+
+      public function addProduct(Request $request) {
         $validatedData = $request->validate([
-            'name' => 'required|max:255',
-            'description' => 'required',
-            'price' => 'required|numeric',
-            'stock' => 'required|integer',
+            'product_name' => 'required',
+            'product_price' => 'required',
+            'product_details' => 'required',
+            'product_status' => 'required',
+            'product_kg' => 'required',
+
+            //'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $product->update($validatedData);
+        //$imageName = time().'.'.$request->image->extension();
 
-        return redirect()->route('admin.products')->with('success', 'Product updated successfully.');
-    }
+        //$request->image->move(public_path('images'), $imageName);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function DeleteProductOnAdminPage(Product $product)
+        //$product = new Product();
+        //$product->name = $validatedData['name'];
+        //$product->description = $validatedData['description'];
+      }
+
+
+    public function editProduct($id)
     {
-        $product->delete();
-
-        return redirect()->route('admin.products')->with('success', 'Product deleted successfully.');
+        // Add logic to handle product editing
     }
+
+    public function updateProduct($id, Request $request)
+    {
+        // Add logic to handle product update
+    }
+
+    public function deleteProduct($id)
+    {
+        // Add logic to handle product deletion
+    }
+
+
+
 }
+

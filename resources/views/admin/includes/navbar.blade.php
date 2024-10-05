@@ -10,17 +10,17 @@
             </button>
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
-                    <li class="nav-item mx-2">
-                        <a class="nav-link custom-font-navbar" href="#" data-toggle="modal" data-target="#pendingMessageModal"> {{ auth()->guard('admin')->user()->username }}</a>
-                    </li>
-                    <li class="nav-item dropdown mx-2">
+                    <li class="nav-item dropdown mx-4">
                         <a class="nav-link dropdown-toggle" href="#" id="triggerModal" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="../img/user.svg" alt="user" height="20">
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="triggerModal">
+                        <ul class="dropdown-menu mr-5" aria-labelledby="triggerModal">
                             <li><a class="dropdown-item" href="#">Edit Profile</a></li>
                             <li><a class="dropdown-item" href="{{ route('admin.logout') }}">Logout</a></li>
                         </ul>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link custom-font-navbar" href="#" data-toggle="modal" data-target="#pendingMessageModal"> {{ auth()->guard('admin')->user()->username }}</a>
                     </li>
                 </ul>
             </div>

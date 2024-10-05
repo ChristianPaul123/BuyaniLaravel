@@ -10,10 +10,15 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
-    
+
     public function showform()
     {
         return view('admin.login');
+    }
+
+    public function test()
+    {
+        return view('admin.test');
     }
 
     public function showdashboard()
@@ -21,7 +26,7 @@ class AdminController extends Controller
         return view('admin.dashboard');
     }
 
-    
+
     public function register (Request $request) {
 
     $fields = $request->validate([
@@ -41,18 +46,18 @@ class AdminController extends Controller
     ]);
 
         //Encryption for password fields
-        $fields['password'] = bcrypt($fields['password']); 
+        $fields['password'] = bcrypt($fields['password']);
 
         if (Admin::create($fields)) {
             return redirect()->route('admin.login')->with('message', 'admin was created successfully');
         } else {
-            return redirect()->route('admin.register')->with('message', 'Error#1: error occurred for some reason');
+            return redirect()->route('admin.test')->with('message', 'Error#1: error occurred for some reason');
         };
-        
+
     }
 
     public function login(Request $request) {
-        
+
         $fields = $request->validate([
             'username' => ['required'],
             'password' => ['required'],
@@ -62,7 +67,7 @@ class AdminController extends Controller
             'username' => $fields['username'],
             'password' => $fields['password'],
         ])) {
-        
+
         $request->session()->regenerate();
         return redirect()->route('admin.dashboard')->with('message', 'login successfull');
         } else {

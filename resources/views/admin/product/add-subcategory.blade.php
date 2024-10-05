@@ -31,38 +31,38 @@
             <!--Add the more part here
             EX: just add a div
             -->
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Product</h1>
+            <div class=" justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+
             </div>
-            </section>
+        </section>
 
-        </div>
     </div>
-     <form action="{{ route('admin.logout') }}" method="POST">
-        {{-- @csrf
-        <button type="submit" class="btn btn-danger">Logout</button>
-    </form>
-     <h1>Welcome to Admin Dashboard, {{ auth()->guard('admin')->user()->username }}</h1> --}}
-     @session('message')
+</div>
+ <form action="{{ route('admin.logout') }}" method="POST">
+    {{-- @csrf
+    <button type="submit" class="btn btn-danger">Logout</button>
+</form>
+ <h1>Welcome to Admin Dashboard, {{ auth()->guard('admin')->user()->username }}</h1> --}}
+ @session('message')
 
 
-    @endsession
+@endsession
 
 
 @else
-            <p>not logged in</p>
-            @session('message')
-            <div class="success-message">
-                {{ session('message') }}
-            </div>
-            @endsession
+        <p>not logged in</p>
+        @session('message')
+        <div class="success-message">
+            {{ session('message') }}
+        </div>
+        @endsession
 @endauth
-    @include('layouts.script')
+@include('layouts.script')
 <script>
-    window.addEventListener('popstate', function(event) {
-        // If the user presses the back button, log them out
-        window.location.href = "{{ route('admin.logout') }}";
-    });
-  </script>
+window.addEventListener('popstate', function(event) {
+    // If the user presses the back button, log them out
+    window.location.href = "{{ route('admin.logout') }}";
+});
+</script>
 </body>
 </html>
