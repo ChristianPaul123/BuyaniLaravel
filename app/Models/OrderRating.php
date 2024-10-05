@@ -16,4 +16,14 @@ class OrderRating extends Model
         'review_by',
         'customer_rating',
     ];
+
+    // public function order()
+    // {
+    //     return $this->belongsTo(Order::class);
+    // }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

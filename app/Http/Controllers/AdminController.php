@@ -82,4 +82,6 @@ class AdminController extends Controller
         $request->session()->regenerateToken();
         return redirect()->route('admin.login')->with('message', 'Successfully logged out');
     }
+
+
 }

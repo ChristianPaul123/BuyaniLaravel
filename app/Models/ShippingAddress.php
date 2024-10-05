@@ -17,6 +17,11 @@ class ShippingAddress extends Model
         'user_id',
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 
     // protected $hidden = [
     //     'user_id',

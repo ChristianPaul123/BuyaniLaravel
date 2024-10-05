@@ -12,8 +12,6 @@
   {{-- Display success or error messages --}}
     <!--CONTENT-->
     <div class="row custom-font-content">
-
-
             @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -23,7 +21,6 @@
                 </ul>
             </div>
             @endif
-
         <div class="col-lg-6 login-card d-flex flex-column align-items-center justify-content-center" style="height: 500px;">
 
             <div class="container d-flex align-items-center justify-content-center">

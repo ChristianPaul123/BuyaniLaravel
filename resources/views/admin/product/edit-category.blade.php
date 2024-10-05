@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
 
-    <title>Admin | Product</title>
+    <title>Category | Edit</title>
     <link rel="icon" type="image/png" href="../img/logo1.svg">
     @include('layouts.head')
     @include('admin.styles.admin_styles')
@@ -25,29 +25,51 @@
 
             <section class="col-md-9 ml-sm-auto col-lg-10 px-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Product</h1>
+                    <h1 class="h2">Category</h1>
                 </div>
 
             <!--Add the more part here
             EX: just add a div
             -->
-            <div class=" justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <div class="card my-3">
+                <div class="card-header">
+                    <h3 class="card-title"> Edit Category</h3>
+                </div>
+                {{-- if there's errors --}}
+                @if ($errors->any())
 
+                <div class="alert alert-danger mx-3 my-2 px-3 py-2">
+                    <button type="button" class="close btn btn-danger" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+
+                </div>
+                @endif
+
+                <div class="card-body">
+                    <form action="{{ route('admin.category.update', $category->id) }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+                        <div class="form-group">
+                            <label for="category_name">Category Name</label>
+                            <input type="text" class="form-control" id="category_name" name="category_name"  value="{{$category->category_name}}" required>
+                        </div>
+                        <div class="d-flex ">
+                            <button type="submit" class="btn btn-block my-3 px-4" style="background-color: #06ff02;">Submit</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </section>
 
     </div>
 </div>
  <form action="{{ route('admin.logout') }}" method="POST">
-    {{-- @csrf
-    <button type="submit" class="btn btn-danger">Logout</button>
-</form>
- <h1>Welcome to Admin Dashboard, {{ auth()->guard('admin')->user()->username }}</h1> --}}
- @session('message')
-
-
-@endsession
-
 
 @else
         <p>not logged in</p>

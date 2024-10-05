@@ -2,7 +2,7 @@
 html, body {
         height: 100%;
         margin: 0;
-        overflow-x: hidden; /* Prevent horizontal scrollbar */
+        /* overflow: hidden; */
     }
 
     .custom-font-content {

@@ -26,14 +26,12 @@ class Product extends Model
         'product_deactivated',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
+    public function category() {
+        return $this->belongsTo(Category::class);
+    }
 
-    // protected $hidden = [
-    //     //
-    // ];
+    public function subCategory() {
+        return $this->belongsTo(SubCategory::class);
+    }
 
 }

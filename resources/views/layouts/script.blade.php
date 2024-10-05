@@ -19,5 +19,10 @@
 <script src="https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap5.js"></script>
 
 <script>
-new DataTable('#example');
+new DataTable('#categoryTable');
+//new DataTable('#productTable');
+new DataTable('#subcategoryTable');
+//new DataTable('#blogTable');
+</script>
+
 </script>
