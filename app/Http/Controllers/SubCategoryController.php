@@ -29,7 +29,7 @@ class SubCategoryController extends Controller
        try {
            $validatedData = $request->validate([
             'category_id' => ['required'],
-           'sub_category_name' => ['required',  Rule::unique('sub_categories', 'sub_category_name'),'max:200'],
+            'sub_category_name' => ['required',  Rule::unique('sub_categories', 'sub_category_name'),'max:200'],
            // Add other validation rules as necessary
        ]);
        } catch (\Illuminate\Validation\ValidationException $e) {
@@ -47,9 +47,10 @@ class SubCategoryController extends Controller
 
        // Find the Subcategory by id
        $subcategory = SubCategory::findOrFail($subcategory);
+       $categories = Category::all();
 
        //Return the view with the Subcategory
-       return view('admin.product.edit-subcategory', ['subcategory' => $subcategory]);
+       return view('admin.product.edit-subcategory', ['subcategory' => $subcategory,'categories' => $categories]);
    }
 
    // Update the Subcategory in the admin product Subcategory page
@@ -59,7 +60,8 @@ class SubCategoryController extends Controller
        // Validate the request data
        try {
            $validatedData = $request->validate([
-           'sub_category_name' => ['required',  Rule::unique('sub_categories', 'sub_category_name'),'max:200'],
+            'category_id' => ['required'],
+           'sub_category_name' => ['required','max:200'],
            // Add other validation rules as necessary
        ]);
        } catch (\Illuminate\Validation\ValidationException $e) {

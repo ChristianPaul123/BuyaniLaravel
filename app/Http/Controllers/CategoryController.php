@@ -39,7 +39,11 @@ class CategoryController extends Controller
     {
         // Your logic to show the form for editing an existing category
         // Find the category by id
-        $category = Category::findOrFail($category);
+        try {
+            $category = Category::findOrFail($category);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return redirect()->route('admin.category')->withErrors(['category' => 'Category not found.']);
+        }
 
         //Return the view with the category
         return view('admin.product.edit-category', ['category' => $category]);

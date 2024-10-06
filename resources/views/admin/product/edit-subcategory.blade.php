@@ -23,18 +23,59 @@
 
         @include('admin.includes.sidebar')
 
-            <section class="col-md-9 ml-sm-auto col-lg-10 px-4">
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Product</h1>
-                </div>
+        <section class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">SubCategory</h1>
+            </div>
 
-            <!--Add the more part here
-            EX: just add a div
-            -->
-            <div class=" justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <!--Add the more part here
+        EX: just add a div
+        -->
+        <div class="card my-3">
+            <div class="card-header">
+                <h3 class="card-title"> Edit SubCategory</h3>
+            </div>
+            {{-- if there's errors --}}
+            @if ($errors->any())
+
+            <div class="alert alert-danger mx-3 my-2 px-3 py-2">
+                <button type="button" class="close btn btn-danger" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
 
             </div>
-        </section>
+            @endif
+
+            <div class="card-body">
+                <form action="{{ route('admin.subcategory.update', $subcategory->id) }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+                    <div class="form-group">
+                        <label for="category_id">Category</label>
+                        <select class="form-control" id="category_id" name="category_id" required>
+                            <option value=" {{$subcategory->category_id}}" selected>{{$subcategory->category->category_name}}</option>
+                            @foreach ($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="sub_category_name">Category Name</label>
+                        <input type="text" class="form-control" id="sub_category_name" name="sub_category_name"  value="{{$category->category_name}}" required>
+                    </div>
+                    <div class="d-flex ">
+
+                        <button type="submit" class="btn btn-block my-3 px-4" style="background-color: #06ff02;">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
 
     </div>
 </div>
