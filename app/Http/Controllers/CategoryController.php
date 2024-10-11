@@ -56,7 +56,7 @@ class CategoryController extends Controller
         // Validate the request data
         try {
             $validatedData = $request->validate([
-            'category_name' => ['required',  Rule::unique('categories', 'category_name'),'max:200'],
+            'category_name' => ['required',  Rule::unique('categories', 'category_name')->ignore($category),'max:200'],
             // Add other validation rules as necessary
         ]);
         } catch (\Illuminate\Validation\ValidationException $e) {
@@ -64,6 +64,7 @@ class CategoryController extends Controller
         }
         // Replace $category with Category::findOrFail($category)
         $category = Category::findOrFail($category);
+        // $category->dd();
         $category->update($validatedData);
         return redirect()->route('admin.category')->with('message', 'Category updated successfully.');
     }

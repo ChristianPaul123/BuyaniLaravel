@@ -42,4 +42,17 @@
     .form-control:focus {
         box-shadow: none;
     }
+
+    .navbar {
+            border: 2px solid black;
+    }
+    .navbar-nav .nav-link:hover {
+        color: #F39634;
+    }
+    .nav-link.active {
+        background-color: orange;
+        color: #FFFFFF;
+        border-radius: 7px;
+        padding: 0.5rem 1rem;
+    }
 </style>

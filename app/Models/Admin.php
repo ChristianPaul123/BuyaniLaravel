@@ -33,4 +33,9 @@ class Admin extends Authenticatable
     //         'password' => 'hashed',
     //     ];
     // }
+
+    // public function getRouteKeyName()
+    // {
+    //     return 'username';
+    // }
 }

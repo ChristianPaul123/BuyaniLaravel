@@ -46,7 +46,11 @@ class SubCategoryController extends Controller
    {
 
        // Find the Subcategory by id
-       $subcategory = SubCategory::findOrFail($subcategory);
+       try {
+           $subcategory = SubCategory::findOrFail($subcategory);
+       } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+           return redirect()->route('admin.subcategory')->withErrors(['subcategory' => 'Subcategory not found']);
+       }
        $categories = Category::all();
 
        //Return the view with the Subcategory
@@ -60,8 +64,8 @@ class SubCategoryController extends Controller
        // Validate the request data
        try {
            $validatedData = $request->validate([
+            'sub_category_name' => ['required','max:200',Rule::unique('sub_categories', 'sub_category_name')->ignore($subcategory)],
             'category_id' => ['required'],
-           'sub_category_name' => ['required','max:200'],
            // Add other validation rules as necessary
        ]);
        } catch (\Illuminate\Validation\ValidationException $e) {

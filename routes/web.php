@@ -3,12 +3,15 @@
 use Illuminate\Support\Facades\Route;
 
 
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\UserProductController;
 
 Route::get('/', function () {
     return view('user.index');
@@ -28,10 +31,9 @@ Route::get('admin/dashboard', [AdminController::class, 'showdashboard'])->name('
 
 //Product Side
 //admin side
-//products side
+//products side check
 Route::get('admin/product', [ProductController::class, 'showProducts'])->name('admin.product');
-Route::get('admin/product/add', [ProductController::class, 'showAddProduct'])->name('admin.product.create');
-Route::post('admin/product/add', [ProductController::class, 'addProduct'])->name('admin.product.add');
+Route::post('admin/product', [ProductController::class, 'addProduct'])->name('admin.product.add');
 Route::get('admin/product/edit/{product}', [ProductController::class, 'editProduct'])->name('admin.product.edit');
 Route::put('admin/product/edit/{product}', [ProductController::class, 'updateProduct'])->name('admin.product.update');
 Route::delete('admin/product/delete/{product}', [ProductController::class, 'deleteProduct'])->name('admin.product.delete');
@@ -43,7 +45,7 @@ Route::get('admin/category/edit/{category}', [CategoryController::class, 'editCa
 Route::put('admin/category/edit/{category}', [CategoryController::class, 'updateCategory'])->name('admin.category.update');
 Route::delete('admin/category/delete/{category}', [CategoryController::class, 'deleteCategory'])->name('admin.category.delete');
 
-//subcategory side
+//subcategory side check
 Route::get('admin/subcategory', [SubCategoryController::class, 'showSubCategories'])->name('admin.subcategory');
 Route::post('admin/subcategory/add', [SubCategoryController::class, 'addSubCategory'])->name('admin.subcategory.add');
 Route::get('admin/subcategory/edit/{subcategory}', [SubCategoryController::class, 'editSubCategory'])->name('admin.subcategory.edit');
@@ -69,11 +71,23 @@ Route::get('admin/message', function () {
 });
 
 
-
-
+//Blog side
 Route::get('admin/blog', function () {
     return view('admin.blog.blog_post');
 });
+
+Route::get('admin/blog',[BlogController::class,'showBlogs'])->name('admin.blog');
+Route::post('admin/blog/add',[BlogController::class,'addBlog'])->name('admin.blog.add');
+Route::get('admin/blog/edit/{blog}',[BlogController::class,'editBlog'])->name('admin.blog.edit');
+Route::put('admin/blog/update/{blog}',[BlogController::class,'updateBlog'])->name('admin.blog.update');
+Route::delete('admin/blog/delete/{blog}',[BlogController::class,'deleteBlog'])->name('admin.blog.delete');
+
+
+
+//Product side
+Route::get('admin/product', [ProductController::class, 'showProducts'])->name('admin.product');
+
+
 
 //This is the user side
 
@@ -92,24 +106,38 @@ Route::get('user/consumer', [UserController::class, 'showCondashboard'])->name('
 Route::get('user/farmer', [UserController::class, 'showFarmDashboard'])->name('user.farmer');
 
 
+//Product for Consumers
+Route::get('user/consumer/product', [UserProductController::class, 'showConsumerProduct'])->name('user.consumer.product');
+Route::get('user/consumer/product/view/{id}', [UserProductController::class, 'viewConsumerProduct'])->name('user.consumer.product.view');
+Route::post('user/consumer/product/add', [UserProductController::class, 'addConsumerProduct'])->name('user.consumer.product.add');
+
+//cart for Consumers
+Route::get('user/consumer/product/cart', [CartController::class, 'showConsumerCart'])->name('user.consumer.product.cart');
+Route::get('user/consumer/product/cart/delete/{id}', [CartController::class, 'deleteConsumerCart'])->name('user.consumer.product.cart.delete');
+Route::get('user/consumer/product/cart/checkout', [CartController::class, 'showConsumerCheckout'])->name('user.consumer.product.cart.checkout');
+Route::post('user/consumer/product/cart/checkout', [CartController::class, 'checkoutConsumerCart'])->name('user.consumer.product.cart.checkout.submit');
+Route::get('user/consumer/product/cart/checkout/success', [CartController::class, 'showConsumerCheckoutSuccess'])->name('user.consumer.product.cart.checkout.success');
+
+//Product for Farmers
+Route::get('user/farmer/product', [UserController::class, 'showFarmerProduct'])->name('user.farmer.product');
+Route::get('user/farmer/product/view/{id}', [UserController::class, 'viewFarmerProduct'])->name('user.farmer.product.view');
+
 
 //Order Side
-//admin side
+
+
+
+
 
 //user side
 
-//Category Side
-//admin side
 
-//user side
 
-//SubCategory Side
-//admin side
 
 //user side
 
 //blog Side
-//admin side
+
 
 //user side
 

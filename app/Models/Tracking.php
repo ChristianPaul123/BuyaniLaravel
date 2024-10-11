@@ -19,4 +19,8 @@ class Tracking extends Model
         'tracking_info',
 
     ];
+
+    public function order() {
+        return $this->belongsTo(Order::class);
+    }
 }

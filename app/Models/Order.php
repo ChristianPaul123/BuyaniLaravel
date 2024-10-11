@@ -9,6 +9,7 @@ class Order extends Model
 {
     use HasFactory;
 
+    // Fillable attributes for the Order model
     protected $fillable = [
         'user_id',
         'total_amount',
@@ -28,4 +29,9 @@ class Order extends Model
         'customer_country',
         'customer_house_number',
     ];
+
+    // Define a relationship between the Order model and the User model
+    public function user() {
+        return $this->belongsTo(User::class, 'user_id'); // 'user_id' is the foreign key in the orders table
+    }
 }

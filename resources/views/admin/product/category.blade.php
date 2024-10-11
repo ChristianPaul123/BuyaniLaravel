@@ -7,7 +7,7 @@
 
 
     <title>Admin | Category</title>
-    <link rel="icon" type="image/png" href="../img/logo1.svg">
+    <link rel="icon" type="image/png" href="{{ asset('img/logo1.svg') }}">
     @include('layouts.head')
     @include('admin.styles.admin_styles')
 
@@ -118,11 +118,6 @@
     </div>
 @else
             <p>not logged in</p>
-            @session('message')
-            <div class="success-message">
-                {{ session('message') }}
-            </div>
-            @endsession
 @endauth
 
     @include('layouts.script')

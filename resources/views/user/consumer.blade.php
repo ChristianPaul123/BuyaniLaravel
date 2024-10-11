@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,7 +10,7 @@
 </head>
 <body>
 @auth('user')
-     @include ('user.includes.navbar');
+     @include ('user.includes.navbar-consumer');
      {{-- <form action="{{ route('user.logout') }}" method="POST">
         @csrf
         <button type="submit" class="btn btn-danger">Logout</button>

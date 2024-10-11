@@ -7,7 +7,7 @@
 
 
     <title>Admin | Sub Category</title>
-    <link rel="icon" type="image/png" href="../img/logo1.svg">
+    <link rel="icon" type="image/png" href="{{ asset('img/logo1.svg') }}">
     @include('layouts.head')
     @include('admin.styles.admin_styles')
 
@@ -100,6 +100,7 @@
                 </thead>
                 <tbody>
                     @foreach ($subcategories as $subcategory)
+                    {{-- @dd($subcategories) --}}
                     <tr>
                         <td>{{ $subcategory->sub_category_name }}</td>
                         <td>{{ $subcategory->category->category_name }}</td>
@@ -112,7 +113,7 @@
                             <form action="{{ route('admin.subcategory.delete', $subcategory->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-danger" onclick="return confirm('Are you sure you want to delete the subcategory?');">Delete</button>
+                                <button class="btn btn-danger" onclick="return confirm('Are you sure you want to delete the subcategory: {{ $subcategory->sub_category_name }}');">Delete</button>
                             </form>
                         </td>
                     </tr>
@@ -127,11 +128,6 @@
 
 @else
             <p>not logged in</p>
-            @session('message')
-            <div class="success-message">
-                {{ session('message') }}
-            </div>
-            @endsession
 @endauth
 
     @include('layouts.script')

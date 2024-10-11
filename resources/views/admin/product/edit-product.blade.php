@@ -7,7 +7,7 @@
 
 
     <title>Admin | Product</title>
-    <link rel="icon" type="image/png" href="../img/logo1.svg">
+    <link rel="icon" type="image/png" href="{{ asset('img/logo1.svg') }}">
     @include('layouts.head')
     @include('admin.styles.admin_styles')
 
@@ -31,31 +31,99 @@
             <!--Add the more part here
             EX: just add a div
             -->
-            <div class=" justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <div class="card my-3">
+                <div class="card-header">
+                    <h3 class="card-title"> Edit Product: {{ $product->product_name }}</h3>
+                </div>
+                {{-- if there's errors --}}
+                @if ($errors->any())
 
+                <div class="alert alert-danger mx-3 my-2 px-3 py-2">
+                    <button type="button" class="close btn btn-danger" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+
+                </div>
+                @endif
+
+                <div class="card-body">
+                    <form action="{{ route('admin.product.update', $product->id) }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+                        <div class="form-group">
+                            <label for="product_name">Product Name</label>
+                            <input type="text" class="form-control" id="product_name" name="product_name"  value="{{$product->product_name}}" required>
+                        </div>
+
+                        <div class="form-group my-3">
+                            <label for="product_details">Product Details</label>
+                            <textarea class="form-control" style="resize: none;" id="product_details" name="product_details" rows="2">{{$product->product_details}}</textarea>
+                        </div>
+
+                        <div class="form-group my-3">
+                            <label for="product_pic">Product Image</label>
+                            <input type="file" class="form-control" id="product_pic" name="product_pic" value="{{$product->product_pic}}">
+                        </div>
+
+                        <div class="form-group my-3">
+                            <label for="product_status">Product Status</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="product_status" id="product_status_available" value="1" {{ $product->product_status == 1 ? 'checked' : '' }}>
+                                <label class="form-check-label" for="product_status_available">
+                                    Available
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="product_status" id="product_status_unavailable" value="0" {{ $product->product_status == 0 ? 'checked' : '' }}>
+                                <label class="form-check-label" for="product_status_unavailable">
+                                    Out of Stock
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="product_status" id="product_status_unavailable" value="2" {{ $product->product_status == 2 ? 'checked' : '' }}>
+                                <label class="form-check-label" for="product_status_unavailable">
+                                    Unavailable
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group my-3">
+                            <label for="category_id">Category</label>
+                            <select class="form-control" id="category_id" name="category_id">
+                                <option value="{{$product->category_id}}" selected>{{$product->category->category_name}}</option>
+                                @foreach ($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        {{-- Remember this is not sub_category_id but subcategory_Id --}}
+                        <div class="form-group">
+                            <label for="subcategory_id">SubCategory</label>
+                            <select class="form-control" id="subcategory_id" name="subcategory_id">
+                                <option value="{{$product->subcategory_id}}" selected>{{$product->subcategory->sub_category_name}}</option>
+                                @foreach ($subcategories as $subcategory)
+                                <option value="{{ $subcategory->id }}">{{ $subcategory->sub_category_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="d-flex ">
+                            <button type="submit" class="btn btn-block my-3 px-4" style="background-color: #06ff02;">Submit</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </section>
 
     </div>
 </div>
- <form action="{{ route('admin.logout') }}" method="POST">
-    {{-- @csrf
-    <button type="submit" class="btn btn-danger">Logout</button>
-</form>
- <h1>Welcome to Admin Dashboard, {{ auth()->guard('admin')->user()->username }}</h1> --}}
- @session('message')
-
-
-@endsession
-
-
 @else
         <p>not logged in</p>
-        @session('message')
-        <div class="success-message">
-            {{ session('message') }}
-        </div>
-        @endsession
 @endauth
 @include('layouts.script')
 <script>
