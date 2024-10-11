@@ -8,7 +8,7 @@
     @include('user.styles.user_styles')
 </head>
 <body style="overflow-x: hidden;">
-    @include ('user.includes.navbar');
+    @include ('user.includes.navbar-consumer');
   {{-- Display success or error messages --}}
     <!--CONTENT-->
     <div class="row custom-font-content">

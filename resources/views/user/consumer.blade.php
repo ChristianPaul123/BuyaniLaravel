@@ -32,9 +32,53 @@
         <h1>Our Best Sellers</h1>
         <p>Freshly delivered from our local farmers!</p>
         <div class="container">
-            <!-- lagayan ng best sellers -->
+            <div class="row">
+                @foreach ($products as $product)
+                    <div class="col-md-4">
+                        <div class="card bg-primary mb-4">
+                            <img src="{{ asset( "$product->product_pic" ) }}" class="card-img-top img-fluid"  alt="{{ $product->product_name }}">
+                            <div class="card-body h-50 p-3">
+                                <h5 class="card-title">{{ $product->product_name }}</h5>
+                                <p class="card-text">{{ $product->product_details }}</p>
+                                {{-- <a href="{{ route('product.view', $product->id) }}" class="btn btn-primary">View Product</a> --}}
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
         </div>
+
+        <button type="button" class="btn btn-primary" id="modalButton">Modal Button</button>
+
+        <!-- Modal Frame -->
+        <div class="modal fade" id="CHANGE_THIS" tabindex="-1" aria-labelledby="CHANGE_THISLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="CHANGE_THISLabel">CHANGE THIS</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        {{-- this is where the modal resides --}}
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <script>
+            document.getElementById('modalButton').addEventListener('click', function() {
+                const CHANGE_THIS = new bootstrap.Modal(document.getElementById('CHANGE_THIS'));
+                CHANGE_THIS.show();
+            });
+        </script>
     </section>
+
 
     <!-- Details -->
      <section>

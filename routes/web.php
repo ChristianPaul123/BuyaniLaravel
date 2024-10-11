@@ -103,11 +103,13 @@ Route::post('user/register', [UserController::class, 'register'])->name('user.re
 
 //Dashboard for Users
 Route::get('user/consumer', [UserController::class, 'showCondashboard'])->name('user.consumer');
+Route::get('user/consumer/contacts', [UserController::class, 'showConContact'])->name('user.consumer.contact');
+Route::get('user/consumer/about-us', [UserController::class, 'showAbout'])->name('user.consumer.about');
 Route::get('user/farmer', [UserController::class, 'showFarmDashboard'])->name('user.farmer');
 
 
 //Product for Consumers
-Route::get('user/consumer/product', [UserProductController::class, 'showConsumerProduct'])->name('user.consumer.product');
+Route::get('user/consumer/products', [UserProductController::class, 'showConsumerProduct'])->name('user.consumer.product');
 Route::get('user/consumer/product/view/{id}', [UserProductController::class, 'viewConsumerProduct'])->name('user.consumer.product.view');
 Route::post('user/consumer/product/add', [UserProductController::class, 'addConsumerProduct'])->name('user.consumer.product.add');
 
@@ -124,9 +126,21 @@ Route::get('user/farmer/product/view/{id}', [UserController::class, 'viewFarmerP
 
 
 //Order Side
+Route::get('user/consumer/orders', function () {
+    return view('user.order.show');
+});
 
+Route::get('user/consumer/cart', function () {
+    return view('user.cart.show');
+});
 
+Route::get('user/consumer/user-profile', function () {
+    return view('user.order.show');
+});
 
+Route::get('user/consumer/orders', function () {
+    return view('user.order.show');
+});
 
 
 //user side

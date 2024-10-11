@@ -11,7 +11,7 @@
 </head>
 <body class="body">
 @auth('user')
-     @include ('user.includes.navbar');
+     @include ('user.includes.navbar-farmer');
      <form action="{{ route('user.logout') }}" method="POST">
         @csrf
         <button type="submit" class="btn btn-danger">Logout</button>

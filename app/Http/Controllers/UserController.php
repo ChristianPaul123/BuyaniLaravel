@@ -1,10 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\User;
+use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
+use App\Models\SubCategory;
 
 class UserController extends Controller
 {
@@ -34,7 +38,20 @@ class UserController extends Controller
     public function showConDashboard()
     {
         //returns the view starting
-        return view('user.consumer');
+        $products = Product::all();
+        $categories = Category::all();
+        $subcategories = SubCategory::all();
+        return view('user.consumer',['products' => $products, 'categories' => $categories, 'subcategories' => $subcategories]);
+    }
+
+    public function showAbout()
+    {
+        return view('about-us');
+    }
+
+    public function showConContact()
+    {
+        return view('contact');
     }
 
     public function showFarmDashboard()

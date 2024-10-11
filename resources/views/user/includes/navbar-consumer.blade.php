@@ -27,11 +27,17 @@
         </div>
     </div>
 </nav> --}}
+{{-- <li class="nav-item">
+    <a class="nav-link @if(request()->is('admin/order')) active @endif" href="/admin/order">
+        <i class="fas fa-file"></i>
+        Orders <span class="sr-only">(current)</span>
+    </a>
+</li> --}}
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" style="background-color: #FFFFFF;">
         <div class="container-fluid">
-            <a class="navbar-brand" href="consumer-home.php">
+            <a class="nav-link" @if(request()->is('user/consumer')) active @endif href="/user/consumer" data-page="home">
                 <img src="{{ asset('img/logo1.svg') }}" style="width: 65px;">
                 <img src="{{ asset('img/logo2.svg') }}">
             </a>
@@ -41,33 +47,32 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-center" style="font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: bold;">
                     <li class="nav-item px-1 py-0">
-                        <a class="nav-link" href="consumer-home.php" data-page="home">HOME</a>
+                        <a class="nav-link" @if(request()->is('user/consumer')) active @endif href="/user/consumer" data-page="home">HOME <span class="sr-only">(current) </span></a>
                     </li>
                     <li class="nav-item px-1">
-                        <a class="nav-link" href="consumer-aboutUs.php" data-page="about">ABOUT US</a>
+                        <a class="nav-link" @if(request()->is('user/consumer/about-us')) active @endif href="/user/consumer/about-us" data-page="about">ABOUT US <span class="sr-only">(current) </span></a>
+                        {{-- <a class="nav-link" href="consumer-aboutUs.php" data-page="about">ABOUT US </a> --}}
                     </li>
                     <li class="nav-item px-1">
-                        <a class="nav-link" href="consumer-shop.php" data-page="shop">SHOP</a>
+                        <a class="nav-link" @if(request()->is('user/consumer/products')) active @endif href="/user/consumer/products" data-page="shop">SHOP <span class="sr-only">(current) </span></a>
+                        {{-- <a class="nav-link" href="consumer-shop.php" data-page="shop">SHOP</a> --}}
                     </li>
                     <li class="nav-item px-1">
-                        <a class="nav-link" href="#" data-page="orders">ORDERS</a>
+                        <a class="nav-link" @if(request()->is('user/consumer/orders')) active @endif href="/user/consumer/orders" data-page="orders">ORDERS <span class="sr-only">(current) </span></a>
+                        {{-- <a class="nav-link" href="#" data-page="orders">ORDERS</a> --}}
                     </li>
                     <li class="nav-item px-1">
-                        <a class="nav-link" href="consumer-contacts.php" data-page="contacts">CONTACTS</a>
+                        <a class="nav-link" @if(request()->is('user/consumer/contacts')) active @endif href="/user/consumer/contacts" data-page="contacts">CONTACTS <span class="sr-only">(current) </span></a>
                     </li>
                     <li class="nav-item px-1">
-                        <a class="nav-link" href="#" data-page="cart">
-                            <i class="fas fa-shopping-basket" style="font-size: 25px;"></i>
-                        </a>
+                        <a class="nav-link" @if(request()->is('user/consumer/cart')) active @endif href="/user/consumer/cart" data-page="cart">
+                            <i class="fas fa-shopping-basket" style="font-size: 25px;"></i> <span class="sr-only">(current) </span></a>
                     </li>
                     <li class="nav-item px-1">
-                        <a class="nav-link" href="consumer-profile.php" data-page="profile">
-                            <i class="fas fa-user-circle" style="font-size: 25px;"></i>
-                        </a>
+                        <a class="nav-link" @if(request()->is('user/consumer/user-profile')) active @endif href="/user/consumer/user-profile" data-page="profile">
+                            <i class="fas fa-user-circle" style="font-size: 25px;"></i> <span class="sr-only">(current) </span></a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-
-
