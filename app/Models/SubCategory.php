@@ -21,4 +21,19 @@ class SubCategory extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function products()
+    {
+        return $this->hasMany(Product::class,'subcategory_id');
+    }
+
+    // public function scopeFilter($query, array $filters)
+    // {
+    //     $query->when($filters['search'] ?? false, function ($query, $search) {
+    //         return $query->where(function ($query) use ($search) {
+    //             $query->where('sub_category_name', 'like', '%' . $search . '%')
+    //                 ->orWhere('category_id', 'like', '%' . $search . '%');
+    //         });
+    //     });
+    // }
+
 }

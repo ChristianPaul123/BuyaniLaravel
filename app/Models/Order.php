@@ -34,4 +34,19 @@ class Order extends Model
     public function user() {
         return $this->belongsTo(User::class, 'user_id'); // 'user_id' is the foreign key in the orders table
     }
+
+    // Define a relationship between the Order model and the OrderItem model
+    public function orderItems() {
+        return $this->hasMany(OrderItem::class, 'order_id'); // 'order_id' is the foreign key in the order_items table
+    }
+
+    public function payment() {
+        return $this->hasOne(Payment::class, 'order_id'); // 'order_id' is the foreign key in the payments table
+    }
+
+    public function tracking() {
+        return $this->hasOne(Tracking::class, 'order_id'); // 'order_id' is the foreign key in the shippings table
+    }
+
+
 }

@@ -21,4 +21,12 @@ class ProductSpecification extends Model
     public function product() {
         return $this->belongsTo(Product::class);
     }
+
+    public function admin() {
+        return $this->belongsTo(Admin::class);
+    }
+
+    public function cartItems() {
+        return $this->hasMany(CartItem::class, 'cartItems');
+    }
 }

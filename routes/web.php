@@ -77,7 +77,7 @@ Route::get('admin/blog', function () {
 });
 
 Route::get('admin/blog',[BlogController::class,'showBlogs'])->name('admin.blog');
-Route::post('admin/blog/add',[BlogController::class,'addBlog'])->name('admin.blog.add');
+Route::post('admin/blog',[BlogController::class,'addBlog'])->name('admin.blog.add');
 Route::get('admin/blog/edit/{blog}',[BlogController::class,'editBlog'])->name('admin.blog.edit');
 Route::put('admin/blog/update/{blog}',[BlogController::class,'updateBlog'])->name('admin.blog.update');
 Route::delete('admin/blog/delete/{blog}',[BlogController::class,'deleteBlog'])->name('admin.blog.delete');

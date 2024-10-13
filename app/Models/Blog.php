@@ -12,10 +12,11 @@ class Blog extends Model
 
     // Define the fillable attributes for this model
     protected $fillable = [
-        'username',
         'admin_id',
         'blog_title',
         'blog_pic',
+        'blog_info',
+        'created_date',
         'removed_date',
     ];
 

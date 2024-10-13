@@ -15,6 +15,7 @@
 <body class="body">
 @auth('admin')
     @include('admin.includes.navbar')
+    {{-- @include('admin.includes.loader') --}}
 
 
      <div class="container-fluid">
@@ -22,7 +23,7 @@
         @include('admin.includes.sidebar')
 
 
-        <section role="main" class="col-md-9 ml-sm-auto col-lg-10 px-5 d-flex-col">
+        <section class="col-md-10 ml-sm-auto col-lg-10 px-3 py-5 overflow-y-scroll main-section">
         {{-- if there is any errors --}}
         @session('message')
         <div class=" mx-3 my-2 px-3 py-2 alert alert-success">
@@ -75,7 +76,7 @@
                     </div>
 
                     <div class="d-flex ">
-                        <button type="submit" class="btn btn-block my-3 px-4" style="background-color: #06ff02;">Submit</button>
+                        <button type="submit" class="btn btn-block my-3 px-4 btn-success">Submit</button>
                     </div>
                 </form>
             </div>

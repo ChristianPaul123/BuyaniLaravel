@@ -15,15 +15,14 @@
 <body class="body">
 @auth('admin')
     @include('admin.includes.navbar')
-
+    {{-- @include('admin.includes.loader') --}}
 
      <div class="container-fluid">
         <div class="row">
 
-
         @include('admin.includes.sidebar')
 
-        <section class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <section class="col-md-10 ml-sm-auto col-lg-10 px-3 py-5 overflow-y-scroll main-section">
                        {{-- if there is any errors --}}
         @session('message')
         <div class=" mx-3 my-2 px-3 py-2 alert alert-success">
@@ -50,7 +49,7 @@
         </div>
         @endif
 
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-1 pb-2 mb-3 border-bottom">
             <h1 class="h2">Product</h1>
         </div>
 
@@ -104,7 +103,7 @@
                                 <input type="hidden" class="form-control" id="product_status" name="product_status" value="1" required>
 
                         <div class="d-flex ">
-                            <button type="submit" class="btn btn-block my-3 px-4" style="background-color: #06ff02;">Submit</button>
+                            <button type="submit" class="btn btn-block my-3 px-4 btn-success">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -114,7 +113,7 @@
                 <div class="card-header">
                     <h3 class="card-title">All Products</h3>
                 </div>
-            {{-- <div class=" justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom border-top"> --}}
+
             <div class="card-body">
                 <table id="productTable" class="table table-bordered table-striped">
                     <thead>
@@ -125,8 +124,6 @@
                             <th>Product Image</th>
                             <th>Category Name</th>
                             <th>Sub Category Name</th>
-                            <th>Created Date</th>
-                            <th>Updated Date</th>
                             <th>Deactivated Date</th>
                             <th>Edit</th>
                             <th>Delete</th>
@@ -142,8 +139,6 @@
                             <td><img src="{{ asset( "$product->product_pic" ) }}" alt="{{ $product->product_name }}" width="50"></td>
                             <td>{{ $product->category->category_name }}</td>
                             <td>{{ $product->subcategory->sub_category_name }}</td>
-                            <td>{{ $product->created_at }}</td>
-                            <td>{{ $product->updated_at }}</td>
                             <td>{{ $product->product_deactivated }}</td>
                             <td class="text-center d-flex justify-content-center align-items-center">
                                 <a href="{{ route('admin.product.edit', $product->id) }}" class="btn btn-primary">Edit</a>
@@ -160,6 +155,7 @@
                     </tbody>
                </table>
                 </div>
+            </div>
             </section>
 
         </div>

@@ -23,7 +23,7 @@
 
         @include('admin.includes.sidebar')
 
-        <section class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <section class="col-md-10 ml-sm-auto col-lg-10 px-3 py-5 overflow-y-scroll main-section">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">SubCategory</h1>
             </div>
@@ -70,7 +70,7 @@
                     </div>
                     <div class="d-flex ">
 
-                        <button type="submit" class="btn btn-block my-3 px-4" style="background-color: #06ff02;">Submit</button>
+                        <button type="submit" class="btn btn-block my-3 px-4 btn-success" >Submit</button>
                     </div>
                 </form>
             </div>
