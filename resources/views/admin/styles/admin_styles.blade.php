@@ -55,6 +55,19 @@ html, body {
     }
 
 
+
+
+    @media (min-width: 765px) {
+    .hide-in-full-view {
+        display: none !important;
+    }
+    }
+
+
+    .navbar {
+        z-index: 100;
+    }
+
     .custom-font-navbar {
         font-family: 'Poppins', sans-serif;
         font-weight: bold;

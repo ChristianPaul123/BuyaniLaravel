@@ -31,6 +31,9 @@
             <!--Add the more part here
             EX: just add a div
             -->
+            <div class="d-flex justify-content-start flex-wrap flex-md-nowrap align-items-center pt-1 pb-2 mb-3 border-bottom">
+                <button type="button" class="btn btn-primary" onclick="window.history.back()"> &#9754; Back to previous</button>
+            </div>
             <div class="card my-3">
                 <div class="card-header">
                     <h3 class="card-title"> Edit Category</h3>

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap CSS -->
     @include('layouts.head');
-    @include()
+    @include('user.styles.user_styles')
     <style>
         .small-input {
             width: 80px; /* Adjust this value to change the width */
@@ -40,9 +40,11 @@
 
 <body>
 
-    <?php include 'navbar-consumer.php'; ?>
+   @include('user.includes.navbar-consumer')
 
-    <div class="container mt-5 mb-5">
+   <div class="container mt-5 mb-5">
+    <!-- Shopping Cart Section -->
+    <section>
         <h2 class="mb-4">Shopping Cart</h2>
         <div class="row">
             <!-- Cart Items -->
@@ -126,9 +128,11 @@
                 </div>
             </div>
         </div>
-    </div>
+    </section>
+</div>
 
-    <?php include 'footer.php'; ?>
+    @include('layouts.script')
+    @include ('layouts.footer')
 
 </body>
 

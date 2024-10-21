@@ -10,32 +10,32 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-center" style="font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: bold;">
-                    <li class="nav-item px-1 py-0">
+                    <li class="nav-item px-1 py-0 position-relative">
                         <a class="nav-link" href="farmer-home.php" data-page="home">HOME</a>
                     </li>
-                    <li class="nav-item px-1">
+                    <li class="nav-item px-1 position-relative">
                         <a class="nav-link" href="#" data-page="analytics">MY ANALYTICS</a>
                     </li>
-                    <li class="nav-item px-1">
+                    <li class="nav-item px-1 position-relative">
                         <a class="nav-link" href="#" data-page="products">SUPPLY PRODUCTS</a>
                     </li>
-                    <li class="nav-item px-1">
+                    <li class="nav-item px-1 position-relative">
                         <a class="nav-link" href="#" data-page="orders">ORDERS</a>
                     </li>
-                    <li class="nav-item px-1">
+                    <li class="nav-item px-1 position-relative">
                         <a class="nav-link" href="#" data-page="contacts">CONTACTS</a>
                     </li>
-                    <li class="nav-item px-1">
+                    <li class="nav-item px-1 position-relative">
                         <a class="nav-link" href="#" data-page="notification">
                             <i class="bi bi-bell-fill" style="font-size: 25px;"></i>
                         </a>
                     </li>
-                    <li class="nav-item px-1">
+                    <li class="nav-item px-1 position-relative">
                         <a class="nav-link" href="#" data-page="chat">
                             <i class="bi bi-chat-dots" style="font-size: 25px;"></i>
                         </a>
                     </li>
-                    <li class="nav-item px-1">
+                    <li class="nav-item px-1 position-relative">
                         <a class="nav-link" href="#" data-page="profile">
                             <i class="bi bi-person-circle" style="font-size: 25px;"></i>
                         </a>

@@ -53,25 +53,37 @@
 
                 </div>
                 @endif
+                <div class="d-flex justify-content-end flex-wrap flex-md-nowrap align-items-center pt-1 pb-2 mb-3 border-bottom">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
+                        Add Category
+                    </button>
+                </div>
 
-                <div class="card my-3">
-                    <div class="card-header">
-                        <h3 class="card-title">Add Category</h3>
-                    </div>
-                    <div class="card-body">
-                        <form action="{{ route('admin.category.add') }}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <div class="form-group">
-                                <label for="category_name">Category Name</label>
-                                <input type="text" class="form-control" id="category_name" name="category_name" required>
+                <!-- Add Category Modal -->
+                <div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="addCategoryModalLabel">Add Category</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
+                            <div class="modal-body">
+                                <form action="{{ route('admin.category.add') }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="form-group">
+                                        <label for="category_name">Category Name</label>
+                                        <input type="text" class="form-control" id="category_name" name="category_name" required>
+                                    </div>
 
-                            <div class="d-flex ">
-                                <button type="submit" class="btn btn-block btn-success my-3 px-4">Submit</button>
+                                    <div class="d-flex">
+                                        <button type="submit" class="btn btn-block btn-success my-3 px-4">Submit</button>
+                                    </div>
+                                </form>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
+
 
                 <div class="card  overflow-auto">
                     <div class="card-header">

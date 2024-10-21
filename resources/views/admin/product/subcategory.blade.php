@@ -49,38 +49,46 @@
 
         </div>
         @endif
-
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2">Subcategory</h1>
+        <div class="d-flex justify-content-end flex-wrap flex-md-nowrap align-items-center pt-1 pb-2 mb-3 border-bottom">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addSubcategoryModal">
+                Add Subcategory
+            </button>
         </div>
 
-        <div class="card my-3">
-            <div class="card-header">
-                <h3 class="card-title">Add Subcategory</h3>
-            </div>
-            <div class="card-body">
-                <form action="{{ route('admin.subcategory.add') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="form-group">
-                        <label for="category_id">Category</label>
-                        <select class="form-control" id="category_id" name="category_id" required>
-                            <option value="">Select Category</option>
-                            @foreach ($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->category_name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="sub_category_name">SubCategory Name</label>
-                        <input type="text" class="form-control" id="sub_category_name" name="sub_category_name" required>
-                    </div>
+            <!-- Add Subcategory Modal -->
+            <div class="modal fade" id="addSubcategoryModal" tabindex="-1" aria-labelledby="addSubcategoryModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addSubcategoryModalLabel">Add Subcategory</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ route('admin.subcategory.add') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="category_id">Category</label>
+                                    <select class="form-control" id="category_id" name="category_id" required>
+                                        <option value="">Select Category</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="sub_category_name">SubCategory Name</label>
+                                    <input type="text" class="form-control" id="sub_category_name" name="sub_category_name" required>
+                                </div>
 
-                    <div class="d-flex ">
-                        <button type="submit" class="btn btn-block my-3 px-4 btn-success">Submit</button>
+                                <div class="d-flex">
+                                    <button type="submit" class="btn btn-block my-3 px-4 btn-success">Submit</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                </form>
+                </div>
             </div>
-        </div>
+
 
         <div class="card overflow-scroll">
             <div class="card-header">

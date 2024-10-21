@@ -6,11 +6,11 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgb(20, 102, 177);
+            background-color: rgba(90, 79, 79, 0.761);
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 9999;
+            z-index: 99;
             flex-direction: column;
             color: white;
             font-size: 48px;

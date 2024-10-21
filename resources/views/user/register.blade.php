@@ -67,7 +67,7 @@
     </style>
 </head>
 <body style="overflow-x: hidden;">
-    @include ('user.includes.navbar');
+    @include ('user.includes.navbar-consumer');
 {{-- Display success or error messages --}}
 @if (session('message'))
     <div class="alert alert-success">

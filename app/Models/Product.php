@@ -60,4 +60,15 @@ class Product extends Model
         return $this->hasOne(Favorite::class);
     }
 
+    public function getStatusLabelAttribute()
+    {
+        $statuses = [
+            1 => 'Available',
+            2 => 'Not Available',
+            3 => 'Out of Stock'
+        ];
+
+        return $statuses[$this->product_status] ?? 'Unknown Status';
+    }
+
 }

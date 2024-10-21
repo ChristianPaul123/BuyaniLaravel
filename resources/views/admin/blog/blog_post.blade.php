@@ -103,6 +103,7 @@
                             <th>Blog Image</th>
                             <th>Created Date</th>
                             <th>Removed Date</th>
+                            <th>Added by</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
@@ -115,6 +116,7 @@
                             <td><img src="{{ asset( "$blog->blog_pic" ) }}" alt="{{ $blog->blog_title }}" width="50"></td>
                             <td>{{ $blog->created_at }}</td>
                             <td>{{ $blog->removed_date }}</td>
+                            <td>{{ $blog->admin->username}}</td>
                             <td class="text-center d-flex justify-content-center align-items-center">
                                 <a href="{{ route('admin.blog.edit', $blog->id) }}" class="btn btn-primary">Edit</a>
                             </td>

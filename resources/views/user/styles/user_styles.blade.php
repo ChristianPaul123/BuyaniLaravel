@@ -5,6 +5,33 @@
         overflow-x: hidden; /* Prevent horizontal scrollbar */
     }
 
+    .notification-circle {
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: red;
+        position: absolute;
+        top: 0px;
+        right: -5px;
+        margin-left: 5px;
+    }
+
+        .navbar-category {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        background-color: #f8f9fa;
+        border-bottom: 1px solid #ddd;
+    }
+    .navbar-nav-category .nav-link-category {
+        color: #333;
+    }
+    .navbar-nav-category .nav-link-category.active {
+        font-weight: bold;
+    }
+
     .custom-font-content {
         font-family: 'Poppins', sans-serif;
         font-weight: bold;

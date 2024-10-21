@@ -12,6 +12,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\UserProductController;
+use App\Http\Controllers\ProductSpecificationController;
 
 Route::get('/', function () {
     return view('user.index');
@@ -36,7 +37,20 @@ Route::get('admin/product', [ProductController::class, 'showProducts'])->name('a
 Route::post('admin/product', [ProductController::class, 'addProduct'])->name('admin.product.add');
 Route::get('admin/product/edit/{product}', [ProductController::class, 'editProduct'])->name('admin.product.edit');
 Route::put('admin/product/edit/{product}', [ProductController::class, 'updateProduct'])->name('admin.product.update');
+// Route::put('admin/product/update/{product}', [ProductController::class,'updateProductAjax'])->name('admin.product.update.ajax');
 Route::delete('admin/product/delete/{product}', [ProductController::class, 'deleteProduct'])->name('admin.product.delete');
+
+//Product Specification Side
+//admin side
+Route::get('admin/product/specification', [ProductSpecificationController::class, 'showProductSpecification'])->name('admin.product.specification');
+Route::post('admin/product/specification', [ProductSpecificationController::class, 'addProductSpecification'])->name('admin.product.specification.add');
+Route::get('admin/product/specification/edit/{product}', [ProductSpecificationController::class, 'editProductSpecification'])->name('admin.product.specification.edit');
+Route::put('admin/product/specification/edit/{product}', [ProductSpecificationController::class, 'updateProductSpecification'])->name('admin.product.specification.update');
+Route::delete('admin/product/specification/delete/{product}', [ProductSpecificationController::class, 'deleteProductSpecification'])->name('admin.product.specification.delete');
+
+
+
+
 
 //category side check
 Route::get('admin/category', [CategoryController::class, 'showCategories'])->name('admin.category');

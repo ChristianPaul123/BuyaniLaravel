@@ -45,32 +45,32 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto align-items-center" style="font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: bold;">
-                    <li class="nav-item px-1 py-0">
+                <ul class="navbar-nav ms-auto align-items-center" style="font-family: 'Poppins', sans-serif; position: relative; font-size: 20px; font-weight: bold;">
+                    <li class="nav-item px-1 py-0 position-relative">
                         <a class="nav-link" @if(request()->is('user/consumer')) active @endif href="/user/consumer" data-page="home">HOME <span class="sr-only">(current) </span></a>
                     </li>
-                    <li class="nav-item px-1">
+                    <li class="nav-item px-1 position-relative">
                         <a class="nav-link" @if(request()->is('user/consumer/about-us')) active @endif href="/user/consumer/about-us" data-page="about">ABOUT US <span class="sr-only">(current) </span></a>
                         {{-- <a class="nav-link" href="consumer-aboutUs.php" data-page="about">ABOUT US </a> --}}
                     </li>
-                    <li class="nav-item px-1">
-                        <a class="nav-link" @if(request()->is('user/consumer/products')) active @endif href="/user/consumer/products" data-page="shop">SHOP <span class="sr-only">(current) </span></a>
+                    <li class="nav-item px-1 position-relative">
+                        <a class="nav-link" @if(request()->is('user/consumer/products')) active @endif href="/user/consumer/products" data-page="shop">SHOP <span class="sr-only">(current) </span><span class="notification-circle"></span></a>
                         {{-- <a class="nav-link" href="consumer-shop.php" data-page="shop">SHOP</a> --}}
                     </li>
-                    <li class="nav-item px-1">
-                        <a class="nav-link" @if(request()->is('user/consumer/orders')) active @endif href="/user/consumer/orders" data-page="orders">ORDERS <span class="sr-only">(current) </span></a>
+                    <li class="nav-item px-1 position-relative">
+                        <a class="nav-link" @if(request()->is('user/consumer/orders')) active @endif href="/user/consumer/orders" data-page="orders">ORDERS <span class="sr-only">(current) </span><span class="notification-circle"></span></a>
                         {{-- <a class="nav-link" href="#" data-page="orders">ORDERS</a> --}}
                     </li>
-                    <li class="nav-item px-1">
+                    <li class="nav-item px-1 position-relative">
                         <a class="nav-link" @if(request()->is('user/consumer/contacts')) active @endif href="/user/consumer/contacts" data-page="contacts">CONTACTS <span class="sr-only">(current) </span></a>
                     </li>
-                    <li class="nav-item px-1">
+                    <li class="nav-item px-1 position-relative">
                         <a class="nav-link" @if(request()->is('user/consumer/cart')) active @endif href="/user/consumer/cart" data-page="cart">
-                            <i class="fas fa-shopping-basket" style="font-size: 25px;"></i> <span class="sr-only">(current) </span></a>
+                            <i class="fas fa-shopping-basket" style="font-size: 25px;"></i> <span class="sr-only">(current) </span><span class="notification-circle"></span></a>
                     </li>
-                    <li class="nav-item px-1">
+                    <li class="nav-item px-1 position-relative">
                         <a class="nav-link" @if(request()->is('user/consumer/user-profile')) active @endif href="/user/consumer/user-profile" data-page="profile">
-                            <i class="fas fa-user-circle" style="font-size: 25px;"></i> <span class="sr-only">(current) </span></a>
+                            <i class="fas fa-user-circle" style="font-size: 25px;"></i> <span class="sr-only">(current) </span><span class="notification-circle"></span></a>
                     </li>
                 </ul>
             </div>
