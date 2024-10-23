@@ -11,11 +11,11 @@ class Inventory extends Model
     protected $fillable = [
         'product_id',
         // 'product_status',
-        'product_new_stocks',
-        'product_old_stocks',
-        'product_sold_stocks',
-        'product_damage_stocks',
-        'product_total_stocks',
+        'product_new_stock',
+        'product_old_stock',
+        'product_sold_stock',
+        'product_damage_stock',
+        'product_total_stock',
     ];
 
     public function product() {

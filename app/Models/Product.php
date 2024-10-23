@@ -60,6 +60,10 @@ class Product extends Model
         return $this->hasOne(Favorite::class);
     }
 
+    public function inventory() {
+        return $this->hasOne(Inventory::class, 'product_id');
+    }
+
     public function getStatusLabelAttribute()
     {
         $statuses = [

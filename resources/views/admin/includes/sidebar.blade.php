@@ -1,3 +1,4 @@
+
 <nav class="col-sm-2 d-none d-md-block bg-light sidebar">
     <div class="sidebar-sticky">
         <ul class="nav flex-column text-nowrap">
@@ -14,6 +15,7 @@
                     Orders <span class="sr-only">(current)</span>
                 </a>
             </li>
+            @if(auth()->guard('admin')->user()->admin_type == 1)
             <hr class="hr hr-blurry" />
             <li class="nav-item">
                <a class="nav-link @if(request()->is('admin/product')) active @endif" href="/admin/product">
@@ -39,6 +41,12 @@
                     SubCategory
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link @if(request()->is('admin/product/inventory')) active @endif" href="/admin/product/inventory">
+                     <i class="fas fa-shopping-cart"></i>
+                     Products Inventory
+                 </a>
+             </li>
             <hr class="hr hr-blurry" />
             <li class="nav-item">
                 <a class="nav-link @if(request()->is('admin/customization')) active @endif" href="/admin/customization">
@@ -46,6 +54,8 @@
                     Customization
                 </a>
             </li>
+            @elseif(auth()->guard('admin')->user()->admin_type == 2)
+            @endif
             <li class="nav-item">
                 <a class="nav-link @if(request()->is('admin/blog')) active @endif" href="/admin/blog">
                      <i class="fas fa-chart-bar"></i>
@@ -74,4 +84,3 @@
         </ul>
     </div>
 </nav>
-

@@ -17,12 +17,12 @@ class UserProductController extends Controller
  }
  public function showConsumerProductDetails($id)
  {
-    $product = Product::find($id);
+    $product = Product::findOrFail($id);
     return view('consumer.product-details', compact('product'));
  }
  public function showConsumerProductCategory($id)
  {
-    $category = Category::find($id);
+    $category = Category::findOrFail($id);
     $products = Product::where('category_id', $id)->where('status', 1)->get();
     return view('consumer.product-category', compact('products', 'category'));
  }

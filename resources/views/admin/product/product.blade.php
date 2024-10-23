@@ -150,10 +150,6 @@
                                     <td>{{ $product->subcategory->sub_category_name }}</td>
                                     <td>{{ $product->product_deactivated }}</td>
                                     <td class="text-center d-flex justify-content-center align-items-center">
-                                        {{-- didn't work properly --}}
-                                        {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProductModal" data-product-id="{{ $product->id }}" data-product-name="{{ $product->product_name }}" data-product-details="{{ $product->product_details }}" data-product-status="{{ $product->product_status }}" data-category-id="{{ $product->category_id }}" data-subcategory-id="{{ $product->subcategory_id }}">
-                                            Edit product
-                                        </button> --}}
                                         <a href="{{ route('admin.product.edit', $product->id) }}" class="btn btn-primary">Edit</a>
                                     </td>
                                     <td>
@@ -189,6 +185,11 @@
 </html>
 
  <!--Edit Modal Frame Not working properly-->
+  {{-- didn't work properly --}}
+                                        {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProductModal" data-product-id="{{ $product->id }}" data-product-name="{{ $product->product_name }}" data-product-details="{{ $product->product_details }}" data-product-status="{{ $product->product_status }}" data-category-id="{{ $product->category_id }}" data-subcategory-id="{{ $product->subcategory_id }}">
+                                            Edit product
+                                        </button> --}}
+
             {{-- <div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
