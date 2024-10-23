@@ -1,6 +1,6 @@
 <?php
 
-use Symfony\Component\Routing\Route;
+use Illuminate\Support\Facades\Route;
 
 
 use App\Http\Controllers\BlogController;
@@ -10,7 +10,6 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\UserProductController;
 use App\Http\Controllers\ProductSpecificationController;
@@ -42,18 +41,15 @@ Route::put('admin/product/edit/{product}', [ProductController::class, 'updatePro
 Route::delete('admin/product/delete/{product}', [ProductController::class, 'deleteProduct'])->name('admin.product.delete');
 
 //Product Specification Side
+//admin side
 Route::get('admin/product/specification', [ProductSpecificationController::class, 'showProductSpecification'])->name('admin.product.specification');
 Route::post('admin/product/specification', [ProductSpecificationController::class, 'addProductSpecification'])->name('admin.product.specification.add');
 Route::get('admin/product/specification/edit/{product}', [ProductSpecificationController::class, 'editProductSpecification'])->name('admin.product.specification.edit');
 Route::put('admin/product/specification/edit/{product}', [ProductSpecificationController::class, 'updateProductSpecification'])->name('admin.product.specification.update');
 Route::delete('admin/product/specification/delete/{product}', [ProductSpecificationController::class, 'deleteProductSpecification'])->name('admin.product.specification.delete');
 
-//Product Inventory Side
-Route::get('admin/product/inventory', [InventoryController::class, 'showProductInventory'])->name('admin.product.inventory');
-Route::post('admin/product/inventory', [InventoryController::class, 'addProductInventory'])->name('admin.product.inventory.add');
-Route::get('admin/product/inventory/edit/{product}', [InventoryController::class, 'editProductInventory'])->name('admin.product.inventory.edit');
-Route::put('admin/product/inventory/edit/{product}', [InventoryController::class, 'updateProductInventory'])->name('admin.product.inventory.update');
-Route::delete('admin/product/inventory/delete/{product}', [InventoryController::class, 'deleteProductInventory'])->name('admin.product.inventory.delete');
+
+
 
 
 //category side check
@@ -69,6 +65,7 @@ Route::post('admin/subcategory/add', [SubCategoryController::class, 'addSubCateg
 Route::get('admin/subcategory/edit/{subcategory}', [SubCategoryController::class, 'editSubCategory'])->name('admin.subcategory.edit');
 Route::put('admin/subcategory/update/{subcategory}', [SubCategoryController::class, 'updateSubCategory'])->name('admin.subcategory.update');
 Route::delete('admin/subcategory/delete/{subcategory}', [SubCategoryController::class, 'deleteSubCategory'])->name('admin.subcategory.delete');
+
 
 
 //order Side
