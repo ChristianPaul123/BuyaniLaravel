@@ -69,15 +69,17 @@ class User extends Authenticatable
         return $this->hasMany(Favorite::class);
     }
 
-
+    public function otp_verifies() {
+        return $this->hasMany(OtpVerify::class);
+    }
 
     // Define a relationship with the OrderRating model
     public function orderRatings() {
         return $this->hasMany(OrderRating::class);
     }
 
-    // Define a relationship with the ProductRating model
-    public function productRatings() {
-        return $this->hasMany(ProductRating::class);
+    // Define a relationship with the UserRatings model
+    public function userRatings() {
+        return $this->hasMany(UserRating::class);
     }
 }

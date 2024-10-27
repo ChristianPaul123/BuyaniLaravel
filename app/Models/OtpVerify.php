@@ -5,15 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Temp_verify extends Model
+class OtpVerify extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
-        'username',
-        'email',
-        'password',
+        'user_id',
         'otp',
         'otp_expiry',
         'v_purpose',
-        'count'
+        'is_verified',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
