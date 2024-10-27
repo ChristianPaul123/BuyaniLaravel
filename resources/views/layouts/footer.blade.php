@@ -1,20 +1,4 @@
-<style>
-        .custom-font-footer {
-            font-family: 'Poppins', sans-serif;
-            font-size: small;
-            font-weight: bold;
-            color: aliceblue;
-        }
-
-        .footer {
-            background: #343a40;
-            color: #fff;
-            padding: 20px 0;
-        }
-</style>
-
 <!--FOOTER-->
-
 <footer class="footer p-0">
     <div class="container-fluid py-4 text-center" style="background-color: #181C1F;">
         <p class="mb-0">Interested in working with us? Drop us a line!</p>

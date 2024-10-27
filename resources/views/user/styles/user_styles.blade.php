@@ -2,8 +2,75 @@
     html, body {
         height: 100%;
         margin: 0;
-        overflow-x: hidden; /* Prevent horizontal scrollbar */
+        overflow-x: hidden;
+        display: flex;
+        flex-direction: column;
+        font-family: 'Poppins', sans-serif; /* Prevent horizontal scrollbar */
     }
+
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    main {
+        flex: 1;
+    }
+
+
+    .footer {
+        flex-direction: column;
+        background: #343a40;
+        color: #fff;
+        padding: 20px 0;
+    }
+
+    section {
+        font-family: 'Poppins', sans-serif;
+    }
+
+    /* Main wrapper to grow and push footer down */
+    .main-content-wrapper {
+    flex: 1;
+    }
+
+    /* Container-top border */
+    .custom-border-top {
+        color: white;
+        background-color: #9db19a;
+        border-radius: 30px 30px 0px 0px;
+        border-style: solid;
+        border-color: black;
+        border-width: 3px 3px 0px 3px;
+    }
+    .custom-border-bottom {
+        color: black;
+        background-color: #FFFFFF;
+        border-radius: 0px 0px 30px 30px;
+        border: solid black;
+    }
+
+
+    /* Weather */
+    #weather i {
+        font-size: 50px;
+        margin-bottom: 10px;
+    }
+    #temperature {
+        font-size: 20px;
+        color: #333;
+    }
+    .sunny {
+        color: orange;
+    }
+    .rainy {
+        color: blue;
+    }
+    .cloudy {
+        color: gray;
+    }
+
 
     .notification-circle {
         display: inline-block;
@@ -73,13 +140,13 @@
     .navbar {
             border: 2px solid black;
     }
-    .navbar-nav .nav-link:hover {
-        color: #F39634;
+    .navbar .nav-link:hover {
+        color: orange;
     }
-    .nav-link.active {
-        background-color: orange;
-        color: #FFFFFF;
+    .navbar .nav-link.active {
+        color: orange;
         border-radius: 7px;
         padding: 0.5rem 1rem;
     }
+
 </style>

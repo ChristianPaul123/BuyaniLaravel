@@ -64,12 +64,16 @@ class Product extends Model
         return $this->hasOne(Inventory::class, 'product_id');
     }
 
+    public function productImgs() {
+        return $this->hasMany(Product::class, 'product_id');
+    }
+
     public function getStatusLabelAttribute()
     {
         $statuses = [
             1 => 'Available',
-            2 => 'Not Available',
-            3 => 'Out of Stock'
+            2 => 'Out of Stock',
+            3 => 'Not Available',
         ];
 
         return $statuses[$this->product_status] ?? 'Unknown Status';

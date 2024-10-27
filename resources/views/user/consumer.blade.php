@@ -1,16 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.app') <!-- Extending the parent layout -->
 
-    @include('layouts.head')
-    @include('user.styles.user_styles')
+@section('title', 'consumer Page') <!-- Defining a title for this view -->
 
-</head>
-<body>
-@auth('user')
-     @include ('user.includes.navbar-consumer');
+@push('styles')
+
+@endpush
+@section('x-content')
+     @include('user.includes.navbar-consumer')
      {{-- <form action="{{ route('user.logout') }}" method="POST">
         @csrf
         <button type="submit" class="btn btn-danger">Logout</button>
@@ -29,56 +25,33 @@
 
     <!-- Our Products -->
     <section class="text-center p-3">
-        <h1>Our Best Sellers</h1>
+        <h1>Our Products</h1>
         <p>Freshly delivered from our local farmers!</p>
-        <div class="container">
-            <div class="row">
+        <div class="container-fluid">
+            <div class="d-flex flex-row md-4">
                 @foreach ($products as $product)
-                    <div class="col-md-4">
-                        <div class="card bg-primary mb-4">
-                            <img src="{{ asset( "$product->product_pic" ) }}" class="card-img-top img-fluid"  alt="{{ $product->product_name }}">
-                            <div class="card-body h-50 p-3">
-                                <h5 class="card-title">{{ $product->product_name }}</h5>
-                                <p class="card-text">{{ $product->product_details }}</p>
-                                {{-- <a href="{{ route('product.view', $product->id) }}" class="btn btn-primary">View Product</a> --}}
-                            </div>
+                <div class="col-md-3 offset-md-2 m-1">
+                    <div class="card">
+                        <div class="card-header d-flex align-items-center justify-content-center">
+                          <div class="ms-3">
+                            <h6 class="mb-0 fs-sm text-center">{{ $product->product_name }}</h6>
+                          </div>
                         </div>
-                    </div>
+                        <img src="{{ asset( "$product->product_pic" ) }}" class="card-img-top" alt="products {{ asset( "$product->product_name" ) }}" />
+                        <div class="card-body">
+                            <p class="card-text">{{ $product->product_details }}</p>
+                        </div>
+                        <div class="card-footer d-flex">
+                            <button class="btn btn-subtle" type="button"><i class="fas fa-heart fa-lg"></i></button>
+                          <a class="btn btn-primary w-100 p-2 me-auto fw-bold" href=" {{ route('user.consumer.product.view', $product->id)}}">View</a>
+                          <button class="btn btn-subtle" type="button"><i class="fas fa-share fa-lg"></i></button>
+                        </div>
+                      </div>
+                </div>
                 @endforeach
             </div>
         </div>
-
-        <button type="button" class="btn btn-primary" id="modalButton">Modal Button</button>
-
-        <!-- Modal Frame -->
-        <div class="modal fade" id="CHANGE_THIS" tabindex="-1" aria-labelledby="CHANGE_THISLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="CHANGE_THISLabel">CHANGE THIS</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-
-                        {{-- this is where the modal resides --}}
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <script>
-            document.getElementById('modalButton').addEventListener('click', function() {
-                const CHANGE_THIS = new bootstrap.Modal(document.getElementById('CHANGE_THIS'));
-                CHANGE_THIS.show();
-            });
-        </script>
     </section>
-
 
     <!-- Details -->
      <section>
@@ -141,24 +114,8 @@
             </div>
         </div>
     </section>
-
-
-     @session('message')
-     <div class="success-message">
-         {{ session('message') }}
-     </div>
-    @endsession
-
-
-@else
-            <p>not logged in</p>
-            @session('message')
-            <div class="success-message">
-                {{ session('message') }}
-            </div>
-            @endsession
-@endauth
-
+@endsection
+@section('scripts')
 <script>
     window.addEventListener('popstate', function(event) {
         // If the user press the back button, log them out
@@ -169,7 +126,5 @@
         AOS.init();
     });
   </script>
-      @include('layouts.script')
-      @include ('layouts.footer')
-</body>
-</html>
+@endsection
+

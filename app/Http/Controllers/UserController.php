@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
-use App\Models\SubCategory;
 
 class UserController extends Controller
 {
@@ -35,34 +36,10 @@ class UserController extends Controller
         }
     }
 
-    public function showConDashboard()
-    {
-        //returns the view starting
-        $products = Product::all();
-        $categories = Category::all();
-        $subcategories = SubCategory::all();
-        return view('user.consumer',['products' => $products, 'categories' => $categories, 'subcategories' => $subcategories]);
-    }
-
-    public function showAbout()
-    {
-        return view('about-us');
-    }
-
-    public function showConContact()
-    {
-        return view('contact');
-    }
-
-    public function showFarmDashboard()
-    {
-        //return the view starting
-        return view('user.farmer');
-    }
 
 
     public function register (Request $request) {
-        $fields = $request->validate([
+        $validatedData = $request->validate([
             'username' => ['required',  Rule::unique('users','username')],
             'email' => ['required', Rule::unique('users','email')],
             'password' => ['required', 'min:8', 'max:200', 'confirmed'],
@@ -80,13 +57,13 @@ class UserController extends Controller
             'user_type.required' => 'The admin type field is required.',
             'user_type.numeric' => 'The user_type is not a number.',
         ]);
-        //Encryption for password fields
-        $fields['password'] = bcrypt($fields['password']);
+        //Encryption for password validatedData
+        $validatedData['password'] = bcrypt($validatedData['password']);
 
         //checks for user type field if numeric otherwise bitch it out
-        $fields['user_type'] = is_numeric($fields['user_type']) ? (int) $fields['user_type'] : 0;
+        $validatedData['user_type'] = is_numeric($validatedData['user_type']) ? (int) $validatedData['user_type'] : 0;
 
-        if (User::create($fields)) {
+        if (User::create($validatedData)) {
             return redirect('/')->with('message', 'user was created successfully');
         } else {
             return redirect()->route('user.register')->with('message', 'invalid login problems');
@@ -95,26 +72,34 @@ class UserController extends Controller
 
     public function login(Request $request) {
 
-     // Validate the username and password fields
-     $fields = $request->validate([
+     // Validate the username and password validatedData
+     $validatedData = $request->validate([
          'username' => ['required'],
          'password' => ['required'],
          'user_type' => ['required'],
      ]);
 
-    $user_type = $fields['user_type'];
+    $user_type = $validatedData['user_type'];
 
      // Attempt to authenticate the user
      if (auth()->guard('user')->attempt([
-         'username' => $fields['username'],
-         'password' => $fields['password'],
-         'user_type' => $fields['user_type'],
+         'username' => $validatedData['username'],
+         'password' => $validatedData['password'],
+         'user_type' => $validatedData['user_type'],
      ])) {
          $request->session()->regenerate();
          $user = auth()->guard('user')->user();
 
          // Check user_type and redirect accordingly
          if ($user->user_type == 1) {
+
+            //this cart relationship works. intellephase just mark it as undefined.
+            $cart = Cart::firstOrCreate(
+                ['user_id' => $user->id],
+                ['cart_total' => 0, 'overall_cartKG' => 0, 'total_price' => 0]
+            );
+
+
              return redirect()->route('user.consumer')->with('message', 'Login successful');
          } elseif ($user->user_type == 2) {
              return redirect()->route('user.farmer')->with('message', 'Login successful');

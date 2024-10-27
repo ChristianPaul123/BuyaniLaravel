@@ -15,6 +15,8 @@
                     Orders <span class="sr-only">(current)</span>
                 </a>
             </li>
+
+
             @if(auth()->guard('admin')->user()->admin_type == 1)
             <hr class="hr hr-blurry" />
             <li class="nav-item">
@@ -54,8 +56,10 @@
                     Customization
                 </a>
             </li>
+
             @elseif(auth()->guard('admin')->user()->admin_type == 2)
             @endif
+
             <li class="nav-item">
                 <a class="nav-link @if(request()->is('admin/blog')) active @endif" href="/admin/blog">
                      <i class="fas fa-chart-bar"></i>

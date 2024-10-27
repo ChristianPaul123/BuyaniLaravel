@@ -12,13 +12,13 @@ class Order extends Model
     // Fillable attributes for the Order model
     protected $fillable = [
         'user_id',
+        'shipping_address_id',
         'total_amount',
         'overall_orderKG',
         'total_price',
-        'payment_status',
+        'order_type',
         //'shipping_method',
         'order_status',
-        'shipping_address',
         'customer_name',
         'customer_phone',
         'customer_email',
@@ -40,12 +40,16 @@ class Order extends Model
         return $this->hasMany(OrderItem::class, 'order_id'); // 'order_id' is the foreign key in the order_items table
     }
 
+    public function orderRatings() {
+        return $this->hasMany(OrderRating::class, 'order_id'); // 'order_id' is the foreign key in the order_ratings table
+    }
+
     public function payment() {
         return $this->hasOne(Payment::class, 'order_id'); // 'order_id' is the foreign key in the payments table
     }
 
-    public function tracking() {
-        return $this->hasOne(Tracking::class, 'order_id'); // 'order_id' is the foreign key in the shippings table
+    public function trackings() {
+        return $this->hasMany(Tracking::class, 'order_id'); // 'order_id' is the foreign key in the tracking table
     }
 
 

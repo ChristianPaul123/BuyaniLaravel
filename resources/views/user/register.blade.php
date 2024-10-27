@@ -1,73 +1,69 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.app') <!-- Extending the parent layout -->
 
-  @include ('layouts.head')
-  @include('user.styles.user_styles')
+@section('title', 'register') <!-- Defining a title for this view -->
 
-    <style>
-        .custom-font-content {
-            font-family: 'Poppins', sans-serif;
-            font-weight: bold;
-            color: aliceblue;
-            background-color: #3F6F23;
-            color: #fff;
-        }
+@push('styles')
+<style>
+    .custom-font-content {
+        font-family: 'Poppins', sans-serif;
+        font-weight: bold;
+        color: aliceblue;
+        background-color: #3F6F23;
+        color: #fff;
+    }
 
-        .form-control:focus {
-            box-shadow: none;
-        }
+    .form-control:focus {
+        box-shadow: none;
+    }
 
-        /* Hide the increment and decrement buttons in WebKit browsers */
-        input[type="number"]::-webkit-inner-spin-button,
-        input[type="number"]::-webkit-outer-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
+    /* Hide the increment and decrement buttons in WebKit browsers */
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
 
-        .error-message {
-            color: red;
-            font-size: 0.875rem;
-        }
+    .error-message {
+        color: red;
+        font-size: 0.875rem;
+    }
 
-        .message {
-        position: absolute;
-        top:0;
-        margin:10px 0 0 0;
-        width: 95%;
-        background-color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding:2rem;
-        gap:1.5rem;
-        border-radius: 40px;
-        z-index: 10000;
-        border: 10px black;
-        justify-content: space-between;
-        }
-        .message span{
-        color:black;
-        font-size: 2rem;
-        }
-        .message i{
-        font-size: 2.5rem;
-        color:red;
+    .message {
+    position: absolute;
+    top:0;
+    margin:10px 0 0 0;
+    width: 95%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding:2rem;
+    gap:1.5rem;
+    border-radius: 40px;
+    z-index: 10000;
+    border: 10px black;
+    justify-content: space-between;
+    }
+    .message span{
+    color:black;
+    font-size: 2rem;
+    }
+    .message i{
+    font-size: 2.5rem;
+    color:red;
+    cursor: pointer;
+    }
+    .message i:active{
+    transform: rotate(90deg);
+    }
+
+    .toggle-password {
         cursor: pointer;
-        }
-        .message i:active{
-        transform: rotate(90deg);
-        }
-
-        .toggle-password {
-            cursor: pointer;
-        }
-    </style>
-</head>
-<body style="overflow-x: hidden;">
-    @include ('user.includes.navbar-consumer');
+    }
+</style>
+@endpush
+@section('x-content')
+    @include('user.includes.navbar-consumer')
 {{-- Display success or error messages --}}
 @if (session('message'))
     <div class="alert alert-success">
@@ -193,10 +189,7 @@
         </div> --}}
       </div>
 @endif
-    <!--Sign Up-->
-
-    @include('layouts.script')
-    @include ('layouts.footer')
-
-</body>
-</html>
+@endsection
+@section('scripts')
+{{-- if meron --}}
+@endsection

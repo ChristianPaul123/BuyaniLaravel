@@ -17,7 +17,8 @@ class Record extends Model
         'product_sold_stocks',
         'product_damage_stocks',
         'product_total_stocks',
-        'transfer_date'
+        'transfer_date',
+        'total_profit'
     ];
 
     public function inventory()

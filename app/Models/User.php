@@ -49,28 +49,34 @@ class User extends Authenticatable
         ];
     }
 
+    // Define a relationship with the ShippingAddress model
     public function shippingAddresses() {
         return $this->hasMany(ShippingAddress::class);
     }
 
-    public function carts() {
-        return $this->hasMany(Cart::class);
+    // Define a relationship with the Cart model
+    public function cart() {
+        return $this->hasOne(Cart::class); // 'user_id' is the foreign key in the cart table
     }
 
+    // Define a relationship with the Order model
     public function orders() {
         return $this->hasMany(Order::class);
     }
 
+    // Define a relationship with the Favorite model
     public function favorites() {
         return $this->hasMany(Favorite::class);
     }
 
 
 
+    // Define a relationship with the OrderRating model
     public function orderRatings() {
         return $this->hasMany(OrderRating::class);
     }
 
+    // Define a relationship with the ProductRating model
     public function productRatings() {
         return $this->hasMany(ProductRating::class);
     }

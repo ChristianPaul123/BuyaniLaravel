@@ -15,8 +15,9 @@ class Payment extends Model
         'order_id',
         'payment_amount',
         'payment_method',
-        //'payment_pic',
         'payment_status',
+        'payment_pic',
+        'accepted_by',
     ];
 
     // Define a relationship with the Order model
@@ -25,4 +26,5 @@ class Payment extends Model
         // Return the relationship between the Payment and Order models
         return $this->belongsTo(Order::class);
     }
+
 }

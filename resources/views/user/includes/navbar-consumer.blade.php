@@ -47,7 +47,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-center" style="font-family: 'Poppins', sans-serif; position: relative; font-size: 20px; font-weight: bold;">
                     <li class="nav-item px-1 py-0 position-relative">
-                        <a class="nav-link" @if(request()->is('user/consumer')) active @endif href="/user/consumer" data-page="home">HOME <span class="sr-only">(current) </span></a>
+                        <a class="nav-link" @if(request()->is('user/consumer')) active @endif href="/user/consumer" data-page="home">HOME <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item px-1 position-relative">
                         <a class="nav-link" @if(request()->is('user/consumer/about-us')) active @endif href="/user/consumer/about-us" data-page="about">ABOUT US <span class="sr-only">(current) </span></a>
@@ -62,16 +62,61 @@
                         {{-- <a class="nav-link" href="#" data-page="orders">ORDERS</a> --}}
                     </li>
                     <li class="nav-item px-1 position-relative">
+                        <a class="nav-link" @if(request()->is('user/consumer/blogs')) active @endif href="/user/consumer/blogs" data-page="blogs">BLOGS <span class="sr-only">(current) </span></a>
+                    </li>
+                    <li class="nav-item px-1 position-relative">
+                        <a class="nav-link" @if(request()->is('user/consumer/voting')) active @endif href="/user/consumer/voting" data-page="voting">VOTING <span class="sr-only">(current) </span></a>
+                    </li>
+                    <li class="nav-item px-1 position-relative">
                         <a class="nav-link" @if(request()->is('user/consumer/contacts')) active @endif href="/user/consumer/contacts" data-page="contacts">CONTACTS <span class="sr-only">(current) </span></a>
                     </li>
                     <li class="nav-item px-1 position-relative">
                         <a class="nav-link" @if(request()->is('user/consumer/cart')) active @endif href="/user/consumer/cart" data-page="cart">
                             <i class="fas fa-shopping-basket" style="font-size: 25px;"></i> <span class="sr-only">(current) </span><span class="notification-circle"></span></a>
                     </li>
-                    <li class="nav-item px-1 position-relative">
-                        <a class="nav-link" @if(request()->is('user/consumer/user-profile')) active @endif href="/user/consumer/user-profile" data-page="profile">
-                            <i class="fas fa-user-circle" style="font-size: 25px;"></i> <span class="sr-only">(current) </span><span class="notification-circle"></span></a>
+                    @auth('user')
+                    <li class="nav-item dropdown px-1 position-relative">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarProfile" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            @if (auth()->guard('user')->user()->profile_pic == null)
+                            <i class="fas fa-user-circle" style="font-size: 25px;"></i>
+                            @else
+                            <img src="{{ asset(auth()->guard('user')->user()->profile_pic) ?? asset('img/logo1.svg') }}" alt="Profile Image" class="rounded-circle" style="width: 30px; height: 30px; margin-right: 8px;">
+                            @endif
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-menu-end border-0" aria-labelledby="navbarProfile">
+                            <li class="dropdown-header text-center fw-bold">User Profile</li>
+                            <li class="text-center my-2">
+                                <img src="{{ auth()->guard('user')->user()->profile_pic ?? asset('img/logo1.svg') }}"
+                                     alt="Profile Image"
+                                     class="rounded-circle"
+                                     style="width: 50px; height: 50px; object-fit: cover;">
+                            </li>
+                            <li>
+                                <p class="dropdown-item text-muted text-center mb-0">
+                                    {{ auth()->guard('user')->user()->username }}
+                                </p>
+                            </li>
+
+                            <!-- Divider Line -->
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/user/consumer/profile">Show Profile</a></li>
+                            <li><form method="POST" action="{{ route('user.logout') }}" class="dropdown-item p-0 m-0">
+                                @csrf
+                                <button type="submit" class="btn btn-link text-decoration-none text-dark w-100 text-start">
+                                    Logout
+                                </button>
+                            </form></li>
+                        </ul>
                     </li>
+                    @else
+                    <li class="nav-item px-1 position-relative">
+                        <a class="nav-link" @if(request()->is('user/consumer/login')) active @endif href="/" data-page="login">LOGIN <span class="sr-only">(current) </span></a>
+                    </li>
+                    <li class="nav-item px-1 position-relative">
+                        <a class="nav-link" @if(request()->is('user/consumer/register')) active @endif href="/" data-page="register">REGISTER <span class="sr-only">(current) </span></a>
+                    </li>
+                    @endauth
                 </ul>
             </div>
         </div>

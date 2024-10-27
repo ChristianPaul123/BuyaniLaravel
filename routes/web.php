@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Livewire\UserProduct;
+
+
 use Illuminate\Support\Facades\Route;
-
-
+use App\Http\Livewire\ConsumerProduct;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OrderController;
@@ -13,18 +16,29 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\UserProductController;
+use App\Http\Controllers\ShippingAddressController;
 use App\Http\Controllers\ProductSpecificationController;
 
 Route::get('/', function () {
     return view('user.index');
-});
+})->name('user.index');
 
+//did not work
+// Route::get('/session-expired', function () {
+//     return view('session_expired');
+// })->name('session.expired');
+
+
+// Example 404 page route (this will typically be caught by Laravel's default 404 handling) not used yet
+// Route::fallback(function () {
+//     return response()->view('errors.404', [], 404);
+// });
 
 //This right here is for the admin side
 //admin logging
-Route::get('/admin', [AdminController::class, 'showForm'])->name('admin.login');
-Route::get('/admin/test', [AdminController::class, 'test'])->name('admin.test');
-Route::post('/admin/register', [AdminController::class, 'register'])->name('admin.register');
+Route::get('admin', [AdminController::class, 'showForm'])->name('admin.login');
+Route::get('admin/test', [AdminController::class, 'test'])->name('admin.test');
+Route::post('admin/register', [AdminController::class, 'register'])->name('admin.register');
 Route::post('admin/login', [AdminController::class,'login' ]);
 Route::get('admin/logout', [AdminController::class,'logout' ])->name('admin.logout');
 
@@ -106,6 +120,9 @@ Route::get('admin/product', [ProductController::class, 'showProducts'])->name('a
 
 
 
+
+
+
 //This is the user side
 
 
@@ -114,26 +131,58 @@ Route::get('user/login', [UserController::class, 'showLoginForm'])->name('user.l
 Route::post('user/login', [UserController::class,'login' ])->name('user.login.submit');
 Route::post('user/logout', [UserController::class,'logout' ])->name('user.logout');
 
+
+
 //user registering
 Route::get('user/register', [UserController::class, 'showRegisterForm'])->name('user.register');
 Route::post('user/register', [UserController::class, 'register'])->name('user.register.submit');
 
 //Dashboard for Users
-Route::get('user/consumer', [UserController::class, 'showCondashboard'])->name('user.consumer');
-Route::get('user/consumer/contacts', [UserController::class, 'showConContact'])->name('user.consumer.contact');
-Route::get('user/consumer/about-us', [UserController::class, 'showAbout'])->name('user.consumer.about');
-Route::get('user/farmer', [UserController::class, 'showFarmDashboard'])->name('user.farmer');
+Route::get('user/consumer', [HomeController::class, 'showCondashboard'])->name('user.consumer');
+Route::get('user/consumer/contacts', [HomeController::class, 'showConContact'])->name('user.consumer.contact');
+Route::get('user/consumer/about-us', [HomeController::class, 'showConAbout'])->name('user.consumer.about');
+Route::get('user/farmer', [HomeController::class, 'showFarmDashboard'])->name('user.farmer');
+Route::get('user/farmer/contacts', [HomeController::class, 'showFarmContact'])->name('user.farmer.contact');
+Route::get('user/farmer/about-us', [HomeController::class, 'showFarmAbout'])->name('user.farmer.about');
 
+
+//Profile for Users
+Route::get('user/consumer/profile', [UserController::class, 'showUserprofile'])->name('user.consumer.profile');
+Route::get('user/consumer/profile/edit', [UserController::class, 'editUserprofile'])->name('user.consumer.profile.edit');
+Route::put('user/consumer/profile/update', [UserController::class, 'updateUserprofile'])->name('user.consumer.profile.update');
+Route::get('user/consumer/profile/changepassword', [UserController::class, 'showChangePasswordForm'])->name('user.consumer.profile.changepassword');
+Route::put('user/consumer/profile/changepassword', [UserController::class, 'changePassword'])->name('user.consumer.profile.changepassword.submit');
+Route::get('user/consumer/profile/verify', [UserController::class, 'showVerifyForm'])->name('user.consumer.profile.verify');
+Route::put('user/consumer/profile/verify', [UserController::class, 'verify'])->name('user.consumer.profile.verify.submit');
+
+
+//Shipping Address for Consumer
+Route::get('user/consumer/profile/shipping',[ShippingAddressController::class, 'showUserAddress'])->name('user.consumer.profile.shipping');
+Route::get('user/consumer/profile/shipping/add',[ShippingAddressController::class, 'showUserAddressAddForm'])->name('user.consumer.profile.shipping.add');
+Route::post('user/consumer/profile/shipping/add',[ShippingAddressController::class, 'addUserAddress'])->name('user.consumer.profile.shipping.add.submit');
+Route::get('user/consumer/profile/shipping/edit/{address}',[ShippingAddressController::class, 'showUserAddressEditForm'])->name('user.consumer.profile.shipping.edit');
+Route::put('user/consumer/profile/shipping/edit/{address}',[ShippingAddressController::class, 'editUserAddress'])->name('user.consumer.profile.shipping.edit.submit');
+Route::delete('user/consumer/profile/shipping/delete/{address}',[ShippingAddressController::class, 'deleteUserAddress'])->name('user.consumer.profile.shipping.delete');
+
+
+
+Route::get('user/farmer/profile', [UserController::class, 'showFarmerprofile'])->name('user.farmer.profile');
+Route::get('user/farmer/profile/edit', [UserController::class, 'editFarmerprofile'])->name('user.farmer.profile.edit');
+Route::put('user/farmer/profile/update', [UserController::class, 'updateFarmerprofile'])->name('user.farmer.profile.update');
 
 //Product for Consumers
 Route::get('user/consumer/products', [UserProductController::class, 'showConsumerProduct'])->name('user.consumer.product');
-Route::get('user/consumer/product/view/{id}', [UserProductController::class, 'viewConsumerProduct'])->name('user.consumer.product.view');
+Route::get('user/consumer/product/view/{product}', [UserProductController::class, 'viewConsumerProduct'])->name('user.consumer.product.view');
 Route::post('user/consumer/product/add', [UserProductController::class, 'addConsumerProduct'])->name('user.consumer.product.add');
+Route::post('user/consumer/product/view/{product}/{specification}', [UserProductController::class, 'addProductSpecificationToCart'])->name('user.consumer.product.cart.add');
 
 //cart for Consumers
-Route::get('user/consumer/product/cart', [CartController::class, 'showConsumerCart'])->name('user.consumer.product.cart');
-Route::get('user/consumer/product/cart/delete/{id}', [CartController::class, 'deleteConsumerCart'])->name('user.consumer.product.cart.delete');
-Route::get('user/consumer/product/cart/checkout', [CartController::class, 'showConsumerCheckout'])->name('user.consumer.product.cart.checkout');
+Route::get('user/consumer/cart', [CartController::class, 'showConsumerCart'])->name('user.consumer.product.cart');
+Route::get('user/consumer/cart/view', [CartController::class, 'updateCartView'])->name('user.consumer.product.cart.view');
+Route::put('user/consumer/cart/item/{cartitem}', [CartController::class, 'updateCartItemAjax'])->name('user.consumer.product.cart.update');
+Route::delete('user/consumer/cart/item/{cartitem}', [CartController::class, 'deleteCartItem'])->name('user.consumer.product.cart.delete');
+
+Route::get('user/consumer/cart/checkout', [CartController::class, 'showConsumerCheckout'])->name('user.consumer.product.cart.checkout');
 Route::post('user/consumer/product/cart/checkout', [CartController::class, 'checkoutConsumerCart'])->name('user.consumer.product.cart.checkout.submit');
 Route::get('user/consumer/product/cart/checkout/success', [CartController::class, 'showConsumerCheckoutSuccess'])->name('user.consumer.product.cart.checkout.success');
 
@@ -147,9 +196,6 @@ Route::get('user/consumer/orders', function () {
     return view('user.order.show');
 });
 
-Route::get('user/consumer/cart', function () {
-    return view('user.cart.show');
-});
 
 Route::get('user/consumer/user-profile', function () {
     return view('user.order.show');

@@ -1,21 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+@section('title','Checkout Page')
 
-<body>
+@push('styles')
+<style>
+    .small-input {
+        width: 80px; /* Adjust this value to change the width */
+    }
+</style>
+@endpush
 
-    <?php include 'navbar-consumer.php'; ?>
 
+@section('content')
+    @include('user.includes.navbar-consumer')
     <div class="container mt-4 mb-5">
         <h2 class="mb-4">Checkout</h2>
-
         <div class="row">
             <div class="col-lg-8">
                 <h5>Billing Information</h5>
@@ -129,12 +128,8 @@
             </div>
         </div>
     </div>
-
-    <?php include 'footer.php'; ?>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
+@endsection
+@section('scripts')
     <script>
         document.getElementById('placeOrderBtn').addEventListener('click', function() {
             const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
@@ -154,6 +149,4 @@
             gcashModal.hide();
         });
     </script>
-</body>
-
-</html>
+@endsection

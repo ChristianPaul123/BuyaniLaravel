@@ -3,6 +3,8 @@
 namespace App\Http;
 
 use App\Http\Middleware\AutoLogout;
+use App\Http\Middleware\CheckSessionExpired;
+use Illuminate\Auth\Middleware\CheckSession;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -55,7 +57,7 @@ class Kernel extends HttpKernel
      */
     protected $routeMiddleware = [
         //'auth' => \App\Http\Middleware\Authenticate::class,
-        //'auto.logout' => \App\Http\Middleware\AutoLogout::class, 
+        //'auto.logout' => \App\Http\Middleware\AutoLogout::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'auth.session' => \Illuminate\Session\Middleware\AuthenticateSession::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
@@ -65,5 +67,6 @@ class Kernel extends HttpKernel
         //'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        //'checkSession' => \App\Http\Middleware\CheckSession::class,
     ];
 }

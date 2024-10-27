@@ -20,8 +20,8 @@ class Admin extends Authenticatable
         'username',
         'email',
         'password',
-        'profile_pic',
         'admin_type',
+        'profile_pic',
         'status',
         'last_online',
     ];

@@ -20,9 +20,7 @@
 
      <div class="container-fluid">
         <div class="row">
-
         @include('admin.includes.sidebar')
-
         <section class="col-md-10 ml-sm-auto col-lg-10 px-3 py-5 overflow-y-scroll main-section">
                        {{-- if there is any errors --}}
         @session('message')
@@ -33,10 +31,8 @@
             {{ session('message') }}
         </div>
        @endsession
-
        {{-- if there's errors --}}
         @if ($errors->any())
-
         <div class="alert alert-danger mx-3 my-2 px-3 py-2">
             <button type="button" class="close btn btn-danger" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -46,7 +42,6 @@
                     <li>{{ $error }}</li>
                 @endforeach
             </ul>
-
         </div>
         @endif
 

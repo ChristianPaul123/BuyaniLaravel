@@ -86,8 +86,8 @@
                                 </div>
 
                                 <div class="form-group my-3">
-                                    <label for="specific_product_info">Specific Product Info</label>
-                                    <textarea class="form-control" style="resize: none;" id="specific_product_info" name="specific_product_info" rows="2" required></textarea>
+                                    <label for="specific_product_info">Specific Product Info max: 50 characters</label>
+                                    <textarea class="form-control" style="resize: none;" id="specific_product_info" name="specific_product_info" rows="2" maxlength="50" required></textarea>
                                 </div>
 
                                 <div class="form-group my-3">

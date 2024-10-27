@@ -86,13 +86,13 @@
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="product_status" id="product_status_unavailable" value="0" {{ $product->product_status == 0 ? 'checked' : '' }}>
+                                <input class="form-check-input" type="radio" name="product_status" id="product_status_unavailable" value="2" {{ $product->product_status == 2 ? 'checked' : '' }}>
                                 <label class="form-check-label" for="product_status_unavailable">
                                     Out of Stock
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="product_status" id="product_status_unavailable" value="2" {{ $product->product_status == 2 ? 'checked' : '' }}>
+                                <input class="form-check-input" type="radio" name="product_status" id="product_status_unavailable" value="3" {{ $product->product_status == 3 ? 'checked' : '' }}>
                                 <label class="form-check-label" for="product_status_unavailable">
                                     Unavailable
                                 </label>

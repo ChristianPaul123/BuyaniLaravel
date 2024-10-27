@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tracking extends Model
 {
+    // Use the HasFactory trait to create factory instances for this model
     use HasFactory;
 
     protected $fillable = [
@@ -20,7 +21,8 @@ class Tracking extends Model
 
     ];
 
+    // Define a relationship with the Order model
     public function order() {
-        return $this->belongsTo(Order::class);
+        return $this->belongsTo(Order::class); // 'order_id' is the foreign key in the orders table
     }
 }

@@ -13,9 +13,9 @@ class OrderRating extends Model
     protected $fillable = [
         'order_id',
         'user_id',
-        'feedback',
-        'review_by',
-        'customer_rating',
+        'comment',
+        'reviewer_id',
+        'delivery_rating',
     ];
 
     //Relationship with the Order model

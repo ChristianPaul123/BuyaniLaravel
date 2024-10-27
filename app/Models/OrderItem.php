@@ -13,7 +13,7 @@ class OrderItem extends Model
     // Define the fillable attributes for this model
     protected $fillable = [
     'order_id',
-    'product_id',
+    'productspecification_id',
     'quantity',
     'price',
     'overall_kg',
@@ -24,8 +24,8 @@ class OrderItem extends Model
         return $this->belongsTo(Order::class);
     }
 
-    // Define a relationship with the Product model
-    public function product() {
-        return $this->belongsTo(Product::class);
+    // Define a relationship with the Product Specificition model
+    public function productspecification() {
+        return $this->belongsTo(ProductSpecification::class);
     }
 }

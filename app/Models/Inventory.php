@@ -13,12 +13,15 @@ class Inventory extends Model
         // 'product_status',
         'product_new_stock',
         'product_old_stock',
+        'product_total_stock',
         'product_sold_stock',
         'product_damage_stock',
-        'product_total_stock',
+        'total_profit',
     ];
 
     public function product() {
         return $this->belongsTo(Product::class, 'product_id');
     }
+
+
 }

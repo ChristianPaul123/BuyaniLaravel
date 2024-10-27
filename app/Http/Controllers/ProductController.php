@@ -122,7 +122,7 @@ class ProductController extends Controller
          $validatedData['product_pic'] = 'img/product/' . $validatedData['product_name'] . '/' . $imageName;
      }
 
-     if ($validatedData['product_status'] == 2) {
+     if ($validatedData['product_status'] == 3) {
         $validatedData['product_deactivated'] = now();// the current date and time
     } else {
         $validatedData['product_deactivated'] = null;
