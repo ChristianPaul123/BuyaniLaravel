@@ -33,7 +33,7 @@
                     <form class="my-3" action="{{ route('user.login.submit') }}" method="post" style="width: 400px;" id="loginForm" autocomplete="off">
                     @csrf
                         <div class="form-group my-3">
-                            <label for="username">username</label>
+                            <label for="username">Username</label>
                             <input type="text" name="username" class="form-control" id="username" placeholder="Enter username" required>
                         </div>
                         <div class="form-group my-3">

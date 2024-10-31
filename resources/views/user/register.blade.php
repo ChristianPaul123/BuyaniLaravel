@@ -106,7 +106,7 @@
                       <div class="form-group my-3">
                           <label for="password">Password:</label>
                           <div class="input-group">
-                              <input type="password" name="password" class="form-control" id="password" placeholder="Enter password" minlength="8" required>
+                          <input type="password" name="password" class="form-control" id="password" placeholder="Enter password" minlength="8" required pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}" title="Password must contain at least 8 characters, including uppercase, lowercase, number, and special character.">
                               <div class="input-group-append">
                                   <span class="input-group-text toggle-password" id="togglePassword"
                                       style="height: 100%; width: 40px; border-top-left-radius: 0px; border-bottom-left-radius: 0px; display: flex; align-items: center; justify-content: center;">
@@ -139,7 +139,7 @@
       <div class="container-fluid custom-font-content" style="padding: 20px;">
         <div class="row">
             <div class="col-12">
-                <h2 class="text-center my-3 mx-2" style="font-size: 40px; white-space: nowrap;">Sign Up As farmer</h2>
+                <h2 class="text-center my-3 mx-2" style="font-size: 40px; white-space: nowrap;">Sign Up As Farmer</h2>
             </div>
         </div>
         <form action="{{ route('user.register.submit') }}" method="post" class="my-3" style="width: 100%;" autocomplete="off">
@@ -159,7 +159,7 @@
                     <div class="form-group my-3">
                         <label for="password">Password:</label>
                         <div class="input-group">
-                            <input type="password" name="password" class="form-control" placeholder="Enter password" minlength="8" required>
+                        <input type="password" name="password" class="form-control" id="password" placeholder="Enter password" minlength="8" required pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}" title="Password must contain at least 8 characters, including uppercase, lowercase, number, and special character.">
                             <div class="input-group-append">
                                 <span class="input-group-text toggle-password" id="togglePassword"
                                     style="height: 100%; width: 40px; border-top-left-radius: 0px; border-bottom-left-radius: 0px; display: flex; align-items: center; justify-content: center;">
