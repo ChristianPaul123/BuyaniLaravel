@@ -25,6 +25,7 @@
 
     <!-- Our Products -->
     <section class="text-center p-3">
+        <livewire:test>
         <h1>Our Products</h1>
         <p>Freshly delivered from our local farmers!</p>
         <div class="container-fluid">

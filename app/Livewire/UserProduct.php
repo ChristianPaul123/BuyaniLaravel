@@ -27,10 +27,8 @@ class UserProduct extends Component
     public function filterByCategory($categoryId)
     {
     try  {
-        $category = Category::findOrFail($categoryId);  // Ensures category exists
-        $this->products = Product::where('category_id', $categoryId)
-            ->where('product_status', 1)
-            ->get();
+        $category = Category::findOrFail($categoryId);
+        $this->products = Product::where('category_id', $categoryId);
 
         $this->message = $this->products->isEmpty() ? 'No products available for this category.' : null;
     } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {

@@ -12,8 +12,9 @@ class VotingCount extends Model
     protected $fillable = [
         'user_id',
         'max_vote_count',
-        'remaining_vote_count'
-    ];
+        'remaining_vote_count',
+        'suggest_count',
+     ];
 
     public function user() {
         return $this->belongsTo(User::class);

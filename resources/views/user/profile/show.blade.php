@@ -7,141 +7,137 @@
     .small-input {
         width: 80px; /* Adjust this value to change the width */
     }
+    <style>
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        .profile-section {
+            margin-top: 20px;
+        }
+    </style>
 </style>
 @endpush
 @section('content')
-     @include('user.includes.navbar-consumer')
+    @include('user.includes.navbar-consumer')
+    @session('message')
+        <div class=" mx-3 my-2 px-3 py-2 alert alert-success">
+            <button type="button" class="close  btn btn-success" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            {{ session('message') }}
+        </div>
+    @endsession
 
-    <!-- Placeholder for AJAX Messages -->
-    <div id="ajaxMessage" class="alert d-none mx-3 my-2 px-3 py-2" role="alert">
-        <button type="button" class="close" onclick="hideMessage()">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        <span id="messageContent"></span>
-    </div>
+       {{-- if there's errors --}}
+        @if ($errors->any())
+        <div class="alert alert-danger mx-3 my-2 px-3 py-2">
+            <button type="button" class="close btn btn-danger" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
 
-   <div class="container mt-5 mb-5">
-    <!-- Shopping Cart Section -->
-    <section class="container-fluid">
-        <h2 class="mb-4">Profile Info</h2>
-        <div class="row md-12">
-            <!-- Cart Items -->
-            <div class="col-lg-9" id="profileContainer">
+        </div>
+        @endif
 
+    <div class="container my-5 pb-5">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="text-center">
+                <h3 class="mt-3">{{ $user->username }}</h3>
+                <img src="{{ asset("$user->profile_pic") }}" alt="Profile Picture" class="profile-pic rounded-circle" width="150px" height="auto">
+                <p class="text-muted">{{ $user->email }}</p>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProfileModal">Edit Profile</button>
+                <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#changePasswordModal">Change Password</button>
+                </div>
             </div>
-            <!-- Cart Summary -->
-           <!-- Cart Summary Section -->
-            <div class="col-lg-2">
-                <div class="card">
-                    <div class="card-body">
-                        <h5>Cart Summary</h5>
-                        <hr>
-                        <div class="d-flex justify-content-between">
-                            <p>Total weight:</p>
-                            <p>{{ $cart->overall_cartKG }} kg</p>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <p>Total price:</p>
-                            <h6>${{ $cart->total_price }}</h6>
-                        </div>
-                        <hr>
-                        <div class="d-flex justify-content-between">
-                            <h6>Total</h6>
-                            <h6 id="total">${{ $cart->total_price }}</h6>
-                        </div>
-                        <a class="btn btn-primary w-100 mt-3" href="{{ route('user.consumer.checkout') }}">Proceed to Checkout</a>
-                    </div>
+
+            <div class="col-md-8">
+                <div class="profile-section">
+                    <h4>Personal Information</h4>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item">Name: {{ $user->username }}</li>
+                        <li class="list-group-item">Email: {{ $user->email }}</li>
+                        <li class="list-group-item">Phone: {{ $user->phone_number }}</li>
+                        <li class="list-group-item">Status: {{ $user->status }}</li>
+                    </ul>
                 </div>
             </div>
         </div>
-    </section>
-</div>
-@endsection
+    </div>
 
-@section('scripts')
-<script>
-    function updateQuantity(cartItemId, action) {
-        let inputField = document.getElementById('numberInput' + cartItemId);
-        let currentQuantity = parseInt(inputField.value);
+    <!-- Edit Profile Modal -->
+    <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{{ route('user.consumer.profile.update', $user->id) }}" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+                        <div class="mb-3">
+                            <label for="nameInput" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="nameInput" name="username" value="{{ $user->username }}">
+                        </div>
+                        <div class="mb-3 text-center">
+                            <img src="{{ $user->profile_pic }}" alt="Profile Picture" class="profile-pic-preview" width="40px" height="auto">
+                        </div>
+                        <div class="mb-3">
+                            <label for="profilePic" class="form-label">Profile Picture</label>
+                            <input type="file" class="form-control" id="profilePic" name="profile_pic">
+                        </div>
+                        <div class="mb-3">
+                            <label for="phoneInput" class="form-label">Phone</label>
+                            <input type="tel" class="form-control" id="phoneInput" name="phone_number" value="{{ $user->phone_number }}">
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
 
-        // Determine new quantity based on action
-        let newQuantity = action === 'increment' ? currentQuantity + 1 : currentQuantity - 1;
-
-        // Ensure new quantity is at least 1
-        if (newQuantity < 1) return;
-
-        // Calculate total weight
-        let totalWeight = calculateTotalWeight();
-
-        // Check if adding exceeds the limit
-        if (totalWeight + {{ $item->product_specification->product_kg }} > 25) {
-            alert('Only 25 kg per customer is available');
-            return;
-        }
-
-        // Send AJAX request to update cart item
-        fetch(`/user/consumer/cart/item/${cartItemId}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            body: JSON.stringify({
-                quantity: newQuantity
-            })
-        })
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                throw new Error('Failed to update quantity');
-            }
-        })
-        .then(data => {
-            if (data.success) {
-                inputField.value = newQuantity;
-                showMessage(data.message);  // Display success message
-            } else {
-                showMessage(data.message, 'danger');  // Display error message if any
-            }})
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    }
-
-    function calculateTotalWeight() {
-        let totalWeight = 0;
-        document.querySelectorAll('[id^="numberInput"]').forEach(input => {
-            let quantity = parseInt(input.value);
-            let productWeight = {{ $item->product_specification->product_kg }}; // You may need to adjust to get actual weights
-            totalWeight += quantity * productWeight;
-        });
-        return totalWeight;
-    }
-
-    // Function to show the message in an alert div
-    function showMessage(message, type = 'success') {
-        let messageDiv = document.getElementById('ajaxMessage');
-        if (!messageDiv) {
-            messageDiv = document.createElement('div');
-            messageDiv.id = 'ajaxMessage';
-            messageDiv.className = 'alert alert-' + type;
-            messageDiv.innerHTML = `
-                <button type="button" class="close btn btn-${type}" onclick="hideMessage()">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <span id="messageContent"></span>
-            `;
-            document.body.prepend(messageDiv);  // Insert the message at the top
-        }
-        document.getElementById('messageContent').textContent = message;
-        messageDiv.classList.remove('d-none');
-        setTimeout(hideMessage, 5000);  // Hide after 5 seconds
-    }
-
-    function hideMessage() {
-        const messageDiv = document.getElementById('ajaxMessage');
-        if (messageDiv) messageDiv.classList.add('d-none');
-    }
-</script>
-@endsection
+    <!-- Change Password Modal -->
+    <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="changePasswordModalLabel">Change Password</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="currentPassword" class="form-label">Current Password</label>
+                            <input type="password" class="form-control" id="currentPassword" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="newPassword" class="form-label">New Password</label>
+                            <input type="password" class="form-control" id="newPassword" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirmPassword" class="form-label">Confirm New Password</label>
+                            <input type="password" class="form-control" id="confirmPassword" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Change Password</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endsection

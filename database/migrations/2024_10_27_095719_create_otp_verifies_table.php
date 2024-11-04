@@ -18,7 +18,8 @@ return new class extends Migration
     {
         Schema::create('otp_verifies', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
+            //$table->foreignId('user_id')->constrained('users')->nullable();
+            $table->string('email');
             $table->string('otp');
             $table->dateTime('otp_expiry');
             $table->string('v_purpose');

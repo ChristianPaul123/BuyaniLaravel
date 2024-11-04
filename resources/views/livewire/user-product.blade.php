@@ -44,26 +44,28 @@
     </nav>
 
 <div class="container-fluid">
-    <div class="row justify-content-center align-items-center">
-        @if ($message)
-            <div class="alert alert-info">
-                {{ $message }}
-            </div>
-        @endif
 
         <h2 class="text-center">All Products</h2>
-        <main class="d-flex d-flex-row col-md-12 col-lg-8 px-md-4 mt-3 main-content">
+        <div class="row justify-content-center align-items-center">
+            @if ($message)
+                <div class="alert alert-info">
+                    {{ $message }}
+                </div>
+            @endif
+        <main class="row justify-content-center main-content">
             @foreach ($products as $product)
-            <div class="d-flex-row col-md-8 offset-md-2 m-1">
-                <div class="card">
+            <div class="col-md-2 m-1">
+                <div class="card h-100">
                     <div class="card-header d-flex align-items-center justify-content-center">
                         <div class="ms-3">
                             <h6 class="mb-0 fs-sm text-center">{{ $product->product_name }}</h6>
                         </div>
                     </div>
-                    <img src="{{ asset($product->product_pic) }}" class="card-img-top" alt="{{ $product->product_name }}" />
-                    <div class="card-body align-items-center">
-                        <p class="card-text">{{ $product->product_details }}</p>
+                    <img src="{{ asset( "$product->product_pic" ) }}" class="card-img-top" alt="products {{ asset( "$product->product_name" ) }}" />
+                    <div class="card-body">
+                        <p class="card-text text-truncate">
+                            {{ Str::limit($product->product_details, 50) }}
+                        </p>
                     </div>
                     <div class="card-footer d-flex">
                         <button class="btn btn-subtle" type="button"><i class="fas fa-heart fa-lg"></i></button>
@@ -73,7 +75,6 @@
                     </div>
                 </div>
             </div>
-
             @endforeach
         </main>
     </div>

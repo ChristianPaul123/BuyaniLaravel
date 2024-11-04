@@ -54,7 +54,5 @@
             AOS.init();
         });
       </script>
-    <!-- Page Content -->
-    <!-- Page-Specific Scripts-->
 </body>
 </html>

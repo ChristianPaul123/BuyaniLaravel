@@ -11,25 +11,25 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-center" style="font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: bold;">
                     <li class="nav-item px-1 py-0 position-relative">
-                        <a class="nav-link" href="/user/farmer" data-page="home">HOME</a>
+                        <a class="nav-link @if(request()->is('user/consumer/cart')) active @endif" href="/user/farmer" data-page="home">HOME</a>
                     </li>
                     <li class="nav-item px-1 position-relative">
-                        <a class="nav-link" href="/user/farmer/analytics" data-page="analytics">ANALYTICS </a>
+                        <a class="nav-link @if(request()->is('user/consumer/cart')) active @endif" href="/user/farmer/analytics" data-page="analytics">ANALYTICS </a>
                     </li>
                     <li class="nav-item px-1 position-relative">
-                        <a class="nav-link" href="/user/farmer/products" data-page="s-products">SUPPLY PRODUCTS </a>
+                        <a class="nav-link @if(request()->is('user/consumer/cart')) active @endif" href="/user/farmer/products" data-page="s-products">SUPPLY PRODUCTS </a>
                     </li>
                     <li class="nav-item px-1 position-relative">
-                        <a class="nav-link" href="/user/farmer/blogs" data-page="blogs">BLOGS</a>
+                        <a class="nav-link @if(request()->is('user/consumer/cart')) active @endif" href="/user/farmer/blogs" data-page="blogs">BLOGS</a>
                     </li>
                     <li class="nav-item px-1 position-relative">
-                        <a class="nav-link"  href="/user/farmer/contact" data-page="contact">CONTACT </a>
+                        <a class="nav-link @if(request()->is('user/consumer/cart')) active @endif"  href="/user/farmer/contact" data-page="contact">CONTACT </a>
                     </li>
                     <li class="nav-item px-1 position-relative">
-                        <a class="nav-link"  href="/user/farmer/about-us" data-page="about-us">ABOUT US </a>
+                        <a class="nav-link @if(request()->is('user/consumer/cart')) active @endif"  href="/user/farmer/about-us" data-page="about-us">ABOUT US </a>
                     </li>
                     <li class="nav-item px-1 position-relative">
-                        <a class="nav-link"  href="/user/farmer/notification" data-page="notification">
+                        <a class="nav-link @if(request()->is('user/consumer/cart')) active @endif"  href="/user/farmer/notification" data-page="notification">
                             <i class="fas fa-bell" style="font-size: 25px;"></i>
                         </a>
                     </li>

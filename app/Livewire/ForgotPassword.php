@@ -2,87 +2,23 @@
 
 namespace App\Livewire;
 
-use App\Models\Cart;
 use App\Models\User;
 use Livewire\Component;
 use App\Models\OtpVerify;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
-class LoginUser extends Component
+class ForgotPassword extends Component
 {
 
-    public $username ='';
-    public $email='';
-
-    public $password='';
-
-    public $user_type='';
-
+    public $email;
     public $otp;
     public $newPassword;
-    public $newPassword_confirmation='';
-
-    public $showEmailModal = false;
+    public $newPasswordConfirmation;
     public $showOtpModal = false;
     public $showPasswordResetForm = false;
 
-
-
-    public function mount($user_type)
-    {
-        $this->user_type = $user_type;
-        //dd($user_type);
-    }
-
-    public function closeModal()
-    {
-        $this->reset(['otp', 'showEmailModal','showOtpModal','showPasswordResetForm','email', 'newPassword']);
-        // Reset OTP and hide modal
-    }
-
-    public function login()
-    {
-        $validatedData = $this->validate([
-            'username' => ['required'],
-            'password' => ['required'],
-            'user_type' => ['required'],
-        ]);
-
-        //dd($validatedData);
-
-        if (Auth::guard('user')->attempt(
-['username' => $this->username,
-            'password' => $this->password,
-            'user_type' => $this->user_type]))
-            {
-            session()->regenerate();
-
-            $user = Auth::guard('user')->user();
-
-                if ($user->user_type == 1) {
-                   Cart::firstOrCreate(
-                    ['user_id' => $user->id],
-                    ['cart_total' => 0, 'overall_cartKG' => 0, 'total_price' => 0]
-                );
-                }
-                // Redirect to the appropriate dashboard based on user type
-                $route = $user->user_type == 1 ? 'user.consumer' : 'user.farmer';
-                return redirect()->route($route)->with('message', 'Login successful');
-
-            } else {
-                session()->flash('message', 'Invalid username or password. Please try again.');
-                //$this->message = 'Invalid username or password. Please try again.';
-            }
-    }
-
-    public function showModal() {
-        $this->showEmailModal = true;
-    }
-
     public function requestOtp()
     {
-
         // Validate email input
         $this->validate([
             'email' => 'required|email|exists:users,email',
@@ -130,9 +66,7 @@ class LoginUser extends Component
         if ($otpRecord && $otpRecord->otp == $this->otp) {
             $otpRecord->update(['is_verified' => true]);
             $this->showOtpModal = false;
-            $this->showEmailModal = false;
             $this->showPasswordResetForm = true;
-            session()->flash('message', 'OTP confirmed Please input your new password.');
         } else {
             session()->flash('error', 'Invalid or expired OTP. Please try again.');
         }
@@ -142,7 +76,7 @@ class LoginUser extends Component
     {
         // Validate new password input
         $this->validate([
-           'newPassword' => ['required', 'min:8', 'max:200', 'confirmed'],
+            'newPassword' => 'required|min:8|confirmed',
         ]);
 
         // Update the user's password
@@ -153,14 +87,13 @@ class LoginUser extends Component
 
             // Flash success message and redirect
             session()->flash('message', 'Password has been reset successfully.');
-            $this->reset(['otp', 'showEmailModal','showOtpModal','showPasswordResetForm','email', 'newPassword']);
-            return redirect()->route('user.login', ['user_type' => $this->user_type]);
+            return redirect()->route('user.login');
         } else {
             session()->flash('error', 'User not found. Please try again.');
         }
     }
     public function render()
     {
-        return view('livewire.login-user',['message' => session('message')]);
+        return view('livewire.forgot-password');
     }
 }

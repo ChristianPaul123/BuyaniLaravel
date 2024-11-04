@@ -22,13 +22,18 @@
 <script src="https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap5.js"></script>
 
 @livewireScripts
-{{-- <script>
+
+
+
+
+{{-- admin side for datatables --}}
+<script>
 new DataTable('#categoryTable');
 new DataTable('#productTable');
 new DataTable('#subcategoryTable');
 new DataTable('#productSpecificationTable');
 new DataTable('#blogTable');
-</script> --}}
+</script>
 
 <!--This is for the nav bar consumer-->
 {{-- <script>

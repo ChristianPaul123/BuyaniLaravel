@@ -1,68 +1,35 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+@extends('layouts.admin-app') {{-- Extend the main parent layout --}}
 
+@section('title', 'Admin | Order') {{-- Set the page title --}}
 
-    <title>Admin | Order</title>
-    <link rel="icon" type="image/png" href="../img/logo1.svg">
-    @include('layouts.head')
-    @include('admin.styles.admin_styles')
+@push('styles')
+<style>
+    .about-section {
+        padding: 60px 0;
+        color: white;
+    }
+    .team-member {
+        margin-bottom: 30px;
+    }
+</style>
+@endpush
 
-</head>
-<body class="body">
-@auth('admin')
-    @include('admin.includes.navbar')
-
-
+@section('content')
      <div class="container-fluid">
         <div class="row">
-
-
         @include('admin.includes.sidebar')
-
-            <section class="col-md-9 ml-sm-auto col-lg-10 px-4">
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Order</h1>
-                </div>
-
-            <!--Add the more part here
-            EX: just add a div
-            -->
+        <section class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Orders</h1>
+                <h1 class="h2">Order</h1>
             </div>
-            </section>
 
+        <!--Add the more part here
+        EX: just add a div
+        -->
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Orders</h1>
+        </div>
+        </section>
         </div>
     </div>
-     <form action="{{ route('admin.logout') }}" method="POST">
-        {{-- @csrf
-        <button type="submit" class="btn btn-danger">Logout</button>
-    </form>
-     <h1>Welcome to Admin Dashboard, {{ auth()->guard('admin')->user()->username }}</h1> --}}
-     @session('message')
-
-
-    @endsession
-
-
-@else
-            <p>not logged in</p>
-            @session('message')
-            <div class="success-message">
-                {{ session('message') }}
-            </div>
-            @endsession
-@endauth
-    @include('layouts.script')
-<script>
-    window.addEventListener('popstate', function(event) {
-        // If the user presses the back button, log them out
-        window.location.href = "{{ route('admin.logout') }}";
-    });
-  </script>
-</body>
-</html>
+@endsection

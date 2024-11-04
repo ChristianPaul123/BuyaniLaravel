@@ -10,6 +10,8 @@ use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -62,6 +64,10 @@ class UserController extends Controller
 
         //checks for user type field if numeric otherwise bitch it out
         $validatedData['user_type'] = is_numeric($validatedData['user_type']) ? (int) $validatedData['user_type'] : 0;
+
+
+
+
 
         if (User::create($validatedData)) {
             return redirect('/')->with('message', 'user was created successfully');
@@ -133,5 +139,88 @@ class UserController extends Controller
     } else {
         return redirect('/')->with('message', 'Successfully logged out');
     }
+    }
+
+
+    //for user profile
+
+    public function showUserprofile() {
+        $user = auth()->guard('user')->user();
+        return view('user.profile.show', ['user' => $user]);
+    }
+
+
+    public function updateUserprofile($user, Request $request)
+    {
+        $user = User::findOrFail($user);
+
+        $request->validate([
+            'username' => ['required','string','max:255'],
+            'phone_number' => ['required','string','max:255'],
+            'profile_pic' => 'nullable','image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+
+        // Confirm user is authenticated and the request is for their own profile
+    if ($user && $user->id == auth()->guard('user')->user()->id) {
+
+        // Update user's basic info
+        $user->username = $request->input('username');
+        $user->phone_number = $request->input('phone_number');
+
+        // Handle profile picture upload if a file is provided
+        if ($request->hasFile('profile_pic')) {
+            // Delete the old profile picture if it exists
+            if ($user->profile_pic && Storage::exists($user->profile_pic)) {
+                Storage::delete($user->profile_pic);
+            }
+
+            // Create a unique name for the image and specify the path
+            $imageName = time() . '.' . $request->profile_pic->extension();
+            $imagePath = 'img/profile/' . $user->username;
+
+            // Ensure the directory exists or create it
+            if (!file_exists(public_path($imagePath))) {
+                mkdir(public_path($imagePath), 0777, true);
+            }
+
+            // Move the uploaded file to the specified directory
+            $request->profile_pic->move(public_path($imagePath), $imageName);
+
+            // Update the user's profile picture path
+            $user->profile_pic = $imagePath . '/' . $imageName;
+        }
+
+
+            $user->save();
+            return redirect()->route('user.consumer.profile.show',['user' => $user->id])->with('message', 'Profile updated successfully.');
+        } else {
+            return redirect()->route('user.consumer.profile.show',['user' => $user->id])->with('error', 'Unauthorized access.');
+        }
+    }
+
+    public function changePassword(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        if ($user && $user->id == auth()->guard('user')->user()->id) {
+            $currentPassword = $request->input('current_password');
+            $newPassword = $request->input('new_password');
+            $confirmPassword = $request->input('confirm_password');
+
+            if (Hash::check($currentPassword, $user->password)) {
+                if ($newPassword === $confirmPassword) {
+                    $user->password = Hash::make($newPassword);
+                    $user->save();
+                    return redirect()->route('user.profile.show')->with('success', 'Password changed successfully.');
+                } else {
+                    return redirect()->route('user.profile.show')->with('error', 'New passwords do not match.');
+                }
+            } else {
+                return redirect()->route('user.profile.show')->with('error', 'Current password is incorrect.');
+            }
+        } else {
+            return redirect()->route('user.profile.show')->with('error', 'Unauthorized access.');
+        }
     }
 }

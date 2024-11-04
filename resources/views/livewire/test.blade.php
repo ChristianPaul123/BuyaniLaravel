@@ -1,3 +1,3 @@
-<div>
-   test me
+<div wire:poll>
+   test me hahahahacxczxcccz
 </div>

@@ -89,7 +89,7 @@
                             <h6>Total</h6>
                             <h6 id="total">${{ $cart->total_price }}</h6>
                         </div>
-                        <a class="btn btn-primary w-100 mt-3" href="{{ route('user.consumer.checkout') }}">Proceed to Checkout</a>
+                        {{-- <a class="btn btn-primary w-100 mt-3" href="{{ route('user.consumer.checkout') }}">Proceed to Checkout</a> --}}
                     </div>
                 </div>
             </div>

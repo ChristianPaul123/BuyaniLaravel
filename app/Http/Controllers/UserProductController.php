@@ -62,18 +62,19 @@ class UserProductController extends Controller
     public function addProductSpecificationToCart(Request $request, $product, $specification)
     {
          // Step 1: try to check
-        try {
-            if (!Auth::check()) {
-                // If not authenticated, flush the session and redirect to user index with a message
-                Session::flush();
-                return redirect()->route('user.index')->with('message', 'Session expired. Please log in and try again.');
-            }
 
+
+         if (!auth()->guard('user')->check()) {
+            Session::flush();
+            return redirect()->route('user.index')->with('message', 'Session expired. Please log in and try again.');
+        }
+        try {
             // Step 2: Find or create a cart for the current user
             $cart = Cart::firstOrCreate(
-                ['user_id' => Auth::user()->id],
+                ['user_id' => auth()->guard("user")->user()->id],
                 ['cart_total' => 0, 'overall_cartKG' => 0, 'total_price' => 0]
             );
+
 
               // Step 3: Retrieve the selected product specification
             $product_status = $request->input('product_status');
@@ -118,6 +119,8 @@ class UserProductController extends Controller
         }
     }
 }
+
+
 
 
 
@@ -240,5 +243,34 @@ class UserProductController extends Controller
 //             return back()->with('error', 'An error occurred while performing the search.');
 //         }
 //     }
+
+// public function filterByCategory($categoryId)
+// {
+//     $products = Product::where('category_id', $categoryId)
+//         ->where('product_status', 1)
+//         ->get();
+
+//     return response()->json($products);
+// }
+
+// public function filterBySubcategory($subcategoryId)
+// {
+//     $products = Product::where('subcategory_id', $subcategoryId)
+//         ->where('product_status', 1)
+//         ->get();
+
+//     return response()->json($products);
+// }
+
+// public function searchProduct(Request $request)
+// {
+//     $searchQuery = $request->input('query');
+
+//     $products = Product::where('product_name', 'LIKE', '%' . $searchQuery . '%')
+//         ->where('product_status', 1)
+//         ->get();
+
+//     return response()->json($products);
+// }
 
 
