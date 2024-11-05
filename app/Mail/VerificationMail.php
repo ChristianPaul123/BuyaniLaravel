@@ -3,11 +3,12 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
 class VerificationMail extends Mailable
 {
@@ -16,7 +17,7 @@ class VerificationMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct(private $otp)
     {
         //
     }
@@ -27,7 +28,8 @@ class VerificationMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Verification Mail',
+            subject: 'Buyani: Pasword Reset',
+            from: new Address('buyani@gmail.com','Buyani: Pasword Reset'),
         );
     }
 
@@ -37,7 +39,8 @@ class VerificationMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'mail.verifymail',
+            with: ['otp' => $this->otp]
         );
     }
 

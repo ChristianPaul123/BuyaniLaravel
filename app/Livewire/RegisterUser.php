@@ -3,9 +3,11 @@
 namespace App\Livewire;
 
 use App\Models\User;
+use App\Mail\HelloMail;
 use Livewire\Component;
 use App\Models\OtpVerify;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Mail;
 
 class RegisterUser extends Component
 {
@@ -80,6 +82,7 @@ class RegisterUser extends Component
 
     protected function generateAndStoreOtp($email)
 {
+    try {
     // Generate a 6-digit OTP
     $otp = rand(100000, 999999);
     $expiryTime = now()->addMinutes(5); // Set OTP to expire in 5 minutes
@@ -96,6 +99,16 @@ class RegisterUser extends Component
             'is_verified' => false,
             'updated_at' => now(), // Update timestamp
         ]);
+
+    Mail::to($email)->send(new HelloMail($otp));
+    // Flash a success message to indicate OTP was resent
+    session()->flash('message', 'A new OTP has been sent to your email.');
+
+    } catch (\Exception $e) {
+        // Flash an error message if there's an issue resending the OTP
+        session()->flash('error', 'Error resending OTP. Please try again.');
+    }
+
 }
 
 public function resendOtp()
@@ -116,9 +129,9 @@ public function resendOtp()
                 'otp_expiry' => $expiryTime,
                 'is_verified' => false,
                 'updated_at' => now(), // Update timestamp
-            ]
-        );
+            ]);
 
+            Mail::to($this->email)->send(new HelloMail($otp));
         // Flash a success message to indicate OTP was resent
         session()->flash('message', 'A new OTP has been sent to your email.');
 
@@ -135,8 +148,6 @@ public function verifyOtp()
     $this->validate([
         'otp' => 'required|numeric|digits:6',
     ]);
-
-
 
     // Retrieve the OTP record from the database for the provided email and purpose
     $otpRecord = OtpVerify::where('email', $this->email)
@@ -168,7 +179,6 @@ public function verifyOtp()
             session()->flash('error', 'Error creating user. Please try again.');
         }
         // Complete the registration process
-
         // Close the OTP modal
         $this->showModal = false;
         $this->completeRegistration();

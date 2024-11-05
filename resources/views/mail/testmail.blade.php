@@ -34,13 +34,7 @@
         .footer p, .footer a {
             color: #777777;
         }
-        .order-info .order-number, .order-info .price {
-            font-weight: 800;
-        }
-        .total {
-            border-top: 3px solid #eeeeee;
-            border-bottom: 3px solid #eeeeee;
-        }
+
     </style>
 </head>
 <body>
@@ -52,49 +46,18 @@
 
         <div class="text-center py-4">
             <img src="https://img.icons8.com/carbon-copy/100/000000/checked-checkbox.png" alt="Checked Checkbox" width="125" height="120">
-            <h2>Thank You For Your Acceptance!</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium iste ipsa numquam odio dolores, nam.</p>
+            <h2>Thank you for Registering to Buyani Shop</h2>
         </div>
 
-        <div class="content px-4">
-            <table class="table order-info">
-                <tbody>
-                    <tr>
-                        <td class="order-number">Order Confirmation #</td>
-                        <td class="price">$2345678</td>
-                    </tr>
-                    <tr>
-                        <td class="item">Purchased Item (1)</td>
-                        <td class="price">$100.00</td>
-                    </tr>
-                    <tr>
-                        <td class="item">Shipping + Handling</td>
-                        <td class="price">$10.00</td>
-                    </tr>
-                    <tr>
-                        <td class="item">Sales Tax</td>
-                        <td class="price">$5.00</td>
-                    </tr>
-                    <tr>
-                        <td class="total">TOTAL</td>
-                        <td class="price">$115.00</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div class="mt-4">
-                <h5>Delivery Address</h5>
-                <p>675 Massachusetts Avenue<br>11th Floor<br>Cambridge, MA 02139</p>
-
-                <h5>Estimated Delivery Date</h5>
-                <p>January 1st, 2016</p>
-            </div>
+        <div class="content text-center px-4">
+            <p>Your OTP is {{ $otp }}</p>
+            <p>This OTP will expire in 5 mins </p>
         </div>
 
         <div class="footer py-4">
             <img src="logo-footer.png" alt="Logo" width="37" height="37" class="mb-2">
-            <p>675 Parko Avenue<br>LA, CA 02232</p>
-            <p>If you didn't create an account using this email address, please ignore this email or <a href="#">unsubscribe</a>.</p>
+            {{-- <p>675 Parko Avenue<br>LA, CA 02232</p> --}}
+            <p>If you didn't create an account using this email address, please ignore this email</p>
         </div>
     </div>
 </body>

@@ -35,7 +35,7 @@ class HomeController extends Controller
         return view('contact-consumer');
     }
 
-    public function Farm()
+    public function showFarmContact()
     {
         return view('contact-farmer');
     }

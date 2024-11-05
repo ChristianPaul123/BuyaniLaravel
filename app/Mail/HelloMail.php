@@ -17,7 +17,7 @@ class HelloMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct(private $otp)
     {
         //
     }
@@ -29,7 +29,7 @@ class HelloMail extends Mailable
     {
         return new Envelope(
             subject: 'Hello From Buyani',
-            from: new Address('buyani@gmail.com','shitpants')
+            from: new Address('buyani@gmail.com','Buyani'),
 
         );
     }
@@ -41,6 +41,7 @@ class HelloMail extends Mailable
     {
         return new Content(
             view: 'mail.testmail',
+            with: ['otp' => $this->otp]
         );
     }
 

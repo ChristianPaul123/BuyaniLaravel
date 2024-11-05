@@ -2,12 +2,14 @@
 
 namespace App\Livewire;
 
+use App\Mail\VerificationMail;
 use App\Models\Cart;
 use App\Models\User;
 use Livewire\Component;
 use App\Models\OtpVerify;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class LoginUser extends Component
 {
@@ -108,6 +110,7 @@ class LoginUser extends Component
 
         // Open OTP modal
         $this->showOtpModal = true;
+        Mail::to($this->email)->send(new VerificationMail($otp));
         session()->flash('message', 'A password reset OTP has been sent to your email.');
     }
 

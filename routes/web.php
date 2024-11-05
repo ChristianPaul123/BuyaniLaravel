@@ -26,12 +26,6 @@ Route::get('/', function () {
     return view('user.index');
 })->name('user.index');
 
-//did not work
-// Route::get('/session-expired', function () {
-//     return view('session_expired');
-// })->name('session.expired');
-
-
 // Example 404 page route (this will typically be caught by Laravel's default 404 handling) not used yet
 // Route::fallback(function () {
 //     return response()->view('errors.404', [], 404);
@@ -45,9 +39,9 @@ Route::post('admin/register', [AdminController::class, 'register'])->name('admin
 Route::post('admin/login', [AdminController::class,'login' ]);
 Route::get('admin/logout', [AdminController::class,'logout' ])->name('admin.logout');
 
-Route::get('/testroute', function() {
-    Mail::to('christianpaulespares1@gmail.com')->send(new HelloMail());
-});
+// Route::get('/testroute', function() {
+//     Mail::to('christianpaulespares1@gmail.com')->send(new HelloMail());
+// });
 
 //Admin Dashboard
 Route::get('admin/dashboard', [AdminController::class, 'showdashboard'])->name('admin.dashboard');
@@ -129,50 +123,58 @@ Route::get('admin/product', [ProductController::class, 'showProducts'])->name('a
 
 
 
-
+// Route::post('user/login', [UserController::class,'login' ])->name('user.login.submit');
 //This is the user side
-
-
 //user logging
 Route::get('user/login', [UserController::class, 'showLoginForm'])->name('user.login');
-//Route::get('user/login/{user_type?}', LoginUser::class)->name('user.login');
-Route::post('user/login', [UserController::class,'login' ])->name('user.login.submit');
 Route::post('user/logout', [UserController::class,'logout' ])->name('user.logout');
-
-Route::group(['middleware' => 'user.type:1'], function () {
-
-});
-Route::middleware(['user.type:2'])->group(function () {
-Route::get('user/farmer', [HomeController::class, 'showFarmDashboard'])->name('user.farmer');
-Route::get('user/farmer/contacts', [HomeController::class, 'showFarmContact'])->name('user.farmer.contact');
-Route::get('user/farmer/about-us', [HomeController::class, 'showFarmAbout'])->name('user.farmer.about');
-Route::get('/user/consumer/profile', [UserController::class, 'showUserprofile'])->name('user.consumer.profile');
-});
-
-
 
 //user registering
 Route::get('user/register', [UserController::class, 'showRegisterForm'])->name('user.register');
 Route::post('user/register', [UserController::class, 'register'])->name('user.register.submit');
 
-//Dashboard for Users
-
-
-
 Route::get('user/consumer', [HomeController::class, 'showCondashboard'])->name('user.consumer');
 Route::get('user/consumer/contacts', [HomeController::class, 'showConContact'])->name('user.consumer.contact');
 Route::get('user/consumer/about-us', [HomeController::class, 'showConAbout'])->name('user.consumer.about');
 
-//Profile for Users
-Route::middleware('auth:user')->group(function () {
+
+Route::get('user/farmer/contacts', [HomeController::class, 'showFarmContact'])->name('user.farmer.contact');
+Route::get('user/farmer/about-us', [HomeController::class, 'showFarmAbout'])->name('user.farmer.about');
+
+
+Route::middleware(['user.type:1'])->group(function () {
+
+
 Route::get('user/consumer/profile', [UserController::class, 'showUserprofile'])->name('user.consumer.profile.show');
+Route::get('user/consumer/blogs', [BlogController::class, 'showConsumerBlogs'])->name('user.consumer.blog');
+
+
+Route::get('user/consumer/orders', function () {
+    return view('user.order.show');
+});
+
+});
+Route::middleware(['user.type:2'])->group(function () {
+
+
+
+Route::get('user/farmer', [HomeController::class, 'showFarmDashboard'])->name('user.farmer');
+Route::get('/user/farmer/profile', [UserController::class, 'showFarmerprofile'])->name('user.farmer.profile');
+Route::get('user/farmer/blogs', [BlogController::class, 'showFarmerBlogs'])->name('user.farmer.blog');
+
+
+
+});
+
+//Dashboard for Users
+
+//Profile for Users
 Route::get('user/consumer/profile/edit', [UserController::class, 'editUserprofile'])->name('user.consumer.profile.edit');
 Route::put('user/consumer/profile/update/{user}', [UserController::class, 'updateUserprofile'])->name('user.consumer.profile.update');
 Route::get('user/consumer/profile/changepassword', [UserController::class, 'showChangePasswordForm'])->name('user.consumer.profile.changepassword');
 Route::put('user/consumer/profile/changepassword', [UserController::class, 'changePassword'])->name('user.consumer.profile.changepassword.submit');
 Route::get('user/consumer/profile/verify', [UserController::class, 'showVerifyForm'])->name('user.consumer.profile.verify');
 Route::put('user/consumer/profile/verify', [UserController::class, 'verify'])->name('user.consumer.profile.verify.submit');
-
 
 //Shipping Address for Consumer
 Route::get('user/consumer/profile/shipping',[ShippingAddressController::class, 'showUserAddress'])->name('user.consumer.profile.shipping');
@@ -181,7 +183,6 @@ Route::post('user/consumer/profile/shipping/add',[ShippingAddressController::cla
 Route::get('user/consumer/profile/shipping/edit/{address}',[ShippingAddressController::class, 'showUserAddressEditForm'])->name('user.consumer.profile.shipping.edit');
 Route::put('user/consumer/profile/shipping/edit/{address}',[ShippingAddressController::class, 'editUserAddress'])->name('user.consumer.profile.shipping.edit.submit');
 Route::delete('user/consumer/profile/shipping/delete/{address}',[ShippingAddressController::class, 'deleteUserAddress'])->name('user.consumer.profile.shipping.delete');
-});
 
 Route::get('user/farmer/profile', [UserController::class, 'showFarmerprofile'])->name('user.farmer.profile');
 Route::get('user/farmer/profile/edit', [UserController::class, 'editFarmerprofile'])->name('user.farmer.profile.edit');
@@ -209,20 +210,6 @@ Route::get('user/farmer/product/view/{id}', [UserController::class, 'viewFarmerP
 
 
 //Order Side
-Route::get('user/consumer/orders', function () {
-    return view('user.order.show');
-});
-
-
-Route::get('user/consumer/user-profile', function () {
-    return view('user.order.show');
-});
-
-Route::get('user/consumer/orders', function () {
-    return view('user.order.show');
-});
-
-
 //user side
 
 

@@ -11,67 +11,75 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-center" style="font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: bold;">
                     <li class="nav-item px-1 py-0 position-relative">
-                        <a class="nav-link @if(request()->is('user/consumer/cart')) active @endif" href="/user/farmer" data-page="home">HOME</a>
+                        <a class="nav-link @if(request()->is('user/farmer')) active @endif" href="/user/farmer" data-page="home">HOME</a>
                     </li>
                     <li class="nav-item px-1 position-relative">
-                        <a class="nav-link @if(request()->is('user/consumer/cart')) active @endif" href="/user/farmer/analytics" data-page="analytics">ANALYTICS </a>
+                        <a class="nav-link @if(request()->is('user/farmer/products')) active @endif" href="/user/farmer/products" data-page="s-products">SUPPLY PRODUCTS </a>
                     </li>
                     <li class="nav-item px-1 position-relative">
-                        <a class="nav-link @if(request()->is('user/consumer/cart')) active @endif" href="/user/farmer/products" data-page="s-products">SUPPLY PRODUCTS </a>
+                        <a class="nav-link @if(request()->is('user/farmer/blogs')) active @endif" href="/user/farmer/blogs" data-page="blogs">BLOGS</a>
                     </li>
                     <li class="nav-item px-1 position-relative">
-                        <a class="nav-link @if(request()->is('user/consumer/cart')) active @endif" href="/user/farmer/blogs" data-page="blogs">BLOGS</a>
+                        <a class="nav-link @if(request()->is('user/farmer/contacts')) active @endif"  href="/user/farmer/contacts" data-page="contact">CONTACT </a>
                     </li>
                     <li class="nav-item px-1 position-relative">
-                        <a class="nav-link @if(request()->is('user/consumer/cart')) active @endif"  href="/user/farmer/contact" data-page="contact">CONTACT </a>
+                        <a class="nav-link @if(request()->is('user/farmer/about-us')) active @endif"  href="/user/farmer/about-us" data-page="about-us">ABOUT US </a>
                     </li>
-                    <li class="nav-item px-1 position-relative">
-                        <a class="nav-link @if(request()->is('user/consumer/cart')) active @endif"  href="/user/farmer/about-us" data-page="about-us">ABOUT US </a>
-                    </li>
-                    <li class="nav-item px-1 position-relative">
-                        <a class="nav-link @if(request()->is('user/consumer/cart')) active @endif"  href="/user/farmer/notification" data-page="notification">
+                    {{-- <li class="nav-item px-1 position-relative">
+                        <a class="nav-link @if(request()->is('user/farmer/notification')) active @endif"  href="/user/farmer/notification" data-page="notification">
                             <i class="fas fa-bell" style="font-size: 25px;"></i>
                         </a>
-                    </li>
+                    </li> --}}
                     <li class="nav-item px-1 position-relative">
                         <a class="nav-link"  href="/user/farmer/chat" data-page="chat">
                             <i class="fas fa-comment-dots" style="font-size: 25px;"></i>
                         </a>
                     </li>
-                    <li class="nav-item px-1 position-relative">
-                        <a class="nav-link" href="/user/farmer/profile" data-page="profile">
+                    @auth('user')
+                    <li class="nav-item dropdown px-1 position-relative">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarProfile" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            @if (auth()->guard('user')->user()->profile_pic == null)
                             <i class="fas fa-user-circle" style="font-size: 25px;"></i>
+                            @else
+                            <img src="{{ asset(auth()->guard('user')->user()->profile_pic) ?? asset('img/logo1.svg') }}" alt="Profile Image" class="rounded-circle" style="width: 30px; height: 30px; margin-right: 8px;">
+                            @endif
                         </a>
+
+                        <ul class="dropdown-menu dropdown-menu-end border-0" aria-labelledby="navbarProfile">
+                            <li class="dropdown-header text-center fw-bold">User Profile</li>
+                            <li class="text-center my-2">
+                                <img src="{{ asset(auth()->guard('user')->user()->profile_pic) ?? asset('img/logo1.svg') }}"
+                                     alt="Profile Image"
+                                     class="rounded-circle"
+                                     style="width: 50px; height: 50px; object-fit: cover;">
+                            </li>
+                            <li>
+                                <p class="dropdown-item text-muted text-center mb-0">
+                                    {{ auth()->guard('user')->user()->username }}
+                                </p>
+                            </li>
+
+                            <!-- Divider Line -->
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/user/farmer/profile">Show Profile</a></li>
+                            <li><form method="POST" action="{{ route('user.logout') }}" class="dropdown-item p-0 m-0">
+                                @csrf
+                                <button type="submit" class="btn btn-link text-decoration-none text-dark w-100 text-start">
+                                    Logout
+                                </button>
+                            </form></li>
+                        </ul>
                     </li>
+                    @else
+                    <li class="nav-item px-1 position-relative">
+                        <a class="nav-link" @if(request()->is('user/farmer/login')) active @endif href="/" data-page="login">LOGIN <span class="sr-only">(current) </span></a>
+                    </li>
+                    <li class="nav-item px-1 position-relative">
+                        <a class="nav-link" @if(request()->is('user/farmer/register')) active @endif href="/" data-page="register">REGISTER <span class="sr-only">(current) </span></a>
+                    </li>
+                    @endauth
                 </ul>
             </div>
         </div>
     </nav>
-    {{-- !--This is for the nav bar consumer--> --}}
-    <script>
-    document.addEventListener('DOMContentLoaded', (event) => {
-                // Get the current page URL
-                const currentPage = window.location.pathname.split('/').pop();
 
-                // Find all nav-links
-                const navLinks = document.querySelectorAll('.nav-link');
-
-                navLinks.forEach(link => {
-                    // Extract the page from the data-page attribute
-                    const page = link.getAttribute('data-page');
-
-                    // Check if the link's href matches the current page
-                    if (link.getAttribute('href').includes(currentPage) || page === currentPage.replace('.html', '')) {
-                        link.classList.add('active');
-                    }
-
-                    // Add click event listener to each link
-                    link.addEventListener('click', () => {
-                        // Remove active class from all links
-                        navLinks.forEach(link => link.classList.remove('active'));
-                        // Add active class to clicked link
-                        link.classList.add('active');
-                    });
-                });
-            });
-    </script>
