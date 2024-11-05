@@ -46,7 +46,7 @@ class LoginUser extends Component
     public function login()
     {
         $validatedData = $this->validate([
-            'username' => ['required'],
+            'email' => ['required'],
             'password' => ['required'],
             'user_type' => ['required'],
         ]);
@@ -54,9 +54,9 @@ class LoginUser extends Component
         //dd($validatedData);
 
         if (Auth::guard('user')->attempt(
-['username' => $this->username,
-            'password' => $this->password,
-            'user_type' => $this->user_type]))
+['email' =>$validatedData['email'],
+            'password' => $validatedData['password'],
+            'user_type' => $validatedData['user_type']]))
             {
             session()->regenerate();
 
@@ -132,9 +132,12 @@ class LoginUser extends Component
         // Check OTP validity
         if ($otpRecord && $otpRecord->otp == $this->otp) {
             $otpRecord->update(['is_verified' => true]);
+
+            //closes the other modal and show the password reseet modal
             $this->showOtpModal = false;
             $this->showEmailModal = false;
             $this->showPasswordResetForm = true;
+
             session()->flash('message', 'OTP confirmed Please input your new password.');
         } else {
             session()->flash('error', 'Invalid or expired OTP. Please try again.');

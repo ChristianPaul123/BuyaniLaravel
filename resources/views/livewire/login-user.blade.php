@@ -23,9 +23,9 @@
 
         <form class="my-3" wire:submit.prevent="login" style="width: 400px;" id="loginForm" autocomplete="off">
             <div class="form-group my-3">
-                <label for="username">Username</label>
-                <input type="text" wire:model="username" class="form-control" id="username" placeholder="Enter username" required>
-                @error('username') <span class="text-danger">{{ $message }}</span> @enderror
+                <label for="email">Email</label>
+                <input type="email" wire:model="email" class="form-control" id="email" placeholder="Enter email" required>
+                @error('email') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
 
             <div class="form-group my-3">

@@ -16,6 +16,7 @@ class ShippingAddress extends Model
         'country',
         'zip_code',
         'user_id',
+        'shipping_name',
     ];
 
     public function user()

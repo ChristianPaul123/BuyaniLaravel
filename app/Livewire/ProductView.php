@@ -53,15 +53,8 @@ class ProductView extends Component
 
 
         $this->$specification = $specification;
-
-        // Step 1: Check if user is authenticated
-        if (!Auth::guard('user')->check()) {
-            Session::flush();
-            return redirect()->route('user.index')->with('message', 'Session expired. Please log in and try again.');
-        }
-
-
         $user = Auth::guard('user')->user();
+
 
         try {
             // Step 2: Find or create a cart for the current user

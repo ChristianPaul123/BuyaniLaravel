@@ -10,6 +10,7 @@
     @include('user.styles.user_styles')
     @stack('styles')
 </head>
+
 <body>
     @auth('user')
     <div class="wrapper">

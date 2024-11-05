@@ -44,7 +44,6 @@
     </nav>
 
 <div class="container-fluid">
-
         <h2 class="text-center">All Products</h2>
         <div class="row justify-content-center align-items-center">
             @if ($message)
@@ -54,7 +53,7 @@
             @endif
         <main class="row justify-content-center main-content">
             @foreach ($products as $product)
-            <div class="col-md-2 m-1">
+            <div wire:key="{{ $product->id }}" class="col-md-2 m-1">
                 <div class="card h-100">
                     <div class="card-header d-flex align-items-center justify-content-center">
                         <div class="ms-3">

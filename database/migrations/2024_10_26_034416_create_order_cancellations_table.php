@@ -8,11 +8,7 @@ return new class extends Migration
 {
     /**
      * Run the migrations.    protected $fillable = [
-        'order_id',
-        'cancelled_by',
-        'reason',
-        'status',
-    ];
+
      */
     public function up(): void
     {

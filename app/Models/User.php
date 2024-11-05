@@ -83,4 +83,14 @@ class User extends Authenticatable
     public function userRatings() {
         return $this->hasMany(UserRating::class);
     }
+
+    public function getUserStatusAttribute()
+    {
+        $statuses = [
+            1 => 'Online',
+            0 => 'Offline'
+        ];
+
+        return $statuses[$this->status] ?? 'Unknown Status';
+    }
 }
