@@ -14,7 +14,7 @@ class UserProduct extends Component
     public $products;
     public $subcategory;
     public $category;
-    public $query;
+    public $searchQuery;
     public $message;
 
     public function mount()
@@ -28,7 +28,7 @@ class UserProduct extends Component
     {
     try  {
         $category = Category::findOrFail($categoryId);
-        $this->products = Product::where('category_id', $category->id);
+        $this->products = Product::where('category_id', $category->id)->get();
 
         $this->message = $this->products->isEmpty() ? 'No products available for this category.' : null;
 
@@ -59,37 +59,41 @@ class UserProduct extends Component
 
 
 
-    public function searchConsumerProduct()
-    {
-        try {
-            $this->validate([
-                'query' => 'required|string|min:3'
-            ]);
+        public function searchConsumerProduct()
+        {
 
-            $this->products = Product::where('product_name', 'like', '%' . $this->query . '%')
-                ->where('product_status', 1)
-                ->get();
 
-            $this->message = $this->products->isEmpty() ? "No products found for '{$this->query}'." : null;
-        } catch (\Illuminate\Validation\ValidationException $e) {
-            $this->message = 'Please enter a valid search query.';
-        } catch (\Exception $e) {
-            $this->message = 'An error occurred while searching for products.';
+            try {
+                // Validate only if searchQuery is present
+                if (!empty($this->searchQuery) && strlen($this->searchQuery) >= 3) {
+                    $this->products = Product::where('product_name', 'like', '%' . $this->searchQuery . '%')
+                        ->where('product_status', 1)
+                        ->get();
+
+                    // Set message based on search results
+                    $this->message = $this->products->isEmpty()
+                        ? "No products found for '{$this->searchQuery}'."
+                        : null;
+                } else {
+                    $this->message = 'Please enter at least 3 characters for the search query.';
+                }
+            } catch (\Exception $e) {
+                $this->message = 'An unexpected error occurred while searching for products.';
+            }
         }
-    }
 
-    public function viewProduct($productId)
-    {
-        return redirect()->route('user.consumer.product.view', $productId);
-    }
+        public function viewProduct($productId)
+        {
+            return redirect()->route('user.consumer.product.view', $productId);
+        }
 
-    public function render()
-    {
-        return view('livewire.user-product', [
-            'categories' => $this->categories,
-            'products' => $this->products,
-            'category' => $this->category,
-            'subcategory' => $this->subcategory
-        ]);
-    }
+        public function render()
+        {
+            return view('livewire.user-product', [
+                'categories' => $this->categories,
+                'products' => $this->products,
+                'category' => $this->category,
+                'subcategory' => $this->subcategory
+            ]);
+        }
 }

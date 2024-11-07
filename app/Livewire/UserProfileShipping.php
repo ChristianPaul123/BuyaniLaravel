@@ -154,9 +154,7 @@ class UserProfileShipping extends Component
             'user_id' => $this->user->id,
             'shipping_name' => $this->shipping_name,
         ]);
-
-        $this->closeModal();
-        session()->flash('message', 'New address added successfully.');
+        session()->flash('modalmessage', 'New address added successfully.');
     }
 
     public function enableAddressEdit()
@@ -189,9 +187,8 @@ class UserProfileShipping extends Component
             'zip_code' => $this->zip_code,
         ]);
 
-        session()->flash('message', 'Address updated successfully.');
+        session()->flash('modalmessage', 'Address updated successfully.');
         $this->isEditingAddress = false;
-        $this->closeModal();
     }
 
     // Delete an address

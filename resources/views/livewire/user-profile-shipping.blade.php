@@ -1,27 +1,23 @@
 <div>
     <!-- Display Success Message -->
     @if (session()->has('message'))
-        <div class="alert alert-success mx-3 my-2 px-3 py-2">
-            <button type="button" class="close btn btn-success">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            {{ session('message') }}
-        </div>
-    @endif
+    <div class="alert alert-success alert-dismissible fade show mx-3 my-2 px-3 py-3" role="alert">
+        {{ session('message') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
 
-    <!-- Display Validation Errors -->
-    @if ($errors->any())
-        <div class="alert alert-danger mx-3 my-2 px-3 py-2">
-            <button type="button" class="close btn btn-danger">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+<!-- Display Validation Errors -->
+@if ($errors->any())
+    <div class="alert alert-danger alert-dismissible fade show mx-3 my-2 px-3 py-3" role="alert">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
 
     <div class="container my-5 pb-5">
         <ul class="nav nav-tabs" id="profileTab" role="tablist">
@@ -113,18 +109,16 @@
     <!-- Modals for Profile and Address --check -->
     @if($showEditProfileModal)
     <div class="modal fade show d-block" tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5);">
-        @if (session('message'))
-        <div class="alert alert-success text-center my-3 d-block col-12 mt-5">
-            {{ session('message') }}
-        </div>
-        @endif
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Edit Profile</h5>
-                    {{-- <button type="button" class="close" wire:click="closeModal()" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button> --}}
+                    @if (session()->has('modalmessage'))
+                    <div class="alert alert-success alert-dismissible fade show mx-3 my-2 px-3 py-2" role="alert">
+                        {{ session('modalmessage') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
                 </div>
                 <div class="modal-body">
                     <form wire:submit.prevent="updateProfile">
@@ -168,18 +162,10 @@
 
 @if($showChangePasswordModal)
     <div class="modal fade show d-block" tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5);">
-        @if (session('message'))
-        <div class="alert alert-success text-center my-3 d-block col-12 mt-5">
-            {{ session('message') }}
-        </div>
-        @endif
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Change Password</h5>
-                    {{-- <button type="button" class="close" wire:click="closeModal()" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button> --}}
                 </div>
                 <div class="modal-body">
                     <form wire:submit.prevent="changePassword" enctype="multipart/form-data">
@@ -213,20 +199,18 @@
 
 @if($showAddAddressModal)
     <div class="modal fade show d-block" tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5);">
-        @if (session('message'))
-        <div class="alert alert-success text-center my-3 d-block col-12 mt-5">
-            {{ session('message') }}
-        </div>
-        @endif
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Add New Address</h5>
-                    {{-- <button type="button" class="close" wire:click="closeModal()" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button> --}}
                 </div>
                 <div class="modal-body">
+                    @if (session()->has('modalmessage'))
+                    <div class="alert alert-success alert-dismissible fade show mx-3 my-2 px-3 py-3" role="alert">
+                        {{ session('modalmessage') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
                     <form wire:submit.prevent="addAddress">
                         <div class="row">
                             <div class="col-md-6">
@@ -288,11 +272,14 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">View Address</h5>
-                    {{-- <button type="button" class="close" wire:click="closeModal()" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button> --}}
                 </div>
                 <div class="modal-body">
+                    @if (session()->has('modalmessage'))
+                    <div class="alert alert-success alert-dismissible fade show mx-3 my-2 px-3 py-3" role="alert">
+                        {{ session('modalmessage') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
