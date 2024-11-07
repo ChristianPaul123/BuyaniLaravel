@@ -17,7 +17,7 @@ return new class extends Migration
             $table->boolean('tracking_status');
             $table->string('tracking_time');
             $table->text('tracking_info');
-            $table->foreignId('order_id')->constrained('orders')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
             $table->timestamps();
 
         });

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->longText('comment');
             $table->foreignId('order_id')->constrained('orders');
             $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('reviewer_id')->constrained('admins')->nullable();
+            $table->foreignId('reviewer_id')->nullable()->constrained('admins');
             $table->timestamps();
         });
     }

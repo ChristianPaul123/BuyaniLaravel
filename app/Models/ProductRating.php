@@ -15,7 +15,7 @@ class ProductRating extends Model
         'rating',
         'comment',
         'removed_date',
-        'reviewer_id',
+        'admin_id',
     ];
 
     // Relationship with Product

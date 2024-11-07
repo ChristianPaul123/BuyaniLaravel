@@ -9,10 +9,6 @@ return new class extends Migration
     /**
      * Run the migrations.
      *         'user_id',
-        'otp',
-        'otp_expiry',
-        'v_purpose',
-        'is_verified',
      */
     public function up(): void
     {

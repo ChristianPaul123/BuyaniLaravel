@@ -26,7 +26,6 @@
     <div class="main-content-wrapper">
         <!-- All your main page content goes here -->
         @livewire('product-view', ['productId' => $product->id])
-
     </div>
 @endsection
 

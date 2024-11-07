@@ -55,6 +55,16 @@ class User extends Authenticatable
         return $this->hasMany(ShippingAddress::class);
     }
 
+    // Define a relationship with the PaymentMethod model
+    public function payments() {
+        return $this->hasMany(Payment::class);
+    }
+
+    public function farmerforms() {
+
+        return $this->hasMany(FarmerForm::class); // 'user_id' is the foreign key in the farmerforms table
+    }
+
     // Define a relationship with the Cart model
     public function cart() {
         return $this->hasOne(Cart::class); // 'user_id' is the foreign key in the cart table
@@ -79,10 +89,10 @@ class User extends Authenticatable
         return $this->hasMany(OrderRating::class);
     }
 
-    // Define a relationship with the UserRatings model
-    public function userRatings() {
-        return $this->hasMany(UserRating::class);
+    public function productRatings() {
+        return $this->hasMany(ProductRating::class);
     }
+
 
     public function getUserStatusAttribute()
     {

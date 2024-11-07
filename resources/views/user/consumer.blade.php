@@ -19,13 +19,12 @@
             <h1 class="display-4" style="color: #FFFF; font-size: 60px; font-weight: bold; margin-bottom: -10px;">EMPOWER FARMERS</h1>
             <h1 style="color: #F39634; font-size: 60px; font-weight: bold; display: inline;">ENRICH </h1><h1 style="color: #69A543; font-size: 60px; font-weight: bold; display: inline;">COMMUNITIES</h1>
             <p class="lead" style="color: #FFFF; font-size: 22px; font-weight: bold;">BuyAni, Where Every Purchase is a Celebration of Hard Work and Fresh Harvests</p>
-            <a href="consumer-shop.php" class="btn btn-lg" style="background-color: #F39634; color: #FFFF;">SHOP NOW!</a>
+            <a href="/user/consumer/products" class="btn btn-lg" style="background-color: #F39634; color: #FFFF;">SHOP NOW!</a>
         </div>
     </section>
 
     <!-- Our Products -->
     <section class="text-center p-3">
-        <livewire:test>
         <h1>Our Products</h1>
         <p>Freshly delivered from our local farmers!</p>
         <div class="container-fluid">

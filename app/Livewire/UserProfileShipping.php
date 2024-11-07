@@ -93,13 +93,6 @@ class UserProfileShipping extends Component
 
 
     // Hide all modals
-    public function hideModals()
-    {
-        $this->showEditProfileModal = false;
-        $this->showChangePasswordModal = false;
-        $this->showAddAddressModal = false;
-        $this->showViewAddressModal = false;
-    }
 
     // Save user profile changes
     public function saveProfileChanges()
@@ -133,7 +126,7 @@ class UserProfileShipping extends Component
         $this->user->save();
 
         // Hide modals and display a success message
-        $this->hideModals();
+        $this->closeModal();
         session()->flash('message', 'Profile updated successfully.');
     }
 
@@ -162,7 +155,7 @@ class UserProfileShipping extends Component
             'shipping_name' => $this->shipping_name,
         ]);
 
-        $this->hideModals();
+        $this->closeModal();
         session()->flash('message', 'New address added successfully.');
     }
 

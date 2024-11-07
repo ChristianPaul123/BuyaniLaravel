@@ -17,7 +17,7 @@ return new class extends Migration
             $table->longText('blog_info')->nullable();
             $table->string('blog_pic')->nullable();
             $table->string('removed_date')->nullable();
-            $table->foreignId('admin_id')->constrained('admins')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('admin_id')->constrained('admins')->onDelete('cascade');
             $table->timestamps();
         });
     }

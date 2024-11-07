@@ -16,6 +16,7 @@ class OrderRating extends Model
         'comment',
         'reviewer_id',
         'delivery_rating',
+        'rating',
     ];
 
     //Relationship with the Order model

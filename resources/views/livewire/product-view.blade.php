@@ -81,16 +81,7 @@
     </section>
 
       {{-- Placeholder for Product Reviews --}}
-      <section>
-        <div class="row">
-            <div class="col">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Product Reviews</h5>
-                        <p class="card-text">Customer reviews section will go here.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        <section>
+@livewire('product-rating-system',['productId' => $product->id])
+        </section>
 </div>

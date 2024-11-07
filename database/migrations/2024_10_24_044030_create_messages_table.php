@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
             $table->foreignId('chat_id')->constrained('chats')->onDelete('cascade');
-            $table->foreignId('user_id')->constrained('users')->nullable()->onDelete('cascade');
-            $table->foreignId('admin_id')->constrained('admins')->nullable()->onDelete('cascade');
+            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('cascade');
+            $table->foreignId('admin_id')->nullable()->constrained('admins')->onDelete('cascade');
             $table->longText('message_info');
             $table->boolean('is_deleted')->default(false);
             $table->boolean('is_edited')->default(false);

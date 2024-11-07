@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('farmer_forms', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->string('identofication_card')->nullable();
+            $table->string('identification_card')->nullable();
             $table->string('farmer_form')->nullable();
             $table->boolean('id_verified')->default('0');
             $table->boolean('form_verified')->default('0');
-            $table->foreignId('admin_id')->constrained('admins')->nullable();
+            $table->foreignId('admin_id')->nullable()->constrained('admins');
             $table->timestamps();
         });
     }

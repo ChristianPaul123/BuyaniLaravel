@@ -47,7 +47,9 @@
                                 <div class="row">
                                     <!-- Profile Picture and Basic Info -->
                                     <div class="col-md-6 col-sm-12 text-center">
-                                        <h3 class="mt-3">{{ $user->username }}</h3>
+                                        <h3 class="mt-3">Consumer</h3>
+                                        <p class="text-muted">Profile Picture</p>
+                                        <h6 class="mt-3">{{ $user->username }}</h3>
                                         <img src="{{ Storage::url($user->profile_pic) }}" alt="Profile Picture" class="profile-pic rounded-circle" width="150px" height="auto">
                                         <p class="text-muted">{{ $user->email }}</p>
                                         <button class="btn btn-primary mt-2" wire:click="showProfileModal()">Edit Profile</button>
@@ -109,7 +111,6 @@
     </div>
 
     <!-- Modals for Profile and Address --check -->
-    ///////////////////////////////////////////////
     @if($showEditProfileModal)
     <div class="modal fade show d-block" tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5);">
         @if (session('message'))

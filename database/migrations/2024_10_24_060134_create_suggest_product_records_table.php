@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('suggest_description');
             $table->string('suggest_image');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->unsignedBigInteger('admin_id')->nullable();
+            $table->foreignId('admin_id')->nullable()->constrained('users');
             $table->bigInteger('total_vote_count')->nullable(0);
             $table->timestamps();
         });

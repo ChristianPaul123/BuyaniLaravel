@@ -110,11 +110,7 @@ class UserController extends Controller
          } elseif ($user->user_type == 2) {
              return redirect()->route('user.farmer')->with('message', 'Login successful');
          }
-        //  else {
-        //      // Unknown user_type, return with an error message -- not readable
-        //      return redirect('/user/login?user_type=' . $user_type)
-        //          ->withErrors('message', 'User type not recognized! Please check properly.');
-        //  }
+
      } else {
          // Authentication failed, return error with user_type in URL
          return redirect('/user/login?user_type=' . $user_type)
@@ -149,78 +145,9 @@ class UserController extends Controller
         return view('user.profile.show', ['user' => $user]);
     }
 
-
-    public function updateUserprofile($user, Request $request)
-    {
-        $user = User::findOrFail($user);
-
-        $request->validate([
-            'username' => ['required','string','max:255'],
-            'phone_number' => ['required','string','max:255'],
-            'profile_pic' => 'nullable','image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
-
-
-        // Confirm user is authenticated and the request is for their own profile
-    if ($user && $user->id == auth()->guard('user')->user()->id) {
-
-        // Update user's basic info
-        $user->username = $request->input('username');
-        $user->phone_number = $request->input('phone_number');
-
-        // Handle profile picture upload if a file is provided
-        if ($request->hasFile('profile_pic')) {
-            // Delete the old profile picture if it exists
-            if ($user->profile_pic && Storage::exists($user->profile_pic)) {
-                Storage::delete($user->profile_pic);
-            }
-
-            // Create a unique name for the image and specify the path
-            $imageName = time() . '.' . $request->profile_pic->extension();
-            $imagePath = 'img/profile/' . $user->username;
-
-            // Ensure the directory exists or create it
-            if (!file_exists(public_path($imagePath))) {
-                mkdir(public_path($imagePath), 0777, true);
-            }
-
-            // Move the uploaded file to the specified directory
-            $request->profile_pic->move(public_path($imagePath), $imageName);
-
-            // Update the user's profile picture path
-            $user->profile_pic = $imagePath . '/' . $imageName;
-        }
-
-
-            $user->save();
-            return redirect()->route('user.consumer.profile.show',['user' => $user->id])->with('message', 'Profile updated successfully.');
-        } else {
-            return redirect()->route('user.consumer.profile.show',['user' => $user->id])->with('error', 'Unauthorized access.');
-        }
+    public function showFarmerprofile() {
+        $user = auth()->guard('user')->user();
+        return view('user.farmerprofile.show', ['user' => $user]);
     }
 
-    public function changePassword(Request $request, $id)
-    {
-        $user = User::find($id);
-
-        if ($user && $user->id == auth()->guard('user')->user()->id) {
-            $currentPassword = $request->input('current_password');
-            $newPassword = $request->input('new_password');
-            $confirmPassword = $request->input('confirm_password');
-
-            if (Hash::check($currentPassword, $user->password)) {
-                if ($newPassword === $confirmPassword) {
-                    $user->password = Hash::make($newPassword);
-                    $user->save();
-                    return redirect()->route('user.profile.show')->with('success', 'Password changed successfully.');
-                } else {
-                    return redirect()->route('user.profile.show')->with('error', 'New passwords do not match.');
-                }
-            } else {
-                return redirect()->route('user.profile.show')->with('error', 'Current password is incorrect.');
-            }
-        } else {
-            return redirect()->route('user.profile.show')->with('error', 'Unauthorized access.');
-        }
-    }
 }

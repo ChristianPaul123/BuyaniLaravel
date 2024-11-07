@@ -168,14 +168,6 @@ Route::get('user/farmer/blogs', [BlogController::class, 'showFarmerBlogs'])->nam
 
 //Dashboard for Users
 
-//Profile for Users
-Route::get('user/consumer/profile/edit', [UserController::class, 'editUserprofile'])->name('user.consumer.profile.edit');
-Route::put('user/consumer/profile/update/{user}', [UserController::class, 'updateUserprofile'])->name('user.consumer.profile.update');
-Route::get('user/consumer/profile/changepassword', [UserController::class, 'showChangePasswordForm'])->name('user.consumer.profile.changepassword');
-Route::put('user/consumer/profile/changepassword', [UserController::class, 'changePassword'])->name('user.consumer.profile.changepassword.submit');
-Route::get('user/consumer/profile/verify', [UserController::class, 'showVerifyForm'])->name('user.consumer.profile.verify');
-Route::put('user/consumer/profile/verify', [UserController::class, 'verify'])->name('user.consumer.profile.verify.submit');
-
 //Shipping Address for Consumer
 Route::get('user/consumer/profile/shipping',[ShippingAddressController::class, 'showUserAddress'])->name('user.consumer.profile.shipping');
 Route::get('user/consumer/profile/shipping/add',[ShippingAddressController::class, 'showUserAddressAddForm'])->name('user.consumer.profile.shipping.add');

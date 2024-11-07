@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('cart_total');
             $table->float('overall_cartKG');
             $table->decimal('total_price',9,2);
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
