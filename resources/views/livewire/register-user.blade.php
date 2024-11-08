@@ -2,7 +2,7 @@
     <div class="container-fluid custom-font-content p-5">
         <nav aria-label="breadcrumb d-flex">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('user.login') }}">Login</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('user.login', ['user_type' => $user_type]) }}">Login</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Registration</li>
             </ol>
         </nav>
