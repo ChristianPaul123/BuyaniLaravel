@@ -11,13 +11,18 @@
     z-index: 1000;
     background-color: #175593;
     border-bottom: 1px solid #ddd;
-}
-.navbar-nav .nav-link {
-    color: #333;
-}
-.navbar-nav .nav-link.active {
-    font-weight: bold;
-}
+    }
+    .navbar-nav .nav-link {
+        color: #333;
+    }
+    .navbar-nav .nav-link.active {
+        font-weight: bold;
+    }
+    .message {
+        color: black;
+        font-size: 25px;
+    }
+
 </style>
 @endpush
 

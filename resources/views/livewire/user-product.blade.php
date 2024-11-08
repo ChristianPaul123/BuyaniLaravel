@@ -43,39 +43,49 @@
         </div>
     </nav>
 
-<div class="container-fluid">
-        <h2 class="text-center">All Products</h2>
-        <div class="row justify-content-center align-items-center">
-            @if ($message)
-                <div class="alert alert-info">
-                    {{ $message }}
-                </div>
-            @endif
-        <main class="row justify-content-center main-content">
-            @foreach ($products as $product)
-            <div wire:key="{{ $product->id }}" class="col-md-2 m-1">
-                <div class="card h-100">
-                    <div class="card-header d-flex align-items-center justify-content-center">
-                        <div class="ms-3">
-                            <h6 class="mb-0 fs-sm text-center">{{ $product->product_name }}</h6>
+    {{-- <div class="container-fluid">
+            <h2 class="text-center">All Products</h2>
+            <div class="row justify-content-center align-items-center">
+                @if ($message)
+                    <div class="alert alert-info">
+                        {{ $message }}
+                    </div>
+                @endif
+            <main class="row justify-content-center main-content">
+                @foreach ($products as $product)
+                <div wire:key="{{ $product->id }}" class="col-md-2 m-1">
+                    <div class="card h-100">
+                        <div class="card-header d-flex align-items-center justify-content-center">
+                            <div class="ms-3">
+                                <h6 class="mb-0 fs-sm text-center">{{ $product->product_name }}</h6>
+                            </div>
+                        </div>
+                        <img src="{{ asset( "$product->product_pic" ) }}" class="card-img-top" alt="products {{ asset( "$product->product_name" ) }}" />
+                        <div class="card-body">
+                            <p class="card-text text-truncate">
+                                {{ Str::limit($product->product_details, 50) }}
+                            </p>
+                        </div>
+                        <div class="card-footer d-flex">
+                            <button class="btn btn-subtle" type="button"><i class="fas fa-heart fa-lg"></i></button>
+                            <button class="btn btn-primary w-100 p-0 me-auto fw-bold"
+                            wire:click.prevent="viewProduct({{ $product->id }})">View</button>
+                            <button class="btn btn-subtle" type="button"><i class="fas fa-share fa-lg"></i></button>
                         </div>
                     </div>
-                    <img src="{{ asset( "$product->product_pic" ) }}" class="card-img-top" alt="products {{ asset( "$product->product_name" ) }}" />
-                    <div class="card-body">
-                        <p class="card-text text-truncate">
-                            {{ Str::limit($product->product_details, 50) }}
-                        </p>
-                    </div>
-                    <div class="card-footer d-flex">
-                        <button class="btn btn-subtle" type="button"><i class="fas fa-heart fa-lg"></i></button>
-                        <button class="btn btn-primary w-100 p-0 me-auto fw-bold"
-                        wire:click.prevent="viewProduct({{ $product->id }})">View</button>
-                        <button class="btn btn-subtle" type="button"><i class="fas fa-share fa-lg"></i></button>
-                    </div>
                 </div>
-            </div>
-            @endforeach
-        </main>
+                @endforeach
+            </main>
+        </div>
+    </div> --}}
+
+    <div class="container d-flex justify-content-center align-items-center" style="height: 390px;">
+        <div class="text-center">
+            <img src="{{ asset('img/outOfStock.png') }}" style="width: 35%;">
+            <h3 class="message">We’re currently out of stock, but don’t worry—we’ll have more products available soon! Be sure to check back or subscribe for updates.</h3>
+        </div>
     </div>
+
+
 </div>
-</div>
+
