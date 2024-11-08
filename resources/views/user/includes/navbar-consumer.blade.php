@@ -1,6 +1,6 @@
 <!--NAVIGATION BAR-->
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-xl navbar-light bg-light fixed-top" style="background-color: #FFFFFF; height: 80px;">
+    <nav class="navbar navbar-expand-xl navbar-light bg-light fixed-top" style="background-color: #FFFFFF;">
 
         <div class="container-fluid">
             <a class="nav-link @if(request()->is('user/consumer')) active @endif" href="/user/consumer" data-page="home">
