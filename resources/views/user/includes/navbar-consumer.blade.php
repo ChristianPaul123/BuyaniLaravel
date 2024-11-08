@@ -1,6 +1,7 @@
 <!--NAVIGATION BAR-->
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-xl navbar-light bg-light sticky-top" style="background-color: #FFFFFF;">
+    <nav class="navbar navbar-expand-xl navbar-light bg-light fixed-top" style="background-color: #FFFFFF; height: 80px;">
+
         <div class="container-fluid">
             <a class="nav-link @if(request()->is('user/consumer')) active @endif" href="/user/consumer" data-page="home">
                 <img src="{{ asset('img/logo1.svg') }}" style="width: 65px;">

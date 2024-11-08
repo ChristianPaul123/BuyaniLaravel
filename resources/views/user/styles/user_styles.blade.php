@@ -146,6 +146,5 @@
     .navbar .nav-link.active {
         color: orange;
         border-radius: 7px;
-        padding: 0.5rem 1rem;
     }
 </style>
