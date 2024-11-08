@@ -1,17 +1,12 @@
-<div>
-    <div class="container-fluid custom-font-content p-3">
+<div class="mt-5 pt-2">
+    <div class="container-fluid custom-font-content p-5">
         <nav aria-label="breadcrumb d-flex">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('user.index') }}">Role Selection</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('user.login') }}">Login</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Registration</li>
             </ol>
         </nav>
     </div>
-
-    {{-- Display success or error messages --}}
-    {{-- @if($message)
-    <div class="alert alert-danger text-center my-3">{{ $message }}</div>
-    @endif --}}
 
     @if (session('message'))
     <div class="alert alert-danger text-center my-3 d-block position-absolute col-12">
@@ -22,7 +17,6 @@
     {{-- Display validation errors --}}
 
       @if($user_type == 1)
-
             <div class="container-fluid custom-font-content" style="padding: 20px;">
               <div class="row">
                   <div class="col-12">
@@ -79,11 +73,7 @@
                       <button type="submit" class="btn btn-warning btn-block px-4" style="width: fit-content;">Sign Up</button>
                   </div>
               </form>
-              {{-- <div class="row">
-                  <div class="col text-end mt-3 my-4">
-                      <a href="../login/consumer-login.php">Has account? | Sign In</a>
-                  </div>
-              </div> --}}
+
           </div>
     @elseif($user_type == 2)
           <div class="container-fluid custom-font-content" style="padding: 20px;">
