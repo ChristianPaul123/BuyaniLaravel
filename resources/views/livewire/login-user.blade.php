@@ -1,12 +1,12 @@
 <div class="d-flex flex-row mt-5 pt-3" >
 
     <div class="col-lg-6 login-card d-flex flex-column align-items-center justify-content-center" style="height: 500px;">
-     @if (session('message'))
-    <div class="alert alert-danger text-center my-3 d-block col-12 mt-5">
-        {{ session('message') }}
-    </div>
-    @endif
         <div class="container d-block align-items-center">
+            @if (session('message'))
+            <div class="alert alert-danger text-center my-3 d-block col-12 mt-5">
+                {{ session('message') }}
+            </div>
+            @endif
             <div class="container-fluid custom-font-content p-3 mt-5 d-flex">
                 <nav aria-label="breadcrumb d-flex">
                     <ol class="breadcrumb">

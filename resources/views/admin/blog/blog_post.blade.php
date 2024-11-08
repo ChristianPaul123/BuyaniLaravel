@@ -1,22 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+@extends('layouts.admin-app') <!-- Extend your main layout -->
 
+@section('title', 'Admin | Blogs') <!-- Define the title for this page -->
 
-    <title>Admin | Blogs</title>
-    <link rel="icon" type="image/png" href="../img/logo1.svg">
-    @include('layouts.head')
-    @include('admin.styles.admin_styles')
+@push('styles')
+<style>
+</style>
+@endpush
 
-</head>
-<body class="body">
-@auth('admin')
-    @include('admin.includes.navbar')
-
-
+@section('content')
     <div class="container-fluid">
         <div class="row">
 
@@ -137,21 +128,13 @@
 
         </div>
     </div>
+@endsection
 
-@else
-            <p>not logged in</p>
-            @session('message')
-            <div class="success-message">
-                {{ session('message') }}
-            </div>
-            @endsession
-@endauth
-    @include('layouts.script')
+@push('scripts')
 <script>
     window.addEventListener('popstate', function(event) {
         // If the user presses the back button, log them out
         window.location.href = "{{ route('admin.logout') }}";
     });
   </script>
-</body>
-</html>
+@endpush

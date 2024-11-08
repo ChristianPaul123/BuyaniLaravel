@@ -13,7 +13,7 @@
 
 <body>
     @auth('user')
-    <div class="wrapper">
+    <div class="wrapper pt-5">
         <main>
             @if (View::hasSection('x-content'))
             {{-- If 'x-content' section is defined, show it --}}
