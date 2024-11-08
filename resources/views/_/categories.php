@@ -18,8 +18,8 @@
                 <h2 class="mb-4">Product Category</h2>
             </div>
             <div class="col-2">
-                <button type="button" class="btn btn-success">Success</button>
-                <button type="button" class="btn btn-success">Success</button>
+                <button type="button" class="btn btn-success">Create Category</button>
+                <button type="button" class="btn btn-success">Create Subcategory</button>
             </div>
         </div>
 
