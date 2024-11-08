@@ -76,6 +76,7 @@
 </style>
 @endpush
 @section('x-content')
+@include('user.includes.navbar-consumer')
     @if (session('message'))
     <div class="alert alert-success">
         {{ session('message') }}
