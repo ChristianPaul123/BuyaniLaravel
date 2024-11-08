@@ -1,4 +1,7 @@
 <div>
+    @if ($products->count() === 0)
+    <div class="d-block-12 m-5"></div>
+    @else
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="">Product Catalog</a>
@@ -42,6 +45,7 @@
             </div>
         </div>
     </nav>
+    @endif
 
     <div class="container-fluid">
         <div class="row justify-content-center align-items-center">
@@ -55,9 +59,9 @@
             <h2 class="text-center">Sorry We're Out At the Moment</h2>
             </div>
         @else
-        <div class="m-3 p-3">
-            <h2 class="text-center">All Products</h2>
-        </div>
+            <div class="m-3 p-3">
+                <h2 class="text-center">All Products</h2>
+            </div>
         @endif
             <main class="row justify-content-center main-content">
                 @forelse ($products as $product)

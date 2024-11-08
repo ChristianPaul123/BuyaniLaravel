@@ -95,7 +95,6 @@
             <div class="card-header">
                 <h3 class="card-title">All Subcategory</h3>
             </div>
-        {{-- <div class=" justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom border-top"> --}}
         <div class="card-body">
             <table id="subcategoryTable" class="table table-bordered table-striped">
                 <thead>
@@ -131,7 +130,7 @@
                 </tbody>
            </table>
             </div>
-
+        </div>
         </section>
     </div>
     </div>

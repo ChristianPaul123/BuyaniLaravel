@@ -19,9 +19,10 @@
  @include('user.includes.navbar-consumer')
 
 <!-- About Us Section -->
-<div class="container about-section" style="background-image: url('{{ asset('img/background.jpg') }}'); background-repeat: no-repeat; background-size: cover; background-position: center;">
-    <h2 class="text-center mb-4 text-white">About Us</h2>
-    <p class="text-center text-white">We are a team of passionate individuals committed to delivering the best services to our clients.</p>
+<div class="container about-section" style="background-image: url('{{ asset('img/stockImg4.png') }}'); background-repeat: no-repeat; background-size: cover; background-position: center;">
+    <div class="d-block-12 m-5"></div>
+    <h2 class="text-center mb-4">About Us</h2>
+    <p class="text-center">We are a team of passionate individuals committed to delivering the best services to our clients.</p>
     <div class="row">
         <!-- Team Member 1 -->
         <div class="col-lg-3 col-md-6 text-center team-member">

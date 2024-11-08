@@ -7,7 +7,7 @@
                 {{ session('message') }}
             </div>
             @endif
-            <div class="container-fluid custom-font-content p-3 mt-5 d-flex">
+            <div class="container-fluid custom-font-content p-2 mt-5 d-flex">
                 <nav aria-label="breadcrumb d-flex">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('user.index') }}">Role Selection</a></li>
@@ -43,17 +43,17 @@
                 <input type="hidden" wire:model="user_type" value="{{ $user_type }}" />
             </div>
 
-             <div class="form-group my-3 d-flex justify-content-end">
+             <div class="form-group my-1 d-flex justify-content-end">
                 <a wire:click.prevent="showModal()"> Forgot Password?</a>
             </div>
 
             <div class="container d-flex justify-content-center">
-                <button type="submit" class="btn btn-warning btn-block my-3 px-4">LOGIN</button>
+                <button type="submit" class="btn btn-warning btn-block my-1 px-4">LOGIN</button>
             </div>
         </form>
 
-        <div class="text-center mt-3 my-3">
-            {{-- <a href="{{ route('register', ['user_type' => $user_type]) }}">Create Account | Sign Up</a> --}}
+        <div class="text-center">
+            <a href="{{ route('user.register', ['user_type' => $user_type]) }}">Create Account | Sign Up</a>
         </div>
     </div>
 
