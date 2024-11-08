@@ -33,7 +33,7 @@
 
 <body style="background-image: url('{{ asset('img/stockImg4.png') }}'); background-repeat: no-repeat; background-size: cover; background-position: center;">
     <div class="container mb-5">
-        <!-- Contact Header -->
+        <!-- Contact Header -->  <div class="d-block-12 m-5"></div>
         <div class="contact-header" style="color: #f8f9fa;">
             <h1>Contact Us</h1>
             <p>We would love to hear from you!</p>
