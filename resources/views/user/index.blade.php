@@ -61,7 +61,7 @@
         transition: transform 0.2s ease;
     }
 
-    img {
+    .logo {
         width: 20%;
         margin-bottom: 15px;
     }
@@ -96,7 +96,7 @@
                     <form action="{{ route('user.login') }}" method="GET">
                         <input type="hidden" name="user_type" value="1">
                         <button type="submit" class="clickable-div">
-                            <img src="{{ asset('img/title/consumer.png') }}" alt="Consumer Icon">
+                            <img src="{{ asset('img/title/consumer.png') }}" alt="Consumer Icon" class="logo">
                             <h5>Interact as Consumer</h5>
                         </button>
 
@@ -106,7 +106,7 @@
                     <form action="{{ route('user.login') }}" method="GET">
                         <input type="hidden" name="user_type" value="2">
                         <button type="submit" class="clickable-div">
-                            <img src="{{ asset('img/title/farmer.png') }}" alt="Farmer Icon">
+                            <img src="{{ asset('img/title/farmer.png') }}" alt="Farmer Icon" class="logo">
                             <h5>Interact as Farmer</h5>
                         </button>
 
