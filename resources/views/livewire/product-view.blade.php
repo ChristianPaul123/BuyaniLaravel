@@ -1,3 +1,21 @@
+<style>
+    .card {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    .row {
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .pagination {
+        justify-content: flex-end;
+    }
+</style>
+
+
 <div class="container container-fluid" style="background-color: rgb(195, 184, 184)">
     <section>
         <h3 class='text-center mt-2'>{{ $product->product_name }}</h3>
