@@ -1,6 +1,11 @@
 <div class="container mt-5 mb-5">
     <section class="container-fluid">
         <h2 class="mb-4">Shopping Cart</h2>
+        @if(session()->has('message'))
+        <div class="alert alert-success mt-3">{{ session('message') }}</div>
+        @elseif(session()->has('error'))
+            <div class="alert alert-danger mt-3">{{ session('error') }}</div>
+        @endif
         <div class="row">
             <div class="col-lg-9" id="cartItemsContainer">
                 @forelse($cartItems as $item)
@@ -64,10 +69,6 @@
                 </div>
             </div>
         </div>
-        @if(session()->has('message'))
-            <div class="alert alert-success mt-3">{{ session('message') }}</div>
-        @elseif(session()->has('error'))
-            <div class="alert alert-danger mt-3">{{ session('error') }}</div>
-        @endif
+
     </section>
 </div>

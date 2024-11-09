@@ -12,7 +12,6 @@ class ProductSpecification extends Model
     protected $fillable = [
         'product_id',
         'specification_name',
-        'specific_product_info',
         'product_price',
         'product_kg',
         'admin_id',
