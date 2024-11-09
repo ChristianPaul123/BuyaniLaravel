@@ -23,6 +23,31 @@
         font-size: 25px;
     }
 
+
+
+
+    .row {
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .card {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    .containerN{
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+    }
+
+    .pagination {
+        justify-content: flex-end;
+    }
+
+
 </style>
 @endpush
 

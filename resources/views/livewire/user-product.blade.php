@@ -1,3 +1,6 @@
+
+
+
 <div>
     @if ($products->count() === 0)
     <div class="d-block-12 m-5"></div>
@@ -97,6 +100,49 @@
                 @endforelse
             </main>
         </div>
+    </div>
+
+
+    {{-- bagong container frame --}}
+    <div class="container mt-5">
+        <div class="row">
+
+        <!-- Item -->
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            <a href="#" class="card-link" style="text-decoration: none; color: inherit;">
+                <div class="card">
+                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Item 1">
+                    <div class="card-body">
+                        <div class="containerN">
+                            <h5 class="card-title">Item 1</h5>
+                            <a href="#"><i class="fas fa-heart"></i></a>
+                        </div>
+                        <p class="card-text">Price: $25.00</p>
+                        <a href="#" class="btn btn-primary">Add to Cart</a>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+
+        </div>
+
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+
     </div>
 
 
