@@ -30,9 +30,9 @@
 <body>
     @include('user.includes.navbar-consumer')
 
-<div class="main-content-wrapper">
+<div class="main-content-wrapper pt-3">
         <!-- All your main page content goes here -->
-    <div class="container container-fluid mt-1">
+    <div class="container container-fluid mt-3">
     <!-- Navbar -->
     <section class="p-3">
         <livewire:user-product />

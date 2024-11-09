@@ -2,6 +2,7 @@
     @if ($products->count() === 0)
     <div class="d-block-12 m-5"></div>
     @else
+    <div class="d-block-12 m-5"></div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="">Product Catalog</a>

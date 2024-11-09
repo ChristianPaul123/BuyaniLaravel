@@ -11,6 +11,7 @@
         "laravel/tinker": "^2.9",
         "league/oauth1-client": "^1.10",
         "livewire/livewire": "^3.5",
+        "realrashid/sweet-alert": "^7.2",
         "symfony/mailer": "^7.1"
     },
     "require-dev": {

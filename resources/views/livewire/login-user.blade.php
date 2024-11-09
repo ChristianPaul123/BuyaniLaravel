@@ -2,10 +2,17 @@
 
     <div class="col-lg-6 login-card d-flex flex-column align-items-center justify-content-center" style="height: 500px;">
         <div class="container d-block align-items-center">
+
+
             @if (session('message'))
-            <div class="alert alert-danger text-center my-3 d-block col-12 mt-5">
-                {{ session('message') }}
-            </div>
+            <script>
+                Swal.fire({
+                    icon: 'info',
+                    title: 'FYI',
+                    text: "{{ session('info') }}",
+                    confirmButtonText: 'Got it'
+                });
+            </script>
             @endif
             <div class="container-fluid custom-font-content p-2 mt-5 d-flex">
                 <nav aria-label="breadcrumb d-flex">
