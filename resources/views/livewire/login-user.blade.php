@@ -5,14 +5,9 @@
 
 
             @if (session('message'))
-            <script>
-                Swal.fire({
-                    icon: 'info',
-                    title: 'FYI',
-                    text: "{{ session('info') }}",
-                    confirmButtonText: 'Got it'
-                });
-            </script>
+            <div class="alert alert-danger text-center my-3 d-block position-absolute col-12 mt-5">
+                {{ session('message') }}
+            </div>
             @endif
             <div class="container-fluid custom-font-content p-2 mt-5 d-flex">
                 <nav aria-label="breadcrumb d-flex">

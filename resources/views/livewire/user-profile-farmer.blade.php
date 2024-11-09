@@ -1,4 +1,4 @@
-<div>
+<div class="pt-3">
     <!-- Display Success Message -->
     @if (session()->has('message'))
         <div class="alert alert-success mx-3 my-2 px-3 py-2">

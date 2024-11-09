@@ -5,7 +5,7 @@
 @section('content')
 @include('user.includes.navbar-farmer')
          <!-- Main Page -->
-    <section >
+    <section class="mt-5">
         <div class="row" class="hero-section d-flex align-items-center" style="background-image: url({{ asset('img/stockImg4.png') }}); background-repeat: no-repeat; background-size: cover; background-position: center; height: 650px;">
             <!-- Left Section -->
             <div class="col-md-4 px-5">

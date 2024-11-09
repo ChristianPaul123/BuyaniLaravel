@@ -1,5 +1,5 @@
  <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" style="background-color: #FFFFFF;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="background-color: #FFFFFF;">
         <div class="container-fluid">
             <a class="navbar-brand" href="farmer-home.php">
                 <img src="{{ asset('img/logo1.svg') }}" style="width: 65px;">
