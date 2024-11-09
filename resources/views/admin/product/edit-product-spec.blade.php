@@ -70,11 +70,6 @@
                         </div>
 
                         <div class="form-group my-3">
-                            <label for="specific_product_info">Specific Product Info max: 50 characters</label>
-                            <textarea class="form-control" style="resize: none;" id="specific_product_info" name="specific_product_info" rows="2" maxlength="50">{{ $productSpecification->specific_product_info }}</textarea>
-                        </div>
-
-                        <div class="form-group my-3">
                             <label for="product_price">Product Price</label>
                             <input type="number" class="form-control" id="product_price" name="product_price" value="{{ $productSpecification->product_price }}" required>
                         </div>

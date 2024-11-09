@@ -183,18 +183,12 @@ Route::put('user/farmer/profile/update', [UserController::class, 'updateFarmerpr
 //Product for Consumers
 Route::get('user/consumer/products', [UserProductController::class, 'showConsumerProduct'])->name('user.consumer.product');
 Route::get('user/consumer/product/view/{product}', [UserProductController::class, 'viewConsumerProduct'])->name('user.consumer.product.view');
-Route::post('user/consumer/product/add', [UserProductController::class, 'addConsumerProduct'])->name('user.consumer.product.add');
-Route::post('user/consumer/product/view/{product}/{specification}', [UserProductController::class, 'addProductSpecificationToCart'])->name('user.consumer.product.cart.add');
+
 
 //cart for Consumers
 Route::get('user/consumer/cart', [CartController::class, 'showConsumerCart'])->name('user.consumer.product.cart');
-Route::get('user/consumer/cart/view', [CartController::class, 'updateCartView'])->name('user.consumer.product.cart.view');
-Route::put('user/consumer/cart/item/{cartitem}', [CartController::class, 'updateCartItemAjax'])->name('user.consumer.product.cart.update');
-Route::delete('user/consumer/cart/item/{cartitem}', [CartController::class, 'deleteCartItem'])->name('user.consumer.product.cart.delete');
+Route::get('user/consumer/cart/checkout/{cart}', [CartController::class, 'showConsumerCheckout'])->name('user.consumer.product.cart.checkout');
 
-Route::get('user/consumer/cart/checkout', [CartController::class, 'showConsumerCheckout'])->name('user.consumer.product.cart.checkout');
-Route::post('user/consumer/product/cart/checkout', [CartController::class, 'checkoutConsumerCart'])->name('user.consumer.product.cart.checkout.submit');
-Route::get('user/consumer/product/cart/checkout/success', [CartController::class, 'showConsumerCheckoutSuccess'])->name('user.consumer.product.cart.checkout.success');
 
 //Product for Farmers
 Route::get('user/farmer/product', [UserController::class, 'showFarmerProduct'])->name('user.farmer.product');

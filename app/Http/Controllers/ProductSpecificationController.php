@@ -24,7 +24,6 @@ public function addProductSpecification(Request $request)
         $validatedData = $request->validate([
             'product_id' => ['required'],
             'specification_name' => ['required', Rule::unique('product_specifications', 'specification_name')],
-            'specific_product_info' => ['required'],
             'product_price' => ['required'],
             'product_kg' => ['required'],
             'admin_id' => ['required'],
@@ -61,7 +60,6 @@ public function updateProductSpecification($productSpecification, Request $reque
         $validatedData = $request->validate([
             'product_id' => ['required'],
             'specification_name' => ['required', Rule::unique('product_specifications', 'specification_name')->ignore($productSpecification)],
-            'specific_product_info' => ['required'],
             'product_price' => ['required'],
             'product_kg' => ['required'],
             'admin_id' => ['required'],

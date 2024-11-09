@@ -5,3 +5,28 @@ setting up the env environment
 # MAIL_USERNAME=buyanibusiness1@gmail.com
 # MAIL_PASSWORD=ymavszjyqimeqxkn
 # MAIL_ENCRYPTION=tls
+
+# Looking to send emails in production? Check out our Email API/SMTP product!
+# MAIL_MAILER=smtp
+# MAIL_HOST=sandbox.smtp.mailtrap.io
+# MAIL_PORT=2525
+# MAIL_USERNAME=30b42f4cebb36f
+# MAIL_PASSWORD=3ba05f7a5d8743
+
+#connecting the storage linking
+#php artisan storage:link
+
+#generating a key for the app
+#php artisan key:generate
+
+#installing the npm packages
+#npm install
+
+#installing the composer package
+#composer install
+
+#installing the livewire package
+#composer require laravel/livewire
+
+# implementing the error handling customization
+#php artisan vendor:publish --tag=laravel-errors

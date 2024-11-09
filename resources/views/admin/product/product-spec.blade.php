@@ -79,13 +79,8 @@
                             </div>
 
                             <div class="form-group my-3">
-                                <label for="specific_product_info">Specific Product Info max: 50 characters</label>
-                                <textarea class="form-control" style="resize: none;" id="specific_product_info" name="specific_product_info" rows="2" maxlength="50" required></textarea>
-                            </div>
-
-                            <div class="form-group my-3">
                                 <label for="product_price">Product Price</label>
-                                <input type="number" class="form-control" id="product_price" name="product_price" required>
+                                <input type="number" step="0.01" class="form-control" id="product_price" name="product_price" required>
                             </div>
 
                             <div class="form-group my-3">
@@ -115,7 +110,6 @@
                     <tr>
                         <th>Product Name</th>
                         <th>Specification Name</th>
-                        <th>Specific Product Info</th>
                         <th>Product Price</th>
                         <th>Product Weight (kg)</th>
                         <th>Admin</th>
@@ -128,7 +122,6 @@
                     <tr>
                         <td>{{ $specification->product->product_name }}</td>
                         <td>{{ $specification->specification_name }}</td>
-                        <td>{{ $specification->specific_product_info }}</td>
                         <td>{{ $specification->product_price }}</td>
                         <td>{{ $specification->product_kg }}</td>
                         <td>{{ $specification->admin->username }}</td>

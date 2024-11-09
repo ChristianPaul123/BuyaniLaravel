@@ -1,7 +1,0 @@
-setting up the env environment
-# MAIL_MAILER=smtp
-# MAIL_HOST=smtp.gmail.com
-# MAIL_PORT=587
-# MAIL_USERNAME=buyanibusiness1@gmail.com
-# MAIL_PASSWORD=ymavszjyqimeqxkn
-# MAIL_ENCRYPTION=tls

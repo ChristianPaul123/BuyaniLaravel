@@ -61,7 +61,6 @@
                             <form wire:submit.prevent="addToCart({{ $specification->id }})">
                                 <div class="row d-flex align-items-center justify-content-center">
                                     <div class="col-8 align-items-center">
-                                        <label for="quantity" class="form-label">Quantity</label>
                                         <input type="hidden" wire:model="product_status" value="{{ $specification->product->product_status }}">
                                         @error('product_status') <span class="text-warning">{{ $message }}</span> @enderror
                                         <input type="hidden" id="quantity" class="form-control" wire:model="quantities"  min="1">
