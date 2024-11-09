@@ -145,6 +145,8 @@ class ProductCategory extends Component
 
         $this->closeModal();
         $this->fetchCategories(); // Refresh categories list
+
+        $this->dispatchBrowserEvent('refreshDataTable');
     }
 
     public function addSubcategory()

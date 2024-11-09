@@ -12,10 +12,10 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     @endif
-    <div class="col-10">
+    <div class="col-8">
         <h2 class="mb-4">Product Category</h2>
     </div>
-    <div class="col-2">
+    <div class="col-4">
         <button type="button" class="btn btn-success" wire:click="showcategoryModal">Create Category</button>
         <button type="button" class="btn btn-success" wire:click="showsubcategoryModal">Create Subcategory</button>
     </div>
@@ -37,7 +37,7 @@
             <div class="card-header">
                 <h3 class="card-title">All Categories</h3>
             </div>
-            <div class="card-body">
+            <div wire:ignore.self class="card-body">
                 <table id="categoryTable" class="table table-bordered table-striped">
                     <thead>
                         <tr>
@@ -74,7 +74,7 @@
             <div class="card-header">
                 <h3 class="card-title">All Subcategories</h3>
             </div>
-            <div class="card-body">
+            <div wire:ignore.self class="card-body">
                 <table id="subcategoryTable" class="table table-bordered table-striped">
                     <thead>
                         <tr>
