@@ -71,10 +71,9 @@
                             <div class="card-header text-center">
                                 <h6 class="mb-0">{{ $specification->specification_name }}</h6>
                             </div>
-                            <img src="{{ asset($product->product_pic) }}" class="card-img-top" alt="products {{ $product->product_name }}">
+                            {{-- <img src="{{ asset($product->product_pic) }}" class="card-img-top" alt="products {{ $product->product_name }}"> --}}
                             <div class="card-body">
                                 <p class="card-text">Price: ₱{{ $specification->product_price }}</p>
-                                <p class="card-text text-truncate">{{ $specification->specific_product_info }}</p>
                             </div>
                             <form wire:submit.prevent="addToCart({{ $specification->id }})">
                                 <div class="row d-flex align-items-center justify-content-center">

@@ -10,6 +10,8 @@ use App\Models\Product;
 
 class UserProduct extends Component
 {
+
+
     public $categories;
     public $products;
     public $subcategory;

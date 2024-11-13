@@ -1,55 +1,60 @@
-
-
-
 <div>
-    @if ($products->count() === 0)
-    <div class="d-block-12 m-5"></div>
-    @else
-    <div class="d-block-12 m-5"></div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="">Product Catalog</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#categoryNav" aria-controls="categoryNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="categoryNav">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <!-- Loop through categories using Livewire -->
-                    @foreach ($categories as $category)
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                {{ $category->category_name }}
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <!-- Link to the main category -->
-                                <li>
-                                    <a class="dropdown-item" href="#" wire:click.prevent="filterByCategory({{ $category->id }})">
-                                        All {{ $category->category_name }}
-                                    </a>
-                                </li>
-                                <li><hr class="dropdown-divider"></li>
-                                <!-- Loop through subcategories -->
-                                @foreach ($category->subcategories as $subcategory)
-                                    <li>
-                                        <a class="dropdown-item" href="#" wire:click.prevent="filterBySubcategory({{ $subcategory->id }})">
-                                            {{ $subcategory->sub_category_name }}
-                                        </a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </li>
-                    @endforeach
-                </ul>
+            @if ($products->count() === 0)
+            <div class="d-block-12 m-5"></div>
+        @else
+            <div class="container my-4">
+                <!-- Navbar Section -->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light rounded flex-wrap">
+                    <div class="container-fluid">
+                        <!-- Product Catalog Title and Categories -->
+                        <div class="col-lg-8 col-md-12 mb-2">
+                            <a class="navbar-brand" href="#">Product Catalog</a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#categoryNav" aria-controls="categoryNav" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="categoryNav">
+                                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                    <!-- Loop through categories using Livewire -->
+                                <div class="col flex-wrap d-flex">
+                                    @foreach ($categories as $category)
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                {{ $category->category_name }}
+                                            </a>
+                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li>
+                                                    <a class="dropdown-item" href="#" wire:click.prevent="filterByCategory({{ $category->id }})">
+                                                        All {{ $category->category_name }}
+                                                    </a>
+                                                </li>
+                                                <li><hr class="dropdown-divider"></li>
+                                                @foreach ($category->subcategories as $subcategory)
+                                                    <li>
+                                                        <a class="dropdown-item" href="#" wire:click.prevent="filterBySubcategory({{ $subcategory->id }})">
+                                                            {{ $subcategory->sub_category_name }}
+                                                        </a>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </li>
+                                    @endforeach
+                                </div>
+                                </ul>
+                            </div>
+                        </div>
 
-                <!-- Search Bar -->
-                <form class="d-flex" wire:submit.prevent="searchConsumerProduct">
-                    <input class="form-control me-2" type="search" wire:model.lazy="searchQuery" placeholder="Search" aria-label="Search" required>
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+                        <!-- Search Bar Section -->
+                        <div class="col-lg-4 col-md-12">
+                            <form class="d-flex" wire:submit.prevent="searchConsumerProduct">
+                                <input class="form-control me-2" type="search" wire:model.lazy="searchQuery" placeholder="Search" aria-label="Search" required>
+                                <button class="btn btn-outline-success" type="submit">Search</button>
+                            </form>
+                        </div>
+                    </div>
+                </nav>
             </div>
-        </div>
-    </nav>
-    @endif
+        @endif
+
 
     <div class="container-fluid">
         <div class="row justify-content-center align-items-center">
@@ -118,7 +123,7 @@
                             <a href="#"><i class="fas fa-heart"></i></a>
                         </div>
                         <p class="card-text">Price: $25.00</p>
-                        <a href="#" class="btn btn-primary">Add to Cart</a>
+                        <a href="#" class="btn btn-primary">View Product</a>
                     </div>
                 </div>
             </a>
