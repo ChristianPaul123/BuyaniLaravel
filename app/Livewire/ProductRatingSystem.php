@@ -6,76 +6,84 @@ use Livewire\Component;
 use App\Models\ProductRating;
 use Illuminate\Support\Facades\Auth;
 
+use Livewire\WithPagination;
+
 class ProductRatingSystem extends Component
 {
+    use WithPagination;
+
     public $productId;
-    public $ratings;
-    public $ratingValue = 0; // for filtering
+    public $ratingValue = 0; // For filtering
     public $comment = '';
     public $newRating = 0;
+    public $averageRating;
+    public $ratingBreakdown = [];
 
-    private $user;
+    protected $paginationTheme = 'bootstrap'; // Optional: Use Bootstrap for pagination styling
 
     public function mount($productId)
     {
-        $this->user = Auth::guard('user')->user();
         $this->productId = $productId;
-        $this->loadRatings();
+        $this->calculateRatingSummary();
     }
 
-    public function loadRatings()
+    public function calculateRatingSummary()
     {
-        $this->ratings = ProductRating::where('product_id', $this->productId)
-            ->when($this->ratingValue > 0, function ($query) {
-                $query->where('rating', $this->ratingValue);
-            })
-            ->with('user')
-            ->latest()
-            ->get();
+        // Calculate average rating
+        $this->averageRating = ProductRating::where('product_id', $this->productId)
+            ->avg('rating');
+
+        // Get breakdown of ratings
+        $this->ratingBreakdown = ProductRating::where('product_id', $this->productId)
+            ->selectRaw('rating, COUNT(*) as count')
+            ->groupBy('rating')
+            ->orderBy('rating', 'desc')
+            ->pluck('count', 'rating')
+            ->toArray();
     }
 
     public function addRating()
     {
-        // Validate new rating and comment inputs
         $this->validate([
             'newRating' => 'required|integer|min:1|max:5',
             'comment' => 'nullable|string|max:500',
         ]);
 
-        // Ensure user is authenticated
         if (!Auth::guard('user')->check()) {
-
-            session()->flash('message', 'You must be logged in');
+            session()->flash('message', 'You must be logged in to leave a review.');
+            return;
         }
 
-        // Create new rating record
-        $productrating = ProductRating::create([
+        ProductRating::create([
             'product_id' => $this->productId,
-            'user_id' =>Auth::guard('user')->user()->id, // Assuming the user is authenticated
+            'user_id' => Auth::guard('user')->id(),
             'rating' => $this->newRating,
             'comment' => $this->comment,
-            'admin_id' => null,
         ]);
 
-        // Reset input fields
-
         $this->reset(['newRating', 'comment']);
-        // Reload ratings
-        $this->loadRatings();
+        $this->calculateRatingSummary();
     }
 
-    public function updatedRatingValue()
+    public function applyRatingFilter()
     {
-        // Refresh ratings on filter change
-        $this->loadRatings();
+        $this->resetPage(); // Reset to the first page when filtering
     }
 
     public function render()
     {
+        $ratings = ProductRating::where('product_id', $this->productId)
+            ->when($this->ratingValue > 0, function ($query) {
+                $query->where('rating', $this->ratingValue);
+            })
+            ->with('user')
+            ->latest()
+            ->paginate(5); // Paginate results
+
         return view('livewire.product-rating-system', [
-            'ratings' => $this->ratings,
-            'user' => $this->user,
+            'ratings' => $ratings,
+            'averageRating' => number_format($this->averageRating, 1),
+            'ratingBreakdown' => $this->ratingBreakdown,
         ]);
     }
-
 }

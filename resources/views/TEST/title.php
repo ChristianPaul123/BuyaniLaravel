@@ -10,10 +10,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
     <style>
-        * {
-            /* border: 1px solid black;   */
-        }
-
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
             -webkit-appearance: none;
@@ -35,7 +31,6 @@
             padding: 0.5em;
             font-size: 1.25em;
             border-radius: 0;
-            -moz-appearance: textfield; /* Remove arrows in Firefox */
         }
 
         #inputBox::-webkit-outer-spin-button,

@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 
 @section('title','Checkout Page')
@@ -20,14 +19,6 @@
             <div class="col-lg-8">
                 <h5>Billing Information</h5>
                 <form id="checkoutForm">
-                    <div class="mb-3">
-                        <label for="fullName" class="form-label">Full Name</label>
-                        <input type="text" class="form-control" id="fullName" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email Address</label>
-                        <input type="email" class="form-control" id="email" required>
-                    </div>
 
                     <h5 class="mt-4">Location Information</h5>
 
@@ -102,52 +93,9 @@
         </div>
     </div>
 
-    <!-- GCash Modal -->
-    <div class="modal fade" id="gcashModal" tabindex="-1" aria-labelledby="gcashModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="gcashModalLabel">Enter GCash Information</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="gcashForm">
-                        <div class="mb-3">
-                            <label for="gcashNumber" class="form-label">GCash Number</label>
-                            <input type="text" class="form-control" id="gcashNumber" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="gcashName" class="form-label">Name on GCash Account</label>
-                            <input type="text" class="form-control" id="gcashName" required>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="confirmPaymentBtn">Confirm Payment</button>
-                </div>
-            </div>
-        </div>
-    </div>
 @endsection
 @section('scripts')
     <script>
-        document.getElementById('placeOrderBtn').addEventListener('click', function() {
-            const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
-            if (paymentMethod === 'gcash') {
-                const gcashModal = new bootstrap.Modal(document.getElementById('gcashModal'));
-                gcashModal.show();
-            } else {
-                alert('Order placed successfully with Cash on Delivery!');
-            }
-        });
 
-        document.getElementById('confirmPaymentBtn').addEventListener('click', function() {
-            const gcashNumber = document.getElementById('gcashNumber').value;
-            const gcashName = document.getElementById('gcashName').value;
-            alert(`Order placed successfully with GCash! \nGCash Number: ${gcashNumber} \nName: ${gcashName}`);
-            const gcashModal = bootstrap.Modal.getInstance(document.getElementById('gcashModal'));
-            gcashModal.hide();
-        });
     </script>
 @endsection

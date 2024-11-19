@@ -4,7 +4,7 @@
 
 @push('styles')
     <style>
-        .navbar-category {
+    .navbar-category {
         position: fixed;
         top: 0;
         width: 100%;
@@ -17,6 +17,48 @@
     }
     .navbar-nav .nav-link.active {
         font-weight: bold;
+    }
+
+    .card {
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+        font-size: 0.95rem;
+        padding: 0.5rem;
+    }
+
+    .card-body {
+        padding: 0.75rem;
+        font-size: 0.85rem;
+    }
+
+    .btn-sm {
+        font-size: 0.8rem;
+        padding: 0.25rem 0.5rem;
+    }
+
+    .input-group button {
+        font-size: 0.8rem;
+        height: 30px;
+    }
+
+    .input-group input {
+        font-size: 0.8rem;
+        height: 30px;
+        width: 50px;
+        padding: 0 0.25rem;
+    }
+
+    button.btn-primary {
+    transition: all 0.3s ease;
+    }
+
+    button.btn-primary:hover {
+        background-color: #45c657;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     }
     </style>
 @endpush

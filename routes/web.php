@@ -1,6 +1,4 @@
 <?php
-
-
 use App\Mail\HelloMail;
 use App\Http\Livewire\UserProduct;
 // use App\Http\Livewire\LoginUser;
@@ -17,7 +15,6 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\UserProductController;
-
 use App\Http\Controllers\ShippingAddressController;
 use App\Http\Controllers\ProductSpecificationController;
 
@@ -25,11 +22,6 @@ use App\Http\Controllers\ProductSpecificationController;
 Route::get('/', function () {
     return view('user.index');
 })->name('user.index');
-
-// Example 404 page route (this will typically be caught by Laravel's default 404 handling) not used yet
-// Route::fallback(function () {
-//     return response()->view('errors.404', [], 404);
-// });
 
 //This right here is for the admin side
 //admin logging

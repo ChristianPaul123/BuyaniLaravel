@@ -1,25 +1,8 @@
-<style>
-    .card {
-        width: 100%;
-        margin-bottom: 1rem;
-    }
-
-    .row {
-        display: flex;
-        justify-content: flex-start;
-        flex-wrap: wrap;
-    }
-
-    .pagination {
-        justify-content: flex-end;
-    }
-</style>
-
-
-<div class="container container-fluid" style="background-color: rgb(195, 184, 184)">
+<div class="container container-fluid" style="background-color: rgb(195, 184, 184); border-radius: 8px; padding: 20px;">
     <section>
-        <h3 class='text-center mt-2'>{{ $product->product_name }}</h3>
-        <!-- Success Message -->
+        <h3 class="text-center mt-2" style="color: #4CAF50;">{{ $product->product_name }}</h3>
+
+        <!-- Success and Error Messages -->
         @if (session()->has('message'))
             <div class="alert alert-success mx-3 my-2 px-3 py-2">
                 <button type="button" class="close btn btn-success" data-dismiss="alert" aria-label="Close">
@@ -29,7 +12,6 @@
             </div>
         @endif
 
-        <!-- Error Messages -->
         @if ($errors->any())
             <div class="alert alert-danger mx-3 my-2 px-3 py-2">
                 <button type="button" class="close btn btn-danger" data-dismiss="alert" aria-label="Close">
@@ -43,61 +25,58 @@
             </div>
         @endif
 
-        <div class="row">
-            <div class="col-md-6">
-                <img class="img-fluid" src="{{ asset($product->product_pic) }}" alt="{{ $product->product_name }}" style="max-width: 80%; height: auto;">
+        <!-- Product Information -->
+        <div class="row mb-5">
+            <!-- Product Image -->
+            <div class="col-12 col-md-6 p-3">
+                <div class="image-container shadow-sm rounded" style="height: 400px; width: 100%; overflow: hidden;">
+                    <img src="{{ asset($product->product_pic) }}" alt="{{ $product->product_name }}" style="object-fit: cover; width: 100%; height: 100%;">
+                </div>
             </div>
 
-            <div class="col-md-6">
-                <div class="row md-2 my-2">
-                    <p class="h5 text-center">Product Information</p>
-                    <div class="col">{{ $product->product_details }}</div>
-                </div>
-                <div class="row md-2 my-3">
-                    <div class="col">Tags: {{ $product->category->category_name }}, {{ $product->subcategory->sub_category_name }}</div>
-                </div>
-                <div class="row md-2 mb-3">
-                    <div class="col">In Store: {{ $product->status_label }}</div>
-                </div>
+            <!-- Product Details -->
+            <div class="col-12 col-md-6 d-flex flex-column gap-3">
+                <h4 class="text-uppercase font-weight-bold">Product Information</h4>
+                <h5 style="color: #555;">{{ $product->product_name }}</h5>
+                <p style="color: #777;">Tags: <span class="font-weight-bold">{{ $categories->category_name }}, {{ $subcategories->sub_category_name }}</span></p>
+                <p style="color: #777;">In Store: <span class="font-weight-bold text-success">{{ $product->status_label }}</span></p>
 
-                <div class="row md-2">
-                    <div class="col">Product Specification:</div>
-                </div>
-
+                <!-- Product Specifications -->
+                <h5 style="color: #555;">Product Specifications</h5>
                 <div class="row">
                     @foreach ($specifications as $specification)
-                    <div class="col-md-5 m-1">
-                        <div class="card"  style="width: auto";>
-                            <div class="card-header text-center">
-                                <h6 class="mb-0">{{ $specification->specification_name }}</h6>
-                            </div>
-                            {{-- <img src="{{ asset($product->product_pic) }}" class="card-img-top" alt="products {{ $product->product_name }}"> --}}
-                            <div class="card-body">
-                                <p class="card-text">Price: ₱{{ $specification->product_price }}</p>
-                            </div>
-                            <form wire:submit.prevent="addToCart({{ $specification->id }})">
-                                <div class="row d-flex align-items-center justify-content-center">
-                                    <div class="col-8 align-items-center">
-                                        <input type="hidden" wire:model="product_status" value="{{ $specification->product->product_status }}">
-                                        @error('product_status') <span class="text-warning">{{ $message }}</span> @enderror
-                                        <input type="hidden" id="quantity" class="form-control" wire:model="quantities"  min="1">
-                                        @error('quantities') <span class="text-warning">{{ $message }}</span> @enderror
-                                    </div>
-                                    <div class="col-12 d-flex align-items-end">
-                                        <button type="submit" class="btn btn-primary w-100">Add to Cart</button>
-                                    </div>
+                        <div class="col-12 col-md-6 mb-3">
+                            <div class="card shadow-sm" style="font-size: 0.9rem; border-radius: 8px; border: none;">
+                                <div class="card-header text-center" style="background-color: #4CAF50; color: white; font-weight: bold;">
+                                    {{ $specification->specification_name }}
                                 </div>
-                            </form>
+                                <div class="card-body p-3">
+                                    <p class="mb-1">Price: <span class="font-weight-bold text-primary">₱{{ $specification->product_price }}</span></p>
+                                    <div class="d-flex align-items-center mb-2">
+                                        <h6 class="mb-0">Quantity:</h6>
+                                        <div class="input-group ml-2" style="max-width: 130px;">
+                                            <button class="btn btn-outline-secondary btn-sm" type="button" wire:click="decrementQuantity({{ $specification->id }})">-</button>
+                                            <input type="text" class="form-control text-center" wire:model="quantities.{{ $specification->id }}" readonly>
+                                            <button class="btn btn-outline-secondary btn-sm" type="button" wire:click="incrementQuantity({{ $specification->id }})">+</button>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary btn-sm w-100" wire:click="addToCart({{ $specification->id }})" style="background-color: #4CAF50; border: none;">Add To Cart</button>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
+
+                <!-- Pagination Links -->
+                <div class="d-flex justify-content-center mt-3">
+                    {{ $specifications->links() }}
                 </div>
             </div>
         </div>
     </section>
 
-      {{-- Placeholder for Product Reviews --}}
-        <section>
-@livewire('product-rating-system',['productId' => $product->id])
-        </section>
+    <!-- Product Reviews Section -->
+    <section class="mt-5">
+        @livewire('product-rating-system', ['productId' => $product->id])
+    </section>
 </div>
