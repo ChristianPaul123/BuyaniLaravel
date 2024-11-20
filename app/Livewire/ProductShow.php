@@ -6,8 +6,10 @@ namespace App\Livewire;
 use App\Models\Product;
 use Livewire\Component;
 use App\Models\Category;
+use App\Models\Favorite;
 use App\Models\SubCategory;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Auth;
 
 class ProductShow extends Component
 {
@@ -21,6 +23,8 @@ class ProductShow extends Component
     public $filteredCategoryId = null;   // Store selected category ID
     public $filteredSubcategoryId = null; // Store selected subcategory ID
 
+    public $title = 'All Products'; // Default title
+
     public function mount()
     {
         $this->message = null;
@@ -30,6 +34,35 @@ class ProductShow extends Component
     {
         // Reset pagination when current page changes
         $this->resetPage();
+    }
+
+    public function toggleFavorite($productId)
+    {
+        try {
+            $userId = Auth::guard('user')->id();
+
+            if (!$userId) {
+                $this->message = "Please log in to add products to favorites.";
+                return;
+            }
+
+            $favorite = Favorite::where('user_id', $userId)->where('product_id', $productId)->first();
+
+            if ($favorite) {
+                // If favorite exists, remove it
+                $favorite->delete();
+                $this->message = "Product removed from favorites.";
+            } else {
+                // Add to favorites
+                Favorite::create([
+                    'user_id' => $userId,
+                    'product_id' => $productId,
+                ]);
+                $this->message = "Product added to favorites.";
+            }
+        } catch (\Exception $e) {
+            $this->message = "An error occurred while updating favorites.";
+        }
     }
 
     private function checkOutOfStock($query)
@@ -47,6 +80,7 @@ class ProductShow extends Component
             $category = Category::findOrFail($categoryId);
             $this->filteredCategoryId = $categoryId; // Set the filtered category
             $this->filteredSubcategoryId = null;     // Reset subcategory filter
+            $this->title = "Products in {$category->category_name}"; // Update title
             $this->message = null;                  // Reset message
 
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
@@ -62,6 +96,7 @@ class ProductShow extends Component
             $subcategory = SubCategory::findOrFail($subcategoryId);
             $this->filteredSubcategoryId = $subcategoryId; // Set the filtered subcategory
             $this->filteredCategoryId = null;             // Reset category filter
+            $this->title = "Products in {$subcategory->sub_category_name}"; // Update title
             $this->message = null;                        // Reset message
 
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
@@ -77,6 +112,7 @@ class ProductShow extends Component
             if (!empty($this->searchQuery) && strlen($this->searchQuery) >= 3) {
                 $this->filteredCategoryId = null;        // Reset category filter
                 $this->filteredSubcategoryId = null;     // Reset subcategory filter
+                $this->title = "Search results for '{$this->searchQuery}'"; // Update title
                 $this->message = null;                  // Reset message
             } else {
                 $this->message = 'Please enter at least 3 characters for the search query.';
@@ -133,12 +169,17 @@ class ProductShow extends Component
         // Check for out-of-stock condition
         $this->checkOutOfStock($products);
 
+        $userFavorites = Auth::guard('user')->check() ? Favorite::where('user_id', Auth::guard('user')->id())->pluck('product_id')->toArray() : [];
+
+
         return view('livewire.product-show', [
             'categories' => $categories,
             'categoriesChunked' => $categoriesChunked,
             'products' => $products,
             'message' => $this->message,
             'currentChunkIndex' => $this->currentChunkIndex,
+            'title' => $this->title, // Pass the title to the view
+            'userFavorites' => $userFavorites,
         ]);
     }
 }

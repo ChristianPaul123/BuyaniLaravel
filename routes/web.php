@@ -6,18 +6,20 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\UserProductController;
 use App\Http\Controllers\ShippingAddressController;
 use App\Http\Controllers\ProductSpecificationController;
-
+use App\Http\Controllers\VotedProductsController;
 
 Route::get('/', function () {
     return view('user.index');
@@ -168,6 +170,12 @@ Route::get('user/consumer/product/view/{product}', [UserProductController::class
 //cart for Consumers
 Route::get('user/consumer/cart', [CartController::class, 'showConsumerCart'])->name('user.consumer.product.cart');
 Route::get('user/consumer/cart/checkout/{cart}', [CartController::class, 'showConsumerCheckout'])->name('user.consumer.product.cart.checkout');
+
+Route::get('user/consumer/favorites', [FavoriteController::class, 'showConsumerFavorites'])->name('user.consumer.favorites');
+
+Route::get('user/consumer/chat', [ChatController::class, 'showConsumerChat'])->name('user.consumer.chat');
+
+Route::get('user/consumer/voting', [VotedProductsController::class, 'showConsumerVoting'])->name('user.consumer.voting');
 
 
 //Product for Farmers
