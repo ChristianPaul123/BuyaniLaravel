@@ -23,29 +23,36 @@
         font-size: 25px;
     }
 
-
-
-
-    .row {
-        display: flex;
-        justify-content: flex-start;
-        flex-wrap: wrap;
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        background-color: rgba(0, 0, 0, 0.5);
+        border-radius: 50%;
+        padding: 5px;
     }
 
     .card {
-        width: 100%;
-        margin-bottom: 1rem;
+        border: none;
+        border-radius: 8px;
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
     }
 
-    .containerN{
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     }
 
-    .pagination {
-        justify-content: flex-end;
+    .btn-outline-primary:hover {
+        background-color: #2d6a4f;
+        color: white;
+        border-color: #2d6a4f;
     }
+
+    .btn-outline-danger:hover {
+        background-color: #ff4d4d;
+        color: white;
+        border-color: #ff4d4d;
+    }
+
 
 
 </style>
@@ -60,7 +67,7 @@
     <div class="container container-fluid mt-3">
     <!-- Navbar -->
     <section class="p-3">
-        <livewire:user-product />
+        @livewire('product-show')
     <section>
     </div>
 </div>
