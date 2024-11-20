@@ -1,5 +1,3 @@
-<!-- This is for the js section of the layout -->
-<!-- P.S I'm not sure if this is the right way to do it but it works for now -->
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <!-- Popper.js -->
@@ -14,6 +12,8 @@
 <!-- Day -->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+
 
 <script src="https://cdn.datatables.net/2.1.8/js/jquery.dataTables.js"></script>
 <!--<script src="https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap5.js"></script>-->

@@ -3,10 +3,94 @@
     <div class="col-lg-6 login-card d-flex flex-column align-items-center justify-content-center" style="height: 500px;">
         <div class="container d-block align-items-center">
 
-
             @if (session('message'))
-            <div class="alert alert-danger text-center my-3 d-block position-absolute col-12 mt-5">
-                {{ session('message') }}
+            <div>
+                <style>
+                    .overlay {
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background-color: rgba(0, 0, 0, 0.6);
+                        z-index: 999;
+                    }
+
+                    .error-popup {
+                        width: 400px;
+                        background-color: #ffffff;
+                        color: #842029;
+                        border: 1px solid black;
+                        border-radius: 5px;
+                        position: fixed;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        text-align: center;
+                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                        overflow: hidden;
+                        z-index: 1000;
+                    }
+
+                    .container-contents {
+                        padding: 20px;
+                    }
+
+                    .error-popup .error-icon {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        height: 120px;
+                        background-color: #e85e6c;
+                        font-size: 60px;
+                    }
+
+                    button {
+                        background-color: #ffc107;
+                        color: #fff;
+                        border: none;
+                        padding: 10px 20px;
+                        border-radius: 5px;
+                        cursor: pointer;
+                    }
+
+                    .error-popup button:hover {
+                        background-color: #e0a800;
+                    }
+
+                    .error-icon .bi-x-circle {
+                        color: #ffffff;
+                    }
+
+                    .error-popup .bi-x-lg {
+                        color: #fff;
+                        position: absolute;
+                        top: 10px;
+                        right: 10px;
+                    }
+                </style>
+
+                <div class="overlay" id="overlay" aria-label="Close" onclick="closePopup()"></div>
+
+                <div class="error-popup">
+                    <i class="bi bi-x-lg fs-4" aria-label="Close" onclick="closePopup()"></i>
+                    <div class="error-icon">
+                        <i class="bi bi-x-circle"></i>
+                    </div>
+                    <div class="container-contents">
+                        <h3>Ooops!</h3>
+                        <p>{{ session('message') }}</p>
+                        {{-- <button onclick="">Button</button> --}}
+                    </div>
+                </div>
+
+                {{-- <script>
+                    function closePopup() {
+                        document.querySelector('.error-popup').style.display = 'none';
+                        document.querySelector('.overlay').style.display = 'none';
+                    }
+                </script> --}}
+
             </div>
             @endif
             <div class="container-fluid custom-font-content p-2 mt-5 d-flex">
