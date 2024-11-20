@@ -1,61 +1,69 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+@extends('layouts.app-admin') {{-- Extend the main admin layout --}}
 
+@section('title', 'Admin | Message') {{-- Set the page title dynamically --}}
 
-    <title>Admin | Message</title>
-    <link rel="icon" type="image/png" href="../img/logo1.svg">
-    @include('layouts.head')
-    @include('admin.styles.admin_styles')
+@push('styles')
+{{-- Add any page-specific styles --}}
+<style>
+    .main-section {
+        max-height: 35rem;
+    }
+</style>
+@endpush
 
-</head>
-<body class="body">
-@auth('admin')
-    @include('admin.includes.navbar')
-
-
-     <div class="container-fluid">
-        <div class="row">
-
-
+@section('content')
+<div class="container-fluid">
+    <div class="row">
+        {{-- Include the sidebar --}}
         @include('admin.includes.sidebar')
 
-            <section role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Chats</h1>
-                </div>
-
-            </section>
-        </div>
-    </div>
-     <form action="{{ route('admin.logout') }}" method="POST">
-        {{-- @csrf
-        <button type="submit" class="btn btn-danger">Logout</button>
-    </form>
-     <h1>Welcome to Admin Dashboard, {{ auth()->guard('admin')->user()->username }}</h1> --}}
-     @session('message')
-
-
-    @endsession
-
-
-@else
-            <p>not logged in</p>
-            @session('message')
-            <div class="success-message">
-                {{ session('message') }}
+        {{-- Main content section --}}
+        <section role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Chats</h1>
             </div>
-            @endsession
-@endauth
-    @include('layouts.script')
+
+            {{-- Display session messages --}}
+            @if (session('message'))
+                <div class="alert alert-success mx-3 my-2 px-3 py-2">
+                    <button type="button" class="close btn btn-success" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{ session('message') }}
+                </div>
+            @endif
+
+            {{-- Display errors, if any --}}
+            @if ($errors->any())
+                <div class="alert alert-danger mx-3 my-2 px-3 py-2">
+                    <button type="button" class="close btn btn-danger" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            {{-- Main content area for chats --}}
+            <div>
+                {{-- Placeholder for chat content --}}
+                <p>Here you can manage admin chats.</p>
+            </div>
+        </section>
+    </div>
+</div>
+@endsection
+
+@section('scripts')
+{{-- Add any page-specific scripts --}}
 <script>
     window.addEventListener('popstate', function(event) {
         // If the user presses the back button, log them out
         window.location.href = "{{ route('admin.logout') }}";
     });
-  </script>
-</body>
-</html>
+</script>
+@endsection
+

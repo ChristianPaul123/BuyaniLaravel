@@ -13,9 +13,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\InventoryController;
-use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\UserProductController;
-use App\Http\Controllers\ShippingAddressController;
 use App\Http\Controllers\ProductSpecificationController;
 
 
@@ -70,12 +68,12 @@ Route::get('admin/category/edit/{category}', [CategoryController::class, 'editCa
 Route::put('admin/category/edit/{category}', [CategoryController::class, 'updateCategory'])->name('admin.category.update');
 Route::delete('admin/category/delete/{category}', [CategoryController::class, 'deleteCategory'])->name('admin.category.delete');
 
-//subcategory side check
-Route::get('admin/subcategory', [SubCategoryController::class, 'showSubCategories'])->name('admin.subcategory');
-Route::post('admin/subcategory/add', [SubCategoryController::class, 'addSubCategory'])->name('admin.subcategory.add');
-Route::get('admin/subcategory/edit/{subcategory}', [SubCategoryController::class, 'editSubCategory'])->name('admin.subcategory.edit');
-Route::put('admin/subcategory/update/{subcategory}', [SubCategoryController::class, 'updateSubCategory'])->name('admin.subcategory.update');
-Route::delete('admin/subcategory/delete/{subcategory}', [SubCategoryController::class, 'deleteSubCategory'])->name('admin.subcategory.delete');
+// //subcategory side check
+// Route::get('admin/subcategory', [SubCategoryController::class, 'showSubCategories'])->name('admin.subcategory');
+// Route::post('admin/subcategory/add', [SubCategoryController::class, 'addSubCategory'])->name('admin.subcategory.add');
+// Route::get('admin/subcategory/edit/{subcategory}', [SubCategoryController::class, 'editSubCategory'])->name('admin.subcategory.edit');
+// Route::put('admin/subcategory/update/{subcategory}', [SubCategoryController::class, 'updateSubCategory'])->name('admin.subcategory.update');
+// Route::delete('admin/subcategory/delete/{subcategory}', [SubCategoryController::class, 'deleteSubCategory'])->name('admin.subcategory.delete');
 
 
 //order Side
@@ -159,15 +157,6 @@ Route::get('user/farmer/blogs', [BlogController::class, 'showFarmerBlogs'])->nam
 });
 
 //Dashboard for Users
-
-//Shipping Address for Consumer
-Route::get('user/consumer/profile/shipping',[ShippingAddressController::class, 'showUserAddress'])->name('user.consumer.profile.shipping');
-Route::get('user/consumer/profile/shipping/add',[ShippingAddressController::class, 'showUserAddressAddForm'])->name('user.consumer.profile.shipping.add');
-Route::post('user/consumer/profile/shipping/add',[ShippingAddressController::class, 'addUserAddress'])->name('user.consumer.profile.shipping.add.submit');
-Route::get('user/consumer/profile/shipping/edit/{address}',[ShippingAddressController::class, 'showUserAddressEditForm'])->name('user.consumer.profile.shipping.edit');
-Route::put('user/consumer/profile/shipping/edit/{address}',[ShippingAddressController::class, 'editUserAddress'])->name('user.consumer.profile.shipping.edit.submit');
-Route::delete('user/consumer/profile/shipping/delete/{address}',[ShippingAddressController::class, 'deleteUserAddress'])->name('user.consumer.profile.shipping.delete');
-
 Route::get('user/farmer/profile', [UserController::class, 'showFarmerprofile'])->name('user.farmer.profile');
 Route::get('user/farmer/profile/edit', [UserController::class, 'editFarmerprofile'])->name('user.farmer.profile.edit');
 Route::put('user/farmer/profile/update', [UserController::class, 'updateFarmerprofile'])->name('user.farmer.profile.update');

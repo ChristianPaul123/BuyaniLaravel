@@ -76,47 +76,6 @@ class UserController extends Controller
         };
     }
 
-    public function login(Request $request) {
-
-     // Validate the username and password validatedData
-     $validatedData = $request->validate([
-         'username' => ['required'],
-         'password' => ['required'],
-         'user_type' => ['required'],
-     ]);
-
-    $user_type = $validatedData['user_type'];
-
-     // Attempt to authenticate the user
-     if (auth()->guard('user')->attempt([
-         'username' => $validatedData['username'],
-         'password' => $validatedData['password'],
-         'user_type' => $validatedData['user_type'],
-     ])) {
-         $request->session()->regenerate();
-         $user = auth()->guard('user')->user();
-
-         // Check user_type and redirect accordingly
-         if ($user->user_type == 1) {
-
-            //this cart relationship works. intellephase just mark it as undefined.
-            $cart = Cart::firstOrCreate(
-                ['user_id' => $user->id],
-                ['cart_total' => 0, 'overall_cartKG' => 0, 'total_price' => 0]
-            );
-
-
-             return redirect()->route('user.consumer')->with('message', 'Login successful');
-         } elseif ($user->user_type == 2) {
-             return redirect()->route('user.farmer')->with('message', 'Login successful');
-         }
-
-     } else {
-         // Authentication failed, return error with user_type in URL
-         return redirect('/user/login?user_type=' . $user_type)
-            ->withErrors(['login' => 'Invalid username or password. Please try again.']);
-     }
-    }
 
 
     public function logout(Request $request)
@@ -142,12 +101,12 @@ class UserController extends Controller
 
     public function showUserprofile() {
         $user = auth()->guard('user')->user();
-        return view('user.profile.show', ['user' => $user]);
+        return view('user.consumer.profile.show', ['user' => $user]);
     }
 
     public function showFarmerprofile() {
         $user = auth()->guard('user')->user();
-        return view('user.farmerprofile.show', ['user' => $user]);
+        return view('user.farmer.farmerprofile.show', ['user' => $user]);
     }
 
 }

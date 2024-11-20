@@ -29,27 +29,9 @@ class CartController extends Controller
         ->with(['product_specification.product'])
         ->get() : collect();
 
-        return view('user.cart.show', ['cart' => $cart, 'cartItems' => $cartItems]);
+        return view('user.consumer.cart.show', ['cart' => $cart, 'cartItems' => $cartItems]);
 
     }
-
-
-
-    // public function add(Request $request)
-    // {
-    //     // dd($request->all());
-    //     $cart = Cart::where('user_id', auth()->guard()->user()->id)->where('product_id', $request->product_id)->first();
-    //     if ($cart) {
-    //         $cart->quantity += $request->quantity;
-    //         $cart->save();
-    //     } else {
-    //         $cart = new Cart();
-    //         $cart->user_id = auth()->guard()->user()->id;
-    //         $cart->product_id = $request->product_id;
-    //         $cart->quantity = $request->quantity;
-    //         $cart->save();
-    //     }
-    // }
 
 
 }

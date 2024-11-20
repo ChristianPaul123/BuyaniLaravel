@@ -9,23 +9,14 @@ use Illuminate\Support\Facades\Storage;
 
 class BlogController extends Controller
 {
+
+//ADMIN SIDE
     public function showBlogs()
     {
         $blogs = Blog::all();
         return view('admin.blog.blog_post', ['blogs' => $blogs]);
     }
 
-    public function showConsumerBlogs()
-    {
-        $blogs = Blog::all();
-        return view('blogs-consumer', ['blogs' => $blogs]);
-    }
-
-    public function showFarmerBlogs()
-    {
-        $blogs = Blog::all();
-        return view('blogs-farmer', ['blogs' => $blogs]);
-    }
 
     // Add logic to handle blog creation
     public function addBlog(Request $request)
@@ -121,6 +112,18 @@ class BlogController extends Controller
         return redirect()->route('admin.blog')->with('message', 'Blog deleted successfully.');
     }
 
+//USER SIDE
 
+public function showConsumerBlogs()
+{
+    $blogs = Blog::all();
+    return view('blogs-consumer', ['blogs' => $blogs]);
+}
+
+public function showFarmerBlogs()
+{
+    $blogs = Blog::all();
+    return view('blogs-farmer', ['blogs' => $blogs]);
+}
 
 }

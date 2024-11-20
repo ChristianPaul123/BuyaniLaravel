@@ -24,20 +24,9 @@ class HomeController extends Controller
         return view('about-us-consumer');
     }
 
-    public function showFarmAbout()
-    {
-
-        return view('about-us-farmer');
-    }
-
     public function showConContact()
     {
         return view('contact-consumer');
-    }
-
-    public function showFarmContact()
-    {
-        return view('contact-farmer');
     }
 
     public function showFarmDashboard()
@@ -45,4 +34,17 @@ class HomeController extends Controller
         //return the view starting
         return view('user.farmer');
     }
+
+
+    public function showFarmAbout()
+    {
+
+        return view('about-us-farmer');
+    }
+
+    public function showFarmContact()
+    {
+        return view('contact-farmer');
+    }
+
 }

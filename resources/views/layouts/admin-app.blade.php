@@ -7,7 +7,7 @@
 
     <title>@yield('title', 'Default Title')</title>
     <link rel="icon" type="image/png" href="{{ asset('img/logo1.svg') }}">
-    @include('layouts.head')
+    @include('layouts.admin-head')
     @include('admin.styles.admin_styles')
     @stack('styles')
 </head>
@@ -19,12 +19,13 @@
 @else
             <p>not logged in</p>
 @endauth
-    @include('layouts.script')
-<script>
+
+    @include('layouts.admin-script')
+{{-- <script>
     window.addEventListener('popstate', function(event) {
         // If the user presses the back button, log them out
         window.location.href = "{{ route('admin.logout') }}";
     });
-  </script>
+</script> --}}
 </body>
 </html>

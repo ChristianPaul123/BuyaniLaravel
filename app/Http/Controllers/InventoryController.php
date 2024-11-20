@@ -136,34 +136,5 @@ class InventoryController extends Controller
         return redirect()->route('admin.product.inventory')->with('message', 'Inventory updated successfully');
     }
 
-
-
-
-    // public function updateStocks(Request $request, $productId)
-    // {
-    //     $product = Product::find($productId);
-
-    //     if (!$product) {
-    //         return redirect()->route('admin.product.index')->with('error', 'Product not found');
-    //     }
-
-    //     $inventory = Inventory::where('product_id', $productId)->first();
-
-    //     if (!$inventory) {
-    //         return redirect()->route('admin.product.index')->with('error', 'Inventory record not found');
-    //     }
-
-    //     $inventory->product_sold_stocks += $request->input('product_sold_stocks');
-    //     $inventory->product_damage_stocks += $request->input('product_damage_stocks');
-    //     $inventory->product_total_stocks = $inventory->product_new_stocks + $inventory->product_old_stocks - $inventory->product_sold_stocks - $inventory->product_damage_stocks;
-
-    //     if ($inventory->product_total_stocks < 0) {
-    //         $inventory->product_total_stocks = 0;
-    //     }
-
-    //     $inventory->save();
-
-    //     return redirect()->route('admin.product.index')->with('message', 'Stocks updated successfully');
-    // }
 }
 
