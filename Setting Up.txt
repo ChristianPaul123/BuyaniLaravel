@@ -30,3 +30,10 @@ setting up the env environment
 
 # implementing the error handling customization
 #php artisan vendor:publish --tag=laravel-errors
+
+#thing to add
+#alphine.js
+#refinement of the error handling customization
+#style some of the layouts
+#make it load faster
+#understand and remove some package dependencies that are not used
