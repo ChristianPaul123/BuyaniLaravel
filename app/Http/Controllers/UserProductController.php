@@ -24,7 +24,7 @@ class UserProductController extends Controller
             $products = Product::where('product_status', 1)->get();
 
             if ($products->isEmpty()) {
-                return view('user.product.show', [
+                return view('user.consumer.product.show', [
                     'products' => $products,
                     'categories' => $categories,
                     'subcategories' => $subcategories,
@@ -32,7 +32,7 @@ class UserProductController extends Controller
                 ]);
             }
 
-            return view('user.product.show', [
+            return view('user.consumer.product.show', [
                 'products' => $products,
                 'categories' => $categories,
                 'subcategories' => $subcategories
@@ -48,7 +48,7 @@ class UserProductController extends Controller
             $categories = Category::all();
             $subcategories = SubCategory::all();
 
-            return view('user.product.view', [
+            return view('user.consumer.product.view', [
                 'product' => $product,
                 'categories' => $categories,
                 'subcategories' => $subcategories,
@@ -59,63 +59,66 @@ class UserProductController extends Controller
             return back()->with(['error', 'An error occurred while retrieving the product.', 'product' => $product]);
         }
     }
-    public function addProductSpecificationToCart(Request $request, $product, $specification)
-    {
-         // Step 1: try to check
 
 
-         if (!auth()->guard('user')->check()) {
-            Session::flush();
-            return redirect()->route('user.index')->with('message', 'Session expired. Please log in and try again.');
-        }
-        try {
-            // Step 2: Find or create a cart for the current user
-            $cart = Cart::firstOrCreate(
-                ['user_id' => auth()->guard("user")->user()->id],
-                ['cart_total' => 0, 'overall_cartKG' => 0, 'total_price' => 0]
-            );
+
+    // public function addProductSpecificationToCart(Request $request, $product, $specification)
+    // {
+    //      // Step 1: try to check
 
 
-              // Step 3: Retrieve the selected product specification
-            $product_status = $request->input('product_status');
-            $productSpecification = ProductSpecification::findOrFail($specification);
+    //      if (!auth()->guard('user')->check()) {
+    //         Session::flush();
+    //         return redirect()->route('user.index')->with('message', 'Session expired. Please log in and try again.');
+    //     }
+    //     try {
+    //         // Step 2: Find or create a cart for the current user
+    //         $cart = Cart::firstOrCreate(
+    //             ['user_id' => auth()->guard("user")->user()->id],
+    //             ['cart_total' => 0, 'overall_cartKG' => 0, 'total_price' => 0]
+    //         );
 
-            // Step 4: Validate quantity input
-            $quantity = $request->input('quantity', 1);
-            if ($quantity < 1) {
-                return redirect()->back()->with(['error' => 'Invalid quantity specified.', 'product' => $product]);
-            }
 
-            // Step 5: Create or update CartItem for this product specification in the current cart
-            $cartItem = CartItem::firstOrNew(
-                [
-                    'cart_id' => $cart->id,
-                    'product_specification_id' => $specification,
-                ]
-            );
+    //           // Step 3: Retrieve the selected product specification
+    //         $product_status = $request->input('product_status');
+    //         $productSpecification = ProductSpecification::findOrFail($specification);
 
-            // Update quantity and calculate price and weight
-            $cartItem->quantity = $cartItem->exists ? $cartItem->quantity + $quantity : $quantity;
-            $cartItem->price = $productSpecification->product_price * $cartItem->quantity;
-            $cartItem->overall_kg = $productSpecification->product_kg * $cartItem->quantity;
-            $cartItem->product_status = $product_status;  // Set product status
+    //         // Step 4: Validate quantity input
+    //         $quantity = $request->input('quantity', 1);
+    //         if ($quantity < 1) {
+    //             return redirect()->back()->with(['error' => 'Invalid quantity specified.', 'product' => $product]);
+    //         }
 
-            // Save CartItem
-            $cartItem->save();
+    //         // Step 5: Create or update CartItem for this product specification in the current cart
+    //         $cartItem = CartItem::firstOrNew(
+    //             [
+    //                 'cart_id' => $cart->id,
+    //                 'product_specification_id' => $specification,
+    //             ]
+    //         );
 
-            // Step 6: Recalculate cart totals
-            $cart->cart_total = $cart->cartItems()->sum('quantity');
-            $cart->overall_cartKG = $cart->cartItems()->sum('overall_kg');
-            $cart->total_price = $cart->cartItems()->sum('price');
-            $cart->save();
+    //         // Update quantity and calculate price and weight
+    //         $cartItem->quantity = $cartItem->exists ? $cartItem->quantity + $quantity : $quantity;
+    //         $cartItem->price = $productSpecification->product_price * $cartItem->quantity;
+    //         $cartItem->overall_kg = $productSpecification->product_kg * $cartItem->quantity;
+    //         $cartItem->product_status = $product_status;  // Set product status
 
-            // Step 7: Redirect back with success message
-            return redirect()->back()->with(['message' => 'Product added to cart successfully!', 'product' => $product]);
+    //         // Save CartItem
+    //         $cartItem->save();
 
-        } catch (\Exception $e) {
-            // Log the exception
-            // \Log::error('Error adding to cart: ' . $e->getMessage());
-            return redirect()->back()->with(['error' => 'An unexpected error occurred while adding the product to the cart.', 'product' => $product]);
-        }
-    }
+    //         // Step 6: Recalculate cart totals
+    //         $cart->cart_total = $cart->cartItems()->sum('quantity');
+    //         $cart->overall_cartKG = $cart->cartItems()->sum('overall_kg');
+    //         $cart->total_price = $cart->cartItems()->sum('price');
+    //         $cart->save();
+
+    //         // Step 7: Redirect back with success message
+    //         return redirect()->back()->with(['message' => 'Product added to cart successfully!', 'product' => $product]);
+
+    //     } catch (\Exception $e) {
+    //         // Log the exception
+    //         // \Log::error('Error adding to cart: ' . $e->getMessage());
+    //         return redirect()->back()->with(['error' => 'An unexpected error occurred while adding the product to the cart.', 'product' => $product]);
+    //     }
+    // }
 }
