@@ -138,7 +138,7 @@ Route::get('user/consumer/blogs', [BlogController::class, 'showConsumerBlogs'])-
 
 
 Route::get('user/consumer/orders', function () {
-    return view('user.order.show');
+    return view('user.consumer.order.show');
 });
 
 });
