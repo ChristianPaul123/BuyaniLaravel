@@ -50,10 +50,6 @@
             // If the user press the back button, log them out
             window.location.href = "{{ route('user.logout') }}";
         });
-
-        document.addEventListener('DOMContentLoaded', function() {
-            AOS.init();
-        });
       </script>
 </body>
 </html>

@@ -78,7 +78,7 @@ class UserProfileFarmer extends Component
     {
         $this->validate([
             'username' => 'required|string|max:255',
-            'phone_number' => 'required|string|max:15',
+            'phone_number' => 'required|string|max:12',
             'profile_pic' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
