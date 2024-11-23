@@ -24,7 +24,10 @@ class User extends Authenticatable
         'profile_pic',
         'phone_number',
         'status',
-        'last_online'
+        'last_online',
+        'deactivated_status',
+        'deactivated_date',
+        'deactivated_by',
     ];
 
     /**

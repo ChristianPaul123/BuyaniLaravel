@@ -11,7 +11,7 @@ class Tracking extends Model
     use HasFactory;
 
     protected $fillable = [
-        'tracking_number',
+        'order_number',
         'order_id',
         //'order_status',
         //'courier_id',

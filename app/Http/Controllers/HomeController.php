@@ -47,4 +47,9 @@ class HomeController extends Controller
         return view('contact-farmer');
     }
 
+    public function sessionExpire()
+    {
+        return view('layouts.session-expire');
+    }
+
 }

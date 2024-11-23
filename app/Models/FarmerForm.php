@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class FarmerForm extends Model
 {
-    use HasFactory;
 
     protected $fillable = [
     'user_id',
@@ -17,7 +16,7 @@ class FarmerForm extends Model
     'farmer_form',
     'id_verified',
     'form_verified',
-    'admin_id'
+    'verified_by'
     ];
 
     public function user() {

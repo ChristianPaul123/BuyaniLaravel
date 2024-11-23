@@ -21,11 +21,6 @@
         overflow-y: hidden;
     }
 
-    /* Main section adjustments */
-    .main-section {
-        max-height: 41rem;
-    }
-
     /* Custom fonts and colors */
     .custom-font-content {
         font-family: 'Poppins', sans-serif;
@@ -40,17 +35,17 @@
         bottom: 0;
         left: 0;
         z-index: 100;
-        padding: 48px 0 0;
+        padding: 10px 0 0;
         background-color: #f4f9f4; /* Light green for a farmer-friendly theme */
         box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
         border-right: 2px solid rgba(0, 0, 0, 0.1);
     }
 
+
     .sidebar-sticky {
         position: relative;
         top: 0;
         height: calc(100vh - 48px);
-        padding-top: .5rem;
         overflow-x: hidden;
         overflow-y: auto;
     }
@@ -102,11 +97,12 @@
     }
 
     /* Navbar styles */
-    .navbar {
+      /* Navbar styles */
+      .navbar {
         z-index: 100;
-        background-color: #fff; /* White navbar for contrast */
-        border-bottom: 2px solid rgba(0, 0, 0, 0.1);
-    }
+        background-color: var(--navbar-bg-color);
+        border-bottom: 2px solid var(--sidebar-border-color);
+      }
 
     .custom-font-navbar {
         font-family: 'Poppins', sans-serif;
@@ -120,6 +116,50 @@
         color: #f39c12; /* Orange hover effect */
         text-decoration: none;
     }
+
+    .dialog-container {
+            text-align: center;
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px 40px;
+            width: 400px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .dialog-container img {
+            width: 80px;
+            margin-bottom: 20px;
+        }
+
+        .dialog-container h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .dialog-container p {
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .refresh-button {
+            display: inline-block;
+            background-color: #1566d6;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .refresh-button:hover {
+            background-color: #104a9e;
+        }
 
     /* Media query for responsiveness */
     @media (min-width: 576px) {

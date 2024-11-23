@@ -84,22 +84,24 @@
   </div>
 </div>
 
-    <script>
-    $(document).ready(function() {
-        $('.toggle-password').click(function() {
-            const passwordField = $('#password');
-            const icon = $(this).find('i');
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Select the toggle password icon
+        const togglePassword = document.querySelector('.toggle-password');
+        const passwordField = document.getElementById('password');
 
-            if (passwordField.attr('type') === 'password') {
-                passwordField.attr('type', 'text');
-                icon.removeClass('fa-eye').addClass('fa-eye-slash');
-            } else {
-                passwordField.attr('type', 'password');
-                icon.removeClass('fa-eye-slash').addClass('fa-eye');
-            }
+        // Add click event listener to toggle password visibility
+        togglePassword.addEventListener('click', function () {
+            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordField.setAttribute('type', type);
+
+            // Toggle the icon class between 'fa-eye' and 'fa-eye-slash'
+            const icon = this.querySelector('i');
+            icon.classList.toggle('fa-eye');
+            icon.classList.toggle('fa-eye-slash');
         });
     });
-    </script>
+</script>
 
 @include('layouts.script')
 

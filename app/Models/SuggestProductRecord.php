@@ -10,12 +10,13 @@ class SuggestProductRecord extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
-        'admin_id',
+        'username',
+        'verified_by',
         'suggest_name',
         'suggest_description',
         'suggest_image',
         'total_vote_count',
+        'transfer_date',
     ];
 
     public function user()

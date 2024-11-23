@@ -14,8 +14,9 @@ class ProductRating extends Model
         'user_id',
         'rating',
         'comment',
-        'removed_date',
-        'admin_id',
+        'deactivated_date',
+        'deactivated_status',
+        'deactivated_by',
     ];
 
     // Relationship with Product

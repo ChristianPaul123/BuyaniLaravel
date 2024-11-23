@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
             $table->integer('rating');
             $table->text('comment');
-            $table->string('removed_date')->nullable();
+            $table->date('deactivated_date')->nullable();
             $table->foreignId('admin_id')->nullable()->constrained('admins');
             $table->timestamps();
         });

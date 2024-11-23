@@ -10,10 +10,7 @@ class Record extends Model
     use HasFactory;
 
     protected $fillable = [
-        'inventory_id',
-        'product_id',
-        'product_new_stocks',
-        'product_old_stocks',
+        'product_name',
         'product_sold_stocks',
         'product_damage_stocks',
         'product_total_stocks',

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Models\ProductSpecification;
@@ -12,9 +14,17 @@ class ProductSpecificationController extends Controller
 // Show all product specifications
 public function showProductSpecification()
 {
-    $productSpecifications = ProductSpecification::all();
-    $products = Product::all();
-    return view('admin.product.product-spec', ['productSpecifications' => $productSpecifications, 'products' => $products]);
+    $products = Product::with(['category', 'subcategory'])->get();
+    $categories = Category::all();
+    $subcategories = SubCategory::all();
+    $productSpecifications = ProductSpecification::with('product')->get();
+
+return view('admin.product.product-index', [
+    'products' => $products,
+    'categories' => $categories,
+    'subcategories' => $subcategories,
+    'productSpecifications' => $productSpecifications,
+]);
 }
 
 // Add a new product specification
@@ -92,7 +102,93 @@ public function deleteProductSpecification($productSpecification)
     return redirect()->route('admin.product.specification')->with('message', 'Product specification deleted successfully.');
 }
 
+public function addCategory(Request $request)
+{
+    $validatedData = $request->validate([
+        'category_name' => ['required', 'string', 'max:255', 'unique:categories,category_name'],
+    ]);
 
+    Category::create($validatedData);
+
+    return redirect()->route('admin.product.index')->with('message', 'Category added successfully.');
+}
+
+public function editCategory($id)
+{
+    $category = Category::findOrFail($id);
+
+    return view('admin.product.edit-category', [
+        'category' => $category,
+    ]);
+}
+
+public function updateCategory(Request $request, $id)
+{
+    $category = Category::findOrFail($id);
+
+    $validatedData = $request->validate([
+        'category_name' => ['required', 'string', 'max:255', 'unique:categories,category_name,' . $id],
+    ]);
+
+    $category->update($validatedData);
+
+    return redirect()->route('admin.product.index')->with('message', 'Category updated successfully.');
+}
+
+public function deleteCategory($id)
+{
+    $category = Category::findOrFail($id);
+    $category->delete();
+
+    return redirect()->route('admin.product.index')->with('message', 'Category deleted successfully.');
+}
+
+// =================== SubCategory Management ===================
+
+public function addSubCategory(Request $request)
+{
+    $validatedData = $request->validate([
+        'sub_category_name' => ['required', 'string', 'max:255', 'unique:sub_categories,sub_category_name'],
+        'category_id' => ['required', 'exists:categories,id'],
+    ]);
+
+    SubCategory::create($validatedData);
+
+    return redirect()->route('admin.product.index')->with('message', 'SubCategory added successfully.');
+}
+
+public function editSubCategory($id)
+{
+    $subcategory = SubCategory::findOrFail($id);
+    $categories = Category::all();
+
+    return view('admin.product.edit-subcategory', [
+        'subcategory' => $subcategory,
+        'categories' => $categories,
+    ]);
+}
+
+public function updateSubCategory(Request $request, $id)
+{
+    $subcategory = SubCategory::findOrFail($id);
+
+    $validatedData = $request->validate([
+        'sub_category_name' => ['required', 'string', 'max:255', 'unique:sub_categories,sub_category_name,' . $id],
+        'category_id' => ['required', 'exists:categories,id'],
+    ]);
+
+    $subcategory->update($validatedData);
+
+    return redirect()->route('admin.product.index')->with('message', 'SubCategory updated successfully.');
+}
+
+public function deleteSubCategory($id)
+{
+    $subcategory = SubCategory::findOrFail($id);
+    $subcategory->delete();
+
+    return redirect()->route('admin.product.index')->with('message', 'SubCategory deleted successfully.');
+}
 //
 
 }

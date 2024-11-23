@@ -35,7 +35,22 @@
 
 <!-- DataTables -->
 <script src="https://cdn.datatables.net/2.1.8/js/jquery.dataTables.js"></script>
+<script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
 <script src="https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap5.js"></script>
+
+<!-- DataTables Buttons Extensions -->
+<script src="https://cdn.datatables.net/buttons/3.2.0/js/dataTables.buttons.js"></script>
+<script src="https://cdn.datatables.net/buttons/3.2.0/js/buttons.bootstrap5.js"></script>
+
+<!-- File Export Libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/3.2.0/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/3.2.0/js/buttons.print.min.js"></script>
+
+<!-- DataTables Column Visibility -->
+<script src="https://cdn.datatables.net/buttons/3.2.0/js/buttons.colVis.min.js"></script>
 
 <!-- Other Libraries -->
 <script defer  src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
@@ -52,15 +67,66 @@
 
 
 <script>
+//Tables for the Product
+new DataTable('#categoryTable');
 new DataTable('#productTable');
+new DataTable('#subcategoryTable');
 new DataTable('#productSpecificationTable');
+
+
+
+//Tables for the Orders
+new DataTable('#orderCancelledTable');
+new DataTable('#orderCompletedTable');
+new DataTable('#orderStandbyTable');
+new DataTable('#orderPayTable');
+new DataTable('#orderShipTable');
+
+//Tables for the Reports
+new DataTable('#currentInventoryTable', {
+    layout: {
+        topStart: {
+            buttons: [
+                {
+                    extend: 'copy',
+                    title: 'Current Inventory Report' // Custom title
+                },
+                {
+                    extend: 'csv',
+                    title: 'Current Inventory Report' // Custom title
+                },
+                {
+                    extend: 'excel',
+                    title: 'Current Inventory Report' // Custom title
+                },
+                {
+                    extend: 'pdf',
+                    title: 'Buyani Current Inventory Report', // Custom title
+                    orientation: 'portrait', // Example of additional customization
+                    pageSize: 'A4' // Example of additional customization
+                },
+                {
+                    extend: 'print',
+                    title: 'Current Inventory Report' // Custom title
+                }
+            ]
+        }
+    }
+});
+
+new DataTable('#pastInventoryTable', {
+    layout: {
+        topStart: {
+            buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+        }
+    }
+});
+
+
 new DataTable('#blogTable');
 </script>
 
 <script>
-    // Initialize AOS (Animate On Scroll)
-    AOS.init();
-
     // DataTables initialization
     $(document).ready(function() {
         $('.datatable').DataTable({

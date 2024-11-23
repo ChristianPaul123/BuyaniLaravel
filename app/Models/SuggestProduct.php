@@ -11,10 +11,10 @@ class SuggestProduct extends Model
 
     protected $fillable = [
         'user_id',
-        'admin_id',
-        'name',
-        'description',
-        'image',
+        'verified_by',
+        'suggest_name',
+        'suggest_description',
+        'suggest_image',
         'total_vote_count',
         'is_accepted',
     ];

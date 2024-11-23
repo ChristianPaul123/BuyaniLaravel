@@ -24,7 +24,21 @@ class Admin extends Authenticatable
         'profile_pic',
         'status',
         'last_online',
+        'deactivated_date',
+        'deactivated_status',
+        'admin_payment',
     ];
+
+    protected $hidden = [
+        // 'password',
+    ];
+
+    protected function casts(): array
+    {
+        return [
+            'password' => 'hashed',
+        ];
+    }
 
     // protected function casts(): array
     // {
@@ -38,4 +52,9 @@ class Admin extends Authenticatable
     // {
     //     return 'username';
     // }
+
+    public function blogs() {
+        return $this->HasMany(Blog::class);
+    }
+
 }

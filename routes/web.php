@@ -17,9 +17,12 @@ use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\UserProductController;
-use App\Http\Controllers\ShippingAddressController;
-use App\Http\Controllers\ProductSpecificationController;
 use App\Http\Controllers\VotedProductsController;
+use App\Http\Controllers\OrderManagementController;
+use App\Http\Controllers\ShippingAddressController;
+use App\Http\Controllers\ProductManagementController;
+use App\Http\Controllers\ProductSpecificationController;
+use App\Http\Controllers\ReportManagementController;
 
 Route::get('/', function () {
     return view('user.index');
@@ -42,21 +45,6 @@ Route::get('admin/dashboard', [AdminController::class, 'showdashboard'])->name('
 
 //Product Side
 //admin side
-//products side check
-Route::get('admin/product', [ProductController::class, 'showProducts'])->name('admin.product');
-Route::post('admin/product', [ProductController::class, 'addProduct'])->name('admin.product.add');
-Route::get('admin/product/edit/{product}', [ProductController::class, 'editProduct'])->name('admin.product.edit');
-Route::put('admin/product/edit/{product}', [ProductController::class, 'updateProduct'])->name('admin.product.update');
-// Route::put('admin/product/update/{product}', [ProductController::class,'updateProductAjax'])->name('admin.product.update.ajax');
-Route::delete('admin/product/delete/{product}', [ProductController::class, 'deleteProduct'])->name('admin.product.delete');
-
-//Product Specification Side
-Route::get('admin/product/specification', [ProductSpecificationController::class, 'showProductSpecification'])->name('admin.product.specification');
-Route::post('admin/product/specification', [ProductSpecificationController::class, 'addProductSpecification'])->name('admin.product.specification.add');
-Route::get('admin/product/specification/edit/{product}', [ProductSpecificationController::class, 'editProductSpecification'])->name('admin.product.specification.edit');
-Route::put('admin/product/specification/edit/{product}', [ProductSpecificationController::class, 'updateProductSpecification'])->name('admin.product.specification.update');
-Route::delete('admin/product/specification/delete/{product}', [ProductSpecificationController::class, 'deleteProductSpecification'])->name('admin.product.specification.delete');
-
 //Product Inventory Side
 Route::get('admin/product/inventory', [InventoryController::class, 'showProductInventory'])->name('admin.product.inventory');
 Route::post('admin/product/inventory', [InventoryController::class, 'addProductInventory'])->name('admin.product.inventory.add');
@@ -65,18 +53,50 @@ Route::put('admin/product/inventory/edit/{product}', [InventoryController::class
 Route::delete('admin/product/inventory/delete/{product}', [InventoryController::class, 'deleteProductInventory'])->name('admin.product.inventory.delete');
 
 
-//category side check
-Route::get('admin/category', [CategoryController::class, 'showCategories'])->name('admin.category');
-Route::post('admin/category', [CategoryController::class, 'addCategory'])->name('admin.category.add');
-Route::get('admin/category/edit/{category}', [CategoryController::class, 'editCategory'])->name('admin.category.edit');
-Route::put('admin/category/edit/{category}', [CategoryController::class, 'updateCategory'])->name('admin.category.update');
-Route::delete('admin/category/delete/{category}', [CategoryController::class, 'deleteCategory'])->name('admin.category.delete');
+Route::get('admin/product/specification', [ProductManagementController::class, 'showProducts'])->name('admin.product.index');
+Route::post('admin/product/add', [ProductManagementController::class, 'addProduct'])->name('admin.product.add');
+Route::get('admin/product/edit/{id}', [ProductManagementController::class, 'editProduct'])->name('admin.product.edit');
+Route::put('admin/product/update/{id}', [ProductManagementController::class, 'updateProduct'])->name('admin.product.update');
+Route::delete('admin/product/delete/{id}', [ProductManagementController::class, 'deleteProduct'])->name('admin.product.delete');
 
+Route::post('admin/product/specification/add', [ProductManagementController::class, 'addProductSpecification'])->name('admin.product.specification.add');
+Route::get('admin/product/specification/edit/{id}', [ProductManagementController::class, 'editProductSpecification'])->name('admin.product.specification.edit');
+Route::put('admin/product/specification/update/{id}', [ProductManagementController::class, 'updateProductSpecification'])->name('admin.product.specification.update');
+Route::delete('admin/product/specification/delete/{id}', [ProductManagementController::class, 'deleteProductSpecification'])->name('admin.product.specification.delete');
 
+Route::post('admin/category/add', [ProductManagementController::class, 'addCategory'])->name('admin.category.add');
+Route::get('admin/category/edit/{id}', [ProductManagementController::class, 'editCategory'])->name('admin.category.edit');
+Route::put('admin/category/update/{id}', [ProductManagementController::class, 'updateCategory'])->name('admin.category.update');
+Route::delete('admin/category/delete/{id}', [ProductManagementController::class, 'deleteCategory'])->name('admin.category.delete');
+
+// Subcategory Routes
+Route::post('admin/subcategory/add', [ProductManagementController::class, 'addSubCategory'])->name('admin.subcategory.add');
+Route::get('admin/subcategory/edit/{id}', [ProductManagementController::class, 'editSubCategory'])->name('admin.subcategory.edit');
+Route::put('admin/subcategory/update/{id}', [ProductManagementController::class, 'updateSubCategory'])->name('admin.subcategory.update');
+Route::delete('admin/subcategory/delete/{id}', [ProductManagementController::class, 'deleteSubCategory'])->name('admin.subcategory.delete');
 
 //order Side
-Route::get('admin/order', [OrderController::class,'showOrders'])->name('admin.order');
-Route::get('admin/order/view/{id}', [OrderController::class,'viewOrder'])->name('admin.order.view');
+
+Route::get('admin/order', [OrderManagementController::class, 'showOrders'])->name('admin.orders.index');
+Route::get('admin/orders/edit/{id}', [OrderManagementController::class, 'edit'])->name('admin.orders.edit');
+Route::delete('admin/orders/delete/{id}', [OrderManagementController::class, 'destroy'])->name('admin.orders.delete');
+Route::get('admin/orders/view/{id}', [OrderManagementController::class, 'viewOrder'])->name('admin.orders.view');
+Route::get('admin/orders/cancel/{id}', [OrderManagementController::class, 'cancelOrder'])->name('admin.orders.cancel');
+Route::post('admin/orders/accept/{id}', [OrderManagementController::class, 'acceptOrder'])->name('admin.orders.accept');
+Route::get('admin/product/special', [OrderManagementController::class, 'showSpecial'])->name('admin.product.special');
+
+
+Route::get('admin/orders/order-standby', [OrderManagementController::class, 'toStandby'])->name('admin.orders.to-standby');
+Route::get('admin/orders/order-pay', [OrderManagementController::class, 'toPay'])->name('admin.orders.to-pay');
+Route::get('admin/orders/order-ship', [OrderManagementController::class, 'toShip'])->name('admin.orders.to-ship');
+Route::get('admin/orders/order-completed', [OrderManagementController::class, 'completed'])->name('admin.orders.completed');
+Route::get('admin/orders/order-cancelled', [OrderManagementController::class, 'cancelled'])->name('admin.orders.cancelled');
+
+Route::get('admin/report/inventory', [ReportManagementController::class, 'showInventoryReports'])->name('admin.reports.inventory');
+Route::get('admin/report/sales', [ReportManagementController::class, 'salesReports'])->name('admin.reports.sales');
+
+
+
 
 Route::get('admin/customization', function () {
     return view('admin.management.customization');
@@ -128,6 +148,9 @@ Route::get('user/consumer/about-us', [HomeController::class, 'showConAbout'])->n
 
 Route::get('user/farmer/contacts', [HomeController::class, 'showFarmContact'])->name('user.farmer.contact');
 Route::get('user/farmer/about-us', [HomeController::class, 'showFarmAbout'])->name('user.farmer.about');
+
+Route::get('/session-expire',[HomeController::class, 'sessionExpire'])->name('session.expire');
+
 
 
 Route::middleware(['user.type:1'])->group(function () {

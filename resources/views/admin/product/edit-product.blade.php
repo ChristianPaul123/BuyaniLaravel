@@ -1,143 +1,152 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+@extends('layouts.admin-app') {{-- Extend the main parent layout --}}
 
+@section('title', 'Admin | Edit Product') {{-- Set the page title --}}
 
-    <title>Admin | Product</title>
-    <link rel="icon" type="image/png" href="{{ asset('img/logo1.svg') }}">
-    @include('layouts.head')
-    @include('admin.styles.admin_styles')
+@push('styles')
+<style>
+    .card {
+        border: 1px solid #dee2e6;
+        border-radius: 0.25rem;
+        background-color: #fff;
+        margin-top: 1rem;
+    }
+    .card-title {
+        font-size: 1.25rem;
+        font-weight: 500;
+    }
+    .form-control:focus {
+        box-shadow: none;
+        border-color: #80bdff;
+    }
+    .main-section {
+        max-height: 35rem;
+        overflow-y: auto;
+    }
+    .img-thumbnail {
+        margin-top: 10px;
+    }
+    .btn-back {
+        margin-bottom: 15px;
+    }
+</style>
+@endpush
 
-</head>
-<body class="body">
-@auth('admin')
-    @include('admin.includes.navbar')
+@section('content')
+<div class="container-fluid">
+    <div class="row">
+        @include('admin.includes.sidebar') {{-- Include the sidebar --}}
 
-
-     <div class="container-fluid">
-        <div class="row">
-
-
-        @include('admin.includes.sidebar')
-
-        <section class="col-md-10 ml-sm-auto col-lg-10 px-3 py-5 overflow-y-scroll main-section">
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Product</h1>
+        <section class="col-md-10 ml-sm-auto col-lg-10 px-3 py-5 main-section">
+            <div class="container-fluid">
+                {{-- Header Section --}}
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Edit Product</h1>
                 </div>
 
-            <!--Add the more part here
-            EX: just add a div
-            -->
-            <div class="d-flex justify-content-start flex-wrap flex-md-nowrap align-items-center pt-1 pb-2 mb-3 border-bottom">
-                <button type="button" class="btn btn-primary" onclick="window.history.back()"> &#9754; Back to previous</button>
-            </div>
-            <div class="card my-3">
-                <div class="card-header">
-                    <h3 class="card-title"> Edit Product: {{ $product->product_name }}</h3>
-                </div>
-                {{-- if there's errors --}}
+                {{-- Back Button --}}
+                <button type="button" class="btn btn-primary btn-back" onclick="window.history.back()">&#9754; Back to previous</button>
+
+                {{-- Error Messages --}}
                 @if ($errors->any())
-
-                <div class="alert alert-danger mx-3 my-2 px-3 py-2">
-                    <button type="button" class="close btn btn-danger" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                <div class="alert alert-danger">
                     <ul>
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
                         @endforeach
                     </ul>
-
                 </div>
                 @endif
 
-                <div class="card-body">
-                    <form action="{{ route('admin.product.update', $product->id) }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        @method('PUT')
-                        <div class="form-group">
-                            <label for="product_name">Product Name</label>
-                            <input type="text" class="form-control" id="product_name" name="product_name"  value="{{$product->product_name}}" required>
-                        </div>
+                {{-- Edit Product Form --}}
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Edit Product: {{ $product->product_name }}</h4>
+                    </div>
+                    <div class="card-body">
+                        <form action="{{ route('admin.product.update', $product->id) }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
 
-                        <div class="form-group my-3">
-                            <label for="product_details">Product Details</label>
-                            <textarea class="form-control" style="resize: none;" id="product_details" name="product_details" rows="2">{{$product->product_details}}</textarea>
-                        </div>
-
-                        <div class="mb-3 d-flex flex-column">
-                            <label for="product_image_showcase">Current Product Image</label>
-                            <img id="product_image_showcase" src="{{ asset( "$product->product_pic" ) }}" alt="Product Image" class="img-thumbnail" width="200px;" height="100px;">
-                        </div>
-                        <div class="form-group my-3">
-                            <label for="product_pic">Product Image</label>
-                            <input type="file" class="form-control" id="product_pic" name="product_pic" value="{{$product->product_pic}}">
-                        </div>
-
-                        <div class="form-group my-3">
-                            <label for="product_status">Product Status</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="product_status" id="product_status_available" value="1" {{ $product->product_status == 1 ? 'checked' : '' }}>
-                                <label class="form-check-label" for="product_status_available">
-                                    Available
-                                </label>
+                            {{-- Product Name --}}
+                            <div class="form-group">
+                                <label for="product_name">Product Name</label>
+                                <input type="text" class="form-control" id="product_name" name="product_name" value="{{ $product->product_name }}" required>
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="product_status" id="product_status_unavailable" value="2" {{ $product->product_status == 2 ? 'checked' : '' }}>
-                                <label class="form-check-label" for="product_status_unavailable">
-                                    Out of Stock
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="product_status" id="product_status_unavailable" value="3" {{ $product->product_status == 3 ? 'checked' : '' }}>
-                                <label class="form-check-label" for="product_status_unavailable">
-                                    Unavailable
-                                </label>
-                            </div>
-                        </div>
 
-                        <div class="form-group my-3">
-                            <label for="category_id">Category</label>
-                            <select class="form-control" id="category_id" name="category_id">
-                                <option value="{{$product->category_id}}" selected>{{$product->category->category_name}}</option>
-                                @foreach ($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->category_name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                            {{-- Product Details --}}
+                            <div class="form-group my-3">
+                                <label for="product_details">Product Details</label>
+                                <textarea class="form-control" style="resize: none;" id="product_details" name="product_details" rows="2">{{ $product->product_details }}</textarea>
+                            </div>
 
-                        {{-- Remember this is not sub_category_id but subcategory_Id --}}
-                        <div class="form-group">
-                            <label for="subcategory_id">SubCategory</label>
-                            <select class="form-control" id="subcategory_id" name="subcategory_id">
-                                <option value="{{$product->subcategory_id}}" selected>{{$product->subcategory->sub_category_name}}</option>
-                                @foreach ($subcategories as $subcategory)
-                                <option value="{{ $subcategory->id }}">{{ $subcategory->sub_category_name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="d-flex ">
-                            <button type="submit" class="btn btn-block my-3 px-4 btn-success">Submit</button>
-                        </div>
-                    </form>
+                            {{-- Current Product Image --}}
+                            <div class="mb-3 d-flex flex-column">
+                                <label for="product_image_showcase">Current Product Image</label>
+                                <img id="product_image_showcase" src="{{ asset($product->product_pic) }}" alt="Product Image" class="img-thumbnail" width="200px" height="100px">
+                            </div>
+
+                            {{-- Upload New Image --}}
+                            <div class="form-group my-3">
+                                <label for="product_pic">Upload New Image</label>
+                                <input type="file" class="form-control" id="product_pic" name="product_pic">
+                            </div>
+
+                            {{-- Product Status --}}
+                            <div class="form-group my-3">
+                                <label for="product_status">Product Status</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="product_status" id="product_status_available" value="1" {{ $product->product_status == 1 ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="product_status_available">Available</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="product_status" id="product_status_out_of_stock" value="2" {{ $product->product_status == 2 ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="product_status_out_of_stock">Out of Stock</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="product_status" id="product_status_unavailable" value="3" {{ $product->product_status == 3 ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="product_status_unavailable">Unavailable</label>
+                                </div>
+                            </div>
+
+                            {{-- Category Dropdown --}}
+                            <div class="form-group my-3">
+                                <label for="category_id">Category</label>
+                                <select class="form-control" id="category_id" name="category_id">
+                                    <option value="{{ $product->category_id }}" selected>{{ $product->category->category_name }}</option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            {{-- Subcategory Dropdown --}}
+                            <div class="form-group">
+                                <label for="subcategory_id">Subcategory</label>
+                                <select class="form-control" id="subcategory_id" name="subcategory_id">
+                                    <option value="{{ $product->subcategory_id }}" selected>{{ $product->subcategory->sub_category_name }}</option>
+                                    @foreach ($subcategories as $subcategory)
+                                        <option value="{{ $subcategory->id }}">{{ $subcategory->sub_category_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            {{-- Submit Button --}}
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-success btn-block">Update Product</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </section>
-
     </div>
 </div>
-@else
-        <p>not logged in</p>
-@endauth
-@include('layouts.script')
+@endsection
+
+@push('scripts')
 <script>
-window.addEventListener('popstate', function(event) {
-    // If the user presses the back button, log them out
-    window.location.href = "{{ route('admin.logout') }}";
-});
+    window.addEventListener('popstate', function(event) {
+        window.location.href = "{{ route('admin.logout') }}";
+    });
 </script>
-</body>
-</html>
+@endpush
