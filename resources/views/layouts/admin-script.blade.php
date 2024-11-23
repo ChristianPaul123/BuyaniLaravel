@@ -82,6 +82,10 @@ new DataTable('#orderStandbyTable');
 new DataTable('#orderPayTable');
 new DataTable('#orderShipTable');
 
+
+//Tables for the Admin
+new DataTable('#adminTable');
+
 //Tables for the Reports
 new DataTable('#currentInventoryTable', {
     layout: {

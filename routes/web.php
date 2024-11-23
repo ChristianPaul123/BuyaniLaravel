@@ -95,12 +95,17 @@ Route::get('admin/orders/order-cancelled', [OrderManagementController::class, 'c
 Route::get('admin/report/inventory', [ReportManagementController::class, 'showInventoryReports'])->name('admin.reports.inventory');
 Route::get('admin/report/sales', [ReportManagementController::class, 'salesReports'])->name('admin.reports.sales');
 
+Route::post('admin/store', [AdminController::class, 'store'])->name('admin.store'); // Store New Admin
+Route::get('admin/{admin}/edit', [AdminController::class, 'edit'])->name('admin.edit'); // Edit Admin Page
+Route::put('admin/{admin}/update', [AdminController::class, 'update'])->name('admin.update'); // Update Admin Info
+Route::post('admin/{admin}/deactivate', [AdminController::class, 'deactivate'])->name('admin.deactivate');
+Route::post('admin/{admin}/activate', [AdminController::class, 'activate'])->name('admin.activate');
+Route::get('admin/customization', [AdminController::class, 'customizationIndex'])->name('admin.customization');
+Route::post('admin/payment/update', [AdminController::class, 'updateAdminPayment'])->name('admin.payment.update');
 
-
-
-Route::get('admin/customization', function () {
-    return view('admin.management.customization');
-});
+// Route::get('admin/customization', function () {
+//     return view('admin.management.customization');
+// });
 
 Route::get('admin/report', function () {
     return view('admin.report.report');
