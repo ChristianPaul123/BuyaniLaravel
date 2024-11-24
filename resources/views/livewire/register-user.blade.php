@@ -79,7 +79,7 @@
           <div class="container-fluid custom-font-content" style="padding: 20px;">
             <div class="row">
                 <div class="col-12">
-                    <h2 class="text-center my-3 mx-2" style="font-size: 40px; white-space: nowrap;">Sign Up As farmer</h2>
+                    <h2 class="text-center my-3 mx-2" style="font-size: 40px; white-space: nowrap;">Sign Up As Farmer</h2>
                 </div>
             </div>
             <form wire:submit.prevent="register" class="my-3" style="width: 100%;" autocomplete="off">
