@@ -67,8 +67,20 @@
         <div class="container-fluid">
             <div class="row justify-content-center align-items-center">
                 @if ($message)
-                    <div class="alert alert-info text-center w-75 mx-auto my-3">
-                        {{ $message }}
+                    <div>
+                        <!-- Overlay and Error Popup HTML -->
+                        <div class="overlay" id="overlay" aria-label="Close" onclick="closePopup()"></div>
+
+                        <div class="error-popup">
+                            <i class="bi bi-x-lg fs-4" aria-label="Close" onclick="closePopup()"></i>
+                            <div class="error-icon">
+                                <i class="icon bi bi-bag-x"></i>
+                            </div>
+                            <div class="container-contents">
+                                <h3>Ooops!</h3>
+                                <p>{{ $message }}</p>
+                            </div>
+                        </div>
                     </div>
                 @endif
 
