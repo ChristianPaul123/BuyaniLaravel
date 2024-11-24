@@ -22,6 +22,46 @@
 </style>
 
 <style>
+    @keyframes fadeInDown {
+        from {
+            transform: translate(-50%, -55%); /* Start from above the screen */
+            opacity: 0;
+        }
+        to {
+            transform: translate(-50%, -50%); /* Center in the screen */
+            opacity: 1;
+        }
+    }
+
+    @keyframes fadeOutUp {
+        from {
+            transform: translate(-50%, -50%); /* Start from center */
+            opacity: 1;
+        }
+        to {
+            transform: translate(-50%, -55%); /* Move up to above the screen */
+            opacity: 0;
+        }
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 0.6;
+        }
+    }
+
+    @keyframes fadeOut {
+        from {
+            opacity: 0.6;
+        }
+        to {
+            opacity: 0;
+        }
+    }
+
     .overlay {
         position: fixed;
         top: 0;
@@ -30,6 +70,11 @@
         height: 100%;
         background-color: rgba(0, 0, 0, 0.6);
         z-index: 999;
+        animation: fadeIn 0.2s ease-out forwards; /* Fade in animation for the overlay */
+    }
+
+    .overlay.hidden {
+        animation: fadeOut 0.2s ease-in forwards; /* Fade out animation for the overlay */
     }
 
     .error-popup {
@@ -46,6 +91,11 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         overflow: hidden;
         z-index: 1000;
+        animation: fadeInDown 0.3s ease-out forwards; /* Slide down animation for the modal */
+    }
+
+    .error-popup.hidden {
+        animation: fadeOutUp 0.3s ease-in forwards; /* Slide up animation for the modal */
     }
 
     .container-contents {
@@ -119,8 +169,29 @@
 
 <script>
     function closePopup() {
-        document.querySelector('.error-popup').style.display = 'none';
-        document.querySelector('.overlay').style.display = 'none';
+        const overlay = document.getElementById('overlay');
+        const popup = document.querySelector('.error-popup');
+
+        // Add the hidden class to trigger the fade-out animation
+        overlay.classList.add('hidden');
+        popup.classList.add('hidden');
+
+        // After animation ends, hide the elements entirely
+        setTimeout(() => {
+            overlay.style.display = 'none';
+            popup.style.display = 'none';
+        }, 300); // Match the duration of the animation
+    }
+
+    function showPopup() {
+        const overlay = document.getElementById('overlay');
+        const popup = document.querySelector('.error-popup');
+
+        // Show elements and remove hidden class for fade-in animation
+        overlay.style.display = 'block';
+        popup.style.display = 'block';
+        overlay.classList.remove('hidden');
+        popup.classList.remove('hidden');
     }
 </script>
 
