@@ -30,9 +30,8 @@
     }
 
     .buyani {
-        font-weight: 1000;
-        font-size: 7rem;
-        color: transparent;
+        font-weight: 100000px;
+        font-size: 9rem;
         -webkit-text-stroke: 1px white;
         text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
         margin-top: 70px;
