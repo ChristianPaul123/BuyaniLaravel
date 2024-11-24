@@ -10,7 +10,7 @@
                 <div class="error-popup">
                     <i class="bi bi-x-lg fs-4" aria-label="Close" onclick="closePopup()"></i>
                     <div class="error-icon">
-                        <i class="bi bi-x-circle"></i>
+                        <i class="icon bi bi-x-circle"></i>
                     </div>
                     <div class="container-contents">
                         <h3>Ooops!</h3>

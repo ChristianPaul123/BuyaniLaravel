@@ -124,7 +124,7 @@
         background-color: #e0a800;
     }
 
-    .error-icon .bi-x-circle {
+    .error-icon .icon {
         color: #ffffff;
     }
 
