@@ -30,48 +30,70 @@
     }
 
     .buyani {
-        font-weight: 700;
+        font-weight: 1000;
         font-size: 7rem;
-        margin-bottom: 40px;
-        padding: 50px;
         color: transparent;
         -webkit-text-stroke: 1px white;
         text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        margin-top: 70px;
+        margin-bottom: 50px;
     }
 
     .buyani .buy {
-        color: green;
+        color: #00cc1a;
     }
 
     .buyani .ani {
         color: orange;
     }
+</style>
 
-    .clickable-div {
-        width: 270px;
-        background-color: green;
-        color: white;
-        padding: 15px;
-        border-radius: 8px;
-        text-align: center;
-        cursor: pointer;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 1.2rem;
-        transition: transform 0.2s ease;
+<style>
+    .col{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
-    .logo {
-        width: 20%;
-        margin-bottom: 15px;
+    .col .button{
+        width: 220px;
+        margin: 10px;
+        border: 4px solid;
+        border-radius: 10px;
+        padding: 10px;
+        font-weight: bold;
+        transition: all 0.3s ease;
     }
 
-    .clickable-div:hover {
-        transform: translateY(-3px);
+    .button:hover{
+        transform: scale(1.1);
     }
 
-    .clickable-div:active {
-        transform: translateY(1px);
+    .icons{
+        height: 150px;
+        margin: 10px;
+    }
+
+    .consumer-container .button-login{
+        border-color: #00cc1a;
+        background-color: #00cc1a;
+        color: #fff8dd;
+    }
+    .consumer-container .button-signup{
+        border-color: #00cc1a;
+        background-color: #fff8dd;
+        color: #00cc1a;
+    }
+    .farmer-container .button-login{
+        border-color: #ffa500;
+        background-color: #ffa500;
+        color: #fff8dd;
+    }
+    .farmer-container .button-signup{
+        border-color: #ffa500;
+        background-color: #fff8dd;
+        color: #ffa500;
     }
 </style>
 @endpush
@@ -90,27 +112,27 @@
                 <span class="buy">Buy</span><span class="ani">Ani</span>
             </h1>
 
-            <!-- Clickable Divs with Icons in Separate Columns -->
+
             <div class="row">
-                <div class="col-md-6">
-                    <form action="{{ route('user.login') }}" method="GET">
-                        <input type="hidden" name="user_type" value="1">
-                        <button type="submit" class="clickable-div">
-                            <img src="{{ asset('img/title/consumer.png') }}" alt="Consumer Icon" class="logo">
-                            <h5>Interact as Consumer</h5>
-                        </button>
-
-                    </form>
-                </div>
-                <div class="col-md-6">
-                    <form action="{{ route('user.login') }}" method="GET">
-                        <input type="hidden" name="user_type" value="2">
-                        <button type="submit" class="clickable-div">
-                            <img src="{{ asset('img/title/farmer.png') }}" alt="Farmer Icon" class="logo">
-                            <h5>Interact as Farmer</h5>
-                        </button>
-
-                    </form>
+                <div class="row">
+                    <div class="col col-md-6 consumer-container">
+                        <img class="icons" src="{{ asset('img/title/consumer.png') }}">
+                        <form action="{{ route('user.login') }}" method="GET">
+                            <input type="hidden" name="user_type" value="1">
+                            <button type="submit" class="button button-login">Login As Consumer</button>
+                        </form>
+                        {{-- Pa link Dito Register --}}
+                        <button class="button button-signup">Sign Up As Consumer</button>
+                    </div>
+                    <div class="col col-md-6 farmer-container">
+                        <img class="icons" src="{{ asset('img/title/farmer.png') }}">
+                        <form action="{{ route('user.login') }}" method="GET">
+                            <input type="hidden" name="user_type" value="2">
+                            <button class="button button-login">Login As Farmer</button>
+                        </form>
+                        {{-- Pa link Dito Register --}}
+                        <button class="button button-signup">Sign Up As Farmer</button>
+                    </div>
                 </div>
             </div>
         </div>
