@@ -17,7 +17,9 @@
     @yield('content')
     @yield('scripts')
 @else
-            <p>not logged in</p>
+    <script>
+        window.location.href = "{{ route('session.expire') }}";
+    </script>
 @endauth
 
     @include('layouts.admin-script')

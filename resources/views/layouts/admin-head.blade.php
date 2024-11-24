@@ -8,15 +8,14 @@
 <!-- Font Awesome (6.5.2 - Latest stable version) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-
-
 <!-- AOS (Animate On Scroll - v2.3.4) -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
 
 <!-- DataTables CSS -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
 <link href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap5.css">
+<link href="https://cdn.datatables.net/buttons/3.2.0/css/buttons.dataTables.css">
+
 
 <!-- Livewire Styles -->
 @livewireStyles

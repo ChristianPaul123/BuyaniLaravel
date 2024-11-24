@@ -111,7 +111,7 @@
 
 <!-- Weather -->
 <script>
-    const apiKey = '8208b36e8c45621736f862fb1933cb36';
+    const apiKey = '{{ config('services.weather.key') }}';
     const city = 'Legaspi, PH';
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
@@ -194,5 +194,9 @@
         // If the user press the back button, log them out
         window.location.href = "{{ route('user.logout') }}";
     });
+
+    document.addEventListener('DOMContentLoaded', function() {
+            AOS.init();
+        });
   </script>
 @endsection

@@ -18,6 +18,9 @@ class Blog extends Model
         'blog_info',
         'created_date',
         'removed_date',
+        'deactivated_status',
+        'added_by',
+        'removed_by',
     ];
 
     // Define a relationship with the Admin model

@@ -9,6 +9,13 @@ class Order extends Model
 {
     use HasFactory;
 
+    // Define order statuses as constants
+    const STATUS_STANDBY = 1;
+    const STATUS_TO_PAY = 2;
+    const STATUS_TO_SHIP = 3;
+    const STATUS_COMPLETED = 4;
+    const STATUS_CANCELLED = 5;
+
     // Fillable attributes for the Order model
     protected $fillable = [
         'user_id',
@@ -50,6 +57,19 @@ class Order extends Model
 
     public function trackings() {
         return $this->hasMany(Tracking::class, 'order_id'); // 'order_id' is the foreign key in the tracking table
+    }
+
+    public function getStatusLabelAttribute()
+    {
+        $statuses = [
+            self::STATUS_STANDBY => 'To Standby',
+            self::STATUS_TO_PAY => 'To Pay',
+            self::STATUS_TO_SHIP => 'To Ship',
+            self::STATUS_COMPLETED => 'Completed',
+            self::STATUS_CANCELLED => 'Cancelled',
+        ];
+
+        return $statuses[$this->order_status] ?? 'Unknown';
     }
 
 

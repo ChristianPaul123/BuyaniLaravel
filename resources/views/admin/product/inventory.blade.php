@@ -4,6 +4,12 @@
 
 @push('styles')
 <style>
+    .main-section {
+    max-height: 36rem;
+}
+.tab-pane {
+    margin-top: 20px;
+}
 </style>
 @endpush
 

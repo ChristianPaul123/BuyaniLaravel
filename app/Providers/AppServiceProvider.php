@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Console\Scheduling\Schedule;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,8 +17,9 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    public function boot(): void
+    public function boot(Schedule $schedule)
     {
-        //
+        $schedule->command('app:generate-monthly-inventory-reports')->everyMinute()->sendOutputTo(storage_path('logs/monthly_inventory_reports.log'));;
     }
+
 }

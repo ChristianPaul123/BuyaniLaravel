@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('total_amount');
             $table->float('overall_orderKG');
             $table->decimal('total_price',8,2);
-            $table->boolean('order_status')->default('0');
+            $table->boolean('order_status')->default('1');
             $table->string('customer_name');
             $table->string('customer_email');
             $table->string('customer_phone');

@@ -74,24 +74,20 @@
 
                 <div class="container my-4">
                     @if ($products->count() === 0)
-                        <!-- Out of Stock Message -->
                         <div class="text-center">
                             <h2 class="my-4 text-muted">Sorry, We're Out At the Moment</h2>
                             <img src="{{ asset('img/outOfStock.png') }}" alt="Out of Stock" class="img-fluid my-3" style="width: 300px;">
                             <p class="text-muted">We’re currently out of stock, but don’t worry—we’ll have more products available soon!</p>
                         </div>
                     @else
-                        <!-- Product Grid Section -->
-                        <h2 class="text-center my-4 fw-bold">All Products</h2>
+                        <h2 class="text-center my-4 fw-bold">{{ $title }}</h2>
                         <div class="row g-4">
                             @foreach ($products as $product)
                                 <div class="col-md-3">
                                     <div class="card shadow-sm border-0 rounded">
-                                        <!-- Product Image -->
                                         <div class="card-img-top-wrapper position-relative">
                                             <img src="{{ asset($product->product_pic) }}" class="card-img-top rounded-top" alt="{{ $product->product_name }}">
                                         </div>
-                                        <!-- Product Details -->
                                         <div class="card-body">
                                             <h5 class="card-title text-center text-truncate fw-bold">{{ $product->product_name }}</h5>
                                             <p class="card-text text-muted text-center text-truncate mb-3">{{ Str::limit($product->product_details, 50) }}</p>
@@ -99,7 +95,7 @@
                                                 <button class="btn btn-sm btn-outline-primary" wire:click.prevent="viewProduct({{ $product->id }})">
                                                     View
                                                 </button>
-                                                <button class="btn btn-sm btn-outline-danger">
+                                                <button class="btn btn-sm btn-outline-danger {{ in_array($product->id, $userFavorites) ? 'active' : '' }}" wire:click.prevent="toggleFavorite({{ $product->id }})">
                                                     <i class="fas fa-heart"></i>
                                                 </button>
                                             </div>
@@ -109,7 +105,6 @@
                             @endforeach
                         </div>
 
-                        <!-- Pagination -->
                         <div class="mt-4 d-flex justify-content-center">
                             {{ $products->links() }}
                         </div>
@@ -118,46 +113,3 @@
             </div>
         </div>
 </div>
-
-
-    {{-- bagong container frame --}}
-    {{-- <div class="container mt-5">
-        <div class="row">
-
-        <!-- Item -->
-        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-            <a href="#" class="card-link" style="text-decoration: none; color: inherit;">
-                <div class="card">
-                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Item 1">
-                    <div class="card-body">
-                        <div class="containerN">
-                            <h5 class="card-title">Item 1</h5>
-                            <a href="#"><i class="fas fa-heart"></i></a>
-                        </div>
-                        <p class="card-text">Price: $25.00</p>
-                        <a href="#" class="btn btn-primary">View Product</a>
-                    </div>
-                </div>
-            </a>
-        </div>
-
-
-        </div>
-
-        <ul class="pagination">
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>
-
-    </div> --}}

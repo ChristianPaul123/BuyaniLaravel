@@ -14,8 +14,11 @@ class OrderRating extends Model
         'order_id',
         'user_id',
         'comment',
-        'reviewer_id',
+        'reviewed_by',
         'delivery_rating',
+        'deactivated_date',
+        'deactivated_status',
+        'deactivated_by',
         'rating',
     ];
 

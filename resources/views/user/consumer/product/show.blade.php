@@ -59,7 +59,7 @@
 @endpush
 
 @section('x-content')
-<body>
+
     @include('user.includes.navbar-consumer')
 
 <div class="main-content-wrapper pt-3">

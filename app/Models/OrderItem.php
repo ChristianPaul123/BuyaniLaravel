@@ -13,7 +13,8 @@ class OrderItem extends Model
     // Define the fillable attributes for this model
     protected $fillable = [
     'order_id',
-    'productspecification_id',
+    'product_specification_name',
+    'product_name',
     'quantity',
     'price',
     'overall_kg',
