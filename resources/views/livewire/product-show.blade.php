@@ -84,7 +84,7 @@
                     </div>
                 @endif
 
-                <div class="container my-4">
+                <div class="container my-4 min-vh-100">
                     @if ($products->count() === 0)
                         <div class="text-center">
                             <h2 class="my-4 text-muted">Sorry, We're Out At the Moment</h2>

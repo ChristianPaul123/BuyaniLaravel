@@ -1,4 +1,5 @@
-<div class="mt-5 pt-2">
+
+<div class="mt-3 pt-0">
     <div class="container-fluid custom-font-content p-5">
         <nav aria-label="breadcrumb d-flex">
             <ol class="breadcrumb">
@@ -156,27 +157,27 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">           <!-- OTP Input Field -->
-                    <form wire:submit.prevent="verifyOtp">
-                        @if (session('error'))
-                        <div class="alert alert-danger text-center my-3 d-block position-absolute col-12">
-                            {{ session('error') }}
-                        </div>
-                        @endif
-                        <div class="form-group">
-                            <p class="text-center">We have sent an OTP to your email at {{ $email }}. </p>
-                            <p class="text-center">Please enter the OTP to verify your email address.</p>
-                            <label class="form-label" for="otp">OTP</label>
-                            <input type="text" id="otp" wire:model="otp" class="form-control" maxlength="6" placeholder="Enter OTP">
-                            @error('otp') <span class="text-danger">{{ $message }}</span> @enderror
-                        </div>
-                        <button type="submit" class="btn btn-success my-3">Submit OTP</button>
-                        <button type="button" class="btn btn-secondary my-3" wire:click="closeModal">Close</button>
-                    </form>
+                    <div class="modal-body">           <!-- OTP Input Field -->
+                        <form wire:submit.prevent="verifyOtp">
+                            @if (session('error'))
+                            <div class="alert alert-danger text-center my-3 d-block position-absolute col-12">
+                                {{ session('error') }}
+                            </div>
+                            @endif
+                            <div class="form-group">
+                                <p class="text-center">We have sent an OTP to your email at {{ $email }}. </p>
+                                <p class="text-center">Please enter the OTP to verify your email address.</p>
+                                <label class="form-label" for="otp">OTP</label>
+                                <input type="text" id="otp" wire:model="otp" class="form-control" maxlength="6" placeholder="Enter OTP">
+                                @error('otp') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                            <button type="submit" class="btn btn-success my-3">Submit OTP</button>
+                            <button type="button" class="btn btn-secondary my-3" wire:click="closeModal">Close</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-@endif
+    @endif
 </div>
 

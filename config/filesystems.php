@@ -46,6 +46,13 @@ return [
             'throw' => false,
         ],
 
+        'public_uploads' => [
+            'driver' => 'local', // The storage driver for public uploads
+            'root' => public_path(), // Use the public directory
+            'url' => env('APP_URL') . '/public', // URL for accessing files
+            'visibility' => 'public', // Ensure files are publicly accessible
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

@@ -7,7 +7,7 @@ use App\Models\Inventory;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
-class InventoryController extends Controller
+class InventoryManagementController extends Controller
 {
     public function showProductInventory()
     {

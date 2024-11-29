@@ -60,7 +60,20 @@
         background-color: #45c657;
         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     }
-    </style>
+
+    .star-rating .fa {
+    cursor: pointer;
+    transition: color 0.2s;
+    }
+
+    .star-rating .fa-star {
+        color: #FFD700;
+    }
+
+    .star-rating .fa-star-o {
+        color: #d6e80c;
+    }
+        </style>
 @endpush
 
 @section('x-content')

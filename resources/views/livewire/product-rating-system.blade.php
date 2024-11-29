@@ -1,4 +1,4 @@
-<div class="container mt-4" style="background-color: rgb(245, 245, 245); border-radius: 8px; padding: 20px;">
+<div class="container mt-4 min-vh-100" style="background-color: rgb(245, 245, 245); border-radius: 8px; padding: 20px;">
     <!-- Rating Summary -->
     <div class="row mb-4">
         <!-- Average Rating -->
@@ -12,7 +12,7 @@
 
         <!-- Rating Breakdown -->
         <div class="col-md-8">
-            <h5 style="color: #4CAF50;">Audience Rating Summary</h5>
+            <h5 style="color: #4CAF50;">Product Rating Summary</h5>
             @for ($i = 5; $i >= 1; $i--)
                 <div class="d-flex align-items-center mb-2">
                     <span class="mr-3" style="width: 70px; text-align: left; color: #555;">{{ $i }} Stars</span>
@@ -36,7 +36,7 @@
 
         <!-- Dropdown -->
         <div class="col-6 col-md-8">
-            <select wire:model="ratingValue" id="ratingFilter" class="form-select"
+            <select wire:model.debounce.500ms="ratingValue" id="ratingFilter" class="form-select"
                 style="border-radius: 8px; padding: 10px; font-size: 1rem; border: 1px solid #ddd; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);">
                 <option value="0">All Ratings</option>
                 <option value="5">5 Stars</option>
@@ -88,30 +88,40 @@
 
         <!-- Pagination Links -->
         <div class="d-flex justify-content-center mt-4">
-            {{ $ratings->links() }}
+            <div wire:loading>
+                <p>Loading...</p>
+            </div>
+            <div wire:loading.remove>
+                {{ $ratings->onEachSide(1)->links() }}
+            </div>
         </div>
     </div>
 
     <!-- Add a Review -->
     @auth('user')
-        <div class="add-rating mt-4">
-            <h6 style="color: #4CAF50;">Add Your Rating</h6>
-            <div class="mb-3">
-                <label for="newRating" class="form-label" style="color: #555;">Rating:</label>
-                <select wire:model="newRating" id="newRating" class="form-select" style="border-radius: 6px;">
-                    <option value="0">Select Rating</option>
-                    @for ($i = 5; $i >= 1; $i--)
-                        <option value="{{ $i }}">{{ $i }} Stars</option>
-                    @endfor
-                </select>
-            </div>
+    <div class="add-rating mt-4">
+        <h6 style="color: #4CAF50;">Add Your Rating</h6>
 
-            <div class="mb-3">
-                <label for="comment" class="form-label" style="color: #555;">Comment:</label>
-                <textarea wire:model="comment" id="comment" rows="3" class="form-control" style="border-radius: 6px;"></textarea>
+        <!-- Star Rating -->
+        <div class="mb-3">
+            <label class="form-label" style="color: #555;">Rating:</label>
+            <div class="star-rating" style="font-size: 2rem; color: #FFD700;">
+                @for ($i = 1; $i <= 5; $i++)
+                    <i class="{{ $i <= $temporaryRating ? 'fa-solid fa-star' : 'fa-regular fa-star' }}"
+                       wire:click="$set('temporaryRating', {{ $i }})"
+                       style="cursor: pointer;"></i>
+                @endfor
             </div>
+        </div>
 
-            <button wire:click="addRating" class="btn btn-primary btn-block mt-"
+        <!-- Comment Section -->
+        <div class="mb-3">
+            <label for="comment" class="form-label" style="color: #555;">Comment:</label>
+            <textarea wire:model="comment" id="comment" rows="3" class="form-control" style="border-radius: 6px;"></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <button wire:click="submitRating" class="btn btn-primary btn-block mt-2"
             style="background-color: #4CAF50; border: none; font-size: 1rem; font-weight: bold; color: white; border-radius: 8px;">
             Submit
         </button>

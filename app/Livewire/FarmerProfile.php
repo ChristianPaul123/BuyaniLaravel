@@ -6,43 +6,21 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Auth;
 
-
-class UserProfileFarmer extends Component
+class FarmerProfile extends Component
 {
-
     use WithFileUploads;
 
-    // User data and modals visibility
     public $user;
-    public $showEditProfileModal = false;
-    public $showChangePasswordModal = false;
-
-
-    // Form fields for user profile
     public $username;
     public $email;
     public $phone_number;
     public $profile_pic;
-
-    public $form_file;
-
-    public $identification_front;
-    public $identification_back;
-
-    public $response;
-
+    public $showEditProfileModal = false;
+    public $showChangePasswordModal = false;
 
     public function mount()
     {
         $this->user = Auth::guard('user')->user();
-        //$this->form_file = $this->user->farmerforms->farmer_form;
-        //$this->identification_front = $this->user->farmerforms->identification_card_front;
-        //$this->identification_back = $this->user->farmerforms->identification_card_back;
-        //$this->response = $this->user->farmerforms->response;
-    }
-
-    public function updated()
-    {
         $this->loadUserData();
     }
 
@@ -87,19 +65,23 @@ class UserProfileFarmer extends Component
 
         // Handle profile picture upload if a new file is provided
         if ($this->profile_pic) {
+            // Define the directory path in the public folder
+            $imagePath = public_path('img/profile');
 
-            // Create a unique name and path for the new image
-            $imageName = time() . '.' . $this->profile_pic->extension();
-            $imagePath = 'img/profile/' . $this->username;
+            // Ensure the directory exists
+            if (!file_exists($imagePath)) {
+                mkdir($imagePath, 0755, true);
+            }
 
+            // Create a unique name for the uploaded file
+            $imageName = time() . '.' . $this->profile_pic->getClientOriginalExtension();
 
-            // Store the uploaded file in the public directory
-            $this->profile_pic->storePubliclyAs($imagePath, $imageName, 'public');
+            // Save the uploaded file to the public/img/profile directory
+            $this->profile_pic->storeAs('img/profile', $imageName, 'public_uploads');
 
             // Update the user's profile picture path
-            $this->user->profile_pic = $imagePath . '/' . $imageName;
+            $this->user->profile_pic = 'img/profile/' . $imageName;
         }
-
 
         // Save user updates to the database
         $this->user->save();
@@ -111,8 +93,6 @@ class UserProfileFarmer extends Component
 
     public function render()
     {
-        return view('livewire.user-profile-farmer',[
-            'user' => $this->user,
-        ]);
+        return view('livewire.farmer-profile');
     }
 }

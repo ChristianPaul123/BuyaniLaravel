@@ -1,4 +1,4 @@
-<div class="d-flex flex-row mt-5 pt-3" >
+<div class="d-flex flex-row mt-3 pt-0" >
 
     <div class="col-lg-6 login-card d-flex flex-column align-items-center justify-content-center" style="height: 500px;">
         <div class="container d-block align-items-center">
@@ -58,7 +58,7 @@
             </div>
 
              <div class="form-group my-1 d-flex justify-content-end">
-                <a wire:click.prevent="showModal()"> Forgot Password?</a>
+                <a class="clickable-forgot-password" wire:click.prevent="showModal()"> Forgot Password?</a>
             </div>
 
             <div class="container d-flex justify-content-center">

@@ -11,18 +11,22 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OrderController;
+
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FavoriteController;
-use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\UserProductController;
 use App\Http\Controllers\VotedProductsController;
+use App\Http\Controllers\BlogManagementController;
+
 use App\Http\Controllers\OrderManagementController;
 use App\Http\Controllers\ShippingAddressController;
-use App\Http\Controllers\ProductManagementController;
-use App\Http\Controllers\ProductSpecificationController;
 use App\Http\Controllers\ReportManagementController;
+
+use App\Http\Controllers\ProductManagementController;
+use App\Http\Controllers\InventoryManagementController;
+use App\Http\Controllers\ProductSpecificationController;
 
 Route::get('/', function () {
     return view('user.index');
@@ -46,11 +50,11 @@ Route::get('admin/dashboard', [AdminController::class, 'showdashboard'])->name('
 //Product Side
 //admin side
 //Product Inventory Side
-Route::get('admin/product/inventory', [InventoryController::class, 'showProductInventory'])->name('admin.product.inventory');
-Route::post('admin/product/inventory', [InventoryController::class, 'addProductInventory'])->name('admin.product.inventory.add');
-Route::get('admin/product/inventory/edit/{product}', [InventoryController::class, 'editProductInventory'])->name('admin.product.inventory.edit');
-Route::put('admin/product/inventory/edit/{product}', [InventoryController::class, 'updateProductInventory'])->name('admin.product.inventory.update');
-Route::delete('admin/product/inventory/delete/{product}', [InventoryController::class, 'deleteProductInventory'])->name('admin.product.inventory.delete');
+Route::get('admin/product/inventory', [InventoryManagementController::class, 'showProductInventory'])->name('admin.product.inventory');
+Route::post('admin/product/inventory', [InventoryManagementController::class, 'addProductInventory'])->name('admin.product.inventory.add');
+Route::get('admin/product/inventory/edit/{product}', [InventoryManagementController::class, 'editProductInventory'])->name('admin.product.inventory.edit');
+Route::put('admin/product/inventory/edit/{product}', [InventoryManagementController::class, 'updateProductInventory'])->name('admin.product.inventory.update');
+Route::delete('admin/product/inventory/delete/{product}', [InventoryManagementController::class, 'deleteProductInventory'])->name('admin.product.inventory.delete');
 
 
 Route::get('admin/product/specification', [ProductManagementController::class, 'showProducts'])->name('admin.product.index');
@@ -121,11 +125,11 @@ Route::get('admin/blog', function () {
     return view('admin.blog.blog_post');
 });
 
-Route::get('admin/blog',[BlogController::class,'showBlogs'])->name('admin.blog');
-Route::post('admin/blog',[BlogController::class,'addBlog'])->name('admin.blog.add');
-Route::get('admin/blog/edit/{blog}',[BlogController::class,'editBlog'])->name('admin.blog.edit');
-Route::put('admin/blog/update/{blog}',[BlogController::class,'updateBlog'])->name('admin.blog.update');
-Route::delete('admin/blog/delete/{blog}',[BlogController::class,'deleteBlog'])->name('admin.blog.delete');
+Route::get('admin/blog',[BlogManagementController::class,'showBlogs'])->name('admin.blog');
+Route::post('admin/blog',[BlogManagementController::class,'addBlog'])->name('admin.blog.add');
+Route::get('admin/blog/edit/{blog}',[BlogManagementController::class,'editBlog'])->name('admin.blog.edit');
+Route::put('admin/blog/update/{blog}',[BlogManagementController::class,'updateBlog'])->name('admin.blog.update');
+Route::delete('admin/blog/delete/{blog}',[BlogManagementController::class,'deleteBlog'])->name('admin.blog.delete');
 
 
 
@@ -163,13 +167,11 @@ Route::middleware(['user.type:1'])->group(function () {
 
 Route::get('user/consumer/profile', [UserController::class, 'showUserprofile'])->name('user.consumer.profile.show');
 Route::get('user/consumer/blogs', [BlogController::class, 'showConsumerBlogs'])->name('user.consumer.blog');
-
-
-Route::get('user/consumer/orders', function () {
-    return view('user.consumer.order.show');
-});
+Route::get('user/consumer/orders', [OrderController::class, 'showOrders'])->name('user.consumer.order');
 
 });
+
+
 Route::middleware(['user.type:2'])->group(function () {
 
 
@@ -197,7 +199,7 @@ Route::get('user/consumer/product/view/{product}', [UserProductController::class
 
 //cart for Consumers
 Route::get('user/consumer/cart', [CartController::class, 'showConsumerCart'])->name('user.consumer.product.cart');
-Route::get('user/consumer/cart/checkout/{cart}', [CartController::class, 'showConsumerCheckout'])->name('user.consumer.product.cart.checkout');
+Route::get('user/consumer/cart/checkout', [CartController::class, 'showConsumerCheckout'])->name('user.consumer.product.cart.checkout');
 
 Route::get('user/consumer/favorites', [FavoriteController::class, 'showConsumerFavorites'])->name('user.consumer.favorites');
 

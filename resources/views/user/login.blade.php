@@ -19,9 +19,8 @@
     .toggle-password {
         cursor: pointer;
     }
-</style>
 
-<style>
+
     @keyframes fadeInDown {
         from {
             transform: translate(-50%, -55%); /* Start from above the screen */
@@ -133,6 +132,16 @@
         position: absolute;
         top: 10px;
         right: 10px;
+    }
+
+    .clickable-forgot-password
+    {
+        cursor: pointer;
+        color: rgb(255, 255, 255)
+    }
+
+    .clickable-forgot-password:hover {
+        color: rgba(244, 225, 22, 0.974)
     }
 </style>
 

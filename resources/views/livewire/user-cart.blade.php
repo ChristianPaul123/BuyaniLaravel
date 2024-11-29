@@ -65,6 +65,8 @@
                             <p>Total price:</p>
                             <h6>${{ $cart->total_price }}</h6>
                         </div>
+
+                        <a href="{{ route('user.consumer.product.cart.checkout') }}" class="btn btn-primary w-100 mt-3">Proceed to Checkout</a>
                     </div>
                 </div>
             </div>

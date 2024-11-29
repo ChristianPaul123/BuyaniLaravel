@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -100,11 +101,22 @@ class UserController extends Controller
     //for user profile
 
     public function showUserprofile() {
+        if (!Auth::guard('user')->check()) {
+            // If not authenticated, flush the session and redirect to user index with a message
+            Session::flush();
+            return redirect()->route('user.index')->with('message', 'Please log in or sign up to view this page');
+        }
         $user = auth()->guard('user')->user();
         return view('user.consumer.profile.show', ['user' => $user]);
     }
 
     public function showFarmerprofile() {
+        if (!Auth::guard('user')->check()) {
+            // If not authenticated, flush the session and redirect to user index with a message
+            Session::flush();
+            return redirect()->route('user.index')->with('message', 'Please log in or sign up to view this page');
+        }
+
         $user = auth()->guard('user')->user();
         return view('user.farmer.farmerprofile.show', ['user' => $user]);
     }

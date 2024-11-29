@@ -12,44 +12,35 @@
 </head>
 
 <body>
-    @auth('user')
     <div class="wrapper pt-5">
         <main>
-            @if (View::hasSection('x-content'))
-            {{-- If 'x-content' section is defined, show it --}}
-            @yield('x-content')
-        @else
-        @endif
-            @yield('content')
+            @auth('user')
+                @if (View::hasSection('x-content'))
+                    @yield('x-content')
+                @endif
+                @yield('content')
+            @else
+                @if (View::hasSection('x-content'))
+                    @yield('x-content')
+                @else
+                    <p>You are not logged in. Please log in or your session has expired.</p>
+                    <p>Please <a href="{{ route('user.index') }}">log in</a> again to continue.</p>
+                @endif
+            @endauth
             @include('layouts.footer')
         </main>
         @yield('scripts')
     </div>
-        @include('layouts.script')
-    @else
-    <!-- if not authenticated -->
-    <div class="wrapper">
-        <main>
-        @if (View::hasSection('x-content'))
-            {{-- If 'x-content' section is defined, show it --}}
-            @yield('x-content')
-            @include('layouts.footer')
-        @else
-            {{-- If 'x-content' section is not defined, show "not logged in" message --}}
-            <p>You are not logged in. Please log in or your session have expired.</p>
-            <p>Please <a href="{{ route('user.index') }}">log in</a> again to continue.</p>
-        @endif
-        </main>
-        @yield('scripts')
-    </div>
-        @include('layouts.script')
-    @endauth
+    @include('layouts.script')
 
     <script>
         window.addEventListener('popstate', function(event) {
-            // If the user press the back button, log them out
-            window.location.href = "{{ route('user.logout') }}";
+            if (confirm("Are you sure you want to log out?")) {
+                window.location.href = "{{ route('user.logout') }}";
+            } else {
+                history.pushState(null, null, window.location.href);
+            }
         });
-      </script>
+    </script>
 </body>
 </html>

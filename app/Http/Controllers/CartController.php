@@ -17,7 +17,7 @@ class CartController extends Controller
         if (!Auth::guard('user')->check()) {
             // If not authenticated, flush the session and redirect to user index with a message
             Session::flush();
-            return redirect()->route('user.index')->with('message', 'Please log in first');
+            return redirect()->route('user.index')->with('message', 'Please log in or sign up to view this page');
         }
 
 
@@ -32,6 +32,15 @@ class CartController extends Controller
         return view('user.consumer.cart.show', ['cart' => $cart, 'cartItems' => $cartItems]);
 
     }
+
+    public function showConsumerCheckout()
+{
+    $cart =Auth::guard('user')->user()->cart;
+    $shippingAddresses = Auth::guard('user')->user()->shippingAddresses;
+    $cartItems = $cart->cartItems()->with('product_specification.product')->get();
+    return view('user.consumer.cart.checkout', compact('cart','shippingAddresses', 'cartItems'));
+}
+
 
 
 }

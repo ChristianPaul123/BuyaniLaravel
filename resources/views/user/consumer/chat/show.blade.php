@@ -15,6 +15,7 @@
     .message-box {
         overflow-y: auto;
         max-height: 400px;
+        min-height: 400px;
         padding: 10px;
         background-color: #e9ecef;
         border-radius: 10px;
@@ -101,37 +102,8 @@
             <h3 class="text-center" style="color: green;">Buy<span style="color: orange;">Ani</span> Chat</h3>
         </div>
 
-        <!-- Chat Container -->
-        <div class="chat-container">
-            <div class="message-box mb-3" id="chatBox">
-                <!-- Left Side Messages -->
-                <div class="message left" data-timestamp="2024-11-09 12:45 PM">
-                    <img src="https://via.placeholder.com/40" alt="User Image">
-                    <div class="text-container">
-                        <div class="user small text-muted">Kathy Robin</div>
-                        <div class="text">Hello, Kian</div>
-                        <div class="timestamp">Sent: 2024-11-09 12:45 PM</div>
-                    </div>
-                </div>
 
-                <!-- Right Side Messages -->
-                <div class="message right admin-msg" data-timestamp="2024-11-09 12:46 PM">
-                    <div class="text-container">
-                        <div class="user small text-muted">You:</div>
-                        <div class="text">Hi, Kathy</div>
-                        <div class="timestamp">Sent: 2024-11-09 12:46 PM</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Message Input -->
-            <form id="messageForm">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Message Admin" id="messageInput" required>
-                    <button class="btn btn-leaf-green" type="submit">Send</button>
-                </div>
-            </form>
-        </div>
+        @livewire('chat-user-system',['chatID' => Auth::guard('user')->user()->id])
     </div>
 </div>
 @endsection
@@ -143,6 +115,13 @@
     const messageInput = document.getElementById('messageInput');
     const chatBox = document.getElementById('chatBox');
 
+    Livewire.on('messageSent', () => {
+        const chatBox = document.getElementById('chatBox');
+        chatBox.scrollTop = chatBox.scrollHeight;
+    });
+
+
+
     messageForm.addEventListener('submit', function (e) {
         e.preventDefault();
         const newMessageText = messageInput.value.trim();
@@ -152,13 +131,13 @@
             messageDiv.className = 'message right admin-msg';
             const currentTimestamp = new Date().toLocaleString();
 
-            messageDiv.innerHTML = `
+            messageDiv.innerHTML =
                 <div class="text-container">
                     <div class="user small text-muted">You:</div>
                     <div class="text">${newMessageText}</div>
                     <div class="timestamp">Sent: ${currentTimestamp}</div>
                 </div>
-            `;
+            ;
 
             chatBox.appendChild(messageDiv);
             messageInput.value = '';
@@ -167,3 +146,40 @@
     });
 </script>
 @endpush
+
+{{-- inside livewire component --}}
+
+{{-- <div class="chat-container">
+    <div class="message-box mb-3" id="chatBox">
+        @foreach ($messages as $message)
+            @if ($message->user_id)
+                <!-- Left Side (User Message) -->
+                <div class="message right">
+                    <img src="https://via.placeholder.com/40" alt="User Image">
+                    <div class="text-container">
+                        <div class="user small text-muted">{{ $message->user->name }}</div>
+                        <div class="text">{{ $message->message_info }}</div>
+                        <div class="timestamp">Sent: {{ $message->created_at->format('Y-m-d h:i A') }}</div>
+                    </div>
+                </div>
+            @else
+                <!-- Right Side (Admin Message) -->
+                <div class="message left admin-msg">
+                    <div class="text-container">
+                        <div class="user small text-muted">Admin</div>
+                        <div class="text">{{ $message->message_info }}</div>
+                        <div class="timestamp">Sent: {{ $message->created_at->format('Y-m-d h:i A') }}</div>
+                    </div>
+                </div>
+            @endif
+        @endforeach
+    </div>
+
+    <!-- Message Input -->
+    <form wire:submit.prevent="sendMessage">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Message" wire:model="messageInput" required>
+            <button class="btn btn-leaf-green" type="submit">Send</button>
+        </div>
+    </form>
+</div> --}}

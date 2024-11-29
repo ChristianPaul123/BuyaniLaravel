@@ -19,7 +19,7 @@ class AdminTypeMiddleware
         $user = Auth::guard('admin')->user();
 
         if (!$user || $user->admin_type != $requiredType) {
-            return redirect()->route('admin.index')->with('error', 'You are not authorized to access this page');
+            return redirect()->route('admin.index')->with('message', 'You are not authorized to access this page');
         }
 
         return $next($request);

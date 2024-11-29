@@ -24,6 +24,7 @@ class Order extends Model
         'overall_orderKG',
         'total_price',
         'order_type',
+        'order_number',
         //'shipping_method',
         'order_status',
         'customer_name',

@@ -1,5 +1,10 @@
 <div class="container container-fluid" style="background-color: rgb(195, 184, 184); border-radius: 8px; padding: 20px;">
-    <section>
+
+
+    <section class="p-3">
+        <div class="d-flex justify-content-start my-5">
+            <button class="btn btn-secondary" onclick="window.history.back()">&#9754; Back</button>
+        </div>
         <h3 class="text-center mt-2" style="color: #4CAF50;">{{ $product->product_name }}</h3>
 
         <!-- Success and Error Messages -->
@@ -44,7 +49,7 @@
                 <!-- Product Specifications -->
                 <h5 style="color: #555;">Product Specifications</h5>
                 <div class="row">
-                    @foreach ($specifications as $specification)
+                    @forelse ($specifications as $specification)
                         <div class="col-12 col-md-6 mb-3">
                             <div class="card shadow-sm" style="font-size: 0.9rem; border-radius: 8px; border: none;">
                                 <div class="card-header text-center" style="background-color: #4CAF50; color: white; font-weight: bold;">
@@ -64,7 +69,11 @@
                                 </div>
                             </div>
                         </div>
-                    @endforeach
+                    @empty
+                        <div class="col-12 text-center">
+                            <p>No specifications found for this product.</p>
+                        </div>
+                    @endforelse
                 </div>
 
                 <!-- Pagination Links -->
