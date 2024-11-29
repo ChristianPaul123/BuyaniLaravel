@@ -134,6 +134,10 @@
         right: 10px;
     }
 
+    .min-height {
+        min-height: 100vh;
+    }
+
     .clickable-forgot-password
     {
         cursor: pointer;

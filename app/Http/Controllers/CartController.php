@@ -33,12 +33,20 @@ class CartController extends Controller
 
     }
 
-    public function showConsumerCheckout()
+public function showConsumerCheckout($cartId)
 {
-    $cart =Auth::guard('user')->user()->cart;
+    // Find the cart by ID
+    $cart = Cart::with('cartItems.product_specification.product')->findOrFail($cartId);
+
+    // Get the authenticated user's shipping addresses
     $shippingAddresses = Auth::guard('user')->user()->shippingAddresses;
-    $cartItems = $cart->cartItems()->with('product_specification.product')->get();
-    return view('user.consumer.cart.checkout', compact('cart','shippingAddresses', 'cartItems'));
+
+    // Pass the cart, shipping addresses, and cart items to the view
+    return view('user.consumer.cart.checkout', [
+        'cart' => $cart,
+        'shippingAddresses' => $shippingAddresses,
+        'cartItems' => $cart->cartItems, // Use related cart items
+    ]);
 }
 
 

@@ -199,7 +199,7 @@ Route::get('user/consumer/product/view/{product}', [UserProductController::class
 
 //cart for Consumers
 Route::get('user/consumer/cart', [CartController::class, 'showConsumerCart'])->name('user.consumer.product.cart');
-Route::get('user/consumer/cart/checkout', [CartController::class, 'showConsumerCheckout'])->name('user.consumer.product.cart.checkout');
+Route::get('user/consumer/cart/checkout/{cartId}', [CartController::class, 'showConsumerCheckout'])->name('user.consumer.product.cart.checkout');
 
 Route::get('user/consumer/favorites', [FavoriteController::class, 'showConsumerFavorites'])->name('user.consumer.favorites');
 

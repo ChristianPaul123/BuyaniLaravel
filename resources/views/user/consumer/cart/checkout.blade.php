@@ -21,7 +21,7 @@
 @section('content')
     @include('user.includes.navbar-consumer')
     <div class="container mt-4 mb-5">
-        <h2 class="mb-4">Checkout</h2>
+        {{-- <h2 class="mb-4">Checkout</h2>
 
         <!-- 1. Shipping Address Dropdown -->
         <div class="row mb-4">
@@ -144,7 +144,8 @@
             <div class="col-6 text-end">
                 <button class="btn btn-custom w-100">Continue</button>
             </div>
-        </div>
+        </div> --}}
+    @livewire('cart-checkout',['cartId' => $cart->id])
     </div>
 @endsection
 

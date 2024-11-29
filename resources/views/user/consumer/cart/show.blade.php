@@ -13,7 +13,7 @@
      @include('user.includes.navbar-consumer')
 
     <!-- Placeholder for AJAX Messages -->
-    @livewire('user-cart',['cart' => $cart]);
+    @livewire('user-cart',['cart' => $cart])
 @endsection
 
 @section('scripts')

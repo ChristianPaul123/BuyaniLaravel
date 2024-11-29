@@ -47,17 +47,17 @@
         <div class="tab-content mt-4" id="farmerTabsContent">
             <!-- Farmer Profile Tab -->
             <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                <livewire:farmer-profile />
+                @livewire('farmer-profile')
             </div>
 
             <!-- Farmer Address Tab -->
             <div class="tab-pane fade" id="address" role="tabpanel" aria-labelledby="address-tab">
-                <livewire:farmer-address />
+                @livewire('farmer-address')
             </div>
 
             <!-- Farmer Forms Tab -->
             <div class="tab-pane fade" id="forms" role="tabpanel" aria-labelledby="forms-tab">
-                <livewire:farmer-forms />
+                @livewire('farmer-forms')
             </div>
         </div>
     </div>

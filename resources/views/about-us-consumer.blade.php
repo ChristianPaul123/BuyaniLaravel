@@ -47,6 +47,10 @@
     .card:hover .card-text {
         color: #555;
     }
+
+    .min-height {
+        min-height: 100vh;
+    }
 </style>
 @endpush
 
@@ -55,6 +59,7 @@
 
 
 <!-- About Us Section -->
+<section class="min-height">
 <div class="container">
     <h1 class="text-center mb-4">Meet Our Team</h1>
     <div class="row text-center">
@@ -104,5 +109,5 @@
         </div>
     </div>
 </div>
-
+</section>
 @endsection

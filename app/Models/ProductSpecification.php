@@ -28,4 +28,10 @@ class ProductSpecification extends Model
     public function cartItems() {
         return $this->hasMany(CartItem::class, 'cartItems');
     }
+
+    public function orderItems() {
+        return $this->hasMany(OrderItem::class, 'orderItems');
+    }
+
+
 }

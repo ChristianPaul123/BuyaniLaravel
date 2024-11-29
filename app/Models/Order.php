@@ -19,7 +19,6 @@ class Order extends Model
     // Fillable attributes for the Order model
     protected $fillable = [
         'user_id',
-        'shipping_address_id',
         'total_amount',
         'overall_orderKG',
         'total_price',
@@ -33,7 +32,7 @@ class Order extends Model
         'customer_street',
         'customer_city',
         'customer_state',
-        'customer_zip_code',
+        'customer_zip',
         'customer_country',
         'customer_house_number',
     ];
