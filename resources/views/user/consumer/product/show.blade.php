@@ -193,6 +193,7 @@
 </div>
 @endsection
 
+{{-- etong part below ayaw nya mag run pa, pero ayos yan na code --}}
 @push('scripts')
 <script>
     function closePopup() {
