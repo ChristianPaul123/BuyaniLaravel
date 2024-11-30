@@ -92,6 +92,10 @@
         color: #999;
         font-size: 1.5rem;
     }
+
+    .min-height {
+        min-height: 100vh;
+    }
 </style>
 @endpush
 

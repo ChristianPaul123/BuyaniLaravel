@@ -15,6 +15,7 @@
                     <th>Product Name</th>
                     <th>Product Details</th>
                     <th>Product Status</th>
+                    <th>Product Stocks</th>
                     <th>Product Image</th>
                     <th>Category Name</th>
                     <th>Sub Category Name</th>
@@ -29,6 +30,7 @@
                         <td>{{ $product->product_name }}</td>
                         <td>{{ $product->product_details }}</td>
                         <td>{{ $product->status_label }}</td>
+                        <th>{{ $product->inventory->product_total_stock }}</th>
                         <td><img src="{{ asset($product->product_pic) }}" alt="{{ $product->product_name }}" width="50"></td>
                         <td>{{ $product->category->category_name }}</td>
                         <td>{{ $product->subcategory->sub_category_name }}</td>

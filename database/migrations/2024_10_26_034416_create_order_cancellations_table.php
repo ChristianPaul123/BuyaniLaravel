@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
             $table->string('cancelled_by')->nullable();
             $table->string('reason')->nullable();
-            $table->string('status')->nullable();
+            // $table->string('status')->nullable();
             $table->timestamps();
         });
     }

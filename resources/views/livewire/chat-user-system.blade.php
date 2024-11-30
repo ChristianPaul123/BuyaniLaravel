@@ -1,10 +1,12 @@
+<div class="min-height">
 <div class="chat-container">
+    <section>
     <div class="message-box mb-3" id="chatBox">
         @foreach ($messages as $message)
             @if ($message->user_id)
                 <!-- Left Side (User Message) -->
                 <div class="message right">
-                    <img src="https://via.placeholder.com/40" alt="User Image">
+                    {{-- <img src="{{ auth()->guard('user')->user()->profile_pic ? asset(auth()->guard('user')->user()->profile_pic) : asset('img/logo1.svg') }}" class="user-image" alt="User Image"> --}}
                     <div class="text-container">
                         <div class="user small text-muted">You:</div>
                         {{-- <div class="user small text-muted">{{ $message->user->username }}</div> --}}
@@ -32,4 +34,6 @@
             <button class="btn btn-leaf-green" type="submit">Send</button>
         </div>
     </form>
+    </section>
+</div>
 </div>

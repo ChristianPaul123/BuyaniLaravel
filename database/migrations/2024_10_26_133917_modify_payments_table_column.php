@@ -15,11 +15,11 @@ return new class extends Migration
             // Add payment_amount as decimal(10,2) following cart style
             $table->decimal('payment_amount', 10, 2)->after('order_id');
 
-            // Modify payment_method to integer with default 0
-            $table->integer('payment_method')->default(0)->change();
+            // Modify payment_status to integer with default 0
+            $table->integer('payment_status')->default(0)->change();
 
-            // Modify payment_status and payment_pic to be nullable
-            $table->string('payment_status')->nullable()->change();
+            // Modify payment_method and payment_pic to be nullable
+            $table->string('payment_method')->nullable()->change();
             $table->string('payment_pic')->nullable()->change();
 
             // Add accepted_by as unsigned big integer and set it as nullable

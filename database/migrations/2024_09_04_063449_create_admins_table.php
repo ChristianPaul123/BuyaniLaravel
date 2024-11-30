@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('profile_pic')->nullable();
             $table->integer('status')->nullable();
             $table->string('last_online')->nullable();
-            $table->timestamp('email_verified_at')->nullable();
+            //$table->timestamp('email_verified_at')->nullable();
             $table->timestamps();
         });
     }

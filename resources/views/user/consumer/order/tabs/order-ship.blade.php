@@ -8,7 +8,8 @@
                     <th>Overall Weight (KG)</th>
                     <th>Total Price</th>
                     <th>Order Status</th>
-                    <th>View Order Information</th>
+                    <th>Customer Name</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,10 +24,15 @@
                                 {{ $order->getStatusLabelAttribute() }}
                             </span>
                         </td>
+                        <td>{{ $order->customer_name }}</td>
+                        <td>
+                            <a class="btn btn-primary" href="{{ route('user.consumer.order.details', $order->id)}}">View</a>
+                            <a class="btn btn-secondary" href="{{ route('user.consumer.order.track', $order->id)}}">Track</a>
+                        </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="5" class="text-center">No orders to standby</td>
+                        <td colspan="7" class="text-center">No orders Yet!</td>
                     </tr>
                 @endforelse
             </tbody>

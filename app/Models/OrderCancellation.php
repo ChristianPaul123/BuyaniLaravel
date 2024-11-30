@@ -13,7 +13,6 @@ class OrderCancellation extends Model
         'order_id',
         'cancelled_by',
         'reason',
-        'status',
     ];
 
     // Relationships

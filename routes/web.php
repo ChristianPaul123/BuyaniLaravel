@@ -168,6 +168,10 @@ Route::middleware(['user.type:1'])->group(function () {
 Route::get('user/consumer/profile', [UserController::class, 'showUserprofile'])->name('user.consumer.profile.show');
 Route::get('user/consumer/blogs', [BlogController::class, 'showConsumerBlogs'])->name('user.consumer.blog');
 Route::get('user/consumer/orders', [OrderController::class, 'showOrders'])->name('user.consumer.order');
+Route::get('user/consumer/order/{id}', [OrderController::class, 'showOrderDetails'])->name('user.consumer.order.details');
+Route::get('user/consumer/order/cancel/{id}', [OrderController::class, 'cancelOrder'])->name('user.consumer.order.cancel');
+Route::post('user/consumer/order/cancel/{id}', [OrderController::class, 'cancelOrderSubmit'])->name('user.consumer.order.cancel.submit');
+Route::get('user/consumer/order/track/{id}', [OrderController::class, 'showOrderTrack'])->name('user.consumer.order.track');
 
 });
 

@@ -106,4 +106,5 @@ class User extends Authenticatable
 
         return $statuses[$this->status] ?? 'Unknown Status';
     }
+
 }

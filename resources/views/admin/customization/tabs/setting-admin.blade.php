@@ -1,3 +1,4 @@
+<section class="min-height">
 <div class="card">
     <div class="card-header">
         <h4>Admin Settings</h4>
@@ -15,3 +16,4 @@
         </div>
     </div>
 </div>
+</section>

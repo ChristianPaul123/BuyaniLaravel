@@ -26,7 +26,7 @@ class OrderItem extends Model
     }
 
     // Define a relationship with the Product Specificition model
-    public function productspecification() {
+    public function productSpecification() {
         return $this->belongsTo(ProductSpecification::class);
     }
 

@@ -41,7 +41,7 @@
                 <li class="nav-item px-1 position-relative">
                     <a class="nav-link @if(request()->is('user/consumer/cart')) active @endif" href="/user/consumer/cart" data-page="cart">
                         <i class="fas fa-shopping-basket" style="font-size: 25px;"></i>
-                        <span class="notification-circle"></span>
+
                     </a>
                 </li>
 
@@ -49,7 +49,7 @@
                 <li class="nav-item px-1 position-relative">
                     <a class="nav-link @if(request()->is('user/consumer/favorites')) active @endif" href="/user/consumer/favorites" data-page="favorites">
                         <i class="fas fa-heart" style="font-size: 25px;"></i>
-                        <span class="notification-circle"></span>
+
                     </a>
                 </li>
 
@@ -57,7 +57,7 @@
                 <li class="nav-item px-1 position-relative">
                     <a class="nav-link @if(request()->is('user/consumer/chat')) active @endif" href="/user/consumer/chat" data-page="chat">
                         <i class="fas fa-comment-alt" style="font-size: 25px;"></i>
-                        <span class="notification-circle"></span>
+
                     </a>
                 </li>
 

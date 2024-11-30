@@ -89,6 +89,10 @@
     .btn-leaf-green:hover {
         background-color: #5a9e2a;
     }
+
+    .min-height {
+        min-height: 100vh;
+    }
 </style>
 @endpush
 

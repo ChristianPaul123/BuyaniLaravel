@@ -1,5 +1,5 @@
 <div class="container mt-5 mb-5">
-    <section class="container-fluid">
+    <section class="container-fluid min-height">
         <h2 class="mb-4">Shopping Cart</h2>
         @if(session()->has('message'))
         <div class="alert alert-success mt-3">{{ session('message') }}</div>
@@ -71,6 +71,5 @@
                 </div>
             </div>
         </div>
-
     </section>
 </div>

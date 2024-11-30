@@ -1,17 +1,49 @@
 <!-- Manage Admins Tab -->
-<div class="tab-pane fade" id="manage-admins" role="tabpanel" aria-labelledby="manage-admins-tab">
+
+<section class="min-height">
+<div>
     <div class="table-responsive">
         <table id="adminTable" class="table table-bordered">
-            <thead>
+          <thead>
                 <tr>
                     <th>Username</th>
                     <th>Email</th>
                     <th>Admin Type</th>
-                    <th>Status</th>
-                    <th>Deactivation Status</th>
+                    <th>Online Status</th>
+                    <th>Last Online</th>
+                    <th>Deactivated Date</th>
+                    <th>Deactived Status</th>
                     <th>Actions</th>
                 </tr>
             </thead>
+        {{-- <tbody>
+                @foreach ($admins as $admin)
+                <tr>
+                    <td>{{ $admin->username }}</td>
+                    <td>{{ $admin->email }}</td>
+                    <td>{{ $admin->admin_type }}</td>
+                    <td>{{ $admin->status == 1 ? 'Active' : 'Inactive' }}</td>
+                    <td>{{ $admin->last_online }}</td>
+                    <td>{{ $admin->deactivated_date }}</td>
+                    <td>{{ $admin->deactivated_status == 1 ? 'Deactivated' : 'Active' }}</td>
+                    <td class="table-action-buttons">
+                        <a href="{{ route('admin.edit', $admin->id) }}" class="btn btn-warning btn-sm">Edit</a>
+
+                        @if($admin->deactivated_status == 0)
+                            <form action="{{ route('admin.deactivate', $admin->id) }}" method="POST" class="d-inline">
+                                @csrf
+                                <button class="btn btn-danger btn-sm">Deactivate</button>
+                            </form>
+                        @else
+                            <form action="{{ route('admin.activate', $admin->id) }}" method="POST" class="d-inline">
+                                @csrf
+                                <button class="btn btn-success btn-sm">Activate</button>
+                            </form>
+                        @endif
+                    </td>
+                </tr>
+                @endforeach
+            </tbody> --}}
             <tbody>
                 @foreach ($admins as $admin)
                 <tr>
@@ -24,7 +56,10 @@
                             @case(3) Employee @break
                         @endswitch
                     </td>
+
                     <td>{{ $admin->status == 1 ? 'Active' : 'Inactive' }}</td>
+                    <td>{{ $admin->last_online }}</td>
+                    <td>{{ $admin->deactivated_date }}</td>
                     <td>{{ $admin->deactivated_status == 1 ? 'Deactivated' : 'Active' }}</td>
                     <td class="table-action-buttons">
                         <a href="{{ route('admin.edit', $admin->id) }}" class="btn btn-warning btn-sm">Edit</a>
@@ -46,7 +81,6 @@
             </tbody>
         </table>
     </div>
-</div>
 
 <!-- Add Admin Modal -->
 <div class="modal fade" id="addAdminModal" tabindex="-1" aria-labelledby="addAdminModalLabel" aria-hidden="true">
@@ -86,3 +120,5 @@
         </div>
     </div>
 </div>
+</div>
+</section>

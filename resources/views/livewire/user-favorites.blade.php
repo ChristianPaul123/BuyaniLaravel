@@ -1,8 +1,9 @@
 <div>
+    <section class="min-height">
     <!-- Wishlist Header -->
     <div class="wishlist-header text-center my-4">
         <i class="fas fa-heart" style="font-size: 3rem; color: #f39c12;"></i>
-        <h1>My Wishlist</h1>
+        <h1>My Favorites</h1>
     </div>
 
     @if ($message)
@@ -22,7 +23,7 @@
                 <thead>
                     <tr>
                         <th>Product Name</th>
-                        <th>Unit Price</th>
+
                         <th>Stock Status</th>
                         <th>Action</th>
                     </tr>
@@ -34,11 +35,11 @@
                                 <img src="{{ asset($favorite->product->product_pic) }}" alt="Product" style="width: 80px; height: 80px; object-fit: cover; margin-right: 10px;">
                                 {{ $favorite->product->product_name }}
                             </td>
+                            {{-- <td>
+                                <strong>${{ $favorite->product->productSpecification }}</strong>
+                            </td> --}}
                             <td>
-                                <strong>${{ $favorite->product->price }}</strong>
-                            </td>
-                            <td>
-                                @if ($favorite->product->inventory && $favorite->product->inventory->quantity > 0)
+                                @if ($favorite->product->inventory && $favorite->product->inventory->product_total_stock > 0)
                                     <span class="stock-status text-success">In Stock</span>
                                 @else
                                     <span class="out-of-stock text-danger">Out of Stock</span>
@@ -58,4 +59,5 @@
             </table>
         </div>
     @endif
+    </section>
 </div>

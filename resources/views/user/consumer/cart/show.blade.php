@@ -7,6 +7,10 @@
     .small-input {
         width: 80px; /* Adjust this value to change the width */
     }
+
+    .min-height {
+        min-height: 100vh; /* Adjust this value to change the height */
+    }
 </style>
 @endpush
 @section('content')

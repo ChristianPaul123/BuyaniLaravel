@@ -4,25 +4,6 @@
 
 @push('styles')
 <style>
-    .navbar-category {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    background-color: #175593;
-    border-bottom: 1px solid #ddd;
-    }
-    .navbar-nav .nav-link {
-        color: #333;
-    }
-    .navbar-nav .nav-link.active {
-        font-weight: bold;
-    }
-    .message {
-        color: black;
-        font-size: 25px;
-    }
-
     .tab-content .order-card {
         border: 1px solid #dee2e6;
         border-radius: 5px;
@@ -41,6 +22,91 @@
         padding: 0.2rem 0.5rem;
         border-radius: 3px;
     }
+
+    /* .order-header {
+        text-align: center;
+        padding: 2rem 0;
+        font-family: 'Arial', sans-serif;
+        color: #175593;
+    }
+
+    .order-header i {
+        font-size: 3rem;
+        color: #ff6b6b;
+    }
+
+    .order-header h1 {
+        margin-top: 0.5rem;
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    .order-container {
+        margin: 2rem auto;
+        max-width: 1200px;
+    }
+
+    .order-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.5rem 0;
+    }
+
+    .order-table th, .order-table td {
+        padding: 1rem;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .order-table th {
+        font-weight: bold;
+        color: #333;
+        text-transform: uppercase;
+    }
+
+    .order-table .order-status {
+        font-weight: bold;
+        padding: 0.3rem 0.6rem;
+        border-radius: 5px;
+    }
+
+    .order-table .status-standby { background-color: #6c757d; color: white; }
+    .order-table .status-to-pay { background-color: #ffc107; color: black; }
+    .order-table .status-to-ship { background-color: #0d6efd; color: white; }
+    .order-table .status-completed { background-color: #28a745; color: white; }
+    .order-table .status-cancelled { background-color: #dc3545; color: white; }
+
+    .btn-view {
+        background-color: #2d6a4f;
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    .btn-view:hover {
+        background-color: #175593;
+    }
+
+    .btn-cancel {
+        background-color: transparent;
+        border: none;
+        color: #ff6b6b;
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: color 0.3s;
+    }
+
+    .btn-cancel:hover {
+        color: #ff4d4d;
+    }
+
+    .order-empty {
+        text-align: center;
+        color: #999;
+        font-size: 1.5rem;
+    } */
 
     .status-standby { background-color: #6c757d; color: white; }
     .status-to-pay { background-color: #ffc107; color: black; }
@@ -87,47 +153,27 @@
             <div class="tab-content mt-3" id="orderTabsContent">
                     <!-- Standby Orders -->
                     <div class="tab-pane fade show active" id="standby" role="tabpanel">
-                        @forelse($ordersToStandby as $order)
-                            @include('user.consumer.order.tabs.order-standby', ['order' => $order])
-                        @empty
-                            <p>No orders in this status.</p>
-                        @endforelse
+                            @include('user.consumer.order.tabs.order-standby', ['order' => $ordersToStandby])
                     </div>
 
                     <!-- To Pay Orders -->
                     <div class="tab-pane fade" id="to-pay" role="tabpanel">
-                        @forelse($ordersToPay as $order)
-                            @include('user.consumer.order.tabs.order-pay', ['order' => $order])
-                        @empty
-                            <p>No orders in this status.</p>
-                        @endforelse
+                            @include('user.consumer.order.tabs.order-pay', ['order' => $ordersToPay])
                     </div>
 
                     <!-- To Ship Orders -->
                     <div class="tab-pane fade" id="to-ship" role="tabpanel">
-                        @forelse($ordersToShip as $order)
-                            @include('user.consumer.order.tabs.order-ship', ['order' => $order])
-                        @empty
-                            <p>No orders in this status.</p>
-                        @endforelse
+                            @include('user.consumer.order.tabs.order-ship', ['order' => $ordersToShip])
                     </div>
 
                     <!-- Completed Orders -->
                     <div class="tab-pane fade" id="completed" role="tabpanel">
-                        @forelse($ordersCompleted as $order)
-                            @include('user.consumer.order.tabs.order-completed', ['order' => $order])
-                        @empty
-                            <p>No orders in this status.</p>
-                        @endforelse
+                            @include('user.consumer.order.tabs.order-completed', ['order' => $ordersCompleted])
                     </div>
 
                     <!-- Cancelled Orders -->
                     <div class="tab-pane fade" id="cancelled" role="tabpanel">
-                        @forelse($ordersCancelled as $order)
-                            @include('user.consumer.order.tabs.order-cancelled', ['order' => $order])
-                        @empty
-                            <p>No orders in this status.</p>
-                        @endforelse
+                            @include('user.consumer.order.tabs.order-cancelled', ['order' => $ordersCancelled])
                     </div>
                 </div>
             </div>

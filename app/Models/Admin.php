@@ -57,4 +57,14 @@ class Admin extends Authenticatable
         return $this->HasMany(Blog::class);
     }
 
+    // public function getAdminTypeAttribute() {
+    //     $types = [
+    //         1 => 'Owner',
+    //         2 => 'Assistant',
+    //         3 => 'Employee',
+    //     ];
+    //     return $types[$this->attributes['admin_type']] ?? 'Unknown Type';
+
+    // }
+
 }
