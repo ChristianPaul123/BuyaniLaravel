@@ -23,9 +23,9 @@
                 <div>
                     <div class="overlay" id="overlay" aria-label="Close" onclick="closePopup()"></div>
 
-                    <div class="popup check">
+                    <div class="popup success">
                         <i class="close bi bi-x-lg fs-4" aria-label="Close" onclick="closePopup()"></i>
-                        <div class="icon-container check-bg">
+                        <div class="icon-container success-bg">
                             <i class="icon bi bi-check-circle"></i>
                         </div>
                         <div class="container-contents">
