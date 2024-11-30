@@ -26,10 +26,6 @@ class RegisterUser extends Component
     public $showModal = false;
 
 
-    protected $rules = [
-        'otp' => 'required|numeric|digits:6',
-    ];
-
 
     public function mount($user_type)
     {
@@ -50,7 +46,7 @@ class RegisterUser extends Component
 
     public function closeModal()
     {
-        $this->reset(['otp', 'showModal','username', 'password','email']);
+        $this->reset(['otp', 'showModal']);
         // Reset OTP and hide modal
     }
 
@@ -102,7 +98,7 @@ class RegisterUser extends Component
 
     Mail::to($email)->send(new HelloMail($otp));
     // Flash a success message to indicate OTP was resent
-    session()->flash('message', 'A new OTP has been sent to your email.');
+    //session()->flash('message', 'A new OTP has been sent to your email.');
 
     } catch (\Exception $e) {
         // Flash an error message if there's an issue resending the OTP
