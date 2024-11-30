@@ -31,7 +31,8 @@
     }
 
     .main-section {
-    max-height: 40rem;
+    min-height: 90vh;
+    max-height: 90vh;
     }
     .tab-pane {
         margin-top: 20px;
@@ -43,7 +44,7 @@
 <div class="container-fluid">
     <div class="row">
         @include('admin.includes.sidebar')
-        <section class="col-md-10 ml-sm-auto col-lg-10 px-3 py-2">
+        <section class="col-md-10 ml-sm-auto col-lg-10 px-3 py-2 main-section">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-1 pb-2 mb-3 border-bottom">
                 <h1 class="h2">Order Management</h1>
             </div>

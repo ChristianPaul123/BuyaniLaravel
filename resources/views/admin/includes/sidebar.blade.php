@@ -1,5 +1,5 @@
 <nav class="col-sm-2 d-none d-md-block bg-light sidebar">
-    <div class="sidebar-sticky">
+    <div class="sidebar-sticky min-height">
         <ul class="nav flex-column text-nowrap">
             <!-- Dashboard -->
             <li class="nav-item">
@@ -67,7 +67,7 @@
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="communityDropdown">
                     <li><a class="dropdown-item" href="#"> <i class="fas fa-star me-2"></i> Reviews</a></li>
-                    <li><a class="dropdown-item" href="#">  <i class="fas fa-blog me-2"></i> Blogs</a></li>
+                    <li><a class="dropdown-item"  href="/admin/blog">  <i class="fas fa-blog me-2"></i> Blogs</a></li>
                     <li><a class="dropdown-item" href="#">  <i class="fas fa-poll me-2"></i> Votes</a></li>
                 </ul>
             </li>

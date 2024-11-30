@@ -51,7 +51,8 @@
     }
 
     .main-section {
-    max-height: 31rem;
+    min-height: 90vh;
+    max-height: 90vh;
     }
 </style>
 @endpush

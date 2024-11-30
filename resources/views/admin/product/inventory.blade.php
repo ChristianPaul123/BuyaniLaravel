@@ -4,8 +4,9 @@
 
 @push('styles')
 <style>
-    .main-section {
-    max-height: 36rem;
+.main-section {
+    min-height: 90vh;
+    max-height: 90vh;
 }
 .tab-pane {
     margin-top: 20px;

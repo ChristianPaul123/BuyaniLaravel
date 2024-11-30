@@ -31,7 +31,8 @@
     }
 
     .main-section {
-    max-height: 35rem;
+    min-height: 90vh;
+    max-height: 90vh;
     }
     .tab-pane {
         margin-top: 20px;

@@ -6,16 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <title>@yield('title', 'Default Title')</title>
-    <link rel="icon" type="image/png" href="{{ asset('img/logo1.svg') }}">
+    <link rel="icon" href="{{ asset('img/logo1.svg') }}" type="image/png">
     @include('layouts.admin-head')
     @include('admin.styles.admin_styles')
     @stack('styles')
 </head>
 <body>
 @auth('admin')
+    <section class="min-height">
     @include('admin.includes.navbar')
     @yield('content')
     @yield('scripts')
+    </section>
 @else
     <script>
         window.location.href = "{{ route('session.expire') }}";
