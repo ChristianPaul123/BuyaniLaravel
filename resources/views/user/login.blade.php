@@ -20,7 +20,8 @@
         cursor: pointer;
     }
 
-
+</style>
+<style>
     @keyframes fadeInDown {
         from {
             transform: translate(-50%, -55%); /* Start from above the screen */
@@ -76,10 +77,9 @@
         animation: fadeOut 0.2s ease-in forwards; /* Fade out animation for the overlay */
     }
 
-    .error-popup {
+    .popup {
         width: 400px;
         background-color: #ffffff;
-        color: #842029;
         border: 1px solid black;
         border-radius: 5px;
         position: fixed;
@@ -93,7 +93,7 @@
         animation: fadeInDown 0.3s ease-out forwards; /* Slide down animation for the modal */
     }
 
-    .error-popup.hidden {
+    .popup.hidden {
         animation: fadeOutUp 0.3s ease-in forwards; /* Slide up animation for the modal */
     }
 
@@ -101,12 +101,11 @@
         padding: 20px;
     }
 
-    .error-popup .error-icon {
+    .popup .icon-container {
         display: flex;
         justify-content: center;
         align-items: center;
         height: 120px;
-        background-color: #e85e6c;
         font-size: 60px;
     }
 
@@ -119,15 +118,15 @@
         cursor: pointer;
     }
 
-    .error-popup button:hover {
+    .popup button:hover {
         background-color: #e0a800;
     }
 
-    .error-icon .icon {
+    .icon-container .icon {
         color: #ffffff;
     }
 
-    .error-popup .bi-x-lg {
+    .popup .close {
         color: #fff;
         position: absolute;
         top: 10px;
@@ -148,6 +147,24 @@
         color: rgba(244, 225, 22, 0.974)
     }
 </style>
+
+<style>
+    .error{
+        color: #842029;
+    }
+    .error-bg{
+        background-color: #e85e6c;
+    }
+
+    .success{
+        color: #208428;
+    }
+    .success-bg{
+        background-color: #42dc3d;
+    }
+</style>
+
+
 
 @endpush
 @section('x-content')
@@ -183,7 +200,7 @@
 <script>
     function closePopup() {
         const overlay = document.getElementById('overlay');
-        const popup = document.querySelector('.error-popup');
+        const popup = document.querySelector('.popup');
 
         // Add the hidden class to trigger the fade-out animation
         overlay.classList.add('hidden');
@@ -198,7 +215,7 @@
 
     function showPopup() {
         const overlay = document.getElementById('overlay');
-        const popup = document.querySelector('.error-popup');
+        const popup = document.querySelector('.popup');
 
         // Show elements and remove hidden class for fade-in animation
         overlay.style.display = 'block';

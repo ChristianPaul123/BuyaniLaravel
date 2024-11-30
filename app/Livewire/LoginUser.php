@@ -20,6 +20,8 @@ class LoginUser extends Component
     public $password='';
 
     public $user_type='';
+    public $sucess;
+    public $error;
 
     public $otp;
     public $newPassword;
@@ -70,10 +72,10 @@ class LoginUser extends Component
                 }
                 // Redirect to the appropriate dashboard based on user type
                 $route = $user->user_type == 1 ? 'user.consumer' : 'user.farmer';
-                return redirect()->route($route)->with('message', 'Login successful');
+                return redirect()->route($route)->with('success', 'Login successful');
 
             } else {
-                session()->flash('message', 'Invalid username or password. Please try again.');
+                session()->flash('error', 'Invalid username or password. Please try again.');
                 //$this->message = 'Invalid username or password. Please try again.';
             }
     }
@@ -111,7 +113,7 @@ class LoginUser extends Component
         // Open OTP modal
         $this->showOtpModal = true;
         Mail::to($this->email)->send(new VerificationMail($otp));
-        session()->flash('message', 'A password reset OTP has been sent to your email.');
+        session()->flash('success', 'A password reset OTP has been sent to your email.');
     }
 
     public function verifyOtp()
@@ -138,7 +140,7 @@ class LoginUser extends Component
             $this->showEmailModal = false;
             $this->showPasswordResetForm = true;
 
-            session()->flash('message', 'OTP confirmed Please input your new password.');
+            session()->flash('success', 'OTP confirmed Please input your new password.');
         } else {
             session()->flash('error', 'Invalid or expired OTP. Please try again.');
         }
@@ -158,7 +160,7 @@ class LoginUser extends Component
             $user->save();
 
             // Flash success message and redirect
-            session()->flash('message', 'Password has been reset successfully.');
+            session()->flash('success', 'Password has been reset successfully.');
             $this->reset(['otp', 'showEmailModal','showOtpModal','showPasswordResetForm','email', 'newPassword']);
             return redirect()->route('user.login', ['user_type' => $this->user_type]);
         } else {
@@ -167,6 +169,6 @@ class LoginUser extends Component
     }
     public function render()
     {
-        return view('livewire.login-user',['message' => session('message')]);
+        return view('livewire.login-user',['success' => session('success'),['error' => session('error')]]);
     }
 }

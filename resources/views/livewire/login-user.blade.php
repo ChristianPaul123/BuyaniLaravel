@@ -3,24 +3,39 @@
     <div class="col-lg-6 login-card d-flex flex-column align-items-center justify-content-center" style="height: 500px;">
         <div class="container d-block align-items-center">
 
-            @if (session('message'))
-            <div>
-                <div class="overlay" id="overlay" aria-label="Close" onclick="closePopup()"></div>
+            @if (session('error'))
+                <div>
+                    <div class="overlay" id="overlay" aria-label="Close" onclick="closePopup()"></div>
 
-                <div class="error-popup">
-                    <i class="bi bi-x-lg fs-4" aria-label="Close" onclick="closePopup()"></i>
-                    <div class="error-icon">
-                        <i class="icon bi bi-x-circle"></i>
-                    </div>
-                    <div class="container-contents">
-                        <h3>Ooops!</h3>
-                        <p>{{ session('message') }}</p>
-                        {{-- <button onclick="">Button</button> --}}
+                    <div class="popup error">
+                        <i class="close bi bi-x-lg fs-4" aria-label="Close" onclick="closePopup()"></i>
+                        <div class="icon-container error-bg">
+                            <i class="icon bi bi-x-circle"></i>
+                        </div>
+                        <div class="container-contents">
+                            <h3>Oops!</h3>
+                            <p>{{ session('error') }}</p>
+                        </div>
                     </div>
                 </div>
-
-            </div>
             @endif
+            @if (session('success'))
+                <div>
+                    <div class="overlay" id="overlay" aria-label="Close" onclick="closePopup()"></div>
+
+                    <div class="popup check">
+                        <i class="close bi bi-x-lg fs-4" aria-label="Close" onclick="closePopup()"></i>
+                        <div class="icon-container check-bg">
+                            <i class="icon bi bi-check-circle"></i>
+                        </div>
+                        <div class="container-contents">
+                            <h3>Yay!</h3>
+                            <p>{{ session('success') }}</p>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
             <div class="container-fluid custom-font-content p-2 mt-5 d-flex">
                 <nav aria-label="breadcrumb d-flex">
                     <ol class="breadcrumb">
