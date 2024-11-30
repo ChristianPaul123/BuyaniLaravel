@@ -10,9 +10,20 @@
     </div>
 
     @if (session('message'))
-    <div class="alert alert-danger text-center my-3 d-block position-absolute col-12">
-        {{ session('message') }}
-    </div>
+        <div>
+            <div class="overlay" id="overlay" aria-label="Close" onclick="closePopup()"></div>
+
+            <div class="popup error">
+                <i class="close bi bi-x-lg fs-4" aria-label="Close" onclick="closePopup()"></i>
+                <div class="icon-container error-bg">
+                    <i class="icon bi bi-x-circle"></i>
+                </div>
+                <div class="container-contents">
+                    <h3>Oops!</h3>
+                    <p>The OTP you have inputted does not match.</p>
+                </div>
+            </div>
+        </div>
     @endif
 
     {{-- Display validation errors --}}
@@ -145,7 +156,7 @@
     @endif
 
     @if($showModal)
-    <div class="modal fade show d-block" tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5);">
+    <div class="modal fade show d-block" tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5); z-index: 50;">
         <div class="modal-dialog" role="document">
             <div class="col-12">
                 <h2 class="text-center my-3 mx-2" style="font-size: 40px; white-space: nowrap;">Sign Up As Consumer</h2>
