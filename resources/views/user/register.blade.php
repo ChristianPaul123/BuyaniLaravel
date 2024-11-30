@@ -214,37 +214,28 @@
 @endsection
 @section('scripts')
 <script>
+    // Function to toggle password visibility for both fields
+    function toggleBothPasswordFields() {
+        const passwordField1 = document.getElementById('password');
+        const passwordField2 = document.getElementById('password2');
+        const toggleIcons = document.querySelectorAll('.toggle-password i');
 
-        //Toggle function for password fields
-    function togglePasswordVisibility(passwordFieldId, toggleIcon) {
-        const passwordField = document.getElementById(passwordFieldId);
-        const icon = toggleIcon.querySelector('i');
+        // Toggle field types and update icons
+        const isPasswordVisible = passwordField1.type === 'text';
+        passwordField1.type = isPasswordVisible ? 'password' : 'text';
+        passwordField2.type = isPasswordVisible ? 'password' : 'text';
 
-        // Toggle the password field type and icon class
-        if (passwordField.type === 'password') {
-            passwordField.type = 'text';
-            icon.classList.replace('fa-eye', 'fa-eye-slash');
-        } else {
-            passwordField.type = 'password';
-            icon.classList.replace('fa-eye-slash', 'fa-eye');
-        }
+        // Update all toggle icons
+        toggleIcons.forEach(icon => {
+            icon.classList.toggle('fa-eye', isPasswordVisible);
+            icon.classList.toggle('fa-eye-slash', !isPasswordVisible);
+        });
     }
 
-    // Event listeners for the password toggle icons
-    document.getElementById('togglePassword').addEventListener('click', function () {
-        togglePasswordVisibility('password', this);
+    // Add click event listener to both toggle elements
+    document.querySelectorAll('.toggle-password').forEach(toggleElement => {
+        toggleElement.addEventListener('click', toggleBothPasswordFields);
     });
-    document.getElementById('togglePasswordConfirm').addEventListener('click', function () {
-        togglePasswordVisibility('password2', this);
-    });
-
-    // document.getElementById('togglePasswordfarm').addEventListener('click', function () {
-    //     togglePasswordVisibility('password3', this);
-    // });
-
-    // document.getElementById('togglePasswordfarmConfirm').addEventListener('click', function () {
-    //     togglePasswordVisibility('password4', this);
-    // });
 </script>
 
 <script>

@@ -51,34 +51,35 @@
                             </div>
                       </div>
                       <div class="col-lg-4 offset-lg-2 mb-4">
-                          <div class="form-group my-3">
-                              <label for="password">Password:</label>
-                              <div class="input-group">
-                                  <input type="password" wire:model="password" class="form-control" id="password" placeholder="Enter password" minlength="8" required>
-                                  <div class="input-group-append">
-                                      <span class="input-group-text toggle-password" id="togglePassword"
-                                          style="height: 100%; width: 40px; border-top-left-radius: 0px; border-bottom-left-radius: 0px; display: flex; align-items: center; justify-content: center;">
-                                          <i class="fas fa-eye"></i>
-                                      </span>
-                                  </div>
-                              </div>
-                              @error('password') <span class="text-warning">{{ $message }}</span> @enderror
-                              <input type="hidden" name="user_type" value="{{ $user_type }}">
-                          </div>
-                          <div class="form-group my-3">
-                              <label for="password2">Confirm Password:</label>
-                              <div class="input-group">
-                                  <input type="password" wire:model="password_confirmation" class="form-control" id="password2" placeholder="Re-enter password" required>
-                                  <div class="input-group-append">
-                                        <span class="input-group-text toggle-password" id="togglePasswordConfirm"
+                        <div class="form-group my-3">
+                            <label for="password">Password:</label>
+                            <div class="input-group">
+                                <input type="password" wire:model="password" class="form-control" id="password" placeholder="Enter password" minlength="8" required>
+                                <div class="input-group-append">
+                                    <span class="input-group-text toggle-password" id="togglePassword"
                                         style="height: 100%; width: 40px; border-top-left-radius: 0px; border-bottom-left-radius: 0px; display: flex; align-items: center; justify-content: center;">
                                         <i class="fas fa-eye"></i>
-                                        </span>
-                                  </div>
+                                    </span>
+                                </div>
+                            </div>
+                            @error('password') <span class="text-warning">{{ $message }}</span> @enderror
+                            <input type="hidden" name="user_type" value="{{ $user_type }}">
+                        </div>
+                        <div class="form-group my-3">
+                            <label for="password2">Confirm Password:</label>
+                            <div class="input-group">
+                                <input type="password" wire:model="password_confirmation" class="form-control" id="password2" placeholder="Re-enter password" required>
+                                <div class="input-group-append">
+                                    <span class="input-group-text toggle-password" id="togglePassword"
+                                        style="height: 100%; width: 40px; border-top-left-radius: 0px; border-bottom-left-radius: 0px; display: flex; align-items: center; justify-content: center;">
+                                        <i class="fas fa-eye"></i>
+                                    </span>
+                                </div>
                             </div>
                             @error('password_confirmation') <span class="text-warning">{{ $message }}</span> @enderror
-                          </div>
-                      </div>
+                        </div>
+                    </div>
+
                   </div>
                   <!-- Submit Button -->
                   <div class="row form-group my-3 d-flex justify-content-center">
