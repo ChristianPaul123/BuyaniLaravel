@@ -54,7 +54,15 @@
                         <div class="form-group my-3">
                             <label for="password">Password:</label>
                             <div class="input-group">
-                                <input type="password" wire:model="password" class="form-control" id="password" placeholder="Enter password" minlength="8" required>
+                                <input type="password"
+                                       wire:model="password"
+                                       class="form-control"
+                                       id="password"
+                                       placeholder="Enter password"
+                                       minlength="8"
+                                       pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                                       title="Must contain at least one number, one uppercase letter, one lowercase letter, and at least 8 or more characters"
+                                       required>
                                 <div class="input-group-append">
                                     <span class="input-group-text toggle-password" id="togglePassword"
                                         style="height: 100%; width: 40px; border-top-left-radius: 0px; border-bottom-left-radius: 0px; display: flex; align-items: center; justify-content: center;">
@@ -68,7 +76,12 @@
                         <div class="form-group my-3">
                             <label for="password2">Confirm Password:</label>
                             <div class="input-group">
-                                <input type="password" wire:model="password_confirmation" class="form-control" id="password2" placeholder="Re-enter password" required>
+                                <input type="password"
+                                       wire:model="password_confirmation"
+                                       class="form-control"
+                                       id="password2"
+                                       placeholder="Re-enter password"
+                                       required>
                                 <div class="input-group-append">
                                     <span class="input-group-text toggle-password" id="togglePassword"
                                         style="height: 100%; width: 40px; border-top-left-radius: 0px; border-bottom-left-radius: 0px; display: flex; align-items: center; justify-content: center;">

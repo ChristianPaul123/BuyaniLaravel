@@ -139,4 +139,12 @@
     .success-bg{
         background-color: #42dc3d;
     }
+
+    .input {
+            color: #d97a18;
+        }
+    .input-bg {
+        background-color: #f5a623;
+    }
+
 </style>
