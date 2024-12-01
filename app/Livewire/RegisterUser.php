@@ -168,7 +168,7 @@ public function verifyOtp()
             ]);
 
             // Flash success message and redirect
-            session()->flash('message', 'User was created successfully.');
+            session()->flash('success', 'User was created successfully.');
             return redirect()->route('user.login', ['user_type' => $this->user_type]);
         } catch (\Exception $e) {
             // Handle any errors that occur during user creation

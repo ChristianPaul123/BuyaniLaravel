@@ -15,6 +15,7 @@
     min-height: 90vh;
     max-height: 90vh;
     }
+
 </style>
 @endpush
 

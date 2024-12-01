@@ -20,7 +20,8 @@ class LoginUser extends Component
     public $password='';
 
     public $user_type='';
-    public $sucess;
+    public $success;
+    public $message;
     public $error;
 
     public $otp;
@@ -169,6 +170,6 @@ class LoginUser extends Component
     }
     public function render()
     {
-        return view('livewire.login-user',['success' => session('success'),['error' => session('error')]]);
+        return view('livewire.login-user',['success' => session('success'),'',['error' => session('error')]]);
     }
 }
