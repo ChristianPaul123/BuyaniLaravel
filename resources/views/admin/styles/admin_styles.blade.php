@@ -161,6 +161,8 @@
             background-color: #104a9e;
         }
 
+
+
     /* Media query for responsiveness */
     @media (min-width: 576px) {
         .sidebar {

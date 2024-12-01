@@ -25,6 +25,11 @@
         vertical-align: bottom;
         border-bottom: 2px solid #dee2e6;
     }
+
+    .main-section {
+    min-height: 90vh;
+    max-height: 90vh;
+    }
 </style>
 @endpush
 

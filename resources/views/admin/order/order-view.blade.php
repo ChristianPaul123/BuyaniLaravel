@@ -50,7 +50,10 @@
         background-color: #0056b3;
     }
 
-
+    .main-section {
+    min-height: 90vh;
+    max-height: 90vh;
+    }
 </style>
 @endpush
 

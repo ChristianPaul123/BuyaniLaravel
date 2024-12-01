@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="{{ asset('img/logo1.svg') }}" type="image/png">
     <title>Testing</title>
 
-    @include('layouts.head')
 
     <style>
         html,body {
@@ -37,6 +37,12 @@
         .form-control:focus {
             box-shadow: none;
         }
+
+        .toggle-password {
+        cursor: pointer;
+        }
+
+
     </style>
 </head>
 <body>
@@ -70,7 +76,7 @@
                   <input type="hidden" name="admin_type" value=1>
                   <div class="input-group-append">
                   <span class="input-group-text toggle-password"
-                      style="height: 100%; width: 40px; border-top-left-radius: 0px; border-bottom-left-radius: 0px; display: flex; align-items: center; justify-content: center;">
+                      style="height: 100%; width: 40px; border-top-left-radius: 0px; border-bottom-left-radius: 0px; display: flex; align-items: center; justify-content: center; ">
                       <i class="fas fa-eye"></i>
                   </span>
                   </div>
