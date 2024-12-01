@@ -61,7 +61,7 @@
                                        placeholder="Enter password"
                                        minlength="8"
                                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                                       title="Must contain at least one number, one uppercase letter, one lowercase letter, and at least 8 or more characters"
+                                       title="Minimum of 8 characters, a lower and upper case letter and a number."
                                        required>
                                 <div class="input-group-append">
                                     <span class="input-group-text toggle-password" id="togglePassword"
