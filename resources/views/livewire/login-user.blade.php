@@ -3,6 +3,7 @@
     <div class="col-lg-6 login-card d-flex flex-column align-items-center justify-content-center" style="height: 500px;">
         <div class="container d-block align-items-center">
 
+
             @if (session('error'))
                 <div>
                     <div class="overlay" id="overlay" aria-label="Close" onclick="closePopup()"></div>
@@ -18,6 +19,14 @@
                         </div>
                     </div>
                 </div>
+
+                {{-- <div class="notif hidden d-flex mt-3" id="notif">
+                    <i class="bi bi-info-square"></i>
+                    <div class="container-right">
+                        <h5 class="m-0">Item has been added to cart</h5>
+                    </div>
+                </div> --}}
+
             @endif
             @if (session('success'))
                 <div>
@@ -77,7 +86,7 @@
             </div>
 
             <div class="container d-flex justify-content-center">
-                <button type="submit" class="btn btn-warning btn-block my-1 px-4">LOGIN</button>
+                <button type="submit" class="btn btn-warning btn-block my-1 px-4" onclick="trigger()">LOGIN</button>
             </div>
         </form>
 

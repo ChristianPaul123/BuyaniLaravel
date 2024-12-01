@@ -23,6 +23,7 @@
 </style>
 
 @include('user.includes.popup-style')
+{{-- @include('user.includes.notif-style') --}}
 
 @endpush
 @section('x-content')
@@ -56,6 +57,8 @@
 </script>
 
 
+
+{{-- @include('user.includes.notif-js') --}}
 @include('user.includes.popup-js')
 
 @endsection

@@ -1,13 +1,15 @@
 <script>
-    function showPopup() {
-        const popup = document.getElementById('notif');
+    function trigger(){
+        const popup = document.querySelector('.notif');
 
+        popup.style.display = 'block';
         popup.classList.remove('hidden');
 
         setTimeout(() => {
             popup.classList.add('hidden');
-        }, 10000);
+            setTimeout(() => {
+                popup.style.display = 'none';
+            }, 500);
+        }, 10000);  <!-- 10 seconds delay -->
     }
-
-    window.onload = () => showPopup();
 </script>

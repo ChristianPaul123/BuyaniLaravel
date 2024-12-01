@@ -16,7 +16,7 @@
             opacity: 1;
         }
         to {
-            transform: translate(-50%, -55%);
+            transform: translate(-50%, -50%);
             opacity: 0;
         }
     }
@@ -42,7 +42,7 @@
         animation: fadeOutUp 0.3s ease-in forwards;
     }
 
-    .container-right{
+    .container-right {
         padding: 15px;
     }
 
