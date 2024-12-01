@@ -170,7 +170,7 @@
     @endif
 
     @if($showModal)
-    <div class="modal fade show d-block" tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5); z-index: 50;">
+    {{-- <div class="modal fade show d-block" tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5); z-index: 50;">
         <div class="modal-dialog" role="document">
             <div class="col-12">
                 <h2 class="text-center my-3 mx-2" style="font-size: 40px; white-space: nowrap;">Sign Up As Consumer</h2>
@@ -202,7 +202,33 @@
                     </div>
                 </div>
             </div>
+        </div> --}}
+
+
+        <div>
+            <div class="overlay" id="overlay" aria-label="Close" onclick="closePopup()"></div>
+
+            <div class="popup input">
+                <form wire:submit.prevent="verifyOtp">
+                    <i class="close bi bi-x-lg fs-4" aria-label="Close" onclick="closePopup()"></i>
+                    <div class="icon-container input-bg">
+                        <i class="icon bi bi-send-exclamation"></i>
+                    </div>
+                    <div class="container-contents">
+                        <h3>Please enter the OTP</h3>
+                        <p>We have sent an OTP to your email at {{ $email }}.</p>
+                        <input type="text" id="otp" wire:model="otp" class="form-control" maxlength="6" placeholder="Enter OTP">
+                        @error('otp') <span class="text-danger">{{ $message }}</span> @enderror
+                        @if (session('error')) <span class="text-danger">{{ session('error') }}</span> @endif
+                        <div class="mt-3">
+                            <button type="submit" class="btn btn-success">Submit OTP</button>
+                            <button type="button" class="btn btn-secondary" wire:click="closeModal">Close</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
+
     @endif
 </div>
 

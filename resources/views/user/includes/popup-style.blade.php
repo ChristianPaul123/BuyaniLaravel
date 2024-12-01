@@ -46,7 +46,6 @@
         width: 100%;
         height: 100%;
         background-color: rgba(0, 0, 0, 0.6);
-        z-index: 999;
         animation: fadeIn 0.2s ease-out forwards; /* Fade in animation for the overlay */
     }
 
@@ -66,7 +65,6 @@
         text-align: center;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         overflow: hidden;
-        z-index: 1000;
         animation: fadeInDown 0.3s ease-out forwards; /* Slide down animation for the modal */
     }
 
@@ -126,6 +124,13 @@
 </style>
 
 <style>
+    .overlay{
+        z-index: 500;
+    }
+
+    .popup.error{
+        z-index: 999;
+    }
     .error{
         color: #842029;
     }
@@ -133,6 +138,9 @@
         background-color: #e85e6c;
     }
 
+    .popup.success{
+        z-index: 999;
+    }
     .success{
         color: #208428;
     }
@@ -140,6 +148,9 @@
         background-color: #42dc3d;
     }
 
+    .popup.input{
+        z-index: 998;
+    }
     .input {
             color: #d97a18;
         }
