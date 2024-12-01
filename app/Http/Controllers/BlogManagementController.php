@@ -12,7 +12,7 @@ class BlogManagementController extends Controller
     public function showBlogs()
     {
         $blogs = Blog::all();
-        return view('admin.blog.blog_post', ['blogs' => $blogs]);
+        return view('admin.community.blogs-index', ['blogs' => $blogs]);
     }
 
 
@@ -53,7 +53,7 @@ class BlogManagementController extends Controller
         }
 
         // Return the view with the blog
-        return view('admin.blog.edit-blog', ['blog' => $blog]);
+        return view('admin.community.edit-blog', ['blog' => $blog]);
     }
 
     // Add logic to handle blog update

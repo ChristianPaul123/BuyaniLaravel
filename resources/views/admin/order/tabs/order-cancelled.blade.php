@@ -1,4 +1,4 @@
-<div class="card overflow-x-scroll">
+<div class="card overflow-x-scroll main-section">
     <div class="card-header">
         <h3 class="card-title">Cancelled Orders</h3>
     </div>

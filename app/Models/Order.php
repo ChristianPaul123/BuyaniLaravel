@@ -37,6 +37,8 @@ class Order extends Model
         'customer_house_number',
     ];
 
+    public $timestamps = true; // Ensure timestamps are enabledz
+
     // Define a relationship between the Order model and the User model
     public function user() {
         return $this->belongsTo(User::class, 'user_id'); // 'user_id' is the foreign key in the orders table

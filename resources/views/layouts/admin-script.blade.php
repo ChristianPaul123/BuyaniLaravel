@@ -128,6 +128,8 @@ new DataTable('#pastInventoryTable', {
 
 
 new DataTable('#blogTable');
+new DataTable('#adminfarmerTable');
+new DataTable('#adminconsumerTable');
 </script>
 
 <script>

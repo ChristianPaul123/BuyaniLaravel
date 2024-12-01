@@ -72,13 +72,10 @@
                         <i class="fas fa-chart-bar"></i> Reports
                     </a>
                 </li>
-            </ul>
 
-            <!-- User Profile Dropdown -->
-            <ul class="navbar-nav ms-auto align-items-center">
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown d-flex align-items-center">
                     <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="{{ asset('img/user.svg') }}" alt="user" class="rounded-circle me-2" width="30">
+                        <img src="{{ asset('img/logo1.svg') }}" alt="user" class="rounded-circle me-2" width="30">
                         {{ auth()->guard('admin')->user()->username }}
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
@@ -87,6 +84,19 @@
                     </ul>
                 </li>
             </ul>
+
+            <!-- ADD A SMALL CALENDAR HERE-->
+
+
+            <div class="ms-auto text-end pe-3 d-flex align-items-center">
+                <!-- Clock -->
+                <i class="fas fa-clock me-2 text-success"></i>
+                <span id="realTimeClock" class="fw-bold text-success fs-5 me-4"></span>
+
+                <!-- Calendar -->
+                <i class="fas fa-calendar-alt me-2 text-primary"></i>
+                <span id="currentDate" class="fw-bold text-primary fs-5"></span>
+            </div>
         </div>
     </div>
 </nav>

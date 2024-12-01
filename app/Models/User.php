@@ -96,6 +96,10 @@ class User extends Authenticatable
         return $this->hasMany(ProductRating::class);
     }
 
+    public function FarmerProduces(){
+        return $this->hasMany(FarmerProduce::class);
+    }
+
 
     public function getUserStatusAttribute()
     {

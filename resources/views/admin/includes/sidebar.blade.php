@@ -1,10 +1,35 @@
 <nav class="col-sm-2 d-none d-md-block bg-light sidebar">
     <div class="sidebar-sticky min-height">
+         <!-- Admin Information Section -->
+         @if(auth()->guard('admin')->check())
+         @php
+             $admin = auth()->guard('admin')->user();
+             $adminTypes = [
+                 1 => 'Owner',
+                 2 => 'Assistant',
+                 3 => 'Employee',
+             ];
+             $adminTypeLabel = $adminTypes[$admin->admin_type] ?? 'Unknown';
+             $adminStatusLabel = $admin->status ? 'Active' : 'Inactive';
+             $statusBadgeClass = $admin->status ? 'bg-success' : 'bg-danger';
+         @endphp
+         <div class="admin-info text-center py-3 border-bottom">
+             <img src="{{ $admin->profile_pic ? asset('storage/' . $admin->profile_pic) : asset('img/logo1.svg') }}"
+                  alt="Profile Picture"
+                  class="rounded-circle"
+                  width="80"
+                  height="80">
+             <h6 class="mt-2">{{ $admin->username }}</h6>
+             <p class="text-muted">{{ $admin->email }}</p>
+             <span class="badge bg-primary">{{ $adminTypeLabel }}</span>
+             <span class="badge {{ $statusBadgeClass }}">{{ $adminStatusLabel }}</span>
+         </div>
+        @endif
         <ul class="nav flex-column text-nowrap">
             <!-- Dashboard -->
             <li class="nav-item">
-                <a class="nav-link @if(request()->is('admin/dashboard')) active @endif" href="/admin/dashboard">
-                    <i class="fas fa-home"></i> Dashboard
+                <a class="nav-link d-flex justify-content-between @if(request()->is('admin/dashboard')) active @endif" href="/admin/dashboard">
+                    <i class="fas fa-home"></i> Dashboard <span>/</span>
                 </a>
             </li>
 
@@ -12,8 +37,8 @@
 
             <!-- Orders -->
             <li class="nav-item">
-                <a class="nav-link @if(request()->is('admin/order')) active @endif" href="/admin/order">
-                    <i class="fas fa-file"></i> Orders
+                <a class="nav-link d-flex justify-content-between @if(request()->is('admin/order')) active @endif" href="/admin/order">
+                    <i class="fas fa-file"></i> Orders <span>/</</span>
                 </a>
             </li>
 
@@ -31,10 +56,12 @@
                 </ul>
             </li>
 
+
+
             <!-- Customization -->
             <li class="nav-item">
-                <a class="nav-link @if(request()->is('admin/customization')) active @endif" href="/admin/customization">
-                    <i class="fas fa-users"></i> Customization
+                <a class="nav-link d-flex justify-content-between @if(request()->is('admin/customization')) active @endif" href="/admin/customization">
+                    <i class="fas fa-cogs"></i> Customization <span>/</</span>
                 </a>
             </li>
 
@@ -53,13 +80,6 @@
         @endif
 
             <hr class="hr hr-blurry" />
-
-            <!-- Blogs -->
-            <li class="nav-item">
-                <a class="nav-link @if(request()->is('admin/blog')) active @endif" href="/admin/blog">
-                    <i class="fas fa-blog"></i> Blogs
-                </a>
-            </li>
 
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="communityDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -87,15 +107,15 @@
 
             <!-- Chats -->
             <li class="nav-item">
-                <a class="nav-link @if(request()->is('admin/message')) active @endif" href="/admin/message">
-                    <i class="fas fa-comments"></i> Chats
+                <a class="nav-link d-flex justify-content-between @if(request()->is('admin/message')) active @endif" href="/admin/message">
+                    <i class="fas fa-comments"></i>Chats <span>/</</span>
                 </a>
             </li>
 
             <!-- Management -->
             <li class="nav-item">
-                <a class="nav-link @if(request()->is('admin/management')) active @endif" href="/admin/management">
-                    <i class="fas fa-cogs"></i> Management
+                <a class="nav-link d-flex justify-content-between @if(request()->is('admin/user/management')) active @endif" href="/admin/user/management">
+                    <i class="fas fa-users"></i> Management <span>/</</span>
                 </a>
             </li>
         </ul>

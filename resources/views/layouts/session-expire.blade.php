@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
     <title>Session Expired</title>
     <style>
         body {
@@ -23,6 +26,9 @@
             padding: 20px 40px;
             width: 400px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            font-size: 80px;
+            margin-top: 20px;
+            padding: 40px;
         }
 
         .dialog-container img {
@@ -63,7 +69,7 @@
 </head>
 <body>
     <div class="dialog-container">
-        <img src="https://via.placeholder.com/80" alt="Session Expired Icon" />
+        <i class="bi bi-hourglass-bottom"></i>
         <h2>Your session has expired</h2>
         <p>Please log in back to the system and try again</p>
         <button class="refresh-button" onclick="window.location.href='/admin'">Login</button>

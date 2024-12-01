@@ -1,7 +1,7 @@
 <section class="min-height">
 <div class="card">
     <div class="card-header">
-        <h4>Admin Settings</h4>
+        <h4>Admin Information</h4>
     </div>
     <div class="card-body">
         <p><strong>Username:</strong> {{ $admin->username }}</p>

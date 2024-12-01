@@ -2,7 +2,7 @@
 <section class="min-height">
 <div class="card">
     <div class="card-header">
-        <h4>Admin Payments</h4>
+        <h4>Admin Payments Settings</h4>
     </div>
     <div class="card-body">
         <div class="row mb-4">

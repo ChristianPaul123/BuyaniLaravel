@@ -180,7 +180,7 @@ public function verifyOtp()
         $this->completeRegistration();
     } else {
         // If OTP is invalid, flash an error message
-        session()->flash('message', 'Invalid or expired OTP. Please try again.');
+        session()->flash('error', 'Invalid or expired OTP. Please try again.');
     }
 }
 

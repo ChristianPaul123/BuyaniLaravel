@@ -25,11 +25,26 @@
 @endauth
 
     @include('layouts.admin-script')
-{{-- <script>
-    window.addEventListener('popstate', function(event) {
-        // If the user presses the back button, log them out
-        window.location.href = "{{ route('admin.logout') }}";
-    });
-</script> --}}
+<script>
+    function updateClockAndDate() {
+        // Update Time
+        const clockElement = document.getElementById('realTimeClock');
+        const now = new Date();
+        const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+        clockElement.textContent = now.toLocaleTimeString('en-US', timeOptions);
+
+        // Update Date
+        const dateElement = document.getElementById('currentDate');
+        const dateOptions = { weekday: 'long', month: 'short', day: 'numeric', year: 'numeric' };
+        dateElement.textContent = now.toLocaleDateString('en-US', dateOptions);
+    }
+
+    // Update clock and date every second
+    setInterval(updateClockAndDate, 1000);
+
+    // Initialize clock and date
+    updateClockAndDate();
+
+</script>
 </body>
 </html>
