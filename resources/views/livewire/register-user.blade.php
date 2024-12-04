@@ -61,7 +61,7 @@
                                        placeholder="Enter password"
                                        minlength="8"
                                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                                       title="Must contain at least one number, one uppercase letter, one lowercase letter, and at least 8 or more characters"
+                                       title="Minimum of 8 characters, a lower and upper case letter and a number."
                                        required>
                                 <div class="input-group-append">
                                     <span class="input-group-text toggle-password" id="togglePassword"
@@ -170,41 +170,6 @@
     @endif
 
     @if($showModal)
-    {{-- <div class="modal fade show d-block" tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5); z-index: 50;">
-        <div class="modal-dialog" role="document">
-            <div class="col-12">
-                <h2 class="text-center my-3 mx-2" style="font-size: 40px; white-space: nowrap;">Sign Up As Consumer</h2>
-            </div>
-            <div class="modal-content">
-                <div class="modal-header d-flex justify-content-between">
-                    <h5 class="modal-title">Enter OTP</h5>
-                    <button type="button" class="btn btn-danger close" wire:click="closeModal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                    <div class="modal-body">           <!-- OTP Input Field -->
-                        <form wire:submit.prevent="verifyOtp">
-                            @if (session('error'))
-                            <div class="alert alert-danger text-center my-3 d-block position-absolute col-12">
-                                {{ session('error') }}
-                            </div>
-                            @endif
-                            <div class="form-group">
-                                <p class="text-center">We have sent an OTP to your email at {{ $email }}. </p>
-                                <p class="text-center">Please enter the OTP to verify your email address.</p>
-                                <label class="form-label" for="otp">OTP</label>
-                                <input type="text" id="otp" wire:model="otp" class="form-control" maxlength="6" placeholder="Enter OTP">
-                                @error('otp') <span class="text-danger">{{ $message }}</span> @enderror
-                            </div>
-                            <button type="submit" class="btn btn-success my-3">Submit OTP</button>
-                            <button type="button" class="btn btn-secondary my-3" wire:click="closeModal">Close</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-
-
         <div>
             <div class="overlay" id="overlay" aria-label="Close" onclick="closePopup()"></div>
 
@@ -228,7 +193,6 @@
                 </form>
             </div>
         </div>
-
     @endif
 </div>
 
