@@ -22,8 +22,7 @@
 
 </style>
 
-@include('user.includes.popup-style')
-{{-- @include('user.includes.notif-style') --}}
+@include('user.includes.modal-style')
 
 @endpush
 @section('x-content')
@@ -56,9 +55,15 @@
     });
 </script>
 
+<script>
+    @if (session('error'))
+        // Show modal automatically if there's an error in the session
+        window.addEventListener('load', () => {
+            const modal = new bootstrap.Modal(document.getElementById('trigger'));
+            modal.show();
+        });
+    @endif
+</script>
 
-
-{{-- @include('user.includes.notif-js') --}}
-@include('user.includes.popup-js')
 
 @endsection

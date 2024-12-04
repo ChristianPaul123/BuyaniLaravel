@@ -5,29 +5,22 @@
 
 
             @if (session('error'))
-                <div>
-                    <div class="overlay" id="overlay" aria-label="Close" onclick="closePopup()"></div>
-
-                    <div class="popup error">
-                        <i class="close bi bi-x-lg fs-4" aria-label="Close" onclick="closePopup()"></i>
-                        <div class="icon-container error-bg">
-                            <i class="icon bi bi-x-circle"></i>
-                        </div>
-                        <div class="container-contents">
-                            <h3>Oops!</h3>
-                            <p>{{ session('error') }}</p>
+                <div class="modal fade" id="trigger" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <i class="close bi bi-x" aria-label="Close" data-bs-dismiss="modal"></i>
+                            <i class="icon icon-bg-error bi bi-x-circle"></i>
+                            <div class="container-contents container-contents-error">
+                                <h3>Oops!</h3>
+                                <p>{{ session('error') }}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                {{-- <div class="notif hidden d-flex mt-3" id="notif">
-                    <i class="bi bi-info-square"></i>
-                    <div class="container-right">
-                        <h5 class="m-0">Item has been added to cart</h5>
-                    </div>
-                </div> --}}
-
             @endif
+
+
+
             @if (session('success'))
                 <div>
                     <div class="overlay" id="overlay" aria-label="Close" onclick="closePopup()"></div>
@@ -86,7 +79,7 @@
             </div>
 
             <div class="container d-flex justify-content-center">
-                <button type="submit" class="btn btn-warning btn-block my-1 px-4" onclick="trigger()">LOGIN</button>
+                <button type="submit" class="btn btn-warning btn-block my-1 px-4">LOGIN</button>
             </div>
         </form>
 
