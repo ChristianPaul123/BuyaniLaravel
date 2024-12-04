@@ -119,8 +119,8 @@
                         <form wire:submit.prevent="requestOtp">
                             <div class="form-group">
                                 <label for="email">Enter your registered email</label>
-                                <input type="email" id="email" wire:model="email" class="form-control" placeholder="Email">
-                                @error('email') <span class="text-danger">{{ $message }}</span> @enderror
+                                <input type="email" id="email" wire:model="selectedEmail" class="form-control" placeholder="Email">
+                                @error('selectedEmail') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             <button type="submit" class="btn btn-primary">Send OTP</button>
                         </form>

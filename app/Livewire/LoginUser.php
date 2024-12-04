@@ -23,6 +23,7 @@ class LoginUser extends Component
     public $success;
     public $message;
     public $error;
+    public $selectedEmail;
 
     public $otp;
     public $newPassword;
@@ -90,7 +91,7 @@ class LoginUser extends Component
 
         // Validate email input
         $this->validate([
-            'email' => 'required|email|exists:users,email',
+            'selectedEmail' => 'required|email|exists:users,email',
         ]);
 
         // Generate a new OTP and expiration time
@@ -100,7 +101,7 @@ class LoginUser extends Component
         // Store OTP in database for password reset purpose
         OtpVerify::updateOrCreate(
             [
-                'email' => $this->email,
+                'email' => $this->selectedEmail,
                 'v_purpose' => 'password_reset',
             ],
             [
@@ -113,8 +114,9 @@ class LoginUser extends Component
 
         // Open OTP modal
         $this->showOtpModal = true;
-        Mail::to($this->email)->send(new VerificationMail($otp));
-        session()->flash('success', 'A password reset OTP has been sent to your email.');
+        Mail::to($this->selectedEmail)->send(new VerificationMail($otp));
+        session()->flash('message
+        ', 'A password reset OTP has been sent to your email.');
     }
 
     public function verifyOtp()
@@ -162,7 +164,7 @@ class LoginUser extends Component
 
             // Flash success message and redirect
             session()->flash('success', 'Password has been reset successfully.');
-            $this->reset(['otp', 'showEmailModal','showOtpModal','showPasswordResetForm','email', 'newPassword']);
+            $this->reset(['otp', 'showEmailModal','showOtpModal','showPasswordResetForm','email', 'newPassword','selectedEmail']);
             return redirect()->route('user.login', ['user_type' => $this->user_type]);
         } else {
             session()->flash('error', 'User not found. Please try again.');
@@ -170,6 +172,6 @@ class LoginUser extends Component
     }
     public function render()
     {
-        return view('livewire.login-user',['success' => session('success'),'',['error' => session('error')]]);
+        return view('livewire.login-user',['success' => session('success'),['message' => session('message')],['error' => session('error')]]);
     }
 }

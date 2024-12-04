@@ -66,8 +66,13 @@
                             <h6>${{ $cart->total_price }}</h6>
                         </div>
 
-                        <a href="{{ route('user.consumer.product.cart.checkout', ['cartId' => $cart->id]) }}" class="btn btn-primary w-100 mt-3">Proceed to Checkout</a>
+                        @if($cart->cart_total == 0)
+                        <button class="btn btn-secondary w-100 mt-3" disabled>Proceed to Checkout</button>
+                        @else
+                            <a href="{{ route('user.consumer.product.cart.checkout', ['cartId' => $cart->id]) }}" class="btn btn-primary w-100 mt-3">Proceed to Checkout</a>
+                        @endif
                     </div>
+
                 </div>
             </div>
         </div>
