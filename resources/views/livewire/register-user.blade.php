@@ -1,13 +1,14 @@
-
 <div class="mt-3 pt-0">
-    <div class="container-fluid custom-font-content p-5">
+    {{-- <div class="container-fluid custom-font-content p-5">
         <nav aria-label="breadcrumb d-flex">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('user.login', ['user_type' => $user_type]) }}">Login</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Registration</li>
             </ol>
         </nav>
-    </div>
+    </div> --}}
+
+
 
     @if (session('message'))
         <div>
@@ -30,6 +31,25 @@
 
       @if($user_type == 1)
             <div class="container-fluid custom-font-content" style="padding: 20px;">
+                <div class="row mt-4" style="display: flex; justify-content:center;">
+                    <div class="banner p-4 rounded bg-warning text-white d-flex flex-wrap align-items-center" style="width: 1000px">
+                        <div class="col-md-6 text-center text-md-start">
+                            <h1 class="display-5 fw-bold">Discover Our New Product</h1>
+                            <p class="mt-3">
+                                Experience innovation and quality like never before.
+                                Limited-time offer – don’t miss out!
+                            </p>
+                            <a href="#" class="btn btn-light btn-lg mt-2">Shop Now</a>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <img
+                                src="https://via.placeholder.com/400x250"
+                                alt="Product Image"
+                                class="img-fluid rounded"
+                                style="height:250px; width:400px">
+                        </div>
+                    </div>
+                </div>
               <div class="row">
                   <div class="col-12">
                       <h2 class="text-center my-3 mx-2" style="font-size: 40px; white-space: nowrap;">Sign Up As Consumer</h2>
