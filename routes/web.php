@@ -52,7 +52,7 @@ Route::get('admin/{admin}/edit', [AdminController::class, 'edit'])->name('admin.
 Route::put('admin/{admin}/update', [AdminController::class, 'update'])->name('admin.update'); // Update Admin Info
 Route::post('admin/{admin}/deactivate', [AdminController::class, 'deactivate'])->name('admin.deactivate');
 Route::post('admin/{admin}/activate', [AdminController::class, 'activate'])->name('admin.activate');
-Route::get('admin/customization', [AdminController::class, 'customizationIndex'])->name('admin.customization');
+Route::get('admin/customization', [AdminController::class, 'showCustomization'])->name('admin.customization');
 Route::post('admin/payment/update', [AdminController::class, 'updateAdminPayment'])->name('admin.payment.update');
 
 //PRODUCT
@@ -165,6 +165,10 @@ Route::get('user/farmer/contacts', [HomeController::class, 'showFarmContact'])->
 Route::get('user/farmer/about-us', [HomeController::class, 'showFarmAbout'])->name('user.farmer.about');
 
 Route::get('/session-expire',[HomeController::class, 'sessionExpire'])->name('session.expire');
+
+Route::get('user/terms',[HomeController::class, 'showUserTermsandCondition'])->name('user.terms');
+Route::get('user/privacy',[HomeController::class, 'showPrivacyPolicy'])->name('user.privacy');
+
 
 
 

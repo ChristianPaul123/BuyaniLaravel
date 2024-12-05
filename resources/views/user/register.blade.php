@@ -97,6 +97,28 @@
     });
 </script>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Select the checkboxes and the submit button
+        const termsCheckbox = document.getElementById("terms");
+        const privacyCheckbox = document.getElementById("privacy");
+        const submitButton = document.getElementById("submit-button");
+
+        // Function to update the button state
+        function updateButtonState() {
+            submitButton.disabled = !(termsCheckbox.checked && privacyCheckbox.checked);
+        }
+
+        // Add event listeners to checkboxes
+        termsCheckbox.addEventListener("change", updateButtonState);
+        privacyCheckbox.addEventListener("change", updateButtonState);
+
+        // Initialize the button state on page load
+        updateButtonState();
+    });
+</script>
+
+
 @include('user.includes.popup-js')
 
 @endsection

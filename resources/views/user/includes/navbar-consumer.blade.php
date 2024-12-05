@@ -100,11 +100,11 @@
                 </li>
                 @else
                 <li class="nav-item px-1">
-                    <a class="nav-link" @if(request()->is('user/consumer/login')) active @endif href="/" data-page="login">LOGIN</a>
+                    <a class="nav-link" @if(request()->is('user/consumer/login')) active @endif href="/" data-page="login">LOGIN/SIGNUP</a>
                 </li>
-                <li class="nav-item px-1">
+                {{-- <li class="nav-item px-1">
                     <a class="nav-link" @if(request()->is('user/consumer/register')) active @endif href="/" data-page="register">REGISTER</a>
-                </li>
+                </li> --}}
                 @endauth
             </ul>
         </div>
