@@ -13,37 +13,11 @@
                     <th>Last Online</th>
                     <th>Deactivated Date</th>
                     <th>Deactived Status</th>
-                    <th>Actions</th>
+                    <th>Edit</th>
+                    <th>Deactivate</th>
                 </tr>
             </thead>
-        {{-- <tbody>
-                @foreach ($admins as $admin)
-                <tr>
-                    <td>{{ $admin->username }}</td>
-                    <td>{{ $admin->email }}</td>
-                    <td>{{ $admin->admin_type }}</td>
-                    <td>{{ $admin->status == 1 ? 'Active' : 'Inactive' }}</td>
-                    <td>{{ $admin->last_online }}</td>
-                    <td>{{ $admin->deactivated_date }}</td>
-                    <td>{{ $admin->deactivated_status == 1 ? 'Deactivated' : 'Active' }}</td>
-                    <td class="table-action-buttons">
-                        <a href="{{ route('admin.edit', $admin->id) }}" class="btn btn-warning btn-sm">Edit</a>
 
-                        @if($admin->deactivated_status == 0)
-                            <form action="{{ route('admin.deactivate', $admin->id) }}" method="POST" class="d-inline">
-                                @csrf
-                                <button class="btn btn-danger btn-sm">Deactivate</button>
-                            </form>
-                        @else
-                            <form action="{{ route('admin.activate', $admin->id) }}" method="POST" class="d-inline">
-                                @csrf
-                                <button class="btn btn-success btn-sm">Activate</button>
-                            </form>
-                        @endif
-                    </td>
-                </tr>
-                @endforeach
-            </tbody> --}}
             <tbody>
                 @foreach ($admins as $admin)
                 <tr>
@@ -61,18 +35,26 @@
                     <td>{{ $admin->last_online }}</td>
                     <td>{{ $admin->deactivated_date }}</td>
                     <td>{{ $admin->deactivated_status == 1 ? 'Deactivated' : 'Active' }}</td>
-                    <td class="table-action-buttons">
-                        <a href="{{ route('admin.edit', $admin->id) }}" class="btn btn-warning btn-sm">Edit</a>
 
+                    <td>
+                        <a href="{{ route('admin.edit', $admin->id) }}" title="Edit">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                    </td>
+                    <td>
                         @if($admin->deactivated_status == 0)
-                            <form action="{{ route('admin.deactivate', $admin->id) }}" method="POST" class="d-inline">
+                            <form action="{{ route('admin.deactivate', $admin->id) }}" method="POST" class="d-inline" style="display:inline;">
                                 @csrf
-                                <button class="btn btn-danger btn-sm">Deactivate</button>
+                                <button title="Deactivate" style="background:none;border:none;padding:0;cursor:pointer;">
+                                    <i class="fa fa-power-off" style="color:red;"></i>
+                                </button>
                             </form>
                         @else
-                            <form action="{{ route('admin.activate', $admin->id) }}" method="POST" class="d-inline">
+                            <form action="{{ route('admin.activate', $admin->id) }}" method="POST" class="d-inline" style="display:inline;">
                                 @csrf
-                                <button class="btn btn-success btn-sm">Activate</button>
+                                <button title="Activate" style="background:none;border:none;padding:0;cursor:pointer;">
+                                    <i class="fa fa-power-off" style="color:green;"></i>
+                                </button>
                             </form>
                         @endif
                     </td>

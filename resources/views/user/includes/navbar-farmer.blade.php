@@ -72,11 +72,11 @@
                     </li>
                     @else
                     <li class="nav-item px-1 position-relative">
-                        <a class="nav-link" @if(request()->is('user/farmer/login')) active @endif href="/" data-page="login">LOGIN <span class="sr-only">(current) </span></a>
+                        <a class="nav-link" @if(request()->is('user/farmer/login')) active @endif href="/" data-page="login">LOGIN/SIGNUP<span class="sr-only">(current) </span></a>
                     </li>
-                    <li class="nav-item px-1 position-relative">
+                    {{-- <li class="nav-item px-1 position-relative">
                         <a class="nav-link" @if(request()->is('user/farmer/register')) active @endif href="/" data-page="register">REGISTER <span class="sr-only">(current) </span></a>
-                    </li>
+                    </li> --}}
                     @endauth
                 </ul>
             </div>

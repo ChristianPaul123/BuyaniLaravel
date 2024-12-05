@@ -90,7 +90,7 @@ class AdminController extends Controller
 
 
 
-    public function customizationIndex()
+    public function showCustomization()
     {
         $admin = auth()->guard('admin')->user(); // Current Admin
         $admins = Admin::where('admin_type', '!=', 1)->get(); // Exclude admin_type = 1
@@ -120,7 +120,8 @@ class AdminController extends Controller
             $admin->update(['admin_payment' => 'uploads/admin_payments/' . $fileName]);
         }
 
-        return redirect()->back()->with('message', 'Payment picture updated successfully.');
+        return redirect()->route('admin.customization', ['tab' => 'payments'])
+        ->with('message', 'Payment picture updated successfully.');
     }
 
     public function store(Request $request)
@@ -139,24 +140,26 @@ class AdminController extends Controller
     }
 
     public function deactivate(Admin $admin)
-    {
-        $admin->update([
-            'deactivated_status' => 1,
-            'deactivated_date' => now(),
-        ]);
+{
+    $admin->update([
+        'deactivated_status' => 1,
+        'deactivated_date' => now(),
+    ]);
 
-        return redirect()->back()->with('message', 'Admin deactivated successfully.');
-    }
+    return redirect()->route('admin.customization', ['tab' => 'admins'])
+        ->with('message', 'Admin deactivated successfully.');
+}
 
-    public function activate(Admin $admin)
-    {
-        $admin->update([
-            'deactivated_status' => 0,
-            'deactivated_date' => null,
-        ]);
+public function activate(Admin $admin)
+{
+    $admin->update([
+        'deactivated_status' => 0,
+        'deactivated_date' => null,
+    ]);
 
-        return redirect()->back()->with('message', 'Admin activated successfully.');
-    }
+    return redirect()->route('admin.customization', ['tab' => 'admins'])
+        ->with('message', 'Admin activated successfully.');
+}
 
     public function edit(Admin $admin)
     {

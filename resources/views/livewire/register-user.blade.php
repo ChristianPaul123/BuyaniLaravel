@@ -92,12 +92,24 @@
                             @error('password_confirmation') <span class="text-warning">{{ $message }}</span> @enderror
                         </div>
                     </div>
+                </div>
+                <div class="row my-3">
+                    <div class="col-12 d-flex flex-column justify-content-center align-items-center">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="privacy">
+                            <label class="form-check-label" for="privacy">I accept the <a href="{{ route('user.privacy') }}" target="_blank">Privacy Policy</a></label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="terms">
+                            <label class="form-check-label" for="terms">I accept the <a href="{{ route('user.terms') }}" target="_blank">Terms and Conditions</a></label>
+                        </div>
+                    </div>
+                </div>
 
-                  </div>
-                  <!-- Submit Button -->
-                  <div class="row form-group my-3 d-flex justify-content-center">
-                      <button type="submit" class="btn btn-warning btn-block px-4" style="width: fit-content;">Sign Up</button>
-                  </div>
+                <!-- Submit Button -->
+                <div class="row form-group my-3 d-flex justify-content-center">
+                    <button id="submit-button" type="submit" class="btn btn-warning btn-block px-4" style="width: fit-content;" disabled>Sign Up</button>
+                </div>
               </form>
 
           </div>
@@ -156,16 +168,24 @@
                         </div>
                     </div>
                 </div>
+                <div class="row my-3">
+                    <div class="col-12 d-flex flex-column justify-content-center align-items-center">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="privacy">
+                            <label class="form-check-label" for="privacy">I accept the <a href="{{ route('user.privacy') }}" target="_blank">Privacy Policy</a></label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="terms">
+                            <label class="form-check-label" for="terms">I accept the <a href="{{ route('user.terms') }}" target="_blank">Terms and Conditions</a></label>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Submit Button -->
                 <div class="row form-group my-3 d-flex justify-content-center">
-                    <button type="submit" class="btn btn-warning btn-block px-4" style="width: fit-content;">Sign Up</button>
+                    <button id="submit-button" type="submit" class="btn btn-warning btn-block px-4" style="width: fit-content;" disabled>Sign Up</button>
                 </div>
             </form>
-            {{-- <div class="row">
-                <div class="col text-end mt-3 my-4">
-                    <a href="../login/consumer-login.php">Has account? | Sign In</a>
-                </div>
-            </div> --}}
           </div>
     @endif
 

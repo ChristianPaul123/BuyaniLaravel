@@ -62,3 +62,20 @@
     </div>
 </div>
 @endsection
+@section('scripts')
+{{-- for the tab to stay where it should --}}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const activeTab = urlParams.get('tab');
+        if (activeTab) {
+            const tab = document.querySelector(`a[href="#${activeTab}"]`);
+            if (tab) {
+                const tabInstance = new bootstrap.Tab(tab);
+                tabInstance.show();
+            }
+        }
+    });
+</script>
+
+@endsection

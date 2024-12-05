@@ -52,4 +52,12 @@ class HomeController extends Controller
         return view('layouts.session-expire');
     }
 
+    public function showUserTermsandCondition() {
+        return view('user-terms-and-condition');
+    }
+
+    public function showPrivacyPolicy() {
+        return view('user-privacy-policy');
+    }
+
 }

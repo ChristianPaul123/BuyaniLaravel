@@ -4,7 +4,7 @@
         <div class="container d-block align-items-center">
 
 
-            @if (session('error'))
+            @if (session('message'))
                 <div>
                     <div class="overlay" id="overlay" aria-label="Close" onclick="closePopup()"></div>
 
@@ -15,7 +15,7 @@
                         </div>
                         <div class="container-contents">
                             <h3>Oops!</h3>
-                            <p>{{ session('error') }}</p>
+                            <p>{{ session('message') }}</p>
                         </div>
                     </div>
                 </div>
