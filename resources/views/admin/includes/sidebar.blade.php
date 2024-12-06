@@ -60,7 +60,7 @@
 
             <!-- Customization -->
             <li class="nav-item">
-                <a class="nav-link d-flex justify-content-between @if(request()->is('admin/customization')) active @endif" href="/admin/customization">
+                <a class="nav-link d-flex justify-content-between @if(request()->is('admin/customization')) active @endif" href="/admin/customization?tab=settings">
                     <i class="fas fa-cogs"></i> Customization <span>/</</span>
                 </a>
             </li>
@@ -107,7 +107,7 @@
 
             <!-- Chats -->
             <li class="nav-item">
-                <a class="nav-link d-flex justify-content-between @if(request()->is('admin/message')) active @endif" href="/admin/message">
+                <a class="nav-link d-flex justify-content-between @if(request()->is('admin/chat')) active @endif" href="/admin/chat">
                     <i class="fas fa-comments"></i>Chats <span>/</</span>
                 </a>
             </li>

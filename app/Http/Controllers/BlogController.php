@@ -17,29 +17,38 @@ class BlogController extends Controller
 public function showConsumerBlogs()
 {
 
-    if ($user = !Auth::guard('user')->check()) {
-        // If not authenticated, flush the session and redirect to user index with a message
-        dd($user);
+    if (!Auth::guard('user')->check()) {
         Session::flush();
         return redirect()->route('user.index')->with('message', 'Please log in or sign up to view this page');
     }
 
-    $blogs = Blog::all();
-    return view('blogs-consumer', ['blogs' => $blogs]);
+    // Fetch the latest blog for the main display and paginate the rest
+    $latestBlog = Blog::orderBy('created_at', 'desc')->first();
+    // dd($latestBlog);
+    $blogs = Blog::where('id', '!=', $latestBlog->id)->orderBy('created_at', 'desc')->paginate(2);
+
+    return view('blogs-consumer', [
+        'latestBlog' => $latestBlog,
+        'blogs' => $blogs,
+    ]);
 }
 
 public function showFarmerBlogs()
 {
 
     if (!Auth::guard('user')->check()) {
-        // If not authenticated, flush the session and redirect to user index with a message
         Session::flush();
-
         return redirect()->route('user.index')->with('message', 'Please log in or sign up to view this page');
     }
 
-    $blogs = Blog::all();
-    return view('blogs-farmer', ['blogs' => $blogs]);
+    // Fetch the latest blog for the main display and paginate the rest
+    $latestBlog = Blog::orderBy('created_at', 'desc')->first();
+    $blogs = Blog::where('id', '!=', $latestBlog->id)->orderBy('created_at', 'desc')->paginate(2);
+
+    return view('blogs-farmer', [
+        'latestBlog' => $latestBlog,
+        'blogs' => $blogs,
+    ]);
 }
 
 }

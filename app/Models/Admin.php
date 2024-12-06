@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\Messages;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Model;
 
 class Admin extends Authenticatable
 {
@@ -55,6 +56,10 @@ class Admin extends Authenticatable
 
     public function blogs() {
         return $this->HasMany(Blog::class);
+    }
+
+    public function messages() {
+        return $this->HasMany(Messages::class);
     }
 
     // public function getAdminTypeAttribute() {

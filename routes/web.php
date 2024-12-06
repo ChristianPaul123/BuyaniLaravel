@@ -20,14 +20,15 @@ use App\Http\Controllers\UserProductController;
 use App\Http\Controllers\VotedProductsController;
 use App\Http\Controllers\BlogManagementController;
 
+use App\Http\Controllers\ChatManagementController;
+use App\Http\Controllers\UserManagementController;
 use App\Http\Controllers\OrderManagementController;
+
 use App\Http\Controllers\ShippingAddressController;
 use App\Http\Controllers\ReportManagementController;
-
 use App\Http\Controllers\ProductManagementController;
 use App\Http\Controllers\InventoryManagementController;
 use App\Http\Controllers\ProductSpecificationController;
-use App\Http\Controllers\UserManagementController;
 
 Route::get('/', function () {
     return view('user.index');
@@ -114,8 +115,12 @@ Route::get('admin/report/sales', [ReportManagementController::class, 'salesRepor
 //MANAGEMENT
 Route::get('admin/user/management', [UserManagementController::class, 'showUsers'])->name('admin.management');
 Route::get('admin/user/management/view/{id}', [UserManagementController::class, 'viewUser'])->name('admin.management.view');
-    Route::post('admin/user/management/deactivate/{id}', [UserManagementController::class, 'deactivateUser'])->name('admin.management.deactivate');
-    Route::post('admin/user/management/reactivate/{id}', [UserManagementController::class, 'reactivateUser'])->name('admin.management.reactivate');
+Route::post('admin/user/management/deactivate/{id}', [UserManagementController::class, 'deactivateUser'])->name('admin.management.deactivate');
+Route::post('admin/user/management/reactivate/{id}', [UserManagementController::class, 'reactivateUser'])->name('admin.management.reactivate');
+
+//CHAT US
+Route::get('admin/chat', [ChatManagementController::class, 'showAdminChat'])->name('admin.chat');
+
 
 Route::get('admin/report', function () {
     return view('admin.report.report');
@@ -193,6 +198,7 @@ Route::middleware(['user.type:2'])->group(function () {
 Route::get('user/farmer', [HomeController::class, 'showFarmDashboard'])->name('user.farmer');
 Route::get('/user/farmer/profile', [UserController::class, 'showFarmerprofile'])->name('user.farmer.profile');
 Route::get('user/farmer/blogs', [BlogController::class, 'showFarmerBlogs'])->name('user.farmer.blog');
+Route::get('user/farmer/chat', [ChatController::class, 'showFarmerChat'])->name('user.farmer.chat');
 
 
 
@@ -227,25 +233,3 @@ Route::get('user/farmer/product', [UserController::class, 'showFarmerProduct'])-
 Route::get('user/farmer/product/view/{id}', [UserController::class, 'viewFarmerProduct'])->name('user.farmer.product.view');
 
 
-//Order Side
-//user side
-
-
-
-
-//user side
-
-//blog Side
-
-
-//user side
-
-//report Side
-
-
-//customization Side
-
-//message Side
-//admin side
-
-//user side

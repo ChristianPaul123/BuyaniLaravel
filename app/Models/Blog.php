@@ -16,7 +16,7 @@ class Blog extends Model
         'blog_title',
         'blog_pic',
         'blog_info',
-        'created_date',
+        'created_at',
         'removed_date',
         'deactivated_status',
         'added_by',

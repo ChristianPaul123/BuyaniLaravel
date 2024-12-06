@@ -30,7 +30,7 @@
             {{-- Tabs Navigation --}}
             <ul class="nav nav-tabs" id="customizationTabs" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="settings-tab" data-bs-toggle="tab" href="#settings" role="tab">Admin Settings</a>
+                    <a class="nav-link" id="settings-tab" data-bs-toggle="tab" href="#settings" role="tab">Admin Settings</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="admins-tab" data-bs-toggle="tab" href="#admins" role="tab">Manage Admins</a>
@@ -44,7 +44,7 @@
             <div class="tab-content mt-4" id="customizationTabsContent">
 
                 {{-- Settings Tab --}}
-                <div class="tab-pane fade show active" id="settings" role="tabpanel">
+                <div class="tab-pane fade" id="settings" role="tabpanel">
                     @include('admin.customization.tabs.setting-admin', ['admin' => $admin])
                 </div>
 

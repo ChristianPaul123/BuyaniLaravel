@@ -100,6 +100,15 @@ class User extends Authenticatable
         return $this->hasMany(FarmerProduce::class);
     }
 
+    public function messages() {
+        return $this->hasMany(Messages::class);
+    }
+
+    public function chat() {
+        return $this->hasOne(Chat::class);
+    }
+
+
 
     public function getUserStatusAttribute()
     {

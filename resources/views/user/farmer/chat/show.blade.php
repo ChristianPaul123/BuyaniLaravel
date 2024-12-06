@@ -4,7 +4,7 @@
 
 @push('styles')
 <style>
-    .chat-container {
+      .chat-container {
         max-width: 600px;
         margin: auto;
         background-color: #f8f9fa;
@@ -111,7 +111,7 @@
 @endpush
 
 @section('content')
-@include('user.includes.navbar-consumer')
+@include('user.includes.navbar-farmer')
 
 <div class="main-content-wrapper">
     <div class="min-height">
@@ -131,7 +131,7 @@
 
 @section('scripts')
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+     document.addEventListener('DOMContentLoaded', function () {
         // Cache DOM elements
         const messageForm = document.getElementById('messageForm');
         const messageInput = document.getElementById('messageInput');

@@ -143,8 +143,20 @@
         background-color: #104a9e;
     }
 
+    /* this is for the tabs design things */
+    .tab-pane {
+        margin-top: 20px;
+    }
 
+    .nav-tabs .nav-link.active {
+        color: #28a745 !important; /* Green color */
+        font-weight: bold; /* Optional: Make the active tab text bold */
+    }
 
+    /* Optional: Add a green underline to the active tab */
+    .nav-tabs .nav-link.active {
+        border-bottom: 2px solid #28a745;
+    }
     /* Media query for responsiveness */
     @media (min-width: 576px) {
         .sidebar {

@@ -1,4 +1,3 @@
-<div class="min-height">
 <div class="chat-container">
     <section>
     <div class="message-box mb-3" id="chatBox">
@@ -11,6 +10,9 @@
                         <div class="user small text-muted">You:</div>
                         {{-- <div class="user small text-muted">{{ $message->user->username }}</div> --}}
                         <div class="text">{{ $message->message_info }}</div>
+                        <p class="time small text-muted" style="font-style: italic;">
+                            {{ $message->created_at->format('h:i A') }}
+                        </p>
                         <div class="timestamp">Sent: {{ $message->created_at->format('Y-m-d h:i A') }}</div>
                     </div>
                 </div>
@@ -18,8 +20,11 @@
                 <!-- Right Side (Admin Message) -->
                 <div class="message left admin-msg">
                     <div class="text-container">
-                        <div class="user small text-muted">Admin</div>
+                        <div class="user small text-muted">Admin: {{ $message->admin->username ?? 'Admin' }}</div>
                         <div class="text">{{ $message->message_info }}</div>
+                        <p class="time small text-muted" style="font-style: italic;">
+                            {{ $message->created_at->format('h:i A') }}
+                        </p>
                         <div class="timestamp">Sent: {{ $message->created_at->format('Y-m-d h:i A') }}</div>
                     </div>
                 </div>
@@ -28,12 +33,11 @@
     </div>
 
     <!-- Message Input -->
-    <form wire:submit.prevent="sendMessage">
+    <form wire:submit.prevent="sendMessage" id="messageForm">
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="Message" wire:model="messageInput" required>
+            <input type="text" class="form-control" placeholder="Message" wire:model="messageInput" id="messageInput" required>
             <button class="btn btn-leaf-green" type="submit">Send</button>
         </div>
     </form>
     </section>
-</div>
 </div>

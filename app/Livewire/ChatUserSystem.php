@@ -42,14 +42,19 @@ class ChatUserSystem extends Component
 
     public function sendMessage()
     {
-        //$this->validate();
+        $sanitizedMessage = trim(strip_tags($this->messageInput));
+
+        // If the sanitized message is empty, disregard the action
+        if (empty($sanitizedMessage)) {
+            return; // Stop execution without doing anything
+        }
 
         // Save the new message
         Messages::create([
             'chat_id' => $this->chatId,
             'user_id' => Auth::guard('user')->id(), // Always associate the authenticated user
             'admin_id' => null, // Always null for this customer service model
-            'message_info' => $this->messageInput,
+            'message_info' => $sanitizedMessage,
             'is_deleted' => 0,
             'is_edited' => 0,
         ]);
@@ -58,7 +63,7 @@ class ChatUserSystem extends Component
         $this->loadMessages();
         $this->reset(['messageInput']);
 
-        // Emit an event to scroll the chatbox to the bottom
+        //Emit an event to scroll the chatbox to the bottom
         //$this->emit('messageSent');
     }
 
