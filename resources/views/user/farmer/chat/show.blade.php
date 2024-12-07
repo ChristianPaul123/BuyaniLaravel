@@ -131,38 +131,46 @@
 
 @section('scripts')
 <script>
-     document.addEventListener('DOMContentLoaded', function () {
+
+document.addEventListener('livewire:load', function () {
+        // Automatically scroll to the bottom after each Livewire DOM update
+        Livewire.hook('message.processed', (message, component) => {
+            window.scrollToBottom();
+        });
+
+        // Scroll to the bottom when the page is first loaded
+        window.scrollToBottom();
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
         // Cache DOM elements
         const messageForm = document.getElementById('messageForm');
         const messageInput = document.getElementById('messageInput');
         const chatBox = document.getElementById('chatBox');
 
-        // Scroll to the bottom of the chat box
+        // Define scrollToBottom function
         window.scrollToBottom = function () {
             if (chatBox) {
-                chatBox.scrollTop = chatBox.scrollHeight;
+                chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom
             }
         };
 
-        // Automatically scroll on initial load
-        scrollToBottom();
-
-        // Listen to Livewire DOM updates
-        Livewire.hook('message.processed', (message, component) => {
-            scrollToBottom();
-        });
+        // Automatically scroll to the bottom on initial load
+        window.scrollToBottom();
 
         // Handle manual message sending via form submission
         if (messageForm) {
             messageForm.addEventListener('submit', function (e) {
                 e.preventDefault();
                 const newMessageText = messageInput.value.trim();
+
                 if (!newMessageText) {
                     alert('Message cannot be empty or contain only spaces.');
                     return; // Prevent form submission
                 } else {
+                    // Optionally create a temporary message in the chatbox
                     const messageDiv = document.createElement('div');
-                    messageDiv.className = 'message right'; // Adjust class if necessary
+                    messageDiv.className = 'message right';
                     const currentTimestamp = new Date().toLocaleString();
 
                     messageDiv.innerHTML = `
@@ -173,51 +181,72 @@
                         </div>
                     `;
 
-                    chatBox.appendChild(messageDiv); // Append the message to the chat box
-                    messageInput.value = ''; // Clear the input field
-                    scrollToBottom(); // Scroll to the bottom
-
+                    chatBox.appendChild(messageDiv); // Append the message
+                    messageInput.value = ''; // Clear input field
+                    window.scrollToBottom(); // Scroll to the bottom
                 }
             });
         }
     });
-
 </script>
 @endsection
 
-{{-- inside livewire component --}}
+{{-- document.addEventListener('livewire:load', function () {
+    Livewire.hook('message.processed', () => {
+        const chatBox = document.getElementById('chatBox');
+        if (chatBox) {
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    });
+});
 
-{{-- <div class="chat-container">
-    <div class="message-box mb-3" id="chatBox">
-        @foreach ($messages as $message)
-            @if ($message->user_id)
-                <!-- Left Side (User Message) -->
-                <div class="message right">
-                    <img src="https://via.placeholder.com/40" alt="User Image">
-                    <div class="text-container">
-                        <div class="user small text-muted">{{ $message->user->name }}</div>
-                        <div class="text">{{ $message->message_info }}</div>
-                        <div class="timestamp">Sent: {{ $message->created_at->format('Y-m-d h:i A') }}</div>
-                    </div>
-                </div>
-            @else
-                <!-- Right Side (Admin Message) -->
-                <div class="message left admin-msg">
-                    <div class="text-container">
-                        <div class="user small text-muted">Admin</div>
-                        <div class="text">{{ $message->message_info }}</div>
-                        <div class="timestamp">Sent: {{ $message->created_at->format('Y-m-d h:i A') }}</div>
-                    </div>
-                </div>
-            @endif
-        @endforeach
-    </div>
+ document.addEventListener('DOMContentLoaded', function () {
+    // Cache DOM elements
+    const messageForm = document.getElementById('messageForm');
+    const messageInput = document.getElementById('messageInput');
+    const chatBox = document.getElementById('chatBox');
 
-    <!-- Message Input -->
-    <form wire:submit.prevent="sendMessage">
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Message" wire:model="messageInput" required>
-            <button class="btn btn-leaf-green" type="submit">Send</button>
-        </div>
-    </form>
-</div> --}}
+    // Scroll to the bottom of the chat box
+    window.scrollToBottom = function () {
+        if (chatBox) {
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    };
+
+    // Automatically scroll on initial load
+    scrollToBottom();
+
+    // Listen to Livewire DOM updates
+    Livewire.hook('message.processed', (message, component) => {
+        scrollToBottom();
+    });
+
+    // Handle manual message sending via form submission
+    if (messageForm) {
+        messageForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const newMessageText = messageInput.value.trim();
+            if (!newMessageText) {
+                alert('Message cannot be empty or contain only spaces.');
+                return; // Prevent form submission
+            } else {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message right'; // Adjust class if necessary
+                const currentTimestamp = new Date().toLocaleString();
+
+                messageDiv.innerHTML = `
+                    <div class="text-container">
+                        <div class="user small text-muted">You:</div>
+                        <div class="text">${newMessageText}</div>
+                        <div class="timestamp">Sent: ${currentTimestamp}</div>
+                    </div>
+                `;
+
+                chatBox.appendChild(messageDiv); // Append the message to the chat box
+                messageInput.value = ''; // Clear the input field
+                scrollToBottom(); // Scroll to the bottom
+
+            }
+        });
+    }
+}); --}}

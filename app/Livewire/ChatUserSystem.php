@@ -76,6 +76,9 @@ class ChatUserSystem extends Component
 
     public function render()
     {
+         // Reload messages dynamically
+         $this->loadMessages();
+
         return view('livewire.chat-user-system', [
             'messages' => $this->messages,
         ]);

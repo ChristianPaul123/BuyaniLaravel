@@ -63,7 +63,7 @@ class ChatAdminConsumer extends Component
     public function sendMessage()
     {
         // Trim and sanitize the input
-    $sanitizedMessage = trim(strip_tags($this->messageInput));
+        $sanitizedMessage = trim(strip_tags($this->messageInput));
 
         // If the sanitized message is empty, disregard the action
         if (empty($sanitizedMessage)) {
@@ -94,6 +94,8 @@ class ChatAdminConsumer extends Component
 
     public function render()
     {
+        $this->loadMessages();
+
         return view('livewire.chat-admin-consumer', [
             'messages' => $this->messages,
             'users' => $this->users,

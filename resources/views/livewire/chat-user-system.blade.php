@@ -1,6 +1,6 @@
-<div class="chat-container">
+<div  class="chat-container">
     <section>
-    <div class="message-box mb-3" id="chatBox">
+    <div class="message-box mb-3" id="chatBox" wire:poll.5s>
         @foreach ($messages as $message)
             @if ($message->user_id)
                 <!-- Left Side (User Message) -->
@@ -18,11 +18,11 @@
                 </div>
             @else
                 <!-- Right Side (Admin Message) -->
-                <div class="message left admin-msg">
+                <div class="message left admin-msg" >
                     <div class="text-container">
                         <div class="user small text-muted">Admin: {{ $message->admin->username ?? 'Admin' }}</div>
                         <div class="text">{{ $message->message_info }}</div>
-                        <p class="time small text-muted" style="font-style: italic;">
+                        <p class="time small text-muted" style="font-style: italic;  margin-bottom: 0; text-align: left; display: block;">
                             {{ $message->created_at->format('h:i A') }}
                         </p>
                         <div class="timestamp">Sent: {{ $message->created_at->format('Y-m-d h:i A') }}</div>

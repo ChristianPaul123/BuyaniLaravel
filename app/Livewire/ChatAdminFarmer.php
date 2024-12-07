@@ -92,6 +92,8 @@ class ChatAdminFarmer extends Component
 
     public function render()
     {
+        $this->loadMessages();
+
         return view('livewire.chat-admin-farmer', [
             'messages' => $this->messages,
             'users' => $this->users,

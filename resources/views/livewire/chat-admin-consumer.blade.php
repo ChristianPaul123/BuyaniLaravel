@@ -9,8 +9,8 @@
             @foreach ($users as $user)
                 <div
                     class="user-item {{ $selectedUser && $selectedUser->id === $user->id ? 'active' : '' }}"
-                    wire:click="selectChat({{ $user->id }})"
-                >
+                    wire:click="selectChat({{ $user->id }})">
+
                     <img src="{{ $user->profile_pic ? asset($user->profile_pic) : 'https://via.placeholder.com/40' }}" alt="User Image">
                     <div class="details">
                         <div class="name">{{ $user->username }}</div>
@@ -39,25 +39,9 @@
         <div class="chat-header">
             Chat with {{ $selectedUser->username ?? 'Select a user' }}
         </div>
-        {{-- <div class="message-box" id="chatBox">
-            @foreach ($messages as $message)
-                <div class="message {{ $message->admin_id ? 'right' : 'left' }}">
-                    @if (!$message->admin_id)
-                        <img src="{{ $selectedUser->profile_pic ? asset($selectedUser->profile_pic) : 'https://via.placeholder.com/40' }}" alt="User Image">
-                    @endif
-                    <div class="text-container">
-                        <div class="admin small text-muted">You:</div>
-                        <div class="text">{{ $message->message_info }}</div>
-                        <p class="time small text-muted" style="font-style: italic;">
-                            {{ $message->created_at->format('h:i A') }}
-                        </p>
-                    </div>
-                </div>
-            @endforeach
-        </div> --}}
 
-        <div class="message-box mb-3" id="chatBox">
-            @foreach ($messages as $message)
+        <div class="message-box mb-3" id="chatBox" wire:poll.5s>
+            @forelse ($messages as $message)
                 @if ($message->user_id)
                     <!-- Left Side (User Message) -->
                     <div class="message left">
@@ -91,7 +75,9 @@
                         </div>
                     </div>
                 @endif
-            @endforeach
+            @empty
+                <div class="no-messages d-flex align-items-center justify-content-center" style="height: 100%; width: 100%;">No messages found.</div>
+            @endforelse
         </div>
         <div class="input-area">
             <form wire:submit.prevent="sendMessage" id="messageForm">

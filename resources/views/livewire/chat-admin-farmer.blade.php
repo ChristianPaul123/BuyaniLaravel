@@ -39,7 +39,7 @@
         <div class="chat-header">
             Chat with {{ $selectedUser->username ?? 'Select a user' }}
         </div>
-        <div class="message-box mb-3" id="chatBox">
+        <div class="message-box mb-3" id="chatBox" wire:poll.5s>
             @foreach ($messages as $message)
                 @if ($message->user_id)
                     <!-- Left Side (User Message) -->

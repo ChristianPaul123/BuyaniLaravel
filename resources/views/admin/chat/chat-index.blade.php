@@ -283,7 +283,114 @@
 @endsection
 @section('scripts')
 {{-- for the tab to stay where it should --}}
-<script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Cache DOM elements
+            const messageForm = document.getElementById('messageForm');
+            const messageInput = document.getElementById('messageInput');
+            const chatBox = document.getElementById('chatBox');
+
+            // Scroll to the bottom of the chat box
+            window.scrollToBottom = function () {
+                if (chatBox) {
+                    chatBox.scrollTop = chatBox.scrollHeight;
+                }
+            };
+
+            // Automatically scroll to the bottom on initial load
+            scrollToBottom();
+
+            // Listen to Livewire DOM updates
+            Livewire.hook('message.processed', (message, component) => {
+                scrollToBottom();
+            });
+
+            // Handle manual message sending via form submission
+            if (messageForm) {
+                messageForm.addEventListener('submit', function (e) {
+                    e.preventDefault();
+
+                    // Trim spaces and validate input
+                    const newMessageText = messageInput.value.trim();
+                    if (!newMessageText) {
+                        alert('Message cannot be empty or contain only spaces.');
+                        return; // Prevent form submission
+                    } else {
+                        const messageDiv = document.createElement('div');
+                        messageDiv.className = 'message right'; // Adjust class dynamically for user or admin
+
+                        // Determine whether the user is admin or regular user
+                        const sender = messageInput.dataset.sender || 'User';
+                        const currentTimestamp = new Date().toLocaleString([], {
+                            hour: '2-digit',
+                            minute: '2-digit',
+                        });
+
+                        // Construct the message bubble
+                        messageDiv.innerHTML = `
+                            <div class="text-container">
+                                <div class="user small text-muted">You (${sender}):</div>
+                                <div class="text">${newMessageText}</div>
+                                <div class="timestamp">${currentTimestamp}</div>
+                            </div>
+                        `;
+
+                        chatBox.appendChild(messageDiv); // Append the message to the chat box
+                        messageInput.value = ''; // Clear the input field
+                        scrollToBottom(); // Scroll to the bottom
+
+                        // Optionally, send the message to the backend via Livewire
+                        Livewire.emit('sendMessage', newMessageText);
+                    }
+                });
+            }
+        });
+
+        // Preserve and activate the selected tab on page reload
+        document.addEventListener('DOMContentLoaded', function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const activeTab = urlParams.get('tab');
+            if (activeTab) {
+                const tab = document.querySelector(`a[href="#${activeTab}"]`);
+                if (tab) {
+                    const tabInstance = new bootstrap.Tab(tab);
+                    tabInstance.show();
+                }
+            }
+        });
+
+        // Save and restore the active tab in localStorage
+        document.addEventListener('DOMContentLoaded', function () {
+            function activateSavedTab() {
+                let activeTab = localStorage.getItem('activeTab');
+                if (activeTab) {
+                    let tabElement = document.querySelector(`button[data-bs-target="${activeTab}"]`);
+                    if (tabElement) {
+                        tabElement.click();
+                    }
+                }
+            }
+
+            activateSavedTab();
+
+            // Add event listeners for Livewire updates
+            document.addEventListener('livewire:load', activateSavedTab);
+            document.addEventListener('livewire:update', activateSavedTab);
+
+            // Save the active tab on click
+            const tabLinks = document.querySelectorAll('.nav-link');
+            tabLinks.forEach(tabLink => {
+                tabLink.addEventListener('click', function (e) {
+                    let targetTab = e.target.getAttribute('data-bs-target');
+                    localStorage.setItem('activeTab', targetTab);
+                });
+            });
+        });
+    </script>
+
+@endsection
+    {{-- <script>
     document.addEventListener('DOMContentLoaded', function () {
         // Cache DOM elements
         const messageForm = document.getElementById('messageForm');
@@ -309,7 +416,7 @@
         if (messageForm) {
             messageForm.addEventListener('submit', function (e) {
                 e.preventDefault();
-               // Trim spaces and validate input
+                // Trim spaces and validate input
                 const newMessageText = messageInput.value.trim();
                 if (!newMessageText) {
                     alert('Message cannot be empty or contain only spaces.');
@@ -378,6 +485,4 @@
     });
 
 
-</script>
-
-@endsection
+    </script> --}}
