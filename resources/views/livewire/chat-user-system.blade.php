@@ -1,6 +1,6 @@
 <div  class="chat-container">
     <section>
-    <div class="message-box mb-3" id="chatBox" wire:poll.5s>
+    <div class="message-box mb-3" id="chatBox" wire:poll>
         @foreach ($messages as $message)
             @if ($message->user_id)
                 <!-- Left Side (User Message) -->

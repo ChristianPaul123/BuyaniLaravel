@@ -10,7 +10,6 @@
                 <div
                     class="user-item {{ $selectedUser && $selectedUser->id === $user->id ? 'active' : '' }}"
                     wire:click="selectChat({{ $user->id }})">
-
                     <img src="{{ $user->profile_pic ? asset($user->profile_pic) : 'https://via.placeholder.com/40' }}" alt="User Image">
                     <div class="details">
                         <div class="name">{{ $user->username }}</div>

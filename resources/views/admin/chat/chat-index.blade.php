@@ -12,8 +12,8 @@
 
         /* Sidebar Styles */
         .chat-sidebar {
-            width: 25%;
-            max-width: 250px;
+            width: 35%;
+            max-width: 30rem;
             background-color: #343a40;
             color: white;
             display: flex;

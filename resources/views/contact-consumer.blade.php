@@ -81,6 +81,6 @@
 </body>
 @endsection
 
-@push('scripts')
+@section('scripts')
 {{-- Any page-specific scripts can be added here --}}
-@endpush
+@endsection

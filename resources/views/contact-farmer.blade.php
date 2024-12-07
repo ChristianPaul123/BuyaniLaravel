@@ -1,5 +1,3 @@
-{{-- contact.blade.php --}}
-
 @extends('layouts.app') {{-- Assuming 'app.blade.php' is the base layout --}}
 
 @section('title', 'Contact Us') {{-- Set the title for this page --}}
@@ -81,6 +79,6 @@
 </body>
 @endsection
 
-@push('scripts')
+@section('scripts')
 {{-- Any page-specific scripts can be added here --}}
-@endpush
+@endsection

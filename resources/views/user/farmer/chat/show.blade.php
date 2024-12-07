@@ -5,7 +5,7 @@
 @push('styles')
 <style>
       .chat-container {
-        max-width: 600px;
+        max-width: 65rem;
         margin: auto;
         background-color: #f8f9fa;
         border-radius: 10px;
@@ -14,6 +14,7 @@
     }
     .message-box {
         overflow-y: auto;
+        overflow-x: hidden;
         max-height: 400px;
         min-height: 400px;
         padding: 10px;

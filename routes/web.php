@@ -26,9 +26,11 @@ use App\Http\Controllers\OrderManagementController;
 
 use App\Http\Controllers\ShippingAddressController;
 use App\Http\Controllers\ReportManagementController;
+use App\Http\Controllers\ReviewManagementController;
 use App\Http\Controllers\ProductManagementController;
 use App\Http\Controllers\InventoryManagementController;
 use App\Http\Controllers\ProductSpecificationController;
+use App\Http\Controllers\VotedProductsManagementController;
 
 Route::get('/', function () {
     return view('user.index');
@@ -121,6 +123,7 @@ Route::post('admin/user/management/reactivate/{id}', [UserManagementController::
 //CHAT US
 Route::get('admin/chat', [ChatManagementController::class, 'showAdminChat'])->name('admin.chat');
 
+//
 
 Route::get('admin/report', function () {
     return view('admin.report.report');
@@ -136,6 +139,15 @@ Route::get('admin/blog', function () {
     return view('admin.blog.blog_post');
 });
 
+// //REVIEWS
+Route::get('admin/reviews', [ReviewManagementController::class, 'showReviews'])->name('admin.reviews');
+
+
+//VOTED PRODUCTS
+Route::get('admin/votes',[VotedProductsManagementController::class, 'showVotedProducts'])->name('admin.voted-products');
+
+
+//BLOGS
 Route::get('admin/blog',[BlogManagementController::class,'showBlogs'])->name('admin.blog');
 Route::post('admin/blog',[BlogManagementController::class,'addBlog'])->name('admin.blog.add');
 Route::get('admin/blog/edit/{blog}',[BlogManagementController::class,'editBlog'])->name('admin.blog.edit');
