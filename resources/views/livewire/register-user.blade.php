@@ -52,7 +52,7 @@
                 </div>
               <div class="row">
                   <div class="col-12">
-                      <h2 class="text-center my-3 mx-2" style="font-size: 40px; white-space: nowrap;">Sign Up As Consumer</h2>
+                      <h2 class="text-center my-3 mx-2 head-sign">Sign Up As Consumer</h2>
                   </div>
               </div>
               <form wire:submit.prevent="register" class="my-3" style="width: 100%;" autocomplete="off">
@@ -60,12 +60,12 @@
                 <div class="row">
                       <div class="col-lg-4 offset-lg-1 mb-4">
                           <div class="form-group my-3">
-                              <label for="username">Username</label>
+                              <label for="username">Username:</label>
                               <input type="text" wire:model="username" class="form-control" id="username" placeholder="Enter username" required>
                               @error('username') <span class="text-warning">{{ $message }}</span> @enderror
                             </div>
                           <div class="form-group my-3">
-                              <label for="email">Email</label>
+                              <label for="email">Email:</label>
                               <input type="email" wire:model="email" class="form-control" id="email" placeholder="Enter email" required>
                               @error('email') <span class="text-warning">{{ $message }}</span> @enderror
                             </div>
@@ -137,7 +137,7 @@
           <div class="container-fluid custom-font-content" style="padding: 20px;">
             <div class="row">
                 <div class="col-12">
-                    <h2 class="text-center my-3 mx-2" style="font-size: 40px; white-space: nowrap;">Sign Up As Farmer</h2>
+                    <h2 class="text-center my-3 mx-2 head-sign">Sign Up As Farmer</h2>
                 </div>
             </div>
             <form wire:submit.prevent="register" class="my-3" style="width: 100%;" autocomplete="off">
@@ -145,13 +145,13 @@
               <div class="row">
                     <div class="col-lg-4 offset-lg-1 mb-4">
                         <div class="form-group my-3">
-                            <label for="username">Username</label>
+                            <label for="username">Username:</label>
                             <input type="text" wire:model="username" class="form-control" id="username" placeholder="Enter username" required>
                             @error('username') <span class="text-warning">{{ $message }}</span> @enderror
 
                         </div>
                         <div class="form-group my-3">
-                            <label for="email">Email</label>
+                            <label for="email">Email:</label>
                             <input type="email" wire:model="email" class="form-control" id="email" placeholder="Enter email" required>
                             @error('email') <span class="text-warning">{{ $message }}</span> @enderror
 
