@@ -22,7 +22,7 @@
     }
 
         /* Card Styling */
-        .card .card-body{
+    .card .card-body{
         padding: auto;
     }
 
@@ -135,6 +135,7 @@
         padding: 20px;
         border-radius: 15px;
         margin-top: 20px;
+        min-height: 500px;
     }
 
     /* Request Product Section */
@@ -159,6 +160,11 @@
         transform: translateY(-3px);
     }
 
+    .max-height {
+        max-height: 300px;
+        min-height: 300px;
+        overflow-y: scroll
+    }
 </style>
 @endpush
 
@@ -178,7 +184,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header bg-success text-white">
-                        <h5 class="mb-0">Top Voted Products</h5>
+                        <h5 class="mb-0 text-center">Top Voted Products</h5>
                     </div>
                     <div class="card-body chart-container">
                         <canvas id="topVotedChart"></canvas>
@@ -189,9 +195,9 @@
 
         <!-- Product Voting Poll Section -->
         <div class="row voting-poll mt-4">
-            <h3 class="mb-3">Product Voting Poll</h3>
-            <div class="col-lg-8 col-md-10 col-sm-12 mb-4">
-                <div class="row">
+            <h3 class="mb-3  text-center">Product Voting Poll</h3>
+            <div class="col-lg-12 col-md-12 col-sm-12 mb-4">
+                <div class="row max-height">
                     <!-- Dummy Data for Suggested Products -->
                     @php
                         $suggestedProducts = [
@@ -216,12 +222,90 @@
                                 'rank' => 1,
                                 'date' => 'January 2024',
                                 'category' => 'Vegetable'
-                            ]
+                            ],
+                            [
+                                'id' => 3,
+                                'suggest_name' => 'Corn',
+                                'suggest_description' => 'Corn is a versatile grain that is a staple food in many cultures.',
+                                'suggest_image' => null, // No image provided
+                                'user' => 'User123',
+                                'total_vote_count' => 1500,
+                                'rank' => 1,
+                                'date' => 'January 2024',
+                                'category' => 'Vegetable'
+                            ],
+                            [
+                                'id' => 3,
+                                'suggest_name' => 'Corn',
+                                'suggest_description' => 'Corn is a versatile grain that is a staple food in many cultures.',
+                                'suggest_image' => null, // No image provided
+                                'user' => 'User123',
+                                'total_vote_count' => 1500,
+                                'rank' => 1,
+                                'date' => 'January 2024',
+                                'category' => 'Vegetable'
+                            ],
+                            [
+                                'id' => 4,
+                                'suggest_name' => 'Corn',
+                                'suggest_description' => 'Corn is a versatile grain that is a staple food in many cultures.',
+                                'suggest_image' => null, // No image provided
+                                'user' => 'User123',
+                                'total_vote_count' => 1500,
+                                'rank' => 1,
+                                'date' => 'January 2024',
+                                'category' => 'Vegetable'
+                            ],
+                            [
+                                'id' => 5,
+                                'suggest_name' => 'Corn',
+                                'suggest_description' => 'Corn is a versatile grain that is a staple food in many cultures.',
+                                'suggest_image' => null, // No image provided
+                                'user' => 'User123',
+                                'total_vote_count' => 1500,
+                                'rank' => 1,
+                                'date' => 'January 2024',
+                                'category' => 'Vegetable'
+                            ],
+                            [
+                                'id' => 6,
+                                'suggest_name' => 'Corn',
+                                'suggest_description' => 'Corn is a versatile grain that is a staple food in many cultures.',
+                                'suggest_image' => null, // No image provided
+                                'user' => 'User123',
+                                'total_vote_count' => 1500,
+                                'rank' => 1,
+                                'date' => 'January 2024',
+                                'category' => 'Vegetable'
+                            ],
+                            [
+                                'id' => 7,
+                                'suggest_name' => 'Corn',
+                                'suggest_description' => 'Corn is a versatile grain that is a staple food in many cultures.',
+                                'suggest_image' => null, // No image provided
+                                'user' => 'User123',
+                                'total_vote_count' => 1500,
+                                'rank' => 1,
+                                'date' => 'January 2024',
+                                'category' => 'Vegetable'
+                            ],
+                            [
+                                'id' => 8,
+                                'suggest_name' => 'Corn',
+                                'suggest_description' => 'Corn is a versatile grain that is a staple food in many cultures.',
+                                'suggest_image' => null, // No image provided
+                                'user' => 'User123',
+                                'total_vote_count' => 1500,
+                                'rank' => 1,
+                                'date' => 'January 2024',
+                                'category' => 'Vegetable'
+                            ],
+
                         ];
                     @endphp
 
                     @foreach ($suggestedProducts as $product)
-                    <div class="col-md-6 mb-4">
+                    <div class="col-lg-6 col-md-12 col-sm-12 mb-4">
                         <div class="card shadow-sm border-0">
                             <div class="card-body d-flex align-items-center gap-3">
                                 <!-- Product Image -->
@@ -251,7 +335,6 @@
                                             '{{ $product['suggest_name'] }}',
                                             '{{ $product['category'] }}',
                                             '{{ $product['suggest_description'] }}',
-
                                             '{{ $product['user'] }}',
                                             '{{ $product['total_vote_count'] }}',
                                             '{{ $product['rank'] }}',
@@ -304,7 +387,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
                 </div>
             </div>
         </div>
@@ -325,14 +408,11 @@
                             <input type="text" class="form-control" name="suggest_name" required>
                         </div>
                         <div class="form-group">
-                            <label for="category">Category</label>
-                            <select class="form-control" name="category" required>
-                                <option value="">Select Category</option>
-                                <!-- Dynamic categories -->
-                            </select>
+                            <label for="category">Sample Category:</label>
+                            <input type="text" class="form-control" name="category" required>
                         </div>
                         <div class="form-group">
-                            <label for="suggest_description">Description</label>
+                            <label for="suggest_description">Introduction to requested product:</label>
                             <textarea class="form-control" name="suggest_description" rows="3" required></textarea>
                         </div>
                         <div class="form-group">
@@ -342,7 +422,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Submit</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
                     </div>
                 </form>
             </div>
@@ -354,7 +434,7 @@
 @section('scripts')
 
 <script>
-    function populateProductModal(name, category, description, image, requestedBy, votes, rank, date) {
+    function populateProductModal(name, category, description, requestedBy, votes, rank, date) {
         // Populate modal with data
         document.getElementById('modalProductName').innerText = name;
         document.getElementById('modalProductCategory').innerText = category;
@@ -368,12 +448,18 @@
 </script>
 
 <script>
-    document.getElementById('viewProductModal').addEventListener('hidden.bs.modal', function () {
-    document.querySelector('[data-bs-target="#viewProductModal"]').focus();
+ document.getElementById('viewProductModal').addEventListener('hidden.bs.modal', function () {
+    const triggerButton = document.querySelector('[data-bs-target="#viewProductModal"]');
+    if (triggerButton) {
+        triggerButton.focus();
+    }
 });
 
-    document.getElementById('requestProductModal').addEventListener('hidden.bs.modal', function () {
-    document.querySelector('[data-bs-target="#requestProductModal"]').focus();
+document.getElementById('requestProductModal').addEventListener('hidden.bs.modal', function () {
+    const triggerButton = document.querySelector('[data-bs-target="#requestProductModal"]');
+    if (triggerButton) {
+        triggerButton.focus();
+    }
 });
 </script>
 

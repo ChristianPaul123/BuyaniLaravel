@@ -40,18 +40,22 @@
                         <td>{{ $user->deactivated_date }}</td>
                         <td>{{ $user->deactivated_status == 1 ? 'Deactivated' : 'Active' }}</td>
                         <td class="table-action-buttons">
-                            <a href="{{ route('admin.management.view', $user->id) }}" class="btn btn-primary btn-sm">View</a>
+                            <a href="{{ route('admin.management.view', $user->id) }}" class="btn btn-primary btn-sm"><i class="fa-solid fa-eye"></i></a>
                         </td>
                         <td>
                             @if ($user->deactivated_status)
                         <form action="{{ route('admin.management.reactivate', $user->id) }}" method="POST" class="d-inline">
                             @csrf
-                            <button type="submit" class="btn btn-success btn-sm">Reactivate</button>
+                            <button title="Activate" style="background:none;border:none;padding:0;cursor:pointer;">
+                                <i class="fa fa-power-off" style="color:green;"></i>
+                            </button>
                         </form>
                     @else
                         <form action="{{ route('admin.management.deactivate', $user->id) }}" method="POST" class="d-inline">
                             @csrf
-                            <button type="submit" class="btn btn-danger btn-sm">Deactivate</button>
+                            <button title="Deactivate" style="background:none;border:none;padding:0;cursor:pointer;">
+                                <i class="fa fa-power-off" style="color:red;"></i>
+                            </button>
                         </form>
                     @endif
                         </td>
