@@ -56,10 +56,103 @@
     .message i:active{
     transform: rotate(90deg);
     }
-
     .toggle-password {
         cursor: pointer;
     }
+    .head-sign{
+        font-size: 40px;
+    }
+
+
+
+    @media (max-width: 576px) {
+        /* Adjust the container padding for smaller screens */
+        .container-fluid.custom-font-content {
+            padding: 10px;
+        }
+
+        /* Make text and titles smaller for better readability on mobile */
+        .custom-font-content h1, .custom-font-content h2, .custom-font-content h3 {
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        /* Adjust form elements for mobile */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-control {
+            font-size: 1rem;
+            padding: 10px;
+        }
+
+        .btn {
+            width: 100%;
+            font-size: 1.2rem;
+        }
+
+        /* Adjust the breadcrumb text size and positioning */
+        .breadcrumb {
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb-item {
+            display: block;
+        }
+
+        /* Stack the image and text in the banner for smaller screens */
+        .banner {
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .banner img {
+            width: 100%;
+            height: auto;
+        }
+
+        /* Make the password toggle icons larger and more touch-friendly */
+        .toggle-password i {
+            font-size: 1.5rem;
+        }
+
+        /* Style the error message popup for smaller screens */
+        .message {
+            width: 90%;
+            left: 5%;
+            padding: 1rem;
+        }
+
+        .message span {
+            font-size: 1.5rem;
+        }
+
+        .message i {
+            font-size: 2rem;
+        }
+
+        /* Ensure the modal popup is responsive */
+        .popup {
+            width: 80%;
+        }
+
+        /* Make checkboxes smaller and more aligned */
+        .form-check-input {
+            width: 20px;
+            height: 20px;
+        }
+
+        .form-check-label {
+            font-size: 1rem;
+        }
+        .head-sign {
+            font-size: 1rem;
+        }
+    }
+
+
 </style>
 
 @include('user.includes.popup-style')

@@ -30,13 +30,23 @@
     }
 
     .buyani {
-        font-weight: 100000px;
+        font-weight: 900;
         font-size: 9rem;
         -webkit-text-stroke: 1px white;
         text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
         margin-top: 70px;
         margin-bottom: 50px;
     }
+
+    /* For screens smaller than 576px (small phones) */
+    @media (max-width: 576px) {
+        .buyani {
+            font-size: 5rem;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+    }
+
 
     .buyani .buy {
         color: #00cc1a;
