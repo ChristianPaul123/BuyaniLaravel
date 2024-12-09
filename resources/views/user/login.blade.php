@@ -56,8 +56,27 @@
     });
 </script>
 
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const emailPhoneInput = document.getElementById("email_phoneNum");
+    const emailPhoneError = document.getElementById("emailPhoneError");
+    const form = document.getElementById("loginForm");
 
+    emailPhoneInput.addEventListener("input", function () {
+        const value = emailPhoneInput.value.trim();
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        const phoneRegex = /^\+?\d{10,15}$/;
 
+        if (emailRegex.test(value) || phoneRegex.test(value)) {
+            emailPhoneError.style.display = "none";
+            emailPhoneInput.setCustomValidity("");
+        } else {
+            emailPhoneError.style.display = "block";
+            emailPhoneInput.setCustomValidity("Invalid email or phone number format.");
+        }
+    });
+});
+</script>
 {{-- @include('user.includes.notif-js') --}}
 @include('user.includes.popup-js')
 

@@ -19,15 +19,23 @@
                         </div>
                     </div>
                 </div>
-
-                {{-- <div class="notif hidden d-flex mt-3" id="notif">
-                    <i class="bi bi-info-square"></i>
-                    <div class="container-right">
-                        <h5 class="m-0">Item has been added to cart</h5>
-                    </div>
-                </div> --}}
-
             @endif
+            {{-- @if (session('error'))
+                <div>
+                    <div class="overlay" id="overlay" aria-label="Close" onclick="closePopup()"></div>
+
+                    <div class="popup error">
+                        <i class="close bi bi-x-lg fs-4" aria-label="Close" onclick="closePopup()"></i>
+                        <div class="icon-container error-bg">
+                            <i class="icon bi bi-x-circle"></i>
+                        </div>
+                        <div class="container-contents">
+                            <h3>Oops!</h3>
+                            <p>{{ session('error') }}</p>
+                        </div>
+                    </div>
+                </div>
+            @endif --}}
             @if (session('success'))
                 <div>
                     <div class="overlay" id="overlay" aria-label="Close" onclick="closePopup()"></div>
@@ -61,9 +69,11 @@
 
         <form class="my-3" wire:submit.prevent="login" style="width: 400px;" id="loginForm" autocomplete="off">
             <div class="form-group my-3">
-                <label for="email">Email</label>
-                <input type="email" wire:model="email" class="form-control" id="email" placeholder="Enter email" required>
-                @error('email') <span class="text-danger">{{ $message }}</span> @enderror
+                <label for="email">Email or Phone Number</label>
+                <input type="text" wire:model="email_phoneNum" class="form-control" id="email_phoneNum" placeholder="Enter email or phone number" required>
+                <small id="emailPhoneError" class="text-warning" style="display: none;">Invalid email or phone number format.</small>
+                {{-- @error('email_phoneNum') <span class="text-danger">{{ $message }}</span> @enderror --}}
+                @if (session()->has('error'))<span id="errorMessage" class="text-danger">{{ session('error') }}</span>@endif
             </div>
 
             <div class="form-group my-3">
@@ -76,8 +86,6 @@
                         </span>
                     </div>
                 </div>
-
-                @error('password') <span class="text-danger">{{ $message }}</span> @enderror
                 <input type="hidden" wire:model="user_type" value="{{ $user_type }}" />
             </div>
 
@@ -198,4 +206,3 @@
         @endif
     </div>
 </div>
-

@@ -14,8 +14,10 @@ class RegisterUser extends Component
 
     public $username ='';
     public $email='';
+    public $phone_number = '';
 
     public $password='';
+
 
     public $password_confirmation='';
     public $user_type='';
@@ -56,17 +58,21 @@ class RegisterUser extends Component
         $validatedData = $this->validate([
             'username' => ['required', Rule::unique('users', 'username')],
             'email' => ['required', Rule::unique('users', 'email')],
+            'phone_number' => ['required','regex:/^\d{10,15}$/',Rule::unique('users', 'phone_number')],
             'password' => ['required', 'min:8', 'max:200', 'confirmed'],
             'user_type' => ['required', 'numeric'],
+        ],[
+            'phone_number.required' => 'The phone number is required.',
+            'phone_number.regex' => 'The phone number must be 10-15 digits',
+            'phone_number.unique' => 'This phone number is already registered.',
         ]);
-
-
         //$validatedData['password'] = bcrypt($validatedData['password']);
         $validatedData['user_type'] = (int)$validatedData['user_type'];
 
         $this->username = $validatedData['username'];
         $this->email = $validatedData['email'];
         $this->password = $validatedData['password'];
+        $this->phone_number = $validatedData['phone_number'];
         //$this->password_confirmation = $validatedData['password_confirmation'];
         $this->user_type = $validatedData['user_type'];
 
@@ -163,6 +169,7 @@ public function verifyOtp()
             User::create([
                 'username' => $this->username,
                 'email' => $this->email,
+                'phone_number' => $this->phone_number,
                 'password' => bcrypt($this->password), // Hash password before saving
                 'user_type' => $this->user_type,
             ]);

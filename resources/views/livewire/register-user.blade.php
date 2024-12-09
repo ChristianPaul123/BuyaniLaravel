@@ -1,15 +1,4 @@
 <div class="mt-3 pt-0">
-    {{-- <div class="container-fluid custom-font-content p-5">
-        <nav aria-label="breadcrumb d-flex">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('user.login', ['user_type' => $user_type]) }}">Login</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Registration</li>
-            </ol>
-        </nav>
-    </div> --}}
-
-
-
     @if (session('message'))
         <div>
             <div class="overlay" id="overlay" aria-label="Close" onclick="closePopup()"></div>
@@ -68,6 +57,11 @@
                               <label for="email">Email:</label>
                               <input type="email" wire:model="email" class="form-control" id="email" placeholder="Enter email" required>
                               @error('email') <span class="text-warning">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="form-group my-3">
+                                <label for="username">Phone Number:</label>
+                                <input type="text" wire:model="phone_number" class="form-control" id="phone_number" placeholder="Enter phone number" required>
+                                @error('phone_number') <span class="text-warning">{{ $message }}</span> @enderror
                             </div>
                       </div>
                       <div class="col-lg-4 offset-lg-2 mb-4">
@@ -154,7 +148,11 @@
                             <label for="email">Email:</label>
                             <input type="email" wire:model="email" class="form-control" id="email" placeholder="Enter email" required>
                             @error('email') <span class="text-warning">{{ $message }}</span> @enderror
-
+                        </div>
+                        <div class="form-group my-3">
+                            <label for="username">Phone Number:</label>
+                            <input type="text" wire:model="phone_number" class="form-control" id="phone_number" placeholder="Enter phone number" required>
+                            @error('phone_number') <span class="text-warning">{{ $message }}</span> @enderror
                         </div>
                     </div>
                     <div class="col-lg-4 offset-lg-2 mb-4">

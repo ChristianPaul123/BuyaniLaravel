@@ -15,7 +15,7 @@ class LoginUser extends Component
 {
 
     public $username ='';
-    public $email='';
+    public $email_phoneNum='';
 
     public $password='';
 
@@ -47,38 +47,43 @@ class LoginUser extends Component
         // Reset OTP and hide modal
     }
 
+
     public function login()
     {
-        $validatedData = $this->validate([
-            'email' => ['required'],
-            'password' => ['required'],
-            'user_type' => ['required'],
-        ]);
+            $validatedData = $this->validate([
+                'email_phoneNum' => ['required','string','regex:/^(\+?\d{10,15}|[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/',],
+                'password' => ['required'],
+                'user_type' => ['required'],
+            ]);
 
-        //dd($validatedData);
+            // Determine if the input is an email or phone number
+            $loginField = filter_var($validatedData['email_phoneNum'], FILTER_VALIDATE_EMAIL) ? 'email' : 'phone_number';
 
-        if (Auth::guard('user')->attempt(
-['email' =>$validatedData['email'],
-            'password' => $validatedData['password'],
-            'user_type' => $validatedData['user_type']]))
-            {
-            session()->regenerate();
+            // Attempt to authenticate
+            if (Auth::guard('user')->attempt([
+                $loginField => $validatedData['email_phoneNum'],
+                'password' => $validatedData['password'],
+                'user_type' => $validatedData['user_type'],
+            ])) {
+                session()->regenerate();
 
-            $user = Auth::guard('user')->user();
+                $user = Auth::guard('user')->user();
 
+                // If user_type == 1 (Consumer), ensure a cart is created
                 if ($user->user_type == 1) {
-                   Cart::firstOrCreate(
-                    ['user_id' => $user->id],
-                    ['cart_total' => 0, 'overall_cartKG' => 0, 'total_price' => 0]
-                );
+                    Cart::firstOrCreate(
+                        ['user_id' => $user->id],
+                        ['cart_total' => 0, 'overall_cartKG' => 0, 'total_price' => 0]
+                    );
                 }
-                // Redirect to the appropriate dashboard based on user type
+
+                // Redirect to the appropriate dashboard
                 $route = $user->user_type == 1 ? 'user.consumer' : 'user.farmer';
                 return redirect()->route($route)->with('success', 'Login successful');
-
             } else {
-                session()->flash('error', 'Invalid username or password. Please try again.');
-                //$this->message = 'Invalid username or password. Please try again.';
+
+                // dd('something went wrong');
+                session()->flash('error', 'Invalid email/phone number or password.');
             }
     }
 
@@ -127,7 +132,7 @@ class LoginUser extends Component
         ]);
 
         // Retrieve the OTP record
-        $otpRecord = OtpVerify::where('email', $this->email)
+        $otpRecord = OtpVerify::where('email', $this->selectedEmail)
             ->where('v_purpose', 'password_reset')
             ->where('is_verified', false)
             ->where('otp_expiry', '>', now())
@@ -157,14 +162,14 @@ class LoginUser extends Component
         ]);
 
         // Update the user's password
-        $user = User::where('email', $this->email)->first();
+        $user = User::where('email', $this->selectedEmail)->first();
         if ($user) {
             $user->password = bcrypt($this->newPassword);
             $user->save();
 
             // Flash success message and redirect
             session()->flash('success', 'Password has been reset successfully.');
-            $this->reset(['otp', 'showEmailModal','showOtpModal','showPasswordResetForm','email', 'newPassword','selectedEmail']);
+            $this->reset(['otp', 'showEmailModal','showOtpModal','showPasswordResetForm','newPassword','selectedEmail']);
             return redirect()->route('user.login', ['user_type' => $this->user_type]);
         } else {
             session()->flash('error', 'User not found. Please try again.');
