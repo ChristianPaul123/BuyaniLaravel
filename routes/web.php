@@ -240,6 +240,7 @@ Route::get('user/consumer/favorites', [FavoriteController::class, 'showConsumerF
 Route::get('user/consumer/chat', [ChatController::class, 'showConsumerChat'])->name('user.consumer.chat');
 
 Route::get('user/consumer/voting', [VotedProductsController::class, 'showConsumerVoting'])->name('user.consumer.voting');
+Route::post('user/consumer/voting', [VotedProductsController::class, 'suggestProduct'])->name('user.consumer.voting.suggest');
 
 
 //Product for Farmers

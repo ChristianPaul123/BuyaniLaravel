@@ -27,12 +27,7 @@
 
 
 
-
 {{-- admin side for datatables --}}
 <script>
-new DataTable('#categoryTable');
-new DataTable('#productTable');
-new DataTable('#subcategoryTable');
-new DataTable('#productSpecificationTable');
-new DataTable('#blogTable');
+
 </script>
