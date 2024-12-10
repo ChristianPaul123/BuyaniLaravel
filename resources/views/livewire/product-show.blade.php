@@ -56,7 +56,7 @@
 
                     <!-- Search Bar -->
                     <form class="d-flex ms-auto" wire:submit.prevent="searchConsumerProduct">
-                        <input class="form-control me-2" type="search" wire:model.lazy="searchQuery" placeholder="Search" required>
+                        <input class="form-control me-2" type="search" id="searchQuery" wire:model.lazy="searchQuery" placeholder="Search" required>
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
                 </div>
@@ -159,3 +159,14 @@
         </div>
     </div>
 </div>
+
+@script
+<script>
+    // document.addEventListener('clear-input', () => {
+    //     console.log('Input cleared');
+    //     const searchForm = document.getElementById('searchForm');
+    //     const searchInput = searchForm.querySelector('#searchQuery');
+    //     searchInput.value = ''; // Clear the input value
+    // });
+</script>
+@endscript

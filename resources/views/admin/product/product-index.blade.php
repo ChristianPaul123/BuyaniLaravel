@@ -57,7 +57,7 @@
                     <a class="nav-link" id="subcategories-tab" data-bs-toggle="tab" href="#subcategories" role="tab">Subcategories</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" id="products-tab" data-bs-toggle="tab" href="#products" role="tab">Products</a>
+                    <a class="nav-link" id="products-tab" data-bs-toggle="tab" href="#products" role="tab">Products</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="specifications-tab" data-bs-toggle="tab" href="#specifications" role="tab">Product Specifications</a>
@@ -94,9 +94,16 @@
 
 @push('scripts')
 <script>
-    window.addEventListener('popstate', function(event) {
-        // If the user presses the back button, log them out
-        window.location.href = "{{ route('admin.logout') }}";
+    document.addEventListener('DOMContentLoaded', function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const activeTab = urlParams.get('tab');
+        if (activeTab) {
+            const tab = document.querySelector(`a[href="#${activeTab}"]`);
+            if (tab) {
+                const tabInstance = new bootstrap.Tab(tab);
+                tabInstance.show();
+            }
+        }
     });
   </script>
 @endpush
