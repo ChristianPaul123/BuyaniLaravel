@@ -123,7 +123,7 @@
                                             @endphp
                                             @if ($prices->isNotEmpty())
                                                 <p class="mb-0 text-success fw-bold">
-                                                    ${{ number_format($prices->min(), 2) }} - ${{ number_format($prices->max(), 2) }}
+                                                    ₱{{ number_format($prices->min(), 2) }} ~ ₱{{ number_format($prices->max(), 2) }}
                                                 </p>
                                             @else
                                                 <p class="text-info fw-bold">NEW</p>
@@ -133,9 +133,17 @@
                                             <button class="btn btn-sm btn-outline-primary" wire:click.prevent="viewProduct({{ $product->id }})">
                                                 View
                                             </button>
-                                            <button class="btn btn-sm btn-outline-danger {{ in_array($product->id, $userFavorites) ? 'active' : '' }}" wire:click.prevent="toggleFavorite({{ $product->id }})">
-                                                <i class="fas fa-heart"></i>
-                                            </button>
+
+                                            @if(Auth::guard('user')->check()) <!-- Check if the user is logged in -->
+                                                <button class="btn btn-sm btn-outline-danger {{ in_array($product->id, $userFavorites) ? 'active' : '' }}"
+                                                        wire:click.prevent="toggleFavorite({{ $product->id }})">
+                                                    <i class="fas fa-heart"></i>
+                                                </button>
+                                            @else
+                                                <button class="btn btn-sm btn-outline-secondary disabled" disabled>
+                                                    <i class="fas fa-heart"></i>
+                                                </button>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
