@@ -20,9 +20,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(Schedule $schedule)
     {
-        $schedule->command('app:generate-monthly-inventory-reports')->everyMinute()->sendOutputTo(storage_path('lo
+        $schedule->command('app:generate-monthly-inventory-reports')->monthly()->sendOutputTo(storage_path('lo
         gs/monthly_inventory_reports.log'));
-
+        $schedule->command('app:generate-monthly-suggest-product-reports')->monthly()->sendOutputTo(storage_path('lo
+        gs/monthly_suggested_products_reports.log'));
         Paginator::useBootstrapFive();
     }
 

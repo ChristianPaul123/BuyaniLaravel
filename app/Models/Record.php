@@ -11,9 +11,9 @@ class Record extends Model
 
     protected $fillable = [
         'product_name',
-        'product_sold_stocks',
-        'product_damage_stocks',
-        'product_total_stocks',
+        'product_sold_stock',
+        'product_damage_stock',
+        'product_total_stock',
         'transfer_date',
         'total_profit'
     ];

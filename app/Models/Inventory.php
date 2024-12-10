@@ -23,5 +23,9 @@ class Inventory extends Model
         return $this->belongsTo(Product::class, 'product_id');
     }
 
+    public function records(){
+        return $this->hasMany(record::class);
+    }
+
 
 }
