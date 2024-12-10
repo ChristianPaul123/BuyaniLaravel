@@ -36,7 +36,6 @@
                                 <div class="d-flex flex-column col-md-6">
                                 <h5 class="card-title">{{ $address->shipping_name }}</h5>
                                 <p class="card-text">{{ $address->shipping_address }}</p>
-
                                 </div>
                                 <div class="d-flex flex-column col-md-6">
                                 <button class="btn btn-outline-primary" wire:click="showViewModal({{ $address->id }})">View Details</button>
@@ -90,6 +89,11 @@
                                     <label for="city" class="form-label">City</label>
                                     <input type="text" class="form-control" id="city" placeholder="City" wire:model="city">
                                     @error('city') <span class="text-danger">{{ $message }}</span> @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label for="barangay" class="form-label">Barangay</label>
+                                    <input type="text" class="form-control" id="barangay" placeholder="barangay" wire:model="barangay">
+                                    @error('barangay') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -196,6 +200,15 @@
                                 @endif
                             </div>
                             <div class="mb-3">
+                                <label class="form-label">Barangay</label>
+                                @if($isEditingAddress)
+                                    <input type="text" class="form-control" wire:model="barangay">
+                                    @error('barangay') <span class="text-danger">{{ $message }}</span> @enderror
+                                @else
+                                <p class="form-control-plaintext">{{ $barangay }}</p>
+                                @endif
+                            </div>
+                            <div class="mb-3">
                                 <label class="form-label">Zip Code</label>
                                 @if($isEditingAddress)
                                     <input type="text" class="form-control" wire:model="zip_code">
@@ -226,3 +239,40 @@
 
     <section>
 </div>
+
+@script
+<script>
+    function updateLocationOptions() {
+        const locationType = document.getElementById('locationType').value;
+        const locationDropdown = document.getElementById('location');
+
+        // Clear current options
+        locationDropdown.innerHTML = '<option selected>Select a location</option>';
+
+        if (locationType) {
+            // Example API endpoint for GeoDB Cities (replace with your own API)
+            fetch('https://wft-geo-db.p.rapidapi.com/v1/geo/cities?countryCode=US', {
+                    method: 'GET',
+                    headers: {
+                        'X-RapidAPI-Host': 'wft-geo-db.p.rapidapi.com',
+                        'X-RapidAPI-Key': 'YOUR_RAPIDAPI_KEY'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    const cities = data.data; // Adjust based on API response
+                    cities.forEach(city => {
+                        const option = document.createElement('option');
+                        option.value = city.city; // Adjust based on API response
+                        option.textContent = city.city; // Adjust based on API response
+                        locationDropdown.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Error fetching cities:', error));
+        }
+    }
+
+    // Attach the event listener
+    document.getElementById('locationType').addEventListener('change', updateLocationOptions);
+</script>
+@endscript

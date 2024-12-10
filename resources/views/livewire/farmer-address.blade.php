@@ -13,6 +13,7 @@
                     <p><strong>City:</strong> {{ $address->city }}</p>
                     <p><strong>State:</strong> {{ $address->state }}</p>
                     <p><strong>Country:</strong> {{ $address->country }}</p>
+                    <p><strong>Barangay:</strong> {{ $address->barangay }}</p>
                     <p><strong>ZIP Code:</strong> {{ $address->zip_code }}</p>
                 </div>
                 <button class="btn btn-primary mt-3" wire:click="toggleEdit">Edit Address</button>
@@ -68,6 +69,12 @@
                         </div>
                     </div>
                     <div class="row">
+                        {{-- Barangay --}}
+                        <div class="col-md-6 mb-3">
+                            <label for="barangay" class="form-label">Barangay</label>
+                            <input type="text" class="form-control" id="barangay" wire:model="barangay" placeholder="Enter Barangay">
+                            @error('barangay') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
                         <!-- ZIP Code -->
                         <div class="col-md-6 mb-3">
                             <label for="zipCode" class="form-label">ZIP Code</label>

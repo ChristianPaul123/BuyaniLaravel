@@ -14,6 +14,7 @@ class ShippingAddress extends Model
         'city',
         'state',
         'country',
+        'barangay',
         'zip_code',
         'user_id',
         'shipping_name',
