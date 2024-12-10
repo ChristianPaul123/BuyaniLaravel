@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Console\Commands\GenerateMonthlyInventoryReports;
+use App\Console\Commands\GenerateMonthlySuggestProductReports;
 
 class CommandServiceProvider extends ServiceProvider
 {
@@ -22,6 +23,7 @@ class CommandServiceProvider extends ServiceProvider
     {
         $this->commands([
             GenerateMonthlyInventoryReports::class,
+            GenerateMonthlySuggestProductReports::class,
         ]);
     }
 }
