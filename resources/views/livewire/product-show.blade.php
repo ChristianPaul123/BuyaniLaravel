@@ -102,7 +102,33 @@
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title text-center text-truncate fw-bold">{{ $product->product_name }}</h5>
-                                        <p class="card-text text-muted text-center text-truncate mb-3">{{ Str::limit($product->product_details, 50) }}</p>
+                                        <div class="text-center mb-2">
+                                            @php
+                                                $averageRating = $product->productRatings()->avg('rating');
+                                            @endphp
+                                            @if ($averageRating)
+                                                @for ($i = 1; $i <= 5; $i++)
+                                                    <i class="fas fa-star {{ $i <= $averageRating ? 'text-warning' : 'text-muted' }}"></i>
+                                                @endfor
+                                                <span class="text-muted">({{ number_format($averageRating, 1) }})</span>
+                                            @else
+                                                <p class="text-muted">No ratings yet</p>
+                                            @endif
+                                        </div>
+
+                                        <!-- Display Price Range -->
+                                        <div class="text-center mb-3">
+                                            @php
+                                                $prices = $product->productSpecification()->pluck('product_price');
+                                            @endphp
+                                            @if ($prices->isNotEmpty())
+                                                <p class="mb-0 text-success fw-bold">
+                                                    ${{ number_format($prices->min(), 2) }} - ${{ number_format($prices->max(), 2) }}
+                                                </p>
+                                            @else
+                                                <p class="text-info fw-bold">NEW</p>
+                                            @endif
+                                        </div>
                                         <div class="d-flex justify-content-between align-items-center">
                                             <button class="btn btn-sm btn-outline-primary" wire:click.prevent="viewProduct({{ $product->id }})">
                                                 View
