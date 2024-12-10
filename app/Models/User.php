@@ -96,7 +96,7 @@ class User extends Authenticatable
         return $this->hasMany(ProductRating::class);
     }
 
-    public function FarmerProduces(){
+    public function farmerProduces(){
         return $this->hasMany(FarmerProduce::class);
     }
 
@@ -107,6 +107,19 @@ class User extends Authenticatable
     public function chat() {
         return $this->hasOne(Chat::class);
     }
+
+    public function votedProducts() {
+        return $this->hasMany(Votedproducts::class);
+    }
+
+    public function votingCounts() {
+        return $this->hasMany(VotingCount::class);
+    }
+
+    public function suggestProduct() {
+        return $this->hasOne(SuggestProduct::class);
+    }
+
 
 
 

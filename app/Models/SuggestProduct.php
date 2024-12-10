@@ -29,5 +29,12 @@ class SuggestProduct extends Model
         return $this->belongsTo(Admin::class);
     }
 
+    public function votedProducts()
+    {
+        return $this->hasMany(VotedProducts::class);
+    }
+
+
+
 
 }

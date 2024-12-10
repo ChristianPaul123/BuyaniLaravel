@@ -57,11 +57,12 @@ class RegisterUser extends Component
     {
         $validatedData = $this->validate([
             'username' => ['required', Rule::unique('users', 'username')],
-            'email' => ['required', Rule::unique('users', 'email')],
+            'email' => ['required','regex:/^[a-zA-Z0-9._%+-]+@(gmail\.com|yahoo\.com|hotmail\.com|outlook\.com|icloud\.com)$/', Rule::unique('users', 'email')],
             'phone_number' => ['required','regex:/^\d{10,15}$/',Rule::unique('users', 'phone_number')],
             'password' => ['required', 'min:8', 'max:200', 'confirmed'],
             'user_type' => ['required', 'numeric'],
         ],[
+            'email.regex' => 'Please provide a valid email address Ex: Gmail, Yahoo, Hotmail, Outlook, or iCloud.',
             'phone_number.required' => 'The phone number is required.',
             'phone_number.regex' => 'The phone number must be 10-15 digits',
             'phone_number.unique' => 'This phone number is already registered.',
