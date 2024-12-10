@@ -19,6 +19,7 @@ class FarmerAddress extends Component
     public $city;
     public $state;
     public $country;
+    public $barangay;
     public $zip_code;
 
     public function mount()
@@ -39,6 +40,7 @@ class FarmerAddress extends Component
             $this->city = $this->address->city;
             $this->state = $this->address->state;
             $this->country = $this->address->country;
+            $this->barangay = $this->address->barangay;
             $this->zip_code = $this->address->zip_code;
         }
     }
@@ -63,6 +65,7 @@ class FarmerAddress extends Component
             'street' => 'required|string|max:255',
             'city' => 'required|string|max:255',
             'state' => 'required|string|max:255',
+            'barangay' => 'required|string|max:255',
             'country' => 'required|string|max:255',
             'zip_code' => 'required|string|max:10',
         ]);
@@ -76,6 +79,7 @@ class FarmerAddress extends Component
                 'city' => $this->city,
                 'state' => $this->state,
                 'country' => $this->country,
+                'barangay' => $this->barangay,
                 'zip_code' => $this->zip_code,
             ]);
         } else {
@@ -88,6 +92,7 @@ class FarmerAddress extends Component
                 'city' => $this->city,
                 'state' => $this->state,
                 'country' => $this->country,
+                'barangay' => $this->barangay,
                 'zip_code' => $this->zip_code,
             ]);
         }

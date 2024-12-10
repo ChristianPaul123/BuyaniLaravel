@@ -16,6 +16,8 @@ class ConsumerAddress extends Component
     public $city;
     public $state;
     public $country;
+
+    public $barangay;
     public $zip_code;
     public $selectedAddress;
 
@@ -23,6 +25,7 @@ class ConsumerAddress extends Component
     public $showViewAddressModal = false;
 
     public $isEditingAddress = false; // Determines if the address modal is in edit mode
+
 
 
     public function mount()
@@ -47,6 +50,7 @@ class ConsumerAddress extends Component
         $this->city = $address->city;
         $this->state = $address->state;
         $this->country = $address->country;
+        $this->barangay = $address->barangay; // Assuming the address has a 'barangay' field
         $this->zip_code = $address->zip_code;
 
         $this->isEditingAddress = false; // Default to view mode
@@ -56,7 +60,7 @@ class ConsumerAddress extends Component
     {
          // Reset inputs and hide modal
         $this->reset(['showViewAddressModal','showAddAddressModal']);
-        $this->reset(['house_number', 'street', 'city', 'state', 'country', 'zip_code', 'shipping_name']);
+        $this->reset(['house_number', 'street', 'city', 'state', 'country', 'barangay','zip_code', 'shipping_name']);
     }
 
     public function saveAddress()
@@ -68,6 +72,7 @@ class ConsumerAddress extends Component
             'city' => 'required|string|max:255',
             'state' => 'required|string|max:255',
             'country' => 'required|string|max:255',
+            'barangay' => 'required|string|max:255',
             'zip_code' => 'required|string|max:10',
         ]);
 
@@ -77,6 +82,7 @@ class ConsumerAddress extends Component
             'city' => $this->city,
             'state' => $this->state,
             'country' => $this->country,
+            'barangay' => $this->barangay,
             'zip_code' => $this->zip_code,
             'user_id' => $this->user->id,
             'shipping_name' => $this->shipping_name,
@@ -100,6 +106,7 @@ class ConsumerAddress extends Component
             'street' => 'required|string|max:255',
             'city' => 'required|string|max:255',
             'state' => 'required|string|max:255',
+            'barangay' => 'required|string|max:255',
             'country' => 'required|string|max:255',
             'zip_code' => 'required|string|max:10',
         ]);
@@ -110,6 +117,7 @@ class ConsumerAddress extends Component
             'street' => $this->street,
             'city' => $this->city,
             'state' => $this->state,
+            'barangay' => $this->barangay, // Assuming the address has a 'barangay' field
             'country' => $this->country,
             'zip_code' => $this->zip_code,
         ]);
