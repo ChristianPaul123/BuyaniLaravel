@@ -70,7 +70,7 @@
     }
 
     .pagination .page-link:hover {
-        background-color: #f39634;
+        background-color: #0056b3;
         color: white;
     }
 
@@ -125,10 +125,15 @@
         color: #666;
     }
 
+    .navi-buttons{
+        display: flex;
+        gap: 1000px;
+    }
+
     /* Responsive Adjustments for Small Screens */
-    @media (max-width: 768px) {
+    @media (max-width: 576px) {
         .card-img-top-wrapper {
-            height: 200px; /* Adjust image height for smaller screens */
+            height: 200px;
         }
 
         form.d-flex {
@@ -139,8 +144,10 @@
             width: 30px;
             height: 30px;
         }
+        .navi-buttons{
+            font-size: 10000px;
+        }
     }
-
 </style>
 
 @endpush

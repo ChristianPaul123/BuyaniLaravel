@@ -92,7 +92,7 @@
                         <p class="text-muted">We’re currently out of stock, but don’t worry—we’ll have more products available soon!</p>
                     </div>
                 @else
-                    <h2 class="text-center my-4 fw-bold">{{ $title }}</h2>
+                    <h2 class="text-center mb-5 fw-bold">{{ $title }}</h2>
                     <div class="row g-4">
                         @foreach ($products as $product)
                             <div class="col-sm-6 col-md-4 col-lg-3">
@@ -143,7 +143,7 @@
                         @endforeach
                     </div>
 
-                    <div class="mt-4 d-flex justify-content-center">
+                    <div class="mt-4 navi-buttons">
                         {{ $products->links() }}
                     </div>
                 @endif
