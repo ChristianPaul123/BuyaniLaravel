@@ -56,7 +56,7 @@
 
                     <!-- Search Bar -->
                     <form class="d-flex ms-auto" wire:submit.prevent="searchConsumerProduct">
-                        <input class="form-control me-2" type="search" wire:model.lazy="searchQuery" placeholder="Search" required>
+                        <input class="form-control me-2" type="search" id="searchQuery" wire:model.lazy="searchQuery" placeholder="Search" required>
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
                 </div>
@@ -123,7 +123,7 @@
                                             @endphp
                                             @if ($prices->isNotEmpty())
                                                 <p class="mb-0 text-success fw-bold">
-                                                    ${{ number_format($prices->min(), 2) }} - ${{ number_format($prices->max(), 2) }}
+                                                    ₱{{ number_format($prices->min(), 2) }} ~ ₱{{ number_format($prices->max(), 2) }}
                                                 </p>
                                             @else
                                                 <p class="text-info fw-bold">NEW</p>
@@ -133,9 +133,17 @@
                                             <button class="btn btn-sm btn-outline-primary" wire:click.prevent="viewProduct({{ $product->id }})">
                                                 View
                                             </button>
-                                            <button class="btn btn-sm btn-outline-danger {{ in_array($product->id, $userFavorites) ? 'active' : '' }}" wire:click.prevent="toggleFavorite({{ $product->id }})">
-                                                <i class="fas fa-heart"></i>
-                                            </button>
+
+                                            @if(Auth::guard('user')->check()) <!-- Check if the user is logged in -->
+                                                <button class="btn btn-sm btn-outline-danger {{ in_array($product->id, $userFavorites) ? 'active' : '' }}"
+                                                        wire:click.prevent="toggleFavorite({{ $product->id }})">
+                                                    <i class="fas fa-heart"></i>
+                                                </button>
+                                            @else
+                                                <button class="btn btn-sm btn-outline-secondary disabled" disabled>
+                                                    <i class="fas fa-heart"></i>
+                                                </button>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -151,3 +159,14 @@
         </div>
     </div>
 </div>
+
+@script
+<script>
+    // document.addEventListener('clear-input', () => {
+    //     console.log('Input cleared');
+    //     const searchForm = document.getElementById('searchForm');
+    //     const searchInput = searchForm.querySelector('#searchQuery');
+    //     searchInput.value = ''; // Clear the input value
+    // });
+</script>
+@endscript

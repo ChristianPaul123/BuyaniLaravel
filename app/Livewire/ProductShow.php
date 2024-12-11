@@ -18,6 +18,7 @@ class ProductShow extends Component
     public $subcategory; // For selected subcategory
     public $category;    // For selected category
     public $searchQuery; // For search input
+    public $searchFilter; // For search
     public $message;     // For user feedback
     public $currentChunkIndex = 0; // Current chunk index for category carousel navigation
     public $filteredCategoryId = null;   // Store selected category ID
@@ -110,10 +111,14 @@ class ProductShow extends Component
     {
         try {
             if (!empty($this->searchQuery) && strlen($this->searchQuery) >= 3) {
+                $this->searchFilter = $this->searchQuery;
                 $this->filteredCategoryId = null;        // Reset category filter
                 $this->filteredSubcategoryId = null;     // Reset subcategory filter
-                $this->title = "Search results for '{$this->searchQuery}'"; // Update title
-                $this->message = null;                  // Reset message
+                $this->title = "Search results for '{$this->searchFilter}'"; // Update title
+                $this->message = null;
+                $this->searchQuery = null;
+
+                // $this->dispatch('clear-input');// Reset message
             } else {
                 $this->message = 'Please enter at least 3 characters for the search query.';
             }
@@ -159,8 +164,8 @@ class ProductShow extends Component
             $query->where('subcategory_id', $this->filteredSubcategoryId);
         }
 
-        if (!empty($this->searchQuery) && strlen($this->searchQuery) >= 3) {
-            $query->where('product_name', 'like', '%' . $this->searchQuery . '%');
+        if (!empty($this->searchFilter) && strlen($this->searchFilter) >= 3) {
+            $query->where('product_name', 'like', '%' . $this->searchFilter . '%');
         }
 
         // Paginate the products
