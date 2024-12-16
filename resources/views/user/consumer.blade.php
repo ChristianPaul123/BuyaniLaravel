@@ -42,6 +42,7 @@
         font-size: 60px;
         font-weight: bold;
         padding: 0;
+        line-height: 0.9;
     }
 
     .section-1 h1:nth-of-type(1) {
@@ -100,10 +101,6 @@
         text-align: center;
     }
 
-    .section-3 .left-panel h3 {
-        margin-bottom: 20px;
-    }
-
     .section-3 .right-panel .container {
         border: 5px solid #00cc1a;
         border-radius: 15px;
@@ -123,114 +120,21 @@
         scale: 1.1;
     }
 
+    .div-iframe{
+        height: 350px;
+    }
+
+    iframe{
+        height: 100%;
+        width: 80%;
+    }
+
     h2 {
         color: #00cc1a;
     }
 
     h4 {
         color: #00584E;
-    }
-
-    @keyframes fadeOutUp {
-        from {
-            transform: translate(-50%, -50%); /* Start from center */
-            opacity: 1;
-        }
-        to {
-            transform: translate(-50%, -55%); /* Move up to above the screen */
-            opacity: 0;
-        }
-    }
-
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-        }
-        to {
-            opacity: 0.6;
-        }
-    }
-
-    @keyframes fadeOut {
-        from {
-            opacity: 0.6;
-        }
-        to {
-            opacity: 0;
-        }
-    }
-
-    .overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.6);
-        z-index: 999;
-        animation: fadeIn 0.2s ease-out forwards; /* Fade in animation for the overlay */
-    }
-
-    .overlay.hidden {
-        animation: fadeOut 0.2s ease-in forwards; /* Fade out animation for the overlay */
-    }
-
-    .error-popup {
-        width: 400px;
-        background-color: #ffffff;
-        color: #842029;
-        border: 1px solid black;
-        border-radius: 5px;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-        z-index: 1000;
-        animation: fadeInDown 0.3s ease-out forwards; /* Slide down animation for the modal */
-    }
-
-    .error-popup.hidden {
-        animation: fadeOutUp 0.3s ease-in forwards; /* Slide up animation for the modal */
-    }
-
-    .container-contents {
-        padding: 20px;
-    }
-
-    .error-popup .error-icon {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 120px;
-        background-color: #e85e6c;
-        font-size: 60px;
-    }
-
-    button {
-        background-color: #ffc107;
-        color: #fff;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    .error-popup button:hover {
-        background-color: #e0a800;
-    }
-
-    .error-icon .icon {
-        color: #ffffff;
-    }
-
-    .error-popup .bi-x-lg {
-        color: #fff;
-        position: absolute;
-        top: 10px;
-        right: 10px;
     }
 
     /* start of css for card layout */
@@ -465,6 +369,80 @@
     .subscribe-button:hover {
         background-color: #00873a; /* Darker green on hover */
     }
+
+
+
+/* ---------------------------------------------------------------------------- */
+
+
+    /* Mobile */
+    @media (max-width: 768px) {
+        *{
+            /* border: 1px solid black; */
+        }
+
+        .section-1 {
+            padding: 20px;
+            height: 600px;
+        }
+
+        .section-1 h1 {
+            font-size: 40px;
+            line-height: 0.9;
+        }
+
+        .section-1 h4{
+            padding-top: 20px;
+        }
+
+        .section-2{
+            padding: 80px 20px;
+            justify-content: center;
+        }
+
+        .section-2 .row h2{
+            font-size: 30px;
+        }
+        .section-2 .row h4{
+            font-size: 15px;
+        }
+
+        .product-card{
+            margin: 20px;
+        }
+
+        .header-section h1{
+            font-size: 40px;
+        }
+        .header-section h1{
+            font-size: 30px;
+        }
+
+        .main-container {
+        padding: 10px; /* Reduce padding for smaller screens */
+    }
+
+    .top-sponsor-row .logo {
+        flex: 1 1 calc(33.33% - 10px); /* Keep 3 logos per row */
+        max-width: 250px; /* Scale down proportionally */
+    }
+
+    .bottom-sponsor-row .logo {
+        flex: 1 1 calc(20% - 10px); /* Keep 5 logos per row */
+        max-width: 150px; /* Scale down proportionally */
+    }
+
+    .logo {
+        padding: 10px; /* Reduce padding slightly */
+    }
+
+    .logo img {
+        max-width: 100%; /* Ensure the image fits inside the logo container */
+        height: auto;
+    }
+
+
+    }
 </style>
 @endpush
 
@@ -476,12 +454,12 @@
     <!-- Section 1 -->
     <div class="row section-1">
         <div class="container">
-            <h1 style="margin-bottom: -10px;">EMPOWER FARMERS</h1>
+            <h1>EMPOWER FARMERS</h1>
             <h1>
                 <span>ENRICH</span>
                 <span>COMMUNITIES</span>
             </h1>
-            <h4>BuyAni, Where Every Purchase is a Celebration of Hard Work and Fresh Harvests</h4>
+            <h4>BuyAni, Where Every Purchase is a Celebration o f Hard Work and Fresh Harvests</h4>
             <button>Shop Now!</button>
         </div>
     </div>
@@ -546,11 +524,11 @@
 
     {{-- Mini Blogs --}}
     <div class="header-section">
-        <img src="https://via.placeholder.com/150" alt="Mayani Logo">
+        <img src="{{ asset('img/logo1.svg') }}" style="height: 150px;" alt="Logo">
         <h1>Transforming the Lives of</h1>
         <h2>Filipino Farmers through Technology</h2>
         <p>
-            Mayani is on a mission to uplift the lives of Filipino farmers and fisherfolk by harnessing the transformative power of technology. Our innovative solutions empower local communities and enable them to thrive in a rapidly evolving agricultural landscape.
+            Buyani is on a mission to uplift the lives of Filipino farmers and fisherfolk by harnessing the transformative power of technology. Our innovative solutions empower local communities and enable them to thrive in a rapidly evolving agricultural landscape.
             Join us in creating a future where technology-driven innovation and sustainable farming practices go hand-in-hand.
         </p>
         <a href="#" class="button">Learn More</a>
@@ -629,18 +607,17 @@
     </div>
 
     <!-- Section 3 -->
-    <div class="row section-3">
+    {{-- <div class="row section-3">
         <div class="col-md-6 left-panel">
-            <h3>Contact Us For Inquiries!</h3>
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!4v1698665449734!6m8!1m7!1seAvRB_mCgHq_5jKGt56U_Q!2m2!1d13.1509736!2d123.7184431!3f44.73!4f0!5f0.7820865974627469"
-                width="400"
-                height="300"
-                style="border: 4px solid #000; border-radius: 20px;"
-                allowfullscreen=""
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
+            <div class="div-iframe">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!4v1698665449734!6m8!1m7!1seAvRB_mCgHq_5jKGt56U_Q!2m2!1d13.1509736!2d123.7184431!3f44.73!4f0!5f0.7820865974627469"
+                    style="border: 4px solid #000; border-radius: 20px;"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
         </div>
         <div class="col-md-6 right-panel">
             <div class="container p-2">
@@ -664,7 +641,7 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> --}}
 
 </section>
 
