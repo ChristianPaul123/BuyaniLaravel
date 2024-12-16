@@ -101,9 +101,9 @@
             <div class="row">
                 <!-- Logo and Description -->
                 <div class="col-md-4">
-                    <div class="footer-logo">
-                        <img src="logo.png" alt="Logo">
-                        <span>Bayani</span>
+                    <div class="footer-logo mb-2">
+                        <img src="{{ asset('img/logo1.svg') }}" style="height: 50px;" alt="Logo">
+                        <img src="{{ asset('img/logo2.svg') }}" style="height: 30px;">
                     </div>
                     <p class="footer-description">
                         The Philippines' fastest-growing, impact-driven agri-tech platform empowering smallholder farmers and fisherfolks across the archipelago.
@@ -127,7 +127,7 @@
 
                 <!-- About Mayani -->
                 <div class="col-md-3 footer-links">
-                    <h5 class="footer-title">About Bayani</h5>
+                    <h5 class="footer-title">About Buyani</h5>
                     <a href="#">About Us</a><br>
                     <a href="#">Meet the Team</a><br>
                     <a href="#">Partner with Us</a><br>
@@ -148,7 +148,6 @@
 
     <!-- Footer Bottom Section -->
     <div class="footer-bottom">
-        <a href="#" class="text-light">Return & Refund Policy</a> |
-        Copyright © 2023 mayani.ph. All Rights Reserved.
+        Copyright © 2023 buyani.ph. All Rights Reserved.
     </div>
 </div>
