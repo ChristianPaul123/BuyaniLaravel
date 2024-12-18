@@ -12,6 +12,11 @@ class Admin extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+      // Define Admin statuses as constants
+      const Owner = 1;
+      const Assistant = 2;
+      const Employee = 3;
+
         /**
      * The attributes that are mass assignable.
      *
@@ -31,7 +36,7 @@ class Admin extends Authenticatable
     ];
 
     protected $hidden = [
-        // 'password',
+        'password',
     ];
 
     protected function casts(): array
@@ -41,19 +46,6 @@ class Admin extends Authenticatable
         ];
     }
 
-    // protected function casts(): array
-    // {
-    //     return [
-    //         'email_verified_at' => 'datetime',
-    //         'password' => 'hashed',
-    //     ];
-    // }
-
-    // public function getRouteKeyName()
-    // {
-    //     return 'username';
-    // }
-
     public function blogs() {
         return $this->HasMany(Blog::class);
     }
@@ -62,14 +54,16 @@ class Admin extends Authenticatable
         return $this->HasMany(Messages::class);
     }
 
-    // public function getAdminTypeAttribute() {
-    //     $types = [
-    //         1 => 'Owner',
-    //         2 => 'Assistant',
-    //         3 => 'Employee',
-    //     ];
-    //     return $types[$this->attributes['admin_type']] ?? 'Unknown Type';
+    public function getAdminTypeLabelAttribute()
+    {
+        $adminTypes = [
+            self::Owner => 'Owner',
+            self::Assistant => 'Assistant',
+            self::Employee => 'Employee',
+        ];
 
-    // }
+        return $adminTypes[$this->admin_type] ?? 'Unknown';
+    }
+
 
 }

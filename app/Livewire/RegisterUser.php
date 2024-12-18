@@ -192,9 +192,6 @@ public function verifyOtp()
     }
 }
 
-
-
-
     public function render()
     {
         return view('livewire.register-user');

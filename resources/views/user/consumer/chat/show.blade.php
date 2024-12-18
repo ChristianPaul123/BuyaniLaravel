@@ -121,9 +121,7 @@
         <div class="text-center mb-3">
             <h3 class="text-center" style="color: green;">Buy<span style="color: orange;">Ani</span> Chat</h3>
         </div>
-
-
-        @livewire('chat-user-system',['chatID' => Auth::guard('user')->user()->id])
+        @livewire('user.user-chat-system',['chatID' => Auth::guard('user')->user()->id])
     </div>
     </div>
 </div>

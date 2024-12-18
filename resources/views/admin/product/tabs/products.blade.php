@@ -12,6 +12,7 @@
         <table id="productTable" class="table table-bordered table-striped">
             <thead>
                 <tr>
+                    <th>#</th>
                     <th>Product Name</th>
                     <th>Product Details</th>
                     <th>Product Status</th>
@@ -26,7 +27,11 @@
             </thead>
             <tbody>
                 @foreach ($products as $product)
+                @php
+                $encryptedId = Crypt::encrypt($product->id);
+                @endphp
                     <tr>
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{ $product->product_name }}</td>
                         <td>{{ $product->product_details }}</td>
                         <td>{{ $product->status_label }}</td>
@@ -36,7 +41,7 @@
                         <td>{{ $product->subcategory->sub_category_name }}</td>
                         <td>{{ $product->product_deactivated }}</td>
                         <td>
-                            <a href="{{ route('admin.product.edit', $product->id) }}" class="btn btn-primary">Edit</a>
+                            <a href="{{ route('admin.product.edit', $encryptedId) }}" class="btn btn-primary">Edit</a>
                         </td>
                         <td>
                             <form action="{{ route('admin.product.delete', $product->id) }}" method="POST">

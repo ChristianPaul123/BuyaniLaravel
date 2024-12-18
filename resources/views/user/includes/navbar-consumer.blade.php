@@ -24,6 +24,7 @@
                 <li class="nav-item px-1">
                     <a class="nav-link @if(request()->is('user/consumer/products')) active @endif" href="/user/consumer/products" data-page="shop">SHOP</a>
                 </li>
+                @if(Auth::guard('user')->check())
                 <li class="nav-item px-1">
                     <a class="nav-link @if(request()->is('user/consumer/orders')) active @endif" href="/user/consumer/orders" data-page="orders">ORDERS</a>
                 </li>
@@ -33,6 +34,8 @@
                 <li class="nav-item px-1">
                     <a class="nav-link @if(request()->is('user/consumer/voting')) active @endif" href="/user/consumer/voting" data-page="voting">VOTING</a>
                 </li>
+                @else
+                @endif
                 <li class="nav-item px-1">
                     <a class="nav-link @if(request()->is('user/consumer/contacts')) active @endif" href="/user/consumer/contacts" data-page="contacts">CONTACTS</a>
                 </li>

@@ -16,6 +16,8 @@
         </div>
     @endif
 
+    <button class="btn btn-primary" wire:click="testforFun">testPLS</button>
+
     {{-- Display validation errors --}}
 
       @if($user_type == 1)

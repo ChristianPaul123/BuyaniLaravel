@@ -12,6 +12,7 @@
         <table id='categoryTable' class="table table-bordered table-striped">
             <thead>
                 <tr>
+                    <th>#</th>
                     <th>Category Name</th>
                     <th>Created At</th>
                     <th>Updated At</th>
@@ -21,12 +22,16 @@
             </thead>
             <tbody>
                 @foreach ($categories as $category)
+                @php
+                    $encryptedId = Crypt::encrypt($category->id);
+                @endphp
                     <tr>
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{ $category->category_name }}</td>
-                        <td>{{ $category->created_at }}</td>
-                        <td>{{ $category->updated_at }}</td>
+                        <td>{{ $category->created_at->format('l, d F Y') }}</td>
+                        <td>{{ $category->updated_at->format('l, d F Y') }}</td>
                         <td>
-                            <a href="{{ route('admin.category.edit', $category->id) }}" class="btn btn-primary">Edit</a>
+                            <a href="{{ route('admin.category.edit', $encryptedId) }}" class="btn btn-primary">Edit</a>
                         </td>
                         <td>
                             <form action="{{ route('admin.category.delete', $category->id) }}" method="POST">

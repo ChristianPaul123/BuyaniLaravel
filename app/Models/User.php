@@ -133,4 +133,15 @@ class User extends Authenticatable
         return $statuses[$this->status] ?? 'Unknown Status';
     }
 
+    public function getUserTypeLabelAttribute()
+{
+    $types = [
+        1 => 'Regular User',
+        2 => 'Farmer',
+        // Add more user types as needed
+    ];
+
+    return $types[$this->user_type] ?? 'Guest';
+}
+
 }

@@ -13,23 +13,21 @@
                     <li class="nav-item px-1 py-0 position-relative">
                         <a class="nav-link @if(request()->is('user/farmer')) active @endif" href="/user/farmer" data-page="home">HOME</a>
                     </li>
+                    @if(Auth::guard('user')->check())
                     <li class="nav-item px-1 position-relative">
                         <a class="nav-link @if(request()->is('user/farmer/products')) active @endif" href="/user/farmer/products" data-page="s-products">SUPPLY PRODUCTS </a>
                     </li>
                     <li class="nav-item px-1 position-relative">
                         <a class="nav-link @if(request()->is('user/farmer/blogs')) active @endif" href="/user/farmer/blogs" data-page="blogs">BLOGS</a>
                     </li>
-                    <li class="nav-item px-1 position-relative">
-                        <a class="nav-link @if(request()->is('user/farmer/contacts')) active @endif"  href="/user/farmer/contacts" data-page="contact">CONTACT </a>
-                    </li>
+                    @else
+                    @endif
                     <li class="nav-item px-1 position-relative">
                         <a class="nav-link @if(request()->is('user/farmer/about-us')) active @endif"  href="/user/farmer/about-us" data-page="about-us">ABOUT US </a>
                     </li>
-                    {{-- <li class="nav-item px-1 position-relative">
-                        <a class="nav-link @if(request()->is('user/farmer/notification')) active @endif"  href="/user/farmer/notification" data-page="notification">
-                            <i class="fas fa-bell" style="font-size: 25px;"></i>
-                        </a>
-                    </li> --}}
+                    <li class="nav-item px-1 position-relative">
+                        <a class="nav-link @if(request()->is('user/farmer/contacts')) active @endif"  href="/user/farmer/contacts" data-page="contact">CONTACT </a>
+                    </li>
                     <li class="nav-item px-1 position-relative">
                         <a class="nav-link"  href="/user/farmer/chat" data-page="chat">
                             <i class="fas fa-comment-dots" style="font-size: 25px;"></i>

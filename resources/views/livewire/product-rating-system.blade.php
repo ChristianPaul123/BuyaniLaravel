@@ -36,7 +36,7 @@
 
         <!-- Dropdown -->
         <div class="col-6 col-md-8">
-            <select wire:model.debounce.500ms="ratingValue" id="ratingFilter" class="form-select"
+            <select wire:model.live="ratingValue" id="ratingFilter" class="form-select"
                 style="border-radius: 8px; padding: 10px; font-size: 1rem; border: 1px solid #ddd; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);">
                 <option value="0">All Ratings</option>
                 <option value="5">5 Stars</option>
@@ -48,12 +48,12 @@
         </div>
 
         <!-- Button -->
-        <div class="col-3 col-md-2 text-end">
+        {{-- <div class="col-3 col-md-2 text-end">
             <button wire:click="applyRatingFilter" class="btn btn-primary"
                 style="background-color: #4CAF50; border: none; padding: 10px 15px; border-radius: 8px; font-size: 1rem; font-weight: bold; color: white; width: 100%;">
                 Confirm
             </button>
-        </div>
+        </div> --}}
     </div>
 
 

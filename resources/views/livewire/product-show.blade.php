@@ -96,9 +96,9 @@
                     <div class="row g-4">
                         @foreach ($products as $product)
                             <div class="col-sm-6 col-md-4 col-lg-3">
-                                <div class="card shadow-sm border-0 rounded">
+                                <div wire:click.prevent="viewProduct({{ $product->id }})" class="card shadow-sm border-0 rounded">
                                     <div class="card-img-top-wrapper position-relative">
-                                        <img src="{{ asset($product->product_pic) }}" class="card-img-top rounded-top" alt="{{ $product->product_name }}">
+                                        <img src="{{ asset($product->product_pic) }}" class="card-img-top rounded-top" alt="{{ $product->product_name }}"  style="cursor: pointer;">
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title text-center text-truncate fw-bold">{{ $product->product_name }}</h5>

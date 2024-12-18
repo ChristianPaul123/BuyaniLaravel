@@ -74,5 +74,8 @@ class Order extends Model
         return $statuses[$this->order_status] ?? 'Unknown';
     }
 
-
+    public function Order_logs()
+    {
+        return $this->hasMany(Order_Log::class);
+    }
 }

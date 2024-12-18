@@ -35,6 +35,23 @@ return [
         ],
     ],
 
+//  // V2 config:
+//not used feel free to change or delete config
+//     'google' => [
+//     'recaptcha' => [
+//         'site_key' => env('RECAPTCHA_SITE_KEY'),
+//         'secret_key' => env('RECAPTCHA_SECRET_KEY'),
+//         'version' => 'v2',
+//         'size' => 'normal', // 'normal', 'compact' or 'invisible'.
+//         'theme' => 'light', // 'light' or 'dark'.
+//     ],
+//     ],
+
+    'recaptcha' => [
+        'public_key' => env('RECAPCHA_SITEKEY'),
+        'secret_key' => env('RECAPTCHA_SECRETKEY'),
+    ],
+
     'weather' => [
         'key' => env('WEATHER_API_KEY'),
     ],

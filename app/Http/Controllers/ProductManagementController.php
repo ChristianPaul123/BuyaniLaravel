@@ -9,6 +9,8 @@ use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use App\Models\ProductSpecification;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Contracts\Encryption\DecryptException;
 
 class ProductManagementController extends Controller
 {
@@ -65,17 +67,23 @@ return view('admin.product.product-index', [
     }
 
     // Edit a product
-    public function editProduct($id)
+    public function editProduct($encryptedId)
     {
-        $product = Product::findOrFail($id);
-        $categories = Category::all();
-        $subcategories = SubCategory::all();
 
-        return view('admin.product.edit-product', [
-            'product' => $product,
-            'categories' => $categories,
-            'subcategories' => $subcategories,
-        ]);
+        try {
+            $id = Crypt::decrypt($encryptedId);
+            $product = Product::findOrFail($id);
+            $categories = Category::all();
+            $subcategories = SubCategory::all();
+
+            return view('admin.product.edit-product', [
+                'product' => $product,
+                'categories' => $categories,
+                'subcategories' => $subcategories,
+            ]);
+        } catch (DecryptException $e) {
+            return redirect()->route('admin.product.index')->with('error', 'Invalid Product ID provided.');
+        }
     }
 
     // Update a product
@@ -145,15 +153,20 @@ return view('admin.product.product-index', [
     }
 
     // Edit a product specification
-    public function editProductSpecification($id)
+    public function editProductSpecification($encryptedId)
     {
-        $specification = ProductSpecification::findOrFail($id);
-        $products = Product::all();
+        try {
+            $id = Crypt::decrypt($encryptedId);
+            $specification = ProductSpecification::findOrFail($id);
+            $products = Product::all();
 
-        return view('admin.product.edit-spec', [
-            'specification' => $specification,
-            'products' => $products,
-        ]);
+            return view('admin.product.edit-spec', [
+                'specification' => $specification,
+                'products' => $products,
+            ]);
+        } catch (DecryptException $e) {
+            return redirect()->route('admin.product.index')->with('error', 'Invalid Specification ID provided.');
+        }
     }
 
     // Update a product specification
@@ -194,14 +207,29 @@ return view('admin.product.product-index', [
         return redirect()->route('admin.product.index')->with('message', 'Category added successfully.');
     }
 
-    public function editCategory($id)
-    {
+    // public function editCategory($id)
+    // {
+    //     $category = Category::findOrFail($id);
+
+    //     return view('admin.product.edit-category', [
+    //         'category' => $category,
+    //     ]);
+    // }
+
+    public function editCategory($encryptedId)
+{
+    try {
+        $id = Crypt::decrypt($encryptedId);
         $category = Category::findOrFail($id);
 
         return view('admin.product.edit-category', [
             'category' => $category,
         ]);
+
+    } catch (DecryptException $e) {
+        return redirect()->route('admin.product.index')->with('error', 'Invalid category ID provided.');
     }
+}
 
     public function updateCategory(Request $request, $id)
     {
@@ -238,15 +266,21 @@ return view('admin.product.product-index', [
         return redirect()->route('admin.product.index')->with('message', 'SubCategory added successfully.');
     }
 
-    public function editSubCategory($id)
+    public function editSubCategory($encryptedId)
     {
-        $subcategory = SubCategory::findOrFail($id);
-        $categories = Category::all();
 
-        return view('admin.product.edit-subcategory', [
-            'subcategory' => $subcategory,
-            'categories' => $categories,
-        ]);
+        try {
+            $id = Crypt::decrypt($encryptedId);
+            $subcategory = SubCategory::findOrFail($id);
+            $categories = Category::all();
+
+            return view('admin.product.edit-subcategory', [
+                'subcategory' => $subcategory,
+                'categories' => $categories,
+            ]);
+        } catch (DecryptException $e) {
+            return redirect()->route('admin.product.index')->with('error', 'Invalid Subcategory ID provided.');
+        }
     }
 
     public function updateSubCategory(Request $request, $id)

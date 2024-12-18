@@ -157,6 +157,7 @@
     .nav-tabs .nav-link.active {
         border-bottom: 2px solid #28a745;
     }
+
     /* Media query for responsiveness */
     @media (min-width: 576px) {
         .sidebar {

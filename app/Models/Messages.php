@@ -29,6 +29,10 @@ class Messages extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function message_reads() {
+        return $this->hasMany(Message_reads::class, 'message_id');
+    }
+
     public function admin()
     {
         return $this->belongsTo(Admin::class, 'admin_id');

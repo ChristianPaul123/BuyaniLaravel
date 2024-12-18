@@ -26,7 +26,6 @@
 
 
 
-
 {{-- admin side for datatables --}}
 <script>
 

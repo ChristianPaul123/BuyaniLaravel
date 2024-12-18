@@ -30,7 +30,7 @@
     @include('user.includes.navbar-consumer')
   {{-- Display success or error messages --}}
     <!--CONTENT-->
-            @livewire('login-user', ['user_type' => request()->user_type])
+            @livewire('user.login-index', ['user_type' => request()->user_type])
 
 @endsection
 

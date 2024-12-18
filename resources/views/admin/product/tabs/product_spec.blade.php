@@ -12,6 +12,7 @@
         <table id="productSpecificationTable" class="table table-bordered table-striped">
             <thead>
                 <tr>
+                    <th>#</th>
                     <th>Specification Name</th>
                     <th>Price</th>
                     <th>Weight</th>
@@ -22,13 +23,17 @@
             </thead>
             <tbody>
                 @foreach ($productSpecifications as $specification)
+                @php
+                $encryptedId = Crypt::encrypt($specification->id);
+                @endphp
                     <tr>
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{ $specification->specification_name }}</td>
                         <td>{{ $specification->product_price }}</td>
                         <td>{{ $specification->product_kg }} kg</td>
                         <td>{{ $specification->product->product_name }}</td>
                         <td>
-                            <a href="{{ route('admin.product.specification.edit', $specification->id) }}" class="btn btn-primary">Edit</a>
+                            <a href="{{ route('admin.product.specification.edit', $encryptedId) }}" class="btn btn-primary">Edit</a>
                         </td>
                         <td>
                             <form action="{{ route('admin.product.specification.delete', $specification->id) }}" method="POST">

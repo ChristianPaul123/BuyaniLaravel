@@ -145,7 +145,7 @@
                 <button class="btn btn-custom w-100">Continue</button>
             </div>
         </div> --}}
-    @livewire('cart-checkout',['cartId' => $cart->id])
+    @livewire('consumer.user-cart-checkout',['cartId' => $cart->id])
     </div>
 @endsection
 

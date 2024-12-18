@@ -6,7 +6,9 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "anhskohbo/no-captcha": "^3.6",
         "asantibanez/livewire-charts": "^4.1",
+        "dutchcodingcompany/livewire-recaptcha": "^1.0",
         "guzzlehttp/guzzle": "^7.9",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",

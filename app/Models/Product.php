@@ -24,6 +24,7 @@ class Product extends Model
         'created_at',
         'updated_at',
         'product_deactivated',
+        'is_featured,'
     ];
 
     public function category() {
@@ -76,6 +77,10 @@ class Product extends Model
         ];
 
         return $statuses[$this->product_status] ?? 'Unknown Status';
+    }
+
+    public function Product_Logs() {
+        $this->hasMany(Product_log::class);
     }
 
 }

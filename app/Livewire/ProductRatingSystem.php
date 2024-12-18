@@ -74,54 +74,6 @@ class ProductRatingSystem extends Component
         session()->flash('success', 'Your rating has been submitted successfully.');
     }
 
-        public function addRating()
-    {
-        // Validate the input fields
-        $this->validate([
-            'newRating' => 'required|integer|min:1|max:5', // Ensure a valid rating is selected
-            'comment' => 'nullable|string|max:500', // Optional comment
-        ]);
-
-        // Ensure the user is authenticated before proceeding
-        if (!Auth::guard('user')->check()) {
-            // Flash a message and return early if the user is not logged in
-            session()->flash('message', 'You must be logged in to leave a review.');
-            return;
-        }
-
-        // Check if the user has already rated this product (to prevent duplicate reviews)
-        $existingRating = ProductRating::where('product_id', $this->productId)
-            ->where('user_id', Auth::guard('user')->id())
-            ->first();
-
-        if ($existingRating) {
-            session()->flash('message', 'You have already rated this product.');
-            return;
-        }
-
-        // Save the new rating and comment to the database
-        ProductRating::create([
-            'product_id' => $this->productId, // Associate the rating with the product
-            'user_id' => Auth::guard('user')->id(), // Associate the rating with the logged-in user
-            'rating' => $this->newRating, // The selected rating value
-            'comment' => $this->comment, // The optional comment
-        ]);
-
-        // Reset the rating and comment fields for a new submission
-        $this->reset(['newRating', 'comment']);
-
-        // Recalculate the average rating and breakdown after the new rating is added
-        $this->calculateRatingSummary();
-
-        // Flash a success message to notify the user
-        session()->flash('success', 'Your rating has been submitted successfully.');
-    }
-
-    public function applyRatingFilter()
-    {
-        $this->resetPage(); // Reset to the first page when filtering
-    }
-
     public function render()
     {
         $ratings = ProductRating::where('product_id', $this->productId)

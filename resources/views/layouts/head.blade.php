@@ -16,6 +16,7 @@
 <!-- Charts -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <!--ajax -->
+
 @livewireStyles
 
 {{-- Modal Alerts --}}

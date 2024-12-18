@@ -123,7 +123,7 @@
         </div>
 
 
-        @livewire('chat-user-system',['chatID' => Auth::guard('user')->user()->id])
+        @livewire('user.user-chat-system',['chatID' => Auth::guard('user')->user()->id])
     </div>
     </div>
 </div>

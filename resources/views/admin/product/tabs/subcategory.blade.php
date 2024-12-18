@@ -12,6 +12,7 @@
         <table id="subcategoryTable" class="table table-bordered table-striped">
             <thead>
                 <tr>
+                    <th>#</th>
                     <th>Subcategory Name</th>
                     <th>Category</th>
                     <th>Created At</th>
@@ -22,13 +23,17 @@
             </thead>
             <tbody>
                 @foreach ($subcategories as $subcategory)
+                @php
+                $encryptedId = Crypt::encrypt($subcategory->id);
+            @endphp
                     <tr>
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{ $subcategory->sub_category_name }}</td>
                         <td>{{ $subcategory->category->category_name }}</td>
                         <td>{{ $subcategory->created_at }}</td>
                         <td>{{ $subcategory->updated_at }}</td>
                         <td>
-                            <a href="{{ route('admin.subcategory.edit', $subcategory->id) }}" class="btn btn-primary">Edit</a>
+                            <a href="{{ route('admin.subcategory.edit', $encryptedId) }}" class="btn btn-primary">Edit</a>
                         </td>
                         <td>
                             <form action="{{ route('admin.subcategory.delete', $subcategory->id) }}" method="POST">
