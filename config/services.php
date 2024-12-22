@@ -47,10 +47,10 @@ return [
 //     ],
 //     ],
 
-    'recaptcha' => [
-        'public_key' => env('RECAPCHA_SITEKEY'),
-        'secret_key' => env('RECAPTCHA_SECRETKEY'),
-    ],
+    // 'recaptcha' => [
+    //     'public_key' => env('RECAPCHA_SITEKEY'),
+    //     'secret_key' => env('RECAPTCHA_SECRETKEY'),
+    // ],
 
     'weather' => [
         'key' => env('WEATHER_API_KEY'),

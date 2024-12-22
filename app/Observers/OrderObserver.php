@@ -16,7 +16,7 @@ class OrderObserver
             'order_id' => $order->id,
             'user_id' => Auth::guard('user')->id() ?? null,
             'action' => 'created',
-            'changes' => null // For creation, you might not have old values.
+            'changes' => null //
         ]);
     }
 

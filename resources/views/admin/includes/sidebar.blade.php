@@ -87,7 +87,7 @@
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="communityDropdown">
                     <li><a class="dropdown-item" href="/admin/reviews?tab=productreviews"> <i class="fas fa-star me-2"></i> Reviews</a></li>
-                    <li><a class="dropdown-item"  href="/admin/blog">  <i class="fas fa-blog me-2"></i> Blogs</a></li>
+                    <li><a class="dropdown-item"  href="/admin/blog?tab=settings">  <i class="fas fa-blog me-2"></i> Blogs</a></li>
                     <li><a class="dropdown-item" href="/admin/votes?tab=managevotes">  <i class="fas fa-poll me-2"></i> Votes</a></li>
                 </ul>
             </li>

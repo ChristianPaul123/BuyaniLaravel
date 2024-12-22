@@ -37,6 +37,7 @@ class LoginIndex extends Component
     public $showOtpModal = false;
     public $showPasswordResetForm = false;
     public $captcha = null;
+    public $captchaVerify = false;
 
 
 
@@ -54,44 +55,55 @@ class LoginIndex extends Component
 
     public function updatedCaptcha($token)
     {
+
+
         try {
             //Send the reCAPTCHA verification request
-            // $response = Http::withOptions([
-            //     'verify' => false, // Temporarily disable SSL verification
-            // ])->post('https://www.google.com/recaptcha/api/siteverify', [
-            //     'secret' => env('RECAPTCHA_SECRETKEY'),
-            //     'response' => $token,
-            // ]);
+            $response = Http::withOptions([
+                'verify' => false, // Temporarily disable SSL verification
+            ])->post('https://www.google.com/recaptcha/api/siteverify', [
+                'secret' => env('RECAPTCHA_SECRETKEY'),
+                'response' => $token,
+                'remoteip' => request()->ip(),
+            ]);
             // $response = Http::post('https://www.google.com/recaptcha/api/siteverify', [
             //         'secret' =>config('services.recaptcha.secret_key'),
             //         'response' => $token,
             //     ]);
 
-            $response = Http::post(
-                'https://www.google.com/recaptcha/api/siteverify?secret='.
-               config('services.recaptcha.secret_key').
-                '&response='.$token
-            );
+            // $response = Http::post(
+            //     'https://www.google.com/recaptcha/api/siteverify?secret='.
+            //    env('RECAPTCHA_SECRETKEY').
+            //     '&response='.$token
+            // );
+            // $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+            //     'secret' => env('RECAPTCHA_SECRETKEY'),
+            //     'response' => $token,
+            //     'remoteip' => request()->ip(),
+            // ]);
 
-            dd($response);
+            // // Log the raw response to check what Google returns
+            // logger()->info('Google reCAPTCHA Response: ', $response->json());
 
-            // Log the raw response to check what Google returns
-            logger()->info('Google reCAPTCHA Response: ', $response->json());
-            // Check if the response is successful and extract the success flag
+            //     $success = $response->json('success');
 
-                $success = $response->json('success');
+            //     if (!$success) {
 
-                dd($success);
-                if (!$success) {
-                    // Throw validation exception if verification fails
-                    throw ValidationException::withMessages([
-                        'captcha' => __('Google thinks you are a bot, please refresh and try again!'),
-                    ]);
-                } else {
-                    $this->captcha = true;
-                    dd($this->captcha);
-                }
+            //         // Throw validation exception if verification fails
+            //         throw ValidationException::withMessages([
+            //             'captcha' => __('Google thinks you are a bot, please refresh and try again!'),
+            //         ]);
+            //     } else {
+            //         $this->captcha = true;
+            //     }
 
+
+            if (!json_decode($response->body(), true)['success']) {
+                $this->captcha = 'Invalid recaptcha';
+            }
+
+            $this->captchaVerify = true;
+            dd($this->captchaVerify);
 
         } catch (\Exception $e) {
 
@@ -113,7 +125,7 @@ class LoginIndex extends Component
                 'user_type' => ['required'],
             ]);
 
-            if ($this->captcha != true) {
+            if ($this->captchaVerify != true) {
                 $this->dispatch('sessionError', error: 'Please verify the captcha');
                 return;
             }

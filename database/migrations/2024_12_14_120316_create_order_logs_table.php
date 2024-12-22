@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('order_logs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
-            $table->unsignedBigInteger('user_id')->nullable(); // If you track which user performed the action
-            $table->string('action'); // e.g. 'created', 'updated', 'deleted'
-            $table->text('changes')->nullable(); // JSON of what changed (if needed)
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->string('action'); // e.g. 'created', 'updated', 'deleted' changes and shit haha don't touch
+            $table->text('changes')->nullable(); // JSON of what changed like old to new or something
             $table->timestamps();
         });
     }
