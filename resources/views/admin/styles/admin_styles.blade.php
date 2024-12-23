@@ -30,7 +30,7 @@
     .custom-font-content {
         font-family: 'Poppins', sans-serif;
         font-weight: bold;
-        color: rgb(0, 123, 230);
+        /* color: rgb(0, 123, 230); */
     }
 
 

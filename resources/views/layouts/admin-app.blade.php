@@ -26,6 +26,7 @@
 
     @include('layouts.admin-script')
 <script>
+
     function updateClockAndDate() {
         // Update Time
         const clockElement = document.getElementById('realTimeClock');

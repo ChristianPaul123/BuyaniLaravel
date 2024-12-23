@@ -51,7 +51,7 @@ class OrderManagementController extends Controller
 
 
 // ----------------------------------------------------------------
-//viewwing in the Admin Page
+//viewing in the Admin Page
 
     public function viewOrder($id)
     {

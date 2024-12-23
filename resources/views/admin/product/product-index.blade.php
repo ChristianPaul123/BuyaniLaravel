@@ -92,7 +92,8 @@
 </div>
 @endsection
 
-@push('scripts')
+@section('scripts')
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const urlParams = new URLSearchParams(window.location.search);
@@ -105,5 +106,6 @@
             }
         }
     });
-  </script>
-@endpush
+</script>
+
+@endsection

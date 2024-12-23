@@ -61,7 +61,7 @@ Route::get('admin/customization', [AdminController::class, 'showCustomization'])
 Route::post('admin/payment/update', [AdminController::class, 'updateAdminPayment'])->name('admin.payment.update');
 
 //PRODUCT
-Route::get('admin/product/specification', [ProductManagementController::class, 'showProducts'])->name('admin.product.index');
+Route::get('admin/product', [ProductManagementController::class, 'showProducts'])->name('admin.product.index');
 Route::post('admin/product/add', [ProductManagementController::class, 'addProduct'])->name('admin.product.add');
 Route::get('admin/product/edit/{encryptedId}', [ProductManagementController::class, 'editProduct'])->name('admin.product.edit');
 Route::put('admin/product/update/{id}', [ProductManagementController::class, 'updateProduct'])->name('admin.product.update');
@@ -137,30 +137,24 @@ Route::get('admin/message', function () {
 });
 
 
-//Blog side
-Route::get('admin/blog', function () {
-    return view('admin.blog.blog_post');
-});
 
-// //REVIEWS
-Route::get('admin/reviews', [ReviewManagementController::class, 'showReviews'])->name('admin.reviews');
+
+//REVIEWS
+Route::get('admin/community/reviews', [ReviewManagementController::class, 'showReviews'])->name('admin.reviews');
 
 
 //VOTED PRODUCTS
-Route::get('admin/votes',[VotedProductsManagementController::class, 'showVotedProducts'])->name('admin.voted-products');
+Route::get('admin/community/votes',[VotedProductsManagementController::class, 'showVotedProducts'])->name('admin.voted-products');
 
 
 //BLOGS
-Route::get('admin/blog',[BlogManagementController::class,'showBlogs'])->name('admin.blog');
+Route::get('admin/community/blog',[BlogManagementController::class,'showBlogs'])->name('admin.blog');
 Route::post('admin/blog',[BlogManagementController::class,'addBlog'])->name('admin.blog.add');
 Route::get('admin/blog/edit/{blog}',[BlogManagementController::class,'editBlog'])->name('admin.blog.edit');
 Route::put('admin/blog/update/{blog}',[BlogManagementController::class,'updateBlog'])->name('admin.blog.update');
 Route::delete('admin/blog/delete/{blog}',[BlogManagementController::class,'deleteBlog'])->name('admin.blog.delete');
 
 
-
-//Product side
-Route::get('admin/product', [ProductController::class, 'showProducts'])->name('admin.product');
 
 
 

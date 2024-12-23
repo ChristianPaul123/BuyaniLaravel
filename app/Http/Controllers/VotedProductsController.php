@@ -58,9 +58,9 @@ class VotedProductsController extends Controller
         $votingCount = VotingCount::firstOrCreate(
             ['user_id' => $userID], // Check condition
             [ // Default values if the instance is created
-                'max_vote_count' => 5, // Example default value
-                'remaining_vote_count' => 5, // Example default value
-                'suggest_count' => 1, // Example default value
+                'max_vote_count' => 5,
+                'remaining_vote_count' => 5,
+                'suggest_count' => 1,
             ]
         );
 

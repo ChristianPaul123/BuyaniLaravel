@@ -20,9 +20,9 @@ class UserTypeMiddleware
 
         if (!$user) {
             return redirect()->route('user.index')->with('message',
-    'You are not authorized to access this page. The following could either be:<br>' .
-        '1. Your session has expired.<br>' .
-        '2. You don’t have an account.'
+                    'You are not authorized to access this page. The following could either be:<br>' .
+                    '1. Your session has expired.<br>' .
+                    '2. You don’t have an account.'
     );
     }
 
