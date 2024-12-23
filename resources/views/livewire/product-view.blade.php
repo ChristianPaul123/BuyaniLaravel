@@ -1,36 +1,126 @@
-<div class="container container-fluid" style="background-color: rgb(195, 184, 184); border-radius: 8px; padding: 20px;">
+<div class="container container-fluid mt-5">
+
+    <!-- Success and Error Messages -->
+    @if (session()->has('message'))
+        <div class="alert alert-success mx-3 my-2 px-3 py-2">
+            <button type="button" class="close btn btn-success" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            {{ session('message') }}
+        </div>
+    @endif
+
+    @if ($errors->any())
+        <div class="alert alert-danger mx-3 my-2 px-3 py-2">
+            <button type="button" class="close btn btn-danger" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
 
-    <section class="p-3">
+
+    <div class="container py-4">
+        <div class="product-container">
+            <div class="row">
+                <div class="col-md-6 product-image">
+                    <div class="d-flex justify-content-start my-2">
+                        <button class="btn btn-secondary" onclick="window.history.back()">&#9754; Back</button>
+                    </div>
+                    <div class="image-container shadow-sm rounded" style="height: 400px; width: 100%; overflow: hidden;">
+                        <img src="{{ asset($product->product_pic) }}" alt="{{ $product->product_name }}" style="object-fit: fill; width: 100%; height: 100%;">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h2 class="product-title">Carropts</h2>
+                    <p class="text-muted">SKU: BUYANI</p>
+
+                    <p><strong>Price:</strong> <span class="product-price">$4.99</span></p>
+                    <p><strong>Condition:</strong> New</p>
+                    <p><strong>Availability:</strong> Ships from warehouse</p>
+
+                    <div class="border p-3 rounded">
+
+                        <label for="quantity" class="form-label">Quantity:</label>
+                        <input type="number" id="quantity" class="form-control form-control-sm mb-3" value="1" min="1">
+
+                        <button class="btn btn-primary w-100">Add to Cart</button>
+                        <button class="btn btn-secondary w-100 mt-2">Add to Wish List</button>
+                    </div>
+
+                    <div class="mt-4">
+                        <p><strong>Product Features:</strong></p>
+                        <ul>
+                            <li>Rich in Vitamin A for good vision and immune health</li>
+                            <li>High in fiber which supports digestive health</li>
+                            <li>Low in calories making them a great option for a healthy snack</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <h5>Customer Reviews</h5>
+
+                <p class="text-warning h5 mb-1">&#9733;&#9733;&#9733;&#9733;&#189;</p>
+                <p class="small text-muted">4.5 based on 104 reviews</p>
+                <p class="small text-success">84% of respondents would recommend this to a friend</p>
+
+                <p class="mt-3 text-muted">Please <a href="#">login</a> to leave a review.</p>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    {{-- <section class="p-3">
         <div class="d-flex justify-content-start my-5">
             <button class="btn btn-secondary" onclick="window.history.back()">&#9754; Back</button>
         </div>
-        <h3 class="text-center mt-2" style="color: #4CAF50;">{{ $product->product_name }}</h3>
 
-        <!-- Success and Error Messages -->
-        @if (session()->has('message'))
-            <div class="alert alert-success mx-3 my-2 px-3 py-2">
-                <button type="button" class="close btn btn-success" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                {{ session('message') }}
-            </div>
-        @endif
 
-        @if ($errors->any())
-            <div class="alert alert-danger mx-3 my-2 px-3 py-2">
-                <button type="button" class="close btn btn-danger" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
 
         <!-- Product Information -->
+        <div class="row">
+            <div class="col-md-6 product-image">
+                <div class="image-container shadow-sm rounded" style="height: 400px; width: 100%; overflow: hidden;">
+                    <img src="{{ asset($product->product_pic) }}" alt="{{ $product->product_name }}" style="object-fit: fill; width: 100%; height: 100%;">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h2 class="product-title">Carropts</h2>
+                <p class="text-muted">SKU: BUYANI</p>
+
+                <p><strong>Price:</strong> <span class="product-price">$4.99</span></p>
+                <p><strong>Condition:</strong> New</p>
+                <p><strong>Availability:</strong> Ships from warehouse</p>
+
+                <div class="border p-3 rounded">
+
+                    <label for="quantity" class="form-label">Quantity:</label>
+                    <input type="number" id="quantity" class="form-control form-control-sm mb-3" value="1" min="1">
+
+                    <button class="btn btn-primary w-100">Add to Cart</button>
+                    <button class="btn btn-secondary w-100 mt-2">Add to Wish List</button>
+                </div>
+
+                <div class="mt-4">
+                    <p><strong>Product Features:</strong></p>
+                    <ul>
+                        <li>Rich in Vitamin A for good vision and immune health</li>
+                        <li>High in fiber which supports digestive health</li>
+                        <li>Low in calories making them a great option for a healthy snack</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
         <div class="row mb-5">
             <!-- Product Image -->
             <div class="col-12 col-md-6 p-3">
@@ -82,7 +172,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <!-- Product Reviews Section -->
     <section class="mt-5">
