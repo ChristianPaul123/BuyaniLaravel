@@ -102,11 +102,11 @@
                 <!-- Logo and Description -->
                 <div class="col-md-4">
                     <div class="footer-logo">
-                        <img src="logo.png" alt="Logo">
-                        <span>Bayani</span>
+                        <img src="{{ asset('img/logo1.svg') }}" alt="Logo">
+                        <span>Buyani</span>
                     </div>
                     <p class="footer-description">
-                        The Philippines' fastest-growing, impact-driven agri-tech platform empowering smallholder farmers and fisherfolks across the archipelago.
+                        The Philippines' fastest-growing, impact-driven agri-tech platform empowering smallholder farmers and sellers across the albay region.
                     </p>
                     <div class="social-icons">
                         <a href="#"><i class="fab fa-linkedin"></i></a>
@@ -149,6 +149,6 @@
     <!-- Footer Bottom Section -->
     <div class="footer-bottom">
         <a href="#" class="text-light">Return & Refund Policy</a> |
-        Copyright © 2023 mayani.ph. All Rights Reserved.
+        Copyright © 2024 buyanicommerce.ph All Rights Reserved.
     </div>
 </div>

@@ -51,6 +51,7 @@ return [
             'root' => public_path(), // Use the public directory
             'url' => env('APP_URL') . '/public', // URL for accessing files
             'visibility' => 'public', // Ensure files are publicly accessible
+            'max_file_size' => 4096, // 4MB
         ],
 
         's3' => [

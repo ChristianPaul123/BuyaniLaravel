@@ -57,21 +57,34 @@ class LoginIndex extends Component
 
 
         try {
+            //#UNCOMMENT WHEN IMPLEMENTED
             // Verify the recaptcha response
-            $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
-                'secret' => env('RECAPTCHA_SECRETKEY'),
-                'response' => $token,
-                'remoteip' => request()->ip(),
-            ]);
+            // $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+            //     'secret' => env('RECAPTCHA_SECRETKEY'),
+            //     'response' => $token,
+            //     'remoteip' => request()->ip(),
+            // ]);
 
 
-            if (!json_decode($response->body(), true)['success']) {
-                $this->captcha = 'Invalid recaptcha';
+            // if (!json_decode($response->body(), true)['success']) {
+            //     $this->captcha = 'Invalid recaptcha';
+            // } else {
+            // $this->captchaVerify = true;
+
+            // };
+
+            //this is for testing purposes #COMMENT IN PROD...
+            if (app()->environment('local', 'testing')) {
+                $response = ['success' => true];
+                $this->captchaVerify = true;
+
             } else {
-            $this->captchaVerify = true;
-
-            };
-
+                $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+                    'secret' => env('RECAPTCHA_SECRETKEY'),
+                    'response' => $token,
+                    'remoteip' => request()->ip(),
+                ])->json();
+            }
         } catch (\Exception $e) {
 
             // Log the error or handle exceptions like SSL or network issues

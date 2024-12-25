@@ -43,7 +43,7 @@
                 <!-- Cart Icon -->
                 <li class="nav-item px-1 position-relative">
                     <a class="nav-link @if(request()->is('user/consumer/cart')) active @endif" href="/user/consumer/cart" data-page="cart">
-                        <i class="fas fa-shopping-basket" style="font-size: 25px;"></i>
+                        <i class="fas fa-shopping-basket" style="font-size: 25px;">@livewire('cart-counter')</i>
 
                     </a>
                 </li>
@@ -51,10 +51,11 @@
                 <!-- Favorites Icon -->
                 <li class="nav-item px-1 position-relative">
                     <a class="nav-link @if(request()->is('user/consumer/favorites')) active @endif" href="/user/consumer/favorites" data-page="favorites">
-                        <i class="fas fa-heart" style="font-size: 25px;"></i>
+                        <i class="fas fa-heart" style="font-size: 25px;">@livewire('favorite-counter')</i>
 
                     </a>
                 </li>
+
 
                   <!-- Favorites Icon -->
                 <li class="nav-item px-1 position-relative">

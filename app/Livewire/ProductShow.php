@@ -53,6 +53,7 @@ class ProductShow extends Component
                 // If favorite exists, remove it
                 $favorite->delete();
                 $this->message = "Product removed from favorites.";
+                $this->dispatch('toggleFavorites');
             } else {
                 // Add to favorites
                 Favorite::create([
@@ -60,6 +61,7 @@ class ProductShow extends Component
                     'product_id' => $productId,
                 ]);
                 $this->message = "Product added to favorites.";
+                $this->dispatch('toggleFavorites');
             }
         } catch (\Exception $e) {
             $this->message = "An error occurred while updating favorites.";
