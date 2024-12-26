@@ -231,31 +231,44 @@
         margin-bottom: 50px;
     }
 
-    .top-sponsor-row {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        gap: 20px;
-        margin-bottom: 40px;
-    }
-
+    .top-sponsor-row,
     .bottom-sponsor-row {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
         align-items: center;
         gap: 20px;
+        margin-bottom: 3%;
     }
 
     .top-sponsor-row .logo {
-        flex: 1 1 calc(33.33% - 20px); /* Top row: 3 per row */
-        max-width: 300px;
+        width: 300px; /* Fixed width for top row */
+        height: 150px; /* Fixed height for top row */
+        flex-shrink: 0; /* Prevent shrinking */
+        flex-grow: 0; /* Prevent growing */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #fff;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
 
     .bottom-sponsor-row .logo {
-        flex: 1 1 calc(20% - 20px); /* Bottom row: up to 5 per row */
-        max-width: 200px;
+        width: 200px; /* Fixed width for bottom row */
+        height: 100px; /* Fixed height for bottom row */
+        flex-shrink: 0; /* Prevent shrinking */
+        flex-grow: 0; /* Prevent growing */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #fff;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
 
     .logo {
@@ -273,6 +286,18 @@
         max-width: 100%;
         height: auto;
     }
+
+    .top-sponsor-row img {
+        width: 300px;
+        height: 150px;
+    }
+
+    .bottom-sponsor-row img{
+        width: 200px;
+        height: 100px;
+    }
+
+
 
     /* Mini Blogs Css */
     .header-section {
@@ -418,28 +443,30 @@
             font-size: 30px;
         }
 
+
         .main-container {
-        padding: 10px; /* Reduce padding for smaller screens */
-    }
+            padding: 10px;
+            margin-bottom: 30px;
+        }
 
-    .top-sponsor-row .logo {
-        flex: 1 1 calc(33.33% - 10px); /* Keep 3 logos per row */
-        max-width: 250px; /* Scale down proportionally */
-    }
+        /* Adjust top row logos size on mobile */
+        .top-sponsor-row .logo {
+            width: 150px; /* Fixed smaller width */
+            height: 75px; /* Fixed smaller height */
+        }
 
-    .bottom-sponsor-row .logo {
-        flex: 1 1 calc(20% - 10px); /* Keep 5 logos per row */
-        max-width: 150px; /* Scale down proportionally */
-    }
+        /* Adjust bottom row logos size on mobile */
+        .bottom-sponsor-row .logo {
+            width: 140px; /* Fixed smaller width */
+            height: 65px; /* Fixed smaller height */
+        }
 
-    .logo {
-        padding: 10px; /* Reduce padding slightly */
-    }
-
-    .logo img {
-        max-width: 100%; /* Ensure the image fits inside the logo container */
-        height: auto;
-    }
+        .top-sponsor-row img,
+        .bottom-sponsor-row img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Ensure images fit within their container */
+        }
 
 
     }
@@ -538,24 +565,23 @@
     <div class="main-container">
         <!-- Top Sponsor Row -->
         <div class="top-sponsor-row">
-            <div class="logo"><img src="https://via.placeholder.com/300x150?text=Sponsor+1" alt="Sponsor 1" style="width: 300px; height: 150px;"></div>
-            <div class="logo"><img src="https://via.placeholder.com/300x150?text=Sponsor+2" alt="Sponsor 2" style="width: 300px; height: 150px;"></div>
-            <div class="logo"><img src="https://via.placeholder.com/300x150?text=Sponsor+3" alt="Sponsor 3" style="width: 300px; height: 150px;"></div>
+            <div class="logo"><img src="{{ asset('img/logo1.svg') }}" alt="Sponsor 1" ></div>
+            <div class="logo"><img src="{{ asset('img/logo2.svg') }}" alt="Sponsor 2"></div>
+            <div class="logo"><img src="{{ asset('img/logo1.svg') }}" alt="Sponsor 3"></div>
         </div>
 
         <!-- Bottom Sponsor Row -->
         <div class="bottom-sponsor-row">
-            <div class="logo"><img src="https://via.placeholder.com/200x100?text=Sponsor+4" alt="Sponsor 4" style="width: 200px; height: 100px;"></div>
-            <div class="logo"><img src="https://via.placeholder.com/200x100?text=Sponsor+5" alt="Sponsor 5" style="width: 200px; height: 100px;"></div>
-            <div class="logo"><img src="https://via.placeholder.com/200x100?text=Sponsor+6" alt="Sponsor 6" style="width: 200px; height: 100px;"></div>
-            <div class="logo"><img src="https://via.placeholder.com/200x100?text=Sponsor+7" alt="Sponsor 7" style="width: 200px; height: 100px;"></div>
-            <div class="logo"><img src="https://via.placeholder.com/200x100?text=Sponsor+8" alt="Sponsor 8" style="width: 200px; height: 100px;"></div>
-            <div class="logo"><img src="https://via.placeholder.com/200x100?text=Sponsor+4" alt="Sponsor 9" style="width: 200px; height: 100px;"></div>
-            <div class="logo"><img src="https://via.placeholder.com/200x100?text=Sponsor+5" alt="Sponsor 10" style="width: 200px; height: 100px;"></div>
-            <div class="logo"><img src="https://via.placeholder.com/200x100?text=Sponsor+6" alt="Sponsor 11" style="width: 200px; height: 100px;"></div>
-            <div class="logo"><img src="https://via.placeholder.com/200x100?text=Sponsor+7" alt="Sponsor 12" style="width: 200px; height: 100px;"></div>
-            <div class="logo"><img src="https://via.placeholder.com/200x100?text=Sponsor+8" alt="Sponsor 13" style="width: 200px; height: 100px;"></div>
-
+            <div class="logo"><img src="{{ asset('img/logo1.svg') }}" alt="Sponsor 4"></div>
+            <div class="logo"><img src="{{ asset('img/logo1.svg') }}" alt="Sponsor 5"></div>
+            <div class="logo"><img src="{{ asset('img/logo2.svg') }}" alt="Sponsor 6"></div>
+            <div class="logo"><img src="https://via.placeholder.com/200x100?text=Sponsor+7" alt="Sponsor 7"></div>
+            <div class="logo"><img src="https://via.placeholder.com/200x100?text=Sponsor+8" alt="Sponsor 8"></div>
+            <div class="logo"><img src="https://via.placeholder.com/200x100?text=Sponsor+4" alt="Sponsor 9"></div>
+            <div class="logo"><img src="https://via.placeholder.com/200x100?text=Sponsor+5" alt="Sponsor 10"></div>
+            <div class="logo"><img src="https://via.placeholder.com/200x100?text=Sponsor+6" alt="Sponsor 11"></div>
+            <div class="logo"><img src="https://via.placeholder.com/200x100?text=Sponsor+7" alt="Sponsor 12"></div>
+            <div class="logo"><img src="https://via.placeholder.com/200x100?text=Sponsor+8" alt="Sponsor 13"></div>
         </div>
     </div>
 
