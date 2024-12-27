@@ -33,6 +33,6 @@ class NavbarCartCounter extends Component
     }
     public function render()
     {
-        return view('livewire.component.navbar-cart-counter');
+        return view('livewire.navbar-cart-counter');
     }
 }

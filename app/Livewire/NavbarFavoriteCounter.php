@@ -32,6 +32,6 @@ class NavbarFavoriteCounter extends Component
     }
     public function render()
     {
-        return view('livewire.component.navbar-favorite-counter');
+        return view('livewire.navbar-favorite-counter');
     }
 }
