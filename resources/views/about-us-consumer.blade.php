@@ -5,12 +5,6 @@
 @push('styles')
 <style>
 
-    .container{
-            height: auto;
-            padding: 70px 20px;
-            margin-top: 35px;
-    }
-
     .team-member img {
     width: 150px; /* Adjusted size */
     height: 150px; /* Adjusted size */
@@ -103,10 +97,10 @@
 <section class="min-height">
     <div class="container mt-5">
         <!-- BuyAni Vision -->
-        <h1 class="text-center mb-4">About Us Buyani</h1>
+        <h1 class="text-center pt-3 mb-4">About Us Buyani</h1>
         <div class="row align-items-center">
             <div class="col-md-6 text-center">
-                <img src="Images/fruit basket.png" alt="Basket of Produce" class="img-fluid">
+                <img src="{{ asset('img/blog/fruit basket.png') }}" alt="Basket of Produce" class="img-fluid">
             </div>
             <div class="col-md-6">
                 <h2 class="section-title">BuyAni Vision</h2>
@@ -125,14 +119,14 @@
                 <p class="text-justify">Through our transparent and community-driven approach, we facilitate sustainable transactions that empower farmers and nurture a stronger, more equitable food ecosystem.</p>
             </div>
             <div class="col-md-6">
-                <img src="Images/stockimage.jpg" alt="Produce Showcase" class="img-fluid">
+                <img src="{{ asset('img/blog/stockimage.jpg') }}" alt="Produce Showcase" class="img-fluid">
             </div>
         </div>
 
         <!-- Video Section -->
         <div class="text-center my-5 px-3">
             <video controls class="w-100">
-                <source src="Images/vid.mp4" type="video/mp4">
+                <source src="{{ asset('img/blog/vid.mp4') }}" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
         </div>
@@ -143,19 +137,19 @@
             <h2 class="section-title text-center">Meet the Team</h2>
             <div class="row text-center">
                 <div class="col-6 col-md-3 team-member">
-                    <img src="Images/espares_prof.png" alt="Backend Developer">
+                    <img src="{{ asset('img/blog/espares_prof.png') }}" alt="Backend Developer">
                     <p>Backend Developer</p>
                 </div>
                 <div class="col-6 col-md-3 team-member">
-                    <img src="Images/chapman_prof.png" alt="Frontend Developer">
+                    <img src="{{ asset('img/blog/chapman_prof.png') }}" alt="Frontend Developer">
                     <p>Frontend Developer</p>
                 </div>
                 <div class="col-6 col-md-3 team-member">
-                    <img src="Images/reola_prof.png" alt="Project Manager">
+                    <img src="{{ asset('img/blog/reola_prof.png') }}" alt="Project Manager">
                     <p>Project Manager</p>
                 </div>
                 <div class="col-6 col-md-3 team-member">
-                    <img src="Images/vista_prof.png" alt="System Analyst">
+                    <img src="{{ asset('img/blog/vista_prof.png') }}" alt="System Analyst">
                     <p>System Analyst</p>
                 </div>
             </div>
