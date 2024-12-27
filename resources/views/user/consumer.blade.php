@@ -29,6 +29,9 @@
     .section-1 {
         height: 705px;
         padding: 100px 100px 50px 100px;
+        background-size: cover; /* Ensures the image covers the section fully */
+        background-repeat: no-repeat; /* Prevents the image from repeating */
+        background-position: center; /* Centers the image in the section */
         background-image: url({{ asset('img/stockImg3.png') }});
     }
 
@@ -61,19 +64,19 @@
         color: #ffffff;
     }
 
-    .section-1 button {
-        width: 150px;
-        height: 40px;
+    .section-1 .btn-shop {
+        width: 130px;
+        padding: 10px 20px;
         border: 3px solid #ffa500;
         border-radius: 7px;
         background-color: #fff8dd;
         color: #ffa500;
         transition: all 0.5s ease;
-        padding: 0px;
+        text-decoration: none;
     }
 
-    .section-1 button:hover {
-        scale: 1.1;
+    .section-1 .btn-shop:hover {
+        transform: scale(1.1);
     }
 
     /* Section 2 */
@@ -420,6 +423,10 @@
             padding-top: 20px;
         }
 
+        .section-1 .btn-shop {
+            margin: 0 auto; /* Optional for extra alignment safeguard */
+        }
+
         .section-2{
             padding: 80px 20px;
             justify-content: center;
@@ -487,7 +494,7 @@
                 <span>COMMUNITIES</span>
             </h1>
             <h4>BuyAni, Where Every Purchase is a Celebration o f Hard Work and Fresh Harvests</h4>
-            <button>Shop Now!</button>
+           <a href="{{ route('user.consumer.product') }}" class="btn-shop">Shop Now</a>
         </div>
     </div>
 
@@ -633,7 +640,7 @@
     </div>
 
     <!-- Section 3 -->
-    {{-- <div class="row section-3">
+    <div class="row section-3">
         <div class="col-md-6 left-panel">
             <div class="div-iframe">
                 <iframe
@@ -667,7 +674,7 @@
                 </form>
             </div>
         </div>
-    </div> --}}
+    </div>
 
 </section>
 
