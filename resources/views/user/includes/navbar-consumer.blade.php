@@ -50,7 +50,7 @@
                 <!-- Favorites Icon -->
                 <li class="nav-item px-1 position-relative">
                     <a class="nav-link @if(request()->is('user/consumer/favorites')) active @endif" href="/user/consumer/favorites" data-page="favorites">
-                        <i class="fas fa-heart" style="font-size: 25px;"></i>
+                        <i class="fas fa-heart" style="font-size: 25px;">@livewire('component.test')</i>
                     </a>
                 </li>
 
