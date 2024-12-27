@@ -241,7 +241,7 @@
 </div>
 
 @script
-<script>
+{{-- <script>
     function updateLocationOptions() {
         const locationType = document.getElementById('locationType').value;
         const locationDropdown = document.getElementById('location');
@@ -274,5 +274,5 @@
 
     // Attach the event listener
     document.getElementById('locationType').addEventListener('change', updateLocationOptions);
-</script>
+</script> --}}
 @endscript

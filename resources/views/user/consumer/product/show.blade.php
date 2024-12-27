@@ -142,7 +142,6 @@
     }
 
 </style>
-
 @endpush
 
 @section('x-content')
@@ -160,8 +159,8 @@
 </div>
 @endsection
 
-{{-- etong part below ayaw nya mag run pa, pero ayos yan na code --}}
-@push('scripts')
+{{-- noted noted tig aayos na --}}
+@section('scripts')
 <script>
     function closePopup() {
         const overlay = document.getElementById('overlay');
@@ -189,6 +188,6 @@
         popup.classList.remove('hidden');
     }
 </script>
-@endpush
+@endsection
 
 

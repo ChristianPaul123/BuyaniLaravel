@@ -149,7 +149,7 @@
     </div>
 @endsection
 
-@push('scripts')
+@section('scripts')
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         // Toggle GCash receipt upload
@@ -170,4 +170,4 @@
         });
     });
 </script>
-@endpush
+@endsection

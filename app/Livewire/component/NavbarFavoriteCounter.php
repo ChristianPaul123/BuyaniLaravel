@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Component;
 
 use Livewire\Component;
 use Livewire\Attributes\On;
 use Illuminate\Support\Facades\Auth;
-use Psy\Readline\Hoa\Console;
 
-class FavoriteCounter extends Component
+class NavbarFavoriteCounter extends Component
 {
 
     public $favoritesCount = 0;
@@ -31,9 +30,8 @@ class FavoriteCounter extends Component
             $this->favoritesCount = $user->favorites->count() ?? 0; // Count user's favorites
         }
     }
-
     public function render()
     {
-        return view('livewire.favorite-counter');
+        return view('livewire.component.navbar-favorite-counter');
     }
 }

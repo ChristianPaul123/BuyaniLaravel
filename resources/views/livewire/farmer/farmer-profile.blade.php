@@ -22,7 +22,8 @@
                             <div class="profile-section mt-4 mt-md-0">
                                 <h4>Personal Information</h4>
                                 <ul class="list-group mb-3">
-                                    <li class="list-group-item">Name: {{ $user->username }}</li>
+                                    <li class="list-group-item">Username: {{ $user->username }}</li>
+                                    <li class="list-group-item">Name: {{ $user->first_name }} {{ $user->last_name }}</li>
                                     <li class="list-group-item">Email: {{ $user->email }}</li>
                                     <li class="list-group-item">Phone: {{ $user->phone_number }}</li>
                                     <li class="list-group-item">Status: {{ $user->user_status }}</li>
@@ -49,15 +50,15 @@
                 <div class="modal-body">
                     <form wire:submit.prevent="updateProfile">
                         <div class="mb-3">
-                            <label for="nameInput" class="form-label">Name</label>
+                            <label for="nameInput" class="form-label">Username</label>
                             <input type="text" class="form-control" id="nameInput" wire:model="username">
                             @error('username') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
                         <div class="mb-3 text-center">
                             @if ($profile_pic)
-                                <img src="{{ $profile_pic->temporaryUrl() }}" alt="Profile Picture Preview" class="profile-pic-preview" width="40px" height="auto">
+                                <img src="{{ $profile_pic->temporaryUrl() }}" alt="Profile Picture Preview" class="profile-pic-preview" width="100px" height="auto">
                             @else
-                                <img src="{{ asset($user->profile_pic) }}" alt="Current Profile Picture" class="profile-pic-preview" width="40px" height="auto">
+                                <img src="{{ asset($user->profile_pic) }}" alt="Current Profile Picture" class="profile-pic-preview" width="100px" height="auto">
                             @endif
                         </div>
 
@@ -71,9 +72,19 @@
                             @error('profile_pic') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
                         <div class="mb-3">
+                            <label for="firstnameInput" class="form-label">First Name</label>
+                            <input type="text" class="form-control" id="firstnameInput" wire:model="first_name">
+                            @error('first_name') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="lastnameInput" class="form-label">Last Name</label>
+                            <input type="text" class="form-control" id="lastnameInput" wire:model="last_name">
+                            @error('last_name') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="mb-3">
                             <label for="phoneInput" class="form-label">Phone</label>
                             <input type="tel" class="form-control" id="phoneInput" wire:model="phone_number">
-                            @error('phone_number') <span class="text-danger">{{ $message }}</span> @enderror
+                            @error('phone1_number') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
                     </form>
                 </div>
@@ -131,8 +142,11 @@
       @this.on('show-modal',(event)=>{
         var myModalEl=document.querySelector('#editModal')
         var modal=bootstrap.Modal.getOrCreateInstance(myModalEl)
-      })
 
+        // myModalEl.addEventListener('hidden.bs.modal', () => {
+        //         @this.dispatch('testtest'); // Call the Livewire method to reset variables
+        //     });
+      })
     })
   </script>
 
@@ -143,7 +157,6 @@
         var myModalEl=document.querySelector('#passwordModal')
         var modal=bootstrap.Modal.getOrCreateInstance(myModalEl)
       })
-
     })
   </script>
 @endscript

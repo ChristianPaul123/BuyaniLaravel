@@ -13,6 +13,8 @@ class FarmerProfile extends Component
 
     public $user;
     public $username;
+    public $first_name;
+    public $last_name;
     public $email;
     public $phone_number;
     public $profile_pic;
@@ -30,16 +32,18 @@ class FarmerProfile extends Component
         $this->username = $this->user->username;
         $this->email = $this->user->email;
         $this->phone_number = $this->user->phone_number;
+        $this->first_name = $this->user->first_name;
+        $this->last_name = $this->user->last_name;
     }
 
     public function showProfileModal()
     {
-        $this->dispatch('show-modal', ['modal' => 'editProfile']);
+        $this->dispatch('show-modal', ['modal' => 'editModal']);
     }
 
     public function showChangeModal()
     {
-        $this->dispatch('show-modal', ['modal' => 'changePassword']);
+        $this->dispatch('show-modal', ['modal' => 'passwordModal']);
     }
 
 
@@ -49,9 +53,14 @@ class FarmerProfile extends Component
         $this->validate([
             'username' => 'required|string|max:255',
             'phone_number' => 'required|string|max:12',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
             'profile_pic' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
+
+        $this->user->first_name = $this->first_name;
+        $this->user->last_name = $this->last_name;
         $this->user->username = $this->username;
         $this->user->phone_number = $this->phone_number;
 
@@ -66,6 +75,7 @@ class FarmerProfile extends Component
             $profileImagePath = $this->storeImage($this->profile_pic, 'img/profile/'. $this->user->username);
             $this->user->profile_pic = $profileImagePath;
         }
+
 
         // Save user updates to the database
         $this->user->save();
@@ -91,6 +101,11 @@ class FarmerProfile extends Component
 
         return $storedPath;
     }
+
+    // #[On('testtest')]
+    // public function test() {
+    //     dd('testing');
+    // }
 
     private function deleteOldImage($path)
     {

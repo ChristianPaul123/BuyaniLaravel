@@ -198,3 +198,5 @@
     </div>
 </section>
 @endsection
+@section('scripts')
+@endsection

@@ -4,7 +4,7 @@
 
             @livewire('session-modal')
 
-            @if (session('success'))
+            {{-- @if (session('success'))
                 <div>
                     <div class="overlay" id="overlay" aria-label="Close" onclick="closePopup()"></div>
 
@@ -19,7 +19,7 @@
                         </div>
                     </div>
                 </div>
-            @endif
+            @endif --}}
 
             <div class="container-fluid custom-font-content p-2 mt-5 d-flex">
                 <nav aria-label="breadcrumb d-flex">
@@ -200,7 +200,7 @@ defer>
 @endassets
 
 @script
-
+@endscript
 {{-- <script>
     document.addEventListener('DOMContentLoaded', function () {
         const siteKey = "{{ config('services.recaptcha.public_key') }}";
@@ -228,4 +228,3 @@ defer>
         });
     });
 </script> --}}
-@endscript

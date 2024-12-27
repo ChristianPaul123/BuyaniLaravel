@@ -156,14 +156,14 @@
     </div>
 @endsection
 
-@push('scripts')
+@section('scripts')
 <script>
     window.addEventListener('popstate', function(event) {
         // If the user presses the back button, log them out
         window.location.href = "{{ route('admin.logout') }}";
     });
   </script>
-@endpush
+@endsection
 
 
 

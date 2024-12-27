@@ -94,7 +94,7 @@
 </div>
 @endsection
 
-@push('scripts')
+@section('scripts')
 <script>
 
     window.addEventListener('popstate', function(event) {
@@ -102,4 +102,4 @@
         window.location.href = "{{ route('admin.logout') }}";
     });
 </script>
-@endpush
+@endsection

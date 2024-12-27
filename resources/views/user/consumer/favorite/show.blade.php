@@ -105,8 +105,8 @@
  @livewire('user-favorites')
 @endsection
 
-@push('scripts')
+@section('scripts')
 <script>
     // You can add JavaScript functionality if needed
 </script>
-@endpush
+@endsection

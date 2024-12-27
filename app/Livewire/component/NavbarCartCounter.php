@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Component;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 
-class CartCounter extends Component
+class NavbarCartCounter extends Component
 {
+
     public $cartCount = 0;
 
     public function mount()
@@ -32,6 +33,6 @@ class CartCounter extends Component
     }
     public function render()
     {
-        return view('livewire.cart-counter');
+        return view('livewire.component.navbar-cart-counter');
     }
 }

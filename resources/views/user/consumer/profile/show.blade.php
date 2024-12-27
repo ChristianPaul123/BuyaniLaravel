@@ -46,12 +46,14 @@
         <div class="tab-content mt-4" id="ConsumerTabsContent">
             <!-- Consumer Profile Tab -->
             <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                <livewire:consumer-profile />
+                {{-- <livewire:consumer-profile /> --}}
+                @livewire('consumer.consumer-profile')
             </div>
 
             <!-- Consumer Address Tab -->
             <div class="tab-pane fade" id="address" role="tabpanel" aria-labelledby="address-tab">
-                <livewire:consumer-address />
+                {{-- <livewire:consumer-address /> --}}
+                @livewire('consumer.consumer-address')
             </div>
 
         </div>
