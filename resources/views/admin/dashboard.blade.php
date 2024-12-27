@@ -34,10 +34,10 @@
                         @livewire('total-orders')
                     </div>
                     <div class="col-3">
-                        @livewire('component.admin-pending-payments-block')
+                        @livewire('blocks.admin-pending-payments')
                     </div>
                     <div class="col-3">
-                        @livewire('component.active-farmers-block')
+                        @livewire('blocks.active-farmers')
                     </div>
                 </div>
             </section>

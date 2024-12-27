@@ -178,8 +178,8 @@
             <h1>Product Voting</h1>
             <p>Vote for your favorite products this month!</p>
         </div>
-        @livewire('product-chart')
-        @livewire('product-poll')
+        @livewire('consumer.suggested-product-ranking')
+        @livewire('consumer.suggested-product-poll')
          <!-- Request Product Button -->
          <div class="request-product">
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#requestProductModal">+ Request Product</button>
