@@ -7,7 +7,7 @@
         </div>
         <div class="user-list">
             @foreach ($users as $user)
-                <div
+                <div wire:key="{{ $user->id }}"
                     class="user-item {{ $selectedUser && $selectedUser->id === $user->id ? 'active' : '' }}"
                     wire:click="selectChat({{ $user->id }})"
                 >

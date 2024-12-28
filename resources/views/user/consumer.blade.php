@@ -504,55 +504,43 @@
             <h2>Our Products</h2>
             <h4>Freshly delivered from our local farmers!</h4>
         </div>
-        <div class="row"> <!--card layout for products-->
+        <div class="row"> <!-- Card layout for products -->
             <div class="container py-5">
                 <div class="row g-4">
-                    <!-- Card 1 -->
+                    @foreach($products->take(4) as $product) {{-- Display only the first 4 products --}}
+                    @php
+                    $encryptedId = Crypt::encrypt($product->id);
+                    @endphp
                     <div class="col-md-6 col-lg-3">
                         <div class="card product-card">
-                            <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Product Image">
+                            {{-- Product Image --}}
+                            <img
+                                src="{{ asset($product->product_pic ?? 'https://via.placeholder.com/300x200') }}"
+                                class="card-img-top"
+                                alt="{{ $product->product_name }}">
+
                             <div class="card-body text-center">
-                                <h5 class="card-title">Carrots</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet.</p>
-                                <button class="btn btn-dark btn-float">Shop Now</button>
+                                {{-- Product Title --}}
+                                <h5 class="card-title">{{ $product->product_name }}</h5>
+
+                                {{-- Product Details --}}
+                                <p class="card-text">{{ Str::limit($product->product_details, 50, '...') }}</p>
+
+                                {{-- Shop Now Button --}}
+                                <a href="{{ route('user.consumer.product.view', $encryptedId) }}" class="btn btn-dark btn-float">Shop Now</a>
                             </div>
                         </div>
                     </div>
-                    <!-- Card 2 -->
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card product-card">
-                            <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Product Image">
-                            <div class="card-body text-center">
-                                <h5 class="card-title">Cabbage</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet.</p>
-                                <button class="btn btn-dark btn-float">Shop Now</button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Card 3 -->
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card product-card">
-                            <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Product Image">
-                            <div class="card-body text-center">
-                                <h5 class="card-title">Lettuce</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet.</p>
-                                <button class="btn btn-dark btn-float">Shop Now</button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Card 4 -->
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card product-card">
-                            <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Product Image">
-                            <div class="card-body text-center">
-                                <h5 class="card-title">Tomato</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet.</p>
-                                <button class="btn btn-dark btn-float">Shop Now</button>
-                            </div>
-                        </div>
+                    @endforeach
+                </div>
+
+                {{-- See More Button --}}
+                <div class="row mt-4">
+                    <div class="col text-center">
+                        <a href="{{ route('user.consumer.product') }}" class="button btn-lg">See More Products</a>
                     </div>
                 </div>
-            </div> <!--end of card-layout-->
+            </div>
         </div>
     </div>
 
@@ -565,31 +553,39 @@
             Buyani is on a mission to uplift the lives of Filipino farmers and fisherfolk by harnessing the transformative power of technology. Our innovative solutions empower local communities and enable them to thrive in a rapidly evolving agricultural landscape.
             Join us in creating a future where technology-driven innovation and sustainable farming practices go hand-in-hand.
         </p>
-        <a href="#" class="button">Learn More</a>
+        <a href="{{ route('user.consumer.about') }}" class="button">Learn More</a>
+    </div>
+    <div class="top-sponsor-row">
+        @if ($sponsorImages->count() >= 3)
+        @foreach ($sponsorImages->take(3) as $images) {{-- Display the first 3 sponsors --}}
+            <div class="logo">
+                <img src="{{ asset($images->img) }}" alt="{{ $images->img_title }}">
+            </div>
+        @endforeach
+    @else
+        @for ($i = 0; $i < 3; $i++) {{-- Add placeholders if fewer than 3 images --}}
+            <div class="logo">
+                <img src="https://via.placeholder.com/200x100?text=Sponsor+Placeholder" alt="Sponsor Placeholder">
+            </div>
+        @endfor
+    @endif
     </div>
 
-    {{-- Sponsorships --}}
-    <div class="main-container">
-        <!-- Top Sponsor Row -->
-        <div class="top-sponsor-row">
-            <div class="logo"><img src="{{ asset('img/logo1.svg') }}" alt="Sponsor 1" ></div>
-            <div class="logo"><img src="{{ asset('img/logo2.svg') }}" alt="Sponsor 2"></div>
-            <div class="logo"><img src="{{ asset('img/logo1.svg') }}" alt="Sponsor 3"></div>
-        </div>
-
-        <!-- Bottom Sponsor Row -->
-        <div class="bottom-sponsor-row">
-            <div class="logo"><img src="{{ asset('img/logo1.svg') }}" alt="Sponsor 4"></div>
-            <div class="logo"><img src="{{ asset('img/logo1.svg') }}" alt="Sponsor 5"></div>
-            <div class="logo"><img src="{{ asset('img/logo2.svg') }}" alt="Sponsor 6"></div>
-            <div class="logo"><img src="https://via.placeholder.com/200x100?text=Sponsor+7" alt="Sponsor 7"></div>
-            <div class="logo"><img src="https://via.placeholder.com/200x100?text=Sponsor+8" alt="Sponsor 8"></div>
-            <div class="logo"><img src="https://via.placeholder.com/200x100?text=Sponsor+4" alt="Sponsor 9"></div>
-            <div class="logo"><img src="https://via.placeholder.com/200x100?text=Sponsor+5" alt="Sponsor 10"></div>
-            <div class="logo"><img src="https://via.placeholder.com/200x100?text=Sponsor+6" alt="Sponsor 11"></div>
-            <div class="logo"><img src="https://via.placeholder.com/200x100?text=Sponsor+7" alt="Sponsor 12"></div>
-            <div class="logo"><img src="https://via.placeholder.com/200x100?text=Sponsor+8" alt="Sponsor 13"></div>
-        </div>
+    <!-- Bottom Sponsor Row -->
+    <div class="bottom-sponsor-row">
+        @if ($sponsorImages->count() > 3)
+        @foreach ($sponsorImages->skip(3) as $images) {{-- Display the remaining sponsors --}}
+            <div class="logo">
+                <img src="{{ asset($images->img) }}" alt="{{ $images->img_title }}">
+            </div>
+        @endforeach
+    @else
+        @for ($i = 0; $i < max(0, 6 - $sponsorImages->count()); $i++) {{-- Add placeholders for remaining slots --}}
+            <div class="logo">
+                <img src="https://via.placeholder.com/200x100?text=Sponsor+Placeholder" alt="Sponsor Placeholder">
+            </div>
+        @endfor
+    @endif
     </div>
 
     {{-- Semi-Contact --}}
@@ -622,7 +618,11 @@
                 <div class="col-lg-6 col-md-12 promo-text">
                     <h3>Our Mission</h3>
                     <h2>More than a convenient online shopping experience</h2>
-                    <h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h6>
+                    <h6>
+                        At Buyani, our mission is to empower local farmers by providing them with a platform to showcase and sell their fresh produce directly to consumers.
+                        We believe in fostering sustainable agriculture, supporting rural communities, and ensuring that you, our valued customer, enjoy the freshest and
+                        healthiest products. Together, we are bridging the gap between the farm and your table, one order at a time.
+                    </h6>
                 </div>
             </div>
             <!-- Second Section -->
@@ -633,7 +633,11 @@
                 <div class="col-lg-6 col-md-12 promo-text">
                     <h3>Why Buyani</h3>
                     <h2>It's More Fun with Buyani</h2>
-                    <h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h6>
+                    <h6>
+                        Buyani is more than just an online marketplace; it’s a movement to support local farming communities and promote sustainable living.
+                        By shopping with us, you contribute to the growth of small-scale farmers, reduce your carbon footprint, and enjoy produce that is as fresh as it gets.
+                        We bring convenience, quality, and a touch of community spirit to your shopping experience. Why settle for less when you can make a difference with Buyani?
+                    </h6>
                 </div>
             </div>
         </div>

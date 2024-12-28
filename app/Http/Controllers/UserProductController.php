@@ -12,7 +12,9 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Log;
 use App\Models\ProductSpecification;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Contracts\Encryption\DecryptException;
 
 class UserProductController extends Controller
 {
@@ -42,9 +44,10 @@ class UserProductController extends Controller
         }
     }
 
-    public function viewConsumerProduct($product) {
+    public function viewConsumerProduct($encryptedId) {
         try {
-            $product = Product::with('category', 'subcategory', 'productImages', 'productSpecification', 'inventory')->findOrFail($product);
+            $id = Crypt::decrypt($encryptedId);
+            $product = Product::with('category', 'subcategory', 'productImages', 'productSpecification', 'inventory')->findOrFail($id);
             $categories = Category::all();
             $subcategories = SubCategory::all();
 
@@ -55,6 +58,8 @@ class UserProductController extends Controller
                 'productSpecification' => $product->productSpecification,
                 'inventory' => $product->inventory
             ]);
+        } catch (DecryptException $e) {
+            return back()->with('error', 'Invalid product ID provided.');
         } catch (\Exception $e) {
             return back()->with(['error', 'An error occurred while retrieving the product.', 'product' => $product]);
         }

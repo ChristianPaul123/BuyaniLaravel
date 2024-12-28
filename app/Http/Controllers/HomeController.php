@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\SponsorImgs;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,8 @@ class HomeController extends Controller
         $products = Product::all();
         $categories = Category::all();
         $subcategories = SubCategory::all();
-        return view('user.consumer',['products' => $products, 'categories' => $categories, 'subcategories' => $subcategories]);
+        $sponsorImages = SponsorImgs::all();
+        return view('user.consumer',['products' => $products, 'categories' => $categories, 'subcategories' => $subcategories,'sponsorImages' => $sponsorImages]);
     }
 
     public function showConAbout()

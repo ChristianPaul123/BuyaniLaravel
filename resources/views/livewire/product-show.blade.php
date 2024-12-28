@@ -95,7 +95,7 @@
                     <h2 class="text-center my-4 fw-bold">{{ $title }}</h2>
                     <div class="row g-4">
                         @foreach ($products as $product)
-                            <div class="col-sm-6 col-md-4 col-lg-3">
+                            <div class="col-sm-6 col-md-4 col-lg-3" wire:key="{{ $product->id }}">
                                 <div class="card shadow-sm border-0 rounded">
                                     <div class="card-img-top-wrapper position-relative" wire:click.prevent="viewProduct({{ $product->id }})">
                                         <img src="{{ asset($product->product_pic) }}" class="card-img-top rounded-top" alt="{{ $product->product_name }}"  style="cursor: pointer;">

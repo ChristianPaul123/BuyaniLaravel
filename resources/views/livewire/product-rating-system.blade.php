@@ -1,6 +1,29 @@
-<div class="container mt-4 min-vh-100" style="background-color: rgb(245, 245, 245); border-radius: 8px; padding: 20px;">
+<div class="container mt-4 min-vh-100">
     <!-- Rating Summary -->
-    <div class="row mb-4">
+    <div class="mt-4">
+        <h5>Customer Reviews</h5>
+
+        <!-- Overall Star Rating -->
+        <p class="text-warning h5 mb-1">
+            @if($averageRating > 0)
+                {!! str_repeat('&#9733;', floor($averageRating)) !!}{{-- Full stars --}}
+                @if(floor($averageRating) < $averageRating)&#189;{{-- Half star --}}
+                @endif
+            @else
+                &#9734;&#9734;&#9734;&#9734;&#9734; {{-- Empty stars if no rating --}}
+            @endif
+        </p>
+
+        <!-- Rating Details -->
+        <p class="small text-muted">
+            {{ number_format($averageRating, 1) }} based on {{ $ratings->total() }} reviews
+        </p>
+        <p class="small text-success">
+            {{ $ratings->total() > 0 ? number_format(($ratings->where('rating', '>=', 4)->count() / $ratings->total()) * 100, 0) : 0 }}% of respondents would recommend this product
+        </p>
+    </div>
+
+    <div class="row mb-4" style="background-color: rgb(245, 245, 245); border-radius: 8px; padding: 20px;">
         <!-- Average Rating -->
         <div class="col-md-4 text-center">
             <h1 class="display-4" style="color: #4CAF50;">{{ $averageRating }}</h1>
@@ -26,7 +49,7 @@
     </div>
 
     <!-- Filter Reviews -->
-    <div class="mb-4 row align-items-center">
+    <div class="mb-4 row align-items-center" style="background-color: rgb(245, 245, 245); border-radius: 8px; padding: 20px;">
         <!-- Label -->
         <div class="col-3 col-md-2">
             <label for="ratingFilter" class="form-label" style="color: #4CAF50; font-weight: bold; font-size: 1rem;">
@@ -46,19 +69,11 @@
                 <option value="1">1 Star</option>
             </select>
         </div>
-
-        <!-- Button -->
-        {{-- <div class="col-3 col-md-2 text-end">
-            <button wire:click="applyRatingFilter" class="btn btn-primary"
-                style="background-color: #4CAF50; border: none; padding: 10px 15px; border-radius: 8px; font-size: 1rem; font-weight: bold; color: white; width: 100%;">
-                Confirm
-            </button>
-        </div> --}}
     </div>
 
 
     <!-- Reviews -->
-    <div class="ratings-list mt-4">
+    <div class="ratings-list mt-4" style="background-color: rgb(245, 245, 245); border-radius: 8px; padding: 20px; margin: 20px 0px;">
         <div wire:loading>
             <p>Loading ratings...</p>
         </div>
@@ -127,6 +142,6 @@
         </button>
     </div>
     @else
-        <p>Please <a href="{{ route('user.index') }}" style="color: #4CAF50;">log in</a> to leave a rating.</p>
+        <p class="text-center" style="color: #777;">Please <a href="{{ route('user.index') }}" style="color: #4CAF50;">log in</a> to leave a rating.</p>
     @endauth
 </div>

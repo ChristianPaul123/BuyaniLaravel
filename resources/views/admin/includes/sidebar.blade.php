@@ -51,14 +51,22 @@
             </ul>
         </li>
 
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle @if(request()->is('admin/customization*')) active @endif" href="#" id="customizationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-shopping-cart"></i> Customization
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="customizationDropdown">
+                <li><a class="dropdown-item @if(request()->is('admin/customization')) active @endif" href="/admin/customization?tab=settings"> <i class="fas fa-tags"></i> Admin Customization</a></li>
+                <li><a class="dropdown-item @if(request()->is('admin/customization/sponsorimg')) active @endif" href="/admin/customization/sponsorimg"><i class="fas fa-warehouse"></i> Sponsor Images</a></li>
+            </ul>
+        </li>
 
-
-        <!-- Customization -->
+        {{-- <!-- Customization -->
         <li class="nav-item">
             <a class="nav-link d-flex justify-content-between @if(request()->is('admin/customization')) active @endif" href="/admin/customization?tab=settings">
                 <i class="fas fa-cogs"></i> Customization <span>/</</span>
             </a>
-        </li>
+        </li> --}}
 
         <hr class="hr hr-blurry" />
 

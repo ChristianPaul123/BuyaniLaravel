@@ -4,7 +4,7 @@
         <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="row max-height">
                 @forelse ($suggestedProducts as $product)
-                <div class="col-lg-6 col-md-12 col-sm-12 mb-4">
+                <div class="col-lg-6 col-md-12 col-sm-12 mb-4" wire:key="{{ $product->id }}">
                     <div class="card shadow-sm border-0">
                         <div class="card-body d-flex align-items-center gap-3">
                             <div class="product-image">

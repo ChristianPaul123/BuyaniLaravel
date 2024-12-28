@@ -63,16 +63,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="mt-4">
-                <h5>Customer Reviews</h5>
-
-                <p class="text-warning h5 mb-1">&#9733;&#9733;&#9733;&#9733;&#189;</p>
-                <p class="small text-muted">4.5 based on 104 reviews</p>
-                <p class="small text-success">84% of respondents would recommend this to a friend</p>
-
-                <p class="mt-3 text-muted">Please <a href="#">login</a> to leave a review.</p>
-            </div>
         </div>
     </div>
 
