@@ -643,8 +643,9 @@
         </div>
     </div>
 
+    {{-- wag na ata neto at redundant na masyado --}}
     <!-- Section 3 -->
-    <div class="row section-3">
+    {{-- <div class="row section-3">
         <div class="col-md-6 left-panel">
             <div class="div-iframe">
                 <iframe
@@ -678,7 +679,7 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> --}}
 
 </section>
 
