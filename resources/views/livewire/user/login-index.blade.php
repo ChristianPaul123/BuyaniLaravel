@@ -1,97 +1,104 @@
-<div class="d-flex flex-row mt-3 pt-0" >
-    <div class="col-lg-6 login-card d-flex flex-column align-items-center justify-content-center" style="height: 500px;">
-        <div class="container d-block align-items-center">
+<main class="row mt-4 a" style="background-color: #48722e;">
+    <div class="col-lg-6 col-sm-12 a d-flex align-items-center justify-content-center" style="height: 500px;">
+        <div class="left-side a w-100">
+            <div class="a mb-5">
 
-            @livewire('session-modal')
+                @livewire('session-modal')
 
-            {{-- @if (session('success'))
-                <div>
-                    <div class="overlay" id="overlay" aria-label="Close" onclick="closePopup()"></div>
+                {{-- @if (session('success'))
+                    <div>
+                        <div class="overlay" id="overlay" aria-label="Close" onclick="closePopup()"></div>
 
-                    <div class="popup success">
-                        <i class="close bi bi-x-lg fs-4" aria-label="Close" onclick="closePopup()"></i>
-                        <div class="icon-container success-bg">
-                            <i class="icon bi bi-check-circle"></i>
-                        </div>
-                        <div class="container-contents">
-                            <h3>Yay!</h3>
-                            <p>{{ session('success') }}</p>
+                        <div class="popup success">
+                            <i class="close bi bi-x-lg fs-4" aria-label="Close" onclick="closePopup()"></i>
+                            <div class="icon-container success-bg">
+                                <i class="icon bi bi-check-circle"></i>
+                            </div>
+                            <div class="container-contents">
+                                <h3>Yay!</h3>
+                                <p>{{ session('success') }}</p>
+                            </div>
                         </div>
                     </div>
+                @endif --}}
+
+                {{-- <div class="container-fluid custom-font-content p-2 mt-5 d-flex">
+                    <nav aria-label="breadcrumb d-flex">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ route('user.index') }}">Role Selection</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Logging</li>
+                        </ol>
+                    </nav>
+                </div> --}}
+
+                <h2>
+                    Login as {{ $user_type == 1 ? 'Consumer' : 'Farmer' }}
+                </h2>
+            </div>
+
+            <form class="my-3 a form-part" wire:submit.prevent="login" id="loginForm" autocomplete="off">
+                <div class="form-group my-3">
+                    <label for="email">Email or Phone Number</label>
+                    <input type="text" wire:model="email_phoneNum" class="form-control" id="email_phoneNum" placeholder="Enter email or phone number" required>
+                    <small id="emailPhoneError" class="text-warning" style="display: none;">Invalid email or phone number format.</small>
+                    {{-- @error('email_phoneNum') <span class="text-danger">{{ $message }}</span> @enderror --}}
+                    @if (session()->has('error'))<span id="errorMessage" class="text-danger">{{ session('error') }}</span>@endif
                 </div>
-            @endif --}}
 
-            <div class="container-fluid custom-font-content p-2 mt-5 d-flex">
-                <nav aria-label="breadcrumb d-flex">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('user.index') }}">Role Selection</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Logging</li>
-                    </ol>
-                </nav>
-            </div>
-
-            <h2 class="text-center my-3 mx-2" style="font-size: 40px; white-space: nowrap;">
-                Login as {{ $user_type == 1 ? 'Consumer' : 'Farmer' }}
-            </h2>
-        </div>
-
-        <form class="my-3" wire:submit.prevent="login" style="width: 400px;" id="loginForm" autocomplete="off">
-            <div class="form-group my-3">
-                <label for="email">Email or Phone Number</label>
-                <input type="text" wire:model="email_phoneNum" class="form-control" id="email_phoneNum" placeholder="Enter email or phone number" required>
-                <small id="emailPhoneError" class="text-warning" style="display: none;">Invalid email or phone number format.</small>
-                {{-- @error('email_phoneNum') <span class="text-danger">{{ $message }}</span> @enderror --}}
-                @if (session()->has('error'))<span id="errorMessage" class="text-danger">{{ session('error') }}</span>@endif
-            </div>
-
-            <div class="form-group my-3">
-                <label for="password">Password:</label>
-                <div class="input-group">
-                    <input type="password" wire:model="password" class="form-control" id="password" placeholder="Enter password" required>
-                    <div class="input-group-append">
-                        <span class="input-group-text toggle-password" id="togglePassword" style="height: 100%; width: 40px; display: flex; align-items: center; justify-content: center;">
-                            <i class="fas fa-eye"></i>
-                        </span>
+                <div class="form-group mt-3 a">
+                    <label for="password">Password:</label>
+                    <div class="input-group">
+                        <input type="password" wire:model="password" class="form-control" id="password" placeholder="Enter password" required>
+                        <div class="input-group-append z-10">
+                            <span class="input-group-text toggle-password fix-edge" id="togglePassword" style="height: 100%; width: 40px;">
+                                <i class="fas fa-eye"></i>
+                            </span>
+                        </div>
                     </div>
+                    <input type="hidden" wire:model="user_type" value="{{ $user_type }}" />
                 </div>
-                <input type="hidden" wire:model="user_type" value="{{ $user_type }}" />
+                {{-- <div id="captcha" wre:model="captcha" class="mt-4" wire:ignore></div> --}}
+                @error('captcha')
+                <div class="bg-red-300 text-red-700 p-3 rounded">{{ $message }}</div>
+                @enderror
+
+                 <div class="form-group d-flex justify-content-end mb-3">
+                    <a class="clickable-forgot-password" wire:click.prevent="showModal()"> Forgot Password?</a>
+                </div>
+            </form>
+
+            <form wire:submit.prevent="login" id="loginForm" autocomplete="off">
+                <div class="container d-flex justify-content-center my-">
+                    <button type="submit" class="button-login button my-1 px-4">LOGIN</button>
+                </div>
+            </form>
+            <script>
+                var  handle = function(e) {
+                    widget = grecaptcha.render('captcha', {
+                        'sitekey': '{{ env('RECAPCHA_SITEKEY') }}',
+                        'theme': 'light', // you could switch between dark and light mode.
+                        'callback': verify
+                    });
+
+                }
+                var verify = function (response) {
+                    @this.set('captcha', response)
+                }
+            </script>
+
+            <div class="">
+                <div class="text-center pt-3">
+                    <a href="{{ route('user.register', ['user_type' => $user_type]) }}">Create Account | Sign Up</a>
+                </div>
             </div>
-            <div id="captcha" wre:model="captcha" class="mt-4" wire:ignore></div>
-            @error('captcha')
-            <div class="bg-red-300 text-red-700 p-3 rounded">{{ $message }}</div>
-            @enderror
 
-             <div class="form-group my-1 d-flex justify-content-end">
-                <a class="clickable-forgot-password" wire:click.prevent="showModal()"> Forgot Password?</a>
-            </div>
-
-            <div class="container d-flex justify-content-center">
-                <button type="submit" class="btn btn-warning btn-block my-1 px-4">LOGIN</button>
-            </div>
-        </form>
-        <script>
-            var  handle = function(e) {
-                widget = grecaptcha.render('captcha', {
-                    'sitekey': '{{ env('RECAPCHA_SITEKEY') }}',
-                    'theme': 'light', // you could switch between dark and light mode.
-                    'callback': verify
-                });
-
-            }
-            var verify = function (response) {
-                @this.set('captcha', response)
-            }
-        </script>
-
-
-        <div class="text-center">
-            <a href="{{ route('user.register', ['user_type' => $user_type]) }}">Create Account | Sign Up</a>
         </div>
     </div>
 
-    <div class="col-lg-6 d-flex align-items-center justify-content-center p-0">
-        <img src="{{ $user_type == 1 ? asset('img/consumerPhoto.jpg') : asset('img/farmerPhoto.jpg') }}" alt="{{ $user_type == 1 ? 'consumer' : 'farmer' }} logo" style="width: 100%; height: 500px;">
+    <div class="col-lg-6 col-sm-12 hide" style="background-image: url('{{ $user_type == 1 ? asset('img/consumerPhoto.jpg') : asset('img/farmerPhoto.jpg') }}'); background-size: cover; background-position: center;">
+        <!-- Content inside the div (if any) can go here -->
     </div>
+
 
     <div>   <!-- Step 1: Request OTP Form -->
         @if($showEmailModal)
@@ -191,7 +198,7 @@
         </div>
         @endif
     </div>
-</div>
+</main>
 @assets
 <script src="https://www.google.com/recaptcha/api.js?onload=handle&render=explicit"
 async
