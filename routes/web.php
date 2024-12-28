@@ -248,4 +248,33 @@ Route::post('user/consumer/voting', [VotedProductsController::class, 'suggestPro
 Route::get('user/farmer/product', [UserController::class, 'showFarmerProduct'])->name('user.farmer.product');
 Route::get('user/farmer/product/view/{id}', [UserController::class, 'viewFarmerProduct'])->name('user.farmer.product.view');
 
+Route::get('/generate-chart', function () {
+    $chartData = [
+        'labels' => ['January', 'February', 'March', 'April'],
+        'values' => [100, 200, 150, 300],
+        'filename' => 'sales_chart_' . time(),
+    ];
 
+    // Pass data to Node.js script
+    $jsonData = json_encode($chartData);
+
+
+
+    // Adjust script path to match `resources/js`
+    $nodeScriptPath = base_path('resources/js/generateChart.cjs');
+
+    // Use `node` to execute the script
+    $command = "node $nodeScriptPath '" . addslashes($jsonData) . "'";
+    exec($command, $output, $returnCode);
+
+    dd($output, $returnCode);
+
+    // Handle errors
+    if ($returnCode !== 0) {
+        return response()->json(['error' => 'Failed to generate chart.'], 500);
+    }
+
+    // Return the chart file URL
+    $chartPath = asset("charts/{$chartData['filename']}.png");
+    return response()->json(['chart_url' => $chartPath]);
+});

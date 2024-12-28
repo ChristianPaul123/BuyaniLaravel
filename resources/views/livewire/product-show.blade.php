@@ -1,72 +1,5 @@
 <div>
-    @if ($categories->count() === 0)
-        <div class="d-block-12 m-5"></div>
-    @else
-        <div class="row container my-4">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light rounded shadow-sm px-3 py-2 w-100">
-                <div class="container-fluid">
-                    <!-- Product Catalog Title -->
-                    <a class="navbar-brand fw-bold fs-4" href="#">Product Catalog</a>
-
-                    <!-- Previous Button -->
-                    <button class="btn btn-outline-primary me-3"
-                            type="button"
-                            wire:click.prevent="previousChunk"
-                            {{ $currentChunkIndex === 0 ? 'disabled' : '' }}>
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-
-                    <!-- Category Dropdowns -->
-                    <div class="d-flex gap-3 flex-wrap">
-                        @foreach ($categoriesChunked[$currentChunkIndex] as $category)
-                            <div class="dropdown">
-                                <button class="btn btn-outline-secondary dropdown-toggle"
-                                        type="button"
-                                        id="categoryDropdown{{ $category->id }}"
-                                        data-bs-toggle="dropdown"
-                                        aria-expanded="false">
-                                    {{ $category->category_name }}
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="categoryDropdown{{ $category->id }}">
-                                    <li>
-                                        <a class="dropdown-item" href="#" wire:click.prevent="filterByCategory({{ $category->id }})">
-                                            All {{ $category->category_name }}
-                                        </a>
-                                    </li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    @foreach ($category->subcategories as $subcategory)
-                                        <li>
-                                            <a class="dropdown-item" href="#" wire:click.prevent="filterBySubcategory({{ $subcategory->id }})">
-                                                {{ $subcategory->sub_category_name }}
-                                            </a>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endforeach
-                    </div>
-
-                    <!-- Next Button -->
-                    <button class="btn btn-outline-primary ms-3"
-                            type="button"
-                            wire:click.prevent="nextChunk"
-                            {{ $currentChunkIndex === count($categoriesChunked) - 1 ? 'disabled' : '' }}>
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-
-                    <!-- Search Bar -->
-                    <form class="d-flex ms-auto" wire:submit.prevent="searchConsumerProduct">
-                        <input class="form-control me-2" type="search" id="searchQuery" wire:model.lazy="searchQuery" placeholder="Search" required>
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
-                </div>
-            </nav>
-        </div>
-    @endif
-
-    <div class="container-fluid">
-        <div class="row justify-content-center align-items-center">
-            @if ($message)
+    @if ($message)
                 <div>
                     <!-- Overlay and Error Popup HTML -->
                     <div class="overlay" id="overlay" aria-label="Close" onclick="closePopup()"></div>
@@ -83,6 +16,80 @@
                     </div>
                 </div>
             @endif
+    @if ($categories->count() === 0)
+        <div class="d-block-12 m-5"></div>
+    @else
+        <div class="row container my-4">
+            <div class="header-title">
+                <h1 class="fw-bold text-success mb-0">Product Catalog</h1>
+                <p class="text-muted small">Explore our wide range of products</p>
+            </div>
+            <div class="header-wrapper bg-light rounded shadow-sm px-4 py-3">
+                <div class="d-flex justify-content-between align-items-center">
+                            <!-- Left Section: Catalog Title -->
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light rounded shadow-sm px-3 py-2 w-100">
+                        <div class="container-fluid">
+                                <button class="btn btn-outline-success me-3" wire:click="resetProducts()">All products</button>
+                            <!-- Previous Button -->
+                            <button class="btn btn-outline-primary me-3"
+                                    type="button"
+                                    wire:click.prevent="previousChunk"
+                                    {{ $currentChunkIndex === 0 ? 'disabled' : '' }}>
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+
+                            <!-- Category Dropdowns -->
+                            <div class="d-flex gap-3 flex-wrap">
+                                @foreach ($categoriesChunked[$currentChunkIndex] as $category)
+                                    <div class="dropdown">
+                                        <button class="btn btn-outline-secondary dropdown-toggle"
+                                                type="button"
+                                                id="categoryDropdown{{ $category->id }}"
+                                                data-bs-toggle="dropdown"
+                                                aria-expanded="false">
+                                            {{ $category->category_name }}
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="categoryDropdown{{ $category->id }}">
+                                            <li>
+                                                <a class="dropdown-item" href="#" wire:click.prevent="filterByCategory({{ $category->id }})">
+                                                    All {{ $category->category_name }}
+                                                </a>
+                                            </li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            @foreach ($category->subcategories as $subcategory)
+                                                <li>
+                                                    <a class="dropdown-item" href="#" wire:click.prevent="filterBySubcategory({{ $subcategory->id }})">
+                                                        {{ $subcategory->sub_category_name }}
+                                                    </a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endforeach
+                            </div>
+
+                            <!-- Next Button -->
+                            <button class="btn btn-outline-primary ms-3"
+                                    type="button"
+                                    wire:click.prevent="nextChunk"
+                                    {{ $currentChunkIndex === count($categoriesChunked) - 1 ? 'disabled' : '' }}>
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+
+                            <!-- Search Bar -->
+                            <form class="d-flex ms-auto" wire:submit.prevent="searchConsumerProduct">
+                                <input class="form-control me-2" type="search" id="searchQuery" wire:model.lazy="searchQuery" placeholder="Search">
+                                <button class="btn btn-outline-success" type="submit">Search</button>
+                            </form>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    @endif
+
+    <div class="container-fluid">
+        <div class="row justify-content-center align-items-center">
 
             <div class="container my-4 min-vh-100">
                 @if ($products->count() === 0)
@@ -93,6 +100,7 @@
                     </div>
                 @else
                     <h2 class="text-center my-4 fw-bold">{{ $title }}</h2>
+                    <p class="text-center text-muted">{{ $message }}</p>
                     <div class="row g-4">
                         @foreach ($products as $product)
                             <div class="col-sm-6 col-md-4 col-lg-3" wire:key="{{ $product->id }}">
@@ -162,11 +170,6 @@
 
 @script
 <script>
-    // document.addEventListener('clear-input', () => {
-    //     console.log('Input cleared');
-    //     const searchForm = document.getElementById('searchForm');
-    //     const searchInput = searchForm.querySelector('#searchQuery');
-    //     searchInput.value = ''; // Clear the input value
-    // });
+
 </script>
 @endscript
