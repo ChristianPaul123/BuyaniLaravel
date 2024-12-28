@@ -59,6 +59,12 @@ Route::post('admin/{admin}/deactivate', [AdminController::class, 'deactivate'])-
 Route::post('admin/{admin}/activate', [AdminController::class, 'activate'])->name('admin.activate');
 Route::get('admin/customization', [AdminController::class, 'showCustomization'])->name('admin.customization');
 Route::post('admin/payment/update', [AdminController::class, 'updateAdminPayment'])->name('admin.payment.update');
+Route::get('admin/customization/sponsorimg', [AdminController::class, 'showSponsorimg'])->name('admin.customization.sponsor');
+Route::post('admin/customization/sponsorimg/add', [AdminController::class, 'addSponsorimg'])->name('admin.customization.sponsor.add');
+Route::get('admin/customization/sponsorimg/edit/{encryptedId}', [AdminController::class, 'editSponsorimg'])->name('admin.customization.sponsor.edit');
+Route::post('admin/customization/sponsorimg/update/{id}', [AdminController::class, 'updateSponsorimg'])->name('admin.customization.sponsor.update');
+Route::delete('admin/customization/sponsorimg/delete/{id}', [AdminController::class,'deleteSponsorimg'])->name('admin.customization.sponsor.delete');
+
 
 //PRODUCT
 Route::get('admin/product', [ProductManagementController::class, 'showProducts'])->name('admin.product.index');
@@ -223,7 +229,7 @@ Route::put('user/farmer/profile/update', [UserController::class, 'updateFarmerpr
 
 //Product for Consumers
 Route::get('user/consumer/products', [UserProductController::class, 'showConsumerProduct'])->name('user.consumer.product');
-Route::get('user/consumer/product/view/{product}', [UserProductController::class, 'viewConsumerProduct'])->name('user.consumer.product.view');
+Route::get('user/consumer/product/view/{encryptedId}', [UserProductController::class, 'viewConsumerProduct'])->name('user.consumer.product.view');
 
 
 //cart for Consumers

@@ -136,13 +136,6 @@
                                 <td class="text-center d-flex justify-content-center align-items-center">
                                     <a href="{{ route('admin.product.inventory.edit', $inventory->id) }}" class="btn btn-primary">Edit</a>
                                 </td>
-                                {{-- <td>
-                                    <form action="{{ route('admin.product.delete', $product->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-danger" onclick="return confirm('Are you sure you want to delete the product: {{ $product->product_name }}?');">Delete</button>
-                                    </form>
-                                </td> --}}
                             </tr>
                         @endforeach
                     </tbody>

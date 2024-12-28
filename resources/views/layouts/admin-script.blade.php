@@ -55,6 +55,9 @@ new DataTable('#orderShipTable');
 //Tables for the Admin
 new DataTable('#adminTable');
 
+//Tables for the Sponsors Images
+new DataTable('#sponsorImagesTable');
+
 //Tables for the Reports
 new DataTable('#currentInventoryTable', {
     layout: {

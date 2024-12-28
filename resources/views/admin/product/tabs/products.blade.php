@@ -36,7 +36,8 @@
                         <td>{{ $product->product_details }}</td>
                         <td>{{ $product->status_label }}</td>
                         <th>{{ $product->inventory->product_total_stock }}</th>
-                        <td><img src="{{ asset($product->product_pic) }}" alt="{{ $product->product_name }}" width="50"></td>
+                        <td><img src="{{\
+                        $product->product_pic) }}" alt="{{ $product->product_name }}" width="50"></td>
                         <td>{{ $product->category->category_name }}</td>
                         <td>{{ $product->subcategory->sub_category_name }}</td>
                         <td>{{ $product->product_deactivated }}</td>

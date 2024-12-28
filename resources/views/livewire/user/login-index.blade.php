@@ -3,33 +3,33 @@
         <div class="left-side a w-100">
             <div class="a mb-5">
 
-                @livewire('session-modal')
+            @livewire('session-modal')
 
-                {{-- @if (session('success'))
-                    <div>
-                        <div class="overlay" id="overlay" aria-label="Close" onclick="closePopup()"></div>
+            {{-- @if (session('success'))
+                <div>
+                    <div class="overlay" id="overlay" aria-label="Close" onclick="closePopup()"></div>
 
-                        <div class="popup success">
-                            <i class="close bi bi-x-lg fs-4" aria-label="Close" onclick="closePopup()"></i>
-                            <div class="icon-container success-bg">
-                                <i class="icon bi bi-check-circle"></i>
-                            </div>
-                            <div class="container-contents">
-                                <h3>Yay!</h3>
-                                <p>{{ session('success') }}</p>
-                            </div>
+                    <div class="popup success">
+                        <i class="close bi bi-x-lg fs-4" aria-label="Close" onclick="closePopup()"></i>
+                        <div class="icon-container success-bg">
+                            <i class="icon bi bi-check-circle"></i>
+                        </div>
+                        <div class="container-contents">
+                            <h3>Yay!</h3>
+                            <p>{{ session('success') }}</p>
                         </div>
                     </div>
-                @endif --}}
+                </div>
+            @endif --}}
 
-                {{-- <div class="container-fluid custom-font-content p-2 mt-5 d-flex">
-                    <nav aria-label="breadcrumb d-flex">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('user.index') }}">Role Selection</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Logging</li>
-                        </ol>
-                    </nav>
-                </div> --}}
+            {{-- <div class="container-fluid custom-font-content p-2 mt-5 d-flex">
+                <nav aria-label="breadcrumb d-flex">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ route('user.index') }}">Role Selection</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Logging</li>
+                    </ol>
+                </nav>
+            </div> --}}
 
                 <h2>
                     Login as {{ $user_type == 1 ? 'Consumer' : 'Farmer' }}

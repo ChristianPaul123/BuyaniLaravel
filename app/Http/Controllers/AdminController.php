@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 use App\Models\Admin;
 use PharIo\Manifest\Email;
+use App\Models\SponsorImgs;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Contracts\Encryption\DecryptException;
 
 class AdminController extends Controller
 {
@@ -165,6 +168,98 @@ public function activate(Admin $admin)
     {
         return view('customization.tabs.edit-admin', compact('admin'));
     }
+
+
+public function showSponsorimg() {
+    $sponsorImages = SponsorImgs::all();
+    return view('admin.customization.sponsor-index', compact('sponsorImages'));
+}
+    // Add Sponsor Image
+public function addSponsorimg(Request $request)
+{
+    $validatedData = $request->validate([
+        'img_title' => ['required', 'string', 'max:255', 'unique:sponsor_imgs,img_title'],
+        'img' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:4096'],
+    ]);
+
+    // Upload sponsor image
+    if ($request->hasFile('img')) {
+        $imageName = time() . '.' . $request->img->extension();
+        $request->img->move(public_path('uploads/sponsor'), $imageName);
+        $validatedData['img'] = 'uploads/sponsor/' . $imageName;
+    } else {
+        return redirect()->route('admin.customization.sponsor')->withErrors(['img' => 'No image uploaded.']);
+    }
+
+    // Create sponsor image record
+    SponsorImgs::create([
+        'img_title' => $validatedData['img_title'],
+        'img' => $validatedData['img'],
+        'admin_id' => Auth::guard('admin')->id(), // Assuming admin is logged in
+    ]);
+
+    return redirect()->route('admin.customization.sponsor')->with('message', 'Sponsor image added successfully.');
+}
+
+// Edit Sponsor Image
+public function editSponsorimg($encryptedId)
+{
+    try {
+        $id = Crypt::decrypt($encryptedId);
+        $sponsorImg = SponsorImgs::findOrFail($id);
+
+        return view('admin.customization.edit-sponsor-img',  compact('sponsorImg'));
+
+    } catch (DecryptException $e) {
+        return redirect()->route('admin.customization.sponsor')->with('error', 'Invalid Sponsor Image ID provided.');
+    }
+}
+
+// Update Sponsor Image
+public function updateSponsorimg(Request $request, $id)
+{
+    $sponsorImg = SponsorImgs::findOrFail($id);
+
+    $validatedData = $request->validate([
+        'img_title' => ['required', 'string', 'max:255', 'unique:sponsor_imgs,img_title,' . $id],
+        'img' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:4096'],
+    ]);
+
+    // Handle image upload if a new one is provided
+    if ($request->hasFile('img')) {
+        // Delete the old image if it exists
+        if ($sponsorImg->img) {
+            @unlink(public_path($sponsorImg->img));
+        }
+
+        $imageName = time() . '.' . $request->img->extension();
+        $request->img->move(public_path('uploads/sponsor'), $imageName);
+        $validatedData['img'] = 'uploads/sponsor/' . $imageName;
+    }
+
+    $sponsorImg->update([
+        'img_title' => $validatedData['img_title'],
+        'img' => $validatedData['img'] ?? $sponsorImg->img, // Keep the old image if none was uploaded
+    ]);
+
+    return redirect()->route('admin.customization.sponsor')->with('message', 'Sponsor image updated successfully.');
+}
+
+// Delete Sponsor Image
+public function deleteSponsorimg($id)
+{
+    $sponsorImg = SponsorImgs::findOrFail($id);
+
+    // Delete the associated image file if it exists
+    if ($sponsorImg->img) {
+        @unlink(public_path($sponsorImg->img));
+    }
+
+    $sponsorImg->delete();
+
+    return redirect()->route('admin.customization.sponsor')->with('message', 'Sponsor image deleted successfully.');
+}
+
 
 
 
