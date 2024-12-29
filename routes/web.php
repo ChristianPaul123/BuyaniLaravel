@@ -2,6 +2,7 @@
 //use App\Mail\HelloMail;
 //use App\Http\Livewire\UserProduct;
 // use App\Http\Livewire\LoginUser;
+use App\Mail\testmail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
@@ -10,22 +11,22 @@ use App\Http\Controllers\ChatController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\OrderController;
 
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\UserProductController;
+
+
+
 use App\Http\Controllers\VotedProductsController;
-
-
-
 use App\Http\Controllers\BlogManagementController;
 use App\Http\Controllers\ChatManagementController;
 use App\Http\Controllers\UserManagementController;
-use App\Http\Controllers\OrderManagementController;
 
+use App\Http\Controllers\OrderManagementController;
 use App\Http\Controllers\ShippingAddressController;
 use App\Http\Controllers\ReportManagementController;
 use App\Http\Controllers\ReviewManagementController;
@@ -248,4 +249,40 @@ Route::post('user/consumer/voting', [VotedProductsController::class, 'suggestPro
 Route::get('user/farmer/product', [UserController::class, 'showFarmerProduct'])->name('user.farmer.product');
 Route::get('user/farmer/product/view/{id}', [UserController::class, 'viewFarmerProduct'])->name('user.farmer.product.view');
 
+Route::get('/generate-chart', function () {
+    $chartData = [
+        'labels' => ['January', 'February', 'March', 'April'],
+        'values' => [100, 200, 150, 300],
+        'filename' => 'sales_chart_' . time(),
+    ];
 
+    // Pass data to Node.js script
+    $jsonData = json_encode($chartData);
+
+
+
+    // Adjust script path to match `resources/js`
+    $nodeScriptPath = base_path('resources/js/generateChart.cjs');
+
+    // Use `node` to execute the script
+    $command = "node $nodeScriptPath '" . addslashes($jsonData) . "'";
+    exec($command, $output, $returnCode);
+
+    dd($output, $returnCode);
+
+    // Handle errors
+    if ($returnCode !== 0) {
+        return response()->json(['error' => 'Failed to generate chart.'], 500);
+    }
+
+    // Return the chart file URL
+    $chartPath = asset("charts/{$chartData['filename']}.png");
+    return response()->json(['chart_url' => $chartPath]);
+});
+
+Route::get('/test-mail', function () {
+    $recipient = 'christianpaulespares2@gmail.com'; // Replace with your email address
+    Mail::to($recipient)->send(new testmail());
+
+    return "Test email sent successfully to {$recipient}!";
+});

@@ -140,6 +140,7 @@
 <script>
     document.addEventListener('livewire:initialized',()=>{
       @this.on('show-modal',(event)=>{
+
         var myModalEl=document.querySelector('#editModal')
         var modal=bootstrap.Modal.getOrCreateInstance(myModalEl)
 
@@ -152,8 +153,7 @@
 
 <script>
     document.addEventListener('livewire:initialized',()=>{
-      @
-      this.on('show-modal',(event)=>{
+      @this.on('show-modal',(event)=>{
         var myModalEl=document.querySelector('#passwordModal')
         var modal=bootstrap.Modal.getOrCreateInstance(myModalEl)
       })

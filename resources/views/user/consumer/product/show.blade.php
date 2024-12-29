@@ -4,6 +4,7 @@
 
 @push('styles')
 <style>
+
     /* Card Styling */
     .card {
         border: 1px solid #e0e0e0; /* Subtle border for each card */
@@ -35,6 +36,34 @@
 
     .card:hover .card-img-top {
         transform: scale(1.05); /* Slight zoom effect on the image */
+    }
+
+    .header-wrapper {
+    border: 1px solid #e0e0e0;
+    background-color: #ffffff;
+    }
+
+    .header-title h1 {
+        font-size: 1.8rem;
+        color: #28a745;
+    }
+
+    .header-title p {
+        font-size: 0.9rem;
+        color: #6c757d;
+    }
+
+    .dropdown-wrapper .btn {
+        border-radius: 50px;
+    }
+
+    input#searchQuery {
+        transition: all 0.3s ease;
+    }
+
+    input#searchQuery:focus {
+        border-color: #28a745;
+        box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
     }
 
     /* Favorite Button Active State */

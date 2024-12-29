@@ -10,14 +10,14 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class HelloMail extends Mailable
+class PaymentDeclinedMail extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      */
-    public function __construct(private $otp)
+    public function __construct()
     {
         //
     }
@@ -28,9 +28,8 @@ class HelloMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Buyani: Hello From Buyani',
-            from: new Address('buyanibusiness1@gmail.com','Buyani: Account Confirmation'),
-
+            subject: 'Buyani: Payment Declined Mail',
+            from: new Address('buyanibusiness1@gmail.com','Buyani: Payment Declined'),
         );
     }
 
@@ -40,8 +39,7 @@ class HelloMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.hellomail',
-            with: ['otp' => $this->otp]
+            view: 'view.name',
         );
     }
 
