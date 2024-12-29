@@ -4,6 +4,14 @@
 
 @push('styles')
 <style>
+    *{
+        /* border: 1px solid black; */
+    }
+
+    .a, .b, .c{
+        /* border: 1px solid black; */
+    }
+
      .custom-font-content {
         font-family: 'Poppins', sans-serif;
         font-weight: bold;
@@ -20,6 +28,46 @@
         cursor: pointer;
     }
 
+    .left-side{
+        margin: 30px;
+    }
+
+    .form-part {
+        margin: 0 50px;
+    }
+
+
+    .button-login{
+        border-color: #ffa500;
+        background-color: #ffa500;
+        color: #fff8dd;
+    }
+
+    .button{
+        width: 120px;
+        margin: 10px;
+        border: 4px solid;
+        border-radius: 10px;
+        padding: 10px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+
+    .button:hover{
+        transform: scale(1.1);
+    }
+
+
+    @media (max-width: 768px) {
+        .hide{
+            display: none;
+        }
+
+        .form-part{
+            margin: 0 0;
+        }
+    }
+
 </style>
 
 @include('user.includes.popup-style')
@@ -32,9 +80,14 @@
     <!--CONTENT-->
             @livewire('user.login-index', ['user_type' => request()->user_type])
 
+            {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"> --}}
+
+
 @endsection
 
 @section('scripts')
+
+
 <script>
     function togglePasswordVisibility(passwordFieldId, toggleIcon) {
         const passwordField = document.getElementById(passwordFieldId);
