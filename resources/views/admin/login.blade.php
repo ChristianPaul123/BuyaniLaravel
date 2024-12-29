@@ -221,7 +221,13 @@
         <!-- Login Section -->
         <div class="login-section">
             <h2>Admin Login</h2>
+            @session('message')
+            <div>
+                {{ session('message') }}
+            </div>
+           @endsession
             <form action="admin/login" method="post" autocomplete="off">
+                @csrf
                 <div class="form-group">
                     <label for="email" class="form-icon"><i class="fas fa-envelope"></i> Username</label>
                     <input type="text" name="username" class="form-control" placeholder="Enter username" required>
