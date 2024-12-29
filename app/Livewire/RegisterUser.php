@@ -26,6 +26,8 @@ class RegisterUser extends Component
 
     public $otp;
     public $showModal = false;
+    public $terms  = null;
+    public $policys = null;
 
 
 

@@ -40,6 +40,7 @@ class LoginIndex extends Component
 
 
 
+
     public function mount($user_type)
     {
         $this->user_type = $user_type;

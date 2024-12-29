@@ -3,7 +3,7 @@
     <div class="chat-sidebar">
         <h4>Consumer Chats</h4>
         <div class="user-search">
-            <input type="text" placeholder="Search user..." wire:model.debounce.300ms="search">
+            {{-- <input type="text" placeholder="Search user..." wire:model.debounce.300ms="search"> --}}
         </div>
         <div class="user-list" wire:ignore>
             @foreach ($users as $user)
@@ -40,7 +40,7 @@
             Chat with {{ $selectedUser->username ?? 'Select a user' }}
         </div>
 
-        <div class="message-box mb-3" id="chatBox" wire:poll>
+        <div class="message-box mb-3" id="chatBoxCon" wire:poll>
             @forelse ($messages as $message)
                 @if ($message->user_id)
                     <!-- Left Side (User Message) -->
@@ -80,12 +80,76 @@
             @endforelse
         </div>
         <div class="input-area">
-            <form wire:submit.prevent="sendMessage" id="messageForm">
+            <form wire:submit.prevent="sendMessage" id="messageFormCon">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Type a message..." wire:model="messageInput" id="messageInput" required>
+                    <input type="text" class="form-control" placeholder="Type a message..." wire:model.lazy="messageInput" id="messageInputCon" required>
                     <button class="btn btn-send" type="submit">Send</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+@script
+<script>
+    document.addEventListener('livewire:initialized', function () {
+        console.log('mama help');
+        // Cache DOM elements
+        const messageForm = document.getElementById('messageFormCon');
+        const messageInput = document.getElementById('messageInputCon');
+        const chatBox = document.getElementById('chatBoxCon');
+
+        // Scroll to the bottom of the chat box
+        window.scrollToBottom = function () {
+            if (chatBox) {
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+        };
+
+        // Automatically scroll to the bottom on initial load
+        scrollToBottom();
+
+        // Listen to Livewire DOM updates
+        Livewire.hook('message.processed', (message, component) => {
+            scrollToBottom();
+        });
+
+        // Handle manual message sending via form submission
+        if (messageForm) {
+            messageForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                // Trim spaces and validate input
+                const newMessageText = messageInput.value.trim();
+                if (!newMessageText) {
+                    alert('Message cannot be empty or contain only spaces.');
+                    return; // Prevent form submission
+                } else {
+                    const messageDiv = document.createElement('div');
+                    messageDiv.className = 'message right'; // Adjust class dynamically for user or admin
+
+                    // Determine whether the user is admin or regular user
+                    const sender = messageInput.dataset.sender || 'User';
+                    const currentTimestamp = new Date().toLocaleString([], {
+                        hour: '2-digit',
+                        minute: '2-digit',
+                    });
+
+                    // Construct the message bubble
+                    messageDiv.innerHTML = `
+                        <div class="text-container">
+                            <div class="user small text-muted">You (${sender}):</div>
+                            <div class="text">${newMessageText}</div>
+                            <div class="timestamp">${currentTimestamp}</div>
+                        </div>
+                    `;
+
+                    chatBox.appendChild(messageDiv); // Append the message to the chat box
+                    messageInput.value = ''; // Clear the input field
+                    scrollToBottom(); // Scroll to the bottom
+                }
+            });
+        }
+    });
+</script>
+@endscript

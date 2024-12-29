@@ -266,12 +266,12 @@
             <div class="tab-content mt-4" id="adminchatTabsContent">
                 {{-- Admins Chat Consumer Tab --}}
                 <div class="tab-pane fade show active" id="chatconsumer" role="tabpanel" aria-labelledby="chatconsumer-tab">
-                    @livewire('chat-admin-consumer')
+                    @livewire('admin.admin-chat-consumer')
                 </div>
 
                 {{-- Admins Chat Farmer Tab --}}
                 <div class="tab-pane fade" id="chatfarmer" role="tabpanel" aria-labelledby="chatfarmer-tab">
-                    @livewire('chat-admin-farmer')
+                    @livewire('admin.chat-admin-farmer')
                 </div>
             </div>
         </section>
@@ -339,9 +339,6 @@
                         chatBox.appendChild(messageDiv); // Append the message to the chat box
                         messageInput.value = ''; // Clear the input field
                         scrollToBottom(); // Scroll to the bottom
-
-                        // Optionally, send the message to the backend via Livewire
-                        Livewire.emit('sendMessage', newMessageText);
                     }
                 });
             }

@@ -189,11 +189,11 @@
                 <div class="row my-3">
                     <div class="col-12 d-flex flex-column justify-content-center align-items-center">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="privacy">
+                            <input class="form-check-input" type="checkbox" wire:model="policys" id="privacy">
                             <label class="form-check-label" for="privacy">I accept the <a href="{{ route('user.privacy') }}" target="_blank">Privacy Policy</a></label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="terms">
+                            <input class="form-check-input" type="checkbox" wire:model="terms" id="terms">
                             <label class="form-check-label" for="terms">I accept the <a href="{{ route('user.terms') }}" target="_blank">Terms and Conditions</a></label>
                         </div>
                     </div>
