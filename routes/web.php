@@ -124,6 +124,10 @@ Route::get('admin/orders/order-cancelled', [OrderManagementController::class, 'c
 Route::get('admin/report/inventory', [ReportManagementController::class, 'showInventoryReports'])->name('admin.reports.inventory');
 Route::get('admin/report/sales', [ReportManagementController::class, 'salesReports'])->name('admin.reports.sales');
 
+//REPORT - LOGS
+Route::get('admin/report/logs', [ReportManagementController::class, 'showLogsReports'])->name('admin.reports.logs');
+
+
 //MANAGEMENT
 Route::get('admin/user/management', [UserManagementController::class, 'showUsers'])->name('admin.management');
 Route::get('admin/user/management/view/{id}', [UserManagementController::class, 'viewUser'])->name('admin.management.view');
@@ -135,9 +139,6 @@ Route::get('admin/chat', [ChatManagementController::class, 'showAdminChat'])->na
 
 //
 
-Route::get('admin/report', function () {
-    return view('admin.report.report');
-});
 
 Route::get('admin/message', function () {
     return view('admin.message.messenger');

@@ -1,36 +1,34 @@
 <section class="min-height">
     <div>
         <div class="table-responsive">
-            <table id="currentvotedTable" class="table table-bordered">
+            <table id="currentvotesTable" class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>suggest name</th>
-                        <th>suggest description</th>
-                        <th>suggest image</th>
-                        <th>total vote count</th>
-                        <th>transfer_date</th>
-                        <th>username</th>
-                        <th>verified_by</th>
-                        <th>View</th>
-                        <th>Action</th>
+                        <th>Suggested By</th>
+                        <th>Suggestion Name</th>
+                        <th>Description</th>
+                        <th>Image</th>
+                        <th>Status</th>
+                        <th>Verified By</th>
+                        <th>Total Votes</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($votedproducts as $votedproduct)
+                    @foreach ($suggestions as $suggestion)
                     <tr>
-                        <td>{{ $votedproduct->email }}</td>
-                        <td>{{ $votedproduct->username }}</td>
-                        <td>{{ $votedproduct->email }}</td>
-                        <td>{{ $votedproduct->email }}</td>
-                        <td>{{ $votedproduct->email }}</td>
-                        <td>{{ $votedproduct->phone_number }}</td>
-                        <td>{{ $votedproduct->status == 1 ? 'Active' : 'Inactive' }}</td>
-                        <td>{{ $votedproduct->last_online }}</td>
-                        <td class="table-action-buttons">
-                        </td>
+                        <td>{{ $suggestion->user->username ?? 'N/A' }}</td>
+                        <td>{{ $suggestion->suggest_name }}</td>
+                        <td>{{ $suggestion->suggest_description }}</td>
                         <td>
+                            @if ($suggestion->suggest_image)
+                                <img src="{{ asset($suggestion->suggest_image) }}" alt="Suggested Image" class="img-thumbnail" width="100">
+                            @else
+                                No Image
+                            @endif
                         </td>
+                        <td>{{ $suggestion->is_accepted ? 'Accepted' : 'Pending' }}</td>
+                        <td>{{ $suggestion->admin->username ?? 'N/A' }}</td>
+                        <td>{{ $suggestion->total_vote_count }}</td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -38,4 +36,3 @@
         </div>
     </div>
 </section>
-

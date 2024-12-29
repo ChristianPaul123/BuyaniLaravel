@@ -117,15 +117,18 @@ class AdminController extends Controller
 
             // Save the new file
             $fileName = time() . '.' . $request->admin_payment->extension();
-            $request->admin_payment->move(public_path('uploads/admin_payments'), $fileName);
+            $request->admin_payment->move(public_path('img/admin_payments'), $fileName);
 
             // Update the database
-            $admin->update(['admin_payment' => 'uploads/admin_payments/' . $fileName]);
+            $admin->update(['admin_payment' => 'img/admin_payments/' . $fileName]);
         }
 
         return redirect()->route('admin.customization', ['tab' => 'payments'])
         ->with('message', 'Payment picture updated successfully.');
     }
+
+
+
 
     public function store(Request $request)
     {
@@ -142,27 +145,32 @@ class AdminController extends Controller
     return redirect()->back()->with('message', 'Admin added successfully.');
     }
 
+
+
+
     public function deactivate(Admin $admin)
-{
-    $admin->update([
-        'deactivated_status' => 1,
-        'deactivated_date' => now(),
-    ]);
+    {
+        $admin->update([
+            'deactivated_status' => 1,
+            'deactivated_date' => now(),
+        ]);
 
-    return redirect()->route('admin.customization', ['tab' => 'admins'])
-        ->with('message', 'Admin deactivated successfully.');
-}
+        return redirect()->route('admin.customization', ['tab' => 'admins'])
+            ->with('message', 'Admin deactivated successfully.');
+    }
 
-public function activate(Admin $admin)
-{
-    $admin->update([
-        'deactivated_status' => 0,
-        'deactivated_date' => null,
-    ]);
 
-    return redirect()->route('admin.customization', ['tab' => 'admins'])
-        ->with('message', 'Admin activated successfully.');
-}
+    public function activate(Admin $admin)
+    {
+        $admin->update([
+            'deactivated_status' => 0,
+            'deactivated_date' => null,
+        ]);
+
+        return redirect()->route('admin.customization', ['tab' => 'admins'])
+            ->with('message', 'Admin activated successfully.');
+    }
+
 
     public function edit(Admin $admin)
     {
@@ -170,13 +178,15 @@ public function activate(Admin $admin)
     }
 
 
-public function showSponsorimg() {
-    $sponsorImages = SponsorImgs::all();
-    return view('admin.customization.sponsor-index', compact('sponsorImages'));
-}
-    // Add Sponsor Image
-public function addSponsorimg(Request $request)
-{
+    public function showSponsorimg() {
+        $sponsorImages = SponsorImgs::all();
+        return view('admin.customization.sponsor-index', compact('sponsorImages'));
+    }
+
+
+        // Add Sponsor Image
+    public function addSponsorimg(Request $request)
+    {
     $validatedData = $request->validate([
         'img_title' => ['required', 'string', 'max:255', 'unique:sponsor_imgs,img_title'],
         'img' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:4096'],
@@ -185,8 +195,8 @@ public function addSponsorimg(Request $request)
     // Upload sponsor image
     if ($request->hasFile('img')) {
         $imageName = time() . '.' . $request->img->extension();
-        $request->img->move(public_path('uploads/sponsor'), $imageName);
-        $validatedData['img'] = 'uploads/sponsor/' . $imageName;
+        $request->img->move(public_path('img/sponsor'), $imageName);
+        $validatedData['img'] = 'img/sponsor/' . $imageName;
     } else {
         return redirect()->route('admin.customization.sponsor')->withErrors(['img' => 'No image uploaded.']);
     }
@@ -199,66 +209,65 @@ public function addSponsorimg(Request $request)
     ]);
 
     return redirect()->route('admin.customization.sponsor')->with('message', 'Sponsor image added successfully.');
-}
+    }
 
-// Edit Sponsor Image
-public function editSponsorimg($encryptedId)
-{
-    try {
-        $id = Crypt::decrypt($encryptedId);
+    // Edit Sponsor Image
+    public function editSponsorimg($encryptedId)
+    {
+        try {
+            $id = Crypt::decrypt($encryptedId);
+            $sponsorImg = SponsorImgs::findOrFail($id);
+
+            return view('admin.customization.edit-sponsor-img',  compact('sponsorImg'));
+
+        } catch (DecryptException $e) {
+            return redirect()->route('admin.customization.sponsor')->with('error', 'Invalid Sponsor Image ID provided.');
+        }
+    }
+
+    // Update Sponsor Image
+    public function updateSponsorimg(Request $request, $id)
+    {
         $sponsorImg = SponsorImgs::findOrFail($id);
 
-        return view('admin.customization.edit-sponsor-img',  compact('sponsorImg'));
+        $validatedData = $request->validate([
+            'img_title' => ['required', 'string', 'max:255', 'unique:sponsor_imgs,img_title,' . $id],
+            'img' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:4096'],
+        ]);
 
-    } catch (DecryptException $e) {
-        return redirect()->route('admin.customization.sponsor')->with('error', 'Invalid Sponsor Image ID provided.');
+        // Handle image upload if a new one is provided
+        if ($request->hasFile('img')) {
+            // Delete the old image if it exists
+            if ($sponsorImg->img) {
+                @unlink(public_path($sponsorImg->img));
+            }
+
+            $imageName = time() . '.' . $request->img->extension();
+            $request->img->move(public_path('img/sponsor'), $imageName);
+            $validatedData['img'] = 'img/sponsor/' . $imageName;
+        }
+
+        $sponsorImg->update([
+            'img_title' => $validatedData['img_title'],
+            'img' => $validatedData['img'] ?? $sponsorImg->img, // Keep the old image if none was uploaded
+        ]);
+        return redirect()->route('admin.customization.sponsor')->with('message', 'Sponsor image updated successfully.');
     }
-}
 
-// Update Sponsor Image
-public function updateSponsorimg(Request $request, $id)
-{
-    $sponsorImg = SponsorImgs::findOrFail($id);
+    // Delete Sponsor Image
+    public function deleteSponsorimg($id)
+    {
+        $sponsorImg = SponsorImgs::findOrFail($id);
 
-    $validatedData = $request->validate([
-        'img_title' => ['required', 'string', 'max:255', 'unique:sponsor_imgs,img_title,' . $id],
-        'img' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:4096'],
-    ]);
-
-    // Handle image upload if a new one is provided
-    if ($request->hasFile('img')) {
-        // Delete the old image if it exists
+        // Delete the associated image file if it exists
         if ($sponsorImg->img) {
             @unlink(public_path($sponsorImg->img));
         }
 
-        $imageName = time() . '.' . $request->img->extension();
-        $request->img->move(public_path('uploads/sponsor'), $imageName);
-        $validatedData['img'] = 'uploads/sponsor/' . $imageName;
+        $sponsorImg->delete();
+
+        return redirect()->route('admin.customization.sponsor')->with('message', 'Sponsor image deleted successfully.');
     }
-
-    $sponsorImg->update([
-        'img_title' => $validatedData['img_title'],
-        'img' => $validatedData['img'] ?? $sponsorImg->img, // Keep the old image if none was uploaded
-    ]);
-
-    return redirect()->route('admin.customization.sponsor')->with('message', 'Sponsor image updated successfully.');
-}
-
-// Delete Sponsor Image
-public function deleteSponsorimg($id)
-{
-    $sponsorImg = SponsorImgs::findOrFail($id);
-
-    // Delete the associated image file if it exists
-    if ($sponsorImg->img) {
-        @unlink(public_path($sponsorImg->img));
-    }
-
-    $sponsorImg->delete();
-
-    return redirect()->route('admin.customization.sponsor')->with('message', 'Sponsor image deleted successfully.');
-}
 
 
 

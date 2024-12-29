@@ -91,6 +91,7 @@
             <ul class="dropdown-menu" aria-labelledby="reportsDropdown">
                 <li> <a class="dropdown-item @if(request()->is('admin/report/inventory')) active @endif" href="{{ route('admin.reports.inventory') }}"> Inventory Reports </a> </li>
                 <li> <a class="dropdown-item @if(request()->is('admin/report/sales')) active @endif" href="{{ route('admin.reports.sales') }}"> Sales Reports </a> </li>
+                <li> <a class="dropdown-item @if(request()->is('admin/report/logs')) active @endif" href="{{ route('admin.reports.logs') }}"> Logs Reports </a> </li>
             </ul>
         </li>
 

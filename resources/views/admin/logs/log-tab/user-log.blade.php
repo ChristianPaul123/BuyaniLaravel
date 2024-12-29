@@ -1,64 +1,49 @@
 <section class="min-height">
     <div>
         <div class="table-responsive">
-            <table id="adminconsumerTable" class="table table-bordered">
-              <thead>
+            <table id="userlogTable" class="table table-bordered">
+                <thead>
                     <tr>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>User Type</th>
-                        <th>Profile Picture</th>
+                        <th>ID</th>
+                        <th>User</th>
                         <th>Phone Number</th>
-                        <th>Online Status</th>
-                        <th>Last Online</th>
-                        <th>Deactivated Date</th>
-                        <th>Deactivated Status</th>
-                        <th>View</th>
-                        <th>Action</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                        <th>Login Field</th>
+                        <th>IP Address</th>
+                        <th>Timestamp</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($users as $user)
+                    @foreach ($userLogs as $log)
                     <tr>
-                        <td>{{ $user->username }}</td>
-                        <td>{{ $user->email }}</td>
+                        {{-- ID --}}
+                        <td>{{ $log->id }}</td>
+
+                        {{-- USER --}}
+                        <td>{{ $log->user->username ?? 'N/A' }}</td>
+
+                        {{-- PHONE NUMBER --}}
+                        <td>{{ $log->phone_number ?? 'N/A' }}</td>
+
+                        {{-- EMAIL --}}
+                        <td>{{ $log->email ?? 'N/A' }}</td>
+
+                        {{-- STATUS --}}
                         <td>
-                            @switch($user->user_type)
-                                @case(1) Consumer @break
-                            @endswitch
+                            <span class="badge {{ $log->status === 'success' ? 'bg-success' : 'bg-danger' }}">
+                                {{ ucfirst($log->status) }}
+                            </span>
                         </td>
-                        <td>
-                            @if($user->profile_pic)
-                                <img src="{{ asset($user->profile_pic) }}" alt="{{ $user->username }}" width="50">
-                            @else
-                                No Profile Picture
-                            @endif
-                        </td>
-                        <td>{{ $user->phone_number }}</td>
-                        <td>{{ $user->status == 1 ? 'Active' : 'Inactive' }}</td>
-                        <td>{{ $user->last_online }}</td>
-                        <td>{{ $user->deactivated_date }}</td>
-                        <td>{{ $user->deactivated_status == 1 ? 'Deactivated' : 'Active' }}</td>
-                        <td class="table-action-buttons">
-                            <a href="{{ route('admin.management.view', $user->id) }}" class="btn btn-primary btn-sm"><i class="fa-solid fa-eye"></i></a>
-                        </td>
-                        <td>
-                            @if ($user->deactivated_status)
-                        <form action="{{ route('admin.management.reactivate', $user->id) }}" method="POST" class="d-inline">
-                            @csrf
-                            <button title="Activate" style="background:none;border:none;padding:0;cursor:pointer;">
-                                <i class="fa fa-power-off" style="color:green;"></i>
-                            </button>
-                        </form>
-                    @else
-                        <form action="{{ route('admin.management.deactivate', $user->id) }}" method="POST" class="d-inline">
-                            @csrf
-                            <button title="Deactivate" style="background:none;border:none;padding:0;cursor:pointer;">
-                                <i class="fa fa-power-off" style="color:red;"></i>
-                            </button>
-                        </form>
-                    @endif
-                        </td>
+
+                        {{-- LOGIN FIELD --}}
+                        <td>{{ $log->login_field }}</td>
+
+                        {{-- IP ADDRESS --}}
+                        <td>{{ $log->ip_address }}</td>
+
+                        {{-- TIMESTAMP --}}
+                        <td>{{ $log->created_at->format('Y-m-d H:i:s') }}</td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -66,4 +51,3 @@
         </div>
     </div>
 </section>
-

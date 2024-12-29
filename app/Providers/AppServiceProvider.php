@@ -1,15 +1,23 @@
 <?php
 
 namespace App\Providers;
+use App\Models\User;
 use App\Models\Order;
 use App\Models\Product;
+use App\Observers\UserObserver;
 use App\Observers\OrderObserver;
+use App\Listeners\LogFailedLogin;
+use Illuminate\Auth\Events\Login;
 use App\Observers\ProductObserver;
+use Illuminate\Auth\Events\Failed;
 use App\Models\ProductSpecification;
 use Illuminate\Pagination\Paginator;
+use App\Listeners\LogSuccessfulLogin;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Console\Scheduling\Schedule;
 use App\Observers\ProductSpecificationObserver;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -31,6 +39,7 @@ class AppServiceProvider extends ServiceProvider
         Order::observe(OrderObserver::class);
         Product::observe(ProductObserver::class);
         ProductSpecification::observe(ProductSpecificationObserver::class);
+        // User::observe(UserObserver::class);
         Paginator::useBootstrapFive();
     }
 

@@ -58,6 +58,12 @@ new DataTable('#adminTable');
 //Tables for the Sponsors Images
 new DataTable('#sponsorImagesTable');
 
+//Tables for the Report logs
+new DataTable('#userlogTable');
+new DataTable('#orderlogTable');
+new DataTable('#productlogTable');
+
+
 //Tables for the Reports
 new DataTable('#currentInventoryTable', {
     layout: {
