@@ -3,13 +3,14 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
-class OrderStandy extends Mailable
+class OrderShippedMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -27,7 +28,8 @@ class OrderStandy extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Order Standy',
+            subject: 'Buyani: Order Shipping Mail',
+            from: new Address('buyanibusiness1@gmail.com','Buyani: Order Shipment'),
         );
     }
 
@@ -37,7 +39,8 @@ class OrderStandy extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'mail.verifymail',
+            // with: ['otp' => $this->otp]
         );
     }
 

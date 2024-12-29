@@ -2,6 +2,7 @@
 //use App\Mail\HelloMail;
 //use App\Http\Livewire\UserProduct;
 // use App\Http\Livewire\LoginUser;
+use App\Mail\testmail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
@@ -10,22 +11,22 @@ use App\Http\Controllers\ChatController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\OrderController;
 
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\UserProductController;
+
+
+
 use App\Http\Controllers\VotedProductsController;
-
-
-
 use App\Http\Controllers\BlogManagementController;
 use App\Http\Controllers\ChatManagementController;
 use App\Http\Controllers\UserManagementController;
-use App\Http\Controllers\OrderManagementController;
 
+use App\Http\Controllers\OrderManagementController;
 use App\Http\Controllers\ShippingAddressController;
 use App\Http\Controllers\ReportManagementController;
 use App\Http\Controllers\ReviewManagementController;
@@ -277,4 +278,11 @@ Route::get('/generate-chart', function () {
     // Return the chart file URL
     $chartPath = asset("charts/{$chartData['filename']}.png");
     return response()->json(['chart_url' => $chartPath]);
+});
+
+Route::get('/test-mail', function () {
+    $recipient = 'christianpaulespares2@gmail.com'; // Replace with your email address
+    Mail::to($recipient)->send(new testmail());
+
+    return "Test email sent successfully to {$recipient}!";
 });

@@ -3,61 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Confirmation</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <title>Test Mail</title>
     <style>
         body {
-            font-family: 'Open Sans', sans-serif;
-            background-color: #eeeeee;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
         }
-        .container {
-            background-color: #ffffff;
-            border-radius: 5px;
+        .email-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background: #ffffff;
+            padding: 20px;
+            border: 1px solid #dddddd;
+            border-radius: 8px;
         }
         .header {
-            background-color: #F44336;
-            color: #ffffff;
+            text-align: center;
+            padding: 10px 0;
         }
-        .header h1 {
-            font-weight: 800;
+        .header img {
+            width: 100px;
+            margin-bottom: 10px;
         }
-        .content h2 {
-            font-weight: 800;
-            color: #333333;
+        .content {
+            text-align: center;
+            padding: 20px 0;
         }
         .footer {
-            background-color: #ffffff;
             text-align: center;
-        }
-        .footer p, .footer a {
+            font-size: 12px;
             color: #777777;
+            margin-top: 20px;
         }
-
     </style>
 </head>
 <body>
-    <div class="container my-5 p-4">
-        <div class="header text-center py-4">
-            <h1>Buyani</h1>
-            <a href="#" class="text-white h5">Shop <img src="https://img.icons8.com/color/48/000000/small-business.png" alt="Shop Icon" width="27" height="23"></a>
+    <div class="email-container">
+        <div class="header">
+            <h2>Test Email</h2>
         </div>
-
-        <div class="text-center py-4">
-            <img src="https://img.icons8.com/carbon-copy/100/000000/checked-checkbox.png" alt="Checked Checkbox" width="125" height="120">
-            <h2>Thank you for Registering to Buyani Shop</h2>
+        <div class="content">
+            <p>Hello,</p>
+            <p>This is a test email to verify that your email service is working correctly.</p>
+            <p>If you receive this email, your setup is successful!</p>
         </div>
-
-        <div class="content text-center px-4">
-            <p>Your OTP is {{ $otp }}</p>
-            <p>This OTP will expire in 5 mins </p>
-        </div>
-
-        <div class="footer py-4">
-            <img src="logo-footer.png" alt="Logo" width="37" height="37" class="mb-2">
-            {{-- <p>675 Parko Avenue<br>LA, CA 02232</p> --}}
-            <p>If you didn't create an account using this email address, please ignore this email</p>
+        <div class="footer">
+            <p>Thank you for using our service.</p>
+            <p>&copy; {{ date('Y') }} Your Company Name</p>
         </div>
     </div>
 </body>

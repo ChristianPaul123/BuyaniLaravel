@@ -3,13 +3,14 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
-class OrderCancelled extends Mailable
+class OrderDeclinedMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -27,7 +28,8 @@ class OrderCancelled extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Order Cancelled',
+            subject: 'Buyani: Order Declined Mail',
+            from: new Address('buyanibusiness1@gmail.com','Buyani: Order Declined'),
         );
     }
 

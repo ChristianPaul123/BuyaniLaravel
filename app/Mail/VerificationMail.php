@@ -28,8 +28,8 @@ class VerificationMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Buyani: Pasword Reset',
-            from: new Address('buyani@gmail.com','Buyani: Pasword Reset'),
+            subject: 'Buyani: Pasword Reset Mail',
+            from: new Address('buyanibusiness1@gmail.com','Buyani: Pasword Reset'),
         );
     }
 
