@@ -19,6 +19,11 @@ class FarmerProfile extends Component
     public $phone_number;
     public $profile_pic;
 
+    public $current_password;
+    public $new_password;
+    public $confirm_password;
+
+
 
     public function mount()
     {
