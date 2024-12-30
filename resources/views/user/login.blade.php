@@ -249,21 +249,40 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     document.getElementById('openModal4').addEventListener('click', function () {
-        // Close the second modal
-        let modal2 = bootstrap.Modal.getInstance(document.getElementById('modal3'));
-        modal2.hide();
+        // Close the third modal
+        let modal3 = bootstrap.Modal.getInstance(document.getElementById('modal3'));
+        modal3.hide();
 
-        // Show the third modal
-        let modal3 = new bootstrap.Modal(document.getElementById('modal4'));
-        modal3.show();
+        // Show the fourth modal
+        let modal4 = new bootstrap.Modal(document.getElementById('modal4'));
+        modal4.show();
     });
 
+    // Reset form inputs when modals are closed
+    const modals = document.querySelectorAll('.modal');
+    modals.forEach(modal => {
+        modal.addEventListener('hidden.bs.modal', () => {
+            const inputs = modal.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.value = ''; // Clear the value
+                input.classList.remove('valid-input', 'invalid-input'); // Remove validation classes
+            });
 
+            // Reset any specific validation messages
+            const validationMessages = modal.querySelectorAll('.invalid, .valid');
+            validationMessages.forEach(message => {
+                message.classList.add('invalid'); // Reset to invalid by default
+                message.classList.remove('valid');
+            });
 
+            const title = modal.querySelector('#title');
+            if (title) {
+                title.style.display = 'inline'; // Ensure title is shown again
+            }
+        });
+    });
 
-
-
-    // Password Valiation
+    // Password Validation
     const passwordInput = document.getElementById('password1');
     const lowercase = document.getElementById('lowercase');
     const uppercase = document.getElementById('uppercase');
@@ -311,10 +330,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-
-
-
-
     // Confirm Password Validation
     const confirmPasswordInput = document.getElementById('password2');
     const passwordMismatchMessage = document.querySelector('#password2 + div span');
@@ -345,10 +360,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // Event listeners for both password inputs
     passwordInput.addEventListener('input', validatePasswordMatch);
     confirmPasswordInput.addEventListener('input', validatePasswordMatch);
-
-
-
-
 
     // Toggle Password
     const togglePasswordOTP = document.getElementById('togglePasswordOTP');
