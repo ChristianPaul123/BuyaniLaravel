@@ -153,18 +153,17 @@
         display: inline;
         color: red;
     }
-    #password {
+    #password1 {
         transition: border-color 0.3s, box-shadow 0.3s;
     }
-    #password.invalid-input {
+    #password1.invalid-input {
         border-color: red;
         box-shadow: 0 0 5px red;
     }
-    #password.valid-input {
+    #password1.valid-input {
         border-color: green;
         box-shadow: 0 0 5px green;
     }
-
 </style>
 
 @include('user.includes.popup-style')
@@ -183,7 +182,7 @@
 @section('scripts')
 
 
-<script>
+{{-- <script>
     function togglePasswordVisibility(passwordFieldId, toggleIcon) {
         const passwordField = document.getElementById(passwordFieldId);
         const icon = toggleIcon.querySelector('i');
@@ -202,7 +201,7 @@
         document.getElementById('togglePassword').addEventListener('click', function () {
         togglePasswordVisibility('password', this);
     });
-</script>
+</script> --}}
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
@@ -227,7 +226,6 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 
 {{-- OTP Modal --}}
-{{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> --}}
 <script>
     // JavaScript to handle modal transitions
     document.getElementById('openModal2').addEventListener('click', function () {
@@ -266,7 +264,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // Password Valiation
-    const passwordInput = document.getElementById('password');
+    const passwordInput = document.getElementById('password1');
     const lowercase = document.getElementById('lowercase');
     const uppercase = document.getElementById('uppercase');
     const number = document.getElementById('number');
@@ -353,8 +351,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // Toggle Password
-    const togglePassword = document.getElementById('togglePassword');
-    const passwordField1 = document.getElementById('password');
+    const togglePasswordOTP = document.getElementById('togglePasswordOTP');
+    const passwordField1 = document.getElementById('password1');
     const passwordField2 = document.getElementById('password2');
     const toggleIcon = document.getElementById('toggleIcon');
 
@@ -373,7 +371,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Add event listener to toggle both password fields
-    togglePassword.addEventListener('click', toggleVisibility);
+    togglePasswordOTP.addEventListener('click', toggleVisibility);
 
 </script>
 

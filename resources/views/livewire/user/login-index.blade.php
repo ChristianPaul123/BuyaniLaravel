@@ -151,8 +151,8 @@
                             <div class="text-start">
                                 <label for="password" class="form-label">New Password:</label>
                                 <div class="input-group">
-                                    <input type="password" class="form-control" id="password" placeholder="Enter your password">
-                                    <span class="input-group-text" id="togglePassword" style="cursor: pointer;">
+                                    <input type="password" class="form-control" id="password1" placeholder="Enter your password">
+                                    <span class="input-group-text" id="togglePasswordOTP" style="cursor: pointer;">
                                         <i class="bi bi-eye" id="toggleIcon"></i>
                                     </span>
                                 </div>
