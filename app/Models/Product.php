@@ -9,6 +9,8 @@ class Product extends Model
 {
     use HasFactory;
 
+    public $timestamp = true;
+
         /**
      * The attributes that are mass assignable.
      *

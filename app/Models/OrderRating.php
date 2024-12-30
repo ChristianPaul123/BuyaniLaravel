@@ -9,6 +9,8 @@ class OrderRating extends Model
 {
     use HasFactory;
 
+    public $timestamp = true;
+
     // Fillable attributes for the OrderRating model
     protected $fillable = [
         'order_id',

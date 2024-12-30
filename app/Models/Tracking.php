@@ -10,6 +10,8 @@ class Tracking extends Model
     // Use the HasFactory trait to create factory instances for this model
     use HasFactory;
 
+    public $timestamp = true;
+
     protected $fillable = [
         'order_number',
         'order_id',

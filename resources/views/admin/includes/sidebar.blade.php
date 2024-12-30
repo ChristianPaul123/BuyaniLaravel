@@ -27,11 +27,9 @@
                 </a>
             </li>
 
-            <!-- Products Dropdown -->
         @if(auth()->guard('admin')->check() && auth()->guard('admin')->user()->admin_type == 1)
 
         <hr class="hr hr-blurry" />
-
         <!-- Orders -->
         <li class="nav-item">
             <a class="nav-link d-flex justify-content-between @if(request()->is('admin/order')) active @endif" href="/admin/order">
@@ -61,12 +59,36 @@
             </ul>
         </li>
 
-        {{-- <!-- Customization -->
-        <li class="nav-item">
-            <a class="nav-link d-flex justify-content-between @if(request()->is('admin/customization')) active @endif" href="/admin/customization?tab=settings">
-                <i class="fas fa-cogs"></i> Customization <span>/</</span>
+        <hr class="hr hr-blurry" />
+
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle @if(request()->is('admin/community*')) active @endif" href="#" id="communityDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-users"></i> Community
             </a>
-        </li> --}}
+            <ul class="dropdown-menu" aria-labelledby="communityDropdown">
+                <li><a class="dropdown-item" href="/admin/community/reviews?tab=productreviews"> <i class="fas fa-star me-2"></i> Reviews</a></li>
+                <li><a class="dropdown-item"  href="/admin/community/blog?tab=settings">  <i class="fas fa-blog me-2"></i> Blogs</a></li>
+                <li><a class="dropdown-item" href="/admin/community/votes?tab=managevotes">  <i class="fas fa-poll me-2"></i> Votes</a></li>
+            </ul>
+        </li>
+
+        <!-- Management -->
+        <li class="nav-item">
+            <a class="nav-link d-flex justify-content-between @if(request()->is('admin/user/management')) active @endif" href="/admin/user/management">
+                <i class="fas fa-users"></i> Management <span>/</</span>
+            </a>
+        </li>
+        {{-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// --}}
+        @elseif ((auth()->guard('admin')->check() && auth()->guard('admin')->user()->admin_type == 2))
+
+        <hr class="hr hr-blurry" />
+
+        <!-- Orders -->
+        <li class="nav-item">
+            <a class="nav-link d-flex justify-content-between @if(request()->is('admin/order')) active @endif" href="/admin/order">
+                <i class="fas fa-file"></i> Orders <span>/</</span>
+            </a>
+        </li>
 
         <hr class="hr hr-blurry" />
 
@@ -82,6 +104,24 @@
         </li>
 
 
+        <hr class="hr hr-blurry" />
+
+        <!-- Management -->
+        <li class="nav-item">
+            <a class="nav-link d-flex justify-content-between @if(request()->is('admin/user/management')) active @endif" href="/admin/user/management">
+                <i class="fas fa-users"></i> Management <span>/</</span>
+            </a>
+        </li>
+
+{{-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// --}}
+        @elseif ((auth()->guard('admin')->check() && auth()->guard('admin')->user()->admin_type == 3))
+
+        <li class="nav-item">
+            <a class="nav-link d-flex justify-content-between @if(request()->is('admin/tracking')) active @endif" href="#">
+                <i class="fas fa-comments"></i>Trackings <span>/</</span>
+            </a>
+        </li>
+        @endif
         <hr class="hr hr-blurry" />
 
         <li class="nav-item dropdown">
@@ -101,19 +141,6 @@
                 <i class="fas fa-comments"></i>Chats <span>/</</span>
             </a>
         </li>
-
-        <!-- Management -->
-        <li class="nav-item">
-            <a class="nav-link d-flex justify-content-between @if(request()->is('admin/user/management')) active @endif" href="/admin/user/management">
-                <i class="fas fa-users"></i> Management <span>/</</span>
-            </a>
-        </li>
-
-        @elseif ((auth()->guard('admin')->check() && auth()->guard('admin')->user()->admin_type == 2))
-
-        @elseif ((auth()->guard('admin')->check() && auth()->guard('admin')->user()->admin_type == 3))
-        @endif
-
 
         </ul>
     </div>

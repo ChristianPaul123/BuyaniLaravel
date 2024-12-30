@@ -45,15 +45,16 @@ new DataTable('#productSpecificationTable');
 
 
 //Tables for the Orders
-new DataTable('#orderCancelledTable');
-new DataTable('#orderCompletedTable');
-new DataTable('#orderStandbyTable');
-new DataTable('#orderPayTable');
-new DataTable('#orderShipTable');
+new DataTable('#ordercancelledTable');
+new DataTable('#ordercompletedTable');
+new DataTable('#orderstandbyTable');
+new DataTable('#orderpayTable');
+new DataTable('#ordershipTable');
 
 
 //Tables for the Admin
 new DataTable('#adminTable');
+
 
 //Tables for the Sponsors Images
 new DataTable('#sponsorImagesTable');

@@ -6,11 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class SponsorImgs extends Model
 {
+
+    public $timestamp = true;
+
     protected $fillable = [
         'img',
         'img_title',
         'admin_id',
-        'created_at',
     ];
 
     public function admin() {

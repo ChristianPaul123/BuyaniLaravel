@@ -49,6 +49,11 @@
     .scroll-to-bottom:hover {
         background-color: #0056b3;
     }
+
+    .main-section {
+    min-height: 90vh;
+    max-height: 90vh;
+    }
 </style>
 @endpush
 
@@ -131,11 +136,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Scroll-to-Bottom Button -->
-                <button class="scroll-to-bottom" id="scrollToBottomBtn">
-                    <i class="fas fa-arrow-down"></i>
-                </button>
             </div>
         </section>
     </div>

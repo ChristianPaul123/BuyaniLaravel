@@ -40,7 +40,7 @@
                         <td>{{ $user->deactivated_date }}</td>
                         <td>{{ $user->deactivated_status == 1 ? 'Deactivated' : 'Active' }}</td>
                         <td class="table-action-buttons">
-                            <a href="{{ route('admin.management.view', $user->id) }}" class="btn btn-primary btn-sm">View</a>
+                            <a href="{{ route('admin.management.view', $user->id) }}" class="btn btn-primary btn-sm"><i class="fa-solid fa-eye"></i></a>
                         </td>
                         <td>
                             @if ($user->deactivated_status)

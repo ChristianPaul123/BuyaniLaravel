@@ -14,67 +14,121 @@
         <!-- Navbar content -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 hide-in-full-view">
+                        <!-- Dashboard -->
+                        <li class="nav-item">
+                            <a class="nav-link d-flex justify-content-between @if(request()->is('admin/dashboard')) active @endif" href="/admin/dashboard">
+                                <i class="fas fa-home"></i> Dashboard <span>/</span>
+                            </a>
+                        </li>
 
-                <!-- Dashboard -->
-                <li class="nav-item">
-                    <a class="nav-link @if(request()->is('admin/dashboard')) active @endif" href="/admin/dashboard">
-                        <i class="fas fa-home"></i> Dashboard
-                    </a>
-                </li>
+                    @if(auth()->guard('admin')->check() && auth()->guard('admin')->user()->admin_type == 1)
 
-                <!-- Orders -->
-                <li class="nav-item">
-                    <a class="nav-link @if(request()->is('admin/order')) active @endif" href="/admin/order">
-                        <i class="fas fa-file"></i> Orders
-                    </a>
-                </li>
 
-                <!-- Products Dropdown -->
-                @if(auth()->guard('admin')->user()->admin_type == 1)
+                    <!-- Orders -->
+                    <li class="nav-item">
+                        <a class="nav-link d-flex justify-content-between @if(request()->is('admin/order')) active @endif" href="/admin/order">
+                            <i class="fas fa-file"></i> Orders <span>/</</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle @if(request()->is('admin/product*')) active @endif" href="#" id="productsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-shopping-cart"></i> Products
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="productsDropdown">
+                            <li><a class="dropdown-item @if(request()->is('admin/product')) active @endif" href="/admin/product?tab=products"> <i class="fas fa-tags"></i> Product Management</a></li>
+                            <li><a class="dropdown-item @if(request()->is('admin/product/inventory')) active @endif" href="/admin/product/inventory"><i class="fas fa-warehouse"></i> Inventory</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle @if(request()->is('admin/customization*')) active @endif" href="#" id="customizationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-shopping-cart"></i> Customization
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="customizationDropdown">
+                            <li><a class="dropdown-item @if(request()->is('admin/customization')) active @endif" href="/admin/customization?tab=settings"> <i class="fas fa-tags"></i> Admin Customization</a></li>
+                            <li><a class="dropdown-item @if(request()->is('admin/customization/sponsorimg')) active @endif" href="/admin/customization/sponsorimg"><i class="fas fa-warehouse"></i> Sponsor Images</a></li>
+                        </ul>
+                    </li>
+
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle @if(request()->is('admin/community*')) active @endif" href="#" id="communityDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-users"></i> Community
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="communityDropdown">
+                            <li><a class="dropdown-item" href="/admin/community/reviews?tab=productreviews"> <i class="fas fa-star me-2"></i> Reviews</a></li>
+                            <li><a class="dropdown-item"  href="/admin/community/blog?tab=settings">  <i class="fas fa-blog me-2"></i> Blogs</a></li>
+                            <li><a class="dropdown-item" href="/admin/community/votes?tab=managevotes">  <i class="fas fa-poll me-2"></i> Votes</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- Management -->
+                    <li class="nav-item">
+                        <a class="nav-link d-flex justify-content-between @if(request()->is('admin/user/management')) active @endif" href="/admin/user/management">
+                            <i class="fas fa-users"></i> Management <span>/</</span>
+                        </a>
+                    </li>
+                    {{-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// --}}
+                    @elseif ((auth()->guard('admin')->check() && auth()->guard('admin')->user()->admin_type == 2))
+
+
+                    <!-- Orders -->
+                    <li class="nav-item">
+                        <a class="nav-link d-flex justify-content-between @if(request()->is('admin/order')) active @endif" href="/admin/order">
+                            <i class="fas fa-file"></i> Orders <span>/</</span>
+                        </a>
+                    </li>
+
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle @if(request()->is('admin/community*')) active @endif" href="#" id="communityDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-users"></i> Community
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="communityDropdown">
+                            <li><a class="dropdown-item" href="/admin/community/reviews?tab=productreviews"> <i class="fas fa-star me-2"></i> Reviews</a></li>
+                            <li><a class="dropdown-item"  href="/admin/community/blog?tab=settings">  <i class="fas fa-blog me-2"></i> Blogs</a></li>
+                            <li><a class="dropdown-item" href="/admin/community/votes?tab=managevotes">  <i class="fas fa-poll me-2"></i> Votes</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- Management -->
+                    <li class="nav-item">
+                        <a class="nav-link d-flex justify-content-between @if(request()->is('admin/user/management')) active @endif" href="/admin/user/management">
+                            <i class="fas fa-users"></i> Management <span>/</</span>
+                        </a>
+                    </li>
+
+                    {{-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// --}}
+                    @elseif ((auth()->guard('admin')->check() && auth()->guard('admin')->user()->admin_type == 3))
+                    <li class="nav-item">
+                        <a class="nav-link d-flex justify-content-between @if(request()->is('admin/tracking')) active @endif" href="#">
+                            <i class="fas fa-comments"></i>Trackings <span>/</</span>
+                        </a>
+                    </li>
+                    @endif
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle @if(request()->is('admin/report*')) active @endif" href="#" id="reportsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-chart-bar"></i> Reports
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="reportsDropdown">
+                            <li> <a class="dropdown-item @if(request()->is('admin/report/inventory')) active @endif" href="{{ route('admin.reports.inventory') }}"> Inventory Reports </a> </li>
+                            <li> <a class="dropdown-item @if(request()->is('admin/report/sales')) active @endif" href="{{ route('admin.reports.sales') }}"> Sales Reports </a> </li>
+                            <li> <a class="dropdown-item @if(request()->is('admin/report/logs')) active @endif" href="{{ route('admin.reports.logs') }}"> Logs Reports </a> </li>
+                        </ul>
+                    </li>
+
+                    <!-- Chats -->
+                    <li class="nav-item">
+                        <a class="nav-link d-flex justify-content-between @if(request()->is('admin/chat')) active @endif" href="/admin/chat">
+                            <i class="fas fa-comments"></i>Chats <span>/</</span>
+                        </a>
+                    </li>
+            </ul>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-center hide-in-full-view">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle @if(request()->is('admin/product') || request()->is('admin/product/*')) active @endif" href="#" id="productsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-shopping-cart"></i> Products
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item @if(request()->is('admin/product')) active @endif" href="/admin/product">Product List</a></li>
-                        <li><a class="dropdown-item @if(request()->is('admin/product/specification')) active @endif" href="/admin/product/specification">Product Specifications</a></li>
-                        <li><a class="dropdown-item @if(request()->is('admin/product/inventory')) active @endif" href="/admin/product/inventory">Inventory</a></li>
-                    </ul>
-                </li>
-
-                <!-- Categories Dropdown -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle @if(request()->is('admin/category') || request()->is('admin/subcategory')) active @endif" href="#" id="categoriesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-layer-group"></i> Categories
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item @if(request()->is('admin/category')) active @endif" href="/admin/category">Main Categories</a></li>
-                        <li><a class="dropdown-item @if(request()->is('admin/subcategory')) active @endif" href="/admin/subcategory">Subcategories</a></li>
-                    </ul>
-                </li>
-                @endif
-
-                <!-- Community Dropdown -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="communityDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-users"></i> Community
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Reviews</a></li>
-                        <li><a class="dropdown-item" href="#">Blogs</a></li>
-                        <li><a class="dropdown-item" href="#">Votes</a></li>
-                    </ul>
-                </li>
-
-                <!-- Reports -->
-                <li class="nav-item">
-                    <a class="nav-link @if(request()->is('admin/report')) active @endif" href="/admin/report">
-                        <i class="fas fa-chart-bar"></i> Reports
-                    </a>
-                </li>
-
-                <li class="nav-item dropdown d-flex align-items-center">
-                    <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="{{ asset('img/logo1.svg') }}" alt="user" class="rounded-circle me-2" width="30">
                         {{ auth()->guard('admin')->user()->username }}
                     </a>

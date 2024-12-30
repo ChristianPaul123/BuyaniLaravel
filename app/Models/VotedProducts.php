@@ -9,6 +9,8 @@ class VotedProducts extends Model
 {
     use HasFactory;
 
+    public $timestamp = true;
+
     protected $fillable = [
         'suggest_product_id',
         'user_id',

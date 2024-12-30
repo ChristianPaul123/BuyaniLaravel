@@ -4,25 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProductSpecification_log extends Model
+class SpecificProductSales extends Model
 {
 
     public $timestamp = true;
 
     protected $fillable = [
         'product_specification_id',
-        'admin_id',
-        'action',
-        'changes',
+        'product_sale_id',
+        'order_quantity',
+        'total_sales',
+        'date',
     ];
 
+    // Relationship with Product Specification
     public function productSpecification()
     {
         return $this->belongsTo(ProductSpecification::class);
-    }
-
-    public function admin()
-    {
-        return $this->belongsTo(Admin::class);
     }
 }

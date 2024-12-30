@@ -1,7 +1,8 @@
-<div class="card">
+<div class="card overflow-x-scroll">
     <div class="card-header">
-        <h4>Current Inventory</h4>
+        <h3 class="card-title">Current Inventory</h3>
     </div>
+    @include('admin.includes.messageBox')
     <div class="card-body">
         <table id="currentInventoryTable" class="table table-bordered table-striped">
             <thead>

@@ -9,6 +9,8 @@ class OtpVerify extends Model
 {
     use HasFactory;
 
+    public $timestamp = true;
+
     protected $fillable = [
         'email',
         'otp',

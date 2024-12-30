@@ -108,7 +108,9 @@ Route::get('admin/order', [OrderManagementController::class, 'showOrders'])->nam
 Route::get('admin/orders/edit/{id}', [OrderManagementController::class, 'edit'])->name('admin.orders.edit');
 Route::delete('admin/orders/delete/{id}', [OrderManagementController::class, 'destroy'])->name('admin.orders.delete');
 Route::get('admin/orders/view/{id}', [OrderManagementController::class, 'viewOrder'])->name('admin.orders.view');
-Route::get('admin/orders/cancel/{id}', [OrderManagementController::class, 'cancelOrder'])->name('admin.orders.cancel');
+Route::get('admin/orders/cancel/{id}', [OrderManagementController::class, 'cancelOrder'])->name('admin.orders.reject');
+Route::get('admin/orders/cancelled/{id}', [OrderManagementController::class, 'showCancelOrder'])->name('admin.orders.reject.view');
+Route::post('admin/orders/cancelprocess/{id}', [OrderManagementController::class, 'cancelOrderProcess'])->name('admin.orders.processCancel');
 Route::post('admin/orders/accept/{id}', [OrderManagementController::class, 'acceptOrder'])->name('admin.orders.accept');
 Route::get('admin/product/special', [OrderManagementController::class, 'showSpecial'])->name('admin.product.special');
 

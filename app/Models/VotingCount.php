@@ -9,6 +9,8 @@ class VotingCount extends Model
 {
     use HasFactory;
 
+    public $timestamp = true;
+
     protected $fillable = [
         'user_id',
         'max_vote_count',

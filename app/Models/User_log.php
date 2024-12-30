@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class User_log extends Model
 {
+
+    public $timestamp = true;
+
     protected $fillable = [
         'user_id',     // The ID of the user attempting to log in
         'phone_number', // The phone number of the user attempting to log in

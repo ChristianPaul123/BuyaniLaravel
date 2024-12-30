@@ -9,6 +9,8 @@ class SubCategory extends Model
 {
     use HasFactory;
 
+    public $timestamp = true;
+
     protected $fillable = [
         'sub_category_name',
         'category_id',

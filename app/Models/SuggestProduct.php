@@ -9,6 +9,9 @@ class SuggestProduct extends Model
 {
     use HasFactory;
 
+    public $timestamp = true;
+
+
     protected $fillable = [
         'user_id',
         'verified_by',

@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order_log extends Model
 {
+
+    public $timestamp = true;
+
     protected $fillable = [
         'order_id',
         'user_id',

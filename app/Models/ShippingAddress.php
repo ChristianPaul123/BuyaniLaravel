@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class ShippingAddress extends Model
 {
     use HasFactory;
+
+    public $timestamp = true;
+
     protected $fillable = [
         'house_number',
         'street',

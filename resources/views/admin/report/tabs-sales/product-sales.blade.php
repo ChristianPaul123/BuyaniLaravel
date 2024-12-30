@@ -4,7 +4,7 @@
     </div>
     @include('admin.includes.messageBox')
     <div class="card-body">
-        <table id="pastInventoryTable" class="table table-bordered table-striped">
+        <table id="productsalesTable" class="table table-bordered table-striped">
             <thead>
                 <tr>
                     <th>Product Name</th>

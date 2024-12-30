@@ -9,6 +9,8 @@ class Record extends Model
 {
     use HasFactory;
 
+    public $timestamp = true;
+
     protected $fillable = [
         'product_name',
         'product_sold_stock',

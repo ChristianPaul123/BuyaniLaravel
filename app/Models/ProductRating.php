@@ -9,6 +9,8 @@ class ProductRating extends Model
 {
     use HasFactory;
 
+    public $timestamp = true;
+
     protected $fillable = [
         'product_id',
         'user_id',

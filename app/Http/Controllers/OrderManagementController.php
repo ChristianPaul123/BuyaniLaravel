@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
+use App\Models\OrderCancellation;
+use Illuminate\Support\Facades\Auth;
 
 class OrderManagementController extends Controller
 {
@@ -11,11 +13,11 @@ class OrderManagementController extends Controller
     public function showOrders()
     {
         return view('admin.order.order-index', [
-            'ordersToStandby' => Order::where('order_status', Order::STATUS_STANDBY)->get(),
-            'ordersToPay' => Order::where('order_status', Order::STATUS_TO_PAY)->get(),
-            'ordersToShip' => Order::where('order_status', Order::STATUS_TO_SHIP)->get(),
-            'ordersCompleted' => Order::where('order_status', Order::STATUS_COMPLETED)->get(),
-            'ordersCancelled' => Order::where('order_status', Order::STATUS_CANCELLED)->get(),
+            'ordersToStandby' => Order::with(['user', 'payment'])->where('order_status', Order::STATUS_STANDBY)->get(),
+            'ordersToPay' => Order::with(['user', 'payment'])->where('order_status', Order::STATUS_TO_PAY)->get(),
+            'ordersToShip' => Order::with(['user', 'payment'])->where('order_status', Order::STATUS_TO_SHIP)->get(),
+            'ordersCompleted' => Order::with(['user', 'payment'])->where('order_status', Order::STATUS_COMPLETED)->get(),
+            'ordersCancelled' => Order::with(['user', 'payment'])->where('order_status', Order::STATUS_CANCELLED)->get(),
         ]);
     }
 
@@ -56,9 +58,9 @@ class OrderManagementController extends Controller
     public function viewOrder($id)
     {
         // Replace with actual data retrieval
-        $order = Order::with('orderItems', 'payment', 'user')->findOrFail($id);
+        $order = Order::with('orderItems.product', 'payment', 'user')->findOrFail($id);
 
-        return view('admin.order.order-special', compact('order'));
+        return view('admin.order.order-view', compact('order'));
     }
 
     public function showSpecial()
@@ -69,19 +71,71 @@ class OrderManagementController extends Controller
     public function cancelOrder($id)
     {
         // Find the order
-        $order = Order::with('orderItems', 'payment', 'user')->findOrFail($id);
-
+      // Retrieve the order and related data
+    $order = Order::with(['user', 'orderItems.product', 'orderItems.productSpecification', 'payment', 'trackings'])
+    ->findOrFail($id);
         // Redirect to the order-rejected page to allow admin to provide cancellation details
         return view('admin.order.order-rejected', compact('order'));
+    }
+
+    public function showCancelOrder($id)
+    {
+        // Find the order
+      // Retrieve the order and related data
+    $order = Order::with(['user', 'orderItems.product', 'orderItems.productSpecification', 'payment', 'trackings','orderCancellation'])
+    ->findOrFail($id);
+        // Redirect to the order-rejected page to allow admin to provide cancellation details
+        return view('admin.order.order-view-rejected', compact('order'));
+    }
+
+    public function cancelOrderProcess( Request $request, $id)
+    {
+        $order = Order::findOrFail($id);
+
+        $validated = $request->validate([
+            'reason' => 'required|string|max:255',
+            'notes' => 'nullable|string',
+        ]);
+
+        // Create the OrderCancellation record
+        OrderCancellation::create([
+            'order_id' => $order->id,
+            'cancelled_by' => Auth::guard('admin')->username ?? 'Unknown', // Capture the admin or user cancelling the order
+            'reason' => $validated['reason'],
+            'notes' => $validated['notes'],
+        ]);
+
+        // Update the order status to cancelled
+        $order->update([
+            'order_status' => Order::STATUS_CANCELLED,
+        ]);
+
+        return redirect()->route('admin.orders.index', $order->id)->with('success', 'Order has been successfully cancelled.');
     }
 
 
     public function acceptOrder($id)
     {
-        $order = Order::findOrFail($id);
-        $order->update(['order_status' => Order::STATUS_COMPLETED]);
+        $order = Order::with('payment')->findOrFail($id); // Load the payment relationship
 
-        return redirect()->route('admin.orders.view', $id)->with('message', 'Order accepted successfully.');
+        if ($order->order_status != Order::STATUS_STANDBY) {
+            return redirect()->back()->withErrors('Order cannot be accepted as it is not in Standby status.');
+        }
+
+        // Determine the next status based on the payment method
+        $nextStatus = ($order->payment && $order->payment->payment_method === 'COD')
+            ? Order::STATUS_TO_SHIP
+            : Order::STATUS_TO_PAY;
+
+        $order->update([
+            'order_status' => $nextStatus,
+        ]);
+
+        $message = $nextStatus === Order::STATUS_TO_SHIP
+            ? 'Order has been accepted and moved to "To Ship" status (COD).'
+            : 'Order has been accepted and moved to "To Pay" status.';
+
+        return redirect()->route('admin.orders.index',['tab' => 'order-standby'])->with('success', $message);
     }
 
 }

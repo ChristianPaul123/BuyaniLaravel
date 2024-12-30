@@ -4,32 +4,6 @@
 
 @push('styles')
 <style>
-    /* .tab-content .card {
-        border: 1px solid #dee2e6;
-        border-radius: 0.25rem;
-        background-color: #fff;
-        margin-top: 1rem;
-    }
-    .card-title {
-        font-size: 1.25rem;
-        font-weight: 500;
-    }
-    table {
-        width: 100%;
-        margin-bottom: 1rem;
-        color: #212529;
-        border-collapse: collapse;
-    }
-    table th, table td {
-        padding: 0.75rem;
-        vertical-align: top;
-        border-top: 1px solid #dee2e6;
-    }
-    table thead th {
-        vertical-align: bottom;
-        border-bottom: 2px solid #dee2e6;
-    } */
-
     .main-section {
     min-height: 90vh;
     max-height: 90vh;
@@ -97,19 +71,19 @@
 
             <div class="tab-content mt-4" id="orderTabsContent">
                 <div class="tab-pane fade show active" id="order-standby" role="tabpanel">
-                    @include('admin.order.tabs.order-standby')
+                    @include('admin.order.tabs.order-standby',['ordersToStandby' => $ordersToStandby])
                 </div>
                 <div class="tab-pane fade" id="order-pay" role="tabpanel">
-                    @include('admin.order.tabs.order-pay')
+                    @include('admin.order.tabs.order-pay',['ordersToPay' => $ordersToPay])
                 </div>
                 <div class="tab-pane fade" id="order-ship" role="tabpanel">
-                    @include('admin.order.tabs.order-ship')
+                    @include('admin.order.tabs.order-ship',['ordersToShip' => $ordersToShip])
                 </div>
                 <div class="tab-pane fade" id="order-completed" role="tabpanel">
-                    @include('admin.order.tabs.order-completed')
+                    @include('admin.order.tabs.order-completed',['ordersCompleted' => $ordersCompleted])
                 </div>
                 <div class="tab-pane fade" id="order-cancelled" role="tabpanel">
-                    @include('admin.order.tabs.order-cancelled')
+                    @include('admin.order.tabs.order-cancelled',['ordersCancelled' => $ordersCancelled])
                 </div>
             </div>
         </section>

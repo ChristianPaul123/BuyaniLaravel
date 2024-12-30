@@ -9,6 +9,8 @@ class Order extends Model
 {
     use HasFactory;
 
+    public $timestamp = true;
+
     // Define order statuses as constants
     const STATUS_STANDBY = 1;
     const STATUS_TO_PAY = 2;
@@ -34,8 +36,11 @@ class Order extends Model
         'customer_state',
         'customer_zip',
         'customer_country',
+        'customer_barangay',
         'customer_house_number',
     ];
+
+
 
     public $timestamps = true; // Ensure timestamps are enabledz
 
@@ -59,6 +64,10 @@ class Order extends Model
 
     public function trackings() {
         return $this->hasMany(Tracking::class, 'order_id'); // 'order_id' is the foreign key in the tracking table
+    }
+
+    public function orderCancellation() {
+        return $this->hasOne(OrderCancellation::class, 'order_id'); // 'order_id' is the foreign key in the order_cancellation table
     }
 
     public function getStatusLabelAttribute()
