@@ -62,8 +62,8 @@
                 <div class="bg-red-300 text-red-700 p-3 rounded">{{ $message }}</div>
                 @enderror
 
-                 <div class="form-group d-flex justify-content-end mb-3">
-                    <a class="clickable-forgot-password" wire:click.prevent="showModal()"> Forgot Password?</a>
+                <div class="form-group d-flex justify-content-end mb-3">
+                    <a class="clickable-forgot-password" href="#" data-bs-toggle="modal" data-bs-target="#modal1">Forgot Password?</a>
                 </div>
             </form>
 
@@ -100,7 +100,102 @@
     </div>
 
 
-    <div>   <!-- Step 1: Request OTP Form -->
+    <div>
+        <!-- Request OTP -->
+        <div class="modal fade" id="modal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <i class="close bi bi-x" aria-label="Close" data-bs-dismiss="modal"></i>
+                    <i class="icon icon-bg-info bi bi-envelope-at"></i>
+                    <div class="container-contents container-contents-info">
+                        <h3>Verify OTP</h3>
+                        <form>
+                            <label for="email" class="form-label">Enter your registered email.</label>
+                            <input type="email" class="form-control" id="email" placeholder="Enter your email">
+
+                            <button id="openModal2" type="button" class="btn btn-primary mt-3">Send OTP</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Confirm OTP -->
+        <div class="modal fade" id="modal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <i class="close bi bi-x" aria-label="Close" data-bs-dismiss="modal"></i>
+                    <i class="icon icon-bg-info bi bi-patch-check"></i>
+                    <div class="container-contents container-contents-info">
+                        <h3>Confirm OTP</h3>
+                        <form>
+                            <label for="email" class="form-label">Enter OTP sent to _NAME_</label>
+                            <input type="text" class="form-control" id="text" placeholder="Enter OTP">
+
+                            <button id="openModal3" type="button" class="btn btn-primary mt-3">Send OTP</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Change Password -->
+        <div class="modal fade" id="modal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <i class="close bi bi-x" aria-label="Close" data-bs-dismiss="modal"></i>
+                    <i class="icon icon-bg-info bi bi-shield-lock"></i>
+                    <div class="container-contents container-contents-info">
+                        <h3>Confirm Change Password</h3>
+                        <form>
+                            <div class="text-start">
+                                <label for="password" class="form-label">New Password:</label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="password1" placeholder="Enter your password">
+                                    <span class="input-group-text" id="togglePasswordOTP" style="cursor: pointer;">
+                                        <i class="bi bi-eye" id="toggleIcon"></i>
+                                    </span>
+                                </div>
+                                <div style="color: red; font-size: 14px;">
+                                    <span id="title" class="invalid">Must contain: </span>
+                                    <span id="lowercase" class="invalid">Lowercase letter | </span>
+                                    <span id="uppercase" class="invalid">Uppercase letter | </span>
+                                    <span id="number" class="invalid">Number | </span>
+                                    <span id="special" class="invalid">Special char | </span>
+                                    <span id="length" class="invalid">8+ chars</span>
+                                </div>
+
+                                <label for="password2" class="form-label mt-3">Confirm New Password:</label>
+                                <input type="password" class="form-control" id="password2" placeholder="Enter your password">
+                                <div style="color: red; font-size: 14px;">
+                                    <span id="title" class="invalid">Password does not match</span>
+                                </div>
+                            </div>
+
+                            <button id="openModal4" type="button" class="btn btn-primary mt-3">Confirm New Password</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success -->
+        <div class="modal fade" id="modal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <i class="close bi bi-x" aria-label="Close" data-bs-dismiss="modal"></i>
+                    <i class="icon icon-bg-success bi bi-check-circle"></i>
+                    <div class="container-contents container-contents-success">
+                        <h3>Password Change Successful!</h3>
+                        <p>Login now with your new password</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    {{-- <div>   <!-- Step 1: Request OTP Form -->
         @if($showEmailModal)
         <div class="modal fade show d-block" tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5);">
             @if (session('message'))
@@ -197,7 +292,7 @@
             </div>
         </div>
         @endif
-    </div>
+    </div> --}}
 </main>
 @assets
 <script src="https://www.google.com/recaptcha/api.js?onload=handle&render=explicit"
