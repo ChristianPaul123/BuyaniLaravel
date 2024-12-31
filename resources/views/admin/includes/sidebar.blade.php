@@ -8,7 +8,7 @@
             $statusBadgeClass = $admin->status ? 'bg-success' : 'bg-danger';
         @endphp
          <div class="admin-info text-center py-3 border-bottom">
-             <img src="{{ $admin->profile_pic ? asset('storage/' . $admin->profile_pic) : asset('img/logo1.svg') }}"
+             <img src="{{ $admin->profile_pic ?  asset($admin->profile_pic)  : asset('img/logo1.svg') }}"
                   alt="Profile Picture"
                   class="rounded-circle"
                   width="80"
@@ -32,7 +32,7 @@
         <hr class="hr hr-blurry" />
         <!-- Orders -->
         <li class="nav-item">
-            <a class="nav-link d-flex justify-content-between @if(request()->is('admin/order')) active @endif" href="/admin/order">
+            <a class="nav-link d-flex justify-content-between @if(request()->is('admin/order')) active @endif" href="/admin/order?tab=order-standby">
                 <i class="fas fa-file"></i> Orders <span>/</</span>
             </a>
         </li>
@@ -66,15 +66,15 @@
                 <i class="fas fa-users"></i> Community
             </a>
             <ul class="dropdown-menu" aria-labelledby="communityDropdown">
-                <li><a class="dropdown-item" href="/admin/community/reviews?tab=productreviews"> <i class="fas fa-star me-2"></i> Reviews</a></li>
-                <li><a class="dropdown-item"  href="/admin/community/blog?tab=settings">  <i class="fas fa-blog me-2"></i> Blogs</a></li>
-                <li><a class="dropdown-item" href="/admin/community/votes?tab=managevotes">  <i class="fas fa-poll me-2"></i> Votes</a></li>
+                <li><a class="dropdown-item @if(request()->is('admin/community/reviews')) active @endif" href="/admin/community/reviews?tab=productreviews"> <i class="fas fa-star me-2"></i> Reviews</a></li>
+                <li><a class="dropdown-item @if(request()->is('admin/community/blog')) active @endif" href="/admin/community/blog?tab=settings">  <i class="fas fa-blog me-2"></i> Blogs</a></li>
+                <li><a class="dropdown-item @if(request()->is('admin/community/votes')) active @endif" href="/admin/community/votes?tab=managevotes">  <i class="fas fa-poll me-2"></i> Votes</a></li>
             </ul>
         </li>
 
         <!-- Management -->
         <li class="nav-item">
-            <a class="nav-link d-flex justify-content-between @if(request()->is('admin/user/management')) active @endif" href="/admin/user/management">
+            <a class="nav-link d-flex justify-content-between @if(request()->is('admin/user/management')) active @endif" href="/admin/user/management?tab=consumers">
                 <i class="fas fa-users"></i> Management <span>/</</span>
             </a>
         </li>
@@ -85,21 +85,22 @@
 
         <!-- Orders -->
         <li class="nav-item">
-            <a class="nav-link d-flex justify-content-between @if(request()->is('admin/order')) active @endif" href="/admin/order">
+            <a class="nav-link d-flex justify-content-between @if(request()->is('admin/order')) active @endif" href="/admin/order?tab=order-standby">
                 <i class="fas fa-file"></i> Orders <span>/</</span>
             </a>
         </li>
 
         <hr class="hr hr-blurry" />
 
+
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle @if(request()->is('admin/community*')) active @endif" href="#" id="communityDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fas fa-users"></i> Community
             </a>
             <ul class="dropdown-menu" aria-labelledby="communityDropdown">
-                <li><a class="dropdown-item" href="/admin/community/reviews?tab=productreviews"> <i class="fas fa-star me-2"></i> Reviews</a></li>
-                <li><a class="dropdown-item"  href="/admin/community/blog?tab=settings">  <i class="fas fa-blog me-2"></i> Blogs</a></li>
-                <li><a class="dropdown-item" href="/admin/community/votes?tab=managevotes">  <i class="fas fa-poll me-2"></i> Votes</a></li>
+                <li><a class="dropdown-item @if(request()->is('admin/community/reviews')) active @endif" href="/admin/community/reviews?tab=productreviews"> <i class="fas fa-star me-2"></i> Reviews</a></li>
+                <li><a class="dropdown-item @if(request()->is('admin/community/blog')) active @endif" href="/admin/community/blog?tab=settings">  <i class="fas fa-blog me-2"></i> Blogs</a></li>
+                <li><a class="dropdown-item @if(request()->is('admin/community/votes')) active @endif" href="/admin/community/votes?tab=managevotes">  <i class="fas fa-poll me-2"></i> Votes</a></li>
             </ul>
         </li>
 
@@ -108,7 +109,7 @@
 
         <!-- Management -->
         <li class="nav-item">
-            <a class="nav-link d-flex justify-content-between @if(request()->is('admin/user/management')) active @endif" href="/admin/user/management">
+            <a class="nav-link d-flex justify-content-between @if(request()->is('admin/user/management')) active @endif" href="/admin/user/management?tab=consumers">
                 <i class="fas fa-users"></i> Management <span>/</</span>
             </a>
         </li>
@@ -129,9 +130,9 @@
                 <i class="fas fa-chart-bar"></i> Reports
             </a>
             <ul class="dropdown-menu" aria-labelledby="reportsDropdown">
-                <li> <a class="dropdown-item @if(request()->is('admin/report/inventory')) active @endif" href="{{ route('admin.reports.inventory') }}"> Inventory Reports </a> </li>
-                <li> <a class="dropdown-item @if(request()->is('admin/report/sales')) active @endif" href="{{ route('admin.reports.sales') }}"> Sales Reports </a> </li>
-                <li> <a class="dropdown-item @if(request()->is('admin/report/logs')) active @endif" href="{{ route('admin.reports.logs') }}"> Logs Reports </a> </li>
+                <li> <a class="dropdown-item @if(request()->is('admin/report/inventory')) active @endif" href="/admin/report/inventory?tab=current-inventory"> Inventory Reports </a> </li>
+                <li> <a class="dropdown-item @if(request()->is('admin/report/sales')) active @endif" href="/admin/report/sales?tab=product-sales"> Sales Reports </a> </li>
+                <li> <a class="dropdown-item @if(request()->is('admin/report/logs')) active @endif" href="/admin/report/logs"> Logs Reports </a> </li>
             </ul>
         </li>
 

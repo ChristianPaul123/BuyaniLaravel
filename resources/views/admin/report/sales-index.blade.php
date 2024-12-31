@@ -80,7 +80,7 @@
             {{-- Tab Contents --}}
             <div class="tab-content mt-4" id="salesTabsContent">
                 {{-- Current Inventory Tab --}}
-                <div class="tab-pane fade show active" id="product-sales" role="tabpanel">
+                <div class="tab-pane fade" id="product-sales" role="tabpanel">
                     @include('admin.report.tabs-sales.product-sales')
                 </div>
 

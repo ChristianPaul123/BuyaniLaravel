@@ -232,4 +232,42 @@
         font-size: 30px;
     }
 
+    /* Success notification style */
+    .notif.success {
+        background-color: #e8f8e5;
+        border: 3px solid #28a745;
+        color: #28a745;
+    }
+
+    .notif.success i {
+        background-color: #28a745;
+        color: #e8f8e5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50px;
+        flex-shrink: 0;
+        font-size: 30px;
+        border-radius: 50%;
+    }
+
+    /* Error notification style */
+    .notif.error {
+        background-color: #fde8e8;
+        border: 3px solid #dc3545;
+        color: #dc3545;
+    }
+
+    .notif.error i {
+        background-color: #dc3545;
+        color: #fde8e8;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50px;
+        flex-shrink: 0;
+        font-size: 30px;
+        border-radius: 50%;
+    }
+
 </style>

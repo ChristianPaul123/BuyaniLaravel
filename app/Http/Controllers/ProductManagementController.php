@@ -48,7 +48,7 @@ return view('admin.product.product-index', [
             $request->product_pic->move(public_path('img/product/'.$validatedData['product_name']), $imageName);
             $validatedData['product_pic'] = 'img/product/'.$validatedData['product_name'].'/'.$imageName;
         } else {
-            return redirect()->route('admin.product')->withErrors(['product_pic' => 'No image uploaded.']);
+            return redirect()->route('admin.product',['tab' => 'products'])-with('error', 'Invalid Product pic provided.');
         }
 
         // Create product and initialize inventory
@@ -63,7 +63,7 @@ return view('admin.product.product-index', [
             'product_damage_stock' => 0,
         ]);
 
-        return redirect()->route('admin.product.index')->with('message', 'Product added successfully.');
+        return redirect()->route('admin.product.index',['tab' => 'products'])->with('success', 'Product added successfully.');
     }
 
     // Edit a product
@@ -82,7 +82,7 @@ return view('admin.product.product-index', [
                 'subcategories' => $subcategories,
             ]);
         } catch (DecryptException $e) {
-            return redirect()->route('admin.product.index')->with('error', 'Invalid Product ID provided.');
+            return redirect()->route('admin.product.index',['tab' => 'products'])->with('error', 'Invalid Product ID provided.');
         }
     }
 
@@ -118,7 +118,7 @@ return view('admin.product.product-index', [
 
         $product->update($validatedData);
 
-        return redirect()->route('admin.product.index')->with('message', 'Product updated successfully.');
+        return redirect()->route('admin.product.index', ['tab' => 'products'])->with('success', 'Product updated successfully.');
     }
 
     // Delete a product
@@ -133,7 +133,7 @@ return view('admin.product.product-index', [
 
         $product->delete();
 
-        return redirect()->route('admin.product.index')->with('message', 'Product deleted successfully.');
+        return redirect()->route('admin.product.index', ['tab' => 'products'])->with('success', 'Product deleted successfully.');
     }
 
     // Add a product specification
@@ -149,7 +149,7 @@ return view('admin.product.product-index', [
 
         ProductSpecification::create($validatedData);
 
-        return redirect()->route('admin.product.index')->with('message', 'Product Specification added successfully.');
+        return redirect()->route('admin.product.index', ['tab' => 'specifications'])->with('success', 'Product Specification added successfully.');
     }
 
     // Edit a product specification
@@ -165,7 +165,7 @@ return view('admin.product.product-index', [
                 'products' => $products,
             ]);
         } catch (DecryptException $e) {
-            return redirect()->route('admin.product.index')->with('error', 'Invalid Specification ID provided.');
+            return redirect()->route('admin.product.index', ['tab' => 'specifications'])->with('error', 'Invalid Specification ID provided.');
         }
     }
 
@@ -184,7 +184,7 @@ return view('admin.product.product-index', [
 
         $specification->update($validatedData);
 
-        return redirect()->route('admin.product.index')->with('message', 'Product Specification updated successfully.');
+        return redirect()->route('admin.product.index', ['tab' => 'specifications'])->with('success', 'Product Specification updated successfully.');
     }
 
     // Delete a product specification
@@ -193,7 +193,7 @@ return view('admin.product.product-index', [
         $specification = ProductSpecification::findOrFail($id);
         $specification->delete();
 
-        return redirect()->route('admin.product.index')->with('message', 'Product Specification deleted successfully.');
+        return redirect()->route('admin.product.index', ['tab' => 'specifications'])->with('success', 'Product Specification deleted successfully.');
     }
 
     public function addCategory(Request $request)
@@ -204,7 +204,7 @@ return view('admin.product.product-index', [
 
         Category::create($validatedData);
 
-        return redirect()->route('admin.product.index')->with('message', 'Category added successfully.');
+        return redirect()->route('admin.product.index', ['tab' => 'categories'])->with('success', 'Category added successfully.');
     }
 
     // public function editCategory($id)
@@ -227,7 +227,7 @@ return view('admin.product.product-index', [
         ]);
 
     } catch (DecryptException $e) {
-        return redirect()->route('admin.product.index')->with('error', 'Invalid category ID provided.');
+        return redirect()->route('admin.product.index', ['tab' => 'categories'])->with('error', 'Invalid category ID provided.');
     }
 }
 
@@ -241,7 +241,7 @@ return view('admin.product.product-index', [
 
         $category->update($validatedData);
 
-        return redirect()->route('admin.product.index')->with('message', 'Category updated successfully.');
+        return redirect()->route('admin.product.index', ['tab' => 'categories'])->with('success', 'Category updated successfully.');
     }
 
     public function deleteCategory($id)
@@ -249,7 +249,7 @@ return view('admin.product.product-index', [
         $category = Category::findOrFail($id);
         $category->delete();
 
-        return redirect()->route('admin.product.index')->with('message', 'Category deleted successfully.');
+        return redirect()->route('admin.product.index', ['tab' => 'categories'])->with('success', 'Category deleted successfully.');
     }
 
     // =================== SubCategory Management ===================
@@ -263,7 +263,7 @@ return view('admin.product.product-index', [
 
         SubCategory::create($validatedData);
 
-        return redirect()->route('admin.product.index')->with('message', 'SubCategory added successfully.');
+        return redirect()->route('admin.product.index', ['tab' => 'subcategories'])->with('success', 'SubCategory added successfully.');
     }
 
     public function editSubCategory($encryptedId)
@@ -279,7 +279,7 @@ return view('admin.product.product-index', [
                 'categories' => $categories,
             ]);
         } catch (DecryptException $e) {
-            return redirect()->route('admin.product.index')->with('error', 'Invalid Subcategory ID provided.');
+            return redirect()->route('admin.product.index', ['tab' => 'subcategories'])->with('error', 'Invalid Subcategory ID provided.');
         }
     }
 
@@ -294,7 +294,7 @@ return view('admin.product.product-index', [
 
         $subcategory->update($validatedData);
 
-        return redirect()->route('admin.product.index')->with('message', 'SubCategory updated successfully.');
+        return redirect()->route('admin.product.index', ['tab' => 'subcategories'])->with('success', 'SubCategory updated successfully.');
     }
 
     public function deleteSubCategory($id)
@@ -302,6 +302,6 @@ return view('admin.product.product-index', [
         $subcategory = SubCategory::findOrFail($id);
         $subcategory->delete();
 
-        return redirect()->route('admin.product.index')->with('message', 'SubCategory deleted successfully.');
+        return redirect()->route('admin.product.index', ['tab' => 'subcategories'])->with('success', 'SubCategory deleted successfully.');
     }
 }

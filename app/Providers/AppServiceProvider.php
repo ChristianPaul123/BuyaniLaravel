@@ -10,11 +10,13 @@ use App\Listeners\LogFailedLogin;
 use Illuminate\Auth\Events\Login;
 use App\Observers\ProductObserver;
 use Illuminate\Auth\Events\Failed;
+use Illuminate\Auth\Events\Logout;
 use App\Models\ProductSpecification;
 use Illuminate\Pagination\Paginator;
 use App\Listeners\LogSuccessfulLogin;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
+use App\Listeners\AdminActivityListener;
 use Illuminate\Console\Scheduling\Schedule;
 use App\Observers\ProductSpecificationObserver;
 
@@ -38,6 +40,8 @@ class AppServiceProvider extends ServiceProvider
         $schedule->command('app:generate-monthly-suggest-product-reports')->monthly()->sendOutputTo(storage_path('logs/monthly_suggested_products_reports.log'));
         Order::observe(OrderObserver::class);
         Product::observe(ProductObserver::class);
+        Event::listen(Login::class, [AdminActivityListener::class, 'handle']);
+        Event::listen(Logout::class, [AdminActivityListener::class, 'handle']);
         ProductSpecification::observe(ProductSpecificationObserver::class);
         // User::observe(UserObserver::class);
         Paginator::useBootstrapFive();
