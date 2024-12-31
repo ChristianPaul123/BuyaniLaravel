@@ -63,6 +63,7 @@ new DataTable('#sponsorImagesTable');
 new DataTable('#userlogTable');
 new DataTable('#orderlogTable');
 new DataTable('#productlogTable');
+new DataTable('#adminlogTable');
 
 
 //Tables for the Reports

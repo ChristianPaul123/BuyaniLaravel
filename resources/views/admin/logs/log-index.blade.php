@@ -40,6 +40,10 @@
                 <li class="nav-item">
                     <a class="nav-link" id="user-logs-tab" data-bs-toggle="tab" href="#user-logs" role="tab">User Logs</a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" id="admin-logs-tab" data-bs-toggle="tab" href="#admin-logs" role="tab">Admin Logs</a>
+                </li>
             </ul>
 
             {{-- Tab Content --}}
@@ -56,6 +60,10 @@
 
                 <div class="tab-pane fade" id="user-logs" role="tabpanel">
                     @include('admin.logs.log-tab.user-log', ['userLogs' => $userLogs])
+                </div>
+
+                <div class="tab-pane fade" id="admin-logs" role="tabpanel">
+                    @include('admin.logs.log-tab.admin-log', ['adminLogs' => $adminLogs])
                 </div>
             </div>
         </section>
