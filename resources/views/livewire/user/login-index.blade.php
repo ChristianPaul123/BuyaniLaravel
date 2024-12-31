@@ -32,10 +32,10 @@
                     </div>
                     <input type="hidden" wire:model="user_type" value="{{ $user_type }}" />
                 </div>
-                <div id="captcha" wre:model="captcha" class="mt-4" wire:ignore></div>
+                {{-- <div id="captcha" wre:model="captcha" class="mt-4" wire:ignore></div>
                 @error('captcha')
                 <div class="bg-red-300 text-red-700 p-3 rounded">{{ $message }}</div>
-                @enderror
+                @enderror --}}
 
                 <div class="form-group d-flex justify-content-end mb-3">
                     <a class="clickable-forgot-password" href="#" data-bs-toggle="modal" data-bs-target="#modal1">Forgot Password?</a>
