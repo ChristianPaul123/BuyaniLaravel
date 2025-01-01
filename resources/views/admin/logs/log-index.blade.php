@@ -32,17 +32,17 @@
             {{-- Tabs Navigation --}}
             <ul class="nav nav-tabs" id="logmanagementTabs" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="product-logs-tab" data-bs-toggle="tab" href="#product-logs" role="tab">Product Logs</a>
+                    <a class="nav-link active" id="productlogs-tab" data-bs-toggle="tab" href="#productlogs" role="tab">Product Logs</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="order-logs-tab" data-bs-toggle="tab" href="#order-logs" role="tab">Order Logs</a>
+                    <a class="nav-link" id="orderlogs-tab" data-bs-toggle="tab" href="#orderlogs" role="tab">Order Logs</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="user-logs-tab" data-bs-toggle="tab" href="#user-logs" role="tab">User Logs</a>
+                    <a class="nav-link" id="userlogs-tab" data-bs-toggle="tab" href="#userlogs" role="tab">User Logs</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" id="admin-logs-tab" data-bs-toggle="tab" href="#admin-logs" role="tab">Admin Logs</a>
+                    <a class="nav-link" id="adminlogs-tab" data-bs-toggle="tab" href="#adminlogs" role="tab">Admin Logs</a>
                 </li>
             </ul>
 
@@ -50,19 +50,19 @@
             <div class="tab-content mt-4" id="logmanagementTabsContent">
 
                 {{-- Manage Logs in  log index tab --}}
-                <div class="tab-pane fade show active" id="product-logs" role="tabpanel">
+                <div class="tab-pane fade show active" id="productlogs" role="tabpanel">
                     @include('admin.logs.log-tab.product-log', ['userLogs' => $productLogs])
                 </div>
 
-                <div class="tab-pane fade" id="order-logs" role="tabpanel">
+                <div class="tab-pane fade" id="orderlogs" role="tabpanel">
                     @include('admin.logs.log-tab.order-log', ['userLogs' => $orderLogs])
                 </div>
 
-                <div class="tab-pane fade" id="user-logs" role="tabpanel">
+                <div class="tab-pane fade" id="userlogs" role="tabpanel">
                     @include('admin.logs.log-tab.user-log', ['userLogs' => $userLogs])
                 </div>
 
-                <div class="tab-pane fade" id="admin-logs" role="tabpanel">
+                <div class="tab-pane fade" id="adminlogs" role="tabpanel">
                     @include('admin.logs.log-tab.admin-log', ['adminLogs' => $adminLogs])
                 </div>
             </div>

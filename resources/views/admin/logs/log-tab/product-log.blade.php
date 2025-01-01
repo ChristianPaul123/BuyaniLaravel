@@ -3,7 +3,7 @@
         <div class="table-responsive">
             <table id="productlogTable" class="table table-bordered">
                 <thead>
-                    <tr>
+                    <tr><th>#</th>
                         <th>Product Name</th>
                         <th>Admin</th>
                         <th>Action</th>
@@ -12,8 +12,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($productLogs as $log)
+                    @foreach ($productLogs as $index => $log)
                     <tr>
+                        <td>{{ $index  + 1 }}</td>
                         {{-- PRODUCT NAME --}}
                         <td>{{ $log->product->name ?? 'N/A' }}</td>
 

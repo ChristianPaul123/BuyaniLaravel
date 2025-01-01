@@ -7,6 +7,7 @@
         <table id="pastInventoryTable" class="table table-bordered table-striped">
             <thead>
                 <tr>
+                    <th>#</th>
                     <th>Product Name</th>
                     <th>Sold Stock</th>
                     <th>Damaged Stock</th>
@@ -18,6 +19,7 @@
             <tbody>
                 @foreach ($records as $record)
                 <tr>
+                    <td>{{ $loop->iteration }}</td>
                     <td>{{ $record->product_name }}</td>
                     <td>{{ $record->product_sold_stock }}</td>
                     <td>{{ $record->product_damage_stock }}</td>

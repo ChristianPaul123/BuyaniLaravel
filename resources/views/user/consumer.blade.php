@@ -4,6 +4,120 @@
 
 @push('styles')
 <style>
+/* Modal Background */
+    .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1050;
+    }
+
+    /* Modal Content */
+    .modal-content {
+        background: #fff;
+        width: 90%;
+        max-width: 500px;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        animation: fadeIn 0.3s ease-in-out;
+    }
+
+    /* Modal Header */
+    .modal-header {
+        background-color: #f8f9fa;
+        padding: 15px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    .modal-title {
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: #343a40;
+    }
+
+    /* Close Button */
+    .close-btn {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #343a40;
+        cursor: pointer;
+        outline: none;
+    }
+
+    .close-btn:hover {
+        color: #dc3545;
+    }
+
+    /* Modal Body */
+    .modal-body {
+        padding: 20px;
+        font-size: 1rem;
+        color: #495057;
+        text-align: center;
+    }
+
+    /* Modal Footer */
+    .modal-footer {
+        padding: 15px 20px;
+        background-color: #f8f9fa;
+        border-top: 1px solid #dee2e6;
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+    }
+
+    .modal-footer .btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .modal-footer .btn-primary {
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+    }
+
+    .modal-footer .btn-primary:hover {
+        background-color: #218838;
+    }
+
+    .modal-footer .btn-secondary {
+        background-color: #6c757d;
+        color: #fff;
+        border: none;
+    }
+
+    .modal-footer .btn-secondary:hover {
+        background-color: #5a6268;
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+
     @media (prefers-reduced-motion: no-preference) {
         .in-view {
             animation: slide-up 1s ease-out both;
@@ -485,6 +599,44 @@
 
 <section class="main-page">
 
+    @if ($isProfileIncomplete == true)
+    <!-- Modal Trigger -->
+    <div id="profileIncompleteModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Profile Incomplete</h5>
+            </div>
+            <div class="modal-body">
+                <p>Looks like you don't have any other info yet. Why not try editing it?</p>
+            </div>
+            <div class="modal-footer">
+                <a href="{{ route('user.consumer.profile.show') }}" class="btn btn-primary">Edit Profile</a>
+                <button type="button" data-close="modal" class="btn btn-secondary">Close</button>
+            </div>
+        </div>
+    </div>
+    @endif
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Automatically show the modal if the profile is incomplete
+        const isProfileIncomplete = {{ json_encode($isProfileIncomplete) }};
+        if (isProfileIncomplete == true) {
+            const modal = document.getElementById('profileIncompleteModal');
+            if (modal) {
+                modal.style.display = 'flex';
+            }
+
+            // Close modal functionality
+            const closeButtons = modal.querySelectorAll('[data-close="modal"]');
+            closeButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    modal.style.display = 'none';
+                });
+            });
+        }
+    });
+    </script>
+
     <!-- Section 1 -->
     <div class="row section-1">
         <div class="container">
@@ -493,7 +645,7 @@
                 <span>ENRICH</span>
                 <span>COMMUNITIES</span>
             </h1>
-            <h4>BuyAni, Where Every Purchase is a Celebration o f Hard Work and Fresh Harvests</h4>
+            <h4>BuyAni, Where Every Purchase is a Celebration of Hard Work and Fresh Harvests</h4>
            <a href="{{ route('user.consumer.product') }}" class="btn-shop">Shop Now</a>
         </div>
     </div>
@@ -687,12 +839,6 @@
 @endsection
 
 @section('scripts')
-<script>
-    window.addEventListener('popstate', function(event) {
-        // If the user press the back button, log them out
-        window.location.href = "{{ route('user.logout') }}";
-    });
-</script>
 
 <script>
     // transition for img, txt and div

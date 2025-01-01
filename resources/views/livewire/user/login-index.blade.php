@@ -84,10 +84,10 @@
                     <i class="icon icon-bg-info bi bi-envelope-at"></i>
                     <div class="container-contents container-contents-info">
                         <h3>Verify OTP</h3>
-                        <form>
+                        <form wire:submit.prevent="requestOtp">
                             <label for="email" class="form-label">Enter your registered email.</label>
-                            <input type="email" class="form-control" id="email" placeholder="Enter your email">
-
+                            <input type="email" id="email" wire:model="selectedEmail" class="form-control" placeholder="Email">
+                            @error('selectedEmail') <span class="text-danger">{{ $message }}</span> @enderror
                             <button id="openModal2" type="button" class="btn btn-primary mt-3">Send OTP</button>
                         </form>
                     </div>
@@ -103,9 +103,10 @@
                     <i class="icon icon-bg-info bi bi-patch-check"></i>
                     <div class="container-contents container-contents-info">
                         <h3>Confirm OTP</h3>
-                        <form>
-                            <label for="email" class="form-label">Enter OTP sent to _NAME_</label>
-                            <input type="text" class="form-control" id="text" placeholder="Enter OTP">
+                        <form wire:submit.prevent="verifyOtp">
+                            <label for="email" class="form-label">Enter OTP {{ $selectedEmail }}</label>
+                            <input type="text" id="otp" wire:model="otp" class="form-control" placeholder="Enter OTP">
+                                @error('otp') <span class="text-danger">{{ $message }}</span> @enderror
 
                             <button id="openModal3" type="button" class="btn btn-primary mt-3">Send OTP</button>
                         </form>
@@ -122,11 +123,24 @@
                     <i class="icon icon-bg-info bi bi-shield-lock"></i>
                     <div class="container-contents container-contents-info">
                         <h3>Confirm Change Password</h3>
-                        <form>
+                        <form wire:submit.prevent="resetPassword">
+                            <div class="form-group">
+                                <label for="newPassword">New Password</label>
+                                <input type="password" id="newPassword" wire:model="newPassword" class="form-control" placeholder="New Password">
+                                @error('newPassword') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="newPasswordConfirmation">Confirm New Password</label>
+                                <input type="password" id="newPasswordConfirmation" wire:model="newPassword_confirmation" class="form-control" placeholder="Confirm New Password">
+                                @error('newPasswordConfirmation') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                            <button type="submit" class="btn btn-primary">Reset Password</button>
+                        </form>
+                        <form wire:submit.prevent="resetPassword">
                             <div class="text-start">
                                 <label for="password" class="form-label">New Password:</label>
                                 <div class="input-group">
-                                    <input type="password" class="form-control" id="password1" placeholder="Enter your password">
+                                    <input type="password"  wire:model="newPassword" class="form-control" id="password1" placeholder="Enter your password">
                                     <span class="input-group-text" id="togglePasswordOTP" style="cursor: pointer;">
                                         <i class="bi bi-eye" id="toggleIcon"></i>
                                     </span>
@@ -141,10 +155,8 @@
                                 </div>
 
                                 <label for="password2" class="form-label mt-3">Confirm New Password:</label>
-                                <input type="password" class="form-control" id="password2" placeholder="Enter your password">
-                                <div style="color: red; font-size: 14px;">
-                                    <span id="title" class="invalid">Password does not match</span>
-                                </div>
+                                <input type="password" class="form-control" id="password2" placeholder="Enter your password" wire:model="newPassword_confirmation">
+                                @error('newPasswordConfirmation') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
 
                             <button id="openModal4" type="button" class="btn btn-primary mt-3">Confirm New Password</button>

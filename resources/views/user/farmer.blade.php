@@ -142,6 +142,44 @@ button {
 
          <!-- Main Page -->
     <section class="mt-5">
+        @if ($isProfileIncomplete == true)
+        <!-- Modal Trigger -->
+        <div id="profileIncompleteModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Profile Incomplete</h5>
+                </div>
+                <div class="modal-body">
+                    <p>Looks like you don't have any other info yet. Why not try editing it?</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="{{ route('user.consumer.profile.show') }}" class="btn btn-primary">Edit Profile</a>
+                    <button type="button" data-close="modal" class="btn btn-secondary">Close</button>
+                </div>
+            </div>
+        </div>
+        @endif
+        <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Automatically show the modal if the profile is incomplete
+            const isProfileIncomplete = {{ json_encode($isProfileIncomplete) }};
+            if (isProfileIncomplete == true) {
+                const modal = document.getElementById('profileIncompleteModal');
+                if (modal) {
+                    modal.style.display = 'flex';
+                }
+
+                // Close modal functionality
+                const closeButtons = modal.querySelectorAll('[data-close="modal"]');
+                closeButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        modal.style.display = 'none';
+                    });
+                });
+            }
+        });
+        </script>
+
         <div class="row" class="hero-section d-flex align-items-center" style="background-image: url({{ asset('img/stockImg4.png') }}); background-repeat: no-repeat; background-size: cover; background-position: center; height: 650px;">
             <!-- Left Section -->
             <div class="col-md-4 px-5">

@@ -174,6 +174,8 @@ class AdminController extends Controller
 
     public function edit(Admin $admin)
     {
+
+        $sponsorImages = Admin::where('');
         return view('customization.tabs.edit-admin', compact('admin'));
     }
 

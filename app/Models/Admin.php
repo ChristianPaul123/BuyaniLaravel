@@ -54,6 +54,10 @@ class Admin extends Authenticatable
         return $this->HasMany(Messages::class);
     }
 
+    public function suggestRecord() {
+        return $this->HasMany(SuggestProductRecord::class);
+    }
+
     public function getAdminTypeLabelAttribute()
     {
         $adminTypes = [

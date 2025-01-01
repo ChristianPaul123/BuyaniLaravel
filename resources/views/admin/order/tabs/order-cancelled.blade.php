@@ -6,6 +6,7 @@
         <table id="ordercancelledTable" class="table table-bordered table-striped">
                 <thead>
                     <tr>
+                        <th>#</th>
                         <th>Order Number</th>
                         <th>User</th>
                         <th>Total Amount</th>
@@ -19,6 +20,7 @@
                 <tbody>
                     @foreach ($ordersCancelled as $order)
                     <tr>
+                        <td>{{ $loop->iteration }}</td>
                         {{-- ORDER NUMBER --}}
                         <td>{{ $order->order_number }}</td>
 

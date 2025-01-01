@@ -91,6 +91,7 @@
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
+                                            <th>#</th>
                                             <th>Product Name</th>
                                             <th>Product Specification</th>
                                             <th>Category Specifcation</th>
@@ -104,6 +105,7 @@
                                     <tbody>
                                         @foreach ($order->orderItems as $item)
                                         <tr>
+                                            <td>{{ $loop->iteration }}</td>
                                             <td>{{ $item->product->product_name ?? 'N/A' }}</td>
                                             <td>{{ $item->productSpecification->specification_name ?? 'N/A' }}</td>
                                             <td>{{ $item->product->category->category_name }}</td>

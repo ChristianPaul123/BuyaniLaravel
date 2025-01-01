@@ -4,6 +4,7 @@
             <table id="orderlogTable" class="table table-bordered">
                 <thead>
                     <tr>
+                        <th>#</th>
                         <th>Order ID</th>
                         <th>User</th>
                         <th>Action</th>
@@ -12,8 +13,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($orderLogs as $log)
+                    @foreach ($orderLogs as $index => $log)
                     <tr>
+                        <td>{{ $index  + 1 }}</td>
                         {{-- ORDER ID --}}
                         <td>{{ $log->order->id ?? 'N/A' }}</td>
 

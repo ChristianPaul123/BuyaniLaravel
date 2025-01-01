@@ -7,6 +7,7 @@
         <table id="orderstandbyTable" class="table table-bordered table-striped">
                 <thead>
                     <tr>
+                        <th>#</th>
                         <th>Order Number</th>
                         <th>User</th>
                         <th>Total Amount</th>
@@ -20,6 +21,7 @@
                 <tbody>
                     @foreach ($ordersToStandby as $order)
                     <tr>
+                        <td>{{ $loop->iteration }}</td>
                         {{-- ORDER NUMBER --}}
                         <td>{{ $order->order_number }}</td>
 

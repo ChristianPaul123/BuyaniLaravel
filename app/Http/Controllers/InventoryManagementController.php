@@ -52,7 +52,6 @@ class InventoryManagementController extends Controller
         ->whereMonth('created_at', $currentMonth)
         ->whereYear('created_at', $currentYear)
         ->first();
-
     if ($previousInventory) {
         // Update the previous inventory record
 

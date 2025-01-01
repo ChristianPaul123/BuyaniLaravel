@@ -1,28 +1,7 @@
 <div>
     <section>
     <!-- Display Success Message -->
-    @if (session()->has('message'))
-        <div class="alert alert-success mx-3 my-2 px-3 py-2">
-            <button type="button" class="close btn btn-success">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            {{ session('message') }}
-        </div>
-    @endif
-
-    <!-- Display Validation Errors -->
-    @if ($errors->any())
-        <div class="alert alert-danger mx-3 my-2 px-3 py-2">
-            <button type="button" class="close btn btn-danger">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+    @include('user.includes.messageBox')
 
     <div class="row mt-3">
         <div class="col-12">
@@ -275,4 +254,23 @@
     // Attach the event listener
     document.getElementById('locationType').addEventListener('change', updateLocationOptions);
 </script> --}}
+<script>
+    // Show the flash message popup if it exists
+    const flashPopup = document.querySelector('#flashMessage');
+
+    if (flashPopup) {
+        // Display the elements and start fade-in animation
+        flashPopup.style.display = 'flex';
+
+        // Automatically hide the popup after 3 seconds
+        setTimeout(() => {
+            flashPopup.classList.add('hidden');
+
+            // After animation ends, hide the elements entirely
+            setTimeout(() => {
+                flashPopup.style.display = 'none';
+            }, 150); // Match the duration of the animation
+        }, 3000); // 3 seconds
+    }
+</script>
 @endscript

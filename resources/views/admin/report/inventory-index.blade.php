@@ -70,22 +70,22 @@
             {{-- Tabs for Navigation --}}
             <ul class="nav nav-tabs" id="inventoryTabs" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="current-inventory-tab" data-bs-toggle="tab" href="#current-inventory" role="tab">Current Inventory</a>
+                    <a class="nav-link active" id="currentinventory-tab" data-bs-toggle="tab" href="#currentinventory" role="tab">Current Inventory</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="past-inventory-tab" data-bs-toggle="tab" href="#past-inventory" role="tab">Past Inventory</a>
+                    <a class="nav-link" id="pastinventory-tab" data-bs-toggle="tab" href="#pastinventory" role="tab">Past Inventory</a>
                 </li>
             </ul>
 
             {{-- Tab Contents --}}
             <div class="tab-content mt-4" id="inventoryTabsContent">
                 {{-- Current Inventory Tab --}}
-                <div class="tab-pane fade" id="current-inventory" role="tabpanel">
+                <div class="tab-pane fade show active" id="currentinventory" role="tabpanel">
                     @include('admin.report.tabs-inventory.current-inventory')
                 </div>
 
                 {{-- Past Inventory Tab --}}
-                <div class="tab-pane fade" id="past-inventory" role="tabpanel">
+                <div class="tab-pane fade" id="pastinventory" role="tabpanel">
                     @include('admin.report.tabs-inventory.past-inventory')
                 </div>
             </div>

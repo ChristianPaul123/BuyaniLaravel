@@ -4,7 +4,7 @@
             <table id="userlogTable" class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>#</th>
                         <th>User</th>
                         <th>Phone Number</th>
                         <th>Email</th>
@@ -15,10 +15,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($userLogs as $log)
+                    @foreach ($userLogs as $index => $log)
                     <tr>
                         {{-- ID --}}
-                        <td>{{ $log->id }}</td>
+                        <td>{{ $index  + 1 }}</td>
 
                         {{-- USER --}}
                         <td>{{ $log->user->username ?? 'N/A' }}</td>

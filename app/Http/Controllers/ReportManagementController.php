@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Admin_Log;
-use App\Models\User_log;
-use App\Models\Order_log;
-USE App\Models\Product_log;
 use App\Models\Record;
+use App\Models\User_log;
+use App\Models\Admin_Log;
+USE App\Models\Product_log;
 use App\Models\Inventory;
+use App\Models\Order_log;
+use App\Models\ProductSales;
 use Illuminate\Http\Request;
+use App\Models\SpecificProductSales;
 
 class ReportManagementController extends Controller
 {
@@ -20,6 +22,13 @@ class ReportManagementController extends Controller
     return view('admin.report.inventory-index', compact('inventories', 'records'));
 }
 
+public function showSalesReports()
+{
+    $productsales = ProductSales::with('product')->get();
+    $specificproductsales = SpecificProductSales::with('productSpecification')->get();
+
+    return view('admin.report.sales-index', compact('productsales', 'specificproductsales'));
+}
 
 public function showLogsReports()
 {

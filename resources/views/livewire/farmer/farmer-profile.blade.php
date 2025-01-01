@@ -37,11 +37,7 @@
     </div>
 
     <div wire:ignore.self class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-        @if (session('message'))
-        <div class="alert alert-success text-center my-3 d-block col-12 mt-5">
-            {{ session('message') }}
-        </div>
-        @endif
+        @include('user.includes.messageBox')
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -97,11 +93,7 @@
     </div>
 
     <div wire:ignore.self class="modal fade" id="passwordModal" tabindex="-1" aria-labelledby="passwordModalLabel" aria-hidden="true">
-        @if (session('message'))
-        <div class="alert alert-success text-center my-3 d-block col-12 mt-5">
-            {{ session('message') }}
-        </div>
-        @endif
+        @include('user.includes.messageBox')
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -159,6 +151,26 @@
       })
     })
   </script>
+
+    <script>
+        // Show the flash message popup if it exists
+        const flashPopup = document.querySelector('#flashMessage');
+
+        if (flashPopup) {
+            // Display the elements and start fade-in animation
+            flashPopup.style.display = 'flex';
+
+            // Automatically hide the popup after 3 seconds
+            setTimeout(() => {
+                flashPopup.classList.add('hidden');
+
+                // After animation ends, hide the elements entirely
+                setTimeout(() => {
+                    flashPopup.style.display = 'none';
+                }, 150); // Match the duration of the animation
+            }, 3000); // 3 seconds
+        }
+    </script>
 @endscript
 
 

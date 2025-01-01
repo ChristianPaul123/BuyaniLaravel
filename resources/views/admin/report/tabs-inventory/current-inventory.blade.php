@@ -7,6 +7,7 @@
         <table id="currentInventoryTable" class="table table-bordered table-striped">
             <thead>
                 <tr>
+                    <th>#</th>
                     <th>Product Name</th>
                     <th>New Stock</th>
                     <th>Old Stock</th>
@@ -20,6 +21,7 @@
             <tbody>
                 @foreach ($inventories as $inventory)
                 <tr>
+                    <td>{{ $loop->iteration }}</td>
                     <td>{{ $inventory->product->product_name }}</td>
                     <td>{{ $inventory->product_new_stock }}</td>
                     <td>{{ $inventory->product_old_stock }}</td>
