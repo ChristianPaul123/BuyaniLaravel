@@ -14,6 +14,8 @@ class AutoLogout
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
+
+    //Not USED FOR SOME REASON
     public function handle(Request $request, Closure $next)
     {
         // If the user is leaving the dashboard, log them out

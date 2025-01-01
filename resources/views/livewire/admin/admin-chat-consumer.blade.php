@@ -2,6 +2,7 @@
     <!-- Sidebar -->
     <div class="chat-sidebar">
         <h4>Consumer Chats</h4>
+
         <div class="user-search">
             {{-- <input type="text" placeholder="Search user..." wire:model.debounce.300ms="search"> --}}
         </div>

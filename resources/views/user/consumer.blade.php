@@ -599,6 +599,7 @@
 
 <section class="main-page">
 
+    <!-- this displays the modal incomplete when the user is missing first name and last name -->
     @if ($isProfileIncomplete == true)
     <!-- Modal Trigger -->
     <div id="profileIncompleteModal" class="modal" style="display: none;">

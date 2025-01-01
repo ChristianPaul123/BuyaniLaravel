@@ -165,7 +165,7 @@
             </div>
             <div class="container-contents">
                 <h3>Oops!</h3>
-                <p>Login First!</p>
+                <p> {{ (session('message')) }} </p>
             </div>
         </div>
     </div>
