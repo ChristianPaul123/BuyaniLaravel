@@ -13,6 +13,12 @@ setting up the env environment
 # MAIL_USERNAME=30b42f4cebb36f
 # MAIL_PASSWORD=3ba05f7a5d8743
 
+WEATHER_API_KEY='8208b36e8c45621736f862fb1933cb36'
+
+# this is my localhostv2
+RECAPCHA_SITEKEY = 6LfbRJ0qAAAAAGYnOhcEf4MccEswv5GG_XJz6M4m
+RECAPTCHA_SECRETKEY = 6LfbRJ0qAAAAAFslz_u0rkcmR05-ZiplAffFUBkn
+
 #connecting the storage linking
 #php artisan storage:link
 
@@ -36,4 +42,4 @@ setting up the env environment
 #refinement of the error handling customization
 #style some of the layouts
 #make it load faster
-#understand and remove some package dependencies that are not used
+#understand and remove some package dependencies that are not used - kasi di mga marunong si tig add yawa

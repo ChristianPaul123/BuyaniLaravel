@@ -180,29 +180,6 @@
 @endsection
 
 @section('scripts')
-
-
-{{-- <script>
-    function togglePasswordVisibility(passwordFieldId, toggleIcon) {
-        const passwordField = document.getElementById(passwordFieldId);
-        const icon = toggleIcon.querySelector('i');
-
-        // Toggle the password field type and icon class
-        if (passwordField.type === 'password') {
-            passwordField.type = 'text';
-            icon.classList.replace('fa-eye', 'fa-eye-slash');
-        } else {
-            passwordField.type = 'password';
-            icon.classList.replace('fa-eye-slash', 'fa-eye');
-        }
-    }
-
-        // Event listeners for the password toggle icons
-        document.getElementById('togglePassword').addEventListener('click', function () {
-        togglePasswordVisibility('password', this);
-    });
-</script> --}}
-
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     const emailPhoneInput = document.getElementById("email_phoneNum");
