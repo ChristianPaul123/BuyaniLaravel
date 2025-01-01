@@ -399,6 +399,16 @@
     }
 
 
+    /* Contacts */
+    .contact-form, .contact-info{
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+
+
 
 /* ---------------------------------------------------------------------------- */
 
@@ -407,6 +417,10 @@
     @media (max-width: 768px) {
         *{
             /* border: 1px solid black; */
+        }
+
+        .contact-form{
+            margin-bottom: 20px;
         }
 
         .section-1 {
@@ -638,6 +652,49 @@
                         By shopping with us, you contribute to the growth of small-scale farmers, reduce your carbon footprint, and enjoy produce that is as fresh as it gets.
                         We bring convenience, quality, and a touch of community spirit to your shopping experience. Why settle for less when you can make a difference with Buyani?
                     </h6>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container mb-5">
+        <div class="contact-header text-center">
+            <h1>Contact Us</h1>
+            <p>We would love to hear from you!</p>
+        </div>
+
+        <!-- Contact Form and Info -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="contact-form">
+                        <h3>Get in Touch</h3>
+                        <form action="mailto:buyanibusiness1@gmail.com" method="post" enctype="text/plain">
+                            <div class="form-group">
+                                <label for="name">Name:</label>
+                                <input type="text" class="form-control" id="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message:</label>
+                                <textarea class="form-control" id="message" rows="4" style="margin-bottom: 20px" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-md-5 offset-md-1 contact-info" style="background-color: #5f8d4e; color: #f8f9fa;">
+                    <h3>Contact Information</h3>
+                    <p class="mb-3" style="font-size: 13px">We'd love to assist you in any way we can! For order updates or questions about any of our products or services, you may contact us through:</p>
+                    <p class="mb-3"><strong>Email:</strong> buyani@gmail.com</p>
+                    <p class="mb-3"><strong>Phone:</strong> +1 (234) 567-890</p>
+                    <p class="mb-3"><strong>Facebook:</strong> vky</p>
+                    <p class="mb-0"><strong>Address:</strong> 123 Maroroy St, Daraga, Albay, PH</p>
                 </div>
             </div>
         </div>
