@@ -23,6 +23,11 @@ class LogSuccessfulLogin
      */
     public function handle(Login $event)
     {
+    // Ensure the user is an instance of the 'User' model
+        if (! $event->user instanceof \App\Models\User) {
+            return;
+        }
+
         $loginMethod = isset($event->credentials['phone_number']) ? 'phone_number' : 'email';
 
         User_log::create([
