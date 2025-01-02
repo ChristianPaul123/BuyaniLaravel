@@ -6,8 +6,10 @@ use App\Models\Chat;
 use App\Models\User;
 use Livewire\Component;
 use App\Models\Messages;
-use Illuminate\Support\Facades\Auth;
+use App\Livewire\Birdcount;
+use Livewire\Attributes\On;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class AdminChatConsumer extends Component
 {
@@ -16,6 +18,7 @@ class AdminChatConsumer extends Component
     public $messageInput;
     public $users;
     public $selectedUser;
+    // public $birdcount = 0;
 
     protected $rules = [
         'messageInput' => 'required|string|max:255',
@@ -59,6 +62,12 @@ class AdminChatConsumer extends Component
         // Load messages for the selected chat
         $this->loadMessages();
     }
+
+    // #[On('birdcount')]
+    // public function testme($birdcount = null) {
+    //     $this->birdcount = $birdcount + 100;
+    //     $this->dispatch('birdcount', $birdcount)->to(Birdcount::class);
+    // }
 
     public function sendMessage()
     {
