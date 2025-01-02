@@ -181,7 +181,6 @@
 
 @section('scripts')
 
-
 <script>
     function togglePasswordVisibility(passwordFieldId, toggleIcon) {
         const passwordField = document.getElementById(passwordFieldId);
@@ -197,18 +196,28 @@
         }
     }
 
+        // Event listeners for the password toggle icons
+        document.getElementById('togglePassword').addEventListener('click', function () {
+        togglePasswordVisibility('password', this);
+    });
+</script>
+
+{{-- <script>
     function togglePasswordVisibility(passwordFieldId, toggleIcon) {
         const passwordField = document.getElementById(passwordFieldId);
-        const toggleIcon = document.getElementById('toggleIcon');
+        const icon = toggleIcon.querySelector('i');
+
         // Toggle the password field type and icon class
-        if (passwordField.type === 'password1') {
+        if (passwordField.type === 'password') {
             passwordField.type = 'text';
             icon.classList.replace('fa-eye', 'fa-eye-slash');
         } else {
-            passwordField.type = 'password1';
-            icon.classList.replace('bi-eye-slash', 'bi-eye');
+            passwordField.type = 'password';
+            icon.classList.replace('fa-eye-slash', 'fa-eye');
         }
     }
+
+
 
     passwordField1.setAttribute('type', type1);
             passwordField2.setAttribute('type', type2);
@@ -226,9 +235,39 @@
         document.getElementById('togglePasswordOTP').addEventListener('click', function () {
         togglePasswordVisibility('password1', this);
     });
-</script>
+</script> --}}
+
 
 <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const emailPhoneInput = document.getElementById("email_phoneNum");
+    const emailPhoneError = document.getElementById("emailPhoneError");
+    const form = document.getElementById("loginForm");
+
+    emailPhoneInput.addEventListener("input", function () {
+        const value = emailPhoneInput.value.trim();
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        const phoneRegex = /^\+?\d{10,15}$/;
+
+        if (emailRegex.test(value) || phoneRegex.test(value)) {
+            emailPhoneError.style.display = "none";
+            emailPhoneInput.setCustomValidity("");
+        } else {
+            emailPhoneError.style.display = "block";
+            emailPhoneInput.setCustomValidity("Invalid email or phone number format.");
+        }
+    });
+});
+</script>
+
+{{-- OTP Modal --}}
+
+
+@include('user.includes.popup-js')
+
+@endsection
+
+{{-- <script>
     document.addEventListener('livewire:initialized',()=>{
 
         // Password Validation
@@ -335,32 +374,4 @@
 
     })
     </script>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    const emailPhoneInput = document.getElementById("email_phoneNum");
-    const emailPhoneError = document.getElementById("emailPhoneError");
-    const form = document.getElementById("loginForm");
-
-    emailPhoneInput.addEventListener("input", function () {
-        const value = emailPhoneInput.value.trim();
-        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        const phoneRegex = /^\+?\d{10,15}$/;
-
-        if (emailRegex.test(value) || phoneRegex.test(value)) {
-            emailPhoneError.style.display = "none";
-            emailPhoneInput.setCustomValidity("");
-        } else {
-            emailPhoneError.style.display = "block";
-            emailPhoneInput.setCustomValidity("Invalid email or phone number format.");
-        }
-    });
-});
-</script>
-
-{{-- OTP Modal --}}
-
-
-@include('user.includes.popup-js')
-
-@endsection
+ --}}
