@@ -50,7 +50,7 @@ class LoginIndex extends Component
 
     public function closeModal()
     {
-        $this->reset(['otp', 'showEmailModal','showOtpModal','showPasswordResetForm','email', 'newPassword']);
+        $this->reset(['otp', 'showEmailModal','showOtpModal','showPasswordResetForm','selectedEmail', 'newPassword']);
         // Reset OTP and hide modal
     }
 
@@ -203,7 +203,7 @@ class LoginIndex extends Component
         if ($otpRecord && $otpRecord->otp == $this->otp) {
             $otpRecord->update(['is_verified' => true]);
 
-            //closes the other modal and show the password reseet modal
+            //closes the other modal and show the password reset modal
             $this->showOtpModal = false;
             $this->showEmailModal = false;
             $this->showPasswordResetForm = true;

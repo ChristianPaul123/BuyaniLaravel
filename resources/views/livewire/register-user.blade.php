@@ -125,7 +125,6 @@
                     <button id="submit-button" type="submit" class="btn btn-warning btn-block px-4" style="width: fit-content;" disabled>Sign Up</button>
                 </div>
               </form>
-
           </div>
     @elseif($user_type == 2)
           <div class="container-fluid custom-font-content" style="padding: 20px;">
@@ -198,7 +197,6 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- Submit Button -->
                 <div class="row form-group my-3 d-flex justify-content-center">
                     <button id="submit-button" type="submit" class="btn btn-warning btn-block px-4" style="width: fit-content;" disabled>Sign Up</button>
@@ -210,7 +208,6 @@
     @if($showModal)
         <div>
             <div class="overlay" id="overlay" aria-label="Close" onclick="closePopup()"></div>
-
             <div class="popup input">
                 <form wire:submit.prevent="verifyOtp">
                     <i class="close bi bi-x-lg fs-4" aria-label="Close" onclick="closePopup()"></i>
