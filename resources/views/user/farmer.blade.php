@@ -4,118 +4,163 @@
 
 @push('styles')
 <style>
-@keyframes fadeInDown {
-    from {
-        transform: translate(-50%, -55%); /* Start from above the screen */
-        opacity: 0;
+    body {
+        font-family: Arial, sans-serif;
     }
-    to {
-        transform: translate(-50%, -50%); /* Center in the screen */
-        opacity: 1;
+    .section-1{
+    padding: 100px 100px 50px 100px;
     }
-}
-
-@keyframes fadeOutUp {
-    from {
-        transform: translate(-50%, -50%); /* Start from center */
-        opacity: 1;
+    .section-1 .container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
-    to {
-        transform: translate(-50%, -55%); /* Move up to above the screen */
-        opacity: 0;
+    .section-1 h1{
+        font-size: 60px;
+        font-weight: bold;
+        padding: 0;
     }
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
+    .section-1 h1:nth-of-type(1){
+        color: #ffffff;
     }
-    to {
-        opacity: 0.6;
+    .section-1 span:nth-of-type(1){
+        color: #ffa500;
     }
-}
-
-@keyframes fadeOut {
-    from {
-        opacity: 0.6;
+    .section-1 h1:nth-of-type(2) span:nth-of-type(2){
+        color: #00cc1a;
     }
-    to {
-        opacity: 0;
+    .section-1 h4{
+        color: #ffffff;
     }
-}
+    .section-1 button{
+        width: 150px;
+        height: 40px;
+        border: 3px solid #00cc1a;
+        border-radius: 7px;
+        background-color:rgb(25, 179, 17);
+        color:rgb(255, 255, 255);
+        transition: all 0.5s ease;
+    }
+    .section-1 button:hover{
+        scale: 1.1;
+    }
+    .hero {
+        background: url('{{ asset('img/farmer-home/farm-bg.jpg') }}') no-repeat center center/cover;
+        color: white;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    .best-selling {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+    }
+    .product-card {
+        flex: 1 1 calc(20% - 1rem);
+        min-width: 200px;
+        max-width: 220px;
+        text-align: center;
+        color: rgb(0, 0, 0);
+        cursor: pointer;
+        transition: 400ms;
+        margin-right: 20px;
+    }
+    .product-card img {
+        max-height: 150px;
+        margin-bottom: 10px;
+    }
 
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    z-index: 999;
-    animation: fadeIn 0.2s ease-out forwards; /* Fade in animation for the overlay */
-}
+    .product-card:hover{
+        transform: scale(1.1, 1.1);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .product-card:hover > .product-card:not(:hover){
+        transform: scale(0.9, 0.9);
+    }
 
-.overlay.hidden {
-    animation: fadeOut 0.2s ease-in forwards; /* Fade out animation for the overlay */
-}
+    /* Analytics */
+    .analytics {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        gap: 4rem;
+    }
 
-.error-popup {
-    width: 400px;
-    background-color: #ffffff;
-    color: #842029;
-    border: 1px solid black;
-    border-radius: 5px;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    z-index: 1000;
-    animation: fadeInDown 0.3s ease-out forwards; /* Slide down animation for the modal */
-}
+    .farmers {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
 
-.error-popup.hidden {
-    animation: fadeOutUp 0.3s ease-in forwards; /* Slide up animation for the modal */
-}
+    .text-center {
+        font-family: 'Poppins', sans-serif;
+        font-weight: bold;
+    }
 
-.container-contents {
-    padding: 20px;
-}
+    /* Carousel */
+    .Promote {
+        padding: 20px;
+        background-color: #F5F5F5;
+        margin-bottom: 20px;
+    }
 
-.error-popup .error-icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 120px;
-    background-color: #e85e6c;
-    font-size: 60px;
-}
+    h2 {
+        font-family: 'Poppins', sans-serif;
+        font-weight: bold;
+        margin-bottom: 30px;
+        text-align: center;
+        color: #2c3e50; /* Dark header text */
+    }
 
-button {
-    background-color: #ffc107;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-}
+    .carousel-inner img {
+        height: 400px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+    .carousel-indicators button {
+        background-color: #2c3e50;
+    }
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        background-color: #2c3e50; /* Dark arrows */
+        border-radius: 50%;
+        padding: 5px;
+    }
+    /* End of Carousel */
 
-.error-popup button:hover {
-    background-color: #e0a800;
-}
 
-.error-icon .icon {
-    color: #ffffff;
-}
+    /* Section 2 Sponsors Styling */
+    .sponsors img {
+        max-height: 100px;
+        object-fit: contain;
+        margin: 10px;
+        filter: grayscale(100%);
+        transition: filter 0.3s ease-in-out;
+    }
+    .sponsors img:hover {
+        filter: grayscale(0%);
+    }
 
-.error-popup .bi-x-lg {
-    color: #fff;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-}
+    .section3{
+        background-color: #F8F9FA;
+    }
+
+
+    /* Bar Chart */
+    #barChart {
+        height: 20;
+        border: 2px solid #f4f4f4;
+        border-radius: 10px;
+        background-color: #f8f9fa;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
 </style>
 @endpush
 
@@ -140,223 +185,194 @@ button {
 </div>
 @endif
 
-         <!-- Main Page -->
-    <section class="mt-5">
-        <div class="row" class="hero-section d-flex align-items-center" style="background-image: url({{ asset('img/stockImg4.png') }}); background-repeat: no-repeat; background-size: cover; background-position: center; height: 650px;">
-            <!-- Left Section -->
-            <div class="col-md-4 px-5">
-                <!-- Upper Part -->
-                <div class="container pt-5">
-                    <h1 class="display-4" style="color: #FFFF; font-size: 50px; font-weight: bold; margin-bottom: -10px;">Welcome</h1>
-                    <h1 style="color: #F39634; font-size: 70px; font-weight: bold;">Farmer!</h1>
-                    <p class="text-light">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    </p>
-                    <button class="btn btn-warning">Learn More</button>
+<div class="main-div">
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container text-center">
+            <div class="container section-1">
+                    <h1 style="margin-bottom: -10px;">WELCOME  <span style="color:orange;font-weight:bold">FARMERS</span></h1>
+                    <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et lacinia dolor, ac varius massa. Interdum et malesuada fames ac ante ipsum primis in faucibus. Quisque dapibus orci eu tempor ullamcorper.</h4>
+                    <button>Sell Now!</button>
                 </div>
-                <!-- User Status -->
-                <div class="row text-center px-3 mt-5">
-                    <div class="row p-0 m-0">
-                        <h1 class="custom-border-top py-2 m-0">Farmers Status</h1>
-                        <div class="row custom-border-bottom py-3 m-0">
-                            <div class="col">
-                                <h5>Active</h5>
-                                <h5>XXX</h5>
-                            </div>
-                            <div class="col m-0 p-0">
-                                <h1>|</h1>
-                            </div>
-                            <div class="col">
-                                <h5>Inactive</h5>
-                                <h5>XXX</h5>
-                            </div>
-                        </div>
+        </div>
+    </section>
+
+    <!-- Best Selling Section -->
+    <section class="py-5">
+        <div class="container">
+            <h1 class="text-center section1 mb-4">Best Selling This Month</h1>
+            <div class="best-selling">
+                <div class="card product-card">
+                    <img src="img/product1.png" class="card-img-top" alt="Cabbage">
+                    <div class="card-body">
+                        <h5>#1 Cabbage</h5>
+                        <p>Amount: 500kg</p>
                     </div>
                 </div>
-            </div>
-
-            <!-- Middle Section-->
-            <div class="col-md-3 text-center" style="color: white;">
-                <div class="container mt-4 p-2" style="background-color: rgba(0, 0, 0, 0.3); border-radius: 15px; width: 90%;">
-                    <div class="row">
-                        <p class="card-text" id="day" style="font-weight: bold; font-size: 45px;"></p>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <div id="weather" class="">
-                                <i id="weatherIcon" class="me-3" style="font-size: 100px;"></i> <!-- Change the value here -->
-                            </div>
-                        </div>
-
-                        <div class="col">
-                            <p id="weatherText" class="mb-0" style="font-size: 25px;"></p>
-                            <p id="temperature" style="font-size: 2em;"></p>
-                        </div>
+                <div class="card product-card">
+                    <img src="img/product1.png" class="card-img-top" alt="Carrots">
+                    <div class="card-body">
+                        <h5>#2 Carrots</h5>
+                        <p>Amount: 400kg</p>
                     </div>
                 </div>
-            </div>
-
-
-
-            <!-- Right Section-->
-            <div class="col-md-5 px-5" style="color: white;">
-                <!-- Best Seller -->
-                <div class="row my-4">
-                    <div class="row text-center d-flex mx-auto custom-border-top">
-                        <h2 class="my-2">Best Selling This Month</h2>
-                    </div>
-                    <div class="row text-center d-flex mx-auto py-3 custom-border-bottom">
-                        <div class="col">
-                            <h4 style="position: absolute;">1st</h4>
-                            <img src="https://via.placeholder.com/125x125" alt="Custom Placeholder" width="125" height="125">
-                            <h4>Apple</h4>
-                            <h5>Amount: 500kg</h5>
-                        </div>
-                        <div class="col">
-                            <h4 style="position: absolute;">2nd</h4>
-                            <img src="https://via.placeholder.com/125x125" alt="Custom Placeholder" width="125" height="125">
-                            <h4>Mango</h4>
-                            <h5>Amount: 300kg</h5>
-                        </div>
-                        <div class="col">
-                            <h4 style="position: absolute;">3rd</h4>
-                            <img src="https://via.placeholder.com/125x125" alt="Custom Placeholder" width="125" height="125">
-                            <h4>Banana</h4>
-                            <h5>Amount: 200kg</h5>
-                        </div>
+                <div class="card product-card">
+                    <img src="img/product1.png" class="card-img-top" alt="Papaya">
+                    <div class="card-body">
+                        <h5>#3 Papaya</h5>
+                        <p>Amount: 300kg</p>
                     </div>
                 </div>
-
-                <!-- Bar Graph -->
-                <div class="row" style="background-color: #FFFFFF;">
-                    <canvas id="myBarChart" style="max-width: 600px;"></canvas>
+                <div class="card product-card">
+                    <img src="img/product1.png" class="card-img-top" alt="Corn">
+                    <div class="card-body">
+                        <h5>#4 Corn</h5>
+                        <p>Amount: 300kg</p>
+                    </div>
+                </div>
+                <div class="card product-card">
+                    <img src="img/tomato.png" class="card-img-top" alt="Apple">
+                    <div class="card-body">
+                        <h5>#5 Apple</h5>
+                        <p>Amount: 300kg</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Analytics Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h1 class="text-center mb-4">This Month's Top Consumer Vote</h1>
+            <div class="analytics">
+                <canvas id="barChart" height="125"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <section class="Promote">
+    <div class="container text-center py-5">
+        <!-- Section Title -->
+        <p class="text-uppercase text-success fw-bold">Portfolio</p>
+        <h2>We Have Done</h2>
+
+        <!-- Carousel -->
+        <div id="portfolioCarousel" class="carousel slide" data-bs-ride="carousel">
+            <!-- Indicators -->
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#portfolioCarousel" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#portfolioCarousel" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#portfolioCarousel" data-bs-slide-to="2"></button>
+                <button type="button" data-bs-target="#portfolioCarousel" data-bs-slide-to="3"></button>
+                <button type="button" data-bs-target="#portfolioCarousel" data-bs-slide-to="4"></button>
+                <button type="button" data-bs-target="#portfolioCarousel" data-bs-slide-to="5"></button>
+            </div>
+
+            <!-- Carousel Items -->
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="{{ asset('img/farmer-home/blog3.jpg') }}" class="d-block w-100" alt="Image 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ asset('img/farmer-home/blog1.jpg') }}" class="d-block w-100" alt="Image 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ asset('img/farmer-home/blog2.jpg') }}" class="d-block w-100" alt="Image 3">
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ asset('img/farmer-home/blog6.jpg') }}" class="d-block w-100" alt="Image 4">
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ asset('img/farmer-home/blog8.jpg') }}" class="d-block w-100" alt="Image 5">
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ asset('img/farmer-home/blog4.jpg') }}" class="d-block w-100" alt="Image 6">
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#portfolioCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#portfolioCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    </section>
+
+    <!-- Section 2: Sponsors -->
+     <section>
+        <div class="container text-center py-5">
+            <!-- <p class="text-uppercase text-success fw-bold" style="color: ;">Sponsors</p>
+            <h2>Supported By</h2> -->
+            <div class="row sponsors">
+                <div class="col-md-2 col-sm-4 col-6">
+                    <img src="https://via.placeholder.com/200x100?text=Sponsor+1" alt="Sponsor 1" class="img-fluid">
+                </div>
+                <div class="col-md-2 col-sm-4 col-6">
+                    <img src="https://via.placeholder.com/200x100?text=Sponsor+2" alt="Sponsor 2" class="img-fluid">
+                </div>
+                <div class="col-md-2 col-sm-4 col-6">
+                    <img src="https://via.placeholder.com/200x100?text=Sponsor+3" alt="Sponsor 3" class="img-fluid">
+                </div>
+                <div class="col-md-2 col-sm-4 col-6">
+                    <img src="https://via.placeholder.com/200x100?text=Sponsor+4" alt="Sponsor 4" class="img-fluid">
+                </div>
+                <div class="col-md-2 col-sm-4 col-6">
+                    <img src="https://via.placeholder.com/200x100?text=Sponsor+5" alt="Sponsor 5" class="img-fluid">
+                </div>
+                <div class="col-md-2 col-sm-4 col-6">
+                    <img src="https://via.placeholder.com/200x100?text=Sponsor+6" alt="Sponsor 6" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
 @endsection
 
 @section('scripts')
-<script>
-    $(document).ready(function(){
-        // Using Moment.js to get and format today's day
-        var today = moment().format('dddd').toUpperCase();  // 'dddd' gives the full day name
-        $('#day').text(today);
-    });
-</script>
-
-<!-- Weather -->
-<script>
-    const apiKey = '{{ config('services.weather.key') }}';
-    const city = 'Legaspi, PH';
-    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-
-    fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => {
-            const weatherElement = document.getElementById('weatherText');
-            const weatherIcon = document.getElementById('weatherIcon');
-            const temperatureElement = document.getElementById('temperature');
-            const weatherCondition = data.weather[0].main.toLowerCase();
-            const temperature = data.main.temp.toFixed(1); // Get temperature and round to 1 decimal place
-
-            // Set temperature text
-            temperatureElement.textContent = `${temperature}°C`;
-
-            // Set weather condition and icon
-            if (weatherCondition.includes('rain')) {
-                weatherElement.textContent = "It's rainy!";
-                weatherIcon.className = "fas fa-cloud-showers-heavy rainy";
-            } else if (weatherCondition.includes('clear')) {
-                weatherElement.textContent = "It's sunny!";
-                weatherIcon.className = "fas fa-sun sunny";
-            } else if (weatherCondition.includes('clouds')) {
-                weatherElement.textContent = "It's cloudy!";
-                weatherIcon.className = "fas fa-cloud cloudy";
-            } else {
-                weatherElement.textContent = "Weather is mixed!";
-                weatherIcon.className = "fas fa-cloud-sun";
-            }
-        })
-        .catch(error => {
-            console.error('Error fetching weather data:', error);
-            document.getElementById('weatherText').textContent = "Unable to fetch weather data.";
-            document.getElementById('temperature').textContent = "";
-        });
-
-</script>
-<script>
-    // Sample Data
-    const ctx = document.getElementById('myBarChart').getContext('2d');
-    const myBarChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-            datasets: [{
-                label: 'This Month’s Top Consumer Vote',
-                data: [12, 19, 3, 5, 2, 3],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            indexAxis: 'y',
-            scales: {
-                x: {
-                    beginAtZero: true
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Bar Chart Configuration
+        const ctx = document.getElementById('barChart').getContext('2d');
+        const barChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Product A', 'Product B', 'Product C', 'Product D', 'Product E'],
+                datasets: [{
+                    label: 'Votes',
+                    data: [120, 150, 80, 200, 170],
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(153, 102, 255, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(153, 102, 255, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
                 }
             }
-        }
-    });
-</script>
-
-<script>
-    function closePopup() {
-        const overlay = document.getElementById('overlay');
-        const popup = document.querySelector('.error-popup');
-
-        // Add the hidden class to trigger the fade-out animation
-        overlay.classList.add('hidden');
-        popup.classList.add('hidden');
-
-        // After animation ends, hide the elements entirely
-        setTimeout(() => {
-            overlay.style.display = 'none';
-            popup.style.display = 'none';
-        }, 300); // Match the duration of the animation
-    }
-
-    function showPopup() {
-        const overlay = document.getElementById('overlay');
-        const popup = document.querySelector('.error-popup');
-
-        // Show elements and remove hidden class for fade-in animation
-        overlay.style.display = 'block';
-        popup.style.display = 'block';
-        overlay.classList.remove('hidden');
-        popup.classList.remove('hidden');
-    }
-</script>
-
-<script>
-    window.addEventListener('popstate', function(event) {
-        // If the user press the back button, log them out
-        window.location.href = "{{ route('user.logout') }}";
-    });
-  </script>
+        });
+    </script>
 @endsection
