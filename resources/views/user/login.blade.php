@@ -153,16 +153,16 @@
         display: inline;
         color: red;
     }
-    #password1 {
+    .password1 {
         transition: border-color 0.3s, box-shadow 0.3s;
     }
-    #password1.invalid-input {
+    .password1.invalid-input {
         border-color: red;
         box-shadow: 0 0 5px red;
     }
-    #password1.valid-input {
+    .password1.valid-input {
         border-color: green;
-        box-shadow: 0 0 5px green;
+         box-shadow: 0 0 5px green;
     }
 </style>
 
@@ -182,7 +182,7 @@
 @section('scripts')
 
 
-{{-- <script>
+<script>
     function togglePasswordVisibility(passwordFieldId, toggleIcon) {
         const passwordField = document.getElementById(passwordFieldId);
         const icon = toggleIcon.querySelector('i');
@@ -197,11 +197,11 @@
         }
     }
 
-        // Event listeners for the password toggle icons
-        document.getElementById('togglePassword').addEventListener('click', function () {
-        togglePasswordVisibility('password', this);
+    // Event listener for the password toggle icon
+    document.getElementById('togglePassword').addEventListener('click', function () {
+        togglePasswordVisibility('passwordField', this);
     });
-</script> --}}
+</script>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
