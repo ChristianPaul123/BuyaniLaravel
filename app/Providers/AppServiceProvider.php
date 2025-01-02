@@ -19,7 +19,6 @@ use Illuminate\Support\ServiceProvider;
 use App\Listeners\AdminActivityListener;
 use Illuminate\Console\Scheduling\Schedule;
 use App\Observers\ProductSpecificationObserver;
-use App\Providers\AuthServiceProvider;
 
 
 class AppServiceProvider extends ServiceProvider
@@ -41,8 +40,8 @@ class AppServiceProvider extends ServiceProvider
         $schedule->command('app:generate-monthly-suggest-product-reports')->monthly()->sendOutputTo(storage_path('logs/monthly_suggested_products_reports.log'));
         Order::observe(OrderObserver::class);
         Product::observe(ProductObserver::class);
-        // Event::listen(Login::class, [AdminActivityListener::class, 'handle']);
-        // Event::listen(Logout::class, [AdminActivityListener::class, 'handle']);
+        Event::listen(Login::class, [AdminActivityListener::class, 'handle']);
+        Event::listen(Logout::class, [AdminActivityListener::class, 'handle']);
         ProductSpecification::observe(ProductSpecificationObserver::class);
         // User::observe(UserObserver::class);
         Paginator::useBootstrapFive();
