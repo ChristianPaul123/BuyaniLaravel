@@ -16,10 +16,10 @@
                     <tr>
                         <td>{{ $index  + 1 }}</td>
                         {{-- PRODUCT NAME --}}
-                        <td>{{ $log->product->name ?? 'N/A' }}</td>
+                        <td>{{ $log->product->product_name ?? 'N/A' }}</td>
 
                         {{-- ADMIN NAME --}}
-                        <td>{{ $log->admin->name ?? 'N/A' }}</td>
+                        <td>{{ $log->admin->username ?? 'N/A' }}</td>
 
                         {{-- ACTION --}}
                         <td>{{ $log->action }}</td>
