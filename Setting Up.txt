@@ -43,3 +43,17 @@ RECAPTCHA_SECRETKEY = 6LfbRJ0qAAAAAFslz_u0rkcmR05-ZiplAffFUBkn
 #style some of the layouts
 #make it load faster
 #understand and remove some package dependencies that are not used - kasi di mga marunong si tig add yawa
+
+
+
+#To automatic have user for testing type the command bellow  
+# php artisan db:seed
+
+
+#Users For Testing Purposes
+#Users
+    #email:myuser@example.com
+    #pass:User12345678
+#Admin
+    #email:myadmin@example.com
+    #pass:Admin12345678
