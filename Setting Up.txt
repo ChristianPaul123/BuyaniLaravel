@@ -46,8 +46,8 @@ RECAPTCHA_SECRETKEY = 6LfbRJ0qAAAAAFslz_u0rkcmR05-ZiplAffFUBkn
 
 
 
-#User  
-
+#To automatic have user for testing type the command bellow  
+# php artisan db:seed
 
 
 #Users For Testing Purposes

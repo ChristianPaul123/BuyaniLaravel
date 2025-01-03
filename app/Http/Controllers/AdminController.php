@@ -111,20 +111,20 @@ class AdminController extends Controller
 
         if ($request->hasFile('admin_payment')) {
             // Remove the old file if exists
-            if ($admin->admin_payment && file_exists(public_path($admin->admin_payment))) {
-                unlink(public_path($admin->admin_payment));
+            if ($admin->admin_payment && file_exists(storage_path('app/' . $admin->admin_payment))) {
+                unlink(storage_path('app/' . $admin->admin_payment));
             }
 
             // Save the new file
             $fileName = time() . '.' . $request->admin_payment->extension();
-            $request->admin_payment->move(public_path('img/admin_payments'), $fileName);
+            $filePath = $request->admin_payment->storeAs('admin/payments', $fileName, 'local');
 
             // Update the database
-            $admin->update(['admin_payment' => 'img/admin_payments/' . $fileName]);
+            $admin->update(['admin_payment' => $filePath]);
         }
 
         return redirect()->route('admin.customization', ['tab' => 'payments'])
-        ->with('message', 'Payment picture updated successfully.');
+            ->with('message', 'Payment picture updated successfully.');
     }
 
 
@@ -187,31 +187,32 @@ class AdminController extends Controller
 
 
         // Add Sponsor Image
-    public function addSponsorimg(Request $request)
-    {
-    $validatedData = $request->validate([
-        'img_title' => ['required', 'string', 'max:255', 'unique:sponsor_imgs,img_title'],
-        'img' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:4096'],
-    ]);
-
-    // Upload sponsor image
-    if ($request->hasFile('img')) {
-        $imageName = time() . '.' . $request->img->extension();
-        $request->img->move(public_path('img/sponsor'), $imageName);
-        $validatedData['img'] = 'img/sponsor/' . $imageName;
-    } else {
-        return redirect()->route('admin.customization.sponsor')->withErrors(['img' => 'No image uploaded.']);
-    }
-
-    // Create sponsor image record
-    SponsorImgs::create([
-        'img_title' => $validatedData['img_title'],
-        'img' => $validatedData['img'],
-        'admin_id' => Auth::guard('admin')->id(), // Assuming admin is logged in
-    ]);
-
-    return redirect()->route('admin.customization.sponsor')->with('message', 'Sponsor image added successfully.');
-    }
+        public function addSponsorimg(Request $request)
+        {
+            $validatedData = $request->validate([
+                'img_title' => ['required', 'string', 'max:255', 'unique:sponsor_imgs,img_title'],
+                'img' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:4096'],
+            ]);
+    
+            // Upload sponsor image
+            if ($request->hasFile('img')) {
+                $imageName = time() . '.' . $request->img->extension();
+                $filePath = $request->img->storeAs('admin/sponsor', $imageName, 'local');
+                $validatedData['img'] = $filePath;
+            } else {
+                return redirect()->route('admin.customization.sponsor')->withErrors(['img' => 'No image uploaded.']);
+            }
+    
+            // Create sponsor image record
+            SponsorImgs::create([
+                'img_title' => $validatedData['img_title'],
+                'img' => $validatedData['img'],
+                'admin_id' => Auth::guard('admin')->id(), // Assuming admin is logged in
+            ]);
+    
+            return redirect()->route('admin.customization.sponsor')->with('message', 'Sponsor image added successfully.');
+        }
+    
 
     // Edit Sponsor Image
     public function editSponsorimg($encryptedId)
@@ -240,19 +241,20 @@ class AdminController extends Controller
         // Handle image upload if a new one is provided
         if ($request->hasFile('img')) {
             // Delete the old image if it exists
-            if ($sponsorImg->img) {
-                @unlink(public_path($sponsorImg->img));
+            if ($sponsorImg->img && file_exists(storage_path('app/' . $sponsorImg->img))) {
+                unlink(storage_path('app/' . $sponsorImg->img));
             }
 
             $imageName = time() . '.' . $request->img->extension();
-            $request->img->move(public_path('img/sponsor'), $imageName);
-            $validatedData['img'] = 'img/sponsor/' . $imageName;
+            $filePath = $request->img->storeAs('admin/sponsor', $imageName, 'local');
+            $validatedData['img'] = $filePath;
         }
 
         $sponsorImg->update([
             'img_title' => $validatedData['img_title'],
             'img' => $validatedData['img'] ?? $sponsorImg->img, // Keep the old image if none was uploaded
         ]);
+
         return redirect()->route('admin.customization.sponsor')->with('message', 'Sponsor image updated successfully.');
     }
 
@@ -262,17 +264,12 @@ class AdminController extends Controller
         $sponsorImg = SponsorImgs::findOrFail($id);
 
         // Delete the associated image file if it exists
-        if ($sponsorImg->img) {
-            @unlink(public_path($sponsorImg->img));
+        if ($sponsorImg->img && file_exists(storage_path('app/' . $sponsorImg->img))) {
+            unlink(storage_path('app/' . $sponsorImg->img));
         }
 
         $sponsorImg->delete();
 
         return redirect()->route('admin.customization.sponsor')->with('message', 'Sponsor image deleted successfully.');
     }
-
-
-
-
-
 }

@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 
 class ConsumerProfile extends Component
 {
-
     use WithFileUploads;
 
     // User data and modals visibility
@@ -60,25 +59,22 @@ class ConsumerProfile extends Component
             'profile_pic' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-
         $this->user->first_name = $this->first_name;
         $this->user->last_name = $this->last_name;
         $this->user->username = $this->username;
         $this->user->phone_number = $this->phone_number;
 
         // Handle profile picture upload if a new file is provided
-       // Handle profile picture upload if a new file is provided
-       if ($this->profile_pic) {
-        // Delete old profile pic if exists
-        if ($this->user->profile_pic) {
-            $this->deleteOldImage($this->user->profile_pic);
+        if ($this->profile_pic) {
+            // Delete old profile pic if exists
+            if ($this->user->profile_pic) {
+                $this->deleteOldImage($this->user->profile_pic);
+            }
+
+            // Store the new image
+            $profileImagePath = $this->storeImage($this->profile_pic, 'profile/' . $this->user->username);
+            $this->user->profile_pic = $profileImagePath;
         }
-
-        // Store the new image
-        $profileImagePath = $this->storeImage($this->profile_pic, 'img/profile/'. $this->user->username);
-        $this->user->profile_pic = $profileImagePath;
-    }
-
 
         // Save user updates to the database
         $this->user->save();
@@ -90,32 +86,28 @@ class ConsumerProfile extends Component
 
     private function storeImage($image, $directory)
     {
-        // Ensure the directory exists
-        if (!file_exists(public_path($directory))) {
-            mkdir(public_path($directory), 0755, true);
-        }
-
         // Create a unique name for the uploaded file
         $imageName = time() . '.' . $image->getClientOriginalExtension();
 
-        // Use storeAs to save the file
-        $storedPath = $image->storeAs($directory, $imageName, 'public_uploads');
+        // Use storeAs to save the file in the storage/app/public directory
+        $storedPath = $image->storeAs($directory, $imageName, 'public');
 
-        return $storedPath;
+        // Return the relative path to the file (for use in the database or URLs)
+        return 'storage/' . $directory . '/' . $imageName;
     }
 
     private function deleteOldImage($path)
     {
-        $fullPath = public_path($path);
+        $fullPath = storage_path('app/public/' . $path);
         if (file_exists($fullPath)) {
             unlink($fullPath);
         }
     }
 
-
     public function render()
     {
-        return view('livewire.consumer.consumer-profile',[
-        'user' => $this->user,]);
+        return view('livewire.consumer.consumer-profile', [
+            'user' => $this->user,
+        ]);
     }
 }
