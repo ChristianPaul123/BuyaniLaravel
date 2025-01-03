@@ -15,12 +15,27 @@
         word-wrap: break-word;
     }
 
+    .shipping-container {
+        border-radius: 8px;
+        border: 1px solid #e0e0e0;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        height: 300px;
+        overflow-y: auto; /* Enables vertical scrolling */
+    }
+
+    .shipping-info{
+        border: 1px solid black;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+
     .profile-section h4 {
         font-size: 1.5rem;
         color: #4a4a4a;
         margin-bottom: 20px;
-        border-bottom: 2px solid #00aaff;
         display: inline-block;
+        font: bol
     }
 
     .profile-section:hover {

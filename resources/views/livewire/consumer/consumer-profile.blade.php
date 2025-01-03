@@ -1,17 +1,17 @@
 <div>
     <section>
     <!-- Display Success Message -->
-    @if (session()->has('message'))
+    {{-- @if (session()->has('message'))
         <div class="alert alert-success mx-3 my-2 px-3 py-2">
             <button type="button" class="close btn btn-success">
                 <span aria-hidden="true">&times;</span>
             </button>
             {{ session('message') }}
         </div>
-    @endif
+    @endif --}}
 
     <!-- Display Validation Errors -->
-    @if ($errors->any())
+    {{-- @if ($errors->any())
         <div class="alert alert-danger mx-3 my-2 px-3 py-2">
             <button type="button" class="close btn btn-danger">
                 <span aria-hidden="true">&times;</span>
@@ -22,18 +22,18 @@
                 @endforeach
             </ul>
         </div>
-    @endif
+    @endif --}}
 
     <div class="row mt-3">
         <div class="col-12">
-            <div class="card shadow-sm">
-                <div class="card-body">
+            <div class="">
+                <div class="">
                     <div class="row">
                         <!-- Profile Picture and Basic Info -->
                         <div class="col-md-6 col-sm-12 text-center">
                             <div class="photo-section">
-                                <h3 class="mt-3">Consumer</h3>
-                                <img src="{{ asset($user->profile_pic) }}" alt="Profile Picture" class="profile-pic" width="150px" width="150px">
+                                <h3 class="">Consumer</h3>
+                                <img src="{{ asset($user->profile_pic) }}" alt="Profile Picture" class="profile-pic" width="150px" width="150px" onerror="this.onerror=null; this.src='{{ asset('img/title/consumer.png') }}';">
                                 {{-- <img src="{{ Storage::url($user->profile_pic) }}" alt="Profile Picture" class="profile-pic rounded-circle" width="150px" height="auto"> --}}
                                 <h6 class="mt-3">{{ $user->username }}</h3>
                                 <p class="text-muted">{{ $user->email }}</p>
