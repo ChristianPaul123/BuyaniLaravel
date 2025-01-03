@@ -119,7 +119,7 @@
           {{ session('message') }}
       </div>
      @endsession
-            <form action="admin/login" method="post" autocomplete="off">
+            <form action="{{ route('admin.admin.login') }}" method="post" autocomplete="off">
                 @csrf
                 <div class="form-group">
                     <label for="email" class="form-icon"><i class="fas fa-envelope"></i> Username</label>

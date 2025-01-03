@@ -12,7 +12,8 @@ use Illuminate\Support\Facades\Session;
 class CartController extends Controller
 {
 
-    public function showConsumerCart() {
+    public function showConsumerCart()
+    {
 
         if (!Auth::guard('user')->check()) {
             // If not authenticated, flush the session and redirect to user index with a message
@@ -20,35 +21,40 @@ class CartController extends Controller
             return redirect()->route('user.index')->with('message', 'Please log in or sign up to view this page');
         }
 
-
         $cart = Cart::where('user_id', auth()->guard('user')->user()->id)->first();
 
-        // Fetch related CartItems with ProductSpecification and Product
         $cartItems = $cart ? $cart->cartItems()
         ->whereHas('product_specification.product')
         ->with(['product_specification.product'])
         ->get() : collect();
 
         return view('user.consumer.cart.show', ['cart' => $cart, 'cartItems' => $cartItems]);
-
     }
 
-public function showConsumerCheckout($cartId)
-{
-    // Find the cart by ID
-    $cart = Cart::with('cartItems.product_specification.product')->findOrFail($cartId);
+    public function showConsumerCheckout(Request $request, $cartId)
+    {
+        $cart = Cart::with('cartItems.product_specification.product')->findOrFail($cartId);
 
-    // Get the authenticated user's shipping addresses
-    $shippingAddresses = Auth::guard('user')->user()->shippingAddresses;
+        $selectedItems = $request->query('selectedItems', []);
 
-    // Pass the cart, shipping addresses, and cart items to the view
-    return view('user.consumer.cart.checkout', [
-        'cart' => $cart,
-        'shippingAddresses' => $shippingAddresses,
-        'cartItems' => $cart->cartItems, // Use related cart items
-    ]);
-}
+        $filteredCartItems = $cart->cartItems->filter(function ($item) use ($selectedItems) {
+            return empty($selectedItems) || in_array($item->id, $selectedItems);
+        });
 
+        $shippingAddresses = Auth::guard('user')->user()->shippingAddresses;
 
+        if (empty($selectedItems)) {
+            return redirect()->route('user.consumer.product.cart')->with('message', 'No items have been selected for checkout.');
+        }
+
+        $user = Auth::guard('user')->user();
+
+        return view('user.consumer.cart.checkout', [
+            'cart' => $cart,
+            'shippingAddresses' => $shippingAddresses,
+            'cartItems' => $filteredCartItems, // Use filtered cart items
+            'selectedItems' => $selectedItems, // Pass selected items to the view
+        ]);
+    }
 
 }

@@ -89,10 +89,6 @@ class AdminController extends Controller
         return redirect()->route('admin.login')->with('message', 'Successfully logged out');
     }
 
-
-
-
-
     public function showCustomization()
     {
         $admin = auth()->guard('admin')->user(); // Current Admin
