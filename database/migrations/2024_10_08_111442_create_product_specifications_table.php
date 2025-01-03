@@ -18,7 +18,6 @@ return new class extends Migration
             $table->longText('specific_product_info')->nullable();
             $table->integer('product_price')->nullable();
             $table->float('product_kg')->nullable();
-            //$table->integer('product_price')->nullable();
             $table->foreignId('admin_id')->constrained('admins')->onDelete('cascade');
             $table->timestamps();
         });

@@ -45,8 +45,8 @@ Route::get('/', function () {
 Route::get('admin', [AdminController::class, 'showForm'])->name('admin.login');
 Route::get('admin/test', [AdminController::class, 'test'])->name('admin.test');
 Route::post('admin/register', [AdminController::class, 'register'])->name('admin.register');
-Route::post('admin/login', [AdminController::class,'login' ]);
-Route::get('admin/logout', [AdminController::class,'logout' ])->name('admin.logout');
+Route::post('admin/login', [AdminController::class,'login'])->name('admin.admin.login');
+Route::get('admin/logout', [AdminController::class,'logout'])->name('admin.logout');
 
 
 //Admin Dashboard
@@ -238,7 +238,8 @@ Route::get('user/consumer/product/view/{encryptedId}', [UserProductController::c
 
 //cart for Consumers
 Route::get('user/consumer/cart', [CartController::class, 'showConsumerCart'])->name('user.consumer.product.cart');
-Route::get('user/consumer/cart/checkout/{cartId}', [CartController::class, 'showConsumerCheckout'])->name('user.consumer.product.cart.checkout');
+Route::get('/user/consumer/product/cart/checkout/{cartId}', [CartController::class, 'showConsumerCheckout'])
+    ->name('user.consumer.product.cart.checkout');
 
 Route::get('user/consumer/favorites', [FavoriteController::class, 'showConsumerFavorites'])->name('user.consumer.favorites');
 

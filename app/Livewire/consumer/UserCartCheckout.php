@@ -31,6 +31,7 @@ class UserCartCheckout extends Component
         'house_number' => '',
     ];
     public $cartItems = [];
+    public $selectedItems = [];
     public $totalPrice = 0;
     public $totalWeight = 0.0;
 
@@ -42,20 +43,32 @@ class UserCartCheckout extends Component
     {
         $this->user = Auth::guard('user')->user();
         $this->cartId = $cartId;
+
+        $selectedItems = request()->input('selectedItems', []);
+        if (!empty($selectedItems)) {
+            $this->cartItems = CartItem::with('product_specification.product')
+                ->whereIn('id', $selectedItems)
+                ->get();
+
+                $this->totalPrice = $this->cartItems->sum(fn($item) => $item->price);
+                $this->totalWeight = $this->cartItems->sum(fn($item) => $item->overall_kg);
+        } else {
+            return redirect()->route('user.consumer.product.cart');
+        }
+
         $this->shippingAddresses = $this->user->shippingAddresses;
-        $this->loadCartItems();
+        // $this->loadCartItems();
     }
 
-    public function loadCartItems()
-    {
-        $cart = Cart::with('cartItems.product_specification.product')->findOrFail($this->cartId);
-        $this->cartItems = collect($cart->cartItems);
+    // public function loadCartItems()
+    // {
+    //     $cart = Cart::with('cartItems.product_specification.product')->findOrFail($this->cartId);
+    //     $this->cartItems = collect($cart->cartItems);
 
-        // Calculate total price
-        $this->totalPrice = $this->cartItems->sum(fn($item) => $item->price);
-        $this->totalWeight = $this->cartItems->sum(fn($item) => $item->overall_kg);
-        $this->totalCart = $cart->cart_total;
-    }
+    //     $this->totalPrice = $this->cartItems->sum(fn($item) => $item->price);
+    //     $this->totalWeight = $this->cartItems->sum(fn($item) => $item->overall_kg);
+    //     $this->totalCart = $cart->cart_total;
+    // }
 
     public function confirmSelectedAddress($address)
     {

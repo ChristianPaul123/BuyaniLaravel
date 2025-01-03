@@ -134,12 +134,12 @@
                     </div>
                 </div>
 
-
                 <!-- 3. Cart Items -->
                 <div class="row mb-4">
                     <div class="col-12">
                         <div class="card p-4">
                             <h5>Cart Items</h5>
+
                             @foreach($cartItems as $item)
                                 <div class="d-flex justify-content-between align-items-center border-bottom py-2" wire:key="{{ $item->id }}">
                                     <p>{{ $item->product_specification->product->product_name }} / {{ $item->product_specification->specification_name }} x {{ $item->quantity }} </p>
