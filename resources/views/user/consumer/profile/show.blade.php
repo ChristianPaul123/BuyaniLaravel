@@ -4,24 +4,91 @@
 
 @push('styles')
 <style>
-    .small-input {
-        width: 80px; /* Adjust this value to change the width */
+    /* Profile Section Styling */
+    .profile-section, .photo-section {
+        background-color: #ffffff;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s ease;
+        word-wrap: break-word;
     }
-    <style>
-        .profile-pic {
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 50%;
-        }
-        .profile-section {
-            margin-top: 20px;
-        }
 
-        .main-height {
-            min-height: 30rem;
-        }
-    </style>
+    .profile-section h4 {
+        font-size: 1.5rem;
+        color: #4a4a4a;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #00aaff;
+        display: inline-block;
+    }
+
+    .profile-section:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    /* List Group Styling */
+    .list-group {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .list-group-item {
+        background-color: #ffffff;
+        border: none;
+        padding: 10px 15px;
+        font-size: 1rem;
+        border-bottom: 1px solid #eaeaea;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #555;
+    }
+
+    .list-group-item:last-child {
+        border-bottom: none;
+    }
+
+    /* Highlight Status */
+    .list-group-item span {
+        font-weight: bold;
+        color: #00aaff;
+    }
+
+    .profile-pic {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .profile-pic:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+
+
+    /* Password Validation */
+    .valid-input {
+        border-color: green !important;
+        box-shadow: 0 0 5px green !important;
+    }
+
+    .invalid-input {
+        border-color: red !important;
+        box-shadow: 0 0 5px red !important;
+    }
+
+    .valid {
+        display: none;
+    }
+    .invalid {
+        display: inline;
+    }
+
 </style>
 @endpush
 @section('content')
@@ -61,4 +128,89 @@
     </section>
 @endsection
 @section('scripts')
+<script>
+
+    // Password Validation
+        const passwordInput = document.getElementById('newPassword');
+        const lowercase = document.getElementById('lowercase');
+        const uppercase = document.getElementById('uppercase');
+        const number = document.getElementById('number');
+        const special = document.getElementById('special');
+        const length = document.getElementById('length');
+        const title = document.getElementById('title');
+
+        passwordInput.addEventListener('input', () => {
+            const value = passwordInput.value;
+
+            // Flags for validation
+            const isLowercaseValid = /[a-z]/.test(value);
+            const isUppercaseValid = /[A-Z]/.test(value);
+            const isNumberValid = /[0-9]/.test(value);
+            const isSpecialValid = /[!@#$%^&*(),.?":{}|<>]/.test(value);
+            const isLengthValid = value.length >= 8;
+
+            // Update criteria indicators
+            toggleValidation(lowercase, isLowercaseValid);
+            toggleValidation(uppercase, isUppercaseValid);
+            toggleValidation(number, isNumberValid);
+            toggleValidation(special, isSpecialValid);
+            toggleValidation(length, isLengthValid);
+
+            // Update input box aura
+            if (isLowercaseValid && isUppercaseValid && isNumberValid && isSpecialValid && isLengthValid) {
+                passwordInput.classList.add('valid-input');
+                passwordInput.classList.remove('invalid-input');
+                title.style.display = 'none';  // Hide the title when all conditions are met
+            } else {
+                passwordInput.classList.add('invalid-input');
+                passwordInput.classList.remove('valid-input');
+                title.style.display = 'inline'; // Show the title when conditions are not met
+            }
+        });
+
+        function toggleValidation(element, isValid) {
+            if (isValid) {
+                element.classList.add('valid');
+                element.classList.remove('invalid');
+            } else {
+                element.classList.add('invalid');
+                element.classList.remove('valid');
+            }
+        }
+
+
+
+
+
+        // Confirm Password Validation
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+        const passwordMismatchMessage = document.querySelector('#confirmPassword + div span');
+
+        // Function to check password match
+        function validatePasswordMatch() {
+            const passwordValue = passwordInput.value;
+            const confirmPasswordValue = confirmPasswordInput.value;
+
+            // Check if passwords match
+            if (passwordValue === confirmPasswordValue && passwordValue !== "") {
+                confirmPasswordInput.classList.add('valid-input');
+                confirmPasswordInput.classList.remove('invalid-input');
+                passwordMismatchMessage.style.display = 'none'; // Hide the mismatch message
+            } else if (confirmPasswordValue !== "") {
+                confirmPasswordInput.classList.add('invalid-input');
+                confirmPasswordInput.classList.remove('valid-input');
+                passwordMismatchMessage.style.display = 'inline'; // Show the mismatch message
+            }
+
+            // If both fields are empty, reset the styles and message
+            if (!passwordValue && !confirmPasswordValue) {
+                confirmPasswordInput.classList.remove('valid-input', 'invalid-input');
+                passwordMismatchMessage.style.display = 'none';
+            }
+        }
+
+        // Event listeners for both password inputs
+        passwordInput.addEventListener('input', validatePasswordMatch);
+        confirmPasswordInput.addEventListener('input', validatePasswordMatch);
+</script>
 @endsection

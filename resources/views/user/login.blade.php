@@ -153,17 +153,6 @@
         display: inline;
         color: red;
     }
-    .password1 {
-        transition: border-color 0.3s, box-shadow 0.3s;
-    }
-    .password1.invalid-input {
-        border-color: red;
-        box-shadow: 0 0 5px red;
-    }
-    .password1.valid-input {
-        border-color: green;
-         box-shadow: 0 0 5px green;
-    }
 </style>
 
 @include('user.includes.popup-style')
