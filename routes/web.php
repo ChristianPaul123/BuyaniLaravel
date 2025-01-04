@@ -34,10 +34,17 @@ use App\Http\Controllers\ProductManagementController;
 use App\Http\Controllers\InventoryManagementController;
 use App\Http\Controllers\ProductSpecificationController;
 use App\Http\Controllers\VotedProductsManagementController;
+use App\Http\Controllers\StripePaymentController;
+
+
 
 Route::get('/', function () {
     return view('user.index');
 })->name('user.index');
+
+Route::get('/charge', [StripePaymentController::class, 'showForm']);
+
+Route::post('/charge', [StripePaymentController::class, 'charge']);
 
 //This right here is for the admin side
 
