@@ -27,7 +27,7 @@
                     <h2 class="product-title">{{ $product->product_name }}</h2>
                     <p style="color: #777;">Tags: <span class="font-weight-bold">{{ $categories->category_name }}, {{ $subcategories->sub_category_name }}</span></p>
 
-                    h5 style="color: #555;">{{ $product->product_name }}</h5>
+                    <h5 style="color: #555;">{{ $product->product_name }}</h5>
 
                     <p><strong>Price:</strong> <span class="product-price">$4.99</span></p>
                     <p><strong>Condition:</strong> New</p>
