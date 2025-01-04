@@ -18,7 +18,7 @@ class CategorySeeder extends Seeder
      *
      * @var int
      */
-    private CONST CATEGORY_COUNT = 50;
+    private CONST CATEGORY_COUNT = 5;
     
     /**
      * Run the database seeds.
@@ -26,6 +26,6 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         // Create Categories
-        Category::factory()->count(self::CATEGORY_COUNT)->create();
+        Category::factory()->count(self::CATEGORY_COUNT)->withSubcategories(2)->create();
     }
 }
