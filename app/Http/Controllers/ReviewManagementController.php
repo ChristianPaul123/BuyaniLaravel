@@ -9,8 +9,8 @@ use App\Models\ProductRating;
 class ReviewManagementController extends Controller
 {
     public function showReviews() {
-        $productRating = ProductRating::with('product','user')->get();
-        $orderRating = OrderRating::with('order','user')->get();
-        return view('admin.community.review-index',compact('productRating','orderRating'));
+        $productRatings = ProductRating::with('product','user')->get();
+        $orderRatings = OrderRating::with('order','user')->get();
+        return view('admin.community.review-index',compact('productRatings','orderRatings'));
     }
 }
