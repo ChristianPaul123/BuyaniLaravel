@@ -202,41 +202,6 @@
     });
 </script>
 
-{{-- <script>
-    function togglePasswordVisibility(passwordFieldId, toggleIcon) {
-        const passwordField = document.getElementById(passwordFieldId);
-        const icon = toggleIcon.querySelector('i');
-
-        // Toggle the password field type and icon class
-        if (passwordField.type === 'password') {
-            passwordField.type = 'text';
-            icon.classList.replace('fa-eye', 'fa-eye-slash');
-        } else {
-            passwordField.type = 'password';
-            icon.classList.replace('fa-eye-slash', 'fa-eye');
-        }
-    }
-
-
-
-    passwordField1.setAttribute('type', type1);
-            passwordField2.setAttribute('type', type2);
-
-            // Toggle the icon
-            toggleIcon.classList.toggle('bi-eye');
-            toggleIcon.classList.toggle('bi-eye-slash');
-
-        // Event listeners for the password toggle icons
-        document.getElementById('togglePassword').addEventListener('click', function () {
-        togglePasswordVisibility('password', this);
-    });
-
-        // Event listeners for the password toggle icons
-        document.getElementById('togglePasswordOTP').addEventListener('click', function () {
-        togglePasswordVisibility('password1', this);
-    });
-</script> --}}
-
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {

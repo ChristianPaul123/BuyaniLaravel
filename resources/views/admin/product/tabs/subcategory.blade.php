@@ -28,8 +28,8 @@
             @endphp
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $subcategory->sub_category_name }}</td>
-                        <td>{{ $subcategory->category->category_name }}</td>
+                        <td>{{ $subcategory->sub_category_name ?? 'N/A'  }}</td>
+                        <td>{{ $subcategory->category->category_name ?? 'N/A'  }}</td>
                         <td>{{ $subcategory->created_at }}</td>
                         <td>{{ $subcategory->updated_at }}</td>
                         <td>

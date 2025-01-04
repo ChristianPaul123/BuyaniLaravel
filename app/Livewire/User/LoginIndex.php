@@ -98,6 +98,11 @@ class LoginIndex extends Component
         }
     }
 
+    public function showModal1()
+    {
+        $this->dispatch('show-modal1', ['modal' => 'modal1']);
+    }
+
 
     public function login()
     {
@@ -147,10 +152,6 @@ class LoginIndex extends Component
             }
     }
 
-    public function showModal() {
-        $this->showEmailModal = true;
-    }
-
     public function requestOtp()
     {
 
@@ -158,6 +159,7 @@ class LoginIndex extends Component
         $this->validate([
             'selectedEmail' => 'required|email|exists:users,email',
         ]);
+
 
         // Generate a new OTP and expiration time
         $otp = rand(100000, 999999);
@@ -177,9 +179,11 @@ class LoginIndex extends Component
             ]
         );
 
-        // Open OTP modal
-        $this->showOtpModal = true;
-        Mail::to($this->selectedEmail)->send(new VerificationMail($otp));
+        // // Open OTP modal
+        // $this->showOtpModal = true;
+        $this->dispatch("show-modal",["modal" => 'modal1']);
+
+        // Mail::to($this->selectedEmail)->send(new VerificationMail($otp));
         session()->flash('message
         ', 'A password reset OTP has been sent to your email.');
     }

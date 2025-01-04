@@ -36,7 +36,7 @@
                 @enderror
 
                 <div class="form-group d-flex justify-content-end mb-3">
-                    <a class="clickable-forgot-password" wire:click.prevent="showModal()"> Forgot Password?</a>
+                    <a class="clickable-forgot-password" data-bs-toggle="modal" data-bs-target="#modal1" wire:click="showModal1()"> Forgot Password?</a>
                 </div>
 
                 <div class="container d-flex justify-content-center my-">
@@ -68,8 +68,7 @@
 
     <div>
         <!-- Request OTP -->
-        @if($showEmailModal)
-        <div class="modal fade show d-block" tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5);">
+        <div  wire:ignore.self class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <i class="close bi bi-x" aria-label="Close" data-bs-dismiss="modal" wire:click="closeModal()"></i>
@@ -86,11 +85,10 @@
                 </div>
             </div>
         </div>
-        @endif
 
-        <!-- Confirm OTP -->
-        @if($showOtpModal)
-        <div class="modal fade show d-block" tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5);">
+
+
+        <div class="modal fade" id="modal2" tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5);" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <i class="close bi bi-x" aria-label="Close" data-bs-dismiss="modal"  wire:click="closeModal()"></i>
@@ -109,11 +107,9 @@
                 </div>
             </div>
         </div>
-        @endif
 
         <!-- Change Password -->
-        @if($showPasswordResetForm)
-        <div class="modal fade show d-block" tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5);">
+        <div class="modal fade" id="modal3" tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5);" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <i class="close bi bi-x" aria-label="Close" data-bs-dismiss="modal"  wire:click="closeModal()"></i>
@@ -131,14 +127,14 @@
                                     </span>
                                     @error('newPassword') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
-                                {{-- <div style="color: red; font-size: 14px;">
+                                <div style="color: red; font-size: 14px;">
                                     <span id="title" class="invalid">Must contain: </span>
                                     <span id="lowercase" class="invalid">Lowercase letter | </span>
                                     <span id="uppercase" class="invalid">Uppercase letter | </span>
                                     <span id="number" class="invalid">Number | </span>
                                     <span id="special" class="invalid">Special char | </span>
                                     <span id="length" class="invalid">8+ chars</span>
-                                </div> --}}
+                                </div>
 
                                 <label for="password2" class="form-label mt-3">Confirm New Password:</label>
                                 <input type="password" class="form-control" id="password2"
@@ -151,7 +147,6 @@
                 </div>
             </div>
         </div>
-    @endif
     </div>
 </div>
 
@@ -164,6 +159,23 @@ defer>
 @endassets
 
 @script
+<script>
+    document.addEventListener('livewire:initialized',()=>{
+    @this.on('show-modal1'(event)=> {
+        console.log('hello');
+
+    // var myModalEl = bootstrap.Modal.getInstance(document.getElementById('modal1'));
+    //     if(myModalEl) {
+    //         myModalEl.hide();
+    //         myModalEl.addEventListener('hidden.bs.modal', () => {
+    //         @this.dispatch('testtest'); // Call the Livewire method to reset variables
+    //     });
+    //     }
+    //     var myModalAl = bootstrap.Modal.getInstance(document.getElement('modal2'));
+    //     myModalAl.show();
+    })
+})
+</script>
 
 @endscript
 

@@ -31,7 +31,7 @@
                         <td>{{ $specification->specification_name }}</td>
                         <td>{{ $specification->product_price }}</td>
                         <td>{{ $specification->product_kg }} kg</td>
-                        <td>{{ $specification->product->product_name }}</td>
+                        <td>{{ $specification->product->product_name ?? 'N/A'  }}</td>
                         <td>
                             <a href="{{ route('admin.product.specification.edit', $encryptedId) }}" class="btn btn-primary">Edit</a>
                         </td>
@@ -80,7 +80,7 @@
                     </div>
                     <div class="form-group my-3">
                         <label for="product_kg">Weight (kg)</label>
-                        <input type="number" class="form-control" id="product_kg" name="product_kg" required>
+                        <input type="number" step="0.01" class="form-control" id="product_kg" name="product_kg" required>
                     </div>
                     <input type="hidden" name="admin_id" value="{{ Auth::guard('admin')->user()->id }}">
                     <button type="submit" class="btn btn-primary mt-3">Save</button>
