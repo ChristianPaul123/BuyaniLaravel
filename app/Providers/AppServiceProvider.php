@@ -38,8 +38,8 @@ class AppServiceProvider extends ServiceProvider
     {
         $schedule->command('app:generate-monthly-inventory-reports')->monthly()->sendOutputTo(storage_path('logs/monthly_inventory_reports.log'));
         $schedule->command('app:generate-monthly-suggest-product-reports')->monthly()->sendOutputTo(storage_path('logs/monthly_suggested_products_reports.log'));
-        Order::observe(OrderObserver::class);
-        Product::observe(ProductObserver::class);
+        // Order::observe(OrderObserver::class);
+        //Product::observe(ProductObserver::class);
         Event::listen(Login::class, [AdminActivityListener::class, 'handle']);
         Event::listen(Logout::class, [AdminActivityListener::class, 'handle']);
         ProductSpecification::observe(ProductSpecificationObserver::class);
