@@ -3,11 +3,12 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Category;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ProductImg>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\SubCategory>
  */
-class ProductImgFactory extends Factory
+class SubCategoryFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +18,8 @@ class ProductImgFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'sub_category_name' => $this->faker->sentence(3),
+            'category_id' => Category::factory(),
         ];
     }
 }
