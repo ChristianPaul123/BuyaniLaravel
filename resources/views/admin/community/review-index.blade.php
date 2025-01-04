@@ -40,11 +40,11 @@ ddd
             <div class="tab-content mt-4" id="reviewsTabsContent">
 
                 <div class="tab-pane fade show active" id="productreviews" role="tabpanel">
-                    @include('admin.community.tabs-review.product-review')
+                    @include('admin.community.tabs-review.product-review',['productRating' => $productRating])
                 </div>
 
                 <div class="tab-pane fade show" id="orderreviews" role="tabpanel">
-                    @include('admin.community.tabs-review.order-review')
+                    @include('admin.community.tabs-review.order-review',['orderRating' => $orderRating])
                 </div>
 
             </div>

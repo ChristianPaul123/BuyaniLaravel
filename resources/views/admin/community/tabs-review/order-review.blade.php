@@ -4,6 +4,7 @@
             <table id="orderreviewTable" class="table table-bordered">
                 <thead>
                     <tr>
+                        <th>#</th>
                         <th>Order ID</th>
                         <th>User ID</th>
                         <th>Comment</th>
@@ -18,6 +19,7 @@
                 <tbody>
                     @foreach ($orderRatings as $rating)
                     <tr>
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{ $rating->order_id }}</td>
                         <td>{{ $rating->user_id }}</td>
                         <td>{{ $rating->comment }}</td>
