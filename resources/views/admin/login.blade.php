@@ -11,7 +11,7 @@
     <style>
         body {
             font-family: 'Open Sans', sans-serif;
-            background-color: #f8f9fa;
+            background-color: #A9BFA8;
             height: 100vh;
             margin: 0;
             display: flex;
@@ -105,20 +105,23 @@
     </style>
 </head>
 <body>
+
     <div class="login-container">
         <!-- Logo Section -->
         <div class="logo-section">
             <img src="{{ asset('img/logo1.svg') }}" alt="Company Logo">
         </div>
 
+        @if(session('message'))
+            <script>
+                alert('{{ session('message') }}');
+            </script>
+        @endif
+
+
         <!-- Login Section -->
         <div class="login-section">
             <h2>Admin Login</h2>
-             @session('message')
-      <div>
-          {{ session('message') }}
-      </div>
-     @endsession
             <form action="admin/login" method="post" autocomplete="off">
                 @csrf
                 <div class="form-group">
