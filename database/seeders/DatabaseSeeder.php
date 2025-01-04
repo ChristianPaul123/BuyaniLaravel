@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         // Create posts
         $this->call([
+            CategorySeeder::class,
             ProductSeeder::class,
             ProductImgSeeder::class,
         ]);
