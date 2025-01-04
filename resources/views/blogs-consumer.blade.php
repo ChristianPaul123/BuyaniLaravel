@@ -130,11 +130,6 @@
 
     <div class="container my-5">
         <!-- Latest Blog -->
-
-        To handle the case where there are no blogs available, you can include a conditional check to display a placeholder message or image when no blog data exists. Here's an updated version of your code:
-
-        php
-        Copy code
         <div class="row">
             @if($latestBlog)
                 <div class="col-12 mb-4">
