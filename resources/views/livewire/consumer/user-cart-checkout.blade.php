@@ -1,6 +1,32 @@
 <div>
     <section>
-        @include('user.includes.messageBox')
+        @if (session('message'))
+        <div>
+            <div class="overlay" id="overlay" aria-label="Close" onclick="closePopup()"></div>
+
+            <div class="error-popup">
+                <i class="bi bi-x-lg fs-4" aria-label="Close" onclick="closePopup()"></i>
+                <div class="error-icon">
+                    <i class="icon bi bi-x-circle"></i>
+                </div>
+                <div class="container-contents">
+                    <h3>Ooops!</h3>
+                    <p>{{ session('message') }}</p>
+                    {{-- <button onclick="">Button</button> --}}
+                </div>
+            </div>
+
+        </div>
+        @endif
+        @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+        @endif
             <div class="container my-5">
                 <h2 class="mb-4">Checkout</h2>
 
@@ -158,25 +184,3 @@
             </div>
         </section>
     </div>
-
-@script
-<script>
-    // Show the flash message popup if it exists
-    const flashPopup = document.querySelector('#flashMessage');
-
-    if (flashPopup) {
-        // Display the elements and start fade-in animation
-        flashPopup.style.display = 'flex';
-
-        // Automatically hide the popup after 3 seconds
-        setTimeout(() => {
-            flashPopup.classList.add('hidden');
-
-            // After animation ends, hide the elements entirely
-            setTimeout(() => {
-                flashPopup.style.display = 'none';
-            }, 150); // Match the duration of the animation
-        }, 3000); // 3 seconds
-    }
-</script>
-@endscript

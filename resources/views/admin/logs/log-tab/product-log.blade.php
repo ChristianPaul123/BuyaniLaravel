@@ -3,7 +3,7 @@
         <div class="table-responsive">
             <table id="productlogTable" class="table table-bordered">
                 <thead>
-                    <tr><th>#</th>
+                    <tr>
                         <th>Product Name</th>
                         <th>Admin</th>
                         <th>Action</th>
@@ -12,14 +12,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($productLogs as $index => $log)
+                    @foreach ($productLogs as $log)
                     <tr>
-                        <td>{{ $index  + 1 }}</td>
                         {{-- PRODUCT NAME --}}
-                        <td>{{ $log->product->product_name ?? 'N/A' }}</td>
+                        <td>{{ $log->product->name ?? 'N/A' }}</td>
 
                         {{-- ADMIN NAME --}}
-                        <td>{{ $log->admin->username ?? 'N/A' }}</td>
+                        <td>{{ $log->admin->name ?? 'N/A' }}</td>
 
                         {{-- ACTION --}}
                         <td>{{ $log->action }}</td>

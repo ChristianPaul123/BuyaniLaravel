@@ -26,7 +26,7 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse ($products as $product)
+                @foreach ($products as $product)
                 @php
                 $encryptedId = Crypt::encrypt($product->id);
                 @endphp
@@ -51,11 +51,7 @@
                             </form>
                         </td>
                     </tr>
-                @empty
-                    <tr>
-                        <td colspan="11">No products found.</td>
-                    </tr>
-                @endforelse
+                @endforeach
             </tbody>
         </table>
     </div>

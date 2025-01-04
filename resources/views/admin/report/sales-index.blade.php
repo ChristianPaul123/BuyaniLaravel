@@ -70,22 +70,22 @@
             {{-- Tabs for Navigation --}}
             <ul class="nav nav-tabs" id="salesTabs" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="productsales-tab" data-bs-toggle="tab" href="#productsales" role="tab">Product Sales</a>
+                    <a class="nav-link active" id="product-sales-tab" data-bs-toggle="tab" href="#product-sales" role="tab">Product Sales</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="specificationsales-tab" data-bs-toggle="tab" href="#specificationsales" role="tab">Product Specfication Sales</a>
+                    <a class="nav-link" id="specification-sales-tab" data-bs-toggle="tab" href="#specification-sales" role="tab">Product Specfication Sales</a>
                 </li>
             </ul>
 
             {{-- Tab Contents --}}
             <div class="tab-content mt-4" id="salesTabsContent">
                 {{-- Current Inventory Tab --}}
-                <div class="tab-pane fade show active" id="productsales" role="tabpanel">
+                <div class="tab-pane fade" id="product-sales" role="tabpanel">
                     @include('admin.report.tabs-sales.product-sales')
                 </div>
 
                 {{-- Past Inventory Tab --}}
-                <div class="tab-pane fade" id="specificationsales" role="tabpanel">
+                <div class="tab-pane fade" id="specfication-sales" role="tabpanel">
                     @include('admin.report.tabs-sales.specification-sales')
                 </div>
             </div>

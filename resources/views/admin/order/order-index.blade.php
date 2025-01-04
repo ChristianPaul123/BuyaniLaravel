@@ -45,6 +45,11 @@
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-1 pb-2 mb-3 border-bottom">
                 <h1 class="h2">Order Management</h1>
             </div>
+            <div class="d-flex justify-content-end">
+                <a href="{{ route('admin.product.special') }}" class="btn btn-primary">
+                    Go to Product Special
+                </a>
+            </div>
 
             <ul class="nav nav-tabs" id="orderTabs" role="tablist">
                 <li class="nav-item">

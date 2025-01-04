@@ -85,7 +85,7 @@
 
         <!-- Orders -->
         <li class="nav-item">
-            <a class="nav-link d-flex justify-content-between @if(request()->is('admin/order')) active @endif" href="/admin/order?tab=orderstandby">
+            <a class="nav-link d-flex justify-content-between @if(request()->is('admin/order')) active @endif" href="/admin/order?tab=order-standby">
                 <i class="fas fa-file"></i> Orders <span>/</</span>
             </a>
         </li>
@@ -130,9 +130,9 @@
                 <i class="fas fa-chart-bar"></i> Reports
             </a>
             <ul class="dropdown-menu" aria-labelledby="reportsDropdown">
-                <li> <a class="dropdown-item @if(request()->is('admin/report/inventory')) active @endif" href="/admin/report/inventory?tab=currentinventory"> Inventory Reports </a> </li>
-                <li> <a class="dropdown-item @if(request()->is('admin/report/sales')) active @endif" href="/admin/report/sales?tab=productsales"> Sales Reports </a> </li>
-                <li> <a class="dropdown-item @if(request()->is('admin/report/logs')) active @endif" href="/admin/report/logs?tab=productlogs"> Logs Reports </a> </li>
+                <li> <a class="dropdown-item @if(request()->is('admin/report/inventory')) active @endif" href="/admin/report/inventory?tab=current-inventory"> Inventory Reports </a> </li>
+                <li> <a class="dropdown-item @if(request()->is('admin/report/sales')) active @endif" href="/admin/report/sales?tab=product-sales"> Sales Reports </a> </li>
+                <li> <a class="dropdown-item @if(request()->is('admin/report/logs')) active @endif" href="/admin/report/logs"> Logs Reports </a> </li>
             </ul>
         </li>
 

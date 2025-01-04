@@ -122,9 +122,7 @@ class User extends Authenticatable
         return $this->hasOne(SuggestProduct::class);
     }
 
-    public function suggestRecord() {
-        return $this->HasMany(SuggestProductRecord::class);
-    }
+
 
 
     public function getUserStatusAttribute()

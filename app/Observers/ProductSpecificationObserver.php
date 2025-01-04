@@ -51,12 +51,12 @@ class ProductSpecificationObserver
      */
     public function deleted(ProductSpecification $productSpecification): void
     {
-        // ProductSpecification_Log::create([
-        //     'product_specification_id' => $productSpecification->id,
-        //     'admin_id' => Auth::guard('admin')->id() ?? null,
-        //     'action' => 'deleted',
-        //     'changes' => null
-        // ]);
+        ProductSpecification_Log::create([
+            'product_specification_id' => $productSpecification->id,
+            'admin_id' => Auth::guard('admin')->id() ?? null,
+            'action' => 'deleted',
+            'changes' => null
+        ]);
     }
 
     /**

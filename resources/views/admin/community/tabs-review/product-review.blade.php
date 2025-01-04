@@ -14,9 +14,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($productreviews as $index => $rating)
+                    @foreach ($productRatings as $rating)
                     <tr>
-
                         <td>{{ $rating->product->name ?? 'N/A' }}</td>
                         <td>{{ $rating->user->username ?? 'N/A' }}</td>
                         <td>{{ $rating->rating }}</td>

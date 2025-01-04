@@ -64,7 +64,10 @@
             <label for="email">Email</label>
             <input type="email" name="email" class="form-control" placeholder="Enter email" required>
         </div>
-
+          {{-- <div class="form-group my-3">
+            <label for="username">Email</label>
+            <input type="email" name="email" class="form-control"  placeholder="Enter email" required>
+        </div> --}}
           <div class="form-group my-3">
               <label for="password">Password:</label>
               <div class="input-group">

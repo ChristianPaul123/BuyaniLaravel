@@ -1,23 +1,45 @@
 <div>
-    <section>
+    <h4 class="shipping-title text-center">Shipping Addresses</h4>
+    <section class="shipping-container">
     <!-- Display Success Message -->
-    @include('user.includes.messageBox')
+    @if (session()->has('message'))
+        <div class="alert alert-success mx-3 my-2 px-3 py-2">
+            <button type="button" class="close btn btn-success">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            {{ session('message') }}
+        </div>
+    @endif
+
+    <!-- Display Validation Errors -->
+    @if ($errors->any())
+        <div class="alert alert-danger mx-3 my-2 px-3 py-2">
+            <button type="button" class="close btn btn-danger">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
     <div class="row mt-3">
         <div class="col-12">
-            <h4>Shipping Addresses</h4>
+
             <div class="row">
                 <!-- Loop through Shipping Addresses -->
                 @foreach ($shippingAddresses as $address)
                     <div wire:key="{{ $address->id }}" class="col-md-12">
-                        <div class="card mb-3 shadow-sm">
+                        <div class="card mb-3 shadow-sm shipping-info">
                             <div class="card-body d-flex flex-row justify-content-between align-items-center">
                                 <div class="d-flex flex-column col-md-6">
-                                <h5 class="card-title">{{ $address->shipping_name }}</h5>
-                                <p class="card-text">{{ $address->shipping_address }}</p>
-                                </div>
+                                    <h5 class="card-title">{{ $address->shipping_name }}</h5>
+                                    <p class="card-text">{{ $address->shipping_address }}</p>
+                                    </div>
                                 <div class="d-flex flex-column col-md-6">
-                                <button class="btn btn-outline-primary" wire:click="showViewModal({{ $address->id }})">View Details</button>
+                                    <button class="btn btn-outline-primary" wire:click="showViewModal({{ $address->id }})">View Details</button>
                                 </div>
                             </div>
                         </div>
@@ -25,12 +47,10 @@
                 @endforeach
             </div>
 
-            <!-- Add New Address Button -->
-            <div class="text-end mt-3">
-                <button class="btn btn-primary" wire:click="showAddModal()">Add New Address</button>
-            </div>
         </div>
     </div>
+
+
 
     @if($showAddAddressModal)
     <div class="modal fade show d-block" tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5);">
@@ -216,7 +236,12 @@
     </div>
 @endif
 
-    <section>
+</section>
+
+        <!-- Add New Address Button -->
+        <div class="text-end mt-3">
+            <button class="btn btn-primary" wire:click="showAddModal()">Add New Address</button>
+        </div>
 </div>
 
 @script
@@ -254,23 +279,4 @@
     // Attach the event listener
     document.getElementById('locationType').addEventListener('change', updateLocationOptions);
 </script> --}}
-<script>
-    // Show the flash message popup if it exists
-    const flashPopup = document.querySelector('#flashMessage');
-
-    if (flashPopup) {
-        // Display the elements and start fade-in animation
-        flashPopup.style.display = 'flex';
-
-        // Automatically hide the popup after 3 seconds
-        setTimeout(() => {
-            flashPopup.classList.add('hidden');
-
-            // After animation ends, hide the elements entirely
-            setTimeout(() => {
-                flashPopup.style.display = 'none';
-            }, 150); // Match the duration of the animation
-        }, 3000); // 3 seconds
-    }
-</script>
 @endscript

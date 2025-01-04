@@ -44,7 +44,7 @@
             <div class="tab-content mt-4" id="managementTabsContent">
 
                 {{-- Manage User Type with 1 means Consumer Tab --}}
-                <div class="tab-pane fade show active" id="consumers" role="tabpanel">
+                <div class="tab-pane fade" id="consumers" role="tabpanel">
                     @include('admin.management.tabs.user-consumer', ['users' => $consumers])
                 </div>
 

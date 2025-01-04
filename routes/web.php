@@ -124,7 +124,7 @@ Route::get('admin/orders/order-cancelled', [OrderManagementController::class, 'c
 
 //REPORT
 Route::get('admin/report/inventory', [ReportManagementController::class, 'showInventoryReports'])->name('admin.reports.inventory');
-Route::get('admin/report/sales', [ReportManagementController::class, 'showSalesReports'])->name('admin.reports.sales');
+Route::get('admin/report/sales', [ReportManagementController::class, 'salesReports'])->name('admin.reports.sales');
 
 //REPORT - LOGS
 Route::get('admin/report/logs', [ReportManagementController::class, 'showLogsReports'])->name('admin.reports.logs');
@@ -155,9 +155,7 @@ Route::get('admin/community/reviews', [ReviewManagementController::class, 'showR
 
 //VOTED PRODUCTS
 Route::get('admin/community/votes',[VotedProductsManagementController::class, 'showVotedProducts'])->name('admin.voted-products');
-// Route::get('admin/community/votes',[VotedProductsManagementController::class, 'showVotedProducts'])->name('admin.voted-products');
-// Route::get('admin/community/votes',[VotedProductsManagementController::class, 'showVotedProducts'])->name('admin.voted-products');
-// Route::get('admin/community/votes',[VotedProductsManagementController::class, 'showVotedProducts'])->name('admin.voted-products');
+
 
 //BLOGS
 Route::get('admin/community/blog',[BlogManagementController::class,'showBlogs'])->name('admin.blog');

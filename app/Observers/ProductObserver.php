@@ -46,12 +46,12 @@ class ProductObserver
 
     public function deleted(Product $product): void
     {
-        // Product_Log::create([
-        //     'product_id' => $product->id,
-        //     'admin_id' => Auth::guard('admin')->id() ?? null,
-        //     'action' => 'deleted',
-        //     'changes' => null
-        // ]);
+        Product_Log::create([
+            'product_id' => $product->id,
+            'admin_id' => Auth::guard('admin')->id() ?? null,
+            'action' => 'deleted',
+            'changes' => null
+        ]);
     }
 
     /**

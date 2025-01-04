@@ -14,7 +14,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($suggestionRecord as $suggestion)
+                    @foreach ($suggestions as $suggestion)
                     <tr>
                         <td>{{ $suggestion->user->username ?? 'N/A' }}</td>
                         <td>{{ $suggestion->suggest_name }}</td>
