@@ -187,7 +187,7 @@
                 </div>
             </div>
             @empty
-            <p>No blogs found.</p>
+            <p>No other blogs found.</p>
             @endforelse
         </div>
 
