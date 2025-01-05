@@ -37,20 +37,26 @@
                         <h5>Select Shipping Address</h5>
                         <select class="form-select mt-3" wire:model.live="selectedAddress">
                             <option value="">Select a saved address</option>
-                            @foreach ($shippingAddresses as $address)
-                                <option value="{{ $address->id }}">
-                                    {{ $address->shipping_name }}, {{ $address->street }}, {{ $address->city }},
-                                    {{ $address->state }}, {{ $address->country }}
-                                </option>
-                            @endforeach
+                            @if ($shippingAddresses->isNotEmpty())
+                                @foreach ($shippingAddresses as $address)
+                                    <option value="{{ $address->id }}">
+                                        {{ $address->shipping_name }}, {{ $address->street }}, {{ $address->city }},
+                                        {{ $address->state }}, {{ $address->country }}
+                                    </option>
+                                @endforeach
+                            @else
+                                <option value="" disabled>No saved addresses available</option>
+                            @endif
                         </select>
-                        <a class="btn btn-primary mt-3 w-100" wire:click="confirmSelectedAddress({{ $address->id }})"
-                            {{ !$address ? 'disabled' : '' }}>
+                        <a class="btn btn-primary mt-3 w-100"
+                            wire:click="confirmSelectedAddress({{ $selectedAddress ?? 'null' }})"
+                            {{ empty($selectedAddress) ? 'disabled' : '' }}>
                             Confirm
                         </a>
                     </div>
                 </div>
             </div>
+
 
             <!-- Shipping Information Form -->
             <div class="row mb-4">
@@ -191,6 +197,9 @@
                             <div class="mt-3" id="stripe-div">
                                 <div class="form-control" id="card-element"></div>
                                 <div id="card-errors" role="alert"></div>
+                                {{-- <div id="payment-request-button" style="margin-bottom: 20px;"></div>
+                                <div class="form-control" id="card-element"></div>
+                                <div id="card-errors" role="alert" class="text-danger"></div> --}}
                             </div>
                         </div>
                     </div>
@@ -203,8 +212,8 @@
                     <button class="btn btn-danger w-100" onclick="window.history.back()">Cancel</button>
                 </div>
                 <div class="col-6 text-end">
-                    <button id="confirm" wire:click="processCheckout"
-                        class="btn btn-success w-100">Continue</button>
+                    <button id="confirm" class="btn btn-success w-100">Continue</button>
+                    {{--  wire:click="processCheckout" --}}
                 </div>
             </div>
         </div>
@@ -246,7 +255,10 @@
 
     function initializeStripe(stripeKey) {
         stripe = Stripe(stripeKey);
-        elements = stripe.elements();
+        // elements = stripe.elements();
+        elements = stripe.elements({
+            externalPaymentMethodTypes: ['external_gcash']
+        });
         card = elements.create("card");
         card.mount("#card-element");
     }
@@ -268,7 +280,7 @@
         var selected = document.querySelector('input[name="paymentMethod"]:checked').value;
         // Generate the token
 
-        if(selected === 'Stripe') {
+        if (selected === 'Stripe') {
             const {
                 token,
                 error
@@ -291,3 +303,102 @@
         }
     });
 </script>
+{{-- <script>
+    let stripe;
+    let elements;
+    let card;
+    let paymentRequest;
+    let prButton;
+
+    function initializeStripe(stripeKey) {
+        stripe = Stripe(stripeKey);
+
+        // Initialize Elements
+        elements = stripe.elements();
+
+        // Create the Card Element
+        card = elements.create("card");
+        card.mount("#card-element");
+
+        // Initialize Payment Request for Wallets
+        paymentRequest = stripe.paymentRequest({
+            country: "US", // Adjust based on your region
+            currency: "usd", // Adjust currency as needed
+            total: {
+                label: "Total",
+                amount: 2000, // Total amount in the smallest currency unit (e.g., 2000 for $20.00)
+            },
+            requestPayerName: true,
+            requestPayerEmail: true,
+        });
+
+        // Create the Payment Request Button Element
+        prButton = elements.create("paymentRequestButton", {
+            paymentRequest: paymentRequest,
+        });
+
+        // Check if the Payment Request Button can be displayed
+        paymentRequest.canMakePayment().then((result) => {
+            if (result) {
+                // Mount the Payment Request Button
+                prButton.mount("#payment-request-button");
+            } else {
+                // Hide the Payment Request Button if not supported
+                document.getElementById("payment-request-button").style.display = "none";
+            }
+        });
+
+        // Handle Payment Request Events
+        paymentRequest.on("paymentmethod", async (event) => {
+            const { error } = await stripe.confirmCardPayment("{{ $clientSecret }}", {
+                payment_method: event.paymentMethod.id,
+            });
+
+            if (error) {
+                event.complete("fail");
+                alert(error.message);
+            } else {
+                event.complete("success");
+                alert("Payment successful!");
+                // Trigger Livewire checkout process
+                @this.processCheckout();
+            }
+        });
+    }
+
+    // Initial load
+    document.addEventListener("DOMContentLoaded", () => {
+        initializeStripe("{{ $stripeKey }}");
+    });
+
+    // Optional: Handle errors globally
+    function handleStripeErrors(error) {
+        if (error) {
+            alert(error.message);
+        }
+    }
+
+    // Handle form submission
+    document.getElementById('confirm').addEventListener('click', async (event) => {
+        event.preventDefault();
+        var selected = document.querySelector('input[name="paymentMethod"]:checked').value;
+
+        if (selected === 'Stripe') {
+            const { token, error } = await stripe.createToken(card);
+
+            if (error) {
+                // Display Stripe errors and stop submission
+                document.getElementById('card-errors').textContent = error.message;
+            } else {
+                // Attach the token to a hidden input for Livewire
+                @this.set('stripeToken', token.id);
+                console.log(token.id);
+                // Trigger the Livewire method
+                @this.processCheckout();
+            }
+        } else {
+            @this.processCheckout();
+        }
+    });
+</script> --}}
+

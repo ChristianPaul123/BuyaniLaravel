@@ -216,6 +216,6 @@ class UserCartCheckout extends Component
 
     public function render()
     {
-        return view('livewire.consumer.user-cart-checkout', ['stripeKey' => env('STRIPE_KEY')]);
+        return view('livewire.consumer.user-cart-checkout', ['stripeKey' => env('STRIPE_KEY'), 'clientSecret' => env('STRIPE_SECRET')]);
     }
 }
