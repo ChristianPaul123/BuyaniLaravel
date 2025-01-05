@@ -10,13 +10,12 @@ class Inventory extends Model
     use HasFactory;
     protected $fillable = [
         'product_id',
-        // 'product_status',
         'product_new_stock',
         'product_old_stock',
         'product_total_stock',
+        'total_profit',
         'product_sold_stock',
         'product_damage_stock',
-        'total_profit',
     ];
 
     public function product() {
