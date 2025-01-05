@@ -23,11 +23,12 @@ class ProductView extends Component
     public $subcategories;
     public $message;
 
-    public $quantities = []; // Array for quantities
+    public $quantities = [];
     public $productTotalStock = [];
     public $product_status;
     public $productSpecification;
     public $productId;
+    public $kl = 0;
 
     protected $paginationTheme = 'bootstrap'; // Use Bootstrap styling for pagination
 
@@ -91,6 +92,10 @@ class ProductView extends Component
             // Sum the quantities for the specific product specification in the cart
             $totalQuantity += CartItem::where('product_specification_id', $item->id)->sum('overall_kg');
         }
+
+        // dd([
+        //     'kl' => $totalQuantity,
+        // ]);
 
         try {
             $cart = Cart::firstOrCreate(

@@ -33,7 +33,7 @@
                     <h2 class="product-title">{{ $product->product_name }}</h2>
                     <p style="color: #777;">Tags: <span class="font-weight-bold">{{ $categories->category_name }}, {{ $subcategories->sub_category_name }}</span></p>
 
-                    <p><strong>Price:</strong> <span class="product-price">{{ $product->productSpecification[0]->product_price }}</span></p>
+                    <p><strong>Price:</strong> <span class="product-price">{{ $product->productSpecification[0]->product_price }} / kg</span></p>
                     <p><strong>Condition:</strong>
                         @if ($product->created_at->diffInDays(now()) < 5)
                             <span class="text-success">New</span>
@@ -41,7 +41,7 @@
                             <span class="text-success">Old</span>
                         @endif
                     </p>
-                    <p><strong>Quantity:</strong> <span class="font-weight-bold">{{ $product->inventory->product_total_stock }}</span></p>
+                    <p><strong>Quantity:</strong> <span class="font-weight-bold">{{ $product->inventory->product_total_stock }} kg</span></p>
                     <p><strong>Availability:</strong> <span class="font-weight-bold text-success">{{ $product->status_label }}</span></p>
 
                     <div class="row">
@@ -52,14 +52,15 @@
                                     <div class="card-header text-center" style="background-color: #4CAF50; color: white; font-weight: bold;">
                                         {{ $specification->specification_name }} kg
                                     </div>
+
                                     <div class="card-body p-3">
                                         <div class="d-flex align-items-center mb-2">
                                             <h6 class="mx-2">Quantity:</h6>
-                                            <div class="input-group ml-2" style="max-width: 130px;">
-                                                <button class="btn btn-outline-secondary btn-sm" type="button" wire:click="decrementQuantity({{ $specification->id }})">-</button>
-                                                 <input type="text" class="form-control text-center" wire:model="quantities.{{ $specification->id }}" readonly>
-                                                <button class="btn btn-outline-secondary btn-sm" type="button" wire:click="incrementQuantity({{ $specification->id }})">+</button>
-                                            </div>
+                                                <div class="input-group ml-2" style="max-width: 130px;">
+                                                    <button class="btn btn-outline-secondary btn-sm" type="button" wire:click="decrementQuantity({{ $specification->id }})">-</button>
+                                                    <input type="text" class="form-control text-center" wire:model="quantities.{{ $specification->id }}">
+                                                    <button class="btn btn-outline-secondary btn-sm" type="button" wire:click="incrementQuantity({{ $specification->id }})">+</button>
+                                                </div>
                                             <h6 class="mx-2"> {{ intval($product->inventory->product_total_stock) }} kg available</h6>
                                         </div>
                                         <button class="btn btn-primary btn-sm w-100" wire:click="addToCart({{ $specification->id }})" style="background-color: #4CAF50; border: none;">Add To Cart</button>

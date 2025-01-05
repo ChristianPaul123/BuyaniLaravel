@@ -2,10 +2,29 @@
     <section>
         @include('user.includes.messageBox')
             <div class="container my-5">
-                <h2 class="mb-4">Checkout</h2>
+                <div class="row">
+                    <h2>Delivery Address</h2>
+                    <div class="col-3">
+                        <p>Ronnie Estillero (09506460086)</p>
+                    </div>
+                    <div class="col">
+                        <div class="d-flex justify-content-center">
+                            <p>
+                                Bonifacio Street, Cota Na Daco (Pob.) Near Aqua deep water station, Cota Na Daco (Pob.), Gubat, South Luzon, Sorsogon 4710
+                            </p>
+                            <div>
+                                <p class="border-1">Default</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <button class="btn btn-primary">Change</button>
+                    </div>
+                </div>
+
 
                 <!-- Shipping Address Dropdown -->
-                <div class="row mb-4">
+                {{-- <div class="row mb-4">
                     <div class="col-12">
                         <div class="card p-4">
                             <h5>Select Shipping Address</h5>
@@ -22,9 +41,9 @@
                             </a>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
-                <!-- Shipping Information Form -->
+                {{-- <!-- Shipping Information Form -->
                 <div class="row mb-4">
                     <div class="col-12">
                         <div class="card p-4">
@@ -106,7 +125,7 @@
                             </form>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
                 <!-- 3. Cart Items -->
                 <div class="row mb-4">

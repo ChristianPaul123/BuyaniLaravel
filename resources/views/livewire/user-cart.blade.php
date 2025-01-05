@@ -101,17 +101,36 @@
                     <div class="card-body">
                         <div class="row align-items-center g-3">
                             <div class="col-md-1">
-                                <img src="{{ asset($item->product_specification->product->product_pic) }}" alt="{{ $item->product_specification->specification_name }}" class="img-fluid">
+                               <div class="d-flex justify-content-center">
+                                    <div>
+                                    <input type="checkbox"
+                                        value="{{ $item->id }}"
+                                        wire:change="selectItem({{ $item->id }})"
+                                        {{ in_array($item->id, $selectedItems) ? 'checked' : '' }}>
+                                    @if (in_array($item->id, $selectedItems))
+                                        <p>true</p>
+                                    @endif
+                                </div>
+                                    <div>
+                                        <img src="{{ asset($item->product_specification->product->product_pic) }}" alt="{{ $item->product_specification->specification_name }}" class="img-fluid">
+                                    </div>
+                               </div>
+
                             </div>
                             <div class="col-md-2">
                                 <p class="h5 card-title mb-1">{{ $item->product_specification->specification_name }}</p>
                             </div>
-                            <div class="col-md-2">
-                                <label for="numberInput{{ $item->id }}" class="form-label">Quantity</label>
+                            <div class="col-md-3">
+                                <label for="numberInput{{ $item->id }}" class="form-label">Manage order (kg)</label>
                                 <div class="input-group">
-                                    <button class="input-group-text" wire:click="updateQuantity({{ $item->id }}, 'decrement')">-</button>
-                                    <input type="number" class="form-control" value="{{ $item->quantity }}" min="1" readonly>
-                                    <button class="input-group-text" wire:click="updateQuantity({{ $item->id }}, 'increment')">+</button>
+                                    <button class="input-group-text" wire:click="updateQuantity({{ $item->id }}, 'decrement')">Minus</button>
+                                    <input
+                                    type="number"
+                                    class="form-control"
+                                    name="product_add_{{ $item->id }}"
+                                    id="numberInput{{ $item->id }}"
+                                    wire:model="manageOrder.{{ $item->id }}" />
+                                    <button class="input-group-text" wire:click="updateQuantity({{ $item->id }}, 'increment')">Add</button>
                                 </div>
                             </div>
                             <div class="col-md-2">
@@ -122,27 +141,14 @@
                                 <label class="form-label">Price per item</label>
                                 <p class="text-muted mb-0">{{ $item->product_specification->product_price }}</p>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 <label class="form-label">Total price</label>
                                 <p class="text-muted mb-0">{{ $item->price }}</p>
                             </div>
                             <div class="col-md-1">
-                                <button class="btn btn-danger btn-sm" wire:click="removeCartItem({{ $item->id }})">Remove</button>
-                            </div>
-                            <div class="col-md-1">
-                                <!-- Individual Checkbox -->
-                                <input type="checkbox" wire:click="selectItem({{ $item->id }})" value="{{ $item->id }}" {{ in_array($item->id, $selectedItems) ? 'checked' : '' }}>
-                            </div>
-
-                            <div>
-                                <h5>Selected Items:</h5>
-                                @foreach ($selectedItems as $selectedItemId)
-                                    @php
-                                        $selectedItem = $cartItems->firstWhere('id', $selectedItemId);
-                                    @endphp
-                                    @if($selectedItem)
-                                        <p>{{ $selectedItem->id }}</p>
-                                    @endif
+                                <button class="btn btn-danger btn-sm" wire:click="removeCartItem({{ $item->id }})"><i class="fas fa-trash"></i></button>
+                                @foreach ($selectedItems as $item)
+                                    {{ $item }}<br>
                                 @endforeach
                             </div>
                         </div>
@@ -164,7 +170,7 @@
                         </div>
                         <div class="d-flex justify-content-between">
                             <p>Total weight:</p>
-                            <p>{{ $totalWeightselected }} kg / 3 kg</p>
+                            <p>{{ $totalWeightselected }} kg / {{ $maxLimit }} kg</p>
                         </div>
                         <div class="d-flex justify-content-between">
                             <p>Total price:</p>
@@ -188,12 +194,6 @@
                             <button type="submit" class="btn btn-primary w-100 mt-3">Proceed to checkout</button>
                         </form>
                         @endif
-
-                        {{-- @if($cart->cart_total == 0)
-                        <button class="btn btn-secondary w-100 mt-3" disabled>Proceed to Checkout</button>
-                        @else
-                            <a href="{{ route('user.consumer.product.cart.checkout', ['cartId' => $cart->id]) }}" class="btn btn-primary w-100 mt-3">Proceed to Checkout</a>
-                        @endif --}}
 
                     </div>
                 </div>

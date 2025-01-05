@@ -17,33 +17,34 @@ class UserCart extends Component
     public $selectAll = false;
     public $totalSelectedPrice = 0;
     public $totalWeightselected = 0;
-    public $maxLimit = 3;
+    public $maxLimit = 25;
+    public $manageOrder = [];
+
 
     public function mount($cart)
     {
         $this->cart = $cart;
-        $this->loadCartItems(); // Use a separate method to load items for easier reusability
+        $this->loadCartItems();
+
+        foreach ($this->cartItems as $item) {
+            $this->manageOrder[$item->id] = 0;
+        }
     }
 
-
-    // The "action" variable expects a value like 'increment' or 'decrement'.
     public function updateQuantity($cartItemId, $action)
     {
         $cartItem = CartItem::findOrFail($cartItemId);
         $productSpec = ProductSpecification::find($cartItem->product_specification_id);
         $inventory = Inventory::where('product_id', $productSpec->product_id)->first();
         $maxLimit = $this->maxLimit;
+        $inputQuantity = $this->manageOrder[$cartItemId];
 
-        // Adjust quantity based on action
-        $newQuantity = $action === 'increment' ? $cartItem->quantity + 1 : $cartItem->quantity - 1;
+        $newQuantity = $action === 'increment' ? $cartItem->overall_kg + $inputQuantity : $cartItem->overall_kg - $inputQuantity;
 
         if ($newQuantity < 1) {
-            $this->removeCartItem($cartItemId); // Remove item if quantity is set below 1
+            $this->removeCartItem($cartItemId);
             return;
         }
-
-        // Calculate total weight including the current update
-        // $totalWeight = $this->calculateTotalWeight($cartItem, $newQuantity);
 
         if($newQuantity <= $inventory->product_total_stock) {
             $cartItem->update([
@@ -57,9 +58,11 @@ class UserCart extends Component
             $this->loadCartItems();
             $this->updatedSelectedItems();
 
+            $this->manageOrder[$cartItemId] = 0;
+
             session()->flash('message', 'Cart item updated successfully');
         } else {
-            session()->flash('error', 'Sorry, you can only buy max ' . $cartItem->quantity . ' in one checkout.');
+            session()->flash('error', 'Sorry, you can only buy max ' . $inventory->product_total_stock . ' in one checkout.');
         }
     }
 
@@ -69,17 +72,16 @@ class UserCart extends Component
         $cartItem->delete();
 
         $this->updateCartTotals();
-        $this->loadCartItems();  // Reload cart items to reflect removal
+        $this->loadCartItems();
 
         session()->flash('message', 'Item removed from cart');
     }
 
     protected function updateCartTotals()
     {
-       // Reload cart items to ensure we have the latest quantities
+
     $this->cart->load('cartItems');
 
-    // Calculate totals from the latest cart items collection
     $this->cart->cart_total = $this->cart->cartItems->sum('quantity');
     $this->cart->overall_cartKG = $this->cart->cartItems->sum('overall_kg');
     $this->cart->total_price = $this->cart->cartItems->sum('price');
@@ -105,12 +107,13 @@ class UserCart extends Component
 
     public function toggleSelectAll()
     {
+
         $this->selectAll = !$this->selectAll;
         $this->totalWeightselected = 0;
 
-
         if ($this->selectAll) {
             $this->selectedItems = $this->cartItems->pluck('id')->toArray();
+
             foreach ($this->selectedItems as $itemId) {
                 $item = CartItem::find($itemId);
                 if ($item) {
@@ -120,11 +123,11 @@ class UserCart extends Component
 
             if ($this->totalWeightselected > $this->maxLimit) {
                 $this->selectAll = false;
+                $this->totalWeightselected = 0;
                 $this->selectedItems = [];
                 session()->flash('error', 'Total weight exceeds the limit of ' . $this->maxLimit . ' kg');
                 return;
             }
-
         } else {
             $this->selectedItems = [];
         }
@@ -157,18 +160,14 @@ class UserCart extends Component
         }
 
         if (in_array($cartItemId, $this->selectedItems)) {
-            // If already selected, remove it
             $this->selectedItems = array_diff($this->selectedItems, [$cartItemId]);
         } else {
-            // Calculate the potential new weight
             $newTotalWeight = $this->totalWeightselected + $item->overall_kg;
-
             if ($newTotalWeight > $this->maxLimit) {
                 session()->flash('error', 'Adding this item exceeds the weight limit of ' . $this->maxLimit . ' kg.');
                 return; // Do not add the item
             }
 
-            // Add the item to selected items if within the limit
             $this->selectedItems[] = $cartItemId;
         }
 

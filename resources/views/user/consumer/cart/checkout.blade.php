@@ -146,6 +146,7 @@
             </div>
         </div> --}}
     @livewire('consumer.user-cart-checkout',['cartId' => $cart->id])
+
     </div>
 @endsection
 
