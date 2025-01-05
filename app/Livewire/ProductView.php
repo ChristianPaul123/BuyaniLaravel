@@ -55,7 +55,6 @@ class ProductView extends Component
     public function incrementQuantity($specificationId)
     {
         $productkg = ProductSpecification::find($specificationId);
-
         if (isset($this->quantities[$specificationId]) && $this->quantities[$specificationId] < $this->productTotalStock[$specificationId]) {
             $this->quantities[$specificationId]+=$productkg->product_kg;
         }
@@ -66,18 +65,18 @@ class ProductView extends Component
     {
         $productkg = ProductSpecification::find($specificationId);
 
-        if (isset($this->quantities[$specificationId]) && $this->quantities[$specificationId] > 1) {
+        if (isset($this->quantities[$specificationId]) && $this->quantities[$specificationId] > $productkg->product_kg) {
             $this->quantities[$specificationId]-=$productkg->product_kg;
         }
     }
 
     public function addToCart($specificationId)
     {
+
         $this->validate([
             "quantities.$specificationId" => ['required', 'numeric', 'min:0.1'],
             'product_status' => ['required', 'numeric'],
         ]);
-
 
         $user = Auth::guard('user')->user();
 
@@ -89,13 +88,8 @@ class ProductView extends Component
         $totalQuantity = 0;
 
         foreach ($selectc as $item) {
-            // Sum the quantities for the specific product specification in the cart
             $totalQuantity += CartItem::where('product_specification_id', $item->id)->sum('overall_kg');
         }
-
-        // dd([
-        //     'kl' => $totalQuantity,
-        // ]);
 
         try {
             $cart = Cart::firstOrCreate(
@@ -112,13 +106,32 @@ class ProductView extends Component
                 ]
             );
 
-            $cartItem->quantity = $cartItem->exists ? $cartItem->quantity + $quantity : $quantity;
+            // Calculate the new total quantity
+            $newQuantity = $cartItem->exists ? $cartItem->quantity + $quantity : $quantity;
+            $addedToCart = $totalQuantity + $newQuantity;
 
-            if(($this->productTotalStock[$specificationId] >= $cartItem->quantity) && $this->productTotalStock[$specificationId] >= $totalQuantity)  {
-                $cartItem->price = $productSpecification->product_price * $cartItem->quantity;
-                $cartItem->overall_kg = $productSpecification->product_kg * $cartItem->quantity;
+            if (($this->productTotalStock[$specificationId] >= $newQuantity) && $addedToCart <= $this->productTotalStock[$specificationId]) {
+
+                // Update only the additional quantities and recalculate the values
+                $additionalQuantity = $quantity;
+                $additionalWeight = $additionalQuantity * $productSpecification->product_kg;
+                $additionalPrice = $additionalQuantity * $productSpecification->product_price;
+
+                $cartItem->quantity = $newQuantity;
+                $cartItem->overall_kg = ($cartItem->overall_kg ?? 0) + $additionalWeight;
+                $cartItem->price = ($cartItem->price ?? 0) + $additionalPrice;
                 $cartItem->product_status = $this->product_status;
+
+                // Debugging output
+                // dd([
+                //     'cartQuantity' => $cartItem->quantity,
+                //     'kg' => $productSpecification->product_kg,
+                //     'price' => $cartItem->price,
+                //     'overall_kg' =>  $cartItem->overall_kg,
+                // ]);
+
                 $cartItem->save();
+
                 $cart->cart_total = $cart->cartItems()->sum('quantity');
                 $cart->overall_cartKG = $cart->cartItems()->sum('overall_kg');
                 $cart->total_price = $cart->cartItems()->sum('price');
@@ -128,10 +141,58 @@ class ProductView extends Component
             } else {
                 session()->flash('error', 'Unable to add selected quantity to cart as it would exceed your purchase limit.');
             }
-
         } catch (\Exception $e) {
             session()->flash('error', 'Error occurred while adding the product to the cart.');
         }
+
+        // try {
+        //     $cart = Cart::firstOrCreate(
+        //         ['user_id' => $user->id],
+        //         ['cart_total' => 0, 'overall_cartKG' => 0, 'total_price' => 0]
+        //     );
+
+        //     $productSpecification = ProductSpecification::findOrFail($specificationId);
+
+        //     $cartItem = CartItem::firstOrNew(
+        //         [
+        //             'cart_id' => $cart->id,
+        //             'product_specification_id' => $productSpecification->id,
+        //         ]
+        //     );
+
+        //     $cartItem->quantity = $cartItem->exists ? $cartItem->quantity + $quantity : $quantity;
+        //     $addedToCart = $totalQuantity + $cartItem->quantity;
+
+        //     if(($this->productTotalStock[$specificationId] >= $cartItem->quantity) && $addedToCart <= $this->productTotalStock[$specificationId])  {
+
+        //         $selectedQuantity = $cartItem->quantity / $productSpecification->product_kg;
+        //         $cartItem->price = $productSpecification->product_price * $selectedQuantity;
+        //         $cartItem->overall_kg = $productSpecification->product_kg * $selectedQuantity;
+        //         $cartItem->product_status = $this->product_status;
+
+        //         // dd([
+        //         //     'cartQuantity' => $cartItem->quantity,
+        //         //     'kg' => $productSpecification->product_kg,
+        //         //     'quantityEquivalent' => $selectedQuantity,
+        //         //     'price' => $cartItem->price,
+        //         //     'overall_kg' =>  $cartItem->overall_kg,
+        //         // ]);
+
+        //         $cartItem->save();
+        //         $cart->cart_total = $cart->cartItems()->sum('quantity');
+        //         $cart->overall_cartKG = $cart->cartItems()->sum('overall_kg');
+        //         $cart->total_price = $cart->cartItems()->sum('price');
+        //         $cart->save();
+
+        //         session()->flash('message', 'Product added to cart successfully!');
+        //     } else {
+        //         session()->flash('error', 'Unable to add selected quantity to cart as it would exceed your purchase limit.');
+        //     }
+
+        // } catch (\Exception $e) {
+        //     session()->flash('error', 'Error occurred while adding the product to the cart.');
+        // }
+
     }
 
     public function render()

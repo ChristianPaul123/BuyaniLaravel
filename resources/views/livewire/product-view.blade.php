@@ -33,7 +33,7 @@
                     <h2 class="product-title">{{ $product->product_name }}</h2>
                     <p style="color: #777;">Tags: <span class="font-weight-bold">{{ $categories->category_name }}, {{ $subcategories->sub_category_name }}</span></p>
 
-                    <p><strong>Price:</strong> <span class="product-price">{{ $product->productSpecification[0]->product_price }} / kg</span></p>
+                    {{-- <p><strong>Price:</strong> <span class="product-price">{{ $product->productSpecification[0]->product_price }} / kg</span></p> --}}
                     <p><strong>Condition:</strong>
                         @if ($product->created_at->diffInDays(now()) < 5)
                             <span class="text-success">New</span>
@@ -43,7 +43,18 @@
                     </p>
                     <p><strong>Quantity:</strong> <span class="font-weight-bold">{{ $product->inventory->product_total_stock }} kg</span></p>
                     <p><strong>Availability:</strong> <span class="font-weight-bold text-success">{{ $product->status_label }}</span></p>
+                    <p><strong>Price List:</strong></p>
+                    <ul>
 
+                            @forelse ($specifications as $specification)
+                           <li>{{ $specification->specification_name }} - {{ $specification->product_price }}</li>
+                        @empty
+                            <div class="">
+                                <p>No specifications found for this product.</p>
+                            </div>
+                        @endforelse
+
+                    </ul>
                     <div class="row">
                         @forelse ($specifications as $specification)
 
@@ -58,7 +69,7 @@
                                             <h6 class="mx-2">Quantity:</h6>
                                                 <div class="input-group ml-2" style="max-width: 130px;">
                                                     <button class="btn btn-outline-secondary btn-sm" type="button" wire:click="decrementQuantity({{ $specification->id }})">-</button>
-                                                    <input type="text" class="form-control text-center" wire:model="quantities.{{ $specification->id }}">
+                                                    <input type="text" class="form-control text-center" wire:model="quantities.{{ $specification->id }}" readonly>
                                                     <button class="btn btn-outline-secondary btn-sm" type="button" wire:click="incrementQuantity({{ $specification->id }})">+</button>
                                                 </div>
                                             <h6 class="mx-2"> {{ intval($product->inventory->product_total_stock) }} kg available</h6>
