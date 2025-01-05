@@ -27,11 +27,11 @@ class InventorySeeder extends Seeder
             Inventory::create([
                 'product_id' => $product->id,
                 'product_new_stock' => $totalProductStock,
-                'product_sold_stock' => $totalProductStock * 0.4,
-                'product_old_stock' => $totalProductStock * 0.6,
+                'product_sold_stock' => ceil($totalProductStock * 0.4),
+                'product_old_stock' => ceil($totalProductStock * 0.5),
                 'product_total_stock' => $totalProductStock,
                 'total_profit' => rand(1, 100),
-                'product_damage_stock' => $totalProductStock * 0.1,
+                'product_damage_stock' => ceil($totalProductStock * 0.1),
             ]);
         }
     }
