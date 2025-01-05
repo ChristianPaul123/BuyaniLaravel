@@ -85,6 +85,6 @@ class Order extends Model
 
     public function Order_logs()
     {
-        return $this->hasMany(Order_Log::class);
+        return $this->hasMany(OrderLog::class);
     }
 }

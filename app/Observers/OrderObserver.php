@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 use App\Models\Order;
-use App\Models\Order_Log;
+use App\Models\OrderLog;
 use Illuminate\Support\Facades\Auth;
 
 class OrderObserver
@@ -12,7 +12,7 @@ class OrderObserver
      */
     public function created(Order $order)
     {
-        Order_Log::create([
+        OrderLog::create([
             'order_id' => $order->id,
             'user_id' => Auth::guard('user')->id() ?? null,
             'action' => 'created',
@@ -35,7 +35,7 @@ class OrderObserver
         }
 
         if (!empty($changes)) {
-            Order_Log::create([
+            OrderLog::create([
                 'order_id' => $order->id,
                 'user_id' => Auth::guard('user')->id() ?? null,
                 'action' => 'updated',
@@ -46,7 +46,7 @@ class OrderObserver
 
     public function deleted(Order $order)
     {
-        Order_Log::create([
+        OrderLog::create([
             'order_id' => $order->id,
             'user_id' => Auth::guard('user')->id() ?? null,
             'action' => 'deleted',
