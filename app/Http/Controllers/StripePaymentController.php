@@ -35,10 +35,10 @@ class StripePaymentController extends Controller
                 'currency' => 'php', // Set currency to PHP (Philippine Peso)
                 'description' => 'Payment for Order',
             ]);
-
-            return response()->json(['message' => 'Payment successful'], 200);
+            return response()->json(['message' => 'Payment successful'], 200); // Return success message
+            
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Payment failed: ' . $e->getMessage()], 500);
+            return response()->json(['error' => 'Payment failed: ' . $e->getMessage()], 500); // Return failure message
         }
     }
 

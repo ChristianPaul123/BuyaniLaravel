@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use App\Models\ProductSpecification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Stripe\Stripe;
+use Stripe\Customer;
+use Stripe\Charge;
 
 class CartController extends Controller
 {
@@ -28,7 +31,7 @@ class CartController extends Controller
         ->with(['product_specification.product'])
         ->get() : collect();
 
-        return view('user.consumer.cart.show', ['cart' => $cart, 'cartItems' => $cartItems]);
+        return view('user.consumer.cart.show', ['cart' => $cart, 'cartItems' => $cartItems, 'stripeKey' => env('STRIPE_KEY')]);
     }
 
     public function showConsumerCheckout(Request $request, $cartId)
@@ -54,6 +57,7 @@ class CartController extends Controller
             'shippingAddresses' => $shippingAddresses,
             'cartItems' => $filteredCartItems, // Use filtered cart items
             'selectedItems' => $selectedItems, // Pass selected items to the view
+            'stripeKey' => env('STRIPE_KEY'),
         ]);
     }
 

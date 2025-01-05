@@ -1,21 +1,34 @@
 @extends('layouts.app')
 
-@section('title','Checkout Page')
+@section('title', 'Checkout Page')
 
 @push('styles')
-<style>
-    .card {
-        border-radius: 8px;
-    }
-    .btn-custom {
-        background-color: #4CAF50;
-        color: white;
-        border-radius: 8px;
-    }
-    .btn-custom:hover {
-        background-color: #45a049;
-    }
-</style>
+    <style>
+        .card {
+            border-radius: 8px;
+        }
+
+        .btn-custom {
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 8px;
+        }
+
+        .btn-custom:hover {
+            background-color: #45a049;
+        }
+
+        #stripe-div {
+            max-height: 0;
+            overflow: hidden;
+            /* transition: max-height 0.2s ease-out; */
+        }
+
+        #stripe-div.active {
+            max-height: 200px;
+            transition: max-height 0.2s ease-out;
+        }
+    </style>
 @endpush
 
 @section('content')
@@ -30,7 +43,7 @@
                     <h5>Select Shipping Address</h5>
                     <select class="form-select mt-3" id="shippingAddressDropdown">
                         <option value="" selected disabled>Select a saved address</option>
-                        @foreach($shippingAddresses as $address)
+                        @foreach ($shippingAddresses as $address)
                             <option value="{{ $address->id }}">
                                 {{ $address->shipping_name }}, {{ $address->street }}, {{ $address->city }}, {{ $address->state }}, {{ $address->country }}
                             </option>
@@ -99,7 +112,7 @@
             <div class="col-12">
                 <div class="card p-4">
                     <h5>Cart Items</h5>
-                    @foreach($cartItems as $item)
+                    @foreach ($cartItems as $item)
                         <div class="d-flex justify-content-between align-items-center border-bottom py-2">
                             <p>{{ $item->product_specification->specification_name }} x {{ $item->quantity }}</p>
                             <p>${{ $item->price }}</p>
@@ -145,29 +158,34 @@
                 <button class="btn btn-custom w-100">Continue</button>
             </div>
         </div> --}}
-    @livewire('consumer.user-cart-checkout',['cartId' => $cart->id])
+        @livewire('consumer.user-cart-checkout', ['cartId' => $cart->id])
     </div>
 @endsection
 
 @section('scripts')
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Toggle GCash receipt upload
-        document.getElementById("gcash").addEventListener("change", function() {
-            document.getElementById("gcashUploadSection").style.display = "block";
-        });
-        document.getElementById("cod").addEventListener("change", function() {
-            document.getElementById("gcashUploadSection").style.display = "none";
-        });
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Toggle GCash receipt upload
+            // document.getElementById("gcash").addEventListener("change", function() {
+            //     document.getElementById("gcashUploadSection").style.display = "block";
+            // });
+            // document.getElementById("cod").addEventListener("change", function() {
+            //     document.getElementById("gcashUploadSection").style.display = "none";
+            // });
 
-        // Handle shipping address selection
-        document.getElementById("shippingAddressDropdown").addEventListener("change", function() {
-            if (this.value === "new") {
-                document.getElementById("shippingForm").reset();
-            } else {
-                // Load selected shipping address into the form (logic to be implemented)
-            }
+            // document.getElementById("stripe").addEventListener("change", function() {
+            //     document.getElementById("stripe-div").
+            // });
+
+            // // Handle shipping address selection
+            // document.getElementById("shippingAddressDropdown").addEventListener("change", function() {
+            //     if (this.value === "new") {
+            //         document.getElementById("shippingForm").reset();
+            //     } else {
+            //         // Load selected shipping address into the form (logic to be implemented)
+            //     }
+            // });
         });
-    });
-</script>
+    </script>
+    
 @endsection
