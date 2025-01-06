@@ -58,6 +58,7 @@ class DatabaseSeeder extends Seeder
             ProductSeeder::class,
             InventorySeeder::class,
             ProductImgSeeder::class,
+            ProductSpecificationsSeeder::class,
         ]);
     }
 }

@@ -1,5 +1,5 @@
-<div class="row mt-4 a" style="background-color: #48722e;">
-    <div class="col-lg-6 col-sm-12 a d-flex align-items-center justify-content-center" style="height: 500px;">
+<div class="row mt-4 h-100" style="background-color: #48722e;">
+    <div class="col-lg-6 col-sm-12 a d-flex align-items-center justify-content-center">
         <div class="left-side a w-100">
             <div class="a mb-5">
             @livewire('session-modal')
@@ -57,7 +57,7 @@
 
             <div class="">
                 <div class="text-center pt-3">
-                    <a href="{{ route('user.register', ['user_type' => $user_type]) }}">Create Account | Sign Up</a>
+                    <a class="text-white" href="{{ route('user.register', ['user_type' => $user_type]) }}">Create Account | Sign Up</a>
                 </div>
             </div>
 
@@ -69,7 +69,7 @@
     </div>
 
 
-    <div>
+    {{-- <div> --}}
 
             @if($showEmailModal)
             <div class="modal fade show d-block" tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5);">
@@ -163,7 +163,7 @@
             </div>
             </div>
             @endif
-    </div>
+    {{-- </div> --}}
 </div>
 
 @assets
