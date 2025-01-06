@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('trackings', function (Blueprint $table) {
-            $table->foreignId('admin_id')->nullable()->constrained('admins')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('user_id')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('admin_id')->nullable()->constrained('admins');
+            $table->foreignId('user_id')->nullable()->constrained('users');
         });
     }
 

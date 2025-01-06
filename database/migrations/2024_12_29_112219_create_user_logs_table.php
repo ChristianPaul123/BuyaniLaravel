@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('user_logs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('cascade');
+            $table->foreignId('user_id')->nullable()->constrained('users');
             $table->string('phone_number')->nullable();
             $table->string('email')->nullable();
             $table->string('status'); // 'success' or 'failed'

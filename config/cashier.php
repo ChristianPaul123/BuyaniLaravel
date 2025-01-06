@@ -47,6 +47,7 @@ return [
     'webhook' => [
         'secret' => env('STRIPE_WEBHOOK_SECRET'),
         'tolerance' => env('STRIPE_WEBHOOK_TOLERANCE', 300),
+        // 'events' => ['payment_intent.succeeded'], // Replace with specific events
         'events' => WebhookCommand::DEFAULT_EVENTS,
     ],
 
@@ -101,6 +102,7 @@ return [
     */
 
     'invoices' => [
+        // 'renderer' => env('CASHIER_INVOICE_RENDERER', null), // Set null if renderer not available
         'renderer' => env('CASHIER_INVOICE_RENDERER', DompdfInvoiceRenderer::class),
 
         'options' => [
