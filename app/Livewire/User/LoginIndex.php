@@ -43,14 +43,13 @@ class LoginIndex extends Component
 
     public function mount($user_type)
     {
-
         $this->user_type = $user_type;
         //dd($user_type);
     }
 
     public function closeModal()
     {
-        $this->reset(['otp', 'showEmailModal','showOtpModal','showPasswordResetForm','selectedEmail', 'newPassword']);
+        $this->reset(['otp', 'showEmailModal','showOtpModal','showPasswordResetForm','email', 'newPassword']);
         // Reset OTP and hide modal
     }
 
@@ -61,32 +60,32 @@ class LoginIndex extends Component
         try {
             //#UNCOMMENT WHEN IMPLEMENTED
             // Verify the recaptcha response
-            $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
-                'secret' => env('RECAPTCHA_SECRETKEY'),
-                'response' => $token,
-                'remoteip' => request()->ip(),
-            ]);
+            // $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+            //     'secret' => env('RECAPTCHA_SECRETKEY'),
+            //     'response' => $token,
+            //     'remoteip' => request()->ip(),
+            // ]);
 
 
-            if (!json_decode($response->body(), true)['success']) {
-                $this->captcha = 'Invalid recaptcha';
-            } else {
-            $this->captchaVerify = true;
+            // if (!json_decode($response->body(), true)['success']) {
+            //     $this->captcha = 'Invalid recaptcha';
+            // } else {
+            // $this->captchaVerify = true;
 
-            };
+            // };
 
             //this is for testing purposes #COMMENT IN PROD...
-            // if (app()->environment('local', 'testing')) {
-            //     $response = ['success' => true];
-            //     $this->captchaVerify = true;
+            if (app()->environment('local', 'testing')) {
+                $response = ['success' => true];
+                $this->captchaVerify = true;
 
-            // } else {
-            //     $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
-            //         'secret' => env('RECAPTCHA_SECRETKEY'),
-            //         'response' => $token,
-            //         'remoteip' => request()->ip(),
-            //     ])->json();
-            // }
+            } else {
+                $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+                    'secret' => env('RECAPTCHA_SECRETKEY'),
+                    'response' => $token,
+                    'remoteip' => request()->ip(),
+                ])->json();
+            }
         } catch (\Exception $e) {
 
             // Log the error or handle exceptions like SSL or network issues
@@ -98,6 +97,11 @@ class LoginIndex extends Component
         }
     }
 
+    public function showModal1()
+    {
+        $this->dispatch('show-modal1', ['modal' => 'modal1']);
+    }
+
 
     public function login()
     {
@@ -107,10 +111,10 @@ class LoginIndex extends Component
                 'user_type' => ['required'],
             ]);
 
-            // if ($this->captchaVerify != true) {
-            //     $this->dispatch('sessionError', error: 'Please verify the captcha');
-            //     return;
-            // }
+            if ($this->captchaVerify != true) {
+                $this->dispatch('sessionError', error: 'Please verify the captcha');
+                return;
+            }
 
 
 
@@ -147,10 +151,6 @@ class LoginIndex extends Component
             }
     }
 
-    public function showModal() {
-        $this->showEmailModal = true;
-    }
-
     public function requestOtp()
     {
 
@@ -158,6 +158,7 @@ class LoginIndex extends Component
         $this->validate([
             'selectedEmail' => 'required|email|exists:users,email',
         ]);
+
 
         // Generate a new OTP and expiration time
         $otp = rand(100000, 999999);
@@ -177,9 +178,11 @@ class LoginIndex extends Component
             ]
         );
 
-        // Open OTP modal
-        $this->showOtpModal = true;
-        Mail::to($this->selectedEmail)->send(new VerificationMail($otp));
+        // // Open OTP modal
+        // $this->showOtpModal = true;
+        $this->dispatch("show-modal",["modal" => 'modal1']);
+
+        // Mail::to($this->selectedEmail)->send(new VerificationMail($otp));
         session()->flash('message
         ', 'A password reset OTP has been sent to your email.');
     }
@@ -203,7 +206,7 @@ class LoginIndex extends Component
         if ($otpRecord && $otpRecord->otp == $this->otp) {
             $otpRecord->update(['is_verified' => true]);
 
-            //closes the other modal and show the password reset modal
+            //closes the other modal and show the password reseet modal
             $this->showOtpModal = false;
             $this->showEmailModal = false;
             $this->showPasswordResetForm = true;

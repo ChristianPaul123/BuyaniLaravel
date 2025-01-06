@@ -66,8 +66,6 @@
             }, 150); // Match the duration of the animation
         }, 3000); // 3 seconds
     }
-
 </script>
-
 </body>
 </html>

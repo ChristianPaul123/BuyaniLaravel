@@ -34,10 +34,17 @@ use App\Http\Controllers\ProductManagementController;
 use App\Http\Controllers\InventoryManagementController;
 use App\Http\Controllers\ProductSpecificationController;
 use App\Http\Controllers\VotedProductsManagementController;
+use App\Http\Controllers\StripePaymentController;
+
+
 
 Route::get('/', function () {
     return view('user.index');
 })->name('user.index');
+
+Route::get('/charge', [StripePaymentController::class, 'showForm']);
+
+Route::post('/charge', [StripePaymentController::class, 'charge']);
 
 //This right here is for the admin side
 
@@ -45,8 +52,8 @@ Route::get('/', function () {
 Route::get('admin', [AdminController::class, 'showForm'])->name('admin.login');
 Route::get('admin/test', [AdminController::class, 'test'])->name('admin.test');
 Route::post('admin/register', [AdminController::class, 'register'])->name('admin.register');
-Route::post('admin/login', [AdminController::class,'login' ]);
-Route::get('admin/logout', [AdminController::class,'logout' ])->name('admin.logout');
+Route::post('admin/login', [AdminController::class,'login'])->name('admin.admin.login');
+Route::get('admin/logout', [AdminController::class,'logout'])->name('admin.logout');
 
 
 //Admin Dashboard
@@ -124,7 +131,7 @@ Route::get('admin/orders/order-cancelled', [OrderManagementController::class, 'c
 
 //REPORT
 Route::get('admin/report/inventory', [ReportManagementController::class, 'showInventoryReports'])->name('admin.reports.inventory');
-Route::get('admin/report/sales', [ReportManagementController::class, 'showSalesReports'])->name('admin.reports.sales');
+Route::get('admin/report/sales', [ReportManagementController::class, 'salesReports'])->name('admin.reports.sales');
 
 //REPORT - LOGS
 Route::get('admin/report/logs', [ReportManagementController::class, 'showLogsReports'])->name('admin.reports.logs');
@@ -155,9 +162,7 @@ Route::get('admin/community/reviews', [ReviewManagementController::class, 'showR
 
 //VOTED PRODUCTS
 Route::get('admin/community/votes',[VotedProductsManagementController::class, 'showVotedProducts'])->name('admin.voted-products');
-// Route::get('admin/community/votes',[VotedProductsManagementController::class, 'showVotedProducts'])->name('admin.voted-products');
-// Route::get('admin/community/votes',[VotedProductsManagementController::class, 'showVotedProducts'])->name('admin.voted-products');
-// Route::get('admin/community/votes',[VotedProductsManagementController::class, 'showVotedProducts'])->name('admin.voted-products');
+
 
 //BLOGS
 Route::get('admin/community/blog',[BlogManagementController::class,'showBlogs'])->name('admin.blog');
@@ -240,7 +245,8 @@ Route::get('user/consumer/product/view/{encryptedId}', [UserProductController::c
 
 //cart for Consumers
 Route::get('user/consumer/cart', [CartController::class, 'showConsumerCart'])->name('user.consumer.product.cart');
-Route::get('user/consumer/cart/checkout/{cartId}', [CartController::class, 'showConsumerCheckout'])->name('user.consumer.product.cart.checkout');
+Route::get('/user/consumer/product/cart/checkout/{cartId}', [CartController::class, 'showConsumerCheckout'])
+    ->name('user.consumer.product.cart.checkout');
 
 Route::get('user/consumer/favorites', [FavoriteController::class, 'showConsumerFavorites'])->name('user.consumer.favorites');
 

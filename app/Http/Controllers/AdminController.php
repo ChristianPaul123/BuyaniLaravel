@@ -89,10 +89,6 @@ class AdminController extends Controller
         return redirect()->route('admin.login')->with('message', 'Successfully logged out');
     }
 
-
-
-
-
     public function showCustomization()
     {
         $admin = auth()->guard('admin')->user(); // Current Admin
@@ -174,8 +170,6 @@ class AdminController extends Controller
 
     public function edit(Admin $admin)
     {
-
-        $sponsorImages = Admin::where('');
         return view('customization.tabs.edit-admin', compact('admin'));
     }
 

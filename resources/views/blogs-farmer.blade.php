@@ -76,37 +76,46 @@
     <div class="container my-5">
         <!-- Latest Blog -->
         <div class="row">
-            <div class="col-12 mb-4">
-                <div class="card latest-blog-card">
-                    <img
-                        src="{{ asset($latestBlog->blog_pic) }}"
-                        class="card-img-top blog-img"
-                        alt="Latest Blog Image"
-                        data-bs-toggle="modal"
-                        data-bs-target="#blogModal"
-                        data-title="{{ $latestBlog->blog_title }}"
-                        data-author="{{ $latestBlog->admin->username }}"
-                        data-date="{{ $latestBlog->created_at }}"
-                        data-info="{{ $latestBlog->blog_info }}"
-                        data-img="{{ asset($latestBlog->blog_pic) }}"
-                    >
-                    <div class="card-body">
-                        <h5 class="card-title">{{ $latestBlog->blog_title }}</h5>
-                        <p class="card-text">{{ Str::limit($latestBlog->blog_info, 100) }}</p>
-                        <p class="text-muted">{{ $latestBlog->admin->username}} | {{ \Carbon\Carbon::parse($latestBlog->created_at)->format('M d, Y') }}</p>
+            @if($latestBlog)
+                <div class="col-12 mb-4">
+                    <div class="card latest-blog-card">
+                        <img
+                            src="{{ asset($latestBlog->blog_pic) }}"
+                            class="card-img-top blog-img card-pointer"
+                            alt="Latest Blog Image"
+                            data-bs-toggle="modal"
+                            data-bs-target="#blogModal"
+                            data-title="{{ $latestBlog->blog_title }}"
+                            data-author="{{ $latestBlog->admin->username }}"
+                            data-date="{{ $latestBlog->created_at }}"
+                            data-info="{{ $latestBlog->blog_info }}"
+                            data-img="{{ asset($latestBlog->blog_pic) }}"
+                        >
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $latestBlog->blog_title }}</h5>
+                            <p class="card-text">{{ Str::limit($latestBlog->blog_info, 100) }}</p>
+                            <p class="text-muted">{{ $latestBlog->admin->username }} | {{ \Carbon\Carbon::parse($latestBlog->created_at)->format('M d, Y') }}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            @else
+                <div class="col-12 text-center">
+                    <div class="alert alert-info">
+                        <h5>No blogs available at the moment</h5>
+                        <p>Check back later for the latest updates.</p>
+                    </div>
+                </div>
+            @endif
         </div>
 
         <!-- Blog Grid -->
         <div class="row g-3">
-            @foreach($blogs as $blog)
+            @forelse($blogs as $blog)
             <div class="col-md-4 col-6">
                 <div class="card">
                     <img
                         src="{{ asset($blog->blog_pic) }}"
-                        class="card-img-top blog-img"
+                        class="card-img-top blog-img card-pointer"
                         alt="Blog Image"
                         data-bs-toggle="modal"
                         data-bs-target="#blogModal"
@@ -122,7 +131,9 @@
                     </div>
                 </div>
             </div>
-            @endforeach
+            @empty
+            <p>No other blogs found.</p>
+            @endforelse
         </div>
 
         <!-- Pagination -->
@@ -130,7 +141,6 @@
             {{ $blogs->links() }}
         </div>
     </div>
-
     <!-- Modal -->
     <div class="modal fade" id="blogModal" tabindex="-1" aria-labelledby="blogModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">

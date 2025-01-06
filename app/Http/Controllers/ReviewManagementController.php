@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\OrderRating;
-use App\Models\ProductRating;
 use Illuminate\Http\Request;
+use App\Models\ProductRating;
 
 class ReviewManagementController extends Controller
 {
     public function showReviews() {
-        $productreviews = ProductRating::with('product','user')->get();
-        $orderreviews = OrderRating::with('order','user')->get();
-        return view('admin.community.review-index',compact('productreviews', 'orderreviews'));
+        $productRatings = ProductRating::with('product','user')->get();
+        $orderRatings = OrderRating::with('order','user')->get();
+        return view('admin.community.review-index',compact('productRatings','orderRatings'));
     }
 }

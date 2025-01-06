@@ -4,24 +4,26 @@
     </div>
     @include('admin.includes.messageBox')
     <div class="card-body">
-        <table id="specificproductsalesTable" class="table table-bordered table-striped">
+        <table id="specifcationTable" class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Product Specification</th>
-                    <th>Order Quantity</th>
-                    <th>Total Sales</th>
-                    <th>Sales Date</th>
+                    <th>Product Name</th>
+                    <th>Sold Stock</th>
+                    <th>Damaged Stock</th>
+                    <th>Total Stock</th>
+                    <th>Total Profit</th>
+                    <th>Transfer Date</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($specificproductsales  as $record)
+                @foreach ($records as $record)
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $record->productSpecification->specification_name ?? 'N/A' }}</td>
-                    <td>{{ $record->order_quantity }}</td>
-                    <td>${{ $record->total_sales }}</td>
-                    <td>{{ \Carbon\Carbon::parse($record->date)->format('F Y') }}</td>
+                    <td>{{ $record->product_name }}</td>
+                    <td>{{ $record->product_sold_stock }}</td>
+                    <td>{{ $record->product_damage_stock }}</td>
+                    <td>{{ $record->product_total_stock }}</td>
+                    <td>${{ $record->total_profit }}</td>
+                    <td>{{ \Carbon\Carbon::parse($record->transfer_date)->format('F Y') }}</td>
                 </tr>
                 @endforeach
             </tbody>

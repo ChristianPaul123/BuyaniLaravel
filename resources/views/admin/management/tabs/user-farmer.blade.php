@@ -4,7 +4,6 @@
             <table id="adminfarmerTable" class="table table-bordered">
               <thead>
                     <tr>
-                        <th>#</th>
                         <th>Username</th>
                         <th>Email</th>
                         <th>User Type</th>
@@ -19,9 +18,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($users as $index => $user)
+                    @foreach ($users as $user)
                     <tr>
-                        <td>{{ $index  + 1 }}</td>
                         <td>{{ $user->username }}</td>
                         <td>{{ $user->email }}</td>
                         <td>

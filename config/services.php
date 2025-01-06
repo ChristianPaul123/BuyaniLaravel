@@ -55,5 +55,9 @@ return [
     'weather' => [
         'key' => env('WEATHER_API_KEY'),
     ],
+    'stripe' => [
+        'key' => env('STRIPE_KEY'),
+        'sectret' => env('STRIPE_SECRET'),
+    ],
 
 ];

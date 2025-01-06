@@ -1,7 +1,7 @@
 <div>
     <section>
     <h4>Farmer's Forms</h4>
-    @include('user.includes.messageBox')
+
     <!-- Row 1 -->
     <div class="row">
         <!-- Farmer Form -->
@@ -98,25 +98,3 @@
     </div>
 </section>
 </div>
-
-@script
-<script>
-    // Show the flash message popup if it exists
-    const flashPopup = document.querySelector('#flashMessage');
-
-    if (flashPopup) {
-        // Display the elements and start fade-in animation
-        flashPopup.style.display = 'flex';
-
-        // Automatically hide the popup after 3 seconds
-        setTimeout(() => {
-            flashPopup.classList.add('hidden');
-
-            // After animation ends, hide the elements entirely
-            setTimeout(() => {
-                flashPopup.style.display = 'none';
-            }, 150); // Match the duration of the animation
-        }, 3000); // 3 seconds
-    }
-</script>
-@endscript

@@ -22,7 +22,7 @@
                 @foreach ($inventories as $inventory)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $inventory->product->product_name }}</td>
+                    <td>{{ $inventory->product->product_name ?? 'N/A' }}</td>
                     <td>{{ $inventory->product_new_stock }}</td>
                     <td>{{ $inventory->product_old_stock }}</td>
                     <td>{{ $inventory->product_total_stock }}</td>

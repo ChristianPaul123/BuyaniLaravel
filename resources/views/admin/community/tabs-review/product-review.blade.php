@@ -4,6 +4,7 @@
             <table id="productreviewTable" class="table table-bordered">
                 <thead>
                     <tr>
+                        <th>#</th>
                         <th>Product Name</th>
                         <th>Username</th>
                         <th>Rating</th>
@@ -14,9 +15,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($productreviews as $index => $rating)
+                    @foreach ($productRatings as $rating)
                     <tr>
-
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{ $rating->product->name ?? 'N/A' }}</td>
                         <td>{{ $rating->user->username ?? 'N/A' }}</td>
                         <td>{{ $rating->rating }}</td>
