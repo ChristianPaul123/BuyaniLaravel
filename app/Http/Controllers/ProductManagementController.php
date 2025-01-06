@@ -94,11 +94,13 @@ return view('admin.product.product-index', [
         try {
             $id = Crypt::decrypt($encryptedId);
             $product = Product::findOrFail($id);
+            $images = $product->productImages
+                ->select(['id','img']);
             $categories = Category::all();
             $subcategories = SubCategory::all();
-
             return view('admin.product.edit-product', [
                 'product' => $product,
+                'images' => $images,
                 'categories' => $categories,
                 'subcategories' => $subcategories,
             ]);
@@ -326,3 +328,11 @@ return view('admin.product.product-index', [
         return redirect()->route('admin.product.index', ['tab' => 'subcategories'])->with('success', 'SubCategory deleted successfully.');
     }
 }
+
+
+
+
+
+
+
+
