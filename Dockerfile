@@ -31,9 +31,9 @@ COPY . /var/www
 # Remove the original avatars folder after copying
 RUN rm -rf /var/www/public/avatars
 
-# Set permissions
-RUN chown -R www-data:www-data /var/www
-RUN chmod -R 755 /var/www/storage
+# Set permissions and ownership (fix for permission issues)
+RUN chown -R www-data:www-data /var/www \
+    && chmod -R 775 /var/www/storage /var/www/bootstrap/cache
 
 # Install application dependencies
 RUN composer install --no-interaction --no-plugins --no-scripts
