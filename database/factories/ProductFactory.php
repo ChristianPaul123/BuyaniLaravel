@@ -19,15 +19,17 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         // Create a Category with one SubCategory
-        $category = Category::factory()->withSubcategories(1)->create();
-        $subcategory = $category->subcategories->first();
+        $randomCategory = Category::inRandomOrder()->first();
+        $subcategory = SubCategory::where('category_id', $randomCategory->id)
+            ->inRandomOrder()->first();
+
 
         return [
             'product_name' => $this->faker->sentence(3),
             'product_pic' => $this->faker->imageUrl(),
             'product_details' => $this->faker->text,
             'product_status' => null,
-            'category_id' => $category->id,
+            'category_id' => $randomCategory->id,
             'subcategory_id' => $subcategory->id,
             'product_deactivated' => $this->faker->boolean(),
             'is_featured' => $this->faker->boolean(),

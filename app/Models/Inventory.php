@@ -13,9 +13,9 @@ class Inventory extends Model
         'product_new_stock',
         'product_old_stock',
         'product_total_stock',
+        'total_profit',
         'product_sold_stock',
         'product_damage_stock',
-        'total_profit',
     ];
 
     public function product() {

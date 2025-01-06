@@ -13,7 +13,9 @@ class ProductSeeder extends Seeder
      *
      * @var int
      */
-    private CONST PRODUCT_COUNT = 50;
+
+    private CONST PRODUCT_COUNT = 250;
+
 
     /**
      * Use the WithoutModelEvents trait to prevent the Product model events from firing.
