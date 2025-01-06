@@ -376,22 +376,16 @@
         color: #d3d3d3; /* Light gray for the description */
     }
 
-    .subscribe-input {
-        border: none;
-        border-radius: 0.25rem 0 0 0.25rem;
-        padding: 10px 15px;
-        font-size: 1rem;
-        flex-grow: 1;
-    }
-
     .subscribe-button {
         background-color: #00b34d; /* Bright green button */
         color: white;
         border: none;
-        border-radius: 0 0.25rem 0.25rem 0;
+        border-radius: 0.25rem;
         font-size: 1rem;
         padding: 10px 20px;
         transition: background-color 0.3s;
+        text-decoration: none;
+        display: inline-block;
     }
 
     .subscribe-button:hover {
@@ -608,15 +602,9 @@
             <div class="row align-items-center">
                 <!-- Left Text -->
                 <div class="col-md-6">
-                    <h1 class="subscribe-title">Subscribe to Buyani</h1>
-                    <p class="subscribe-description">Get updates about our latest promos, new products, and featured brands.</p>
-                </div>
-                <!-- Right Form -->
-                <div class="col-md-6">
-                    <form class="d-flex">
-                        <input type="email" class="form-control subscribe-input" placeholder="Email Address">
-                        <button type="submit" class="btn subscribe-button">Subscribe</button>
-                    </form>
+                    <h1 class="subscribe-title">Want to Know More?</h1>
+                    <p class="subscribe-description">Send us a message to learn more about our latest promos, new products, and featured brands.</p>
+                    <a href="mailto:contact@buyani.com" class="btn subscribe-button">Contact Us</a>
                 </div>
             </div>
         </div>
