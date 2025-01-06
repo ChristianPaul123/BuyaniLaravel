@@ -34,6 +34,7 @@ use App\Http\Controllers\InventoryManagementController;
 use App\Http\Controllers\ProductSpecificationController;
 use App\Http\Controllers\VotedProductsManagementController;
 use App\Http\Controllers\StripePaymentController;
+use App\Http\Controllers\UserProductController;
 
 
 
@@ -238,8 +239,8 @@ Route::get('user/farmer/profile/edit', [UserController::class, 'editFarmerprofil
 Route::put('user/farmer/profile/update', [UserController::class, 'updateFarmerprofile'])->name('user.farmer.profile.update');
 
 //Product for Consumers
-Route::get('user/consumer/products', [ProductController::class, 'showConsumerProduct'])->name('user.consumer.product');
-Route::get('user/consumer/product/view/{encryptedId}', [ProductController::class, 'viewConsumerProduct'])->name('user.consumer.product.view');
+Route::get('user/consumer/products', [UserProductController::class, 'showConsumerProduct'])->name('user.consumer.product');
+Route::get('user/consumer/product/view/{encryptedId}', [UserProductController::class, 'viewConsumerProduct'])->name('user.consumer.product.view');
 
 
 //cart for Consumers

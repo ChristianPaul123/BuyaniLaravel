@@ -122,7 +122,7 @@
 
                 <!-- Submit Button -->
                 <div class="row form-group my-3 d-flex justify-content-center">
-                    <button id="submit-button" type="submit" class="btn btn-warning btn-block px-4" style="width: fit-content;" disabled>Sign Up</button>
+                    <button id="submit-button" type="submit" class="btn btn-warning btn-block px-4" style="width: fit-content;">Sign Up</button>
                 </div>
               </form>
 
@@ -201,7 +201,7 @@
 
                 <!-- Submit Button -->
                 <div class="row form-group my-3 d-flex justify-content-center">
-                    <button id="submit-button" type="submit" class="btn btn-warning btn-block px-4" style="width: fit-content;" disabled>Sign Up</button>
+                    <button id="submit-button" type="submit" class="btn btn-warning btn-block px-4" style="width: fit-content;">Sign Up</button>
                 </div>
             </form>
           </div>
