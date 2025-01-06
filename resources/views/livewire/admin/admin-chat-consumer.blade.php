@@ -14,20 +14,17 @@
                     <img src="{{ $user->profile_pic ? asset($user->profile_pic) : 'https://via.placeholder.com/40' }}" alt="User Image">
                     <div class="details">
                         <div class="name">{{ $user->username }}</div>
-                        <div class="last-message">
-                            @if ($user->chat && $user->chat->messages->isNotEmpty())
-                            @php
-                                $lastMessage = $user->chat->messages->first();
-                                $sender = $lastMessage->admin_id ? ($lastMessage->admin->username ?? 'Admin') : $user->username;
-                            @endphp
-                            <strong>{{ $sender }}:</strong> {{ Str::limit($lastMessage->message_info, 10) }}
-                            <span style="font-size: 0.8rem;">
-                                {{ $lastMessage->created_at->diffForHumans() }}
-                            </span>
-                            @else
-                                No messages yet
-                            @endif
-                        </div>
+                            <div class="last-message">
+                                @if ($user->lastMessageText)
+                                    <strong>{{ $user->senderName }}:</strong>
+                                    {{ $user->lastMessageText }}
+                                    <span style="font-size: 0.8rem;">
+                                        {{ $user->lastMessageTimeAgo }}
+                                    </span>
+                                @else
+                                    No messages yet
+                                @endif
+                            </div>
                     </div>
                 </div>
             @endforeach
@@ -39,7 +36,6 @@
         <div class="chat-header">
             Chat with {{ $selectedUser->username ?? 'Select a user' }}
         </div>
-
         <div class="message-box mb-3" id="chatBoxCon" wire:poll>
             @forelse ($messages as $message)
                 @if ($message->user_id)
@@ -93,7 +89,6 @@
 @script
 <script>
     document.addEventListener('livewire:initialized', function () {
-        console.log('mama help');
         // Cache DOM elements
         const messageForm = document.getElementById('messageFormCon');
         const messageInput = document.getElementById('messageInputCon');
