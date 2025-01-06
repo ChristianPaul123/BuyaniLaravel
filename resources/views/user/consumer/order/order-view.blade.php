@@ -27,9 +27,9 @@
                     {{ $order->getStatusLabelAttribute() }}
                 </span>
             </p>
-            <p><strong>Total Amount:</strong> ${{ number_format($order->total_amount, 2) }}</p>
+            <p><strong>Total Amount:</strong> ₱{{ number_format($order->total_amount, 2) }}</p>
             <p><strong>Overall Weight:</strong> {{ $order->overall_orderKG }} KG</p>
-            <p><strong>Total Price:</strong> ${{ number_format($order->total_price, 2) }}</p>
+            <p><strong>Total Price:</strong> ₱{{ number_format($order->total_price, 2) }}</p>
         </div>
     </div>
 
@@ -69,7 +69,7 @@
                             <td>{{ $item->product->product_name ?? 'N/A' }}</td>
                             <td>{{ $item->productSpecification->specification_name ?? 'N/A' }}</td>
                             <td>{{ $item->quantity }}</td>
-                            <td>${{ number_format($item->price, 2) }}</td>
+                            <td>₱{{ number_format($item->price, 2) }}</td>
                             <td>{{ $item->overall_kg }} KG</td>
                         </tr>
                     @endforeach
@@ -84,8 +84,16 @@
         <div class="card-body">
             <h5>Payment Information</h5>
             <p><strong>Payment Method:</strong> {{ ucfirst($order->payment->payment_method) }}</p>
-            <p><strong>Payment Amount:</strong> ${{ number_format($order->payment->payment_amount, 2) }}</p>
-            <p><strong>Payment Status:</strong> {{ ucfirst($order->payment->payment_status) }}</p>
+            <p><strong>Payment Amount:</strong> ₱{{ number_format($order->payment->payment_amount, 2) }}</p>
+            <p><strong>Payment Status:</strong> 
+                @if ($order->payment->payment_status === 0)
+                Pending
+            @elseif ($order->payment->payment_status === 1)
+                Paid
+            @else
+                Unknown
+            @endif
+            </p>
             @if($order->payment->payment_pic)
                 <p><strong>Payment Receipt:</strong></p>
                 <img src="{{ asset($order->payment->payment_pic) }}" alt="Payment Receipt" style="max-width: 300px;">

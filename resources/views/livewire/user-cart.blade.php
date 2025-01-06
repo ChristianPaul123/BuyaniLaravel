@@ -141,7 +141,7 @@
                                         $selectedItem = $cartItems->firstWhere('id', $selectedItemId);
                                     @endphp
                                     @if($selectedItem)
-                                        <p>{{ $selectedItem->id }}</p>
+                                        <p>{{ $selectedItem->product_specification->specification_name }}</p>
                                     @endif
                                 @endforeach
                             </div>
@@ -168,7 +168,7 @@
                         </div>
                         <div class="d-flex justify-content-between">
                             <p>Total price:</p>
-                            <h6>${{ $totalSelectedPrice }}</h6> <!-- Display total price of selected items -->
+                            <h6>₱{{ $totalSelectedPrice }}</h6> <!-- Display total price of selected items -->
                         </div>
 
                         @if(count($selectedItems) == 0)
