@@ -122,7 +122,7 @@
 <body>
     @include('user.includes.navbar-consumer')
 
-<div class="main-content-wrapper">
+<div class="main-content-wrapper h-100">
         <!-- All your main page content goes here -->
     <div class="container container-fluid mt-1">
     <!-- Navbar -->
