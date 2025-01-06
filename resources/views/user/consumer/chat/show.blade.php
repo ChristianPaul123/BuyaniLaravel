@@ -131,15 +131,15 @@
 @section('scripts')
 <script>
 
-    document.addEventListener('livewire:load', function () {
-        // Automatically scroll to the bottom after each Livewire DOM update
-        Livewire.hook('message.processed', (message, component) => {
-            window.scrollToBottom();
-        });
+    // document.addEventListener('livewire:load', function () {
+    //     // Automatically scroll to the bottom after each Livewire DOM update
+    //     Livewire.hook('message.processed', (message, component) => {
+    //         window.scrollToBottom();
+    //     });
 
-        // Scroll to the bottom when the page is first loaded
-        window.scrollToBottom();
-    });
+    //     // Scroll to the bottom when the page is first loaded
+    //     window.scrollToBottom();
+    // });
 
     document.addEventListener('DOMContentLoaded', function () {
         // Cache DOM elements
@@ -170,7 +170,11 @@
                     // Optionally create a temporary message in the chatbox
                     const messageDiv = document.createElement('div');
                     messageDiv.className = 'message right';
-                    const currentTimestamp = new Date().toLocaleString();
+                    const currentTimestamp = new Intl.DateTimeFormat('en-US', {
+                        dateStyle: 'short',
+                        timeStyle: 'short',
+                        timeZone: 'Asia/Manila' // Time zone for the Philippines
+                    }).format(new Date());
 
                     messageDiv.innerHTML = `
                         <div class="text-container">

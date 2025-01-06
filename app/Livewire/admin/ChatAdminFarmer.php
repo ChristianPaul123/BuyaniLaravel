@@ -6,6 +6,7 @@ use App\Models\Chat;
 use App\Models\User;
 use Livewire\Component;
 use App\Models\Messages;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 
 class ChatAdminFarmer extends Component
@@ -31,17 +32,42 @@ class ChatAdminFarmer extends Component
         }
     }
 
+
     public function getUsersWithLastMessage()
     {
-        // Fetch all users with their chat and latest message
-        return User::where('user_type', 2) // Assuming `1` is for farmer
+        $users = User::where('user_type', 2)
             ->with(['chat' => function ($query) {
-                $query->with(['messages' => function ($query) {
-                    $query->latest('created_at')->take(1); // Fetch the most recent message
+                $query->with(['messages' => function ($q) {
+                    $q->latest('created_at')->take(1);
                 }]);
             }])
             ->get();
+
+        // Append last message details to each user instance
+        foreach ($users as $user) {
+            if ($user->chat && $user->chat->messages->isNotEmpty()) {
+                $lastMessage = $user->chat->messages->first();
+
+                // Determine the sender name
+                $sender = $lastMessage->admin_id
+                    ? ($lastMessage->admin->username ?? 'Admin')
+                    : $user->username;
+
+                // Store these values so we can display them in the Blade
+                $user->senderName = $sender;
+                $user->lastMessageText = Str::limit($lastMessage->message_info, 10);
+                $user->lastMessageTimeAgo = $lastMessage->created_at->diffForHumans();
+            } else {
+                // For users with no messages, set these to null
+                $user->senderName = null;
+                $user->lastMessageText = null;
+                $user->lastMessageTimeAgo = null;
+            }
+        }
+
+        return $users;
     }
+
 
     public function selectChat($userId)
     {

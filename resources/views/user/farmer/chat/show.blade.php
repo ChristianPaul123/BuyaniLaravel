@@ -133,15 +133,15 @@
 @section('scripts')
 <script>
 
-document.addEventListener('livewire:load', function () {
-        // Automatically scroll to the bottom after each Livewire DOM update
-        Livewire.hook('message.processed', (message, component) => {
-            window.scrollToBottom();
-        });
+    // document.addEventListener('livewire:load', function () {
+    //     // Automatically scroll to the bottom after each Livewire DOM update
+    //     Livewire.hook('message.processed', (message, component) => {
+    //         window.scrollToBottom();
+    //     });
 
-        // Scroll to the bottom when the page is first loaded
-        window.scrollToBottom();
-    });
+    //     // Scroll to the bottom when the page is first loaded
+    //     window.scrollToBottom();
+    // });
 
     document.addEventListener('DOMContentLoaded', function () {
         // Cache DOM elements
@@ -190,6 +190,4 @@ document.addEventListener('livewire:load', function () {
         }
     });
 </script>
-@endsection
-@section('scripts')
 @endsection
