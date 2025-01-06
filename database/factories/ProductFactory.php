@@ -28,7 +28,7 @@ class ProductFactory extends Factory
             'product_name' => $this->faker->sentence(3),
             'product_pic' => $this->faker->imageUrl(),
             'product_details' => $this->faker->text,
-            'product_status' => null,
+            'product_status' => 1,
             'category_id' => $randomCategory->id,
             'subcategory_id' => $subcategory->id,
             'product_deactivated' => $this->faker->boolean(),

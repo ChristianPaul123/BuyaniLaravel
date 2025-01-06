@@ -34,13 +34,23 @@
     @include('layouts.script')
 
     <script>
-        window.addEventListener('popstate', function(event) {
-            if (confirm("Are you sure you want to log out?")) {
-                window.location.href = "{{ route('user.logout') }}";
-            } else {
-                history.pushState(null, null, window.location.href);
-            }
-        });
+        // Show the flash message popup if it exists
+        const flashPopup = document.querySelector('#flashMessage');
+    
+        if (flashPopup) {
+            // Display the elements and start fade-in animation
+            flashPopup.style.display = 'flex';
+    
+            // Automatically hide the popup after 3 seconds
+            setTimeout(() => {
+                flashPopup.classList.add('hidden');
+    
+                // After animation ends, hide the elements entirely
+                setTimeout(() => {
+                    flashPopup.style.display = 'none';
+                }, 150); // Match the duration of the animation
+            }, 3000); // 3 seconds
+        }
     </script>
 </body>
 </html>

@@ -8,7 +8,9 @@ use App\Models\Inventory;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Contracts\Encryption\DecryptException;
 
 
 class ProductController extends Controller
@@ -153,6 +155,58 @@ class ProductController extends Controller
 
      return redirect()->route('admin.product')->with('message', 'Product deleted successfully.');
  }
+
+
+
+// This is for the User Side
+
+
+public function showConsumerProduct()
+{
+    try {
+        $categories = Category::all();
+        $subcategories = SubCategory::all();
+        $products = Product::where('product_status', 1)->get();
+
+        if ($products->isEmpty()) {
+            return view('user.consumer.product.show', [
+                'products' => $products,
+                'categories' => $categories,
+                'subcategories' => $subcategories,
+                'message' => 'Sorry, there are no products available at the moment.'
+            ]);
+        }
+
+        return view('user.consumer.product.show', [
+            'products' => $products,
+            'categories' => $categories,
+            'subcategories' => $subcategories
+        ]);
+    } catch (\Exception $e) {
+        return back()->with('error', 'An error occurred while retrieving products.');
+    }
+}
+
+public function viewConsumerProduct($encryptedId) {
+    try {
+        $id = Crypt::decrypt($encryptedId);
+        $product = Product::with('category', 'subcategory', 'productImages', 'productSpecification', 'inventory')->findOrFail($id);
+        $categories = Category::all();
+        $subcategories = SubCategory::all();
+
+        return view('user.consumer.product.view', [
+            'product' => $product,
+            'categories' => $categories,
+            'subcategories' => $subcategories,
+            'productSpecification' => $product->productSpecification,
+            'inventory' => $product->inventory
+        ]);
+    } catch (DecryptException $e) {
+        return back()->with('error', 'Invalid product ID provided.');
+    } catch (\Exception $e) {
+        return back()->with(['error', 'An error occurred while retrieving the product.', 'product' => $product]);
+    }
+}
 
 }
 

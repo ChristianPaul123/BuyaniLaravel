@@ -23,6 +23,11 @@ class LogFailedLogin
      */
     public function handle(Failed $event)
     {
+    // Ensure the user is an instance of the 'User' model
+    if (! $event->user instanceof \App\Models\User) {
+        return;
+    }
+
         $loginMethod = isset($event->credentials['phone_number']) ? 'phone_number' : (isset($event->credentials['email']) ? 'email' : 'unknown');
 
         UserLog::create([
