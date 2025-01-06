@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Tracking_timeline extends Model
+class TrackingTimeline extends Model
 {
 
     public $timestamp = true;

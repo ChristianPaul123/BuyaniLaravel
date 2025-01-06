@@ -33,6 +33,7 @@
                     <h2 class="product-title">{{ $product->product_name }}</h2>
                     <p style="color: #777;">Tags: <span class="font-weight-bold">{{ $categories->category_name }}, {{ $subcategories->sub_category_name }}</span></p>
 
+
                     <p><strong>Price:</strong> <span class="product-price">{{ $product->productSpecification[0]->product_price }}</span></p>
                     <p><strong>Condition:</strong>
                         @if ($product->created_at->diffInDays(now()) < 5)
@@ -43,6 +44,7 @@
                     </p>
                     <p><strong>Quantity:</strong> <span class="font-weight-bold">{{ $product->inventory->product_total_stock }}</span></p>
                     <p><strong>Availability:</strong> <span class="font-weight-bold text-success">{{ $product->status_label }}</span></p>
+
 
                     <div class="row">
                         @forelse ($specifications as $specification)

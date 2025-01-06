@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('order_logs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
+            $table->foreignId('order_id')->nullable()->constrained('orders');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('action'); // e.g. 'created', 'updated', 'deleted' changes and shit haha don't touch
             $table->text('changes')->nullable(); // JSON of what changed like old to new or something

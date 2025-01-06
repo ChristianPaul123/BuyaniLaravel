@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('product_specification_logs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_specification_id')->constrained('product_specifications')->onDelete('cascade');
+            $table->foreignId('product_specification_id')->nullable()->constrained('product_specifications');
             $table->unsignedBigInteger('admin_id')->nullable(); // If you track which user performed the action
             $table->string('action'); // e.g. 'created', 'updated', 'deleted'
             $table->text('changes')->nullable(); // JSON of what changed (if needed)

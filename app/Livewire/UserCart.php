@@ -17,7 +17,7 @@ class UserCart extends Component
     public $selectAll = false;
     public $totalSelectedPrice = 0;
     public $totalWeightselected = 0;
-    public $maxLimit = 3;
+    public $maxLimit = 10;
 
     public function mount($cart)
     {

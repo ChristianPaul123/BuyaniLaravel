@@ -49,7 +49,7 @@ class LoginIndex extends Component
 
     public function closeModal()
     {
-        $this->reset(['otp', 'showEmailModal','showOtpModal','showPasswordResetForm','email', 'newPassword']);
+        $this->reset(['otp', 'showEmailModal','showOtpModal','showPasswordResetForm','selectedEmail', 'newPassword']);
         // Reset OTP and hide modal
     }
 
@@ -96,12 +96,9 @@ class LoginIndex extends Component
             ]);
         }
     }
-
-    public function showModal1()
-    {
-        $this->dispatch('show-modal1', ['modal' => 'modal1']);
+    public function showModal() {
+        $this->showEmailModal = true;
     }
-
 
     public function login()
     {
@@ -151,6 +148,7 @@ class LoginIndex extends Component
             }
     }
 
+
     public function requestOtp()
     {
 
@@ -158,7 +156,6 @@ class LoginIndex extends Component
         $this->validate([
             'selectedEmail' => 'required|email|exists:users,email',
         ]);
-
 
         // Generate a new OTP and expiration time
         $otp = rand(100000, 999999);
@@ -178,13 +175,11 @@ class LoginIndex extends Component
             ]
         );
 
-        // // Open OTP modal
-        // $this->showOtpModal = true;
-        $this->dispatch("show-modal",["modal" => 'modal1']);
-
-        // Mail::to($this->selectedEmail)->send(new VerificationMail($otp));
-        session()->flash('message
-        ', 'A password reset OTP has been sent to your email.');
+        // Open OTP modal
+        $this->showEmailModal = false;
+        $this->showOtpModal = true;
+        Mail::to($this->selectedEmail)->send(new VerificationMail($otp));
+        session()->flash('message', 'A password reset OTP has been sent to your email.');
     }
 
     public function verifyOtp()
@@ -206,9 +201,8 @@ class LoginIndex extends Component
         if ($otpRecord && $otpRecord->otp == $this->otp) {
             $otpRecord->update(['is_verified' => true]);
 
-            //closes the other modal and show the password reseet modal
+            //closes the other modal and show the password reset modal
             $this->showOtpModal = false;
-            $this->showEmailModal = false;
             $this->showPasswordResetForm = true;
 
             session()->flash('success', 'OTP confirmed Please input your new password.');
@@ -238,6 +232,7 @@ class LoginIndex extends Component
             session()->flash('error', 'User not found. Please try again.');
         }
     }
+
     public function render()
     {
         return view('livewire.user.login-index',['success' => session('success'),['message' => session('message')],['error' => session('error')]]);
@@ -246,6 +241,42 @@ class LoginIndex extends Component
 
 
 // Code dumps
+
+    // public function requestOtp()
+    // {
+
+    //     // Validate email input
+    //     $this->validate([
+    //         'selectedEmail' => 'required|email|exists:users,email',
+    //     ]);
+
+
+    //     // Generate a new OTP and expiration time
+    //     $otp = rand(100000, 999999);
+    //     $expiryTime = now()->addMinutes(5);
+
+    //     // Store OTP in database for password reset purpose
+    //     OtpVerify::updateOrCreate(
+    //         [
+    //             'email' => $this->selectedEmail,
+    //             'v_purpose' => 'password_reset',
+    //         ],
+    //         [
+    //             'otp' => $otp,
+    //             'otp_expiry' => $expiryTime,
+    //             'is_verified' => false,
+    //             'updated_at' => now(),
+    //         ]
+    //     );
+
+    //     // // Open OTP modal
+    //     // $this->showOtpModal = true;
+    //     $this->dispatch("show-modal",["modal" => 'modal1']);
+
+    //     // Mail::to($this->selectedEmail)->send(new VerificationMail($otp));
+    //     session()->flash('message
+    //     ', 'A password reset OTP has been sent to your email.');
+    // }
 
             //Send the reCAPTCHA verification request
             // $response = Http::withOptions([

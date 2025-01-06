@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('tracking_timelines', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('tracking_id')->constrained('trackings')->onDelete('cascade');
+            $table->foreignId('tracking_id')->constrained('trackings');
             $table->string('status');
             $table->string('description');
             $table->string('location');
