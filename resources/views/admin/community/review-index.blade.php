@@ -35,7 +35,6 @@
                 </li>
 
             </ul>
-ddd
             {{-- Tab Content --}}
             <div class="tab-content mt-4" id="reviewsTabsContent">
 
