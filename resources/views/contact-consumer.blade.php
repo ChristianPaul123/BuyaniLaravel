@@ -7,10 +7,6 @@
 {{-- Add Page-Specific Styles --}}
 @push('styles')
 <style>
-    *{
-        /* border: 1px solid black; */
-    }
-
     body {
         background-color: #f8f9fa;
         font-family: 'Poppins', sans-serif;
@@ -25,15 +21,9 @@
         padding: 20px;
         border-radius: 10px;
     }
-
-    .contact-info{
-        background-color: #5f8d4e;
-        color: #f8f9fa;
-        height:325px;
-    }
-
-    .gmap{
-        border: 3px solid #000;
+    .contact-form {
+        background: #fff;
+        padding: 30px;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         width: 80%;
