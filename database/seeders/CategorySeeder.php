@@ -18,7 +18,9 @@ class CategorySeeder extends Seeder
      *
      * @var int
      */
+
     private CONST CATEGORY_COUNT = 5;
+
     
     /**
      * Run the database seeds.

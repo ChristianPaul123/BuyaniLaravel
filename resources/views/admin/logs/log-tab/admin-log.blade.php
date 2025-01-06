@@ -4,7 +4,7 @@
             <table id="adminlogTable" class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>#</th>
+                        <th>ID</th>
                         <th>Admin name</th>
                         <th>Admin email</th>
                         <th>Admin type</th>
@@ -16,10 +16,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($adminLogs as $index => $log)
+                    @foreach ($adminLogs as $log)
                     <tr>
                         {{-- ID --}}
-                        <td>{{ $index  + 1 }}</td>
+                        <td>{{ $log->id }}</td>
+
                         {{-- Admin name --}}
                         <td>{{ $log->admin->username ?? 'N/A' }}</td>
 

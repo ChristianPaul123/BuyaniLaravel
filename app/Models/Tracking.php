@@ -36,6 +36,6 @@ class Tracking extends Model
     }
 
     public function tracking_timelines() {
-        return $this->belongsToMany(Tracking_timeline::class);
+        return $this->belongsToMany(TrackingTimeline::class);
     }
 }

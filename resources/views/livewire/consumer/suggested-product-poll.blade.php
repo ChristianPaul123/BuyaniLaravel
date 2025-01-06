@@ -29,6 +29,13 @@
                                     color: {{ $product->votedProducts->isNotEmpty() ? '#fff' : '#000' }};">
                                     👍 {{ $product->total_vote_count }}
                                 </button>
+
+                                <button
+                                    wire:click="example()"
+                                    class="btn btn-sm"
+                                    style="border-radius: 20px; padding: 5px 15px; font-size: 14px;">
+                                    👍 {{ $product->total_vote_count }}
+                                </button>
                             </div>
                         </div>
                     </div>

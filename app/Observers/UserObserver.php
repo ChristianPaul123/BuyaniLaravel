@@ -3,7 +3,7 @@
 namespace App\Observers;
 
 use App\Models\User;
-use App\Models\User_log;
+use App\Models\UserLog;
 use Illuminate\Support\Facades\Request;
 
 

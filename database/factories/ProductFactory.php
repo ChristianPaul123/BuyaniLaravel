@@ -23,6 +23,7 @@ class ProductFactory extends Factory
         $subcategory = SubCategory::where('category_id', $randomCategory->id)
             ->inRandomOrder()->first();
 
+
         return [
             'product_name' => $this->faker->sentence(3),
             'product_pic' => $this->faker->imageUrl(),

@@ -41,16 +41,16 @@
             <div class="tab-content mt-4" id="votedProductsTabsContent">
 
                 <div class="tab-pane fade show active" id="managevotes" role="tabpanel">
-                    @include('admin.community.tabs-votes.manage-suggestions',['manageSuggestions' => $manageSuggestions])
+                    @include('admin.community.tabs-votes.manage-votes')
                 </div>
 
-                <div class="tab-pane fade" id="currentvotes" role="tabpanel">
-                    @include('admin.community.tabs-votes.current-votes',['suggestionRecord' => $suggestionRecord])
+                <div class="tab-pane fade show" id="currentvotes" role="tabpanel">
+                    @include('admin.community.tabs-votes.current-votes')
                 </div>
 
 
                 <div class="tab-pane fade" id="pastvotes" role="tabpanel">
-                    @include('admin.community.tabs-votes.past-votes',[['suggestionRecord' => $suggestionRecord]])
+                    @include('admin.community.tabs-votes.past-votes')
                 </div>
 
             </div>

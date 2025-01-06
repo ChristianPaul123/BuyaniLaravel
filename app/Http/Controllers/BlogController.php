@@ -22,10 +22,21 @@ public function showConsumerBlogs()
         return redirect()->route('user.index')->with('message', 'Please log in or sign up to view this page');
     }
 
-    // Fetch the latest blog for the main display and paginate the rest
+    // Fetch the latest blog for the main display
     $latestBlog = Blog::orderBy('created_at', 'desc')->first();
-    // dd($latestBlog);
-    $blogs = Blog::where('id', '!=', $latestBlog->id)->orderBy('created_at', 'desc')->paginate(2);
+
+    // Check if there are any blogs
+    if (!$latestBlog) {
+        return view('blogs-consumer', [
+            'latestBlog' => null,
+            'blogs' => collect([]), // Empty collection for consistency
+        ])->with('message', 'No blogs are currently available. Check back later!');
+    }
+
+    // Fetch the remaining blogs, excluding the latest one
+    $blogs = Blog::where('id', '!=', $latestBlog->id)
+        ->orderBy('created_at', 'desc')
+        ->paginate(2);
 
     return view('blogs-consumer', [
         'latestBlog' => $latestBlog,

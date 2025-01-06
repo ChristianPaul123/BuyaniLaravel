@@ -82,7 +82,7 @@ class Product extends Model
     }
 
     public function Product_Logs() {
-        $this->hasMany(Product_log::class);
+        $this->hasMany(ProductLog::class);
     }
 
 }
