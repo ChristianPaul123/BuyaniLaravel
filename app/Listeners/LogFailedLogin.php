@@ -5,7 +5,7 @@ namespace App\Listeners;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Auth\Events\Failed;
-use App\Models\User_log;
+use App\Models\UserLog;
 use Illuminate\Support\Facades\Request;
 
 class LogFailedLogin
@@ -25,7 +25,7 @@ class LogFailedLogin
     {
         $loginMethod = isset($event->credentials['phone_number']) ? 'phone_number' : (isset($event->credentials['email']) ? 'email' : 'unknown');
 
-        User_log::create([
+        UserLog::create([
             'user_id' => $event->user->id ?? null,
             'phone_number' => $event->credentials['phone_number'] ?? null,
             'email' => $event->credentials['email'] ?? null,

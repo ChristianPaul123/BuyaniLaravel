@@ -4,15 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Admin_Log extends Model
+class ProductLog extends Model
 {
+
     public $timestamp = true;
 
     protected $fillable = [
+        'product_id',
         'admin_id',
         'action',
-        'ip_address',
+        'changes',
     ];
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 
     public function admin()
     {

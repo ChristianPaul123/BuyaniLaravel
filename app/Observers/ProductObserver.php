@@ -4,7 +4,7 @@ namespace App\Observers;
 
 use App\Models\Product;
 
-use App\Models\Product_Log;
+use App\Models\ProductLog;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,7 +12,7 @@ class ProductObserver
 {
     public function created(Product $product): void
     {
-        Product_Log::create([
+        ProductLog::create([
             'product_id' => $product->id,
             'admin_id' => Auth::guard('admin')->id() ?? null,
             'action' => 'created',
@@ -35,7 +35,7 @@ class ProductObserver
         }
 
         if (!empty($changes)) {
-            Product_Log::create([
+            ProductLog::create([
                 'product_id' => $product->id,
                 'admin_id' => Auth::guard('admin')->id() ?? null,
                 'action' => 'updated',
@@ -46,7 +46,7 @@ class ProductObserver
 
     public function deleted(Product $product): void
     {
-        Product_Log::create([
+        ProductLog::create([
             'product_id' => $product->id,
             'admin_id' => Auth::guard('admin')->id() ?? null,
             'action' => 'deleted',

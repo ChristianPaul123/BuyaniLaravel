@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class User_log extends Model
+class UserLog extends Model
 {
 
     public $timestamp = true;
