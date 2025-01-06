@@ -21,9 +21,15 @@
         padding: 20px;
         border-radius: 10px;
     }
-    .contact-form {
-        background: #fff;
-        padding: 30px;
+
+    .contact-info{
+        background-color: #5f8d4e;
+        color: #f8f9fa;
+        height:325px;
+    }
+
+    .gmap{
+        border: 3px solid #000;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         width: 80%;
@@ -54,7 +60,6 @@
         }
 
     }
-
 </style>
 @endpush
 
