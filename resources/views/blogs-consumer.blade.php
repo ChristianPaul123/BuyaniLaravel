@@ -127,9 +127,6 @@
     @include('user.includes.navbar-consumer')
 
     <section class="min-height">
-
-
-
         <div class="container my-5">
             <h1 class="text-center py-4">Our Blogs</h1>
             <!-- Latest Blog -->

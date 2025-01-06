@@ -23,7 +23,7 @@
 @section('content')
     @include('user.includes.navbar-farmer')
 
-    <div class="container my-5">
+    <div class="h-100 container mt-5 pt-5">
         <!-- Tab Navigation -->
         <ul class="nav nav-tabs" id="farmerTabs" role="tablist">
             <li class="nav-item" role="presentation">

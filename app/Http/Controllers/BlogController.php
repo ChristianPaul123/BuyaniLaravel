@@ -60,6 +60,15 @@ public function showFarmerBlogs()
 
     // Fetch the latest blog for the main display and paginate the rest
     $latestBlog = Blog::orderBy('created_at', 'desc')->first();
+    if (!$latestBlog) {
+        // Return an empty paginator with the correct page settings
+        $blogs = Blog::paginate(2); // This will give a paginator, but with no results.
+        return view('blogs-farmer', [
+            'latestBlog' => null,
+            'blogs' => $blogs,
+            'message' => 'No blogs are currently available. Check back later!',
+        ]);
+    }
     $blogs = Blog::where('id', '!=', $latestBlog->id)->orderBy('created_at', 'desc')->paginate(2);
 
     return view('blogs-farmer', [

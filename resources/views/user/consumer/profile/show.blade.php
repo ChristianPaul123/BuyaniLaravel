@@ -108,7 +108,7 @@
 @endpush
 @section('content')
     @include('user.includes.navbar-consumer')
-    <section class="main-height">
+    <section style="min-height: 100vh;">
     <div class="container my-5">
         <!-- Tab Navigation -->
         <ul class="nav nav-tabs" id="ConsumerTabs" role="tablist">
