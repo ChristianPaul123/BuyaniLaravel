@@ -206,10 +206,6 @@
 @endsection
 
 @section('scripts')
-
-@endsection
-
-
     <script>
         var productGallery = function() {
             var gallery = document.querySelectorAll('.product-gallery');
