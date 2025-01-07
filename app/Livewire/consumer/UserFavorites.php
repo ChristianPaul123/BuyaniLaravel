@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Consumer;
 
 use App\Models\Cart;
 use Livewire\Component;
@@ -57,7 +57,7 @@ class UserFavorites extends Component
 
     public function render()
     {
-        return view('livewire.user-favorites', [
+        return view('livewire.consumer.user-favorites', [
             'favorites' => $this->favorites,
             'message' => $this->message,
         ]);

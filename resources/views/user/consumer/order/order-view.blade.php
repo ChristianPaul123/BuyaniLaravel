@@ -45,6 +45,7 @@
             <p><strong>City:</strong> {{$order->customer_city }}</p>
             <p><strong>State:</strong> {{  $order->customer_state }}</p>
             <p><strong>Zip Code:</strong> {{  $order->customer_zip }}</p>
+            <p><strong>Zip Code:</strong> {{  $order->customer_barangay }}</p>
             <p><strong>Country:</strong> {{  $order->customer_country }}</p>
         </div>
     </div>
@@ -85,7 +86,7 @@
             <h5>Payment Information</h5>
             <p><strong>Payment Method:</strong> {{ ucfirst($order->payment->payment_method) }}</p>
             <p><strong>Payment Amount:</strong> ₱{{ number_format($order->payment->payment_amount, 2) }}</p>
-            <p><strong>Payment Status:</strong> 
+            <p><strong>Payment Status:</strong>
                 @if ($order->payment->payment_status === 0)
                 Pending
             @elseif ($order->payment->payment_status === 1)

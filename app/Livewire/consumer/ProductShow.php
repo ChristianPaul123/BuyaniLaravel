@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Livewire;
+namespace App\Livewire\Consumer;
 
 use App\Models\Product;
 use Livewire\Component;
@@ -208,7 +208,7 @@ class ProductShow extends Component
 
         $userFavorites = Auth::guard('user')->check() ? Favorite::where('user_id', Auth::guard('user')->id())->pluck('product_id')->toArray() : [];
 
-        return view('livewire.product-show', [
+        return view('livewire.consumer.product-show', [
             'categories' => $categories,
             'categoriesChunked' => $categoriesChunked,
             'products' => $products,

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Consumer;
 
 use App\Models\Cart;
 use App\Models\Product;
@@ -106,9 +106,9 @@ class ProductView extends Component
 
     public function render()
     {
-        return view('livewire.product-view', [
-            'product' => $this->product->load('productImages'),
-            'specifications' => $this->product->productSpecification()->paginate(5),
+        return view('livewire.consumer.product-view', [
+            'product' => $this->product,
+           'specifications' => $this->product->productSpecification()->paginate(5),
         ]);
     }
 }
@@ -228,7 +228,7 @@ class ProductView extends Component
 
     // public function render()
     // {
-    //     return view('livewire.product-view', [
+    //     return view('', [
     //         'product' => $this->product,
     //        'specifications' => $this->product->productSpecification()->paginate(5),
     //     ]);

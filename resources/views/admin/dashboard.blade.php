@@ -28,10 +28,10 @@
                 </div>
                 <div class="row">
                     <div class="col-3">
-                        @livewire('total-users')
+                        @livewire('blocks.total-users')
                     </div>
                     <div class="col-3">
-                        @livewire('total-orders')
+                        @livewire('blocks.total-orders')
                     </div>
                     <div class="col-3">
                         @livewire('blocks.admin-pending-payments')

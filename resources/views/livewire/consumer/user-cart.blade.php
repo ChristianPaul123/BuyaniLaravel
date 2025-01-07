@@ -84,11 +84,7 @@
 <div class="container mt-5 mb-5">
     <section class="container-fluid min-height">
         <h2 class="mb-4">Shopping Cart</h2>
-        @if(session()->has('message'))
-        <div class="alert alert-success mt-3">{{ session('message') }}</div>
-        @elseif(session()->has('error'))
-            <div class="alert alert-danger mt-3">{{ session('error') }}</div>
-        @endif
+        @include('user.includes.messageBox')
 
         <div class="row">
             <div class="col-lg-9" id="cartItemsContainer">
@@ -97,7 +93,7 @@
                 </button>
 
                 @forelse($cartItems as $item)
-                <div class="card mb-3">
+                <div class="card mb-3" wire:key="{{ $item->id }}">
                     <div class="card-body">
                         <div class="row align-items-center g-3">
                             <div class="col-md-1">
@@ -164,7 +160,7 @@
                         </div>
                         <div class="d-flex justify-content-between">
                             <p>Total weight:</p>
-                            <p>{{ $totalWeightselected }} kg / 3 kg</p>
+                            <p>{{ $totalWeightselected }} kg / {{ $maxLimit }} kg</p>
                         </div>
                         <div class="d-flex justify-content-between">
                             <p>Total price:</p>

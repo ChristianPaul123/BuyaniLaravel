@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Blocks;
 
 use App\Models\Order;
 use Livewire\Component;
@@ -17,6 +17,6 @@ class TotalOrders extends Component
     }
     public function render()
     {
-        return view('livewire.total-orders');
+        return view('livewire.blocks.total-orders');
     }
 }

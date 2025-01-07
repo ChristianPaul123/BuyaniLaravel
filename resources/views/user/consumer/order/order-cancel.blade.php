@@ -10,9 +10,9 @@
         <div class="card-body">
             <h5>Order Summary</h5>
             <p><strong>Order Number:</strong> {{ $order->order_number }}</p>
-            <p><strong>Total Amount:</strong> ${{ number_format($order->total_amount, 2) }}</p>
+            <p><strong>Total Amount:</strong> {{ number_format($order->total_amount) }}</p>
             <p><strong>Total Weight:</strong> {{ $order->overall_orderKG }} KG</p>
-            <p><strong>Total Price:</strong> ${{ number_format($order->total_price, 2) }}</p>
+            <p><strong>Total Price:</strong> ₱{{ number_format($order->total_price, 2) }}</p>
         </div>
     </div>
 
