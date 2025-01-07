@@ -85,7 +85,7 @@
             <h5>Payment Information</h5>
             <p><strong>Payment Method:</strong> {{ ucfirst($order->payment->payment_method) }}</p>
             <p><strong>Payment Amount:</strong> ₱{{ number_format($order->payment->payment_amount, 2) }}</p>
-            <p><strong>Payment Status:</strong> 
+            <p><strong>Payment Status:</strong>
                 @if ($order->payment->payment_status === 0)
                 Pending
             @elseif ($order->payment->payment_status === 1)

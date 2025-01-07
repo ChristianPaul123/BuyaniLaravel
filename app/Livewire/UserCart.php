@@ -7,6 +7,7 @@ use Livewire\Component;
 use App\Models\CartItem;
 use App\Models\Inventory;
 use App\Models\ProductSpecification;
+use App\Livewire\Counter\CartCounter;
 
 class UserCart extends Component
 {
@@ -17,7 +18,7 @@ class UserCart extends Component
     public $selectAll = false;
     public $totalSelectedPrice = 0;
     public $totalWeightselected = 0;
-    public $maxLimit = 100;
+    public $maxLimit = 50;
 
     public function mount($cart)
     {
@@ -70,8 +71,9 @@ class UserCart extends Component
 
         $this->updateCartTotals();
         $this->loadCartItems();  // Reload cart items to reflect removal
-
+        $this->dispatch('addedtoCart')->to(CartCounter::class);
         session()->flash('message', 'Item removed from cart');
+
     }
 
     protected function updateCartTotals()

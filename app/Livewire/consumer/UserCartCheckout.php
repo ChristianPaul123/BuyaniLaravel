@@ -44,8 +44,8 @@ class UserCartCheckout extends Component
     public $stripeToken; // Define the Stripe token property
 
     protected $listeners = ['processCheckout']; // Listen for the emitted event
-    
-    
+
+
     public function mount($cartId)
     {
         $this->user = Auth::guard('user')->user();
@@ -59,6 +59,7 @@ class UserCartCheckout extends Component
 
                 $this->totalPrice = $this->cartItems->sum(fn($item) => $item->price);
                 $this->totalWeight = $this->cartItems->sum(fn($item) => $item->overall_kg);
+                $this->totalCart = $this->cartItems->sum(fn($item) => $item->quantity);
         } else {
             return redirect()->route('user.consumer.product.cart');
         }
@@ -91,6 +92,7 @@ class UserCartCheckout extends Component
                     'zip_code' => $address->zip_code,
                     'country' => $address->country,
                     'house_number' => $address->house_number,
+                    'barangay' => $address->barangay,
                 ];
             }
     }
@@ -109,6 +111,7 @@ class UserCartCheckout extends Component
             'shippingInfo.email' => 'required|email|max:255',
             'shippingInfo.country' => 'required|string|max:255',
             'shippingInfo.house_number' => 'required|string|max:255',
+            'shippingInfo.barangay' => 'required|string|max:255',
             'paymentMethod' => 'required|in:COD,GCash,Stripe',
         ]);
 
@@ -164,6 +167,7 @@ class UserCartCheckout extends Component
                 'customer_email' => $this->shippingInfo['email'],
                 'customer_house_number' => $this->shippingInfo['house_number'],
                 'customer_country' => $this->shippingInfo['country'],
+                'customer_barangay' => $this->shippingInfo['barangay']
             ]);
 
             // Transfer cart items to order items
@@ -210,7 +214,7 @@ class UserCartCheckout extends Component
     }
 
 
-    
+
 
 
 
