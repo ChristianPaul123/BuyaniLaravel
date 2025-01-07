@@ -1,5 +1,5 @@
-<div class="row mt-4 a" style="background-color: #48722e;">
-    <div class="col-lg-6 col-sm-12 a d-flex align-items-center justify-content-center" style="height: 500px;">
+<div class="row mt-4 a custom-font-content" style="background-color: #3f6f23;">
+    <div class="col-lg-6 col-sm-12 a d-flex align-items-center justify-content-center left-div">
         <div class="left-side a w-100">
             <div class="a mb-5">
             @livewire('session-modal')
@@ -10,7 +10,7 @@
 
             <form class="my-3 a form-part" wire:submit.prevent="login" id="loginForm" autocomplete="off">
                 <div class="form-group my-3">
-                    <label for="email">Email or Phone Number</label>
+                    <label for="email">Email or Phone Number:</label>
                     <input type="text" wire:model="email_phoneNum" class="form-control" id="email_phoneNum" placeholder="Enter email or phone number" required>
                     <small id="emailPhoneError" class="text-warning" style="display: none;">Invalid email or phone number format.</small>
                     {{-- @error('email_phoneNum') <span class="text-danger">{{ $message }}</span> @enderror --}}
@@ -21,7 +21,7 @@
                     <div class="input-group">
                         <input type="password" wire:model="password" class="form-control" id="passwordField" placeholder="Enter password" required>
                         <div class="input-group-append z-10">
-                            <span class="input-group-text toggle-password fix-edge" id="togglePassword" style="height: 100%; width: 40px;">
+                            <span class="input-group-text toggle-password fix-edge" id="togglePassword" style="height: 100%; width: 40px; border-top-left-radius: 0px; border-bottom-left-radius: 0px; display: flex; align-items: center; justify-content: center;">
                                 <i class="fas fa-eye toggleEye"></i>
                             </span>
                         </div>
@@ -36,7 +36,7 @@
                 <div class="form-group d-flex justify-content-end mb-3">
                     <a class="clickable-forgot-password" data-bs-toggle="modal" wire:click="showModal()"> Forgot Password?</a>
                 </div>
-         
+
                 <div class="container d-flex justify-content-center my-">
                     <button type="submit" class="button-login button my-1 px-4">LOGIN</button>
                 </div>
@@ -56,7 +56,7 @@
             </script>
 
             <div class="">
-                <div class="text-center pt-3">
+                <div class="text-center pt-3" style="color: #ffa500">
                     <a href="{{ route('user.register', ['user_type' => $user_type]) }}">Create Account | Sign Up</a>
                 </div>
             </div>
@@ -69,12 +69,12 @@
     </div>
 
 
-    <div>
+    {{-- <div> --}}
 
             @if($showEmailModal)
             <div class="modal fade show d-block" tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5);">
                 @include('user.includes.messageBox')
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <i class="close bi bi-x" aria-label="Close" wire:click="$set('showEmailModal', false)" data-bs-dismiss="modal"></i>
                         <i class="icon icon-bg-info bi bi-envelope-at"></i>
@@ -99,7 +99,7 @@
             <div class="modal fade show d-block" tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5);">
                 @include('user.includes.messageBox')
             <div class="modal-dialog">
-                <div class="modal-content">
+                <div class="modal-content modal-dialog-centered">
                     <i class="close bi bi-x" aria-label="Close" wire:click="$set('showOtpModal', false)" data-bs-dismiss="modal"></i>
                     <i class="icon icon-bg-info bi bi-patch-check"></i>
                     <div class="container-contents container-contents-info">
@@ -124,8 +124,8 @@
             @if($showPasswordResetForm)
             <div class="modal fade show d-block" tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5);">
                 @include('user.includes.messageBox')
-            <div class="modal-dialog">
-                <div class="modal-content">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content ">
                     <i class="close bi bi-x" aria-label="Close" wire:click="$set('showPasswordResetForm', false)" data-bs-dismiss="modal"></i>
                     <i class="icon icon-bg-info bi bi-shield-lock"></i>
                     <div class="container-contents container-contents-info">
@@ -163,7 +163,7 @@
             </div>
             </div>
             @endif
-    </div>
+    {{-- </div> --}}
 </div>
 
 @assets

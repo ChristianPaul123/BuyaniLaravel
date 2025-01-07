@@ -19,8 +19,9 @@
     {{-- Display validation errors --}}
 
       @if($user_type == 1)
-            <div class="container-fluid custom-font-content" style="padding: 20px;">
-                <div class="row mt-4" style="display: flex; justify-content:center;">
+            <div class="container-fluid custom-font-content register-background" style="padding: 20px;">
+
+                {{-- <div class="row mt-4" style="display: flex; justify-content:center;">
                     <div class="banner p-4 rounded bg-warning text-white d-flex flex-wrap align-items-center" style="width: 1000px">
                         <div class="col-md-6 text-center text-md-start">
                             <h1 class="display-5 fw-bold">Discover Our New Product</h1>
@@ -38,7 +39,8 @@
                                 style="height:250px; width:400px">
                         </div>
                     </div>
-                </div>
+                </div> --}}
+
               <div class="row">
                   <div class="col-12">
                       <h2 class="text-center my-3 mx-2 head-sign">Sign Up As Consumer</h2>
@@ -128,7 +130,7 @@
 
           </div>
     @elseif($user_type == 2)
-          <div class="container-fluid custom-font-content" style="padding: 20px;">
+          <div class="container-fluid custom-font-content register-background" style="padding: 20px;">
             <div class="row">
                 <div class="col-12">
                     <h2 class="text-center my-3 mx-2 head-sign">Sign Up As Farmer</h2>

@@ -9,7 +9,6 @@
         font-weight: bold;
         color: aliceblue;
         background-color: #3F6F23;
-        color: #fff;
     }
 
     .form-control:focus {
@@ -59,13 +58,25 @@
     .toggle-password {
         cursor: pointer;
     }
+
+
+
     .head-sign{
         font-size: 40px;
     }
-
-
+    .register-background{
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 
     @media (max-width: 576px) {
+        .register-background{
+            height: auto    ;
+        }
+
         /* Adjust the container padding for smaller screens */
         .container-fluid.custom-font-content {
             padding: 10px;
@@ -111,11 +122,6 @@
         .banner img {
             width: 100%;
             height: auto;
-        }
-
-        /* Make the password toggle icons larger and more touch-friendly */
-        .toggle-password i {
-            font-size: 1.5rem;
         }
 
         /* Style the error message popup for smaller screens */

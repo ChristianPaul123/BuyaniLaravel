@@ -1,17 +1,12 @@
 <div>
     <section>
     <!-- Display Success Message -->
-    {{-- @if (session()->has('message'))
-        <div class="alert alert-success mx-3 my-2 px-3 py-2">
-            <button type="button" class="close btn btn-success">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            {{ session('message') }}
-        </div>
-    @endif --}}
+    @if (session()->has('message'))
+        @livewire('session-modal')
+    @endif
 
     <!-- Display Validation Errors -->
-    {{-- @if ($errors->any())
+    @if ($errors->any())
         <div class="alert alert-danger mx-3 my-2 px-3 py-2">
             <button type="button" class="close btn btn-danger">
                 <span aria-hidden="true">&times;</span>
@@ -22,7 +17,7 @@
                 @endforeach
             </ul>
         </div>
-    @endif --}}
+    @endif
 
     <div class="row mt-3">
         <div class="col-12">
