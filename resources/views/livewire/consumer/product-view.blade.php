@@ -107,7 +107,7 @@
 
     <!-- Product Reviews Section -->
     <section class="mt-5">
-        @livewire('consumer.roduct-rating-system', ['productId' => $product->id])
+        @livewire('consumer.product-rating-system', ['productId' => $product->id])
     </section>
 </div>
 
