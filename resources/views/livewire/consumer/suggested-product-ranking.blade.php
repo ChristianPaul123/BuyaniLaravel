@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header bg-success text-white text-center">
-        <h5 class="mb-0">Top Voted Products</h5>
+        <h5 class="mb-0">Top Requested Products</h5>
     </div>
     <div class="card-body chart-container" wire:ignore>
         <canvas id="topVotedChart"></canvas>

@@ -16,7 +16,6 @@ class BlogController extends Controller
 
 public function showConsumerBlogs()
 {
-
     if (!Auth::guard('user')->check()) {
         Session::flush();
         return redirect()->route('user.index')->with('message', 'Please log in or sign up to view this page');
@@ -27,10 +26,13 @@ public function showConsumerBlogs()
 
     // Check if there are any blogs
     if (!$latestBlog) {
+        // Return an empty paginator with the correct page settings
+        $blogs = Blog::paginate(2); // This will give a paginator, but with no results.
         return view('blogs-consumer', [
             'latestBlog' => null,
-            'blogs' => collect([]), // Empty collection for consistency
-        ])->with('message', 'No blogs are currently available. Check back later!');
+            'blogs' => $blogs,
+            'message' => 'No blogs are currently available. Check back later!',
+        ]);
     }
 
     // Fetch the remaining blogs, excluding the latest one
@@ -38,11 +40,15 @@ public function showConsumerBlogs()
         ->orderBy('created_at', 'desc')
         ->paginate(2);
 
+    // Return the view with the paginated blogs
     return view('blogs-consumer', [
         'latestBlog' => $latestBlog,
         'blogs' => $blogs,
+        'message' => null, // Clear message for the blogs page
     ]);
 }
+
+
 
 public function showFarmerBlogs()
 {
@@ -54,6 +60,15 @@ public function showFarmerBlogs()
 
     // Fetch the latest blog for the main display and paginate the rest
     $latestBlog = Blog::orderBy('created_at', 'desc')->first();
+    if (!$latestBlog) {
+        // Return an empty paginator with the correct page settings
+        $blogs = Blog::paginate(2); // This will give a paginator, but with no results.
+        return view('blogs-farmer', [
+            'latestBlog' => null,
+            'blogs' => $blogs,
+            'message' => 'No blogs are currently available. Check back later!',
+        ]);
+    }
     $blogs = Blog::where('id', '!=', $latestBlog->id)->orderBy('created_at', 'desc')->paginate(2);
 
     return view('blogs-farmer', [

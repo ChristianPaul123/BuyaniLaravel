@@ -36,7 +36,7 @@
     <form wire:submit.prevent="sendMessage" id="messageForm">
         <div class="input-group">
             <input type="text" class="form-control" placeholder="Message" wire:model="messageInput" id="messageInput" required>
-            <button class="btn btn-leaf-green" type="submit">Send</button>
+            <button class="btn btn-leaf-green text-white" type="submit">Send</button>
         </div>
     </form>
     </section>

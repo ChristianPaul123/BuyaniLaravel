@@ -77,8 +77,8 @@
                         <textarea class="form-control" id="product_details" name="product_details" rows="2" required></textarea>
                     </div>
                     <div class="form-group my-3">
-                        <label for="product_pic">Product Image</label>
-                        <input type="file" class="form-control" id="product_pic" name="product_pic">
+                        <label for="product_pic">Product Images</label>
+                        <input type="file" class="form-control" id="product_pic" name="product_pic[]" multiple>
                     </div>
                     <div class="form-group my-3">
                         <label for="category_id">Category</label>

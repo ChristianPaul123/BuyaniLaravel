@@ -147,8 +147,8 @@
     </footer>
 
     <!-- Footer Bottom Section -->
-    <div class="footer-bottom">
-        <a href="#" class="text-light">Return & Refund Policy</a> |
+    <div class="footer-bottom text-white">
+        <a href="#" class="text-white">Return & Refund Policy</a> |
         Copyright © 2024 buyanicommerce.ph All Rights Reserved.
     </div>
 </div>

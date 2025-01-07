@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Inventory;
+use App\Models\ProductImg;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use App\Models\ProductSpecification;
@@ -14,6 +15,7 @@ use Illuminate\Contracts\Encryption\DecryptException;
 
 class ProductManagementController extends Controller
 {
+    protected CONST PRODUCT_IMAGE_PATH = 'img/product/';
 
 public function showProducts()
 {
@@ -39,16 +41,28 @@ return view('admin.product.product-index', [
             'product_status' => ['required', 'integer'],
             'category_id' => ['required', 'exists:categories,id'],
             'subcategory_id' => ['required', 'exists:sub_categories,id'],
-            'product_pic' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:4096'],
-        ]);
+            'product_pic' => ['required', 'array', 'min:1'], // Ensure at least one image is uploaded
+            'product_pic.*' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'max:4096'], // Validate each image individually
+        ]);        
 
-        // Upload product image
+        // Upload product images
         if ($request->hasFile('product_pic')) {
-            $imageName = time().'.'.$request->product_pic->extension();
-            $request->product_pic->move(public_path('img/product/'.$validatedData['product_name']), $imageName);
-            $validatedData['product_pic'] = 'img/product/'.$validatedData['product_name'].'/'.$imageName;
+            $imagePaths = [];
+
+            foreach ($request->file('product_pic') as $image) {
+                // Replace spaces with underscores in product name
+                $imageName = time().rand(1000, 9999).'.'.$image->extension();
+                $cleanProductName = str_replace(' ', '_', $validatedData['product_name']);
+                $image->move(public_path(self::PRODUCT_IMAGE_PATH.$cleanProductName), $imageName);
+                $imagePaths[] = self::PRODUCT_IMAGE_PATH. $imageName;
+            }
+
+            // Set the first image as the product pic
+            $validatedData['product_pic'] = $imagePaths[0];
+            // offset the array by 1 to be used as the other images.
+            $imagePaths = array_slice($imagePaths, 1);
         } else {
-            return redirect()->route('admin.product',['tab' => 'products'])-with('error', 'Invalid Product pic provided.');
+            return redirect()->route('admin.product', ['tab' => 'products'])->with('error', 'Invalid Product pic provided.');
         }
 
         // Create product and initialize inventory
@@ -63,6 +77,13 @@ return view('admin.product.product-index', [
             'product_damage_stock' => 0,
         ]);
 
+        foreach ($imagePaths as $imagePath) {
+            ProductImg::create([
+                'product_id' => $product->id,
+                'img' => $imagePath,
+            ]);
+        }
+
         return redirect()->route('admin.product.index',['tab' => 'products'])->with('success', 'Product added successfully.');
     }
 
@@ -73,11 +94,13 @@ return view('admin.product.product-index', [
         try {
             $id = Crypt::decrypt($encryptedId);
             $product = Product::findOrFail($id);
+            $images = $product->productImages
+                ->select(['id','img']);
             $categories = Category::all();
             $subcategories = SubCategory::all();
-
             return view('admin.product.edit-product', [
                 'product' => $product,
+                'images' => $images,
                 'categories' => $categories,
                 'subcategories' => $subcategories,
             ]);
@@ -305,3 +328,11 @@ return view('admin.product.product-index', [
         return redirect()->route('admin.product.index', ['tab' => 'subcategories'])->with('success', 'SubCategory deleted successfully.');
     }
 }
+
+
+
+
+
+
+
+

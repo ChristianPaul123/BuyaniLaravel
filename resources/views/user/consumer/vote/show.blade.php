@@ -176,7 +176,7 @@
         <!-- Voting Header -->
         <div class="voting-header">
             <h1>Product Voting</h1>
-            <p>Vote for your favorite products this month!</p>
+            <p>Vote for your requested products!</p>
         </div>
         @livewire('consumer.suggested-product-ranking')
         @livewire('consumer.suggested-product-poll')

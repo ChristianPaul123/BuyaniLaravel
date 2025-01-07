@@ -84,7 +84,17 @@
                                     <label for="product_image_showcase">Current Product Image</label>
                                     <img id="product_image_showcase" src="{{ asset($product->product_pic) }}" alt="Product Image" class="img-thumbnail" width="200px" height="100px">
                                 </div>
-
+                                {{-- Current Product Image --}}
+                                <div class="mb-3 d-flex flex-column">
+                                    <label for="product_image_showcase">Sub Product Image</label>
+                                    <div class="row">
+                                        @foreach ($images as $image)
+                                            <div class="col-6 col-md-4 col-lg-3 mb-2">
+                                                <img id="{{ $image['id'] }}" src="{{ asset($image['img']) }}" alt="Product Image" class="img-thumbnail" width="200px" height="100px">
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
                                 {{-- Upload New Image --}}
                                 <div class="form-group my-3">
                                     <label for="product_pic">Upload New Image</label>
