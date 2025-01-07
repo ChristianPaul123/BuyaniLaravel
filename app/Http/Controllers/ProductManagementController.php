@@ -12,6 +12,7 @@ use App\Models\ProductSpecification;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Support\Facades\File;
 
 class ProductManagementController extends Controller
 {
@@ -50,11 +51,7 @@ return view('admin.product.product-index', [
             $imagePaths = [];
 
             foreach ($request->file('product_pic') as $image) {
-                // Replace spaces with underscores in product name
-                $imageName = time().rand(1000, 9999).'.'.$image->extension();
-                $cleanProductName = str_replace(' ', '_', $validatedData['product_name']);
-                $image->move(public_path(self::PRODUCT_IMAGE_PATH.$cleanProductName), $imageName);
-                $imagePaths[] = self::PRODUCT_IMAGE_PATH. $imageName;
+                $imagePaths[] = $this->handleImageSaving($image, $validatedData);
             }
 
             // Set the first image as the product pic
@@ -121,7 +118,15 @@ return view('admin.product.product-index', [
             'category_id' => ['required', 'exists:categories,id'],
             'subcategory_id' => ['required', 'exists:sub_categories,id'],
             'product_pic' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+            'product_images' => ['nullable', 'array', 'min:1'], // Ensure at least one image is uploaded
+            'product_images.*' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'max:4096'], // Validate each image individually
+            'removed_images' => ['nullable', 'string'],
         ]);
+
+        $removedImages = json_decode($request->input('removed_images'), true);
+        if (!empty($removedImages)) {
+            $this->handleImageRemoval($product->id, $removedImages);
+        }
 
         // Handle image upload if a new one is provided
         if ($request->hasFile('product_pic')) {
@@ -326,6 +331,53 @@ return view('admin.product.product-index', [
         $subcategory->delete();
 
         return redirect()->route('admin.product.index', ['tab' => 'subcategories'])->with('success', 'SubCategory deleted successfully.');
+    }
+
+    /**
+     * Handles the saving of the product image.
+     *
+     * This function replaces spaces with underscores in the product name,
+     * generates a unique image name using the current timestamp and a random number,
+     * and moves the uploaded image to the specified directory.
+     *
+     * @param \Illuminate\Http\UploadedFile $image The uploaded image file.
+     * @param array $validatedData The validated data containing the product name.
+     * @return string The path where the image is saved.
+     */
+    private function handleImageSaving($image, $validatedData) {
+        // Replace spaces with underscores in product name
+        $cleanProductName = str_replace(' ', '_', $validatedData['product_name']);
+        $imageName = self::PRODUCT_IMAGE_PATH.$cleanProductName.'/'.time().rand(1000, 9999).'.'.$image->extension();
+        $image->move(public_path(self::PRODUCT_IMAGE_PATH.$cleanProductName), $imageName);
+
+        return $imageName;
+    }
+
+    /**
+     * Handle the removal of images associated with a product.
+     *
+     * This method deletes the specified images from storage and removes their records from the database.
+     *
+     * @param int $productId The ID of the product whose images are to be removed.
+     * @param array|null $removedImages An array of image IDs to be removed. If null, no images will be removed.
+     * @return void
+     */
+    private function handleImageRemoval(
+        int $productId,
+        ?array $removedImages
+    )  {
+        foreach ($removedImages as $imageId) {
+            $image = ProductImg::where('id', $imageId)
+                ->where('product_id', $productId)
+                ->first();
+            if ($image) {
+                $fullPath = public_path($image->img);
+                if (File::exists($fullPath)) {
+                    File::delete($fullPath);
+                }
+                $image->delete();
+            }
+        }
     }
 }
 
