@@ -130,16 +130,33 @@ return view('admin.product.product-index', [
 
         // Handle image upload if a new one is provided
         if ($request->hasFile('product_pic')) {
+            $image = $request->file('product_pic');
             // Delete the old image if it exists
-            if ($product->product_pic) {
-                Storage::delete($product->product_pic);
+            if ($image) {
+                $fullPath = public_path($product->product_pic);
+                if (File::exists($fullPath)) {
+                    File::delete($fullPath);
+                }
             }
-
-            $imageName = time() . '.' . $request->product_pic->extension();
-            $request->product_pic->move(public_path('img/product/' . $validatedData['product_name']), $imageName);
-            $validatedData['product_pic'] = 'img/product/' . $validatedData['product_name'] . '/' . $imageName;
+            // Save the new image
+            $validatedData['product_pic'] = $this->handleImageSaving($image, $validatedData);
         }
 
+        // Handle additional images if provided
+        if ($request->hasFile('product_images')) {
+            $imagePaths = [];
+
+            foreach ($request->file('product_images') as $image) {
+                $imagePaths[] = $this->handleImageSaving($image, $validatedData);
+            }
+
+            foreach ($imagePaths as $imagePath) {
+                ProductImg::create([
+                    'product_id' => $product->id,
+                    'img' => $imagePath,
+                ]);
+            }
+        }
 
         // Set deactivation date if the status is "Unavailable"
         $validatedData['product_deactivated'] = $validatedData['product_status'] == 3 ? now() : null;
