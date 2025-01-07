@@ -34,9 +34,9 @@
     @include('layouts.script')
 
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
         // Show the flash message popup if it exists
         const flashPopup = document.querySelector('#flashMessage');
-    
         if (flashPopup) {
             // Display the elements and start fade-in animation
             flashPopup.style.display = 'flex';
@@ -51,6 +51,7 @@
                 }, 150); // Match the duration of the animation
             }, 3000); // 3 seconds
         }
+    });
     </script>
 </body>
 </html>

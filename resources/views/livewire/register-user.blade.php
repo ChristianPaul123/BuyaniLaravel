@@ -1,20 +1,5 @@
 <div class="mt-3 pt-0">
-    @if (session('message'))
-        <div>
-            <div class="overlay" id="overlay" aria-label="Close" onclick="closePopup()"></div>
-
-            <div class="popup error">
-                <i class="close bi bi-x-lg fs-4" aria-label="Close" onclick="closePopup()"></i>
-                <div class="icon-container error-bg">
-                    <i class="icon bi bi-x-circle"></i>
-                </div>
-                <div class="container-contents">
-                    <h3>Oops!</h3>
-                    <p>The OTP you have inputted does not match.</p>
-                </div>
-            </div>
-        </div>
-    @endif
+    {{-- @include('user.includes.messageBox') --}}
 
     {{-- Display validation errors --}}
 
@@ -210,7 +195,6 @@
     @if($showModal)
         <div>
             <div class="overlay" id="overlay" aria-label="Close" onclick="closePopup()"></div>
-
             <div class="popup input">
                 <form wire:submit.prevent="verifyOtp">
                     <i class="close bi bi-x-lg fs-4" aria-label="Close" onclick="closePopup()"></i>
@@ -222,7 +206,7 @@
                         <p>We have sent an OTP to your email at {{ $email }}.</p>
                         <input type="text" id="otp" wire:model="otp" class="form-control" maxlength="6" placeholder="Enter OTP">
                         @error('otp') <span class="text-danger">{{ $message }}</span> @enderror
-                        @if (session('error')) <span class="text-danger">{{ session('error') }}</span> @endif
+                        {{-- @if (session('error')) <span class="text-danger">{{ session('error') }}</span> @endif --}}
                         <div class="mt-3">
                             <button type="submit" class="btn btn-success">Submit OTP</button>
                             <button type="button" class="btn btn-secondary" wire:click="closeModal">Close</button>
