@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('img')->nullable();
             $table->string('img_title')->nullable();
             $table->foreignId('admin_id')->constrained('admins')->nullable();
+            $table->date('deactivated_date')->nullable();
+            $table->boolean('deactivated_status')->default(0);
             $table->timestamps();
         });
     }

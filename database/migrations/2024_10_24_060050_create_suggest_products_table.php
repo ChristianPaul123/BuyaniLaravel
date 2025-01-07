@@ -20,6 +20,8 @@ return new class extends Migration
             $table->foreignId('admin_id')->nullable()->constrained('admins');
             $table->bigInteger('total_vote_count')->nullable(0);
             $table->boolean('is_accepted')->default(0);
+            $table->date('deactivated_date')->nullable();
+            $table->boolean('deactivated_status')->default(0);
             $table->timestamps();
         });
     }

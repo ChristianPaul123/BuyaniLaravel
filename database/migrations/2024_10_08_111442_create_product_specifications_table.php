@@ -19,6 +19,8 @@ return new class extends Migration
             $table->integer('product_price')->nullable();
             $table->float('product_kg')->nullable();
             $table->foreignId('admin_id')->constrained('admins')->onDelete('cascade');
+            $table->date('deactivated_date')->nullable();
+            $table->boolean('deactivated_status')->default(0);
             $table->timestamps();
         });
     }

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('rating');
             $table->text('comment');
             $table->date('deactivated_date')->nullable();
+            $table->boolean('deactivated_status')->default(0);
             $table->foreignId('admin_id')->nullable()->constrained('admins');
             $table->timestamps();
         });

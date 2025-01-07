@@ -17,6 +17,8 @@ class ProductSpecification extends Model
         'product_price',
         'product_kg',
         'admin_id',
+        'deactivated_date',
+        'deactivated_status',
     ];
 
     public function product() {

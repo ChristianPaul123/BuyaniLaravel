@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('category_name')->nullable()->unique();
+            $table->date('deactivated_date')->nullable();
+            $table->boolean('deactivated_status')->default(0);
             $table->timestamps();
         });
     }

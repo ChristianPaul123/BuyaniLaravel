@@ -18,6 +18,8 @@ return new class extends Migration
             $table->foreignId('order_id')->constrained('orders');
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('reviewer_id')->nullable()->constrained('admins');
+            $table->date('deactivated_date')->nullable();
+            $table->boolean('deactivated_status')->default(0);
             $table->timestamps();
         });
     }

@@ -17,6 +17,9 @@ class Admin extends Authenticatable
       const Assistant = 2;
       const Employee = 3;
 
+      public $timestamp = true;
+
+
         /**
      * The attributes that are mass assignable.
      *

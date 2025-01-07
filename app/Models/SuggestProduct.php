@@ -20,6 +20,8 @@ class SuggestProduct extends Model
         'suggest_image',
         'total_vote_count',
         'is_accepted',
+        'deactivated_date',
+        'deactivated_status',
     ];
 
     public function user()
