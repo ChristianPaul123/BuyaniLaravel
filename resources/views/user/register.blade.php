@@ -161,7 +161,7 @@
 @endpush
 @section('x-content')
     @include('user.includes.navbar-consumer')
-    @livewire('register-user',['user_type' => request()->user_type])
+    @livewire('user.register-user',['user_type' => request()->user_type])
 
 @endsection
 @section('scripts')

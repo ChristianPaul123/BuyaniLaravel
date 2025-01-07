@@ -45,6 +45,7 @@
             <p><strong>City:</strong> {{$order->customer_city }}</p>
             <p><strong>State:</strong> {{  $order->customer_state }}</p>
             <p><strong>Zip Code:</strong> {{  $order->customer_zip }}</p>
+            <p><strong>Zip Code:</strong> {{  $order->customer_barangay }}</p>
             <p><strong>Country:</strong> {{  $order->customer_country }}</p>
         </div>
     </div>

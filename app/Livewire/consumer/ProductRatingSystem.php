@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Consumer;
 
 use Livewire\Component;
 use App\Models\ProductRating;
@@ -84,7 +84,7 @@ class ProductRatingSystem extends Component
             ->latest()
             ->paginate(5);
 
-        return view('livewire.product-rating-system', [
+        return view('livewire.consumer.product-rating-system', [
             'ratings' => $ratings,
             'averageRating' => number_format($this->averageRating, 1),
             'ratingBreakdown' => $this->ratingBreakdown,

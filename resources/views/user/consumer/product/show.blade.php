@@ -182,7 +182,7 @@
     <div class="container container-fluid mt-3">
     <!-- Navbar -->
     <section class="p-3">
-        @livewire('product-show')
+        @livewire('consumer.product-show')
     <section>
     </div>
 </div>

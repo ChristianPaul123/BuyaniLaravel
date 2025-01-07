@@ -20,7 +20,7 @@
                     <p style="color: #777;">Tags: <span class="font-weight-bold">{{ $categories->category_name }}, {{ $subcategories->sub_category_name }}</span></p>
 
 
-                    <p><strong>Price:</strong> 
+                    <p><strong>Price:</strong>
                         <span class="product-price">
                             @if(isset($product->productSpecification[0]->product_price))
                                 {{ $product->productSpecification[0]->product_price }}
@@ -68,6 +68,31 @@
                         @endforelse
                     </div>
 
+                    <!-- Pagination Links -->
+                    <div class="d-flex justify-content-center mt-3">
+                        {{ $specifications->links() }}
+                    </div>
+
+                    <div class="mt-4">
+                        <p><strong>Product Features:</strong></p>
+                        <ul>
+                            <li>Rich in Vitamin A for good vision and immune health</li>
+                            <li>High in fiber which supports digestive health</li>
+                            <li>Low in calories making them a great option for a healthy snack</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Reviews Section -->
+    <section class="mt-5">
+        @livewire('consumer.roduct-rating-system', ['productId' => $product->id])
+    </section>
+</div>
+
+{{-- #code dump --}}
                     {{-- <div class="row">
                         @forelse ($specifications as $specification)
                             <div class="col-12 col-md-6 mb-3" wire:key="{{ $specification->id }}">
@@ -95,27 +120,6 @@
                             </div>
                         @endforelse
                     </div> --}}
-    
-
-                    <!-- Pagination Links -->
-                    <div class="d-flex justify-content-center mt-3">
-                        {{ $specifications->links() }}
-                    </div>
-
-                    <div class="mt-4">
-                        <p><strong>Product Features:</strong></p>
-                        <ul>
-                            <li>Rich in Vitamin A for good vision and immune health</li>
-                            <li>High in fiber which supports digestive health</li>
-                            <li>Low in calories making them a great option for a healthy snack</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
 
 
     {{-- <section class="p-3">
@@ -212,9 +216,3 @@
             </div>
         </div>
     </section> --}}
-
-    <!-- Product Reviews Section -->
-    <section class="mt-5">
-        @livewire('product-rating-system', ['productId' => $product->id])
-    </section>
-</div>

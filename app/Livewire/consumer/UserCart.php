@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Consumer;
 
 use App\Models\Cart;
 use Livewire\Component;
@@ -198,6 +198,6 @@ class UserCart extends Component
 
     public function render()
     {
-        return view('livewire.user-cart');
+        return view('livewire.consumer.user-cart');
     }
 }

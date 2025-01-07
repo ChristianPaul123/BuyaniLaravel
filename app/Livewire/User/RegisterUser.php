@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\User;
 
 use App\Models\User;
 use App\Mail\HelloMail;
@@ -196,6 +196,6 @@ public function verifyOtp()
 
     public function render()
     {
-        return view('livewire.register-user');
+        return view('livewire.user.register-user');
     }
 }

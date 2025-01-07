@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Blocks;
 
 use App\Models\User;
 use Livewire\Component;
@@ -16,6 +16,6 @@ class TotalUsers extends Component
     }
     public function render()
     {
-        return view('livewire.total-users');
+        return view('livewire.blocks.total-users');
     }
 }
