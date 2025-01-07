@@ -73,7 +73,7 @@ class ConsumerProfile extends Component
         if ($this->user->profile_pic) {
             $this->deleteOldImage($this->user->profile_pic);
         }
-
+        
         // Store the new image
         $profileImagePath = $this->storeImage($this->profile_pic, 'img/profile/'. $this->user->username);
         $this->user->profile_pic = $profileImagePath;
