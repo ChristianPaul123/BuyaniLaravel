@@ -107,8 +107,8 @@ class ProductView extends Component
     public function render()
     {
         return view('livewire.product-view', [
-            'product' => $this->product,
-           'specifications' => $this->product->productSpecification()->paginate(5),
+            'product' => $this->product->load('productImages'),
+            'specifications' => $this->product->productSpecification()->paginate(5),
         ]);
     }
 }

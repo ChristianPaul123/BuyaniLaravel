@@ -14,36 +14,21 @@
                     {{-- <div class="image-container shadow-sm rounded" style="height: 400px; width: 100%; overflow: hidden;">
                         <img src="{{ asset($product->product_pic) }}" alt="{{ $product->product_name }}" style="object-fit: fill; width: 100%; height: 100%;">
                     </div> --}}
-
                     <div class="h-100 bg-light rounded-3 p-4">
                         <div class="product-gallery">
                             <div class="product-gallery-preview order-sm-2">
-                                <div class="product-gallery-preview-item active" id="first">
-                                    <img src="https://i.pravatar.cc/150?img=49" alt="Product image">
-                                </div>
-                                <div class="product-gallery-preview-item" id="second">
-                                    <img src="https://i.pravatar.cc/150?img=50" alt="Product image">
-                                </div>
-                                <div class="product-gallery-preview-item" id="third">
-                                    <img src="/path/to/image3.jpg" alt="Product image">
-                                </div>
-                                <div class="product-gallery-preview-item" id="fourth">
-                                    <img src="/path/to/image4.jpg" alt="Product image">
-                                </div>
+                                @foreach ($product['productImages'] as $index => $productImg)
+                                    <div class="product-gallery-preview-item @if($index === 0) active @endif" id="image-{{ $productImg->id }}">
+                                        <img src="{{ asset($productImg->img) }}" alt="Product image">
+                                    </div>
+                                @endforeach
                             </div>
                             <div class="product-gallery-thumblist order-sm-1">
-                                <a class="product-gallery-thumblist-item active" href="#first">
-                                    <img src="https://i.pravatar.cc/150?img=49" alt="Product thumb">
-                                </a>
-                                <a class="product-gallery-thumblist-item" href="#second">
-                                    <img src="https://i.pravatar.cc/150?img=50" alt="Product thumb">
-                                </a>
-                                <a class="product-gallery-thumblist-item" href="#third">
-                                    <img src="/path/to/image3.jpg" alt="Product thumb">
-                                </a>
-                                <a class="product-gallery-thumblist-item" href="#fourth">
-                                    <img src="/path/to/image4.jpg" alt="Product thumb">
-                                </a>
+                                @foreach ($product['productImages'] as $index => $productImg)
+                                    <a class="product-gallery-thumblist-item @if($index === 0) active @endif" href="#image-{{ $productImg->id }}">
+                                        <img src="{{ asset($productImg->img) }}" alt="Product thumb">
+                                    </a>
+                                @endforeach
                             </div>
                         </div>
                     </div>
