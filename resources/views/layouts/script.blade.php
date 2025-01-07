@@ -23,10 +23,3 @@
 
 
 @livewireScripts
-
-
-
-{{-- admin side for datatables --}}
-<script>
-
-</script>

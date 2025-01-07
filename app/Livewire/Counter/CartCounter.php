@@ -3,6 +3,7 @@
 namespace App\Livewire\Counter;
 
 use Livewire\Component;
+use Livewire\Attributes\On;
 use Illuminate\Support\Facades\Auth;
 
 class CartCounter extends Component
@@ -22,6 +23,7 @@ class CartCounter extends Component
     }
 
 
+    #[On('addedtoCart')]
     public function getCartCount() {
         $user = Auth::guard('user')->user();
 

@@ -106,10 +106,10 @@
                         <h3>Confirm OTP</h3>
                         <form wire:submit.prevent="verifyOtp">
                             <div class="form-group">
-                                <label for="otp" class="form-label">Enter OTP sent to _NAME_</label>
+                                <label for="otp" class="form-label">Enter OTP sent to {{ $selectedEmail }}</label>
                                 <input type="text" id="otp" wire:model="otp" class="form-control" placeholder="Enter OTP">
                                 @error('otp')<span class="text-danger">{{ $message }}</span>@enderror
-                                @if (session()->has('error'))<span id="errorMessage" class="text-danger">{{ session('error') }}</span>@endif
+                                {{-- @if (session()->has('error'))<span id="errorMessage" class="text-danger">{{ session('error') }}</span>@endif --}}
                             </div>
                             <button type="submit" class="btn btn-primary mt-3">Verify OTP</button>
                         </form>

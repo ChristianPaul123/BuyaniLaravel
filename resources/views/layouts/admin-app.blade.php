@@ -48,7 +48,7 @@
 
 </script>
 
-<script>
+{{-- <script>
     // Show the flash message popup if it exists
     const flashPopup = document.querySelector('#flashMessage');
 
@@ -66,6 +66,6 @@
             }, 150); // Match the duration of the animation
         }, 3000); // 3 seconds
     }
-</script>
+</script> --}}
 </body>
 </html>
