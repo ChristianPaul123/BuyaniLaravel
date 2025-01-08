@@ -95,9 +95,15 @@
                     <div class="mt-4">
                         <p><strong>Product Features:</strong></p>
                         <ul>
-                            <li>Rich in Vitamin A for good vision and immune health</li>
-                            <li>High in fiber which supports digestive health</li>
-                            <li>Low in calories making them a great option for a healthy snack</li>
+                            @if ($product->product_details)
+                            @foreach (explode("\n", $product->product_details) as $detail)
+                                @if (trim($detail) !== '')
+                                    <li>{{ $detail }}</li>
+                                @endif
+                            @endforeach
+                        @else
+                            <li>No product details available.</li>
+                        @endif
                         </ul>
                     </div>
                 </div>

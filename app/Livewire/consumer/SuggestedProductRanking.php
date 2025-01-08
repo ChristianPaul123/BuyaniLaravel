@@ -22,7 +22,7 @@ class SuggestedProductRanking extends Component
     {
         // Fetch products sorted by vote count
         // Fetch products sorted by vote count, exclude products with 0 votes
-    $products = SuggestProduct::where('total_vote_count', '>', 0)
+    $products = SuggestProduct::where('total_vote_count', '>', 0)->where('is_accepted', 1)
     ->orderBy('total_vote_count', 'desc')
     ->get();
 

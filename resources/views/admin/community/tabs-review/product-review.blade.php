@@ -18,7 +18,7 @@
                     @foreach ($productRatings as $rating)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $rating->product->name ?? 'N/A' }}</td>
+                        <td>{{ $rating->product->product_name ?? 'N/A' }}</td>
                         <td>{{ $rating->user->username ?? 'N/A' }}</td>
                         <td>{{ $rating->rating }}</td>
                         <td>{{ $rating->comment }}</td>
@@ -26,14 +26,14 @@
                         <td>{{ $rating->deactivated_status == 1 ? 'Deactivated' : 'Active' }}</td>
                         <td>
                             @if ($rating->deactivated_status)
-                                <form action="{{ route('productRating.reactivate', $rating->id) }}" method="POST" class="d-inline">
+                                <form action="{{ route('admin.reviews.productrating.activate', $rating->id) }}" method="POST" class="d-inline">
                                     @csrf
                                     <button title="Activate" style="background:none;border:none;padding:0;cursor:pointer;">
                                         <i class="fa fa-power-off" style="color:green;"></i>
                                     </button>
                                 </form>
                             @else
-                                <form action="{{ route('productRating.deactivate', $rating->id) }}" method="POST" class="d-inline">
+                                <form action="{{ route('admin.reviews.productrating.deactivate', $rating->id) }}" method="POST" class="d-inline">
                                     @csrf
                                     <button title="Deactivate" style="background:none;border:none;padding:0;cursor:pointer;">
                                         <i class="fa fa-power-off" style="color:red;"></i>

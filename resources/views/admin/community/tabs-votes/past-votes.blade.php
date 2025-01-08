@@ -4,6 +4,7 @@
             <table id="pastvotesTable" class="table table-bordered">
                 <thead>
                     <tr>
+                        <th>#</th>
                         <th>Username</th>
                         <th>Verified By</th>
                         <th>Suggestion Name</th>
@@ -14,8 +15,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($suggestProductRecords as $record)
+                    @foreach ($productSuggestionRecord as $record)
                     <tr>
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{ $record->username ?? 'N/A' }}</td>
                         <td>{{ $record->admin->username ?? 'N/A' }}</td>
                         <td>{{ $record->suggest_name }}</td>

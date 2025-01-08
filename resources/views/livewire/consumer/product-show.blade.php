@@ -1,5 +1,5 @@
 <div>
-    @if ($message)
+    {{-- @if ($message)
                 <div>
                     <!-- Overlay and Error Popup HTML -->
                     <div class="overlay" id="overlay" aria-label="Close" onclick="closePopup()"></div>
@@ -15,7 +15,7 @@
                         </div>
                     </div>
                 </div>
-            @endif
+            @endif --}}
     @if ($categories->count() === 0)
         <div class="d-block-12 m-5"></div>
     @else

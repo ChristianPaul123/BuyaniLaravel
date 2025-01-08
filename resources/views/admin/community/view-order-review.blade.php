@@ -37,7 +37,7 @@
             <div class="container-fluid">
                 {{-- Header Section --}}
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Edit Order Rating</h1>
+                    <h1 class="h2">View Order Rating</h1>
                 </div>
 
                 {{-- Back Button --}}
@@ -57,39 +57,34 @@
                 {{-- Edit Order Rating Form --}}
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Edit Rating for Order: {{ $orderRating->order->id ?? 'Unknown Order' }}</h4>
+                        <h4 class="card-title">View Rating for Order: {{ $orderRating->order->id ?? 'Unknown Order' }}</h4>
                     </div>
                     <div class="card-body">
                         <form action="{{ route('admin.orderRating.update', $orderRating->id) }}" method="POST">
                             @csrf
                             @method('PUT')
-
                             {{-- Order --}}
                             <div class="form-group">
                                 <label for="order_id">Order</label>
-                                <input type="text" class="form-control" id="order_id" value="{{ $orderRating->order->id ?? 'Unknown Order' }}" disabled>
+                                <p class="form-control-plaintext" id="order_id">{{ $orderRating->order->id ?? 'Unknown Order' }}</p>
                             </div>
 
                             {{-- User --}}
                             <div class="form-group">
                                 <label for="user_name">User</label>
-                                <input type="text" class="form-control" id="user_name" value="{{ $orderRating->user->username ?? 'Unknown User' }}" disabled>
+                                <p class="form-control-plaintext" id="user_name">{{ $orderRating->user->username ?? 'Unknown User' }}</p>
                             </div>
 
                             {{-- Rating --}}
                             <div class="form-group">
                                 <label for="rating">Delivery Rating</label>
-                                <select class="form-control" id="rating" name="delivery_rating" required>
-                                    @for ($i = 1; $i <= 5; $i++)
-                                        <option value="{{ $i }}" {{ $orderRating->delivery_rating == $i ? 'selected' : '' }}>{{ $i }}</option>
-                                    @endfor
-                                </select>
+                                <p class="form-control-plaintext" id="rating">{{ $orderRating->delivery_rating }}</p>
                             </div>
 
                             {{-- Comment --}}
                             <div class="form-group my-3">
                                 <label for="comment">Comment</label>
-                                <textarea class="form-control" style="resize: none;" id="comment" name="comment" rows="3" required>{{ $orderRating->comment }}</textarea>
+                                <p class="form-control-plaintext" id="comment">{{ $orderRating->comment }}</p>
                             </div>
 
                             {{-- Deactivation --}}
@@ -101,15 +96,9 @@
                                 </select>
                             </div>
 
-                            {{-- Deactivation Date --}}
-                            <div class="form-group my-3">
-                                <label for="deactivated_date">Deactivated Date</label>
-                                <input type="date" class="form-control" id="deactivated_date" name="deactivated_date" value="{{ $orderRating->deactivated_date }}">
-                            </div>
-
                             {{-- Submit Button --}}
                             <div class="form-group">
-                                <button type="submit" class="btn btn-success btn-block">Update Order Rating</button>
+                                <button type="submit" class="btn btn-success btn-block">Update Status</button>
                             </div>
                         </form>
                     </div>

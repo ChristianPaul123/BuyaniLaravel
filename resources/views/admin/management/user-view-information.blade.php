@@ -28,7 +28,7 @@
                 <h1 class="h2">User Management</h1>
             </div>
                {{-- Back Button --}}
-               <button type="button" class="btn btn-primary btn-back" onclick="window.history.back()">&#9754; Back to previous</button>
+               <button type="button" class="btn btn-primary btn-back" onclick="window.history.back()"><span class="fa fa-arrow-left" aria-hidden="true"></span> Back to previous</button>
 
             {{-- Tabs --}}
             <ul class="nav nav-tabs mt-4" id="userTabs" role="tablist">

@@ -30,7 +30,7 @@ class UserProductController extends Controller
                     'products' => $products,
                     'categories' => $categories,
                     'subcategories' => $subcategories,
-                    'message' => 'Sorry, there are no products available at the moment.'
+                    // 'message' => 'Sorry, there are no products available at the moment.'
                 ]);
             }
 

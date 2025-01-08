@@ -27,7 +27,7 @@ class UserManagementController extends Controller
     /**
      * Deactivate a user.
      */
-    public function deactivateUser(Request $request, $id)
+    public function deactivateUser($id)
     {
         $user = User::findOrFail($id);
 
@@ -38,13 +38,24 @@ class UserManagementController extends Controller
 
         $user->save();
 
-        return redirect()->back()->with('success', 'User deactivated successfully.');
+
+           // Redirect based on user type
+        if ($user->user_type == 1) {
+            return redirect()->route('admin.management', ['tab' => 'consumers'])
+                ->with('success', 'User deactivated successfully.');
+        } elseif ($user->user_type == 2) {
+            return redirect()->route('admin.management', ['tab' => 'farmers'])
+                ->with('success', 'User deactivated successfully.');
+        }
+
+        return redirect()->route('admin.management', ['tab' => 'consumers'])
+        ->with('success',' User deactivated successfully.');
     }
 
     /**
      * Reactivate a user.
      */
-    public function reactivateUser(Request $request, $id)
+    public function reactivateUser($id)
     {
         $user = User::findOrFail($id);
 
@@ -55,6 +66,16 @@ class UserManagementController extends Controller
 
         $user->save();
 
-        return redirect()->back()->with('success', 'User reactivated successfully.');
+                   // Redirect based on user type
+                   if ($user->user_type == 1) {
+                    return redirect()->route('admin.management', ['tab' => 'consumers'])
+                        ->with('success', 'User reactivated successfully.');
+                } elseif ($user->user_type == 2) {
+                    return redirect()->route('admin.management', ['tab' => 'farmers'])
+                        ->with('success', 'User reactivated successfully.');
+                }
+
+        return redirect()->route('admin.management', ['tab' => 'consumers'])
+        ->with('success',' User reactivated successfully.');
     }
 }
