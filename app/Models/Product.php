@@ -23,10 +23,9 @@ class Product extends Model
         'product_status',
         'category_id',
         'subcategory_id',
-        'created_at',
-        'updated_at',
-        'product_deactivated',
-        'is_featured,'
+        'is_featured,',
+        'deactivated_date',
+        'deactivated_status',
     ];
 
     public function category() {

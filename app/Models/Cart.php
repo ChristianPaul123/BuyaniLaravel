@@ -9,6 +9,7 @@ class Cart extends Model
 {
     // Use the HasFactory trait to create factory instances for this model
     use HasFactory;
+    public $timestamp = true;
 
     // Define the fillable attributes for this model
     protected $fillable = [

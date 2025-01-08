@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('sub_category_name')->nullable()->unique();
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
+            $table->date('deactivated_date')->nullable();
+            $table->boolean('deactivated_status')->default(0);
             $table->timestamps();
         });
     }

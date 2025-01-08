@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class FarmerProduce extends Model
 {
+    public $timestamp = true;
 
     protected $fillable = [
         'user_id',
