@@ -62,6 +62,9 @@
                     <a class="nav-link" id="order-ship-tab" data-bs-toggle="tab" href="#order-ship" role="tab">To Ship</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" id="order-deliver-tab" data-bs-toggle="tab" href="#order-deliver" role="tab">To Deliver</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" id="order-completed-tab" data-bs-toggle="tab" href="#order-completed" role="tab">Order Completed</a>
                 </li>
                 <li class="nav-item">
@@ -78,6 +81,9 @@
                 </div>
                 <div class="tab-pane fade" id="order-ship" role="tabpanel">
                     @include('admin.order.tabs.order-ship',['ordersToShip' => $ordersToShip])
+                </div>
+                <div class="tab-pane fade" id="order-deliver" role="tabpanel">
+                    @include('admin.order.tabs.order-deliver', ['ordersToShip' => $ordersToShip])
                 </div>
                 <div class="tab-pane fade" id="order-completed" role="tabpanel">
                     @include('admin.order.tabs.order-completed',['ordersCompleted' => $ordersCompleted])
