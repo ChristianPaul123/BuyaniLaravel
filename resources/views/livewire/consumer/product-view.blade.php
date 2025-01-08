@@ -26,7 +26,7 @@
                             <div class="product-gallery-thumblist order-sm-1">
                                 @foreach ($product['productImages'] as $index => $productImg)
                                     <a class="product-gallery-thumblist-item @if($index === 0) active @endif" href="#image-{{ $productImg->id }}">
-                                        <img src="{{ asset($productImg->img) }}" alt="Product thumb">
+                                        <img class="h-100" src="{{ asset($productImg->img) }}" alt="Product thumb">
                                     </a>
                                 @endforeach
                             </div>

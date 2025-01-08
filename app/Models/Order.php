@@ -79,6 +79,7 @@ class Order extends Model
             self::STATUS_TO_SHIP => 'To Ship',
             self::STATUS_COMPLETED => 'Completed',
             self::STATUS_CANCELLED => 'Cancelled',
+            self::OUT_FOR_DELIVERY => 'Out for Delivery',
         ];
 
         return $statuses[$this->order_status] ?? 'Unknown';
@@ -87,5 +88,10 @@ class Order extends Model
     public function Order_logs()
     {
         return $this->hasMany(OrderLog::class);
+    }
+    
+    public function rating()
+    {
+        return $this->hasOne(OrderRating::class, 'order_id');
     }
 }

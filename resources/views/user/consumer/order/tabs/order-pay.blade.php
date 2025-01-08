@@ -20,7 +20,7 @@
                         <td>{{ $order->overall_orderKG }} KG</td>
                         <td>₱{{ number_format($order->total_price, 2) }}</td>
                         <td>
-                            <span class="badge status-to-pay text-dark">
+                            <span class="badge status-to-pay">
                                 {{ $order->getStatusLabelAttribute() }}
                             </span>
                         </td>

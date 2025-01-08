@@ -111,8 +111,10 @@
     .status-standby { background-color: #6c757d; color: white; }
     .status-to-pay { background-color: #ffc107; color: black; }
     .status-to-ship { background-color: #0d6efd; color: white; }
+    .status-out-for-delivery { background-color: #6a17b8; color: white; }
     .status-completed { background-color: #28a745; color: white; }
     .status-cancelled { background-color: #dc3545; color: white; }
+
 
 
 </style>
@@ -142,7 +144,10 @@
                     <a class="nav-link" id="to-ship-tab" data-bs-toggle="tab" href="#to-ship" role="tab">To Ship</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="completed-tab" data-bs-toggle="tab" href="#completed" role="tab">Completed</a>
+                    <a class="nav-link" id="completed-tab" data-bs-toggle="tab" href="#order-deliver" role="tab">Out for Delivery</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="order-deliver-tab" data-bs-toggle="tab" href="#completed" role="tab">Completed</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="cancelled-tab" data-bs-toggle="tab" href="#cancelled" role="tab">Cancelled</a>
@@ -164,6 +169,11 @@
                     <!-- To Ship Orders -->
                     <div class="tab-pane fade" id="to-ship" role="tabpanel">
                             @include('user.consumer.order.tabs.order-ship', ['order' => $ordersToShip])
+                    </div>
+
+                    <!-- Out for Delivery Orders -->
+                    <div class="tab-pane fade" id="order-deliver" role="tabpanel">
+                        @include('user.consumer.order.tabs.order-deliver', ['order' => $ordersToDeliver])
                     </div>
 
                     <!-- Completed Orders -->
