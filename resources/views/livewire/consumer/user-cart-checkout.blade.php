@@ -232,6 +232,19 @@
                     {{--  wire:click="processCheckout" --}}
                 </div>
             </div>
+
+            <!-- Spinner Overlay -->
+            <div id="spinner-overlay" class="spinner-overlay" style="display: none;">
+                <div class="d-flex justify-content-center align-items-center">
+                    <div class="text-center">
+                        <div class="spinner-border text-primary" role="status" style="width: 5rem; height: 5rem;">
+                            <span class="sr-only">Processing...</span>
+                        </div>
+                        <p class="mt-3 text-white">Processing your checkout, please wait...</p>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 </div>
@@ -292,11 +305,15 @@
     }
 
     document.getElementById('confirm').addEventListener('click', async (event) => {
-        event.preventDefault();
         var selected = document.querySelector('input[name="paymentMethod"]:checked').value;
         // Generate the token
+        const spinnerOverlay = document.getElementById('spinner-overlay');
+        spinnerOverlay.style.display = 'flex';
 
-        if (selected === 'Stripe') {
+        if(selected === null || selected === '') {
+            spinnerOverlay.style.display = 'none';
+            return;
+        } else if (selected === 'Stripe') {
             const {
                 token,
                 error
@@ -305,6 +322,7 @@
             if (error) {
                 // Display Stripe errors and stop submission
                 document.getElementById('card-errors').textContent = error.message;
+                spinnerOverlay.style.display = 'none';
             } else {
                 // Attach the token to a hidden input for Livewire
                 @this.set('stripeToken', token.id);
@@ -314,7 +332,7 @@
                 // Trigger the Livewire method
                 @this.processCheckout();
             }
-        } else {
+        } else if(selected === 'COD'){
             @this.processCheckout();
         }
     });
