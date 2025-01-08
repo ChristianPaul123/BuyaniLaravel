@@ -78,10 +78,6 @@
                             </a>
 
                             <a href="{{ route('admin.orders.view', $order->id) }}" class="btn btn-primary btn-sm">
-                                <i class="fa fa-eye"></i> Assign Employee
-                            </a>
-
-                            <a href="{{ route('admin.orders.view', $order->id) }}" class="btn btn-primary btn-sm">
                                 <i class="fa fa-eye"></i> View Trackings
                             </a>
 
