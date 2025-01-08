@@ -62,7 +62,7 @@
                     <a class="nav-link" id="order-ship-tab" data-bs-toggle="tab" href="#order-ship" role="tab">To Ship</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="order-deliver-tab" data-bs-toggle="tab" href="#order-deliver" role="tab">To Deliver</a>
+                    <a class="nav-link" id="order-deliver-tab" data-bs-toggle="tab" href="#order-deliver" role="tab">Out For Delivery</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="order-completed-tab" data-bs-toggle="tab" href="#order-completed" role="tab">Order Completed</a>
