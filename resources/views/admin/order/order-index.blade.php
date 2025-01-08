@@ -83,7 +83,7 @@
                     @include('admin.order.tabs.order-ship',['ordersToShip' => $ordersToShip])
                 </div>
                 <div class="tab-pane fade" id="order-deliver" role="tabpanel">
-                    @include('admin.order.tabs.order-deliver', ['ordersToShip' => $ordersToShip])
+                    @include('admin.order.tabs.order-deliver', ['ordersToDeliver' => $ordersToDeliver])
                 </div>
                 <div class="tab-pane fade" id="order-completed" role="tabpanel">
                     @include('admin.order.tabs.order-completed',['ordersCompleted' => $ordersCompleted])

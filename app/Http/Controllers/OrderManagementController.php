@@ -16,6 +16,7 @@ class OrderManagementController extends Controller
             'ordersToStandby' => Order::with(['user', 'payment'])->where('order_status', Order::STATUS_STANDBY)->get(),
             'ordersToPay' => Order::with(['user', 'payment'])->where('order_status', Order::STATUS_TO_PAY)->get(),
             'ordersToShip' => Order::with(['user', 'payment'])->where('order_status', Order::STATUS_TO_SHIP)->get(),
+            'ordersToDeliver' => Order::with(['user', 'payment'])->where('order_status', Order::OUT_FOR_DELIVERY)->get(),
             'ordersCompleted' => Order::with(['user', 'payment'])->where('order_status', Order::STATUS_COMPLETED)->get(),
             'ordersCancelled' => Order::with(['user', 'payment'])->where('order_status', Order::STATUS_CANCELLED)->get(),
         ]);
@@ -37,6 +38,12 @@ class OrderManagementController extends Controller
     {
         $ordersToShip = Order::where('order_status', Order::STATUS_TO_SHIP)->get();
         return view('admin.order.tabs.order-ship', compact('ordersToShip'));
+    }
+
+    public function toDeliver()
+    {
+        $ordersToDeliver = Order::where('order_status', Order::OUT_FOR_DELIVERY)->get();
+        return view('admin.order.tabs.order-deliver', compact('ordersToDeliver'));
     }
 
     public function completed()

@@ -30,6 +30,7 @@ class Order extends Model
         //'shipping_method',
         'order_status',
         'customer_name',
+        'delivery_employee',
         'customer_phone',
         'customer_email',
         'customer_street',

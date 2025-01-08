@@ -125,6 +125,7 @@ Route::get('admin/product/special', [OrderManagementController::class, 'showSpec
 Route::get('admin/orders/order-standby', [OrderManagementController::class, 'toStandby'])->name('admin.orders.to-standby');
 Route::get('admin/orders/order-pay', [OrderManagementController::class, 'toPay'])->name('admin.orders.to-pay');
 Route::get('admin/orders/order-ship', [OrderManagementController::class, 'toShip'])->name('admin.orders.to-ship');
+Route::get('admin/orders/order-deliver', [OrderManagementController::class, 'toDeliver'])->name('admin.orders.to-deliver');
 Route::get('admin/orders/order-completed', [OrderManagementController::class, 'completed'])->name('admin.orders.completed');
 Route::get('admin/orders/order-cancelled', [OrderManagementController::class, 'cancelled'])->name('admin.orders.cancelled');
 
