@@ -45,7 +45,7 @@
         scale: 1.1;
     }
     .hero {
-        background: url('{{ asset('img/farmer-home/farm-bg.jpg') }}') no-repeat center center/cover;
+        /* background: url('{{ asset('img/farmer-home/farm-bg.jpg') }}') no-repeat center center/cover; */
         color: white;
         height: 100vh;
         display: flex;
@@ -199,46 +199,38 @@
 
     <!-- Best Selling Section -->
     <section class="py-5">
-        <div class="container">
-            <h1 class="text-center section1 mb-4">Best Selling This Month</h1>
-            <div class="best-selling">
-                <div class="card product-card">
-                    <img src="img/product1.png" class="card-img-top" alt="Cabbage">
-                    <div class="card-body">
-                        <h5>#1 Cabbage</h5>
-                        <p>Amount: 500kg</p>
-                    </div>
-                </div>
-                <div class="card product-card">
-                    <img src="img/product1.png" class="card-img-top" alt="Carrots">
-                    <div class="card-body">
-                        <h5>#2 Carrots</h5>
-                        <p>Amount: 400kg</p>
-                    </div>
-                </div>
-                <div class="card product-card">
-                    <img src="img/product1.png" class="card-img-top" alt="Papaya">
-                    <div class="card-body">
-                        <h5>#3 Papaya</h5>
-                        <p>Amount: 300kg</p>
-                    </div>
-                </div>
-                <div class="card product-card">
-                    <img src="img/product1.png" class="card-img-top" alt="Corn">
-                    <div class="card-body">
-                        <h5>#4 Corn</h5>
-                        <p>Amount: 300kg</p>
-                    </div>
-                </div>
-                <div class="card product-card">
-                    <img src="img/tomato.png" class="card-img-top" alt="Apple">
-                    <div class="card-body">
-                        <h5>#5 Apple</h5>
-                        <p>Amount: 300kg</p>
-                    </div>
+        <h1 class="text-center section1 mb-4">Best Selling Products This Month</h1>
+    <div class="best-selling">
+        @forelse ($bestSellingProducts as $index => $productSale)
+            <div class="card product-card">
+                <img src="{{ asset($productSale->product->image ?? 'img/placeholder.png') }}"
+                     class="card-img-top" alt="{{ $productSale->product->name ?? 'Unknown Product' }}">
+                <div class="card-body">
+                    <h5>#{{ $index + 1 }} {{ $productSale->product->name ?? 'Unknown Product' }}</h5>
+                    <p>Amount: {{ $productSale->total_sales }} kg</p>
                 </div>
             </div>
-        </div>
+        @empty
+            <p>No best selling products found.</p>
+        @endforelse
+    </div>
+
+    <!-- Best Selling Product Variants -->
+    <h1 class="text-center section1 mb-4 mt-5">Best Selling Product Variants This Month</h1>
+    <div class="best-selling">
+        @forelse ($bestSellingVariants as $index => $variantSale)
+            <div class="card product-card">
+                <img src="{{ asset($variantSale->productSpecification->product->image ?? 'img/placeholder.png') }}"
+                     class="card-img-top" alt="{{ $variantSale->productSpecification->product->name ?? 'Unknown Variant' }}">
+                <div class="card-body">
+                    <h5>#{{ $index + 1 }} {{ $variantSale->productSpecification->name ?? 'Unknown Variant' }}</h5>
+                    <p>Amount: {{ $variantSale->total_sales }} kg</p>
+                </div>
+            </div>
+        @empty
+            <p>No best selling product variants found.</p>
+        @endforelse
+    </div>
     </section>
 
     <!-- Analytics Section -->
@@ -246,7 +238,7 @@
         <div class="container">
             <h1 class="text-center mb-4">This Month's Top Consumer Vote</h1>
             <div class="analytics">
-                <canvas id="barChart" height="125"></canvas>
+                <canvas id="barChart" width="500" height="400"></canvas>
             </div>
         </div>
     </section>
@@ -307,27 +299,16 @@
     <!-- Section 2: Sponsors -->
      <section>
         <div class="container text-center py-5">
-            <!-- <p class="text-uppercase text-success fw-bold" style="color: ;">Sponsors</p>
-            <h2>Supported By</h2> -->
-            <div class="row sponsors">
-                <div class="col-md-2 col-sm-4 col-6">
-                    <img src="https://via.placeholder.com/200x100?text=Sponsor+1" alt="Sponsor 1" class="img-fluid">
-                </div>
-                <div class="col-md-2 col-sm-4 col-6">
-                    <img src="https://via.placeholder.com/200x100?text=Sponsor+2" alt="Sponsor 2" class="img-fluid">
-                </div>
-                <div class="col-md-2 col-sm-4 col-6">
-                    <img src="https://via.placeholder.com/200x100?text=Sponsor+3" alt="Sponsor 3" class="img-fluid">
-                </div>
-                <div class="col-md-2 col-sm-4 col-6">
-                    <img src="https://via.placeholder.com/200x100?text=Sponsor+4" alt="Sponsor 4" class="img-fluid">
-                </div>
-                <div class="col-md-2 col-sm-4 col-6">
-                    <img src="https://via.placeholder.com/200x100?text=Sponsor+5" alt="Sponsor 5" class="img-fluid">
-                </div>
-                <div class="col-md-2 col-sm-4 col-6">
-                    <img src="https://via.placeholder.com/200x100?text=Sponsor+6" alt="Sponsor 6" class="img-fluid">
-                </div>
+            <p class="text-uppercase text-success fw-bold">Sponsors</p>
+            <h2>Supported By</h2>
+            <div class="row sponsors justify-content-center">
+                @forelse ($sponsors as $sponsor)
+                    <div class="col-md-2 col-sm-4 col-6">
+                        <img src="{{ asset($sponsor->img) }}" alt="{{ $sponsor->img_title }}" class="img-fluid">
+                    </div>
+                @empty
+                    <p>No sponsors found.</p>
+                @endforelse
             </div>
         </div>
     </section>
@@ -337,17 +318,20 @@
 @endsection
 
 @section('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        // Data passed from the controller
+        const chartLabels = @json($topVotedProducts->pluck('suggest_name'));
+        const chartData = @json($topVotedProducts->pluck('total_vote_count'));
+
         // Bar Chart Configuration
         const ctx = document.getElementById('barChart').getContext('2d');
         const barChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Product A', 'Product B', 'Product C', 'Product D', 'Product E'],
+                labels: chartLabels,
                 datasets: [{
-                    label: 'Votes',
-                    data: [120, 150, 80, 200, 170],
+                    label: 'Vote Count',
+                    data: chartData,
                     backgroundColor: [
                         'rgba(75, 192, 192, 0.2)',
                         'rgba(255, 99, 132, 0.2)',
@@ -366,6 +350,7 @@
                 }]
             },
             options: {
+                maintainAspectRatio: false,
                 responsive: true,
                 scales: {
                     y: {

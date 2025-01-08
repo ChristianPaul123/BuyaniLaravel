@@ -108,7 +108,7 @@ class ProductView extends Component
     {
         return view('livewire.consumer.product-view', [
             'product' => $this->product,
-           'specifications' => $this->product->productSpecification()->paginate(5),
+           'specifications' => $this->product->productSpecification()->paginate(2),
         ]);
     }
 }

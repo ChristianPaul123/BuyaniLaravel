@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-md-6 product-image">
                     <div class="d-flex justify-content-start my-2">
-                        <button class="btn btn-secondary" onclick="window.history.back()">&#9754; Back</button>
+                        <a href="{{ route('user.consumer.product') }}" class="btn btn-secondary" ><span class="fa fa-arrow-left" aria-hidden="true"></span> Back</a>
                     </div>
                     {{-- <div class="image-container shadow-sm rounded" style="height: 400px; width: 100%; overflow: hidden;">
                         <img src="{{ asset($product->product_pic) }}" alt="{{ $product->product_name }}" style="object-fit: fill; width: 100%; height: 100%;">
@@ -32,7 +32,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
                 <div class="col-md-6">
                     <h2 class="product-title">{{ $product->product_name }}</h2>

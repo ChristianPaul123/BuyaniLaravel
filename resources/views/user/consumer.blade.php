@@ -700,44 +700,6 @@
         </div>
     </div>
 
-    {{-- wag na ata neto at redundant na masyado --}}
-    <!-- Section 3 -->
-    {{-- <div class="row section-3">
-        <div class="col-md-6 left-panel">
-            <div class="div-iframe">
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!4v1698665449734!6m8!1m7!1seAvRB_mCgHq_5jKGt56U_Q!2m2!1d13.1509736!2d123.7184431!3f44.73!4f0!5f0.7820865974627469"
-                    style="border: 4px solid #000; border-radius: 20px;"
-                    allowfullscreen=""
-                    loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
-            </div>
-        </div>
-        <div class="col-md-6 right-panel">
-            <div class="container p-2">
-                <h3>Contact Form</h3>
-                <form>
-                    <div class="form-group p-1">
-                        <label for="name">Name</label>
-                        <input type="text" class="form-control" id="name" placeholder="Enter your name">
-                    </div>
-                    <div class="form-group p-1">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="Enter your email">
-                    </div>
-                    <div class="form-group p-1">
-                        <label for="message">Message</label>
-                        <textarea class="form-control scroll" id="message" rows="3" placeholder="Enter your message"></textarea>
-                    </div>
-                    <div class="text-center pt-1">
-                        <button type="submit">Send</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div> --}}
-
 </section>
 
 

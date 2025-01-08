@@ -1,22 +1,34 @@
  <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="background-color: #FFFFFF;">
+        <!--Logo section-->
         <div class="container-fluid">
             <a class="navbar-brand" href="farmer-home.php">
                 <img src="{{ asset('img/logo1.svg') }}" style="width: 65px;">
                 <img src="{{ asset('img/logo2.svg') }}">
             </a>
+
+            <!--Navbar toggle button-->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
+                    <!-- Navbar Links -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-center" style="font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: bold;">
                     <li class="nav-item px-1 py-0 position-relative">
                         <a class="nav-link @if(request()->is('user/farmer')) active @endif" href="/user/farmer" data-page="home">HOME</a>
                     </li>
                     @if(Auth::guard('user')->check())
-                    <li class="nav-item px-1 position-relative">
-                        <a class="nav-link @if(request()->is('user/farmer/products')) active @endif" href="/user/farmer/products" data-page="s-products">SUPPLY PRODUCTS </a>
-                    </li>
+                            {{-- if the user is not verified, this won't show --}}
+                            @if(Auth::guard('user')->user()->id_verified && Auth::guard('user')->user()->form_verified)
+                            <li class="nav-item px-1 position-relative">
+                                <a class="nav-link @if(request()->is('user/farmer/blogs')) active @endif" href="/user/farmer/blogs" data-page="blogs">BLOGS</a>
+                            </li>
+                            @else
+                            <li class="nav-item px-1 position-relative">
+                                <a class="nav-link" href="javascript:void(0);" onclick="alert('You must get verified first to access this functionality!')" style="cursor: not-allowed;">SUPPLY PRODUCTS</a>
+                            </li>
+                            @endif
                     <li class="nav-item px-1 position-relative">
                         <a class="nav-link @if(request()->is('user/farmer/blogs')) active @endif" href="/user/farmer/blogs" data-page="blogs">BLOGS</a>
                     </li>
@@ -33,6 +45,7 @@
                             <i class="fas fa-comment-dots" style="font-size: 25px;"></i>
                         </a>
                     </li>
+
                     @auth('user')
                     <li class="nav-item dropdown px-1 position-relative">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarProfile" role="button" data-bs-toggle="dropdown" aria-expanded="false">

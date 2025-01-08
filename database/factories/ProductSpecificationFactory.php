@@ -21,7 +21,7 @@ class ProductSpecificationFactory extends Factory
             'product_id' => $this->faker->numberBetween(1, 50), // Assuming 50 products exist
             'specification_name' => $this->faker->words(3, true), // Random specification name
             'product_price' => $this->faker->randomFloat(2, 10, 500), // Random price between 10 and 500
-            'product_kg' => $this->faker->randomFloat(1, 1, 100), // Random weight between 1 and 100 kg
+            'product_kg' => $this->faker->randomFloat(1, 1, 10), // Random weight between 1 and 10 kg
             'admin_id' => 1,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),

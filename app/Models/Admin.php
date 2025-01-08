@@ -17,9 +17,6 @@ class Admin extends Authenticatable
       const Assistant = 2;
       const Employee = 3;
 
-      public $timestamp = true;
-
-
         /**
      * The attributes that are mass assignable.
      *
@@ -35,7 +32,6 @@ class Admin extends Authenticatable
         'last_online',
         'deactivated_date',
         'deactivated_status',
-        'admin_payment',
     ];
 
     protected $hidden = [
