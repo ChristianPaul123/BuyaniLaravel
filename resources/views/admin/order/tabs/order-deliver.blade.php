@@ -72,8 +72,6 @@
                         <td>
                             {{-- View Order --}}
                             <a href="{{ route('admin.orders.view', $order->id) }}" class="btn btn-info btn-sm mb-2">View</a>
-                            <button class="btn btn-success btn-sm w-full mb-2">Mark as Delivered</button>
-                            <button class="btn btn-danger btn-sm w-full">Cancel Order</button>
                         </td>
                     </tr>
                 @endforeach
