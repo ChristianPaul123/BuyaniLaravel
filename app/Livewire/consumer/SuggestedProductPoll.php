@@ -23,8 +23,8 @@ class SuggestedProductPoll extends Component
     {
         $userId = Auth::guard('user')->id();
         $this->suggestedProducts = SuggestProduct::with(['votedProducts' => function ($query) use ($userId) {
-            $query->where('user_id', $userId)->where('is_accepted', 1);
-        }])->orderBy('total_vote_count', 'desc')->get();
+            $query->where('user_id', $userId);
+        }])->where('is_accepted', 1)->orderBy('total_vote_count', 'desc')->get();
     }
 
     public function toggleVote($productId)

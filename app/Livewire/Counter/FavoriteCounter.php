@@ -27,7 +27,7 @@ class FavoriteCounter extends Component
         $user = Auth::guard('user')->user();
 
         if ($user) {
-            $this->favoritesCount = $user->favorites->count() ?? 0; // Count user's favorites
+            $this->favoritesCount = optional($user->favorites)->count() ?? 0; // Safely count user's favorites
         }
     }
     public function render()

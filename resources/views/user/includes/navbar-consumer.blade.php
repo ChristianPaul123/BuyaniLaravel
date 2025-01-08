@@ -55,7 +55,7 @@
                 </li>
 
 
-                  <!-- Favorites Icon -->
+                  <!-- Chat Icon -->
                 <li class="nav-item px-1 position-relative">
                     <a class="nav-link @if(request()->is('user/consumer/chat')) active @endif" href="/user/consumer/chat" data-page="chat">
                         <i class="fas fa-comment-alt" style="font-size: 25px;"></i>
