@@ -17,6 +17,7 @@ class Order extends Model
     const STATUS_TO_SHIP = 3;
     const STATUS_COMPLETED = 4;
     const STATUS_CANCELLED = 5;
+    const OUT_FOR_DELIVERY = 6;
 
     // Fillable attributes for the Order model
     protected $fillable = [
