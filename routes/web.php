@@ -214,6 +214,9 @@ Route::get('user/consumer/order/{id}', [OrderController::class, 'showOrderDetail
 Route::get('user/consumer/order/cancel/{id}', [OrderController::class, 'cancelOrder'])->name('user.consumer.order.cancel');
 Route::post('user/consumer/order/cancel/{id}', [OrderController::class, 'cancelOrderSubmit'])->name('user.consumer.order.cancel.submit');
 Route::get('user/consumer/order/track/{id}', [OrderController::class, 'showOrderDetails'])->name('user.consumer.order.track');
+Route::post('/order/confirm', [OrderController::class, 'confirmOrderReceived'])->name('user.order.confirm');
+Route::get('user/consumer/order/rate/{id}', [OrderController::class, 'rateOrder'])->name('user.consumer.order.rate');
+Route::post('user/consumer/order/rate/store', [OrderController::class, 'storeOrderRating'])->name('user.consumer.order.rate.store');
 
 });
 

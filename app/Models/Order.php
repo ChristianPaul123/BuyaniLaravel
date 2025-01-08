@@ -90,4 +90,9 @@ class Order extends Model
     {
         return $this->hasMany(OrderLog::class);
     }
+    
+    public function rating()
+    {
+        return $this->hasOne(OrderRating::class, 'order_id');
+    }
 }

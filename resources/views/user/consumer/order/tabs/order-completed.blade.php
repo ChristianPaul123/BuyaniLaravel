@@ -20,15 +20,20 @@
                         <td>{{ $order->overall_orderKG }} KG</td>
                         <td>₱{{ number_format($order->total_price, 2) }}</td>
                         <td>
-                            <span class="badge status-completed text-dark">
+                            <span class="badge status-completed">
                                 {{ $order->getStatusLabelAttribute() }}
                             </span>
                         </td>
                         <td>{{ $order->customer_name }}</td>
                         <td>
-                            <a class="btn btn-primary" href="{{ route('user.consumer.order.details', $order->id)}}">View</a>
-                            <a class="btn btn-secondary" href="{{ route('user.consumer.order.cancel', $order->id)}}">Rate Product</a>
-                            {{-- <a class="btn btn-secondary" href="{{ route('user.consumer.order.cancel', $order->id)}}">Cancel</a> --}}
+                            <a class="btn btn-primary"
+                                href="{{ route('user.consumer.order.details', $order->id) }}">View</a>
+                            @if (!$order->rating)
+                                <a class="btn btn-secondary"
+                                    href="{{ route('user.consumer.order.rate', $order->id) }}">Rate Order</a>
+                            {{-- @else
+                                <span class="text-success">Rated</span> --}}
+                            @endif
                         </td>
                     </tr>
                 @empty
