@@ -63,103 +63,75 @@
                 <div class="col-12">
                     <div class="card p-4">
                         <h5>Shipping Information</h5>
-                        <form class="mt-3">
-                            <div class="row">
+                        <form class="mt-3" id="shippingForm">
+                            <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label for="name" class="form-label">Name</label>
                                     <input type="text" class="form-control" id="name"
                                         wire:model="shippingInfo.name">
-                                    @error('shippingInfo.name')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                                    <div class="invalid-feedback">Name is required.</div>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="phone" class="form-label">Phone</label>
                                     <input type="text" class="form-control" id="phone"
                                         wire:model="shippingInfo.phone">
-                                    @error('shippingInfo.phone')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                                    <div class="invalid-feedback">Phone is required.</div>
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label for="email" class="form-label">Email</label>
                                     <input type="text" class="form-control" id="email"
                                         wire:model="shippingInfo.email">
-                                    @error('shippingInfo.email')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                                    <div class="invalid-feedback">Email is required.</div>
                                 </div>
+                                <div class="col-md-6">
+                                    <label for="house_number" class="form-label">House Number</label>
+                                    <input type="text" class="form-control" id="house_number"
+                                        wire:model="shippingInfo.house_number">
+                                    <div class="invalid-feedback">House number is required.</div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label for="street" class="form-label">Street</label>
                                     <input type="text" class="form-control" id="street"
                                         wire:model="shippingInfo.street">
-                                    @error('shippingInfo.street')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label for="city" class="form-label">City</label>
-                                    <input type="text" class="form-control" id="city"
-                                        wire:model="shippingInfo.city">
-                                    @error('shippingInfo.city')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="state" class="form-label">State</label>
-                                    <input type="text" class="form-control" id="state"
-                                        wire:model="shippingInfo.state">
-                                    @error('shippingInfo.state')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="zip_code" class="form-label">Zip Code</label>
-                                    <input type="text" class="form-control" id="zip_code"
-                                        wire:model="shippingInfo.zip_code">
-                                    @error('shippingInfo.zip_code')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                                    <div class="invalid-feedback">Street is required.</div>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="barangay" class="form-label">Barangay</label>
                                     <input type="text" class="form-control" id="barangay"
                                         wire:model="shippingInfo.barangay">
-                                    @error('shippingInfo.barangay')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                                    <div class="invalid-feedback">Barangay is required.</div>
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="city" class="form-label">City</label>
+                                    <input type="text" class="form-control" id="city"
+                                        wire:model="shippingInfo.city">
+                                    <div class="invalid-feedback">City is required.</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="state" class="form-label">State</label>
+                                    <input type="text" class="form-control" id="state"
+                                        wire:model="shippingInfo.state">
+                                    <div class="invalid-feedback">State is required.</div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label for="zip_code" class="form-label">Zip Code</label>
                                     <input type="text" class="form-control" id="zip_code"
                                         wire:model="shippingInfo.zip_code">
-                                    @error('shippingInfo.zip_code')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                                    <div class="invalid-feedback">Zip Code is required.</div>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="country" class="form-label">Country</label>
                                     <input type="text" class="form-control" id="country"
                                         wire:model="shippingInfo.country">
-                                    @error('shippingInfo.country')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label for="house_number" class="form-label">House Number</label>
-                                    <input type="text" class="form-control" id="house_number"
-                                        wire:model="shippingInfo.house_number">
-                                    @error('shippingInfo.house_number')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                                    <div class="invalid-feedback">Country is required.</div>
                                 </div>
                             </div>
                         </form>
@@ -201,11 +173,7 @@
                                 name="paymentMethod" id="cod" value="COD">
                             <label class="form-check-label" for="cod">Cash on Delivery</label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" wire:model="paymentMethod"
-                                name="paymentMethod" id="gcash" value="GCash">
-                            <label class="form-check-label" for="gcash">GCash</label>
-                        </div>
+                        
                         <div class="form-check">
                             <input class="form-check-input" type="radio" wire:model="paymentMethod"
                                 name="paymentMethod" id="stripe" value="Stripe">
@@ -213,11 +181,9 @@
                             <div class="mt-3" id="stripe-div">
                                 <div class="form-control" id="card-element"></div>
                                 <div id="card-errors" role="alert"></div>
-                                {{-- <div id="payment-request-button" style="margin-bottom: 20px;"></div>
-                                <div class="form-control" id="card-element"></div>
-                                <div id="card-errors" role="alert" class="text-danger"></div> --}}
                             </div>
                         </div>
+                        <div class="invalid-feedback" id="error-msg-payment">Payment method is required.</div>
                     </div>
                 </div>
             </div>
@@ -272,7 +238,6 @@
         const initiallySelected = document.querySelector('input[name="paymentMethod"]:checked');
         if (initiallySelected && initiallySelected.value === 'Stripe') {
             stripeDiv.classList.add('active');
-
         }
     });
 </script>
@@ -304,37 +269,95 @@
         }
     }
 
-    document.getElementById('confirm').addEventListener('click', async (event) => {
-        var selected = document.querySelector('input[name="paymentMethod"]:checked').value;
-        // Generate the token
-        const spinnerOverlay = document.getElementById('spinner-overlay');
-        spinnerOverlay.style.display = 'flex';
+    function validateFields(fields) {
+        let hasError = false;
 
-        if(selected === null || selected === '') {
-            spinnerOverlay.style.display = 'none';
-            return;
-        } else if (selected === 'Stripe') {
-            const {
-                token,
-                error
-            } = await stripe.createToken(card);
-
-            if (error) {
-                // Display Stripe errors and stop submission
-                document.getElementById('card-errors').textContent = error.message;
-                spinnerOverlay.style.display = 'none';
+        fields.forEach(field => {
+            const $input = $(`#${field}`);
+            if ($input.val().trim() === '') {
+                $input.addClass('is-invalid');
+                hasError = true;
             } else {
+                $input.removeClass('is-invalid');
+            }
+        });
+
+        return hasError;
+    }
+
+    document.getElementById('confirm').addEventListener('click', async (event) => {
+        event.preventDefault();
+
+        const fieldsToValidate = [
+            'name',
+            'phone',
+            'email',
+            'house_number',
+            'street',
+            'barangay',
+            'city',
+            'state',
+            'zip_code',
+            'country'
+        ];
+
+        $('#shippingForm input').removeClass('is-invalid');
+        document.getElementById('error-msg-payment').style.display = 'none';
+
+        const spinnerOverlay = document.getElementById('spinner-overlay');
+        const selectedPaymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
+        // Validate form fields
+        if (validateFields(fieldsToValidate)) {
+            if(!selectedPaymentMethod){
+                document.getElementById('error-msg-payment').style.display = 'block';
+            }
+            document.querySelector('body').scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+            return;
+        }
+
+        // Ensure a payment method is selected
+        
+        if (!selectedPaymentMethod) {
+            document.getElementById('error-msg-payment').style.display = 'block';
+            document.querySelector('body').scrollTo({ top: document.body.scrollHeight, left: 0, behavior: 'smooth' });
+            return;
+        }
+        
+        // Handle payment methods
+        if (selectedPaymentMethod && selectedPaymentMethod.value === 'Stripe') {
+            spinnerOverlay.style.display = 'flex'; // Show the spinner initially
+            try {
+                const {
+                    token,
+                    error
+                } = await stripe.createToken(card);
+
+                if (error) {
+                    document.getElementById('card-errors').textContent = error.message;
+                    spinnerOverlay.style.display = 'none'; // Show the spinner initially
+                    return;
+                }
+                
                 // Attach the token to a hidden input for Livewire
                 @this.set('stripeToken', token.id);
 
-                console.log(token.id);
+                console.log('Stripe Token:', token.id);
 
-                // Trigger the Livewire method
+                // Trigger Livewire method
                 @this.processCheckout();
+            } catch (err) {
+                console.error('Stripe Error:', err);
+                document.getElementById('card-errors').textContent ='An error occurred during payment processing.';
+                spinnerOverlay.style.display = 'none';
             }
-        } else if(selected === 'COD'){
+        } else if (selectedPaymentMethod && selectedPaymentMethod.value === 'COD') {
+            // Process checkout for COD
+            spinnerOverlay.style.display = 'flex'; // Show the spinner initially
             @this.processCheckout();
         }
+
+        // Hide the spinner after processing
+        spinnerOverlay.style.display = 'none';
     });
 </script>
 {{-- <script>
@@ -435,4 +458,3 @@
         }
     });
 </script> --}}
-
