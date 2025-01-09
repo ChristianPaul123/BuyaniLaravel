@@ -37,11 +37,7 @@
     </div>
 
     <div wire:ignore.self class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-        @if (session('message'))
-        <div class="alert alert-success text-center my-3 d-block col-12 mt-5">
-            {{ session('message') }}
-        </div>
-        @endif
+        @include('user.includes.messageBox')
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -97,11 +93,7 @@
     </div>
 
     <div wire:ignore.self class="modal fade" id="passwordModal" tabindex="-1" aria-labelledby="passwordModalLabel" aria-hidden="true">
-        @if (session('message'))
-        <div class="alert alert-success text-center my-3 d-block col-12 mt-5">
-            {{ session('message') }}
-        </div>
-        @endif
+        @include('user.includes.messageBox')
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -152,7 +144,35 @@
     </section>
 </div>
 
+
 @script
+
+<script>
+
+    // Toggle visibility for both password fields
+    document.getElementById("togglePassword").addEventListener("click", function () {
+        const password1 = document.getElementById("currentPassword");
+        const password2 = document.getElementById("newPassword");
+        const password3 = document.getElementById("confirmPassword");
+        const icon = document.getElementById("toggleIcon");
+
+        // Check current state and toggle visibility
+        if (password1.type === "password") {
+            password1.type = "text";
+            password2.type = "text";
+            password3.type = "text";
+            icon.classList.remove("bi-eye");
+            icon.classList.add("bi-eye-slash");
+        } else {
+            password1.type = "password";
+            password2.type = "password";
+            password3.type = "password";
+            icon.classList.remove("bi-eye-slash");
+            icon.classList.add("bi-eye");
+        }
+    });
+
+</script>
 
 <script>
 
@@ -184,7 +204,6 @@
 <script>
     document.addEventListener('livewire:initialized',()=>{
       @this.on('show-modal',(event)=>{
-
         var myModalEl=document.querySelector('#editModal')
         var modal=bootstrap.Modal.getOrCreateInstance(myModalEl)
 

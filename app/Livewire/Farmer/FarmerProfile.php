@@ -5,6 +5,7 @@ namespace App\Livewire\Farmer;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash; // Import Hash facade
 use Livewire\Attributes\On;
 
 class FarmerProfile extends Component
@@ -107,17 +108,40 @@ class FarmerProfile extends Component
         return $storedPath;
     }
 
-    // #[On('testtest')]
-    // public function test() {
-    //     dd('testing');
-    // }
-
     private function deleteOldImage($path)
     {
         $fullPath = public_path($path);
         if (file_exists($fullPath)) {
             unlink($fullPath);
         }
+    }
+
+    public function changePassword()
+    {
+        $this->validate([
+            'current_password' => 'required',
+            'new_password' => [
+                'required',
+                'min:8',
+                // Additional complexity rules can be added here, e.g.
+                // 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/'
+            ],
+            'confirm_password' => 'required|same:new_password',
+        ]);
+
+        // Verify current password
+        if (! Hash::check($this->current_password, $this->user->password)) {
+            $this->addError('current_password', 'Your current password is incorrect.');
+            return;
+        }
+
+        // Update the password
+        $this->user->password = Hash::make($this->new_password);
+        $this->user->save();
+
+        session()->flash('message', 'Password changed successfully.');
+        // Clear input fields or re-initialize if desired
+        $this->reset(['current_password', 'new_password','confirm_password']);
     }
 
     public function render()
