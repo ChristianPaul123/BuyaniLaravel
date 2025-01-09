@@ -7,6 +7,117 @@
     body {
         font-family: Arial, sans-serif;
     }
+
+
+/* design for the modal popup */
+    /* Modal Background */
+    .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1050;
+    }
+
+    /* Modal Content */
+    .modal-content {
+        background: #fff;
+        width: 90%;
+        max-width: 500px;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        animation: fadeIn 0.3s ease-in-out;
+    }
+
+    /* Modal Header */
+    .modal-header {
+        background-color: #f8f9fa;
+        padding: 15px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    .modal-title {
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: #343a40;
+    }
+
+    /* Close Button */
+    .close-btn {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #343a40;
+        cursor: pointer;
+        outline: none;
+    }
+
+    .close-btn:hover {
+        color: #dc3545;
+    }
+
+    /* Modal Body */
+    .modal-body {
+        padding: 20px;
+        font-size: 1rem;
+        color: #495057;
+        text-align: center;
+    }
+
+    /* Modal Footer */
+    .modal-footer {
+        padding: 15px 20px;
+        background-color: #f8f9fa;
+        border-top: 1px solid #dee2e6;
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+    }
+
+    .modal-footer .btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .modal-footer .btn-primary {
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+    }
+
+    .modal-footer .btn-primary:hover {
+        background-color: #218838;
+    }
+
+    .modal-footer .btn-secondary {
+        background-color: #6c757d;
+        color: #fff;
+        border: none;
+    }
+
+    .modal-footer .btn-secondary:hover {
+        background-color: #5a6268;
+    }
+
+
+
+    .modal.hide {
+        display: none; /* Hidden modal */
+    }
+
+
     .section-1{
     padding: 100px 100px 50px 100px;
     }
@@ -166,26 +277,27 @@
 
 @section('content')
 @include('user.includes.navbar-farmer')
-@if (session('message'))
-<div>
-    <div class="overlay" id="overlay" aria-label="Close" onclick="closePopup()"></div>
 
-    <div class="error-popup">
-        <i class="bi bi-x-lg fs-4" aria-label="Close" onclick="closePopup()"></i>
-        <div class="error-icon">
-            <i class="icon bi bi-x-circle"></i>
-        </div>
-        <div class="container-contents">
-            <h3>Ooops!</h3>
-            <p>{{ session('message') }}</p>
-            {{-- <button onclick="">Button</button> --}}
+
+<div class="main-div">
+    @include('user.includes.messageBox')
+
+    {{-- popup modal on startup page --}}
+    <div id="profileIncompleteModal" class="modal {{ $isProfileIncomplete ? 'show' : 'hide' }}">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Profile Incomplete</h5>
+            </div>
+            <div class="modal-body">
+                <p>Looks like you don't have any other info yet. Why not try editing it?</p>
+            </div>
+            <div class="modal-footer">
+                <a href="{{ route('user.consumer.profile.show') }}" class="btn btn-primary">Edit Profile</a>
+                <button type="button" data-close="modal" class="btn btn-secondary">Close</button>
+            </div>
         </div>
     </div>
 
-</div>
-@endif
-
-<div class="main-div">
     <!-- Hero Section -->
     <section class="hero">
         <div class="container text-center">
@@ -318,6 +430,21 @@
 @endsection
 
 @section('scripts')
+    <script>
+        //this is the script that modal to popup when start of the page
+        document.addEventListener('DOMContentLoaded', function () {
+            // Select modal and close button
+            const modal = document.getElementById('profileIncompleteModal');
+            const closeButton = modal.querySelector('[data-close="modal"]');
+
+            // Add event listener to the close button
+            closeButton.addEventListener('click', function () {
+                modal.classList.remove('show');
+                modal.classList.add('hide');
+            });
+        });
+    </script>
+
     <script>
         // Data passed from the controller
         const chartLabels = @json($topVotedProducts->pluck('suggest_name'));

@@ -133,7 +133,7 @@ class ConsumerAddress extends Component
 
         if ($address->user_id === $this->user->id) {
             $address->delete();
-            session()->flash('message', 'Address deleted successfully.');
+            session()->flash('succcess', 'Address deleted successfully.');
         } else {
             session()->flash('error', 'Unauthorized action.');
         }
