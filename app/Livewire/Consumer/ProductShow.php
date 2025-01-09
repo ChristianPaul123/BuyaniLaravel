@@ -113,13 +113,6 @@ class ProductShow extends Component
         try {
             if (!empty($this->searchQuery)) {
                 $this->action = 3;
-                // if (strlen($this->searchQuery) >= 3) {
-                //     $this->searchFilter = $this->searchQuery;
-                //     $this->title = "Search results for '{$this->searchFilter}'";
-                // } else {
-                //     $this->message = 'Please enter at least 3 characters for the search query.';
-                //     return;
-                // }
 
                 $this->searchFilter = $this->searchQuery;
                     $this->title = "Search results for '{$this->searchFilter}'";

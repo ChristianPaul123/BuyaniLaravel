@@ -65,6 +65,15 @@ new DataTable('#orderlogTable');
 new DataTable('#productlogTable');
 new DataTable('#adminlogTable');
 
+//Tables for the Reviews
+new DataTable('#productreviewTable');
+new DataTable('#orderreviewTable');
+
+//Tables for the Votes
+new DataTable('#currentvotesTable');
+new DataTable('#managesuggestionsTable');
+new DataTable('#pastvotesTable');
+
 
 //Tables for the Reports
 new DataTable('#currentInventoryTable', {

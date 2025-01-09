@@ -159,11 +159,25 @@ Route::get('admin/message', function () {
 
 //REVIEWS
 Route::get('admin/community/reviews', [ReviewManagementController::class, 'showReviews'])->name('admin.reviews');
+Route::get('admin/community/reviews/orderrating/view/{id}', [ReviewManagementController::class, 'viewOrderReview'])->name('admin.reviews.view.orderrating');
+Route::get('admin/community/reviews/productrating/view/{id}', [ReviewManagementController::class, 'viewProductReview'])->name('admin.reviews.view.productrating');
+Route::post('admin/community/reviews/productrating/update/{id}', [ReviewManagementController::class, 'updateProductReview'])->name('admin.reviews.update.productrating');
+Route::post('admin/community/reviews/orderrating/update/{id}', [ReviewManagementController::class, 'updateOrderReview'])->name('admin.reviews.update.orderrating');
+// Route::post('admin/community/reviews/productrating/view/{id}', [ReviewManagementController::class, 'editReview'])->name('admin.reviews.edit');
+// Route::post('admin/community/reviews/productrating/view/{id}', [ReviewManagementController::class, 'editReview'])->name('admin.reviews.edit');
 
+
+Route::post('admin/community/reviews/orderrating/{id}/deactivate', [ReviewManagementController::class, 'orderRatingdeactivate'])->name('admin.reviews.orderrating.deactivate');
+Route::post('admin/community/reviews/orderrating/{id}/activate', [ReviewManagementController::class, 'orderRatingactivate'])->name('admin.reviews.orderrating.activate');
+Route::post('admin/community/reviews/productrating/{id}/deactivate', [ReviewManagementController::class, 'productRatingdeactivate'])->name('admin.reviews.productrating.deactivate');
+Route::post('admin/community/reviews/productrating/{id}/activate', [ReviewManagementController::class, 'productRatingactivate'])->name('admin.reviews.productrating.activate');
 
 //VOTED PRODUCTS
-Route::get('admin/community/votes',[VotedProductsManagementController::class, 'showVotedProducts'])->name('admin.voted-products');
 
+Route::get('admin/community/votes',[VotedProductsManagementController::class, 'showVotedProducts'])->name('admin.voted-products');
+Route::get('admin/community/votes/suggestionss/{id}',[VotedProductsManagementController::class, 'viewSuggestproduct'])->name('admin.voted-products.suggestions.view');
+Route::post('admin/community/votes/suggestions/{id}/accept', [VotedProductsManagementController::class, 'acceptSuggestproduct'])->name('admin.voted-products.suggestions.accept');
+Route::post('admin/community/votes/suggestions/{id}/reject', [VotedProductsManagementController::class, 'rejectSuggestproduct'])->name('admin.voted-products.suggestions.reject');
 
 //BLOGS
 Route::get('admin/community/blog',[BlogManagementController::class,'showBlogs'])->name('admin.blog');
