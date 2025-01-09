@@ -45,7 +45,7 @@ class VotedProductsManagementController extends Controller
         $admin = Auth::guard('admin')->user();
 
         // Mark the suggestion as rejected
-        $suggestion->is_rejected = 0;
+        $suggestion->is_accepted = 2;
         $suggestion->verified_by = $admin->username; // Ensure it is not marked as rejected
         $suggestion->save();
 

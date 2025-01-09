@@ -23,7 +23,7 @@
                         <td>{{ $suggestion->suggest_description }}</td>
                         <td>
                             @if ($suggestion->suggest_image)
-                                <img src="{{ asset($suggestion->suggest_image)}}" alt="Suggested Image" class="img-thumbnail" width="100">
+                                <img src="{{ $suggestion->suggest_image ? asset('storage/'.$suggestion->suggest_image) : asset('img/logo1.svg') }}"  alt="Suggested Image" class="img-thumbnail" width="80">
                             @else
                                 No Image
                             @endif

@@ -26,7 +26,7 @@
                         {{-- IMAGE --}}
                         <td>
                             @if ($record->suggest_image)
-                                <img src="{{ asset($record->suggest_image) }}" alt="Suggestion Image" class="img-thumbnail" width="100">
+                            <img src="{{ $record->suggest_image ? asset('storage/'.$suggestion->suggest_image) : asset('img/logo1.svg') }}"  alt="Suggested Image" class="img-thumbnail" width="80">
                             @else
                                 No Image
                             @endif

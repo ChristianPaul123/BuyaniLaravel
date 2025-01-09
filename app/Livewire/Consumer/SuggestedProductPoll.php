@@ -12,11 +12,19 @@ use Livewire\Attributes\On;
 class SuggestedProductPoll extends Component
 {
     public $suggestedProducts = [];
+    public $mySuggestions = [];
+    public $maxSuggestions = 0;
+    public $maxVoteCount = 0;
+
     public $productName, $category, $description, $image;
+
+    // For modal viewing
+    public $selectedProduct;
 
     public function mount()
     {
         $this->loadSuggestedProducts();
+        $this->loadMySuggestions();
     }
 
     public function loadSuggestedProducts()
@@ -25,6 +33,23 @@ class SuggestedProductPoll extends Component
         $this->suggestedProducts = SuggestProduct::with(['votedProducts' => function ($query) use ($userId) {
             $query->where('user_id', $userId);
         }])->where('is_accepted', 1)->orderBy('total_vote_count', 'desc')->get();
+        $this->maxSuggestions = VotingCount::where('user_id', $userId)->first()->suggest_count;
+        $this->maxVoteCount = VotingCount::where('user_id', $userId)->first()->remaining_vote_count;
+    }
+
+    public function vote($productId)
+    {
+        $userId = Auth::guard('user')->id();
+
+        // Check if the user has already voted for this product
+    }
+
+    public function loadMySuggestions()
+    {
+        $userId = Auth::guard('user')->id();
+        $this->mySuggestions = SuggestProduct::where('user_id', $userId)
+            ->orderBy('created_at', 'desc')
+            ->get();
     }
 
     public function toggleVote($productId)
@@ -80,10 +105,22 @@ class SuggestedProductPoll extends Component
         $this->dispatch('update_charts');
     }
 
+    /**
+     * Shows a specific product in a modal.
+     */
+    public function showProduct($productId)
+    {
+        $this->selectedProduct = SuggestProduct::with('user','admin')->find($productId);
+
+        // Optionally dispatch an event to open the modal if using Alpine or Bootstrap
+        $this->dispatch('show-modal', 'viewProductModal');
+    }
+
     public function render()
     {
         return view('livewire.consumer.suggested-product-poll', [
             'suggestedProducts' => $this->suggestedProducts,
+            'mySuggestions' => $this->mySuggestions,
         ]);
     }
 }
