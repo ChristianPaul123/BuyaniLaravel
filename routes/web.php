@@ -26,6 +26,7 @@ use App\Http\Controllers\VotedProductsController;
 use App\Http\Controllers\BlogManagementController;
 
 use App\Http\Controllers\ChatManagementController;
+use App\Http\Controllers\FarmerProduceController;
 use App\Http\Controllers\UserManagementController;
 use App\Http\Controllers\OrderManagementController;
 use App\Http\Controllers\ShippingAddressController;
@@ -243,6 +244,7 @@ Route::get('user/farmer', [HomeController::class, 'showFarmDashboard'])->name('u
 Route::get('/user/farmer/profile', [UserController::class, 'showFarmerprofile'])->name('user.farmer.profile');
 Route::get('user/farmer/blogs', [BlogController::class, 'showFarmerBlogs'])->name('user.farmer.blog');
 Route::get('user/farmer/chat', [ChatController::class, 'showFarmerChat'])->name('user.farmer.chat');
+Route::get('user/farmer/supply-products', [FarmerProduceController::class, 'showFarmerSupplyProduct'])->name('user.farmer.supply.product');
 
 
 
