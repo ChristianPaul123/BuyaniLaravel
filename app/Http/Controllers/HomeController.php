@@ -11,17 +11,25 @@ use App\Models\ProductSales;
 use Illuminate\Http\Request;
 use App\Models\SuggestProduct;
 use App\Models\SpecificProductSales;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
     public function showConDashboard()
     {
+        $user = Auth::guard('user')->user(); // Get the authenticated user
+        $isProfileIncomplete = false; // Default value for guests
+        if ($user != null) {
+
+            $isProfileIncomplete = empty($user->first_name) || empty($user->last_name);
+        }
+
         //returns the view starting
         $products = Product::all();
         $categories = Category::all();
         $subcategories = SubCategory::all();
         $sponsorImages = SponsorImgs::all();
-        return view('user.consumer',['products' => $products, 'categories' => $categories, 'subcategories' => $subcategories,'sponsorImages' => $sponsorImages]);
+       return view('user.consumer',compact('subcategories', 'sponsorImages', 'products', 'categories','isProfileIncomplete'));
     }
 
     public function showConAbout()
@@ -37,6 +45,13 @@ class HomeController extends Controller
 
     public function showFarmDashboard()
     {
+
+    $user = Auth::guard('user')->user(); // Get the authenticated user
+    $isProfileIncomplete = false; // Default value for guests
+    if ($user != null) {
+
+        $isProfileIncomplete = empty($user->first_name) || empty($user->last_name);
+    }
         // Fetch sponsor images and limit to 6 items
     $sponsorImages = SponsorImgs::all();
 
@@ -80,7 +95,7 @@ class HomeController extends Controller
         ]);
     }
 
-    return view('user.farmer', compact('sponsors', 'bestSellingProducts', 'bestSellingVariants','topVotedProducts'));
+    return view('user.farmer', compact('sponsors', 'bestSellingProducts', 'bestSellingVariants','topVotedProducts','isProfileIncomplete'));
 
     }
 
