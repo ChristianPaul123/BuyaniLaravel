@@ -14,6 +14,7 @@
                     <th>Order Status</th>
                     <th>Order Type</th>
                     <th>Customer Details</th>
+                    <th>Delivery Person</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -68,7 +69,10 @@
                             {{ $order->customer_zip }},
                             {{ $order->customer_country }}
                         </td>
-
+                        {{-- Delivery Person --}}
+                        <td>
+                            <strong>{{ $order->delivery_employee }}</strong>
+                        </td>
                         <td>
                             {{-- View Order --}}
                             <a href="{{ route('admin.orders.view', $order->id) }}" class="btn btn-info btn-sm mb-2">View</a>

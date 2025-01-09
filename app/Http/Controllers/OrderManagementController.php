@@ -75,6 +75,23 @@ class OrderManagementController extends Controller
         return view('admin.order.order-special');
     }
 
+    public function shipOrderProcess(Request $request)
+    {
+        $validated = $request->validate([
+            'order_id' => 'required|exists:orders,id',
+            'employee_name' => 'required|string',
+        ]);
+
+        $order = Order::findOrFail($validated['order_id']);
+
+        $order->update([
+            'delivery_employee' => $validated['employee_name'],
+            'order_status' => Order::OUT_FOR_DELIVERY,
+        ]);
+
+        return redirect()->route('admin.orders.index')->with('success', 'Order is now out for delivery.');
+    }
+
     public function cancelOrder($id)
     {
         // Find the order

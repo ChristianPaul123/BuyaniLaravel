@@ -104,12 +104,13 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="assignEmployeeForm" method="POST" action="">
+            <form id="assignEmployeeForm" method="POST" action="{{ route('admin.orders.ship') }}">
                     {{-- {{ route('employee.assign') }} --}}
                     @csrf
                     <div class="mb-3">
                         <label for="employeeName" class="form-label">Employee Name</label>
                         <input type="text" class="form-control" id="employeeName" name="employee_name" required>
+                        <input type="hidden" name="order_id" value="{{ $order->id ?? null }}">
                     </div>
                 </form>
                 {{-- Add note that by confirming, it will change to out for delivery status --}}
