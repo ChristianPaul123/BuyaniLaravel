@@ -203,33 +203,7 @@
                 </div>
 
                 {{-- Sixth Row: Actions --}}
-                @if ($order->order_type == 1) {{-- Delivery --}}
-                <div class="row mb-4">
-                    <div class="col-12 text-center">
-                        <form action="{{ route('admin.orders.accept', $order->id) }}" method="POST" style="display:inline-block;">
-                            @csrf
-                            <button class="btn btn-success">Accept Order</button>
-                        </form>
-                        <form action="{{ route('admin.orders.reject', $order->id) }}" method="POST" style="display:inline-block;">
-                            @csrf
-                            <button class="btn btn-danger">Cancel Order</button>
-                        </form>
-                    </div>
-                </div>
-                @elseif ($order->order_type == 2)
-                <div class="row mb-4">
-                    <div class="col-12 text-center">
-                        <form action="{{ route('admin.orders.accept', $order->id) }}" method="POST" style="display:inline-block;">
-                            @csrf
-                            <button class="btn btn-success">Accept Order</button>
-                        </form>
-                        <form action="{{ route('admin.orders.reject', $order->id) }}" method="POST" style="display:inline-block;">
-                            @csrf
-                            <button class="btn btn-danger">Cancel Order</button>
-                        </form>
-                    </div>
-                </div>
-                @elseif ($order->order_type == 3)
+                @if ($order->order_type == 1 && $order->order_status === \App\Models\Order::STATUS_STANDBY) {{-- Delivery --}}
                     <div class="row mb-4">
                         <div class="col-12 text-center">
                             <form action="{{ route('admin.orders.accept', $order->id) }}" method="POST" style="display:inline-block;">
@@ -242,32 +216,6 @@
                             </form>
                         </div>
                     </div>
-                @elseif ($order->order_type == 4)
-                <div class="row mb-4">
-                    <div class="col-12 text-center">
-                        <form action="{{ route('admin.orders.accept', $order->id) }}" method="POST" style="display:inline-block;">
-                            @csrf
-                            <button class="btn btn-success">Accept Order</button>
-                        </form>
-                        <form action="{{ route('admin.orders.reject', $order->id) }}" method="POST" style="display:inline-block;">
-                            @csrf
-                            <button class="btn btn-danger">Cancel Order</button>
-                        </form>
-                    </div>
-                </div>
-                @elseif ($entry->order_type == 5)
-                <div class="row mb-4">
-                    <div class="col-12 text-center">
-                        <form action="{{ route('admin.orders.accept', $order->id) }}" method="POST" style="display:inline-block;">
-                            @csrf
-                            <button class="btn btn-success">Accept Order</button>
-                        </form>
-                        <form action="{{ route('admin.orders.reject', $order->id) }}" method="POST" style="display:inline-block;">
-                            @csrf
-                            <button class="btn btn-danger">Cancel Order</button>
-                        </form>
-                    </div>
-                </div>
                 @endif
         </section>
     </div>
