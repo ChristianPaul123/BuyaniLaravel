@@ -130,9 +130,7 @@ class OrderManagementController extends Controller
         }
 
         // Determine the next status based on the payment method
-        $nextStatus = ($order->payment && $order->payment->payment_method === 'COD')
-            ? Order::STATUS_TO_SHIP
-            : Order::STATUS_TO_PAY;
+        $nextStatus = ($order->payment && ($order->payment->payment_method === 'COD' || $order->payment->payment_method === 'Stripe'))? Order::STATUS_TO_SHIP : Order::STATUS_TO_PAY;
 
         $order->update([
             'order_status' => $nextStatus,
