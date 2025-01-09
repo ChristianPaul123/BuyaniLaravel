@@ -22,7 +22,7 @@
                             {{-- if the user is not verified, this won't show --}}
                             @if(Auth::guard('user')->user()->id_verified && Auth::guard('user')->user()->form_verified)
                             <li class="nav-item px-1 position-relative">
-                                <a class="nav-link @if(request()->is('user/farmer/blogs')) active @endif" href="/user/farmer/blogs" data-page="blogs">BLOGS</a>
+                                <a class="nav-link @if(request()->is('user/farmer/supply-products')) active @endif" href="/user/farmer/supply-products" data-page="supply-products">SUPPLY PRODUCTS</a>
                             </li>
                             @else
                             <li class="nav-item px-1 position-relative">

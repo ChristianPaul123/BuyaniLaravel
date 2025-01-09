@@ -1,29 +1,5 @@
 <div>
     <section>
-    <!-- Display Success Message -->
-    {{-- @if (session()->has('message'))
-        <div class="alert alert-success mx-3 my-2 px-3 py-2">
-            <button type="button" class="close btn btn-success">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            {{ session('message') }}
-        </div>
-    @endif --}}
-
-    <!-- Display Validation Errors -->
-    {{-- @if ($errors->any())
-        <div class="alert alert-danger mx-3 my-2 px-3 py-2">
-            <button type="button" class="close btn btn-danger">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif --}}
-
     <div class="row mt-3">
         <div class="col-12">
             <div class="">
@@ -59,7 +35,6 @@
                 </div>
             </div>
         </div>
-
 
         <div wire:ignore.self class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
             @if (session('message'))
