@@ -22,17 +22,20 @@ class SuggestedProductRanking extends Component
     {
         // Fetch products sorted by vote count
         // Fetch products sorted by vote count, exclude products with 0 votes
-    $products = SuggestProduct::where('total_vote_count', '>', 0)->where('is_accepted', 1)
+    $products = SuggestProduct::where('total_vote_count', '>', 0)
+    ->where('is_accepted', 1)
+    ->whereMonth('created_at', now()->month)
+    ->whereYear('created_at', now()->year)
     ->orderBy('total_vote_count', 'desc')
     ->get();
 
-        // Prepare chart data
-        $this->chartLabels = $products->pluck('suggest_name')->toArray();
-        $this->chartData = $products->pluck('total_vote_count')->toArray();
+    // Prepare chart data
+    $this->chartLabels = $products->pluck('suggest_name')->toArray();
+    $this->chartData = $products->pluck('total_vote_count')->toArray();
 
 
-        // dispatch data for the chart to the chart js
-        $this->dispatch('chartUpdated', $this->chartLabels, $this->chartData);
+    // dispatch data for the chart to the chart js
+    $this->dispatch('chartUpdated', $this->chartLabels, $this->chartData);
     }
 
     // #[On('update_charts')]

@@ -32,17 +32,27 @@ class SuggestedProductPoll extends Component
         $userId = Auth::guard('user')->id();
         $this->suggestedProducts = SuggestProduct::with(['votedProducts' => function ($query) use ($userId) {
             $query->where('user_id', $userId);
-        }])->where('is_accepted', 1)->orderBy('total_vote_count', 'desc')->get();
-        $this->maxSuggestions = VotingCount::where('user_id', $userId)->first()->suggest_count;
-        $this->maxVoteCount = VotingCount::where('user_id', $userId)->first()->remaining_vote_count;
+        }])
+        ->where('is_accepted', 1)
+        ->whereMonth('created_at', now()->month)
+        ->whereYear('created_at', now()->year)
+        ->orderBy('total_vote_count', 'desc')
+        ->get();
+
+    // Load user's VotingCount
+    $votingCount = VotingCount::where('user_id', $userId)->first();
+    if ($votingCount) {
+        $this->maxSuggestions = $votingCount->suggest_count;
+        $this->maxVoteCount = $votingCount->remaining_vote_count;
+    }
     }
 
-    public function vote($productId)
-    {
-        $userId = Auth::guard('user')->id();
+    // public function vote($productId)
+    // {
+    //     $userId = Auth::guard('user')->id();
 
-        // Check if the user has already voted for this product
-    }
+    //     // Check if the user has already voted for this product
+    // }
 
     public function loadMySuggestions()
     {
