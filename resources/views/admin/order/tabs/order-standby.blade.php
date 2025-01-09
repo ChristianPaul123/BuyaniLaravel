@@ -2,7 +2,6 @@
     <div class="card-header">
         <h3 class="card-title">To Standby Orders</h3>
     </div>
-    @include('admin.includes.messageBox')
     <div class="card-body">
         <table id="orderstandbyTable" class="table table-bordered table-striped">
                 <thead>

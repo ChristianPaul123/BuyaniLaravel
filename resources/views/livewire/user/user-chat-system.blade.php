@@ -19,6 +19,7 @@
             @else
                 <!-- Right Side (Admin Message) -->
                 <div class="message left admin-msg" wire:key="{{ $message->id }}">
+                    <img src="{{ $message->profile_pic ? asset($message->profile_pic) : asset('img/logo1.svg') }}" class="user-image" alt="User Image">
                     <div class="text-container">
                         <div class="user small text-muted">Admin: {{ $message->admin->username ?? 'Admin' }}</div>
                         <div class="text">{{ $message->message_info }}</div>

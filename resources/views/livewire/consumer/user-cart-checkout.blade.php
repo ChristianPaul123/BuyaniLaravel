@@ -114,10 +114,11 @@
                                     <div class="invalid-feedback">City is required.</div>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="state" class="form-label">State</label>
+                                    {{-- this is the state variable input just edited --}}
+                                    <label for="state" class="form-label">Province</label>
                                     <input type="text" class="form-control" id="state"
                                         wire:model="shippingInfo.state">
-                                    <div class="invalid-feedback">State is required.</div>
+                                    <div class="invalid-feedback">Province is required.</div>
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -173,7 +174,7 @@
                                 name="paymentMethod" id="cod" value="COD">
                             <label class="form-check-label" for="cod">Cash on Delivery</label>
                         </div>
-                        
+
                         <div class="form-check">
                             <input class="form-check-input" type="radio" wire:model="paymentMethod"
                                 name="paymentMethod" id="stripe" value="Stripe">
@@ -316,13 +317,13 @@
         }
 
         // Ensure a payment method is selected
-        
+
         if (!selectedPaymentMethod) {
             document.getElementById('error-msg-payment').style.display = 'block';
             document.querySelector('body').scrollTo({ top: document.body.scrollHeight, left: 0, behavior: 'smooth' });
             return;
         }
-        
+
         // Handle payment methods
         if (selectedPaymentMethod && selectedPaymentMethod.value === 'Stripe') {
             spinnerOverlay.style.display = 'flex'; // Show the spinner initially
@@ -337,7 +338,7 @@
                     spinnerOverlay.style.display = 'none'; // Show the spinner initially
                     return;
                 }
-                
+
                 // Attach the token to a hidden input for Livewire
                 @this.set('stripeToken', token.id);
 

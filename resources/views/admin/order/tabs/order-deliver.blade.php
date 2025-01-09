@@ -2,7 +2,6 @@
     <div class="card-header">
         <h3 class="card-title">Out for Delivery Orders</h3>
     </div>
-    @include('admin.includes.messageBox')
     <div class="card-body">
         <table class="table table-bordered table-striped">
             <thead class="table-light">
@@ -39,7 +38,7 @@
 
                         {{-- ORDER STATUS --}}
                         <td>
-                            <span class="badge 
+                            <span class="badge
                                 @if($order->order_status == \App\Models\Order::STATUS_STANDBY) bg-secondary
                                 @elseif($order->order_status == \App\Models\Order::STATUS_TO_PAY) bg-warning
                                 @elseif($order->order_status == \App\Models\Order::STATUS_TO_SHIP) bg-info

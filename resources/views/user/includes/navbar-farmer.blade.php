@@ -50,16 +50,16 @@
                     <li class="nav-item dropdown px-1 position-relative">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarProfile" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             @if (auth()->guard('user')->user()->profile_pic == null)
-                            <i class="fas fa-user-circle" style="font-size: 25px;"></i>
+                            <img src="{{ asset('img/title/farmer.png') }}" alt="Profile Image" class="rounded-circle" style="width: 30px; height: 30px; margin-right: 8px;">
                             @else
-                            <img src="{{ auth()->guard('user')->user()->profile_pic ? asset(auth()->guard('user')->user()->profile_pic) : asset('img/logo1.svg') }}" alt="Profile Image" class="rounded-circle" style="width: 30px; height: 30px; margin-right: 8px;">
+                            <img src="{{ auth()->guard('user')->user()->profile_pic ? asset(auth()->guard('user')->user()->profile_pic) : asset('img/title/farmer.png') }}" alt="Profile Image" class="rounded-circle" style="width: 30px; height: 30px; margin-right: 8px;">
                             @endif
                         </a>
 
                         <ul class="dropdown-menu dropdown-menu-end border-0" aria-labelledby="navbarProfile">
                             <li class="dropdown-header text-center fw-bold">User Profile</li>
                             <li class="text-center my-2">
-                                <img src="{{ auth()->guard('user')->user()->profile_pic ? asset(auth()->guard('user')->user()->profile_pic) : asset('img/logo1.svg') }}"
+                                <img src="{{ auth()->guard('user')->user()->profile_pic ? asset(auth()->guard('user')->user()->profile_pic) : asset('img/title/farmer.png') }}"
                                 alt="Profile Image"
                                 class="rounded-circle"
                                 style="width: 50px; height: 50px; object-fit: cover;">

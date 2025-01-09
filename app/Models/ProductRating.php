@@ -19,6 +19,7 @@ class ProductRating extends Model
         'deactivated_date',
         'deactivated_status',
         'deactivated_by',
+        'created_at',
     ];
 
     // Relationship with Product
