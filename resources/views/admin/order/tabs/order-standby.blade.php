@@ -85,9 +85,9 @@
                             </form>
 
                             {{-- Decline Order --}}
-                             {{-- <a href="{{ route('admin.orders.reject', $order->id) }}" class="btn btn-warning btn-sm">
-                                <i class="fa fa-edit"></i> Decline Order
-                            </a> --}}
+                             <a href="{{ route('admin.orders.reject', $order->id) }}" class="btn btn-danger btn-sm">
+                                <i class="fa fa-trash"></i> Decline Order
+                            </a>
                         </td>
                     </tr>
                     @endforeach
