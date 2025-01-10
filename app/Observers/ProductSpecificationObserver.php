@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Observers;
-use App\Models\ProductSpecification_Log;
+use App\Models\ProductSpecificationLog;
 use Illuminate\Support\Facades\Auth;
 use App\Models\ProductSpecification;
 
@@ -12,7 +12,7 @@ class ProductSpecificationObserver
      */
     public function created(ProductSpecification $productSpecification): void
     {
-        ProductSpecification_Log::create([
+        ProductSpecificationLog::create([
             'product_specification_id' => $productSpecification->id,
             'admin_id' => Auth::guard('admin')->id() ?? null,
             'action' => 'created',
@@ -37,7 +37,7 @@ class ProductSpecificationObserver
         }
 
         if (!empty($changes)) {
-            ProductSpecification_Log::create([
+            ProductSpecificationLog::create([
                 'product_specification_id' => $productSpecification->id,
                 'admin_id' => Auth::guard('admin')->id() ?? null,
                 'action' => 'updated',
@@ -51,7 +51,7 @@ class ProductSpecificationObserver
      */
     public function deleted(ProductSpecification $productSpecification): void
     {
-        ProductSpecification_Log::create([
+        ProductSpecificationLog::create([
             'product_specification_id' => $productSpecification->id,
             'admin_id' => Auth::guard('admin')->id() ?? null,
             'action' => 'deleted',

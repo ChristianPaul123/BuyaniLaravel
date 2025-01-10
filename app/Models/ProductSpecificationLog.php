@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProductSpecification_log extends Model
+class ProductSpecificationLog extends Model
 {
 
     public $timestamp = true;
