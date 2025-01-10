@@ -70,10 +70,12 @@ class DatabaseSeeder extends Seeder
         // Create posts
         $this->call([
             CategorySeeder::class,
+            CustomUsersSeeder::class,
             ProductSeeder::class,
             InventorySeeder::class,
             ProductImgSeeder::class,
             ProductSpecificationsSeeder::class,
+            FarmerProduceSeeder::class,
         ]);
     }
 }

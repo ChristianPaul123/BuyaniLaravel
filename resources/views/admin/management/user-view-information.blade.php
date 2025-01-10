@@ -186,36 +186,48 @@
                     {{-- Farmer's Produce Tab --}}
                     <div class="tab-pane fade" id="produce" role="tabpanel">
                         <div class="card overflow-x-scroll">
-                            <div class="card-header">
-                                <h5>Farmer's Produce</h5>
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">Farmer's Produce</h5>
+                                <a href="{{ route('admin.chat') }}" target="_blank">
+                                    <button class="btn btn-primary btn-sm">
+                                        <i class="fa fa-comments"></i>
+                                        <span>Chat with Farmer</span>
+                                    </button>
+                                </a>
                             </div>
                             @if ($user->farmerProduces->isEmpty())
                                 <div class="card-body">
                                     <p>No produce data found.</p>
                                 </div>
                             @else
-                                <div class="card-body">
-                                    <table class="table table-bordered">
-                                        <thead>
+                            <div class="card-body">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Produce Name</th>
+                                            <th>Description</th>
+                                            <th>Product Image</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($user->farmerProduces as $produce)
                                             <tr>
-                                                <th>#</th>
-                                                <th>Produce Name</th>
-                                                <th>Description</th>
-                                                <th>Quantity</th>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $produce->produce_name }}</td>
+                                                <td>{{ $produce->produce_description }}</td>
+                                                <td>
+                                                    <img
+                                                        src="{{ asset($produce->produce_image) }}" 
+                                                        alt="{{ $produce->produce_name }}"
+                                                        class="img-fluid" 
+                                                        style="max-width: 300px; height: auto;">
+                                                </td>
                                             </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($user->farmerProduces as $produce)
-                                                <tr>
-                                                    <td>{{ $loop->iteration }}</td>
-                                                    <td>{{ $produce->produce_name }}</td>
-                                                    <td>{{ $produce->produce_description }}</td>
-                                                    <td>{{ $produce->produce_quantity }}</td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                             @endif
                         </div>
                     </div>
