@@ -68,6 +68,10 @@
         .modal-sm {
             max-width: 600px;
         }
+
+        .min-height {
+            min-height: 100vh;
+        }
     </style>
 @endpush
 
@@ -76,13 +80,10 @@
 
     <!-- About Us Section -->
     <section class="min-height">
-        {{-- <div id="loading-screen">
-        🌾 Farm Loading... 🚜
-    </div> --}}
         <div class="container my-5">
             <h1 class="text-center py-4">Our Blogs</h1>
             <!-- Latest Blog -->
-            <div class="row d-flex justify-content-center mb-4">
+            <div class="row d-flex justify-content-center">
                 @if ($latestBlog)
                     <div class="card latest-blog-card" style="width: 50%; height: auto;">
                         <img src="{{ asset($latestBlog->blog_pic) }}" class="card-img-top blog-img card-pointer"
@@ -125,7 +126,7 @@
                         </div>
                     </div>
                 @empty
-                    <p>No other blogs found.</p>
+                    {{-- <p>No other blogs found.</p> --}}
                 @endforelse
             </div>
 
@@ -134,6 +135,7 @@
                 {{ $blogs->links() }}
             </div>
         </div>
+
         <!-- Modal -->
         <div class="modal fade" id="blogModal" tabindex="-1" aria-labelledby="blogModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered">

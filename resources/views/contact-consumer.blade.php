@@ -78,18 +78,18 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <div class="contact-form">
+                    <div class="contact-form text-white">
                         <h3>Get in Touch</h3>
                         <form action="mailto:buyanibusiness1@gmail.com" method="post" enctype="text/plain">
-                            <div class="form-group">
+                            <div class="form-group mb-2">
                                 <label for="name">Name:</label>
                                 <input type="text" class="form-control" id="name" required>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group mb-2">
                                 <label for="email">Email:</label>
                                 <input type="email" class="form-control" id="email" required>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group mb-2">
                                 <label for="message">Message:</label>
                                 <textarea class="form-control" id="message" rows="4" style="margin-bottom: 20px" required></textarea>
                             </div>
