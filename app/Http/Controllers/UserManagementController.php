@@ -96,7 +96,7 @@ class UserManagementController extends Controller
         $form = FarmerForm::findOrFail($id);
 
         $form->form_verified = true;
-        $form->verified_by = Auth::guard('admin')->user()->id;
+        $form->verified_by = Auth::guard('admin')->user()->username;
 
         $form->save();
 
@@ -119,7 +119,7 @@ class UserManagementController extends Controller
         $form = FarmerForm::findOrFail($id);
 
         $form->id_verified = true;
-        $form->verified_by = Auth::guard('admin')->user()->id;
+        $form->verified_by = Auth::guard('admin')->user()->username;
 
         $form->save();
 
