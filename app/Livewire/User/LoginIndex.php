@@ -108,10 +108,10 @@ class LoginIndex extends Component
                 'user_type' => ['required'],
             ]);
 
-            if ($this->captchaVerify != true) {
-                $this->dispatch('sessionError', error: 'Please verify the captcha');
-                return;
-            }
+            // if ($this->captchaVerify != true) {
+            //     $this->dispatch('sessionError', error: 'Please verify the captcha');
+            //     return;
+            // }
 
 
 

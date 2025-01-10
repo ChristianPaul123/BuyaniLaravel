@@ -1,14 +1,14 @@
-<div class="row mt-4 a custom-font-content" style="background-color: #3f6f23;">
-    <div class="col-lg-6 col-sm-12 a d-flex align-items-center justify-content-center left-div">
-        <div class="left-side a w-100">
-            <div class="a mb-5">
+<div class="row custom-font-content">
+    <div class="col-lg-6 col-sm-12 left-div">
+        <div class="left-side w-100">
+            <div>
             @livewire('session-modal')
-                <h2>
+                <h2 class="login-as">
                     Login as {{ $user_type == 1 ? 'Consumer' : 'Farmer' }}
                 </h2>
             </div>
 
-            <form class="my-3 a form-part" wire:submit.prevent="login" id="loginForm" autocomplete="off">
+            <form class="my-3 form-part" wire:submit.prevent="login" id="loginForm" autocomplete="off" style="margin: 100px  0px;">
                 <div class="form-group my-3">
                     <label for="email">Email or Phone Number:</label>
                     <input type="text" wire:model="email_phoneNum" class="form-control" id="email_phoneNum" placeholder="Enter email or phone number" required>
@@ -74,7 +74,7 @@
             @if($showEmailModal)
             <div class="modal fade show d-block" tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5);">
                 @include('user.includes.messageBox')
-                <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-dialog modal-dialog-centered mobile-modal">
                     <div class="modal-content">
                         <i class="close bi bi-x" aria-label="Close" wire:click="$set('showEmailModal', false)" data-bs-dismiss="modal"></i>
                         <i class="icon icon-bg-info bi bi-envelope-at"></i>
@@ -98,16 +98,16 @@
             @if($showOtpModal)
             <div class="modal fade show d-block" tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5);">
                 @include('user.includes.messageBox')
-            <div class="modal-dialog">
-                <div class="modal-content modal-dialog-centered">
+            <div class="modal-dialog modal-dialog-centered mobile-modal">
+                <div class="modal-content">
                     <i class="close bi bi-x" aria-label="Close" wire:click="$set('showOtpModal', false)" data-bs-dismiss="modal"></i>
                     <i class="icon icon-bg-info bi bi-patch-check"></i>
                     <div class="container-contents container-contents-info">
                         <h3>Confirm OTP</h3>
                         <form wire:submit.prevent="verifyOtp">
                             <div class="form-group">
-                                <label for="otp" class="form-label">Enter OTP sent to _NAME_</label>
-                                <input type="text" id="otp" wire:model="otp" class="form-control" placeholder="Enter OTP">
+                                <label for="otp" class="form-label">Enter OTP sent to your email</label>
+                                <input type="text" id="otp" wire:model="otp" class="form-control" placeholder="Enter OTP" width="100%">
                                 @error('otp')<span class="text-danger">{{ $message }}</span>@enderror
                                 @if (session()->has('error'))<span id="errorMessage" class="text-danger">{{ session('error') }}</span>@endif
                             </div>
@@ -124,8 +124,8 @@
             @if($showPasswordResetForm)
             <div class="modal fade show d-block" tabindex="-1" role="dialog" style="background: rgba(0,0,0,0.5);">
                 @include('user.includes.messageBox')
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content ">
+            <div class="modal-dialog modal-dialog-centered mobile-modal">
+                <div class="modal-content">
                     <i class="close bi bi-x" aria-label="Close" wire:click="$set('showPasswordResetForm', false)" data-bs-dismiss="modal"></i>
                     <i class="icon icon-bg-info bi bi-shield-lock"></i>
                     <div class="container-contents container-contents-info">

@@ -1,5 +1,6 @@
 <style>
-        .notif {
+
+    .notif {
         background-color: #fff8dd;
         border: 3px solid #d97a18;
         border-radius: 10px;

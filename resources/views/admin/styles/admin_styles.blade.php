@@ -196,7 +196,7 @@
 
     .notif {
         background-color: #fff8dd;
-        border: 3px solid #d97a18;
+        border: 3px solid black;
         border-radius: 10px;
         position: fixed;
         top: 15%;
