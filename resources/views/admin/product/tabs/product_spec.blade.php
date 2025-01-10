@@ -76,7 +76,7 @@
                     </div>
                     <div class="form-group my-3">
                         <label for="product_price">Price</label>
-                        <input type="number" class="form-control" id="product_price" name="product_price" required>
+                        <input type="number" step="0.01" class="form-control" id="product_price" name="product_price" required>
                     </div>
                     <div class="form-group my-3">
                         <label for="product_kg">Weight (kg)</label>
