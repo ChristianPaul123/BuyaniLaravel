@@ -201,7 +201,7 @@ document.addEventListener("DOMContentLoaded", function () {
     emailPhoneInput.addEventListener("input", function () {
         const value = emailPhoneInput.value.trim();
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        const phoneRegex = /^\+?\d{10,15}$/;
+        const phoneRegex = /^(?:\+63|09|\d{1})\d{9}$/;
 
         if (emailRegex.test(value) || phoneRegex.test(value)) {
             emailPhoneError.style.display = "none";
