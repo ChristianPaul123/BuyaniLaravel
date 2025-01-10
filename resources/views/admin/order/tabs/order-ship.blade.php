@@ -1,6 +1,6 @@
 <div class="card overflow-x-scroll">
     <div class="card-header">
-        <h3 class="card-title">To Standby Orders</h3>
+        <h3 class="card-title">To Ship Orders</h3>
     </div>
     <div class="card-body">
         <table id="ordershipTable" class="table table-bordered table-striped">
@@ -86,7 +86,7 @@
                             </a> --}}
 
                             <a href="{{ route('admin.orders.reject', $order->id) }}" class="btn btn-danger btn-sm">
-                                <i class="fa fa-eye"></i> Decline Order
+                                <i class="fa fa-trash"></i> Cancel Order
                             </a>
                         </td>
                     </tr>

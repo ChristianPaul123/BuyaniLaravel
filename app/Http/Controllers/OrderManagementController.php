@@ -96,18 +96,20 @@ class OrderManagementController extends Controller
     {
         // Find the order
       // Retrieve the order and related data
-    $order = Order::with(['user', 'orderItems.product', 'orderItems.productSpecification', 'payment', 'trackings'])
-    ->findOrFail($id);
+        $order = Order::with(['user', 'orderItems.product', 'orderItems.productSpecification', 'payment', 'trackings'])
+            ->findOrFail($id);
         // Redirect to the order-rejected page to allow admin to provide cancellation details
         return view('admin.order.order-rejected', compact('order'));
     }
+    
 
     public function showCancelOrder($id)
     {
         // Find the order
-      // Retrieve the order and related data
-    $order = Order::with(['user', 'orderItems.product', 'orderItems.productSpecification', 'payment', 'trackings','orderCancellation'])
-    ->findOrFail($id);
+        // Retrieve the order and related data
+            $order = Order::with(['user', 'orderItems.product', 'orderItems.productSpecification', 'payment', 'trackings','orderCancellation'])
+                ->findOrFail($id);
+
         // Redirect to the order-rejected page to allow admin to provide cancellation details
         return view('admin.order.order-view-rejected', compact('order'));
     }

@@ -76,6 +76,9 @@
                         <td>
                             {{-- View Order --}}
                             <a href="{{ route('admin.orders.view', $order->id) }}" class="btn btn-info btn-sm mb-2">View</a>
+                            <a href="{{ route('admin.orders.reject', $order->id) }}" class="btn btn-danger btn-sm">
+                                <i class="fa fa-trash"></i> Cancel Order
+                            </a>
                         </td>
                     </tr>
                 @endforeach
