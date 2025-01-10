@@ -97,8 +97,8 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="state" class="form-label">State</label>
-                                    <input type="text" class="form-control" id="state" placeholder="State" wire:model="state">
+                                    <label for="state" class="form-label">Province</label>
+                                    <input type="text" class="form-control" id="state" placeholder="Province" wire:model="state">
                                     @error('state') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
                                 <div class="mb-3">
@@ -181,7 +181,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label class="form-label">State</label>
+                                <label class="form-label">Province</label>
                                 @if($isEditingAddress)
                                     <input type="text" class="form-control" wire:model="state">
                                     @error('state') <span class="text-danger">{{ $message }}</span> @enderror

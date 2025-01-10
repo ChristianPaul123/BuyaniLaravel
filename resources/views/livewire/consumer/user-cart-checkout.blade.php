@@ -114,10 +114,10 @@
                                     <div class="invalid-feedback">City is required.</div>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="state" class="form-label">State</label>
+                                    <label for="state" class="form-label">Province</label>
                                     <input type="text" class="form-control" id="state"
                                         wire:model="shippingInfo.state">
-                                    <div class="invalid-feedback">State is required.</div>
+                                    <div class="invalid-feedback">Province is required.</div>
                                 </div>
                             </div>
                             <div class="row mb-3">

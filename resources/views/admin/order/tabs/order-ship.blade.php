@@ -71,22 +71,22 @@
                         </td>
 
                         {{-- ACTIONS --}}
-                        <td>
+                        <td style="width: 150px">
                             {{-- View Order --}}
-                            <a href="{{ route('admin.orders.view', $order->id) }}" class="btn btn-primary btn-sm">
-                                <i class="fa fa-eye"></i> View Order
+                            <a href="{{ route('admin.orders.view', $order->id) }}" class="btn btn-primary btn-sm w-100 mb-2">
+                                <i class="fa fa-eye fa-sm"></i> View Order
                             </a>
 
                             {{-- Assign employee --}}
-                            <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#assignEmployeeModal">
-                                <i class="fa fa-eye"></i> Assign Employee
+                            <button class="btn btn-success btn-sm w-100 mb-2" data-bs-toggle="modal" data-bs-target="#assignEmployeeModal">
+                                <i class="fa fa-edit fa-sm"></i> Assign Employee
                             </button>
                             {{-- <a href="{{ route('admin.orders.view', $order->id) }}" class="btn btn-primary btn-sm">
                                 <i class="fa fa-eye"></i>Ass
                             </a> --}}
 
-                            <a href="{{ route('admin.orders.reject', $order->id) }}" class="btn btn-danger btn-sm">
-                                <i class="fa fa-trash"></i> Cancel Order
+                            <a href="{{ route('admin.orders.reject', $order->id) }}" class="btn btn-danger btn-sm w-100">
+                                <i class="fa fa-trash fa-sm"></i> Cancel Order
                             </a>
                         </td>
                     </tr>

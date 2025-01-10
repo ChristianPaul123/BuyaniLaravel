@@ -72,23 +72,23 @@
                         </td>
 
                         {{-- ACTIONS --}}
-                        <td>
+                        <td style="width: 150px">
                             {{-- View Order --}}
-                            <a href="{{ route('admin.orders.view', $order->id) }}" class="btn btn-primary btn-sm">
-                                <i class="fa fa-eye"></i> View
+                            <a href="{{ route('admin.orders.view', $order->id) }}" class="btn btn-primary btn-sm w-100 mb-2">
+                                <i class="fa fa-eye fa-sm"></i> View
                             </a>
 
                             {{-- Edit Order --}}
-                            <a href="{{ route('admin.orders.edit', $order->id) }}" class="btn btn-warning btn-sm">
-                                <i class="fa fa-edit"></i> Edit
-                            </a>
+                            {{-- <a href="{{ route('admin.orders.edit', $order->id) }}" class="btn btn-warning btn-sm w-100 mb-2">
+                                <i class="fa fa-edit fa-sm"></i> Edit
+                            </a> --}}
 
                             {{-- Delete Order --}}
                             <form action="{{ route('admin.orders.delete', $order->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">
-                                    <i class="fa fa-trash"></i> Delete
+                                <button type="submit" class="btn btn-danger btn-sm w-100 btn-block">
+                                    <i class="fa fa-trash"></i> Archive Order
                                 </button>
                             </form>
                         </td>

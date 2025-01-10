@@ -108,8 +108,8 @@
                             <div class="card-body">
                                 <p><strong>Street:</strong> {{ $order->customer_street }}</p>
                                 <p><strong>City:</strong> {{ $order->customer_city }}</p>
-                                <p><strong>State:</strong> {{ $order->customer_barangay }}</p>
-                                <p><strong>State:</strong> {{ $order->customer_state }}</p>
+                                <p><strong>Barangay:</strong> {{ $order->customer_barangay }}</p>
+                                <p><strong>Province:</strong> {{ $order->customer_state }}</p>
                                 <p><strong>Zip Code:</strong> {{ $order->customer_zip }}</p>
                                 <p><strong>Country:</strong> {{ $order->customer_country }}</p>
 

@@ -96,7 +96,7 @@
                                             <p><strong>House Number:</strong> {{ $address->house_number }} </p>
                                             <p><strong>Street:</strong> {{ $address->street }} </p>
                                             <p><strong>City:</strong> {{ $address->city }} </p>
-                                            <p><strong>State:</strong> {{ $address->state }} </p>
+                                            <p><strong>Province:</strong> {{ $address->state }} </p>
                                             <p><strong>Country:</strong> {{ $address->country }} </p>
                                             <p><strong>Barangay:</strong> {{ $address->barangay }}</p>
                                             <p><strong>Postal Code:</strong> {{ $address->zip_code }}</p>
@@ -166,7 +166,7 @@
                                     <p><strong>House Number:</strong> {{ $address->house_number }} </p>
                                     <p><strong>Street:</strong> {{ $address->street }} </p>
                                     <p><strong>City:</strong> {{ $address->city }} </p>
-                                    <p><strong>State:</strong> {{ $address->state }} </p>
+                                    <p><strong>Province:</strong> {{ $address->state }} </p>
                                     <p><strong>Country:</strong> {{ $address->country }} </p>
                                     <p><strong>Barangay:</strong> {{ $address->barangay }}</p>
                                     <p><strong>Postal Code:</strong> {{ $address->zip_code }}</p>
