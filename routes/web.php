@@ -145,6 +145,8 @@ Route::get('admin/user/management', [UserManagementController::class, 'showUsers
 Route::get('admin/user/management/view/{id}', [UserManagementController::class, 'viewUser'])->name('admin.management.view');
 Route::post('admin/user/management/deactivate/{id}', [UserManagementController::class, 'deactivateUser'])->name('admin.management.deactivate');
 Route::post('admin/user/management/reactivate/{id}', [UserManagementController::class, 'reactivateUser'])->name('admin.management.reactivate');
+Route::put('admin/user/management/farmer/form/{id}/verify', [UserManagementController::class, 'verifyForm'])->name('farmer.form.verify');
+Route::put('admin/user/management/farmer/id/{id}/verify', [UserManagementController::class, 'verifyIdentification'])->name('farmer.id.verify');
 
 //CHAT US
 Route::get('admin/chat', [ChatManagementController::class, 'showAdminChat'])->name('admin.chat');
