@@ -8,6 +8,7 @@
             <div class="modal-body text-center">
                 <p><i class="fas fa-exclamation-triangle fa-3x text-warning mb-3"></i></p>
                 <p>You must get verified first to access this functionality!</p>
+                <p>If you have already submitted your documents, please wait for the admin to verify your account.</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
