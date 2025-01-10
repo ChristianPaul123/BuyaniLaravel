@@ -14,6 +14,7 @@ class FarmerProduce extends Model
         'produce_name',
         'produce_description',
         'produce_image',
+        'suggested_price',
     ];
 
     public function user() {

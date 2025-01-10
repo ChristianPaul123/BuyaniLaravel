@@ -23,14 +23,20 @@
                  </li>
                  @if (Auth::guard('user')->check())
                      {{-- if the user is not verified, this won't show --}}
-                     @if (Auth::guard('user')->user()->id_verified && Auth::guard('user')->user()->form_verified)
+                     @php
+                         $firstForm = Auth::guard('user')->user()->farmerForms->first();
+                     @endphp
+
+                     @if ($firstForm && $firstForm->id_verified == 1 && $firstForm->form_verified == 1)
                          <li class="nav-item px-1 position-relative">
                              <a class="nav-link @if (request()->is('user/farmer/supply-products')) active @endif"
                                  href="/user/farmer/supply-products" data-page="supply-products">SUPPLY PRODUCTS</a>
                          </li>
                      @else
                          <li class="nav-item px-1 position-relative">
-                             <a class="nav-link" href="javascript:void(0);" onclick="showVerificationModal()">SUPPLY PRODUCTS</a>
+                             <a class="nav-link" href="javascript:void(0);" onclick="showVerificationModal()">
+                                 SUPPLY PRODUCTS
+                             </a>
                          </li>
                      @endif
                      <li class="nav-item px-1 position-relative">
@@ -108,4 +114,3 @@
          </div>
      </div>
  </nav>
-

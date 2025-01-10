@@ -248,6 +248,11 @@ Route::get('/user/farmer/profile', [UserController::class, 'showFarmerprofile'])
 Route::get('user/farmer/blogs', [BlogController::class, 'showFarmerBlogs'])->name('user.farmer.blog');
 Route::get('user/farmer/chat', [ChatController::class, 'showFarmerChat'])->name('user.farmer.chat');
 Route::get('user/farmer/supply-products', [FarmerProduceController::class, 'showFarmerSupplyProduct'])->name('user.farmer.supply.product');
+Route::post('user/farmer/add-product', [FarmerProduceController::class, 'saveFarmerSupplyProduct'])->name('user.farmer.supply.product.save');
+Route::get('user/farmer/supply/product/edit', [FarmerProduceController::class, 'editProduct'])->name('user.farmer.supply.product.edit');
+Route::post('user/farmer/supply/product/update', [FarmerProduceController::class, 'saveEditProduct'])->name('user.farmer.supply.product.update');
+Route::post('user/farmer/supply/product/delete', [FarmerProduceController::class, 'deleteProduct'])->name('user.farmer.supply.product.delete');
+
 
 
 

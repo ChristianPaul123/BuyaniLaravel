@@ -218,7 +218,7 @@
                                                 <td>{{ $produce->produce_description }}</td>
                                                 <td>
                                                     <img
-                                                        src="{{ asset($produce->produce_image) }}" 
+                                                        src="/farmer_produce_images/{{ $produce->produce_image }}" 
                                                         alt="{{ $produce->produce_name }}"
                                                         class="img-fluid" 
                                                         style="max-width: 300px; height: auto;">
