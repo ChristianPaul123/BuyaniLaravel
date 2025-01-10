@@ -65,6 +65,7 @@
                                 <div class="card shadow-sm" style="font-size: 0.9rem; border-radius: 8px; border: none;">
                                     <div class="card-header text-center" style="background-color: #4CAF50; color: white; font-weight: bold;">
                                         {{ $specification->specification_name }}
+                                         {{ $specification->product_price }}
                                     </div>
                                     <div class="card-body p-3">
                                         <div class="d-flex align-items-center mb-2">
