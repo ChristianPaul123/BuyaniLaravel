@@ -324,6 +324,7 @@
         </div>
     </div>
 </div>
+@include('user.includes.unverified-modal')
 @endsection
 
 @section('scripts')

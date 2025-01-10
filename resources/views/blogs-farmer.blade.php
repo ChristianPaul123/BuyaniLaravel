@@ -154,6 +154,7 @@
                 </div>
             </div>
         </div>
+        @include('user.includes.unverified-modal')
     </section>
 @endsection
 
