@@ -121,6 +121,7 @@
         </div>
 
     </div>
+    @include('user.includes.unverified-modal')
 </body>
 @endsection
 
