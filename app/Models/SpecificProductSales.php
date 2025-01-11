@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class SpecificProductSales extends Model
 {
 
+      //TO DO: implement and refine this model class and also the migration
     public $timestamp = true;
 
     protected $fillable = [
@@ -21,5 +22,9 @@ class SpecificProductSales extends Model
     public function productSpecification()
     {
         return $this->belongsTo(ProductSpecification::class);
+    }
+
+    public function productSales() {
+        return $this->belongsTo(ProductSales::class);
     }
 }

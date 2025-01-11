@@ -27,8 +27,8 @@ class CartController extends Controller
         $cart = Cart::where('user_id', auth()->guard('user')->user()->id)->first();
 
         $cartItems = $cart ? $cart->cartItems()
-        ->whereHas('product_specification.product')
-        ->with(['product_specification.product'])
+        ->whereHas('productSpecification.product')
+        ->with(['productSpecification.product'])
         ->get() : collect();
 
         return view('user.consumer.cart.show', ['cart' => $cart, 'cartItems' => $cartItems, 'stripeKey' => env('STRIPE_KEY')]);
@@ -36,7 +36,7 @@ class CartController extends Controller
 
     public function showConsumerCheckout(Request $request, $cartId)
     {
-        $cart = Cart::with('cartItems.product_specification.product')->findOrFail($cartId);
+        $cart = Cart::with('cartItems.productSpecification.product')->findOrFail($cartId);
 
         $selectedItems = $request->query('selectedItems', []);
 

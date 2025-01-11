@@ -53,7 +53,7 @@ class UserCartCheckout extends Component
 
         $selectedItems = request()->input('selectedItems', []);
         if (!empty($selectedItems)) {
-            $this->cartItems = CartItem::with('product_specification.product')
+            $this->cartItems = CartItem::with('productSpecification.product')
                 ->whereIn('id', $selectedItems)
                 ->get();
 
