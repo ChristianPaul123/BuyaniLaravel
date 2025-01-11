@@ -52,8 +52,8 @@
                                 </div>
                                 <div class="form-group my-3">
                                     <label for="username">Phone Number:</label>
-                                    <input type="tel" pattern="[0-9]{11}"  maxlength="12" minlength="11"
-                                    title="Phone number must be 11 digits" wire:model="phone_number" class="form-control" id="phone_number"
+                                    <input type="tel" pattern="^(?:\+63|09|\d{1})\d{9}$" maxlength="11" minlength="11"
+                                    title="Please Enter a valid philippines number {09##########}" wire:model="phone_number" class="form-control" id="phone_number"
                                         placeholder="Enter phone number" required>
                                     @error('phone_number')
                                         <span class="text-warning">{{ $message }}</span>
@@ -170,8 +170,8 @@
                             </div>
                             <div class="form-group my-3">
                                 <label for="username">Phone Number:</label>
-                                <input type="tel" pattern="[0-9]{11}"  maxlength="12" minlength="11"
-                                title="Phone number must be 11 digits" wire:model="phone_number" class="form-control" id="phone_number"
+                                <input type="tel" pattern="^(?:\+63|09|\d{1})\d{9}$" maxlength="11" minlength="11"
+                                title="Please Enter a valid philippines number {09##########}" wire:model="phone_number" class="form-control" id="phone_number"
                                     placeholder="Enter phone number" required>
                                 @error('phone_number')
                                     <span class="text-warning">{{ $message }}</span>
@@ -183,7 +183,8 @@
                                 <label for="password">Password:</label>
                                 <div class="input-group">
                                     <input type="password" wire:model="password" id="password" class="form-control"
-                                        placeholder="Enter password" minlength="8" required>
+                                        placeholder="Enter password" minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                                        title="Minimum of 8 characters, a lower and upper case letter and a number." required>
                                     <div class="input-group-append">
                                         <span class="input-group-text toggle-password" id="togglePassword"
                                             style="height: 100%; width: 40px; border-top-left-radius: 0px; border-bottom-left-radius: 0px; display: flex; align-items: center; justify-content: center;">
