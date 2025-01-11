@@ -37,7 +37,7 @@ class HomeController extends Controller
             title: 'Consumer Dashboard | BuyAni',            // Title
             description: 'Discover local farm produce and support Filipino farmers.', // Meta description
             image: asset('img/stockImg3.png'),              // URL to a representative image
-            keywords: 'farmers, produce, fresh harvests',    // Optionally define keywords (not heavily used by Google, but still okay to set)
+            // keywords: 'farmers, produce, fresh harvests',    // Optionally define keywords (not heavily used by Google, but still okay to set)
         );
 
         // --- STEP 2: Pass your SEO data to the SEO singleton ---
