@@ -8,16 +8,20 @@
         /* border: 1px solid black; */
     }
 
-    .a, .b, .c{
-        /* border: 1px solid black; */
-    }
-
      .custom-font-content {
         font-family: 'Poppins', sans-serif;
         font-weight: bold;
         color: aliceblue;
-        background-color: #3F6F23;
-        color: #fff;
+        background-color: #3f6f23;
+        height: 100vh;
+    }
+
+    .left-div{
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
     .form-control:focus {
@@ -29,7 +33,13 @@
     }
 
     .left-side{
+
+        padding: 0px 50px;
+        height: 70%;
         margin: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
 
     .form-part {
@@ -57,6 +67,13 @@
         transform: scale(1.1);
     }
 
+    .login-as {
+        font-size: 45px;
+        text-align: center;
+    }
+
+
+
 
     @media (max-width: 768px) {
         .hide{
@@ -66,6 +83,30 @@
         .form-part{
             margin: 0 0;
         }
+
+        .custom-font-content {
+            height: auto;
+            padding: 20px;
+        }
+
+        .left-side{
+            text-align: start;
+            padding: 0px 0px;
+        }
+
+        .login-as {
+            margin-top: -50px;
+            font-size: 2.0rem;
+        }
+
+        .mobile-modal {
+            width: 95% !important;
+        }
+
+        .bottom-fix{
+            margin-bottom: 50px;
+        }
+
     }
 
 
@@ -157,6 +198,7 @@
 
 @include('user.includes.popup-style')
 {{-- @include('user.includes.notif-style') --}}
+@include('user.styles.messageBox_styles');
 
 @endpush
 @section('x-content')

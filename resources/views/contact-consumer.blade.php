@@ -82,29 +82,36 @@
     @include('user.includes.navbar-consumer')
 
 
-<body style="background-image: url('{{ asset('img/stockImg4.png') }}'); background-repeat: no-repeat; background-size: cover; background-position: center;">
-    <div class="h-100 container d-flex flex-column justify-content-center align-items-center">
-        {{-- <div class="d-block-12 m-5"></div> --}}
+<body>
+    <div class="container-main">
+        <!-- Contact Header -->
+        <div class="contact-header text-center mt-3">
+            <h1>Contact Us</h1>
+            <p>We would love to hear from you!</p>
+        </div>
+
         <!-- Contact Form and Info -->
         <div class="container">
+
             <div class="contact-header text-center" style="color: #f8f9fa;">
                 <h1>Contact Us</h1>
                 <p>We would love to hear from you!</p>
             </div>
+
             <div class="row">
                 <div class="col-md-6">
-                    <div class="contact-form text-white">
+                    <div class="contact-form">
                         <h3>Get in Touch</h3>
                         <form action="mailto:buyanibusiness1@gmail.com" method="post" enctype="text/plain">
-                            <div class="form-group mb-2">
+                            <div class="form-group">
                                 <label for="name">Name:</label>
                                 <input type="text" class="form-control" id="name" required>
                             </div>
-                            <div class="form-group mb-2">
+                            <div class="form-group">
                                 <label for="email">Email:</label>
                                 <input type="email" class="form-control" id="email" required>
                             </div>
-                            <div class="form-group mb-2">
+                            <div class="form-group">
                                 <label for="message">Message:</label>
                                 <textarea class="form-control" id="message" rows="4" style="margin-bottom: 20px" required></textarea>
                             </div>
