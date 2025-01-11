@@ -39,6 +39,15 @@
             gap: 10px;
             scroll-behavior: smooth;
             transition: transform 0.5s ease-in-out;
+            overflow: hidden;
+            /* Prevents overflow */
+            width: 100%;
+            /* 5 items + gap compensation */
+        }
+
+        .item-list .card {
+            flex: 0 0 250px;
+            /* Fixed width for each card */
         }
 
         .card {
@@ -64,10 +73,10 @@
         }
 
         /* .btn {
-                                        background-color: rgb(224, 121, 31);
-                                        color: white;
-                                        border-color: rgb(224, 121, 31);
-                                    } */
+                                            background-color: rgb(224, 121, 31);
+                                            color: white;
+                                            border-color: rgb(224, 121, 31);
+                                        } */
 
         .btn-stock {
             background-color: rgb(238, 11, 11);
@@ -189,12 +198,11 @@
         <div class="carousel-container">
             <div class="carousel-view">
                 <div id="item-list" class="item-list">
-                    @foreach($lowStockProducts as $product)
+                    @foreach ($lowStockProducts as $product)
                         <div class="card">
                             <!-- If you have a product_pic or similar field -->
-                            <img class="card-img-top item"
-                                 src="{{ $product->product_pic ?? 'img/default.png' }}"
-                                 alt="{{ $product->product_name }}">
+                            <img class="card-img-top item" src="{{ $product->product_pic ?? 'img/default.png' }}"
+                                alt="{{ $product->product_name }}">
 
                             <div class="card-body">
                                 <h5 class="card-title">{{ $product->product_name }}</h5>
@@ -202,7 +210,7 @@
                                     {{ $product->product_details ?? 'No description available.' }}
                                 </p>
                                 <!-- The “Low Stock” badge or button -->
-                                @if($product->inventory && $product->inventory->product_total_stock < 50)
+                                @if ($product->inventory && $product->inventory->product_total_stock < 50)
                                     <a href="#" class="btn-stock btn-primary">
                                         Low Stock ({{ $product->inventory->product_total_stock }})
                                     </a>
@@ -257,8 +265,7 @@
                                     </td>';
                                 echo '</tr>';
                             }
-                        }
-                        else {
+                        } else {
                             echo '<tr><td colspan="5">No products found.</td></tr>';
                         }
                     @endphp
@@ -423,14 +430,14 @@
         </div>
     </div>
 
-
-    <div class="notif success alert alert-dismissible fade show" role="alert" id="successMessage">
-        <i class="fa-solid fa-info"></i>
-        <div class="container-right">
-            <h5 class="m-0" id="notif-msg"></h5> <!-- Display the flash message -->
+    <div id="successMessage" class="position-fixed top-0 start-50 translate-middle-x mt-3" style="display: none; z-index: 1050; width: 50%;">
+        <div class="alert alert-success d-flex align-items-center w-100 shadow" role="alert">
+            <i class="fa-solid fa-circle-check me-2"></i>
+            <h5 class="m-0 flex-grow-1" id="notif-msg"></h5> <!-- Flash message content -->
+            <button type="button" class="btn-close ms-2" onclick="this.parentElement.parentElement.style.display='none';" aria-label="Close"></button>
         </div>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
+    
 
     @include('user.includes.unverified-modal')
 @endsection
@@ -481,9 +488,9 @@
                 success: function(response) {
                     $('#deleteProductModal').modal('hide'); // Close the confirmation modal
                     $('#notif-msg').text(response.success);
-                    $('#successMessage').css('opacity', 1);
-                    $('#successMessage').addClass('d-flex');
+                    $('#successMessage').slideDown();
                     setTimeout(() => {
+                        $('#successMessage').slideUp();
                         window.location.reload();
                     }, 1000);
                 },
@@ -509,9 +516,9 @@
                     success: function(response) {
                         $('#notif-msg').text(response.success);
                         $('#editProductModal').modal('hide');
-                        $('#successMessage').css('opacity', 1);
-                        $('#successMessage').addClass('d-flex');
+                        $('#successMessage').slideDown();
                         setTimeout(() => {
+                            $('#successMessage').slideUp();
                             window.location.reload();
                         }, 1000);
                     },
@@ -547,9 +554,9 @@
                     $('#liveImage').attr('src', '#');
                     $('#productModal').modal('hide');
                     $('#notif-msg').text(response.success);
-                    $('#successMessage').css('opacity', 1);
-                    $('#successMessage').addClass('d-flex');
+                    $('#successMessage').slideDown();
                     setTimeout(() => {
+                        $('#successMessage').slideUp();
                         window.location.reload();
                     }, 1000);
                 },
@@ -572,7 +579,7 @@
         // code for carousel
         const list = document.getElementById('item-list');
         const items = document.querySelectorAll('.item');
-        const itemWidth = items[0].offsetWidth + 10; // Include gap
+        const itemWidth = 210;
         let autoMoveInterval;
 
         // Function to shift the first image to the end

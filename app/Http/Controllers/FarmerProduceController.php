@@ -27,9 +27,9 @@ class FarmerProduceController extends Controller
             $lowStockProducts = Product::with('inventory')
             ->whereHas('inventory', function($query) {
                 $query->where('product_total_stock', '<', 50);
-            })
-            ->take(5) // or ->limit(10)
-            ->get();
+            })->get();
+            // ->take(10) // or ->limit(10)
+            
 
 
         // get all farmer produce
