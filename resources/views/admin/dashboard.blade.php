@@ -16,6 +16,11 @@
         min-height: 100vh;
     }
 </style>
+<style>
+    *{
+        border: 1px solid black;
+    }
+</style>
 @endpush
 
 @section('content')
@@ -39,6 +44,17 @@
                     <div class="col-3">
                         @livewire('blocks.active-farmers')
                     </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+
+                    </div>
+                    <div class="col">
+
+                    </div>
+                </div>
+                <div class="row">
+
                 </div>
             </section>
         </div>
