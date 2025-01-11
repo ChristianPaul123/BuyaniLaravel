@@ -52,7 +52,7 @@
                                 </div>
                                 <div class="form-group my-3">
                                     <label for="username">Phone Number:</label>
-                                    <input type="tel" pattern="[0-9]{10}"  maxlength="12" minlength="11"
+                                    <input type="tel" pattern="[0-9]{11}"  maxlength="12" minlength="11"
                                     title="Phone number must be 10 digits" wire:model="phone_number" class="form-control" id="phone_number"
                                         placeholder="Enter phone number" required>
                                     @error('phone_number')
@@ -170,7 +170,7 @@
                             </div>
                             <div class="form-group my-3">
                                 <label for="username">Phone Number:</label>
-                                <input type="tel" pattern="[0-9]{10}"  maxlength="12" minlength="11"
+                                <input type="tel" pattern="[0-9]{11}"  maxlength="12" minlength="11"
                                 title="Phone number must be 12 digits" wire:model="phone_number" class="form-control" id="phone_number"
                                     placeholder="Enter phone number" required>
                                 @error('phone_number')
