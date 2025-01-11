@@ -86,23 +86,15 @@
     <div class="container-main">
         <!-- Contact Header -->
         <div class="contact-header text-center mt-3">
-            <h1>Contact Us</h1>
-            <p>We would love to hear from you!</p>
+            <h1 style="color: #00cc1a; font-weight: bold;">Contact Us</h1>
+            <p style="color: #00584e">We would love to hear from you!</p>
         </div>
 
         <!-- Contact Form and Info -->
-        <div class="container">
-
-            <div class="contact-header text-center" style="color: #f8f9fa;">
-                <h1>Contact Us</h1>
-                <p>We would love to hear from you!</p>
-            </div>
-
+        <div class="container mt-4">
             <div class="row">
                 <div class="col-md-6">
-                    <div class="contact-form">
-                        <h3>Get in Touch</h3>
-                        <form action="mailto:buyanibusiness1@gmail.com" method="post" enctype="text/plain">
+                    <div class="contact-form" style="background: linear-gradient(135deg, #e0e0e0, #f5f5f5); padding: 20px; border-radius: 10px; color: #333; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">                        <form action="mailto:buyanibusiness1@gmail.com" method="post" enctype="text/plain">
                             <div class="form-group">
                                 <label for="name">Name:</label>
                                 <input type="text" class="form-control" id="name" required>
