@@ -107,6 +107,23 @@ new DataTable('#currentInventoryTable', {
     }
 });
 
+new DataTable(#productsalesTable, {
+    layout: {
+        topStart: {
+            buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+        }
+    }
+});
+
+new DataTable(#specificproductSalesTable, {
+    layout: {
+        topStart: {
+            buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+        }
+    }
+});
+
+
 new DataTable('#pastInventoryTable', {
     layout: {
         topStart: {
