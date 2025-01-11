@@ -136,9 +136,9 @@
                                     <label for="newPassword" class="form-label">New Password:</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control password1" id="newPassword" wire:model="newPassword" placeholder="Enter your password">
-                                        {{-- <span class="input-group-text" id="togglePasswordOTP" style="cursor: pointer;">
+                                        <span class="input-group-text" id="togglePasswordOTP" style="cursor: pointer;">
                                             <i class="bi bi-eye" id="toggleIcon"></i>
-                                        </span> --}}
+                                        </span>
                                     </div>
                                     @error('newPassword') <span class="text-danger">{{ $message }}</span> @enderror
                                     {{-- <div style="color: red; font-size: 14px;">
@@ -176,6 +176,9 @@ defer>
 
 @script
 @endscript
+
+
+
 
 {{--CODE --}}
 {{-- <script>
