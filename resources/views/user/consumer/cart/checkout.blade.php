@@ -28,6 +28,25 @@
             max-height: 200px;
             transition: max-height 0.2s ease-out;
         }
+
+        #spinner-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.75);
+            /* Semi-transparent black */
+            display: flex;
+            justify-content: center;
+            /* Center horizontally */
+            align-items: center;
+            /* Center vertically */
+            z-index: 1050;
+            /* Ensure it appears above other elements */
+            flex-direction: column;
+            /* Stack spinner and text vertically */
+        }
     </style>
 @endpush
 
@@ -187,5 +206,5 @@
             // });
         });
     </script>
-    
+
 @endsection

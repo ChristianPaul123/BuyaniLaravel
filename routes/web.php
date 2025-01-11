@@ -20,11 +20,14 @@ use App\Http\Controllers\SubCategoryController;
 
 
 
+use App\Http\Controllers\UserProductController;
+use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\VotedProductsController;
 use App\Http\Controllers\BlogManagementController;
-use App\Http\Controllers\ChatManagementController;
-use App\Http\Controllers\UserManagementController;
 
+use App\Http\Controllers\ChatManagementController;
+use App\Http\Controllers\FarmerProduceController;
+use App\Http\Controllers\UserManagementController;
 use App\Http\Controllers\OrderManagementController;
 use App\Http\Controllers\ShippingAddressController;
 use App\Http\Controllers\ReportManagementController;
@@ -33,7 +36,6 @@ use App\Http\Controllers\ProductManagementController;
 use App\Http\Controllers\InventoryManagementController;
 use App\Http\Controllers\ProductSpecificationController;
 use App\Http\Controllers\VotedProductsManagementController;
-use App\Http\Controllers\StripePaymentController;
 
 
 
@@ -116,6 +118,7 @@ Route::delete('admin/orders/delete/{id}', [OrderManagementController::class, 'de
 Route::get('admin/orders/view/{id}', [OrderManagementController::class, 'viewOrder'])->name('admin.orders.view');
 Route::get('admin/orders/cancel/{id}', [OrderManagementController::class, 'cancelOrder'])->name('admin.orders.reject');
 Route::get('admin/orders/cancelled/{id}', [OrderManagementController::class, 'showCancelOrder'])->name('admin.orders.reject.view');
+Route::post('admin/orders/ship', [OrderManagementController::class, 'shipOrderProcess'])->name('admin.orders.ship');
 Route::post('admin/orders/cancelprocess/{id}', [OrderManagementController::class, 'cancelOrderProcess'])->name('admin.orders.processCancel');
 Route::post('admin/orders/accept/{id}', [OrderManagementController::class, 'acceptOrder'])->name('admin.orders.accept');
 Route::get('admin/product/special', [OrderManagementController::class, 'showSpecial'])->name('admin.product.special');
@@ -124,6 +127,7 @@ Route::get('admin/product/special', [OrderManagementController::class, 'showSpec
 Route::get('admin/orders/order-standby', [OrderManagementController::class, 'toStandby'])->name('admin.orders.to-standby');
 Route::get('admin/orders/order-pay', [OrderManagementController::class, 'toPay'])->name('admin.orders.to-pay');
 Route::get('admin/orders/order-ship', [OrderManagementController::class, 'toShip'])->name('admin.orders.to-ship');
+Route::get('admin/orders/order-deliver', [OrderManagementController::class, 'toDeliver'])->name('admin.orders.to-deliver');
 Route::get('admin/orders/order-completed', [OrderManagementController::class, 'completed'])->name('admin.orders.completed');
 Route::get('admin/orders/order-cancelled', [OrderManagementController::class, 'cancelled'])->name('admin.orders.cancelled');
 
@@ -141,6 +145,8 @@ Route::get('admin/user/management', [UserManagementController::class, 'showUsers
 Route::get('admin/user/management/view/{id}', [UserManagementController::class, 'viewUser'])->name('admin.management.view');
 Route::post('admin/user/management/deactivate/{id}', [UserManagementController::class, 'deactivateUser'])->name('admin.management.deactivate');
 Route::post('admin/user/management/reactivate/{id}', [UserManagementController::class, 'reactivateUser'])->name('admin.management.reactivate');
+Route::put('admin/user/management/farmer/form/{id}/verify', [UserManagementController::class, 'verifyForm'])->name('farmer.form.verify');
+Route::put('admin/user/management/farmer/id/{id}/verify', [UserManagementController::class, 'verifyIdentification'])->name('farmer.id.verify');
 
 //CHAT US
 Route::get('admin/chat', [ChatManagementController::class, 'showAdminChat'])->name('admin.chat');
@@ -157,11 +163,25 @@ Route::get('admin/message', function () {
 
 //REVIEWS
 Route::get('admin/community/reviews', [ReviewManagementController::class, 'showReviews'])->name('admin.reviews');
+Route::get('admin/community/reviews/orderrating/view/{id}', [ReviewManagementController::class, 'viewOrderReview'])->name('admin.reviews.view.orderrating');
+Route::get('admin/community/reviews/productrating/view/{id}', [ReviewManagementController::class, 'viewProductReview'])->name('admin.reviews.view.productrating');
+Route::post('admin/community/reviews/productrating/update/{id}', [ReviewManagementController::class, 'updateProductReview'])->name('admin.reviews.update.productrating');
+Route::post('admin/community/reviews/orderrating/update/{id}', [ReviewManagementController::class, 'updateOrderReview'])->name('admin.reviews.update.orderrating');
+// Route::post('admin/community/reviews/productrating/view/{id}', [ReviewManagementController::class, 'editReview'])->name('admin.reviews.edit');
+// Route::post('admin/community/reviews/productrating/view/{id}', [ReviewManagementController::class, 'editReview'])->name('admin.reviews.edit');
 
+
+Route::post('admin/community/reviews/orderrating/{id}/deactivate', [ReviewManagementController::class, 'orderRatingdeactivate'])->name('admin.reviews.orderrating.deactivate');
+Route::post('admin/community/reviews/orderrating/{id}/activate', [ReviewManagementController::class, 'orderRatingactivate'])->name('admin.reviews.orderrating.activate');
+Route::post('admin/community/reviews/productrating/{id}/deactivate', [ReviewManagementController::class, 'productRatingdeactivate'])->name('admin.reviews.productrating.deactivate');
+Route::post('admin/community/reviews/productrating/{id}/activate', [ReviewManagementController::class, 'productRatingactivate'])->name('admin.reviews.productrating.activate');
 
 //VOTED PRODUCTS
-Route::get('admin/community/votes',[VotedProductsManagementController::class, 'showVotedProducts'])->name('admin.voted-products');
 
+Route::get('admin/community/votes',[VotedProductsManagementController::class, 'showVotedProducts'])->name('admin.voted-products');
+Route::get('admin/community/votes/suggestionss/{id}',[VotedProductsManagementController::class, 'viewSuggestproduct'])->name('admin.voted-products.suggestions.view');
+Route::post('admin/community/votes/suggestions/{id}/accept', [VotedProductsManagementController::class, 'acceptSuggestproduct'])->name('admin.voted-products.suggestions.accept');
+Route::post('admin/community/votes/suggestions/{id}/reject', [VotedProductsManagementController::class, 'rejectSuggestproduct'])->name('admin.voted-products.suggestions.reject');
 
 //BLOGS
 Route::get('admin/community/blog',[BlogManagementController::class,'showBlogs'])->name('admin.blog');
@@ -211,7 +231,10 @@ Route::get('user/consumer/orders', [OrderController::class, 'showOrders'])->name
 Route::get('user/consumer/order/{id}', [OrderController::class, 'showOrderDetails'])->name('user.consumer.order.details');
 Route::get('user/consumer/order/cancel/{id}', [OrderController::class, 'cancelOrder'])->name('user.consumer.order.cancel');
 Route::post('user/consumer/order/cancel/{id}', [OrderController::class, 'cancelOrderSubmit'])->name('user.consumer.order.cancel.submit');
-Route::get('user/consumer/order/track/{id}', [OrderController::class, 'showOrderTrack'])->name('user.consumer.order.track');
+Route::get('user/consumer/order/track/{id}', [OrderController::class, 'showOrderDetails'])->name('user.consumer.order.track');
+Route::post('/order/confirm', [OrderController::class, 'confirmOrderReceived'])->name('user.order.confirm');
+Route::get('user/consumer/order/rate/{id}', [OrderController::class, 'rateOrder'])->name('user.consumer.order.rate');
+Route::post('user/consumer/order/rate/store', [OrderController::class, 'storeOrderRating'])->name('user.consumer.order.rate.store');
 
 });
 
@@ -224,6 +247,12 @@ Route::get('user/farmer', [HomeController::class, 'showFarmDashboard'])->name('u
 Route::get('/user/farmer/profile', [UserController::class, 'showFarmerprofile'])->name('user.farmer.profile');
 Route::get('user/farmer/blogs', [BlogController::class, 'showFarmerBlogs'])->name('user.farmer.blog');
 Route::get('user/farmer/chat', [ChatController::class, 'showFarmerChat'])->name('user.farmer.chat');
+Route::get('user/farmer/supply-products', [FarmerProduceController::class, 'showFarmerSupplyProduct'])->name('user.farmer.supply.product');
+Route::post('user/farmer/add-product', [FarmerProduceController::class, 'saveFarmerSupplyProduct'])->name('user.farmer.supply.product.save');
+Route::get('user/farmer/supply/product/edit', [FarmerProduceController::class, 'editProduct'])->name('user.farmer.supply.product.edit');
+Route::post('user/farmer/supply/product/update', [FarmerProduceController::class, 'saveEditProduct'])->name('user.farmer.supply.product.update');
+Route::post('user/farmer/supply/product/delete', [FarmerProduceController::class, 'deleteProduct'])->name('user.farmer.supply.product.delete');
+
 
 
 
@@ -238,8 +267,8 @@ Route::get('user/farmer/profile/edit', [UserController::class, 'editFarmerprofil
 Route::put('user/farmer/profile/update', [UserController::class, 'updateFarmerprofile'])->name('user.farmer.profile.update');
 
 //Product for Consumers
-Route::get('user/consumer/products', [ProductController::class, 'showConsumerProduct'])->name('user.consumer.product');
-Route::get('user/consumer/product/view/{encryptedId}', [ProductController::class, 'viewConsumerProduct'])->name('user.consumer.product.view');
+Route::get('user/consumer/products', [UserProductController::class, 'showConsumerProduct'])->name('user.consumer.product');
+Route::get('user/consumer/product/view/{encryptedId}', [UserProductController::class, 'viewConsumerProduct'])->name('user.consumer.product.view');
 
 
 //cart for Consumers

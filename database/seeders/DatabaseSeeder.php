@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
      * Use the WithoutModelEvents trait to prevent the Product model events from firing.
      */
     use WithoutModelEvents;
-    
+
     /**
      * Seed the application's database.
      */
@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
             'deactivated_status' => 0,
             'admin_payment' => null,
         ]);
-        
+
         // Create User
         User::create([
             'username' => 'user',
@@ -51,13 +51,31 @@ class DatabaseSeeder extends Seeder
             'deactivated_by' => null,
         ]);
 
+        User::create([
+            'username' => 'userfarmer',
+            'email' => 'userfarmer@email.com',
+            'password' => bcrypt('password'),
+            'user_type' => 2,
+            'profile_pic' => null,
+            'phone_number' => '09232323232',
+            'status' => 1,
+            'last_online' => null,
+            'deactivated_status' => 0,
+            'deactivated_date' => null,
+            'deactivated_by' => null,
+        ]);
+
+
 
         // Create posts
         $this->call([
             CategorySeeder::class,
+            CustomUsersSeeder::class,
             ProductSeeder::class,
             InventorySeeder::class,
             ProductImgSeeder::class,
+            ProductSpecificationsSeeder::class,
+            FarmerProduceSeeder::class,
         ]);
     }
 }

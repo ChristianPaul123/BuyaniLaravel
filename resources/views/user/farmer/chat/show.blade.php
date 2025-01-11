@@ -114,34 +114,38 @@
 @section('content')
 @include('user.includes.navbar-farmer')
 
-<div class="main-content-wrapper">
-    <div class="min-height">
-    <div class="container mt-5">
-        <!-- Chat Header -->
-        <div class="text-center mb-3">
-            <h3 class="text-center" style="color: green;">Buy<span style="color: orange;">Ani</span> Chat</h3>
+<div class="main-content-wrapper h-100">
+    <div class="h-100">
+        <div class="m-auto h-100 d-flex align-items-center">
+            <div class="container">
+                <!-- Chat Header -->
+                <div class="text-center mb-3">
+                    <h3 class="text-center" style="color: green;">Buy<span style="color: orange;">Ani</span> Chat</h3>
+                </div>
+
+
+                @livewire('user.user-chat-system',['chatID' => Auth::guard('user')->user()->id])
+            </div>
         </div>
-
-
-        @livewire('user.user-chat-system',['chatID' => Auth::guard('user')->user()->id])
     </div>
     </div>
 </div>
+@include('user.includes.unverified-modal')
 @endsection
 
 
 @section('scripts')
 <script>
 
-document.addEventListener('livewire:load', function () {
-        // Automatically scroll to the bottom after each Livewire DOM update
-        Livewire.hook('message.processed', (message, component) => {
-            window.scrollToBottom();
-        });
+    // document.addEventListener('livewire:load', function () {
+    //     // Automatically scroll to the bottom after each Livewire DOM update
+    //     Livewire.hook('message.processed', (message, component) => {
+    //         window.scrollToBottom();
+    //     });
 
-        // Scroll to the bottom when the page is first loaded
-        window.scrollToBottom();
-    });
+    //     // Scroll to the bottom when the page is first loaded
+    //     window.scrollToBottom();
+    // });
 
     document.addEventListener('DOMContentLoaded', function () {
         // Cache DOM elements
@@ -190,6 +194,4 @@ document.addEventListener('livewire:load', function () {
         }
     });
 </script>
-@endsection
-@section('scripts')
 @endsection

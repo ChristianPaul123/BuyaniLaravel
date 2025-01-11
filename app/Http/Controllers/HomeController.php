@@ -2,22 +2,34 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\SponsorImgs;
 use App\Models\SubCategory;
+use App\Models\ProductSales;
 use Illuminate\Http\Request;
+use App\Models\SuggestProduct;
+use App\Models\SpecificProductSales;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
     public function showConDashboard()
     {
+        $user = Auth::guard('user')->user(); // Get the authenticated user
+        $isProfileIncomplete = false; // Default value for guests
+        if ($user != null) {
+
+            $isProfileIncomplete = empty($user->first_name) || empty($user->last_name);
+        }
+
         //returns the view starting
         $products = Product::all();
         $categories = Category::all();
         $subcategories = SubCategory::all();
         $sponsorImages = SponsorImgs::all();
-        return view('user.consumer',['products' => $products, 'categories' => $categories, 'subcategories' => $subcategories,'sponsorImages' => $sponsorImages]);
+       return view('user.consumer',compact('subcategories', 'sponsorImages', 'products', 'categories','isProfileIncomplete'));
     }
 
     public function showConAbout()
@@ -33,8 +45,58 @@ class HomeController extends Controller
 
     public function showFarmDashboard()
     {
-        //return the view starting
-        return view('user.farmer');
+
+    $user = Auth::guard('user')->user(); // Get the authenticated user
+    $isProfileIncomplete = false; // Default value for guests
+    if ($user != null) {
+
+        $isProfileIncomplete = empty($user->first_name) || empty($user->last_name);
+    }
+        // Fetch sponsor images and limit to 6 items
+    $sponsorImages = SponsorImgs::all();
+
+    $sponsors = $sponsorImages; // Include all available sponsor images
+
+    // Ensure at least 3 items (real sponsors or placeholders)
+    $minVisible = 3;
+    $placeholdersNeeded = max(0, $minVisible - $sponsors->count());
+    $currentMonth = Carbon::now()->format('Y-m'); // Get the current year and month
+
+    // Fetch best-selling products for the current month
+    $bestSellingProducts = ProductSales::where('date', 'like', "$currentMonth%")
+        ->with('product') // Assuming a relation with the Product model
+        ->orderBy('order_count', 'desc')
+        ->take(5)
+        ->get();
+
+    // Fetch best-selling product variants for the current month
+    $bestSellingVariants = SpecificProductSales::where('date', 'like', "$currentMonth%")
+        ->with('productSpecification.product') // Assuming nested relations
+        ->orderBy('order_quantity', 'desc')
+        ->take(5)
+        ->get();
+
+        $currentMonth = Carbon::now()->format('Y-m'); // Get current year and month
+
+        // Fetch top-voted products for the current month
+        $topVotedProducts = SuggestProduct::where('deactivated_status', false)
+            ->where('is_accepted', true) // Ensure only accepted products are included
+            ->whereMonth('created_at', Carbon::now()->month)
+            ->whereYear('created_at', Carbon::now()->year)
+            ->orderBy('total_vote_count', 'desc')
+            ->take(10) // Limit to top 10
+            ->get(['suggest_name', 'total_vote_count']); // Fetch only necessary fields
+
+    // Add placeholders if necessary
+    for ($i = 0; $i < $placeholdersNeeded; $i++) {
+        $sponsors->push((object) [
+            'img' => 'https://via.placeholder.com/200x100?text=Sponsor+Placeholder',
+            'img_title' => 'Sponsor Placeholder',
+        ]);
+    }
+
+    return view('user.farmer', compact('sponsors', 'bestSellingProducts', 'bestSellingVariants','topVotedProducts','isProfileIncomplete'));
+
     }
 
 

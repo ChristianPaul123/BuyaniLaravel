@@ -1,7 +1,14 @@
+
 <div class="row custom-font-content">
     <div class="col-lg-6 col-sm-12 left-div">
         <div class="left-side w-100">
             <div>
+
+{{-- <div class="row mt-4 h-100" style="background-color: #48722e;">
+    <div class="col-lg-6 col-sm-12 a d-flex align-items-center justify-content-center">
+        <div class="left-side a w-100">
+            <div class="a mb-5"> --}}
+
             @livewire('session-modal')
                 <h2 class="login-as">
                     Login as {{ $user_type == 1 ? 'Consumer' : 'Farmer' }}
@@ -56,8 +63,8 @@
             </script>
 
             <div class="">
-                <div class="text-center pt-3" style="color: #ffa500">
-                    <a href="{{ route('user.register', ['user_type' => $user_type]) }}">Create Account | Sign Up</a>
+                <div class="text-center pt-3">
+                    <a class="text-white" href="{{ route('user.register', ['user_type' => $user_type]) }}">Create Account | Sign Up</a>
                 </div>
             </div>
 
@@ -106,10 +113,12 @@
                         <h3>Confirm OTP</h3>
                         <form wire:submit.prevent="verifyOtp">
                             <div class="form-group">
-                                <label for="otp" class="form-label">Enter OTP sent to your email</label>
+
+                                <label for="otp" class="form-label">Enter OTP sent to {{ $selectedEmail }}</label>
                                 <input type="text" id="otp" wire:model="otp" class="form-control" placeholder="Enter OTP" width="100%">
+
                                 @error('otp')<span class="text-danger">{{ $message }}</span>@enderror
-                                @if (session()->has('error'))<span id="errorMessage" class="text-danger">{{ session('error') }}</span>@endif
+                                {{-- @if (session()->has('error'))<span id="errorMessage" class="text-danger">{{ session('error') }}</span>@endif --}}
                             </div>
                             <button type="submit" class="btn btn-primary mt-3">Verify OTP</button>
                         </form>

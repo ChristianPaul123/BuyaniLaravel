@@ -8,20 +8,16 @@
         /* border: 1px solid black; */
     }
 
+    .a, .b, .c{
+        /* border: 1px solid black; */
+    }
+
      .custom-font-content {
         font-family: 'Poppins', sans-serif;
         font-weight: bold;
         color: aliceblue;
-        background-color: #3f6f23;
-        height: 100vh;
-    }
-
-    .left-div{
-        height: auto;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        background-color: #3F6F23;
+        color: #fff;
     }
 
     .form-control:focus {
@@ -83,6 +79,7 @@
         .form-part{
             margin: 0 0;
         }
+
 
         .custom-font-content {
             height: auto;
@@ -238,7 +235,7 @@ document.addEventListener("DOMContentLoaded", function () {
     emailPhoneInput.addEventListener("input", function () {
         const value = emailPhoneInput.value.trim();
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        const phoneRegex = /^\+?\d{10,15}$/;
+        const phoneRegex = /^(?:\+63|09|\d{1})\d{9}$/;
 
         if (emailRegex.test(value) || phoneRegex.test(value)) {
             emailPhoneError.style.display = "none";

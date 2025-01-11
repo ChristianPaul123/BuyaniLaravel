@@ -1,24 +1,5 @@
 <div>
     <section>
-    <!-- Display Success Message -->
-    @if (session()->has('message'))
-        @livewire('session-modal')
-    @endif
-
-    <!-- Display Validation Errors -->
-    @if ($errors->any())
-        <div class="alert alert-danger mx-3 my-2 px-3 py-2">
-            <button type="button" class="close btn btn-danger">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
     <div class="row mt-3">
         <div class="col-12">
             <div class="">
@@ -55,13 +36,8 @@
             </div>
         </div>
 
-
         <div wire:ignore.self class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-            @if (session('message'))
-            <div class="alert alert-success text-center my-3 d-block col-12 mt-5">
-                {{ session('message') }}
-            </div>
-            @endif
+            @include('user.includes.messageBox')
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -117,11 +93,7 @@
         </div>
 
         <div wire:ignore.self class="modal fade" id="passwordModal" tabindex="-1" aria-labelledby="passwordModalLabel" aria-hidden="true">
-            @if (session('message'))
-            <div class="alert alert-success text-center my-3 d-block col-12 mt-5">
-                {{ session('message') }}
-            </div>
-            @endif
+            @include('user.includes.successBox')
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -219,8 +191,7 @@
 
 <script>
     document.addEventListener('livewire:initialized',()=>{
-      @
-      this.on('show-modal',(event)=>{
+      @this.on('show-modal',(event)=>{
         var myModalEl=document.querySelector('#passwordModal')
         var modal=bootstrap.Modal.getOrCreateInstance(myModalEl)
       })

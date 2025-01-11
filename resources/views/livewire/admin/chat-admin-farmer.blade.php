@@ -14,15 +14,12 @@
                     <div class="details">
                         <div class="name">{{ $user->username }}</div>
                         <div class="last-message">
-                            @if ($user->chat && $user->chat->messages->isNotEmpty())
-                            @php
-                                $lastMessage = $user->chat->messages->first();
-                                $sender = $lastMessage->admin_id ? ($lastMessage->admin->username ?? 'Admin') : $user->username;
-                            @endphp
-                            <strong>{{ $sender }}:</strong> {{ Str::limit($lastMessage->message_info, 10) }}
-                            <span style="font-size: 0.8rem;">
-                                {{ $lastMessage->created_at->diffForHumans() }}
-                            </span>
+                            @if ($user->lastMessageText)
+                                <strong>{{ $user->senderName }}:</strong>
+                                {{ $user->lastMessageText }}
+                                <span style="font-size: 0.8rem;">
+                                    {{ $user->lastMessageTimeAgo }}
+                                </span>
                             @else
                                 No messages yet
                             @endif
@@ -38,7 +35,7 @@
         <div class="chat-header">
             Chat with {{ $selectedUser->username ?? 'Select a user' }}
         </div>
-        <div class="message-box mb-3" id="chatBox" wire:poll.5s>
+        <div class="message-box mb-3" id="chatBoxFarmer" wire:poll.5s>
             @foreach ($messages as $message)
                 @if ($message->user_id)
                     <!-- Left Side (User Message) -->
@@ -88,7 +85,6 @@
 @script
 <script>
     document.addEventListener('livewire:initialized', function () {
-        console.log('mama help');
         // Cache DOM elements
         const messageForm = document.getElementById('messageFormFarmer');
         const messageInput = document.getElementById('messageInputFarmer');

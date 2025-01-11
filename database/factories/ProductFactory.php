@@ -31,7 +31,7 @@ class ProductFactory extends Factory
             'product_status' => 1,
             'category_id' => $randomCategory->id,
             'subcategory_id' => $subcategory->id,
-            'product_deactivated' => $this->faker->boolean(),
+            'deactivated_status' => $this->faker->boolean(),
             'is_featured' => $this->faker->boolean(),
         ];
     }

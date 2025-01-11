@@ -4,6 +4,125 @@
 
 @push('styles')
 <style>
+/* design for the modal popup */
+    /* Modal Background */
+    .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1050;
+    }
+
+    /* Modal Content */
+    .modal-content {
+        background: #fff;
+        width: 90%;
+        max-width: 500px;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        animation: fadeIn 0.3s ease-in-out;
+    }
+
+    /* Modal Header */
+    .modal-header {
+        background-color: #f8f9fa;
+        padding: 15px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    .modal-title {
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: #343a40;
+    }
+
+    /* Close Button */
+    .close-btn {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #343a40;
+        cursor: pointer;
+        outline: none;
+    }
+
+    .close-btn:hover {
+        color: #dc3545;
+    }
+
+    /* Modal Body */
+    .modal-body {
+        padding: 20px;
+        font-size: 1rem;
+        color: #495057;
+        text-align: center;
+    }
+
+    /* Modal Footer */
+    .modal-footer {
+        padding: 15px 20px;
+        background-color: #f8f9fa;
+        border-top: 1px solid #dee2e6;
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+    }
+
+    .modal-footer .btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .modal-footer .btn-primary {
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+    }
+
+    .modal-footer .btn-primary:hover {
+        background-color: #218838;
+    }
+
+    .modal-footer .btn-secondary {
+        background-color: #6c757d;
+        color: #fff;
+        border: none;
+    }
+
+    .modal-footer .btn-secondary:hover {
+        background-color: #5a6268;
+    }
+
+
+
+    .modal.hide {
+        display: none; /* Hidden modal */
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
     @media (prefers-reduced-motion: no-preference) {
         .in-view {
             animation: slide-up 1s ease-out both;
@@ -376,16 +495,22 @@
         color: #d3d3d3; /* Light gray for the description */
     }
 
+    .subscribe-input {
+        border: none;
+        border-radius: 0.25rem 0 0 0.25rem;
+        padding: 10px 15px;
+        font-size: 1rem;
+        flex-grow: 1;
+    }
+
     .subscribe-button {
         background-color: #00b34d; /* Bright green button */
         color: white;
         border: none;
-        border-radius: 0.25rem;
+        border-radius: 0 0.25rem 0.25rem 0;
         font-size: 1rem;
         padding: 10px 20px;
         transition: background-color 0.3s;
-        text-decoration: none;
-        display: inline-block;
     }
 
     .subscribe-button:hover {
@@ -492,6 +617,21 @@
 @include('user.includes.navbar-consumer')
 
 <section class="main-page">
+
+    <div id="profileIncompleteModal" class="modal {{ $isProfileIncomplete ? 'show' : 'hide' }}">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Profile Incomplete</h5>
+            </div>
+            <div class="modal-body">
+                <p>Looks like you don't have any other info yet. Why not try editing it?</p>
+            </div>
+            <div class="modal-footer">
+                <a href="{{ route('user.consumer.profile.show') }}" class="btn btn-primary">Edit Profile</a>
+                <button type="button" data-close="modal" class="btn btn-secondary">Close</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Section 1 -->
     <div class="row section-1">
@@ -602,9 +742,15 @@
             <div class="row align-items-center">
                 <!-- Left Text -->
                 <div class="col-md-6">
-                    <h1 class="subscribe-title">Want to Know More?</h1>
-                    <p class="subscribe-description">Send us a message to learn more about our latest promos, new products, and featured brands.</p>
-                    <a href="mailto:contact@buyani.com" class="btn subscribe-button">Contact Us</a>
+                    <h1 class="subscribe-title">Subscribe to Buyani</h1>
+                    <p class="subscribe-description">Get updates about our latest promos, new products, and featured brands.</p>
+                </div>
+                <!-- Right Form -->
+                <div class="col-md-6">
+                    <form class="d-flex">
+                        <input type="email" class="form-control subscribe-input" placeholder="Email Address">
+                        <button type="submit" class="btn subscribe-button">Subscribe</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -688,50 +834,27 @@
         </div>
     </div>
 
-    {{-- wag na ata neto at redundant na masyado --}}
-    <!-- Section 3 -->
-    {{-- <div class="row section-3">
-        <div class="col-md-6 left-panel">
-            <div class="div-iframe">
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!4v1698665449734!6m8!1m7!1seAvRB_mCgHq_5jKGt56U_Q!2m2!1d13.1509736!2d123.7184431!3f44.73!4f0!5f0.7820865974627469"
-                    style="border: 4px solid #000; border-radius: 20px;"
-                    allowfullscreen=""
-                    loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
-            </div>
-        </div>
-        <div class="col-md-6 right-panel">
-            <div class="container p-2">
-                <h3>Contact Form</h3>
-                <form>
-                    <div class="form-group p-1">
-                        <label for="name">Name</label>
-                        <input type="text" class="form-control" id="name" placeholder="Enter your name">
-                    </div>
-                    <div class="form-group p-1">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="Enter your email">
-                    </div>
-                    <div class="form-group p-1">
-                        <label for="message">Message</label>
-                        <textarea class="form-control scroll" id="message" rows="3" placeholder="Enter your message"></textarea>
-                    </div>
-                    <div class="text-center pt-1">
-                        <button type="submit">Send</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div> --}}
-
 </section>
 
 
 @endsection
 
 @section('scripts')
+<script>
+    //this is the script that modal to popup when start of the page
+    document.addEventListener('DOMContentLoaded', function () {
+        // Select modal and close button
+        const modal = document.getElementById('profileIncompleteModal');
+        const closeButton = modal.querySelector('[data-close="modal"]');
+
+        // Add event listener to the close button
+        closeButton.addEventListener('click', function () {
+            modal.classList.remove('show');
+            modal.classList.add('hide');
+        });
+    });
+</script>
+
 <script>
     window.addEventListener('popstate', function(event) {
         // If the user press the back button, log them out

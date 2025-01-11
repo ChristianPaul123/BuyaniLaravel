@@ -9,6 +9,7 @@ class Blog extends Model
 {
     // Use the HasFactory trait to create factory instances for this model
     use HasFactory;
+    public $timestamp = true;
 
     // Define the fillable attributes for this model
     protected $fillable = [
@@ -17,7 +18,7 @@ class Blog extends Model
         'blog_pic',
         'blog_info',
         'created_at',
-        'removed_date',
+        'deactivated_date',
         'deactivated_status',
         'added_by',
         'removed_by',

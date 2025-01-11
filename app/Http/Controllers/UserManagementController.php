@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\VerifyFarmerRequest;
+use App\Models\FarmerForm;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,7 +29,7 @@ class UserManagementController extends Controller
     /**
      * Deactivate a user.
      */
-    public function deactivateUser(Request $request, $id)
+    public function deactivateUser($id)
     {
         $user = User::findOrFail($id);
 
@@ -38,13 +40,24 @@ class UserManagementController extends Controller
 
         $user->save();
 
-        return redirect()->back()->with('success', 'User deactivated successfully.');
+
+           // Redirect based on user type
+        if ($user->user_type == 1) {
+            return redirect()->route('admin.management', ['tab' => 'consumers'])
+                ->with('success', 'User deactivated successfully.');
+        } elseif ($user->user_type == 2) {
+            return redirect()->route('admin.management', ['tab' => 'farmers'])
+                ->with('success', 'User deactivated successfully.');
+        }
+
+        return redirect()->route('admin.management', ['tab' => 'consumers'])
+        ->with('success',' User deactivated successfully.');
     }
 
     /**
      * Reactivate a user.
      */
-    public function reactivateUser(Request $request, $id)
+    public function reactivateUser($id)
     {
         $user = User::findOrFail($id);
 
@@ -55,6 +68,62 @@ class UserManagementController extends Controller
 
         $user->save();
 
-        return redirect()->back()->with('success', 'User reactivated successfully.');
+                   // Redirect based on user type
+                   if ($user->user_type == 1) {
+                    return redirect()->route('admin.management', ['tab' => 'consumers'])
+                        ->with('success', 'User reactivated successfully.');
+                } elseif ($user->user_type == 2) {
+                    return redirect()->route('admin.management', ['tab' => 'farmers'])
+                        ->with('success', 'User reactivated successfully.');
+                }
+
+        return redirect()->route('admin.management', ['tab' => 'consumers'])
+        ->with('success',' User reactivated successfully.');
+    }
+
+    /**
+     * Verify the specified form.
+     *
+     * This method finds the FarmerForm by its ID, marks it as verified,
+     * saves the changes, and redirects back with a success message.
+     *
+     * @param int $id The ID of the form to verify.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function verifyForm($id)
+    {
+        $form = FarmerForm::findOrFail($id);
+
+        $form->form_verified = true;
+        $form->verified_by = Auth::guard('admin')->user()->username;
+
+        $form->save();
+
+        return redirect()
+            ->back()->with('success', 'Form verified successfully.');
+    }
+
+    /**
+     * Verify the identification of a farmer form.
+     *
+     * This method finds the FarmerForm by its ID, sets the id_verified attribute to true,
+     * saves the changes, and then redirects back with a success message.
+     *
+     * @param int $id The ID of the FarmerForm to verify.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function verifyIdentification($id)
+    {
+        $form = FarmerForm::findOrFail($id);
+
+        $form->id_verified = true;
+        $form->verified_by = Auth::guard('admin')->user()->username;
+
+        $form->save();
+
+        return redirect()
+            ->back()->with('success', 'Identification verified successfully.');
     }
 }

@@ -67,7 +67,6 @@
                 <div class="d-flex justify-content-start pt-1 pb-2 mb-3 border-bottom">
                     <button type="button" class="btn btn-primary" onclick="window.history.back()"> &#9754; Back to previous</button>
                 </div>
-
                 {{-- First Row: User Information --}}
                 <div class="row mb-4">
                     <div class="col-12">
@@ -84,13 +83,14 @@
                                 <strong>Customer Phone:</strong> {{ $order->customer_phone }}<br>
                                 <strong>Order Status:</strong>
                                 <span class="badge
-                                @if($order->order_status == \App\Models\Order::STATUS_STANDBY) bg-secondary
-                                @elseif($order->order_status == \App\Models\Order::STATUS_TO_PAY) bg-warning
-                                @elseif($order->order_status == \App\Models\Order::STATUS_TO_SHIP) bg-info
-                                @elseif($order->order_status == \App\Models\Order::STATUS_COMPLETED) bg-success
-                                @elseif($order->order_status == \App\Models\Order::STATUS_CANCELLED) bg-danger
+                                    @if($order->order_status == \App\Models\Order::STATUS_STANDBY) bg-secondary
+                                    @elseif($order->order_status == \App\Models\Order::STATUS_TO_PAY) bg-warning
+                                    @elseif($order->order_status == \App\Models\Order::STATUS_TO_SHIP) bg-info
+                                    @elseif($order->order_status == \App\Models\Order::STATUS_COMPLETED) bg-success
+                                    @elseif($order->order_status == \App\Models\Order::STATUS_CANCELLED) bg-danger
+                                    @elseif($order->order_status == \App\Models\Order::OUT_FOR_DELIVERY) bg-info
                                 @else bg-primary @endif">
-                                {{ $order->status_label }}
+                                {{ $order->status_label }}  
                             </span>
                                 </p>
                             </div>
@@ -108,8 +108,8 @@
                             <div class="card-body">
                                 <p><strong>Street:</strong> {{ $order->customer_street }}</p>
                                 <p><strong>City:</strong> {{ $order->customer_city }}</p>
-                                <p><strong>State:</strong> {{ $order->customer_barangay }}</p>
-                                <p><strong>State:</strong> {{ $order->customer_state }}</p>
+                                <p><strong>Barangay:</strong> {{ $order->customer_barangay }}</p>
+                                <p><strong>Province:</strong> {{ $order->customer_state }}</p>
                                 <p><strong>Zip Code:</strong> {{ $order->customer_zip }}</p>
                                 <p><strong>Country:</strong> {{ $order->customer_country }}</p>
 
@@ -174,7 +174,10 @@
                         </div>
                     </div>
                 </div>
-
+                {{-- Fifth Row: Assign Delivery Employee --}}
+                @if($order->order_status !== 1 && $order->order_status !== 2)
+                    @livewire('admin.assign-employee', ['orderId' => $order->id]) {{-- Include the livewire component --}}
+                @endif
                 {{-- Fifth Row: Tracking Information --}}
                 <div class="row mb-4">
                     <div class="col-12">
@@ -200,71 +203,35 @@
                 </div>
 
                 {{-- Sixth Row: Actions --}}
-                @if ($order->order_type == 1) {{-- Delivery --}}
-                <div class="row mb-4">
-                    <div class="col-12 text-center">
-                        <form action="{{ route('admin.orders.accept', $order->id) }}" method="POST" style="display:inline-block;">
-                            @csrf
-                            <button class="btn btn-success">Accept Order</button>
-                        </form>
-                        <form action="{{ route('admin.orders.reject', $order->id) }}" method="POST" style="display:inline-block;">
-                            @csrf
-                            <button class="btn btn-danger">Cancel Order</button>
-                        </form>
+                @if ($order->order_type == 1 && $order->order_status === \App\Models\Order::STATUS_STANDBY) {{-- Delivery --}}
+                    <div class="row mb-4">
+                        <div class="col-12 text-center">
+                            <form action="{{ route('admin.orders.accept', $order->id) }}" method="POST" style="display:inline-block;">
+                                @csrf
+                                <button class="btn btn-success">Accept Order</button>
+                            </form>
+                            <form action="{{ route('admin.orders.reject', $order->id) }}" method="GET" style="display:inline-block;">
+                                @csrf
+                                <button class="btn btn-danger">Cancel Order</button>
+                            </form>
+                        </div>
                     </div>
-                </div>
-                @elseif ($order->order_type == 2)
-                <div class="row mb-4">
-                    <div class="col-12 text-center">
-                        <form action="{{ route('admin.orders.accept', $order->id) }}" method="POST" style="display:inline-block;">
-                            @csrf
-                            <button class="btn btn-success">Accept Order</button>
-                        </form>
-                        <form action="{{ route('admin.orders.reject', $order->id) }}" method="POST" style="display:inline-block;">
-                            @csrf
-                            <button class="btn btn-danger">Cancel Order</button>
-                        </form>
+                @endif
+                {{-- Seventh Row: Actions --}}
+                @if ($order->order_type == 1 &&
+                        ($order->order_status === \App\Models\Order::STATUS_TO_PAY 
+                            || $order->order_status === \App\Models\Order::STATUS_TO_SHIP 
+                            || $order->order_status === \App\Models\Order::OUT_FOR_DELIVERY
+                        )
+                    ) {{-- Delivery --}}
+                    <div class="row mb-4">
+                        <div class="col-12 text-center">
+                            <form action="{{ route('admin.orders.reject', $order->id) }}" method="GET" style="display:inline-block;">
+                                @csrf
+                                <button class="btn btn-danger">Cancel Order</button>
+                            </form>
+                        </div>
                     </div>
-                </div>
-                @elseif ($order->order_type == 3)
-                <div class="row mb-4">
-                    <div class="col-12 text-center">
-                        <form action="{{ route('admin.orders.accept', $order->id) }}" method="POST" style="display:inline-block;">
-                            @csrf
-                            <button class="btn btn-success">Accept Order</button>
-                        </form>
-                        <form action="{{ route('admin.orders.reject', $order->id) }}" method="POST" style="display:inline-block;">
-                            @csrf
-                            <button class="btn btn-danger">Cancel Order</button>
-                        </form>
-                    </div>
-                </div>
-                @elseif ($order->order_type == 4)
-                <div class="row mb-4">
-                    <div class="col-12 text-center">
-                        <form action="{{ route('admin.orders.accept', $order->id) }}" method="POST" style="display:inline-block;">
-                            @csrf
-                            <button class="btn btn-success">Accept Order</button>
-                        </form>
-                        <form action="{{ route('admin.orders.reject', $order->id) }}" method="POST" style="display:inline-block;">
-                            @csrf
-                            <button class="btn btn-danger">Cancel Order</button>
-                        </form>
-                    </div>
-                </div>
-                @elseif ($entry->order_type == 5)
-                <div class="row mb-4">
-                    <div class="col-12 text-center">
-                        <form action="{{ route('admin.orders.accept', $order->id) }}" method="POST" style="display:inline-block;">
-                            @csrf
-                            <button class="btn btn-success">Accept Order</button>
-                        </form>
-                        <form action="{{ route('admin.orders.reject', $order->id) }}" method="POST" style="display:inline-block;">
-                            @csrf
-                            <button class="btn btn-danger">Cancel Order</button>
-                        </form>
-                    </div>
-                </div>
                 @endif
         </section>
     </div>

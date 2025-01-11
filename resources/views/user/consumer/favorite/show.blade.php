@@ -102,7 +102,7 @@
 @section('content')
 @include('user.includes.navbar-consumer')
 <div class="main-content-wrapper">
- @livewire('user-favorites')
+ @livewire('consumer.user-favorites')
 @endsection
 
 @section('scripts')

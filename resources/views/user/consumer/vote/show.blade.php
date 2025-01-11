@@ -170,13 +170,14 @@
 
 @section('content')
 @include('user.includes.navbar-consumer')
+@include('user.includes.messageBox')
 
 <div class="main-content-wrapper">
     <div class="container my-5">
         <!-- Voting Header -->
         <div class="voting-header">
-            <h1>Product Voting</h1>
-            <p>Vote for your favorite products this month!</p>
+            <h1>Product Voting - {{ \Carbon\Carbon::now()->format('F Y') }}</h1>
+            <p>Vote for your requested products!</p>
         </div>
         @livewire('consumer.suggested-product-ranking')
         @livewire('consumer.suggested-product-poll')
@@ -204,7 +205,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="suggest_description">Introduction to requested product:</label>
-                                <textarea class="form-control" name="suggest_description" rows="3" required></textarea>
+                                <textarea maxlength="500" class="form-control" name="suggest_description" rows="3" required></textarea>
+                                <span class="text-muted">Max 500 characters</span>
                             </div>
                             <div class="form-group">
                                 <label for="suggest_image">Product Image</label>

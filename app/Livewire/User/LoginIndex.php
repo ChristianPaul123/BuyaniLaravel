@@ -85,6 +85,12 @@ class LoginIndex extends Component
                     'response' => $token,
                     'remoteip' => request()->ip(),
                 ])->json();
+
+                // if (!json_decode($response->body(), true)['success']) {
+                //         $this->captcha = 'Invalid recaptcha';
+                //     } else {
+                //     $this->captchaVerify = true;
+                //     }
             }
         } catch (\Exception $e) {
 

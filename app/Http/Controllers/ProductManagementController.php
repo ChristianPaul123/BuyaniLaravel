@@ -5,15 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Inventory;
+use App\Models\ProductImg;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use App\Models\ProductSpecification;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Support\Facades\File;
 
 class ProductManagementController extends Controller
 {
+    protected CONST PRODUCT_IMAGE_PATH = 'img/product/';
 
 public function showProducts()
 {
@@ -39,16 +42,24 @@ return view('admin.product.product-index', [
             'product_status' => ['required', 'integer'],
             'category_id' => ['required', 'exists:categories,id'],
             'subcategory_id' => ['required', 'exists:sub_categories,id'],
-            'product_pic' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:4096'],
-        ]);
+            'product_pic' => ['required', 'array', 'min:1'], // Ensure at least one image is uploaded
+            'product_pic.*' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'max:4096'], // Validate each image individually
+        ]);        
 
-        // Upload product image
+        // Upload product images
         if ($request->hasFile('product_pic')) {
-            $imageName = time().'.'.$request->product_pic->extension();
-            $request->product_pic->move(public_path('img/product/'.$validatedData['product_name']), $imageName);
-            $validatedData['product_pic'] = 'img/product/'.$validatedData['product_name'].'/'.$imageName;
+            $imagePaths = [];
+
+            foreach ($request->file('product_pic') as $image) {
+                $imagePaths[] = $this->handleImageSaving($image, $validatedData);
+            }
+
+            // Set the first image as the product pic
+            $validatedData['product_pic'] = $imagePaths[0];
+            // offset the array by 1 to be used as the other images.
+            $imagePaths = array_slice($imagePaths, 1);
         } else {
-            return redirect()->route('admin.product',['tab' => 'products'])-with('error', 'Invalid Product pic provided.');
+            return redirect()->route('admin.product', ['tab' => 'products'])->with('error', 'Invalid Product pic provided.');
         }
 
         // Create product and initialize inventory
@@ -63,6 +74,13 @@ return view('admin.product.product-index', [
             'product_damage_stock' => 0,
         ]);
 
+        foreach ($imagePaths as $imagePath) {
+            ProductImg::create([
+                'product_id' => $product->id,
+                'img' => $imagePath,
+            ]);
+        }
+
         return redirect()->route('admin.product.index',['tab' => 'products'])->with('success', 'Product added successfully.');
     }
 
@@ -73,11 +91,13 @@ return view('admin.product.product-index', [
         try {
             $id = Crypt::decrypt($encryptedId);
             $product = Product::findOrFail($id);
+            $images = $product->productImages
+                ->select(['id','img']);
             $categories = Category::all();
             $subcategories = SubCategory::all();
-
             return view('admin.product.edit-product', [
                 'product' => $product,
+                'images' => $images,
                 'categories' => $categories,
                 'subcategories' => $subcategories,
             ]);
@@ -98,20 +118,45 @@ return view('admin.product.product-index', [
             'category_id' => ['required', 'exists:categories,id'],
             'subcategory_id' => ['required', 'exists:sub_categories,id'],
             'product_pic' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+            'product_images' => ['nullable', 'array', 'min:1'], // Ensure at least one image is uploaded
+            'product_images.*' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'max:4096'], // Validate each image individually
+            'removed_images' => ['nullable', 'string'],
         ]);
+
+        $removedImages = json_decode($request->input('removed_images'), true);
+        if (!empty($removedImages)) {
+            $this->handleImageRemoval($product->id, $removedImages);
+        }
 
         // Handle image upload if a new one is provided
         if ($request->hasFile('product_pic')) {
+            $image = $request->file('product_pic');
             // Delete the old image if it exists
-            if ($product->product_pic) {
-                Storage::delete($product->product_pic);
+            if ($image) {
+                $fullPath = public_path($product->product_pic);
+                if (File::exists($fullPath)) {
+                    File::delete($fullPath);
+                }
             }
-
-            $imageName = time() . '.' . $request->product_pic->extension();
-            $request->product_pic->move(public_path('img/product/' . $validatedData['product_name']), $imageName);
-            $validatedData['product_pic'] = 'img/product/' . $validatedData['product_name'] . '/' . $imageName;
+            // Save the new image
+            $validatedData['product_pic'] = $this->handleImageSaving($image, $validatedData);
         }
 
+        // Handle additional images if provided
+        if ($request->hasFile('product_images')) {
+            $imagePaths = [];
+
+            foreach ($request->file('product_images') as $image) {
+                $imagePaths[] = $this->handleImageSaving($image, $validatedData);
+            }
+
+            foreach ($imagePaths as $imagePath) {
+                ProductImg::create([
+                    'product_id' => $product->id,
+                    'img' => $imagePath,
+                ]);
+            }
+        }
 
         // Set deactivation date if the status is "Unavailable"
         $validatedData['product_deactivated'] = $validatedData['product_status'] == 3 ? now() : null;
@@ -304,4 +349,59 @@ return view('admin.product.product-index', [
 
         return redirect()->route('admin.product.index', ['tab' => 'subcategories'])->with('success', 'SubCategory deleted successfully.');
     }
+
+    /**
+     * Handles the saving of the product image.
+     *
+     * This function replaces spaces with underscores in the product name,
+     * generates a unique image name using the current timestamp and a random number,
+     * and moves the uploaded image to the specified directory.
+     *
+     * @param \Illuminate\Http\UploadedFile $image The uploaded image file.
+     * @param array $validatedData The validated data containing the product name.
+     * @return string The path where the image is saved.
+     */
+    private function handleImageSaving($image, $validatedData) {
+        // Replace spaces with underscores in product name
+        $cleanProductName = str_replace(' ', '_', $validatedData['product_name']);
+        $imageName = self::PRODUCT_IMAGE_PATH.$cleanProductName.'/'.time().rand(1000, 9999).'.'.$image->extension();
+        $image->move(public_path(self::PRODUCT_IMAGE_PATH.$cleanProductName), $imageName);
+
+        return $imageName;
+    }
+
+    /**
+     * Handle the removal of images associated with a product.
+     *
+     * This method deletes the specified images from storage and removes their records from the database.
+     *
+     * @param int $productId The ID of the product whose images are to be removed.
+     * @param array|null $removedImages An array of image IDs to be removed. If null, no images will be removed.
+     * @return void
+     */
+    private function handleImageRemoval(
+        int $productId,
+        ?array $removedImages
+    )  {
+        foreach ($removedImages as $imageId) {
+            $image = ProductImg::where('id', $imageId)
+                ->where('product_id', $productId)
+                ->first();
+            if ($image) {
+                $fullPath = public_path($image->img);
+                if (File::exists($fullPath)) {
+                    File::delete($fullPath);
+                }
+                $image->delete();
+            }
+        }
+    }
 }
+
+
+
+
+
+
+
+

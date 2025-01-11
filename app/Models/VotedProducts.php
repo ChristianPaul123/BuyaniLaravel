@@ -15,6 +15,7 @@ class VotedProducts extends Model
         'suggest_product_id',
         'user_id',
         'is_voted',
+
     ];
 
     public function suggestProduct()

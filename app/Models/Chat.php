@@ -8,11 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Chat extends Model
 {
     use HasFactory;
+    public $timestamp = true;
 
     protected $fillable =  [
         'user_id',
         'chat_status',
         'timestamp',
+        'is_message_count',
     ];
 
     public function messages(){

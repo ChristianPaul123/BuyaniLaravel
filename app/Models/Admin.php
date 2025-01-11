@@ -32,7 +32,6 @@ class Admin extends Authenticatable
         'last_online',
         'deactivated_date',
         'deactivated_status',
-        'admin_payment',
     ];
 
     protected $hidden = [

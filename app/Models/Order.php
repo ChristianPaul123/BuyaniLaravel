@@ -17,6 +17,7 @@ class Order extends Model
     const STATUS_TO_SHIP = 3;
     const STATUS_COMPLETED = 4;
     const STATUS_CANCELLED = 5;
+    const OUT_FOR_DELIVERY = 6;
 
     // Fillable attributes for the Order model
     protected $fillable = [
@@ -29,6 +30,7 @@ class Order extends Model
         //'shipping_method',
         'order_status',
         'customer_name',
+        'delivery_employee',
         'customer_phone',
         'customer_email',
         'customer_street',
@@ -78,6 +80,7 @@ class Order extends Model
             self::STATUS_TO_SHIP => 'To Ship',
             self::STATUS_COMPLETED => 'Completed',
             self::STATUS_CANCELLED => 'Cancelled',
+            self::OUT_FOR_DELIVERY => 'Out for Delivery',
         ];
 
         return $statuses[$this->order_status] ?? 'Unknown';
@@ -86,5 +89,10 @@ class Order extends Model
     public function Order_logs()
     {
         return $this->hasMany(OrderLog::class);
+    }
+    
+    public function rating()
+    {
+        return $this->hasOne(OrderRating::class, 'order_id');
     }
 }

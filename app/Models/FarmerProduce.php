@@ -7,16 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class FarmerProduce extends Model
 {
+    public $timestamp = true;
 
     protected $fillable = [
         'user_id',
         'produce_name',
         'produce_description',
-        'produce_quantity',
+        'produce_image',
+        'suggested_price',
     ];
 
     public function user() {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
 }

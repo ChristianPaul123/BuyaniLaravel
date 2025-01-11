@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('product_details')->nullable();
             $table->string('product_status')->nullable();
             //$table->float('product_kg')->nullable();
-            $table->string('product_deactivated')->nullable();
+            $table->date('deactivated_date')->nullable();
+            $table->boolean('deactivated_status')->default(0);
 
             //make this foriegn key migration
             //$table->foreignId('category_id')->nullable()->constrained('categories')->onDelete('cascade')->onUpdate('cascade');

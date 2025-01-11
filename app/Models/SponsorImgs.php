@@ -13,6 +13,9 @@ class SponsorImgs extends Model
         'img',
         'img_title',
         'admin_id',
+        'deactivated_by',
+        'deactivated_date',
+        'deactivated_status',
     ];
 
     public function admin() {

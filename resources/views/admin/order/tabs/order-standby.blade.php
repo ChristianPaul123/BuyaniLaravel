@@ -72,22 +72,24 @@
                         </td>
 
                         {{-- ACTIONS --}}
-                        <td>
+                        <td style="width: 100px">
                             {{-- View Order --}}
-                            <a href="{{ route('admin.orders.view', $order->id) }}" class="btn btn-primary btn-sm">
-                                <i class="fa fa-eye"></i> View
+                            <a href="{{ route('admin.orders.view', $order->id) }}" class="btn btn-primary btn-sm w-100 mb-2">
+                                <i class="fa fa-eye fa-sm"></i> View Order
                             </a>
 
                             {{-- Accept Order --}}
-                            <form action="{{ route('admin.orders.accept', $order->id) }}" method="POST" style="display:inline-block;">
+                            <form action="{{ route('admin.orders.accept', $order->id) }}" method="POST">
                                 @csrf
-                                <button class="btn btn-success">Accept Order</button>
+                                <button class="btn btn-sm btn-success w-100 mb-2">
+                                    <i class="fa fa-check fa-sm"> </i> Accept Order
+                                </button>
                             </form>
 
                             {{-- Decline Order --}}
-                             {{-- <a href="{{ route('admin.orders.reject', $order->id) }}" class="btn btn-warning btn-sm">
-                                <i class="fa fa-edit"></i> Decline Order
-                            </a> --}}
+                             <a href="{{ route('admin.orders.reject', $order->id) }}" class="btn btn-danger btn-sm w-100 mb-2">
+                                <i class="fa fa-trash fa-sm"></i> Decline Order
+                            </a>
                         </td>
                     </tr>
                     @endforeach

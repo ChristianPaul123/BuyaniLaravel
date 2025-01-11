@@ -19,6 +19,7 @@ return new class extends Migration
             $table->decimal('product_total_stock', 10, 2)->default(0);
             $table->decimal('product_sold_stock', 10, 2)->default(0);
             $table->decimal('product_damage_stock', 10, 2)->default(0);
+
             $table->timestamps();
         });
     }

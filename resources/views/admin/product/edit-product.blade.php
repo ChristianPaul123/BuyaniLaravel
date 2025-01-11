@@ -78,17 +78,33 @@
                                     <label for="product_details">Product Details</label>
                                     <textarea class="form-control" style="resize: none;" id="product_details" name="product_details" rows="2">{{ $product->product_details }}</textarea>
                                 </div>
-
                                 {{-- Current Product Image --}}
                                 <div class="mb-3 d-flex flex-column">
                                     <label for="product_image_showcase">Current Product Image</label>
                                     <img id="product_image_showcase" src="{{ asset($product->product_pic) }}" alt="Product Image" class="img-thumbnail" width="200px" height="100px">
                                 </div>
-
-                                {{-- Upload New Image --}}
                                 <div class="form-group my-3">
-                                    <label for="product_pic">Upload New Image</label>
+                                    <label for="product_pic">Upload New Main Image</label>
                                     <input type="file" class="form-control" id="product_pic" name="product_pic">
+                                </div>
+
+                                {{-- Sub Product Images --}}
+                                <div class="mb-3 d-flex flex-column">
+                                    <label for="product_image_showcase">Sub Product Image</label>
+                                    <div class="row">
+                                        @foreach ($images as $image)
+                                        <div class="position-relative col-6 col-md-4 col-lg-3 mb-2">
+                                            <img id="{{ $image['id'] }}" src="{{ asset($image['img']) }}" alt="Product Image" class="img-thumbnail w-100 h-100" style="object-fit: cover;">
+                                            <button type="button" class="btn btn-danger btn-sm position-absolute" style="top: 5px; right: 5px; z-index: 1;">
+                                                &times;
+                                            </button>
+                                        </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <div class="form-group my-3">
+                                    <label for="product_pic">Upload New Product Images</label>
+                                    <input type="file" class="form-control" id="product_pic" name="product_images[]" multiple>
                                 </div>
 
                                 {{-- Product Status --}}
@@ -129,6 +145,7 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                <input type="hidden" name="removed_images" id="removed_images">
 
                                 {{-- Submit Button --}}
                                 <div class="form-group">
@@ -142,4 +159,30 @@
         </section>
     </div>
 </div>
+<script>
+    // Array to keep track of removed image IDs
+    let removedImages = [];
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // Add event listeners to all remove buttons
+        document.querySelectorAll('.btn-danger').forEach(button => {
+            button.addEventListener('click', function () {
+                const imageDiv = this.closest('.position-relative');
+                const imageId = imageDiv.querySelector('img').id;
+
+                // Add the image ID to the removedImages array
+                removedImages.push(imageId);
+
+                // Remove the image visually
+                imageDiv.remove();
+                console.log('Removed images:', removedImages);
+            });
+        });
+    });
+
+    document.querySelector('form').addEventListener('submit', function () {
+        document.getElementById('removed_images').value = JSON.stringify(removedImages);
+    });
+</script>
+
 @endsection

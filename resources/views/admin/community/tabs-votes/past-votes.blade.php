@@ -4,6 +4,7 @@
             <table id="pastvotesTable" class="table table-bordered">
                 <thead>
                     <tr>
+                        <th>#</th>
                         <th>Username</th>
                         <th>Verified By</th>
                         <th>Suggestion Name</th>
@@ -14,8 +15,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($suggestProductRecords as $record)
+                    @foreach ($productSuggestionRecord as $record)
                     <tr>
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{ $record->username ?? 'N/A' }}</td>
                         <td>{{ $record->admin->username ?? 'N/A' }}</td>
                         <td>{{ $record->suggest_name }}</td>
@@ -24,7 +26,7 @@
                         {{-- IMAGE --}}
                         <td>
                             @if ($record->suggest_image)
-                                <img src="{{ asset($record->suggest_image) }}" alt="Suggestion Image" class="img-thumbnail" width="100">
+                            <img src="{{ $record->suggest_image ? asset('storage/'.$suggestion->suggest_image) : asset('img/logo1.svg') }}"  alt="Suggested Image" class="img-thumbnail" width="80">
                             @else
                                 No Image
                             @endif

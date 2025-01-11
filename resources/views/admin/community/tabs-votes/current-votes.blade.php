@@ -4,6 +4,7 @@
             <table id="currentvotesTable" class="table table-bordered">
                 <thead>
                     <tr>
+                        <th>#</th>
                         <th>Suggested By</th>
                         <th>Suggestion Name</th>
                         <th>Description</th>
@@ -14,14 +15,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($suggestions as $suggestion)
+                    @foreach ($productSuggestions as $suggestion)
                     <tr>
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{ $suggestion->user->username ?? 'N/A' }}</td>
                         <td>{{ $suggestion->suggest_name }}</td>
                         <td>{{ $suggestion->suggest_description }}</td>
                         <td>
                             @if ($suggestion->suggest_image)
-                                <img src="{{ asset($suggestion->suggest_image) }}" alt="Suggested Image" class="img-thumbnail" width="100">
+                            <img src="{{ $suggestion->suggest_image ? asset('storage/'.$suggestion->suggest_image) : asset('img/logo1.svg') }}"  alt="Suggested Image" class="img-thumbnail" width="80">
                             @else
                                 No Image
                             @endif

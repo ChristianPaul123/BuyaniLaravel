@@ -16,6 +16,7 @@ class OrderManagementController extends Controller
             'ordersToStandby' => Order::with(['user', 'payment'])->where('order_status', Order::STATUS_STANDBY)->get(),
             'ordersToPay' => Order::with(['user', 'payment'])->where('order_status', Order::STATUS_TO_PAY)->get(),
             'ordersToShip' => Order::with(['user', 'payment'])->where('order_status', Order::STATUS_TO_SHIP)->get(),
+            'ordersToDeliver' => Order::with(['user', 'payment'])->where('order_status', Order::OUT_FOR_DELIVERY)->get(),
             'ordersCompleted' => Order::with(['user', 'payment'])->where('order_status', Order::STATUS_COMPLETED)->get(),
             'ordersCancelled' => Order::with(['user', 'payment'])->where('order_status', Order::STATUS_CANCELLED)->get(),
         ]);
@@ -37,6 +38,12 @@ class OrderManagementController extends Controller
     {
         $ordersToShip = Order::where('order_status', Order::STATUS_TO_SHIP)->get();
         return view('admin.order.tabs.order-ship', compact('ordersToShip'));
+    }
+
+    public function toDeliver()
+    {
+        $ordersToDeliver = Order::where('order_status', Order::OUT_FOR_DELIVERY)->get();
+        return view('admin.order.tabs.order-deliver', compact('ordersToDeliver'));
     }
 
     public function completed()
@@ -68,22 +75,41 @@ class OrderManagementController extends Controller
         return view('admin.order.order-special');
     }
 
+    public function shipOrderProcess(Request $request)
+    {
+        $validated = $request->validate([
+            'order_id' => 'required|exists:orders,id',
+            'employee_name' => 'required|string',
+        ]);
+
+        $order = Order::findOrFail($validated['order_id']);
+
+        $order->update([
+            'delivery_employee' => $validated['employee_name'],
+            'order_status' => Order::OUT_FOR_DELIVERY,
+        ]);
+
+        return redirect()->route('admin.orders.index')->with('success', 'Order is now out for delivery.');
+    }
+
     public function cancelOrder($id)
     {
         // Find the order
       // Retrieve the order and related data
-    $order = Order::with(['user', 'orderItems.product', 'orderItems.productSpecification', 'payment', 'trackings'])
-    ->findOrFail($id);
+        $order = Order::with(['user', 'orderItems.product', 'orderItems.productSpecification', 'payment', 'trackings'])
+            ->findOrFail($id);
         // Redirect to the order-rejected page to allow admin to provide cancellation details
         return view('admin.order.order-rejected', compact('order'));
     }
+    
 
     public function showCancelOrder($id)
     {
         // Find the order
-      // Retrieve the order and related data
-    $order = Order::with(['user', 'orderItems.product', 'orderItems.productSpecification', 'payment', 'trackings','orderCancellation'])
-    ->findOrFail($id);
+        // Retrieve the order and related data
+            $order = Order::with(['user', 'orderItems.product', 'orderItems.productSpecification', 'payment', 'trackings','orderCancellation'])
+                ->findOrFail($id);
+
         // Redirect to the order-rejected page to allow admin to provide cancellation details
         return view('admin.order.order-view-rejected', compact('order'));
     }
@@ -123,9 +149,7 @@ class OrderManagementController extends Controller
         }
 
         // Determine the next status based on the payment method
-        $nextStatus = ($order->payment && $order->payment->payment_method === 'COD')
-            ? Order::STATUS_TO_SHIP
-            : Order::STATUS_TO_PAY;
+        $nextStatus = ($order->payment && ($order->payment->payment_method === 'COD' || $order->payment->payment_method === 'Stripe'))? Order::STATUS_TO_SHIP : Order::STATUS_TO_PAY;
 
         $order->update([
             'order_status' => $nextStatus,

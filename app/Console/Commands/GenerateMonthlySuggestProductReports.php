@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\VotingCount;
 use App\Models\SuggestProduct;
 use Illuminate\Console\Command;
 use App\Models\SuggestProductRecord;
@@ -27,6 +28,13 @@ class GenerateMonthlySuggestProductReports extends Command
      */
     public function handle()
 {
+    // Reset all voting counts for all users
+    VotingCount::query()->update([
+        'max_vote_count' => 5,
+        'remaining_vote_count' => 5,
+        'suggest_count' => 1,
+    ]);
+
     // Fetch top 10 suggest products with the highest vote count
     $suggestedProducts = SuggestProduct::orderBy('total_vote_count', 'desc')
         ->limit(10)
@@ -43,6 +51,7 @@ class GenerateMonthlySuggestProductReports extends Command
             'transfer_date' => now(), // Current date for transfer
         ]);
     }
+
 
     $this->info('Top 10 monthly suggest product report generated successfully.');
 }

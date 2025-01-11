@@ -1,6 +1,6 @@
 <div class="card overflow-x-scroll">
     <div class="card-header">
-        <h3 class="card-title">To Standby Orders</h3>
+        <h3 class="card-title">To Ship Orders</h3>
     </div>
     <div class="card-body">
         <table id="ordershipTable" class="table table-bordered table-striped">
@@ -71,27 +71,55 @@
                         </td>
 
                         {{-- ACTIONS --}}
-                        <td>
+                        <td style="width: 150px">
                             {{-- View Order --}}
-                            <a href="{{ route('admin.orders.view', $order->id) }}" class="btn btn-primary btn-sm">
-                                <i class="fa fa-eye"></i> View Order
+                            <a href="{{ route('admin.orders.view', $order->id) }}" class="btn btn-primary btn-sm w-100 mb-2">
+                                <i class="fa fa-eye fa-sm"></i> View Order
                             </a>
 
-                            <a href="{{ route('admin.orders.view', $order->id) }}" class="btn btn-primary btn-sm">
-                                <i class="fa fa-eye"></i> Assign Employee
-                            </a>
+                            {{-- Assign employee --}}
+                            <button class="btn btn-success btn-sm w-100 mb-2" data-bs-toggle="modal" data-bs-target="#assignEmployeeModal">
+                                <i class="fa fa-edit fa-sm"></i> Assign Employee
+                            </button>
+                            {{-- <a href="{{ route('admin.orders.view', $order->id) }}" class="btn btn-primary btn-sm">
+                                <i class="fa fa-eye"></i>Ass
+                            </a> --}}
 
-                            <a href="{{ route('admin.orders.view', $order->id) }}" class="btn btn-primary btn-sm">
-                                <i class="fa fa-eye"></i> View Trackings
-                            </a>
-
-                            <a href="{{ route('admin.orders.reject', $order->id) }}" class="btn btn-primary btn-sm">
-                                <i class="fa fa-eye"></i> Decline Order
+                            <a href="{{ route('admin.orders.reject', $order->id) }}" class="btn btn-danger btn-sm w-100">
+                                <i class="fa fa-trash fa-sm"></i> Cancel Order
                             </a>
                         </td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
+    </div>
+</div>
+
+<div class="modal fade" id="assignEmployeeModal" tabindex="-1" aria-labelledby="assignEmployeeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="assignEmployeeModalLabel">Assign Employee</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <form id="assignEmployeeForm" method="POST" action="{{ route('admin.orders.ship') }}">
+                    {{-- {{ route('employee.assign') }} --}}
+                    @csrf
+                    <div class="mb-3">
+                        <label for="employeeName" class="form-label">Employee Name</label>
+                        <input type="text" class="form-control" id="employeeName" name="employee_name" required>
+                        <input type="hidden" name="order_id" value="{{ $order->id ?? null }}">
+                    </div>
+                </form>
+                {{-- Add note that by confirming, it will change to out for delivery status --}}
+                <p>By assigning an employee, the order will be marked as <strong>Out for Delivery</strong></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" form="assignEmployeeForm" class="btn btn-primary">Confirm</button>
+            </div>
+        </div>
     </div>
 </div>
