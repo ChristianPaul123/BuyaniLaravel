@@ -147,4 +147,92 @@
         color: orange;
         border-radius: 7px;
     }
+
+    .notif {
+        position: fixed;
+        z-index: 1050;
+
+        left: 50%;
+        top: 3%;
+        transform: translateX(-50%);
+        transition: all 0.3s ease-in-out;
+
+        display: flex;
+        padding: 0;
+        height: auto;
+        min-height: 80px;
+        width: auto;
+    }
+
+    .container1{
+        height: auto;
+        width: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .icon-modal{
+        font-size: 2rem;
+        color: #fff8dd;
+    }
+
+    .container2{
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* Centers content horizontally */
+        align-items: center;     /* Centers content vertically */
+        background-color: #fff8dd;
+    }
+
+    .error-list{
+        margin: 0 auto;
+        width: fit-content;
+    }
+
+    .exit-modal {
+        font-size: 1.5rem; /* Adjust size as desired (e.g., 1.5rem, 24px, etc.) */
+        color: #000; /* Optional: Set icon color */
+        cursor: pointer; /* Optional: Make it visually indicate it's clickable */
+        background-color: #fff8dd;
+    }
+
+
+
+
+    .notif-error{
+        border: 5px solid #d91818;
+    }
+    .notif-message{
+        border: 5px solid #d97a18;
+    }
+    .notif-success{
+        border: 5px solid #4caf50;
+    }
+
+    .container-error{
+        background-color: #d91818;
+        border-right: 5px solid #d91818;
+    }
+    .container-message{
+        background-color: #d97a18;
+        border-right: 5px solid #d97a18;
+    }
+    .container-success{
+        background-color: #4caf50;
+        border-right: 5px solid #4caf50;
+    }
+
+
+    @media (max-width: 768px) {
+        .notif {
+            display: flex;
+            padding: 0;
+            height: auto;
+            min-height: 80px;
+            width: 90%;
+        }
+    }
+
 </style>

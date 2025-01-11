@@ -207,7 +207,6 @@
     <!--CONTENT-->
             @livewire('user.login-index', ['user_type' => request()->user_type])
 
-
 @endsection
 
 @section('scripts')

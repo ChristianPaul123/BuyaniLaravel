@@ -97,10 +97,10 @@
                     <div class="card-body">
                         <div class="row align-items-center g-3">
                             <div class="col-md-1">
-                                <img src="{{ asset($item->product_specification->product->product_pic) }}" alt="{{ $item->product_specification->specification_name }}" class="img-fluid">
+                                <img src="{{ asset($item->productSpecification->product->product_pic) }}" alt="{{ $item->productSpecification->specification_name }}" class="img-fluid">
                             </div>
                             <div class="col-md-2">
-                                <p class="h5 card-title mb-1">{{ $item->product_specification->specification_name }}</p>
+                                <p class="h5 card-title mb-1">{{ $item->productSpecification->specification_name }}</p>
                             </div>
                             <div class="col-md-2">
                                 <label for="numberInput{{ $item->id }}" class="form-label">Quantity</label>
@@ -116,7 +116,7 @@
                             </div>
                             <div class="col-md-2">
                                 <label class="form-label">Price per item</label>
-                                <p class="text-muted mb-0">{{ $item->product_specification->product_price }}</p>
+                                <p class="text-muted mb-0">{{ $item->productSpecification->product_price }}</p>
                             </div>
                             <div class="col-md-2">
                                 <label class="form-label">Total price</label>
@@ -137,7 +137,7 @@
                                         $selectedItem = $cartItems->firstWhere('id', $selectedItemId);
                                     @endphp
                                     @if($selectedItem)
-                                        <p>{{ $selectedItem->product_specification->specification_name }}</p>
+                                        <p>{{ $selectedItem->productSpecification->specification_name }}</p>
                                     @endif
                                 @endforeach
                             </div>
@@ -176,7 +176,7 @@
                                     <input type="checkbox" class="form-check-input" id="item-{{ $item->id }}" name="selectedItems[]"
                                         value="{{ $item->id }}" {{ in_array($item->id, $selectedItems ?? []) ? 'checked' : '' }}>
                                     <label class="form-check-label" for="item-{{ $item->id }}">
-                                        {{ $item->product_specification->product->name }}
+                                        {{ $item->productSpecification->product->product_name }}
                                     </label>
                                 </div>
                             @endforeach

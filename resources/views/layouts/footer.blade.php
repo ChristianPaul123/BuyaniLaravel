@@ -147,8 +147,8 @@
     </footer>
 
     <div class="footer-bottom text-white">
-        <a href="#" class="text-white">
-        <span class="text-white copyright">Copyright © 2025 buyanicommerce.ph All Rights Reserved.</span>
+        <a href="#" class="text-white">Return & Refund Policy</a> |
+        <span class="text-white copyright">Copyright © 2024 buyanicommerce.ph All Rights Reserved.</span>
     </div>
 
     <script>

@@ -176,17 +176,17 @@
             <!-- Action Buttons -->
             <div class="d-flex justify-content-end">
                 <!-- Always visible: Return Button -->
-                <button class="btn btn-danger me-2" onclick="window.history.back()">Return</button>
+                <button class="btn btn-secondary me-2" onclick="window.history.back()">Return</button>
 
                 <!-- Conditional Buttons -->
                 @if ($order->order_status == 1)
                     <!-- Status: 1 -->
-                    <a class="btn btn-secondary me-2"
+                    <a class="btn btn-danger me-2"
                         href="{{ route('user.consumer.order.cancel', $order->id) }}">Cancel</a>
                 @elseif($order->order_status == 2)
                     <!-- Status: 2 -->
                     {{-- <a class="btn btn-warning me-2" href="{{ route('user.consumer.order.update-payment', $order->id) }}">Update Payment</a> --}}
-                    <a class="btn btn-secondary me-2"
+                    <a class="btn btn-danger me-2"
                         href="{{ route('user.consumer.order.cancel', $order->id) }}">Cancel</a>
                     {{-- @elseif($order->order_status == 3) <!-- Status: 3 -->
             <a class="btn btn-primary me-2" href="{{ route('user.consumer.order.track', $order->id) }}">Track Order</a> --}}

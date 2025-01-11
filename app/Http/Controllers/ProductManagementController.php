@@ -44,7 +44,7 @@ return view('admin.product.product-index', [
             'subcategory_id' => ['required', 'exists:sub_categories,id'],
             'product_pic' => ['required', 'array', 'min:1'], // Ensure at least one image is uploaded
             'product_pic.*' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'max:4096'], // Validate each image individually
-        ]);        
+        ]);
 
         // Upload product images
         if ($request->hasFile('product_pic')) {
@@ -186,7 +186,7 @@ return view('admin.product.product-index', [
     {
         $validatedData = $request->validate([
             'product_id' => ['required', 'exists:products,id'],
-            'specification_name' => ['required', 'string', 'max:255', 'unique:product_specifications,specification_name'],
+            'specification_name' => ['required', 'string', 'max:255', 'unique:productSpecifications,specification_name'],
             'product_price' => ['required', 'numeric', 'min:0'],
             'product_kg' => ['required', 'numeric', 'min:0'],
             'admin_id' => ['required', 'exists:admins,id'],
@@ -221,7 +221,7 @@ return view('admin.product.product-index', [
 
         $validatedData = $request->validate([
             'product_id' => ['required', 'exists:products,id'],
-            'specification_name' => ['required', 'string', 'max:255', 'unique:product_specifications,specification_name,' . $id],
+            'specification_name' => ['required', 'string', 'max:255', 'unique:productSpecifications,specification_name,' . $id],
             'product_price' => ['required', 'numeric', 'min:0'],
             'product_kg' => ['required', 'numeric', 'min:0'],
             'admin_id' => ['required', 'exists:admins,id'],

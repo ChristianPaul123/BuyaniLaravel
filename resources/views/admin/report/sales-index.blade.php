@@ -80,13 +80,13 @@
             {{-- Tab Contents --}}
             <div class="tab-content mt-4" id="salesTabsContent">
                 {{-- Current Inventory Tab --}}
-                <div class="tab-pane fade" id="product-sales" role="tabpanel">
-                    @include('admin.report.tabs-sales.product-sales')
+                <div class="tab-pane fade show active" id="product-sales" role="tabpanel">
+                    @include('admin.report.tabs-sales.product-sales',['productSales' => $productSales])
                 </div>
 
                 {{-- Past Inventory Tab --}}
-                <div class="tab-pane fade" id="specfication-sales" role="tabpanel">
-                    @include('admin.report.tabs-sales.specification-sales')
+                <div class="tab-pane fade" id="specification-sales" role="tabpanel">
+                    @include('admin.report.tabs-sales.specification-sales',['specificProductSales' => $specificProductSales])
                 </div>
             </div>
         </section>

@@ -6,12 +6,13 @@ namespace App\Http\Controllers;
 use App\Models\Record;
 use App\Models\UserLog;
 use App\Models\AdminLog;
-use App\Models\ProductLog;
-use App\Models\Inventory;
 use App\Models\OrderLog;
+use App\Models\Inventory;
+use App\Models\ProductLog;
 use App\Models\ProductSales;
 
 use Illuminate\Http\Request;
+use App\Models\SpecificProductSales;
 
 class ReportManagementController extends Controller
 {
@@ -21,6 +22,14 @@ class ReportManagementController extends Controller
     $records = Record::all();
 
     return view('admin.report.inventory-index', compact('inventories', 'records'));
+}
+
+public function showSalesReports()
+{
+    $productSales = ProductSales::with('product')->get();
+    $specificProductSales = SpecificProductSales::with('productSales','productSpecification')->get();
+
+    return view('admin.report.sales-index', compact('productSales', 'specificProductSales'));
 }
 
 

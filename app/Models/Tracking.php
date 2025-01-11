@@ -35,7 +35,7 @@ class Tracking extends Model
         return $this->belongsTo(User::class); // 'user_id' is the foreign key in the users table
     }
 
-    public function tracking_timelines() {
+    public function trackingTimelines() {
         return $this->belongsToMany(TrackingTimeline::class);
     }
 }

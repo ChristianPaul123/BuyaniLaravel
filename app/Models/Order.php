@@ -86,11 +86,11 @@ class Order extends Model
         return $statuses[$this->order_status] ?? 'Unknown';
     }
 
-    public function Order_logs()
+    public function OrderLogs()
     {
         return $this->hasMany(OrderLog::class);
     }
-    
+
     public function rating()
     {
         return $this->hasOne(OrderRating::class, 'order_id');

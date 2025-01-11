@@ -108,50 +108,49 @@ class LoginIndex extends Component
 
     public function login()
     {
-            $validatedData = $this->validate([
-                'email_phoneNum' => ['required','string','regex:/^(\+?\d{10,15}|[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/',],
-                'password' => ['required'],
-                'user_type' => ['required'],
+        $validatedData = $this->validate([
+            'email_phoneNum' => [
+                'required',
+                'string',
+                'regex:/^(\+?\d{10,15}|[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/',
+            ],
+            'password' => ['required', 'string'],
+            'user_type' => ['required'],
+        ]);
+
+        if (!$this->captchaVerify) {
+            throw ValidationException::withMessages([
+                'captcha' => 'Please verify that you are not a robot.',
             ]);
+        }
 
-            // if ($this->captchaVerify != true) {
-            //     $this->dispatch('sessionError', error: 'Please verify the captcha');
-            //     return;
-            // }
+        $loginField = filter_var($validatedData['email_phoneNum'], FILTER_VALIDATE_EMAIL) ? 'email' : 'phone_number';
 
+        if (Auth::guard('user')->attempt([
+            $loginField => $validatedData['email_phoneNum'],
+            'password' => $validatedData['password'],
+            'user_type' => $validatedData['user_type'],
+        ])) {
+            session()->regenerate();
 
+            $user = Auth::guard('user')->user();
 
-            // Determine if the input is an email or phone number
-            $loginField = filter_var($validatedData['email_phoneNum'], FILTER_VALIDATE_EMAIL) ? 'email' : 'phone_number';
-
-            // Attempt to authenticate
-            if (Auth::guard('user')->attempt([
-                $loginField => $validatedData['email_phoneNum'],
-                'password' => $validatedData['password'],
-                'user_type' => $validatedData['user_type'],
-            ])) {
-                session()->regenerate();
-
-                $user = Auth::guard('user')->user();
-
-                // If user_type == 1 (Consumer), ensure a cart is created
-                if ($user->user_type == 1) {
-                    Cart::firstOrCreate(
-                        ['user_id' => $user->id],
-                        ['cart_total' => 0, 'overall_cartKG' => 0, 'total_price' => 0]
-                    );
-                }
-
-                // Redirect to the appropriate dashboard
-                $route = $user->user_type == 1 ? 'user.consumer' : 'user.farmer';
-                return redirect()->route($route)->with('success', 'Login successful');
-            } else {
-
-                // dd('something went wrong');
-                // $this->dispatch('sessionError', error: $error);
-                $this->reset('captcha');
-                session()->flash('errorpassword', 'Invalid email/phone number or password.');
+            if ($user->user_type == 1) {
+                Cart::firstOrCreate(
+                    ['user_id' => $user->id],
+                    ['cart_total' => 0, 'overall_cartKG' => 0, 'total_price' => 0]
+                );
             }
+
+            $route = $user->user_type == 1 ? 'user.consumer' : 'user.farmer';
+            return redirect()->route($route)->with('success', 'Login successful');
+        } else {
+            $this->reset('captcha');
+            throw ValidationException::withMessages([
+                'email_phoneNum' => 'Invalid email/phone number or password.',
+                // 'password' => 'Invalid email/phone number or password.',
+            ]);
+        }
     }
 
 
@@ -207,15 +206,22 @@ class LoginIndex extends Component
         if ($otpRecord && $otpRecord->otp == $this->otp) {
             $otpRecord->update(['is_verified' => true]);
 
-            //closes the other modal and show the password reset modal
+            // Close OTP modal and show password reset form
             $this->showOtpModal = false;
             $this->showPasswordResetForm = true;
 
-            session()->flash('success', 'OTP confirmed Please input your new password.');
+            session()->flash('success', 'OTP confirmed. Please input your new password.');
         } else {
-            session()->flash('error', 'Invalid or expired OTP. Please try again.');
+            // Clear OTP input on failure
+            $this->reset('otp');
+
+            // Show dynamic validation error under input
+            throw ValidationException::withMessages([
+                'otp' => 'Invalid or expired OTP. Please try again.',
+            ]);
         }
     }
+
 
     public function resetPassword()
     {
