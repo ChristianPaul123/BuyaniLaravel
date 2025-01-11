@@ -90,7 +90,7 @@
                                     @elseif($order->order_status == \App\Models\Order::STATUS_CANCELLED) bg-danger
                                     @elseif($order->order_status == \App\Models\Order::OUT_FOR_DELIVERY) bg-info
                                 @else bg-primary @endif">
-                                {{ $order->status_label }}  
+                                {{ $order->status_label }}
                             </span>
                                 </p>
                             </div>
@@ -131,12 +131,12 @@
                                         <tr>
                                             <th>Product Name</th>
                                             <th>Product Specification</th>
+                                            <th>Product Price</th>
                                             <th>Category Specifcation</th>
                                             <th>Sub Category Specification</th>
                                             <th>Product Details</th>
                                             <th>Quantity</th>
-                                            <th>Price</th>
-                                            <th>Total</th>
+                                            <th>Total Price</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -144,12 +144,12 @@
                                         <tr>
                                             <td>{{ $item->product->product_name ?? 'N/A' }}</td>
                                             <td>{{ $item->productSpecification->specification_name ?? 'N/A' }}</td>
+                                            <td>{{ $item->productSpecification->product_price ?? 'N/A' }}</td>
                                             <td>{{ $item->product->category->category_name }}</td>
                                             <td>{{ $item->product->subcategory->sub_category_name }}</td>
                                             <td>{{  $item->product->product_details ?? 'N/A' }}</td>
                                             <td>{{ $item->quantity }}</td>
                                             <td>${{ number_format($item->price, 2) }}</td>
-                                            <td>${{ number_format($item->price * $item->quantity, 2) }}</td>
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -219,8 +219,8 @@
                 @endif
                 {{-- Seventh Row: Actions --}}
                 @if ($order->order_type == 1 &&
-                        ($order->order_status === \App\Models\Order::STATUS_TO_PAY 
-                            || $order->order_status === \App\Models\Order::STATUS_TO_SHIP 
+                        ($order->order_status === \App\Models\Order::STATUS_TO_PAY
+                            || $order->order_status === \App\Models\Order::STATUS_TO_SHIP
                             || $order->order_status === \App\Models\Order::OUT_FOR_DELIVERY
                         )
                     ) {{-- Delivery --}}
