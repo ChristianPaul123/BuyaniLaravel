@@ -101,7 +101,7 @@ class UserCart extends Component
     protected function loadCartItems()
     {
         $this->cartItems = CartItem::where('cart_id', $this->cart->id)
-            ->with('product_specification.product')
+            ->with('productSpecification.product')
             ->get();
     }
 
