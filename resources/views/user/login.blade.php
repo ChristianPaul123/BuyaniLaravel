@@ -8,16 +8,20 @@
         /* border: 1px solid black; */
     }
 
-    .a, .b, .c{
-        /* border: 1px solid black; */
-    }
-
      .custom-font-content {
         font-family: 'Poppins', sans-serif;
         font-weight: bold;
         color: aliceblue;
-        background-color: #3F6F23;
-        color: #fff;
+        background-color: #3f6f23;
+        height: 100vh;
+    }
+
+    .left-div{
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
     .form-control:focus {
@@ -79,7 +83,6 @@
         .form-part{
             margin: 0 0;
         }
-
 
         .custom-font-content {
             height: auto;
