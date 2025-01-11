@@ -239,7 +239,7 @@
                         </h2>
                         <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
                             <div class="accordion-body">
-                                Buyani is an innovative e-commerce platform that connects farmers directly with consumers. Farmers use Buyani to sell their fresh produce, while customers use it to purchase high-quality, locally grown products.
+                                BuyAni is an e-commerce system where farmers can sell their fresh produce, and customers can browse and purchase fruits and vegetables conveniently. It provides a simple platform for smooth transactions,making it easier for farmers to offer their products and for customers to access quality local produce.
                             </div>
                         </div>
                     </div>
