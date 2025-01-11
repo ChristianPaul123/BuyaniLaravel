@@ -165,7 +165,7 @@
                     </div>
                 </div>
 
-                <div class="chart-container mt-2" style="border: 1px solid #d2d2d2; padding: 20px; border-radius: 7px; margin-bottom: 200px;">
+                <div class="chart-container mt-2" style="border: 1px solid #d2d2d2; padding: 20px; border-radius: 7px; margin-bottom: 100px;">
                     <div class="row g-5">
                         <div class="col-md-6">
                             <label class="chart-label">Top Sales Products</label>
