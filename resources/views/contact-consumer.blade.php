@@ -72,7 +72,7 @@
         {{-- <div class="d-block-12 m-5"></div> --}}
         <!-- Contact Form and Info -->
         <div class="container">
-            <div class="contact-header" style="color: #f8f9fa;">
+            <div class="contact-header text-center" style="color: #f8f9fa;">
                 <h1>Contact Us</h1>
                 <p>We would love to hear from you!</p>
             </div>

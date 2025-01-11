@@ -742,15 +742,16 @@
             <div class="row align-items-center">
                 <!-- Left Text -->
                 <div class="col-md-6">
-                    <h1 class="subscribe-title">Subscribe to Buyani</h1>
-                    <p class="subscribe-description">Get updates about our latest promos, new products, and featured brands.</p>
+                    <h1 class="subscribe-title">Want to Know More?</h1>
+                    <p class="subscribe-description">Get updates by contacting us through our email.</p>
                 </div>
-                <!-- Right Form -->
+
                 <div class="col-md-6">
-                    <form class="d-flex">
+                    {{-- <form class="d-flex">
                         <input type="email" class="form-control subscribe-input" placeholder="Email Address">
                         <button type="submit" class="btn subscribe-button">Subscribe</button>
-                    </form>
+                    </form> --}}
+                    <a href="route('user.consumer.contact')" class="btn subscribe-button">Contact Us</a>
                 </div>
             </div>
         </div>
