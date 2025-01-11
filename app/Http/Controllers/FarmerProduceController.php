@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
+use Illuminate\Http\Request;
 use App\Models\FarmerProduce;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\StoreFarmerProduceRequest;
 use App\Http\Requests\UpdateFarmerProduceRequest;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\File;
 
 class FarmerProduceController extends Controller
 {
@@ -22,10 +23,19 @@ class FarmerProduceController extends Controller
             return redirect()->route('user.index')->with('message', 'Please log in or sign up to view this page');
         }
 
+            // **************** NEW CODE: Fetch low stock products ****************
+            $lowStockProducts = Product::with('inventory')
+            ->whereHas('inventory', function($query) {
+                $query->where('product_total_stock', '<', 50);
+            })
+            ->take(5) // or ->limit(10)
+            ->get();
+
+
         // get all farmer produce
         $farmerProduce = FarmerProduce::where('user_id', Auth::guard('user')->user()->id)->get();
 
-        return view('user.farmer.farmerproduce.show', compact('farmerProduce'));
+        return view('user.farmer.farmerproduce.show', compact('farmerProduce','lowStockProducts'));
     }
 
     public function saveFarmerSupplyProduct(Request $request)
@@ -51,12 +61,12 @@ class FarmerProduceController extends Controller
             $image = $request->file('produce_image');
             $name = time() . '.' . $image->getClientOriginalExtension();
             $destinationPath = public_path('/farmer_produce_images');
-        
+
             // Check if the directory exists, and create it if it doesn't
             if (!File::exists($destinationPath)) {
                 File::makeDirectory($destinationPath, 0755, true);
             }
-        
+
             $image->move($destinationPath, $name);
             $farmerProduce->produce_image = $name;
         }
@@ -64,7 +74,7 @@ class FarmerProduceController extends Controller
         $farmerProduce->save();
 
         return response()->json(['success' => 'Product added successfully!']);
-    } 
+    }
 
     public function editProduct(Request $request)
     {
@@ -105,7 +115,7 @@ class FarmerProduceController extends Controller
 
         // Find the farmer product
         $farmerProduce = FarmerProduce::findOrFail($request->id);
-        
+
         // Update product details
         $farmerProduce->produce_name = $request->produce_name;
         $farmerProduce->produce_description = $request->produce_description;
@@ -122,7 +132,7 @@ class FarmerProduceController extends Controller
             $image = $request->file('produce_image');
             $name = time() . '.' . $image->getClientOriginalExtension();
             $destinationPath = public_path('/farmer_produce_images');
-            
+
             // Check if the directory exists, create it if it doesn't
             if (!File::exists($destinationPath)) {
                 File::makeDirectory($destinationPath, 0755, true);

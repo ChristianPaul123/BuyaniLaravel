@@ -313,7 +313,7 @@
                         <p>Looks like you don't have any other info yet. Why not try editing it?</p>
                     </div>
                     <div class="modal-footer">
-                        <a href="{{ route('user.consumer.profile.show') }}" class="btn btn-primary">Edit Profile</a>
+                        <a href="/user/farmer/profile" class="btn btn-primary">Edit Profile</a>
                         <button type="button" class="btn btn-secondary" onclick="hideProfileModal()">Close</button>
                     </div>
                 </div>

@@ -91,9 +91,9 @@
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="/user/consumer/profile">Show Profile</a></li>
                         <li>
-                            <form method="POST" action="{{ route('user.logout') }}" class="dropdown-item p-0 m-0">
+                            <form method="POST" action="{{ route('user.logout') }}" class="dropdown-item p-0 m-0" id="logoutForm">
                                 @csrf
-                                <button type="submit" class="btn btn-link text-decoration-none text-dark w-100 text-start">
+                                <button type="button" class="btn btn-link text-decoration-none text-dark w-100 text-start" id="logoutButton">
                                     Logout
                                 </button>
                             </form>
@@ -102,7 +102,7 @@
                 </li>
                 @else
                 <li class="nav-item px-1">
-                    <a class="nav-link" @if(request()->is('user/consumer/login')) active @endif href="/" data-page="login">LOGIN/SIGNUP</a>
+                    <a class="nav-link" @if(request()->is('user/consumer/login')) active @endif href="/" data-page="login">LOGIN</a>
                 </li>
                 {{-- <li class="nav-item px-1">
                     <a class="nav-link" @if(request()->is('user/consumer/register')) active @endif href="/" data-page="register">REGISTER</a>
