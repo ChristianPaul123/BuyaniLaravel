@@ -252,7 +252,7 @@
                         </h2>
                         <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
                             <div class="accordion-body">
-                                Farmers can connect to Buyani by creating an account on the platform. Once registered, they can list their produce, manage inventory, track orders, and receive payments securely. This helps farmers reach a wider audience and sell their products more efficiently.
+                                Farmers can easily sign up on BuyAni by uploading their ID and supporting documents for verification. Once approved, they can start listing their products with details like name, price, and photos. They can update or remove product listings anytime. For questions or assistance, farmers can use the messaging feature to reach out to the admin. If they need to, they can also request their account to be deactivated, keeping everything smooth and up to date.
                             </div>
                         </div>
                     </div>
