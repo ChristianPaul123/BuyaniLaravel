@@ -29,7 +29,13 @@
     }
 
     .left-side{
+
+        padding: 0px 50px;
+        height: 70%;
         margin: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
 
     .form-part {
@@ -57,6 +63,13 @@
         transform: scale(1.1);
     }
 
+    .login-as {
+        font-size: 45px;
+        text-align: center;
+    }
+
+
+
 
     @media (max-width: 768px) {
         .hide{
@@ -66,6 +79,26 @@
         .form-part{
             margin: 0 0;
         }
+
+
+        .custom-font-content {
+            height: auto;
+            padding: 20px;
+        }
+
+        .left-side{
+            text-align: start;
+            padding: 0px 0px;
+        }
+
+        .login-as {
+            font-size: 2.0rem;
+        }
+
+        .mobile-modal {
+            width: 95% !important;
+        }
+
     }
 
 
@@ -157,6 +190,7 @@
 
 @include('user.includes.popup-style')
 {{-- @include('user.includes.notif-style') --}}
+@include('user.styles.messageBox_styles');
 
 @endpush
 @section('x-content')
