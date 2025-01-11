@@ -95,11 +95,16 @@
         }
 
         .login-as {
+            margin-top: -50px;
             font-size: 2.0rem;
         }
 
         .mobile-modal {
             width: 95% !important;
+        }
+
+        .bottom-fix{
+            margin-bottom: 50px;
         }
 
     }

@@ -57,7 +57,7 @@
             </script>
 
             <div class="">
-                <div class="text-center pt-3" style="color: #ffa500">
+                <div class="text-center pt-3 bottom-fix" style="color: #ffa500;">
                     <a href="{{ route('user.register', ['user_type' => $user_type]) }}">Create Account | Sign Up</a>
                 </div>
             </div>
