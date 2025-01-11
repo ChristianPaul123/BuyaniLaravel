@@ -175,7 +175,7 @@ class UserCartCheckout extends Component
                 OrderItem::create([
                     'order_id' => $order->id,
                     'product_specification_id' => $item->product_specification_id,
-                    'product_id' => $item->product_specification->product_id,
+                    'product_id' => $item->productSpecification->product_id,
                     'quantity' => $item->quantity,
                     'price' => $item->price,
                     'overall_kg' => $item->overall_kg,

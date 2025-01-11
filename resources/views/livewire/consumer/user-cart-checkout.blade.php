@@ -148,8 +148,8 @@
                         @foreach ($cartItems as $item)
                             <div class="d-flex justify-content-between align-items-center border-bottom py-2"
                                 wire:key="{{ $item->id }}">
-                                <p>{{ $item->product_specification->product->product_name }} /
-                                    {{ $item->product_specification->specification_name }} x {{ $item->quantity }}
+                                <p>{{ $item->productSpecification->product->product_name }} /
+                                    {{ $item->productSpecification->specification_name }} x {{ $item->quantity }}
                                 </p>
                                 <p>{{ $item->overall_kg }} / {{ $item->overall_kg }}
                                 <p>₱{{ $item->price }}</p>

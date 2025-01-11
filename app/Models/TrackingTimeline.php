@@ -15,4 +15,8 @@ class TrackingTimeline extends Model
         'description',
         'location'
     ];
+
+    public function tracking() {
+        return $this->belongsTo(Tracking::class);
+    }
 }

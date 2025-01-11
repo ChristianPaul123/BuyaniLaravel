@@ -28,7 +28,7 @@ class CartItem extends Model
     }
 
     // Define a relationship with the Product Specification model
-    public function product_specification()
+    public function productSpecification()
     {
         return $this->belongsTo(ProductSpecification::class);
     }
