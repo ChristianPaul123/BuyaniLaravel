@@ -27,6 +27,7 @@
                          $firstForm = Auth::guard('user')->user()->farmerForms->first();
                      @endphp
 
+
                      @if ($firstForm && $firstForm->id_verified == 1 && $firstForm->form_verified == 1)
                          <li class="nav-item px-1 position-relative">
                              <a class="nav-link @if (request()->is('user/farmer/supply-products')) active @endif"
@@ -71,6 +72,7 @@
                                      style="width: 30px; height: 30px; margin-right: 8px;">
                              @endif
                          </a>
+
 
                          <ul class="dropdown-menu dropdown-menu-end border-0" aria-labelledby="navbarProfile">
                              <li class="dropdown-header text-center fw-bold">User Profile</li>
