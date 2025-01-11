@@ -208,6 +208,7 @@
                                             <th>Produce Name</th>
                                             <th>Description</th>
                                             <th>Product Image</th>
+                                            <th>Suggested_Price</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -218,11 +219,12 @@
                                                 <td>{{ $produce->produce_description }}</td>
                                                 <td>
                                                     <img
-                                                        src="/farmer_produce_images/{{ $produce->produce_image }}" 
+                                                        src="/farmer_produce_images/{{ $produce->produce_image }}"
                                                         alt="{{ $produce->produce_name }}"
-                                                        class="img-fluid" 
-                                                        style="max-width: 300px; height: auto;">
+                                                        class="img-fluid"
+                                                        style="max-width: 150px; height: auto;">
                                                 </td>
+                                                <td>₱ {{ $produce->suggested_price }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
