@@ -18,10 +18,9 @@
                                     Experience innovation and quality like never before.
                                     Limited-time offer – don’t miss out!
                                 </p>
-                                <a href="#" class="btn btn-light btn-lg mt-2">Shop Now</a>
                             </div>
                             <div class="col-md-6 text-center">
-                                <img src="https://via.placeholder.com/400x250" alt="Product Image" class="img-fluid rounded"
+                                <img src=" {{ asset('img/title/bundle-fruits-bg.png') }}" alt="Product Image" class="img-fluid rounded"
                                     style="height:250px; width:400px">
                             </div>
                         </div>
@@ -53,8 +52,8 @@
                                 </div>
                                 <div class="form-group my-3">
                                     <label for="username">Phone Number:</label>
-                                    <input type="tel" pattern="[0-9]{10}"  maxlength="10" minlength="10"
-                                    title="Phone number must be 10 digits" wire:model="phone_number" class="form-control" id="phone_number"
+                                    <input type="tel" pattern="[0-9]{11}"  maxlength="12" minlength="11"
+                                    title="Phone number must be 11 digits" wire:model="phone_number" class="form-control" id="phone_number"
                                         placeholder="Enter phone number" required>
                                     @error('phone_number')
                                         <span class="text-warning">{{ $message }}</span>
@@ -127,9 +126,29 @@
     @elseif($user_type == 2)
         <div class="container-fluid custom-font-content h-100" style="padding: 20px; width: 100%;">
             <div class="row d-flex h-100 justify-content-start align-items-center">
+                <div class="row" style="display: flex; justify-content:center;">
+                    <div class="banner p-4 rounded bg-warning text-white d-flex flex-wrap align-items-center"
+                        style="width: 1000px">
+                        <div class="col-md-6 text-center text-md-start">
+                            <h1 class="display-5 fw-bold">Discover Our New Product</h1>
+                            <p class="mt-3">
+                                Experience innovation and quality like never before.
+                                Limited-time offer – don’t miss out!
+                            </p>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <img src=" {{ asset('img/title/bundle-fruits-bg.png') }}" alt="Product Image" class="img-fluid rounded"
+                                style="height:250px; width:400px">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="text-center my-3 mx-2 head-sign">Sign Up As Farmer</h2>
+                    </div>
+                </div>
                 <form wire:submit.prevent="register" class="my-3" style="width: 100%;" autocomplete="off">
                     @csrf
-                    <h2 class="text-center my-3 mx-2 head-sign">Sign Up As Farmer</h2>
                     <div class="row">
                         <div class="col-lg-4 offset-lg-1 mb-4">
                             <div class="form-group my-3">
@@ -151,8 +170,8 @@
                             </div>
                             <div class="form-group my-3">
                                 <label for="username">Phone Number:</label>
-                                <input type="tel" pattern="[0-9]{10}"  maxlength="10" minlength="15"
-                                title="Phone number must be 12 digits" wire:model="phone_number" class="form-control" id="phone_number"
+                                <input type="tel" pattern="[0-9]{11}"  maxlength="12" minlength="11"
+                                title="Phone number must be 11 digits" wire:model="phone_number" class="form-control" id="phone_number"
                                     placeholder="Enter phone number" required>
                                 @error('phone_number')
                                     <span class="text-warning">{{ $message }}</span>

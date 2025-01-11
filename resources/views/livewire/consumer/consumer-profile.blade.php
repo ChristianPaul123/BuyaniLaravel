@@ -37,11 +37,7 @@
         </div>
 
         <div wire:ignore.self class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-            @if (session('message'))
-            <div class="alert alert-success text-center my-3 d-block col-12 mt-5">
-                {{ session('message') }}
-            </div>
-            @endif
+            @include('user.includes.messageBox')
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -97,11 +93,7 @@
         </div>
 
         <div wire:ignore.self class="modal fade" id="passwordModal" tabindex="-1" aria-labelledby="passwordModalLabel" aria-hidden="true">
-            @if (session('message'))
-            <div class="alert alert-success text-center my-3 d-block col-12 mt-5">
-                {{ session('message') }}
-            </div>
-            @endif
+            @include('user.includes.successBox')
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -199,8 +191,7 @@
 
 <script>
     document.addEventListener('livewire:initialized',()=>{
-      @
-      this.on('show-modal',(event)=>{
+      @this.on('show-modal',(event)=>{
         var myModalEl=document.querySelector('#passwordModal')
         var modal=bootstrap.Modal.getOrCreateInstance(myModalEl)
       })

@@ -145,6 +145,8 @@ Route::get('admin/user/management', [UserManagementController::class, 'showUsers
 Route::get('admin/user/management/view/{id}', [UserManagementController::class, 'viewUser'])->name('admin.management.view');
 Route::post('admin/user/management/deactivate/{id}', [UserManagementController::class, 'deactivateUser'])->name('admin.management.deactivate');
 Route::post('admin/user/management/reactivate/{id}', [UserManagementController::class, 'reactivateUser'])->name('admin.management.reactivate');
+Route::put('admin/user/management/farmer/form/{id}/verify', [UserManagementController::class, 'verifyForm'])->name('farmer.form.verify');
+Route::put('admin/user/management/farmer/id/{id}/verify', [UserManagementController::class, 'verifyIdentification'])->name('farmer.id.verify');
 
 //CHAT US
 Route::get('admin/chat', [ChatManagementController::class, 'showAdminChat'])->name('admin.chat');
@@ -246,6 +248,11 @@ Route::get('/user/farmer/profile', [UserController::class, 'showFarmerprofile'])
 Route::get('user/farmer/blogs', [BlogController::class, 'showFarmerBlogs'])->name('user.farmer.blog');
 Route::get('user/farmer/chat', [ChatController::class, 'showFarmerChat'])->name('user.farmer.chat');
 Route::get('user/farmer/supply-products', [FarmerProduceController::class, 'showFarmerSupplyProduct'])->name('user.farmer.supply.product');
+Route::post('user/farmer/add-product', [FarmerProduceController::class, 'saveFarmerSupplyProduct'])->name('user.farmer.supply.product.save');
+Route::get('user/farmer/supply/product/edit', [FarmerProduceController::class, 'editProduct'])->name('user.farmer.supply.product.edit');
+Route::post('user/farmer/supply/product/update', [FarmerProduceController::class, 'saveEditProduct'])->name('user.farmer.supply.product.update');
+Route::post('user/farmer/supply/product/delete', [FarmerProduceController::class, 'deleteProduct'])->name('user.farmer.supply.product.delete');
+
 
 
 

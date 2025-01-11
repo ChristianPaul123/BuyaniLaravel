@@ -3,7 +3,7 @@
 @section('title', 'Farmer Shop')
 
 @push('styles')
-<style>
+    <style>
         body {
             font-family: 'Open Sans', sans-serif;
             background-color: #f8f9fa;
@@ -63,11 +63,11 @@
             align-items: center;
         }
 
-        .btn {
-            background-color: rgb(224, 121, 31);
-            color: white;
-            border-color: rgb(224, 121, 31);
-        }
+        /* .btn {
+                                        background-color: rgb(224, 121, 31);
+                                        color: white;
+                                        border-color: rgb(224, 121, 31);
+                                    } */
 
         .btn-stock {
             background-color: rgb(238, 11, 11);
@@ -94,42 +94,39 @@
 
         /* css for modal*/
         .modal-dialog {
-            max-width: 1000px; /* Increase the modal width */
-            max-height: 800px;
+            /* max-width: 1000px; */
+            /* Increase the modal width */
+            /* max-height: 800px; */
         }
 
-        .modal-body {
-            display: flex;
-            flex-wrap: wrap; /* Allow wrapping */
-            align-items: flex-start; /* Align items at the top */
-        }
+
 
         #productForm {
-            flex: 1; /* Make it take up equal space */
-            min-width: 300px; /* Set a minimum width */
+            flex: 1;
+            /* Make it take up equal space */
+            min-width: 300px;
+            /* Set a minimum width */
         }
 
-        .live-preview {
-            flex: 1; /* Make it take up equal space */
-            min-width: 300px; /* Set a minimum width */
-            text-align: left; /* Center the content */
-            border: 1px solid;
+
+        #liveTitle,
+        #liveDescription {
+            word-break: break-word;
+            /* Break long words */
+            width: 100%;
+            /* Ensure it spans the available width */
+            max-height: 100px;
+            /* Limit the height */
+            overflow-y: auto;
+            /* Add scroll if content is too long */
         }
 
-        .live-preview img {
-            margin: 0 auto; /* Center the image */
-        }
-
-        #liveTitle, #liveDescription {
-            word-break: break-word; /* Break long words */
-            width: 100%; /* Ensure it spans the available width */
-            max-height: 100px; /* Limit the height */
-            overflow-y: auto; /* Add scroll if content is too long */
-        }
-
-        #productTitle, #productDescription {
-            max-height: 100px; /* Limit the height */
-            overflow-y: auto; /* Add scroll if content is too long */
+        #productTitle,
+        #productDescription {
+            max-height: 100px;
+            /* Limit the height */
+            overflow-y: auto;
+            /* Add scroll if content is too long */
         }
 
         /* Ensure the modal does not move and limit character input */
@@ -151,7 +148,8 @@
 
         /* Additional styles to ensure modal stability */
         .modal {
-            overflow-y: auto; /* Add scroll if modal content is too long */
+            overflow-y: auto;
+            /* Add scroll if modal content is too long */
         }
 
 
@@ -186,7 +184,7 @@
 @endpush
 
 @section('content')
-@include('user.includes.navbar-farmer')
+    @include('user.includes.navbar-farmer')
     <div class="container mt-5">
         <div class="carousel-container">
             <div class="carousel-view">
@@ -235,98 +233,360 @@
             </div>
         </div>
 
+        <!-- Button to trigger modal -->
+        <div class="mt-3 d-flex justify-content-end">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#productModal">
+                <h5> <i class="fa fa-add fa-md"></i> Add Product </h5>
+            </button>
+        </div>
+
         <div class="table-responsive mt-3">
             <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th>PRODUCT NAME</th>
-                        <th>DETAILS</th>
-                        <th>ADD IMAGE</th>
-                        <th>PRICE PER KILO</th>
+                        <th>DESCRIPTION</th>
+                        <th>IMAGE</th>
+                        <th>SUGGESTED PRICE</th>
                         <th>ACTION</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>APPLE</td>
-                        <td>AVAILABLE</td>
-                        <td>IMG</td>
-                        <td>60.00</td>
-                        <td><a href="#" class="text-primary">Edit</a> | <a href="#" class="text-danger">Delete</a></td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
+                    @php
+                        if (count($farmerProduce) > 0) {
+                            foreach ($farmerProduce as $produce) {
+                                echo '<tr>';
+                                echo '<td>' . $produce->produce_name . '</td>';
+                                echo '<td>' . $produce->produce_description . '</td>';
+                                echo '<td><img src="' .
+                                    asset('farmer_produce_images/' . $produce->produce_image) .
+                                    '" alt="Product Image" style="width: 100px; height: 100px;"></td>';
+                                echo '<td>' . $produce->suggested_price . '</td>';
+                                echo '<td>
+                                    <a class="btn btn-primary" onclick=editProduct("' .
+                                    $produce->id .
+                                    '")>
+                                        <i class="fa fa-edit fa-sm me-2"></i>Edit
+                                    </a>
+                                    <a class="btn btn-danger" onclick=showDeleteConfirmation("' .
+                                    $produce->id .
+                                    '")>
+                                        <i class="fa fa-trash fa-sm me-2"></i>Delete
+                                    </a>
+                                    </td>';
+                                echo '</tr>';
+                            }
+                        }
+                        else {
+                            echo '<tr><td colspan="5">No products found.</td></tr>';
+                        }
+                    @endphp
                 </tbody>
             </table>
         </div>
 
-        <!-- Button to trigger modal -->
-        <div class="d-flex justify-content-end">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#productModal">
-                Add Product
-            </button>
-        </div>
+
     </div>
 
     <!-- Modal -->
-<div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="productModalLabel">Add Product</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="productForm" class="w-50 mr-3">
-                    <div class="form-group">
-                        <label for="productImage">Upload Image:</label>
-                        <input type="file" class="form-control" id="productImage" accept="image/*">
-                    </div>
-                    <div class="form-group">
-                        <label for="productTitle">Title:</label>
-                        <input type="text" class="form-control" id="productTitle" maxlength="20" placeholder="Enter product title">
-                    </div>
-                    <div class="form-group">
-                        <label for="productDescription">Description:</label>
-                        <textarea class="form-control" id="productDescription" maxlength="40" rows="3" placeholder="Enter product description"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="productPrice">Suggested Price:</label>
-                        <input type="number" class="form-control" id="productPrice" placeholder="Enter suggested price" step="0.01">
-                    </div>
-                </form>
-                <div class="live-preview w-50">
-                    <h5>Live Preview</h5>
-                    <p><strong>Title:</strong> <span id="liveTitle"></span></p>
-                    <p><strong>Description:</strong> <span id="liveDescription"></span></p>
-                    <p><strong>Suggested Price:</strong> <span id="livePrice"></span></p>
-                    <p><strong>Image Preview:</strong></p>
-                    <img id="liveImage" src="#" alt="Image Preview" class="img-fluid">
+    <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header d-flex justify-content-between">
+                    <h5 class="modal-title" id="productModalLabel">Add Product</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"
+                        style="border: none;background: none;">
+                        <span aria-hidden="true" style="font-size: 1.5rem; color: #333; font-weight: bold;">&times;</span>
+                    </button>
                 </div>
-            </div>
-            <div class="text-center mt-3">
-                <button type="submit" class="add-btn btn-primary">Submit Product</button>
+                <div class="modal-body">
+                    <form id="productForm">
+                        {{-- action="{{ route('user.farmer.supply.product.save') }}" method="POST" enctype="multipart/form-data" --}}
+                        @csrf
+                        <div class="row">
+                            <!-- Form Section -->
+                            <div class="col-md-6">
+
+                                <div class="form-group mb-2">
+                                    <label for="productImage">Upload Image:</label>
+                                    <input type="file" class="form-control" id="productImage" accept="image/*"
+                                        name="produce_image">
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="productTitle">Title:</label>
+                                    <input type="text" class="form-control" id="productTitle" maxlength="20"
+                                        placeholder="Enter product title" name="produce_name">
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="productDescription">Description:</label>
+                                    <textarea class="form-control" id="productDescription" maxlength="40" rows="3"
+                                        placeholder="Enter product description" name="produce_description"></textarea>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="productPrice">Suggested Price:</label>
+                                    <input type="number" class="form-control" id="productPrice"
+                                        placeholder="Enter suggested price" step="0.01" name="suggested_price">
+                                </div>
+
+                            </div>
+
+                            <!-- Live Preview Section -->
+                            <div class="col-md-6">
+                                <div class="live-preview">
+                                    <h5 class="mb-4">Live Preview</h5>
+                                    <p class="mb-4"><strong>Title:</strong> <span id="liveTitle"></span></p>
+                                    <p class="mb-4"><strong>Description:</strong> <span id="liveDescription"></span></p>
+                                    <p class="mb-4"><strong>Suggested Price:</strong> <span id="livePrice"></span></p>
+                                    <p class="mb-4"><strong>Image Preview:</strong></p>
+                                    <img id="liveImage" src="#" alt="Image Preview" class="img-fluid"
+                                        style="max-height: 200px;">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer justify-content-center">
+                            <button type="submit" class="btn btn-primary">Submit Product</button>
+                        </div>
+                    </form>
+                </div>
+
             </div>
         </div>
     </div>
-</div>
+
+    {{-- Edit Modal --}}
+
+    <div class="modal fade" id="editProductModal" tabindex="-1" role="dialog" aria-labelledby="editProductModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header d-flex justify-content-between">
+                    <h5 class="modal-title" id="editProductModalLabel">Edit Product</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"
+                        style="border: none;background: none;">
+                        <span aria-hidden="true" style="font-size: 1.5rem; color: #333; font-weight: bold;">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editProductForm">
+                        @csrf
+                        <div class="row">
+                            <!-- Form Section -->
+                            <div class="col-md-6">
+                                <input type="hidden" name="id" id="productId2">
+                                <div class="form-group mb-2">
+                                    <label for="productImage">Upload Image:</label>
+                                    <input type="file" class="form-control" id="productImage2" accept="image/*"
+                                        name="produce_image">
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="productTitle">Title:</label>
+                                    <input type="text" class="form-control" id="productTitle2" maxlength="20"
+                                        placeholder="Enter product title" name="produce_name">
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="productDescription">Description:</label>
+                                    <textarea class="form-control" id="productDescription2" maxlength="40" rows="3"
+                                        placeholder="Enter product description" name="produce_description"></textarea>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="productPrice">Suggested Price:</label>
+                                    <input type="number" class="form-control" id="productPrice2"
+                                        placeholder="Enter suggested price" step="0.01" name="suggested_price">
+                                </div>
+
+                            </div>
+
+                            <!-- Live Preview Section -->
+                            <div class="col-md-6">
+                                <div class="live-preview">
+                                    <h5 class="mb-4">Live Preview</h5>
+                                    <p class="mb-4"><strong>Title:</strong> <span id="liveTitle2"></span></p>
+                                    <p class="mb-4"><strong>Description:</strong> <span id="liveDescription2"></span>
+                                    </p>
+                                    <p class="mb-4"><strong>Suggested Price:</strong> <span id="livePrice2"></span></p>
+                                    <p class="mb-4"><strong>Image Preview:</strong></p>
+                                    <img id="liveImage2" src="#" alt="Image Preview" class="img-fluid"
+                                        style="max-height: 200px;">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer justify-content-center">
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Modal  -->
+    <div class="modal fade" id="deleteProductModal" tabindex="-1" role="dialog"
+        aria-labelledby="deleteProductModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteProductModalLabel">Confirm Deletion</h5>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this product? This action cannot be undone.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteButton">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="notif success alert alert-dismissible fade show" role="alert" id="successMessage">
+        <i class="fa-solid fa-info"></i>
+        <div class="container-right">
+            <h5 class="m-0" id="notif-msg"></h5> <!-- Display the flash message -->
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    @include('user.includes.unverified-modal')
 @endsection
 
 @section('scripts')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function editProduct(id) {
+            $.ajax({
+                url: "{{ route('user.farmer.supply.product.edit') }}",
+                type: "GET",
+                data: {
+                    id: id
+                },
+                success: function(response) {
+                    $('#productId2').val(id);
+                    $('#productTitle2').val(response.produce_name);
+                    $('#productDescription2').val(response.produce_description);
+                    $('#productPrice2').val(response.suggested_price);
+                    $('#liveTitle2').text(response.produce_name);
+                    $('#liveDescription2').text(response.produce_description);
+                    $('#livePrice2').text(response.suggested_price);
+                    $('#liveImage2').attr('src', "{{ asset('farmer_produce_images') }}/" + response
+                        .produce_image);
+                    $('#editProductModal').modal('show');
+                }
+            });
+        }
+
+        var productIdToDelete = null; // Variable to store the ID of the product to be deleted
+
+        // Function to show the confirmation modal
+        function showDeleteConfirmation(id) {
+            productIdToDelete = id; // Store the product ID to delete
+            $('#deleteProductModal').modal('show'); // Show the confirmation modal
+        }
+
+        // Function to handle product deletion when confirmed
+        $('#confirmDeleteButton').on('click', function() {
+            // Send AJAX request to delete the product
+            $.ajax({
+                url: "{{ route('user.farmer.supply.product.delete') }}", // The route for deletion
+                type: "POST",
+                data: {
+                    id: productIdToDelete,
+                    _token: "{{ csrf_token() }}" // Include CSRF token for security
+                },
+                success: function(response) {
+                    $('#deleteProductModal').modal('hide'); // Close the confirmation modal
+                    $('#notif-msg').text(response.success);
+                    $('#successMessage').css('opacity', 1);
+                    $('#successMessage').addClass('d-flex');
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1000);
+                },
+                error: function(xhr, status, error) {
+                    alert('Error: ' + error); // Show error message
+                }
+            });
+        });
+
+
+        $(document).ready(function() {
+            $('#editProductForm').on('submit', function(e) {
+                e.preventDefault(); // Prevent the form from submitting the traditional way
+
+                var formData = new FormData(this); // Collect form data, including the file
+
+                $.ajax({
+                    url: "{{ route('user.farmer.supply.product.update') }}", // Define the correct route
+                    type: "POST",
+                    data: formData,
+                    contentType: false, // Necessary for file uploads
+                    processData: false, // Don't process the data
+                    success: function(response) {
+                        $('#notif-msg').text(response.success);
+                        $('#editProductModal').modal('hide');
+                        $('#successMessage').css('opacity', 1);
+                        $('#successMessage').addClass('d-flex');
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 1000);
+                    },
+                    error: function(xhr, status, error) {
+                        let errors = xhr.responseJSON.errors;
+                        $('.invalid-feedback').remove();
+                        $('.is-invalid').removeClass('is-invalid');
+
+                        $.each(errors, function(key, value) {
+                            let input = $(`[name="${key}"]`);
+                            input.addClass('is-invalid');
+                            input.after(
+                                `<div class="invalid-feedback">${value[0]}</div>`);
+                        });
+                    }
+                });
+            });
+        });
+        $('#productForm').on('submit', function(e) {
+            e.preventDefault();
+
+            let formData = new FormData(this);
+
+            $.ajax({
+                url: "{{ route('user.farmer.supply.product.save') }}",
+                type: "POST",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    $('#productForm')[0].reset();
+                    $('#liveTitle, #liveDescription, #livePrice').text('');
+                    $('#liveImage').attr('src', '#');
+                    $('#productModal').modal('hide');
+                    $('#notif-msg').text(response.success);
+                    $('#successMessage').css('opacity', 1);
+                    $('#successMessage').addClass('d-flex');
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1000);
+                },
+                error: function(xhr) {
+                    let errors = xhr.responseJSON.errors;
+                    $('.invalid-feedback').remove();
+                    $('.is-invalid').removeClass('is-invalid');
+
+                    $.each(errors, function(key, value) {
+                        let input = $(`[name="${key}"]`);
+                        input.addClass('is-invalid');
+                        input.after(`<div class="invalid-feedback">${value[0]}</div>`);
+                    });
+                }
+            });
+        });
+    </script>
+
     <script>
         // code for carousel
         const list = document.getElementById('item-list');
@@ -364,38 +624,77 @@
             $('#liveTitle').text(sanitized);
         });
 
+        $('#productTitle2').on('input', function() {
+            const badWords = /fuck|butt|tangina|nigga|shit|nig|fck|butsalo|tanga|tanginamo/gi;
+            const sanitized = $(this).val().replace(badWords, '***********');
+            $('#liveTitle2').text(sanitized);
+        });
+
         $('#productDescription').on('input', function() {
             const badWords = /fuck|butt|tangina|nigga|shit|nig|fck|butsalo|tanga|tanginamo/gi;
             const sanitized = $(this).val().replace(badWords, '**********');
             $('#liveDescription').text(sanitized);
         });
 
+        $('#productDescription2').on('input', function() {
+            const badWords = /fuck|butt|tangina|nigga|shit|nig|fck|butsalo|tanga|tanginamo/gi;
+            const sanitized = $(this).val().replace(badWords, '**********');
+            $('#liveDescription2').text(sanitized);
+        });
+
         $('#productPrice').on('input', function() {
-    let price = parseFloat($(this).val());
+            let price = parseFloat($(this).val());
 
-    // If the input is not a number or is less than 0, reset the input and live preview
-    if (isNaN(price) || price < 0) {
-        $('#productPrice').val('');
-        $('#livePrice').text('');
-        return;
-    }
+            // If the input is not a number or is less than 0, reset the input and live preview
+            if (isNaN(price) || price < 0) {
+                $('#productPrice').val('');
+                $('#livePrice').text('');
+                return;
+            }
 
-    // Limit the price to a maximum of 2000
-    if (price > 2000) {
-        price = 2000;
-        $(this).val(price.toFixed(2));
-    }
+            // Limit the price to a maximum of 2000
+            if (price > 2000) {
+                price = 2000;
+                $(this).val(price.toFixed(2));
+            }
 
-    // Format the price with commas and two decimal places
-    let formattedPrice = price.toLocaleString('en-US', {
-        style: 'currency',
-        currency: 'PHP',
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
-    }).replace('PHP', '₱');
+            // Format the price with commas and two decimal places
+            let formattedPrice = price.toLocaleString('en-US', {
+                style: 'currency',
+                currency: 'PHP',
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }).replace('PHP', '₱');
 
-    $('#livePrice').text(formattedPrice);
-});
+            $('#livePrice').text(formattedPrice);
+        });
+
+        $('#productPrice2').on('input', function() {
+            let price = parseFloat($(this).val());
+
+            // If the input is not a number or is less than 0, reset the input and live preview
+            if (isNaN(price) || price < 0) {
+                $('#productPrice2').val('');
+                $('#livePrice2').text('');
+                return;
+            }
+
+            // Limit the price to a maximum of 2000
+            if (price > 2000) {
+                price = 2000;
+                $(this).val(price.toFixed(2));
+            }
+
+            // Format the price with commas and two decimal places
+            let formattedPrice = price.toLocaleString('en-US', {
+                style: 'currency',
+                currency: 'PHP',
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }).replace('PHP', '₱');
+
+            $('#livePrice2').text(formattedPrice);
+        });
 
         // Image preview handling
         $('#productImage').on('change', function(event) {
@@ -412,39 +711,53 @@
             }
         });
 
-        // Submit product form
-        $('#productForm').on('submit', function(event) {
-            event.preventDefault();
-
-            const title = $('#productTitle').val();
-            const description = $('#productDescription').val();
-            const price = $('#productPrice').val();
-            const imageInput = $('#productImage')[0];
-
-            if (!title || !description || !price || !imageInput.files.length) {
-                alert('Please fill in all fields and upload an image.');
-                return;
+        $('#productImage2').on('change', function(event) {
+            const file = event.target.files[0];
+            if (file && file.size > 2 * 1024 * 1024) { // Limit to 2MB
+                alert('Image size should not exceed 2MB.');
+                $(this).val('');
+            } else if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#liveImage2').attr('src', e.target.result).show();
+                };
+                reader.readAsDataURL(file);
             }
-
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                products.push({
-                    title: title,
-                    description: description,
-                    price: parseFloat(price).toFixed(2),
-                    image: e.target.result,
-                    lowStock: true
-                });
-                updateCarousel();
-                alert('Product submitted successfully!');
-            };
-            reader.readAsDataURL(imageInput.files[0]);
-
-            $('#productForm')[0].reset();
-            $('#liveTitle, #liveDescription, #livePrice').text('');
-            $('#liveImage').hide();
         });
 
-        updateCarousel();
+        // Submit product form
+        // $('#productForm').on('submit', function(event) {
+        //     event.preventDefault();
+
+        //     const title = $('#productTitle').val();
+        //     const description = $('#productDescription').val();
+        //     const price = $('#productPrice').val();
+        //     const imageInput = $('#productImage')[0];
+
+        //     if (!title || !description || !price || !imageInput.files.length) {
+        //         alert('Please fill in all fields and upload an image.');
+        //         return;
+        //     }
+
+        //     const reader = new FileReader();
+        //     reader.onload = function(e) {
+        //         products.push({
+        //             title: title,
+        //             description: description,
+        //             price: parseFloat(price).toFixed(2),
+        //             image: e.target.result,
+        //             lowStock: true
+        //         });
+        //         // updateCarousel();
+        //         alert('Product submitted successfully!');
+        //     };
+        //     reader.readAsDataURL(imageInput.files[0]);
+
+        //     $('#productForm')[0].reset();
+        //     $('#liveTitle, #liveDescription, #livePrice').text('');
+        //     $('#liveImage').hide();
+        // });
+
+        // updateCarousel();
     </script>
 @endsection

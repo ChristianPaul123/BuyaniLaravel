@@ -11,7 +11,7 @@
                     <p><strong>House Number:</strong> {{ $address->house_number }}</p>
                     <p><strong>Street:</strong> {{ $address->street }}</p>
                     <p><strong>City:</strong> {{ $address->city }}</p>
-                    <p><strong>State:</strong> {{ $address->state }}</p>
+                    <p><strong>Province:</strong> {{ $address->state }}</p>
                     <p><strong>Country:</strong> {{ $address->country }}</p>
                     <p><strong>Barangay:</strong> {{ $address->barangay }}</p>
                     <p><strong>ZIP Code:</strong> {{ $address->zip_code }}</p>
@@ -57,7 +57,7 @@
                     <div class="row">
                         <!-- State -->
                         <div class="col-md-6 mb-3">
-                            <label for="state" class="form-label">State</label>
+                            <label for="state" class="form-label">Province</label>
                             <input type="text" class="form-control" id="state" wire:model="state" placeholder="Enter State">
                             @error('state') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>

@@ -114,7 +114,6 @@
                                     <div class="invalid-feedback">City is required.</div>
                                 </div>
                                 <div class="col-md-6">
-                                    {{-- this is the state variable input just edited --}}
                                     <label for="state" class="form-label">Province</label>
                                     <input type="text" class="form-control" id="state"
                                         wire:model="shippingInfo.state">

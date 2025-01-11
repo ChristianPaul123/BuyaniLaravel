@@ -146,9 +146,17 @@
 
     </footer>
 
-    <!-- Footer Bottom Section -->
     <div class="footer-bottom text-white">
         <a href="#" class="text-white">Return & Refund Policy</a> |
-        Copyright © 2024 buyanicommerce.ph All Rights Reserved.
+        <span class="text-white copyright">Copyright © 2024 buyanicommerce.ph All Rights Reserved.</span>
     </div>
+
+    <script>
+        const currentYear = new Date().getFullYear();
+        // Find the copyright text element with class 'copyright'
+        const copyrightElement = document.querySelector('.footer-bottom .copyright');
+
+        // Update the copyright text content
+        copyrightElement.textContent = `Copyright © ${currentYear} buyanicommerce.ph All Rights Reserved.`;
+    </script>
 </div>

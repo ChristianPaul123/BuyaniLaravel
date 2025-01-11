@@ -86,6 +86,43 @@
     .min-height {
         min-height: 100vh;
     }
+
+    .faq-header {
+            text-align: center;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            font-weight: bold;
+            font-family: Poppins, sans-serif;
+            color: #000000;
+        }
+
+        .accordion-button {
+            color: #000; /* Black text */
+            background-color: #fff; /* White background for buttons */
+        }
+
+        .accordion-button:focus {
+            box-shadow: none;
+        }
+
+        .accordion-button.collapsed {
+            color: #000;
+        }
+
+        .accordion-item {
+            border: none;
+            margin-bottom: 10px;
+        }
+
+        .faq-container {
+            background-color: rgba(32, 160, 49, 0.9); /* Slightly transparent white */
+            color: #000;
+            border-radius: 8px;
+            padding: 20px;
+            width: 100%;
+            margin-bottom: 8rem;
+            margin-top: 8rem; /* Add some space above the first FAQ item */
+        }
 </style>
 @endpush
 
@@ -156,7 +193,7 @@
         </div>
 
         <!-- Contact Us Section -->
-            <div class="contact-section pb-5" style="margin-bottom: 50px;"> <!-- Added inline margin for spacing -->
+            {{-- <div class="contact-section pb-5" style="margin-bottom: 50px;"> <!-- Added inline margin for spacing -->
                 <div class="container">
                     <h2 class="text-center">Contact Us</h2>
                     <p class="text-center">BuyAni, Where Every Purchase is a Celebration of Hard Work and Fresh Harvests</p>
@@ -184,6 +221,65 @@
                                 <textarea placeholder="Type your Message..." required></textarea>
                                 <button type="submit">Send</button>
                             </form>
+                        </div>
+                    </div>
+                </div>
+            </div> --}}
+
+            {{-- <div class="contact-section pb-5" style="margin-bottom: 50px;"> <!-- Added inline margin for spacing --> --}}
+            <div class="container faq-container pb-5" >
+                <h2 class="faq-header">Frequently Asked Questions</h2>
+                <div class="accordion" id="faqAccordion">
+                    <!-- FAQ Item 1 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                What is Buyani?
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Buyani is an innovative e-commerce platform that connects farmers directly with consumers. Farmers use Buyani to sell their fresh produce, while customers use it to purchase high-quality, locally grown products.
+                            </div>
+                        </div>
+                    </div>
+                    <!-- FAQ Item 2 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                How do farmers use Buyani?
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Farmers can connect to Buyani by creating an account on the platform. Once registered, they can list their produce, manage inventory, track orders, and receive payments securely. This helps farmers reach a wider audience and sell their products more efficiently.
+                            </div>
+                        </div>
+                    </div>
+                    <!-- FAQ Item 3 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                How do customers use Buyani?
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Customers can connect to Buyani by signing up on the platform. They can browse the available produce, place orders, make payments, and have fresh produce delivered to their doorstep. This provides customers with easy access to fresh, locally sourced products.
+                            </div>
+                        </div>
+                    </div>
+                    <!-- FAQ Item 4 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingFour">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                How to Order as Ka-Ani Customer at Buyani?
+                            </button>
+                        </h2>
+                        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                To order on Buyani, simply sign up, browse products, add items to your cart, and proceed to checkout with your preferred payment method. You'll receive order updates and can track delivery through the platform.
+                            </div>
                         </div>
                     </div>
                 </div>

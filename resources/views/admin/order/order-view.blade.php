@@ -108,8 +108,8 @@
                             <div class="card-body">
                                 <p><strong>Street:</strong> {{ $order->customer_street }}</p>
                                 <p><strong>City:</strong> {{ $order->customer_city }}</p>
-                                <p><strong>State:</strong> {{ $order->customer_barangay }}</p>
-                                <p><strong>State:</strong> {{ $order->customer_state }}</p>
+                                <p><strong>Barangay:</strong> {{ $order->customer_barangay }}</p>
+                                <p><strong>Province:</strong> {{ $order->customer_state }}</p>
                                 <p><strong>Zip Code:</strong> {{ $order->customer_zip }}</p>
                                 <p><strong>Country:</strong> {{ $order->customer_country }}</p>
 
@@ -210,7 +210,23 @@
                                 @csrf
                                 <button class="btn btn-success">Accept Order</button>
                             </form>
-                            <form action="{{ route('admin.orders.reject', $order->id) }}" method="POST" style="display:inline-block;">
+                            <form action="{{ route('admin.orders.reject', $order->id) }}" method="GET" style="display:inline-block;">
+                                @csrf
+                                <button class="btn btn-danger">Cancel Order</button>
+                            </form>
+                        </div>
+                    </div>
+                @endif
+                {{-- Seventh Row: Actions --}}
+                @if ($order->order_type == 1 &&
+                        ($order->order_status === \App\Models\Order::STATUS_TO_PAY 
+                            || $order->order_status === \App\Models\Order::STATUS_TO_SHIP 
+                            || $order->order_status === \App\Models\Order::OUT_FOR_DELIVERY
+                        )
+                    ) {{-- Delivery --}}
+                    <div class="row mb-4">
+                        <div class="col-12 text-center">
+                            <form action="{{ route('admin.orders.reject', $order->id) }}" method="GET" style="display:inline-block;">
                                 @csrf
                                 <button class="btn btn-danger">Cancel Order</button>
                             </form>

@@ -28,6 +28,8 @@ class ProductShow extends Component
 
     public $title = 'All Products'; // Default title
 
+    protected $paginationTheme = 'bootstrap'; // Use Bootstrap styling for pagination
+
     public function resetProducts()
     {
         // Reset the product list
@@ -115,7 +117,7 @@ class ProductShow extends Component
                 $this->action = 3;
 
                 $this->searchFilter = $this->searchQuery;
-                    $this->title = "Search results for '{$this->searchFilter}'";
+                $this->title = "Search results for '{$this->searchFilter}'";
             } else {
                 // Clear search and show all products
                 $this->searchFilter = null;
@@ -173,16 +175,7 @@ class ProductShow extends Component
         }
         // If a search filter is applied
         else if ($this->action == 3) {
-            // if (strlen($this->searchFilter) >= 3) {
-            //     $this->reset(['subcategory', 'category','searchQuery','filteredSubcategoryId','filteredCategoryId']);
-            //     $query->where('product_status', 1)
-            //           ->where('product_name', 'like', '%' . $this->searchFilter . '%');
-            //     $this->title = "Search results for '{$this->searchFilter}'";// Clear search query after applying filter
-            // } else {
-            //     $this->message = "Please enter at least 3 characters for the search query.";
-            // }
-
-            $this->reset(['subcategory', 'category','searchQuery','filteredSubcategoryId','filteredCategoryId']);
+            $this->reset(['subcategory', 'category','filteredSubcategoryId','filteredCategoryId']);
             $query->where('product_status', 1)
                   ->where('product_name', 'like', '%' . $this->searchFilter . '%');
             $this->title = "Search results for '{$this->searchFilter}'";// Clear search query after applying filter
