@@ -34,17 +34,29 @@
     @include('layouts.script')
 
     <script>
+        document.getElementById('logoutButton').addEventListener('click', function (event) {
+            // Show confirmation prompt
+            const userConfirmed = confirm('Are you sure you want to log out?');
+
+            // Submit form if user confirmed, otherwise do nothing
+            if (userConfirmed) {
+                document.getElementById('logoutForm').submit();
+            }
+        });
+    </script>
+
+    <script>
         document.addEventListener('DOMContentLoaded', function () {
         // Show the flash message popup if it exists
         const flashPopup = document.querySelector('#flashMessage');
         if (flashPopup) {
             // Display the elements and start fade-in animation
             flashPopup.style.display = 'flex';
-    
+
             // Automatically hide the popup after 3 seconds
             setTimeout(() => {
                 flashPopup.classList.add('hidden');
-    
+
                 // After animation ends, hide the elements entirely
                 setTimeout(() => {
                     flashPopup.style.display = 'none';
