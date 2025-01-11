@@ -117,8 +117,16 @@ class UserController extends Controller
             return redirect()->route('user.index')->with('message', 'Please log in or sign up to view this page');
         }
 
+            // **************** NEW CODE: Fetch low stock products ****************
+    $lowStockProducts = Product::with('inventory')
+    ->whereHas('inventory', function($query) {
+        $query->where('product_total_stock', '<', 50);
+    })
+    ->get();
+
+
         $user = auth()->guard('user')->user();
-        return view('user.farmer.farmerprofile.show', ['user' => $user]);
+        return view('user.farmer.farmerprofile.show',compact('user','lowStockProducts'));
     }
 
 }

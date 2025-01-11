@@ -189,46 +189,27 @@
         <div class="carousel-container">
             <div class="carousel-view">
                 <div id="item-list" class="item-list">
-                    <div class="card">
-                        <img class="card-img-top item" src="img/product1.png" alt="Product 1">
-                        <div class="card-body">
-                            <h5 class="card-title">Product 1</h5>
-                            <p class="card-text">Description of Product 1</p>
-                            <a href="#" class="btn-stock btn-primary">Low Stock</a>
+                    @foreach($lowStockProducts as $product)
+                        <div class="card">
+                            <!-- If you have a product_pic or similar field -->
+                            <img class="card-img-top item"
+                                 src="{{ $product->product_pic ?? 'img/default.png' }}"
+                                 alt="{{ $product->product_name }}">
+
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $product->product_name }}</h5>
+                                <p class="card-text">
+                                    {{ $product->product_details ?? 'No description available.' }}
+                                </p>
+                                <!-- The “Low Stock” badge or button -->
+                                @if($product->inventory && $product->inventory->product_total_stock < 50)
+                                    <a href="#" class="btn-stock btn-primary">
+                                        Low Stock ({{ $product->inventory->product_total_stock }})
+                                    </a>
+                                @endif
+                            </div>
                         </div>
-                    </div>
-                    <div class="card">
-                        <img class="card-img-top item" src="img/product2.png" alt="Product 2">
-                        <div class="card-body">
-                            <h5 class="card-title">Product 2</h5>
-                            <p class="card-text">Description of Product 2</p>
-                            <a href="#" class="btn-stock btn-primary">Low Stock</a>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <img class="card-img-top item" src="img/product3.png" alt="Product 3">
-                        <div class="card-body">
-                            <h5 class="card-title">Product 3</h5>
-                            <p class="card-text">Description of Product 3</p>
-                            <a href="#" class="btn-stock btn-primary">Low Stock</a>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <img class="card-img-top item" src="img/product4.png" alt="Product 4">
-                        <div class="card-body">
-                            <h5 class="card-title">Product 4</h5>
-                            <p class="card-text">Description of Product 4</p>
-                            <a href="#" class="btn-stock btn-primary">Low Stock</a>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <img class="card-img-top item" src="img/squash.png" alt="Product 5">
-                        <div class="card-body">
-                            <h5 class="card-title">Product 5</h5>
-                            <p class="card-text">Description of Product 5</p>
-                            <a href="#" class="btn-stock btn-primary">Low Stock</a>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
