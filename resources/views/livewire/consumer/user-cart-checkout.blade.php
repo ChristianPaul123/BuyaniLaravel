@@ -357,7 +357,7 @@
         }
 
         // Hide the spinner after processing
-        spinnerOverlay.style.display = 'none';
+        // spinnerOverlay.style.display = 'none';
     });
 </script>
 {{-- <script>
