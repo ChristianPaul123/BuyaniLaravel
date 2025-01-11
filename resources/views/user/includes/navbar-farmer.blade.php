@@ -14,7 +14,7 @@
          </button>
 
          <!-- Navbar Links -->
-         <div class="collapse navbar-collapse" id="navbarNav">
+         <div class="collapse navbar-collapse scrollable-navbar" id="navbarNav">
              <ul class="navbar-nav ms-auto align-items-center"
                  style="font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: bold;">
                  <li class="nav-item px-1 py-0 position-relative">
@@ -114,3 +114,13 @@
          </div>
      </div>
  </nav>
+
+<style>
+    @media (max-width: 768px) {
+        .scrollable-navbar {
+            max-height: 70vh; /* Adjust height as needed */
+            overflow-y: auto; /* Enable vertical scrolling */
+            scrollbar-width: thin; /* Optional: for thinner scrollbars in Firefox */
+        }
+    }
+</style>
