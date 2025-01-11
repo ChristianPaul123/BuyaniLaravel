@@ -89,3 +89,12 @@
         </div>
     </div>
 </div>
+
+<div class="chart-contaner mt-4" style="border: 1px solid #d2d2d2; padding: 20px; border-radius: 7px;">
+    <div class="bar-chart">
+        <label class="chart-label text-center d-block">Product Specifications</label>
+        <div class="chart">
+            <canvas id="product_specification_bar"></canvas>
+        </div>
+    </div>
+</div>

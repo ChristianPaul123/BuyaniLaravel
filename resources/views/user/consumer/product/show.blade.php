@@ -1,6 +1,6 @@
 @extends('layouts.app') <!-- Extend your main layout -->
 
-@section('title', 'Product Catalog') <!-- Define the title for this page -->
+@section('title', 'Shop') <!-- Define the title for this page -->
 
 @push('styles')
 <style>

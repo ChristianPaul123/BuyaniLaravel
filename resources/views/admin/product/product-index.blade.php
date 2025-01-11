@@ -11,6 +11,15 @@
 .tab-pane {
     margin-top: 20px;
 }
+
+*{
+    /* border: 1px solid black; */
+}
+.chart-label{
+    font-size: 25px;
+    font-weight: bold;
+}
+
 </style>
 @endpush
 
@@ -67,12 +76,15 @@
                     @include('admin.product.tabs.product_spec')
                 </div>
             </div>
+
+
         </section>
     </div>
 </div>
 @endsection
 
 @section('scripts')
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -86,6 +98,71 @@
             }
         }
     });
+</script>
+<script>
+    // Data for the charts
+    const category_bar = {
+        labels: ['A', 'B', 'C', 'D'],
+        datasets: [{
+            label: 'Chart 1 Values',
+            data: [10, 25, 15, 30],
+            backgroundColor: ['blue', 'green', 'orange', 'red'],
+            borderColor: ['darkblue', 'darkgreen', 'darkorange', 'darkred'],
+            borderWidth: 1
+        }]
+    };
+
+    const sub_category_bar = {
+        labels: ['X', 'Y', 'Z', 'W'],
+        datasets: [{
+            label: 'Chart 2 Values',
+            data: [20, 40, 25, 35],
+            backgroundColor: ['purple', 'cyan', 'yellow', 'pink'],
+            borderColor: ['darkpurple', 'darkcyan', 'darkyellow', 'darkpink'],
+            borderWidth: 1
+        }]
+    };
+
+    const product_bar = {
+        labels: ['A', 'B', 'C', 'D'],
+        datasets: [{
+            label: 'Chart 1 Values',
+            data: [10, 25, 15, 30],
+            backgroundColor: ['blue', 'green', 'orange', 'red'],
+            borderColor: ['darkblue', 'darkgreen', 'darkorange', 'darkred'],
+            borderWidth: 1
+        }]
+    };
+
+    const product_specification_bar = {
+        labels: ['X', 'Y', 'Z', 'W'],
+        datasets: [{
+            label: 'Chart 2 Values',
+            data: [20, 40, 25, 35],
+            backgroundColor: ['purple', 'cyan', 'yellow', 'pink'],
+            borderColor: ['darkpurple', 'darkcyan', 'darkyellow', 'darkpink'],
+            borderWidth: 1
+        }]
+    };
+
+    // Configuration for the charts
+    const config = {
+        type: 'bar',
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    };
+
+    // Rendering the charts
+    new Chart(document.getElementById('category_bar').getContext('2d'), {...config, data: category_bar});
+    new Chart(document.getElementById('sub_category_bar').getContext('2d'), {...config, data: sub_category_bar});
+    new Chart(document.getElementById('product_bar').getContext('2d'), {...config, data: product_bar});
+    new Chart(document.getElementById('product_specification_bar').getContext('2d'), {...config, data: product_specification_bar});
 </script>
 
 @endsection

@@ -1,6 +1,6 @@
 @extends('layouts.app') <!-- Extending the parent layout -->
 
-@section('title', 'Show Cart Page') <!-- Defining a title for this view -->
+@section('title', 'Shopping Cart') <!-- Defining a title for this view -->
 
 @push('styles')
 <style>

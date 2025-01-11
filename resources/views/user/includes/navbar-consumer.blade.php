@@ -121,4 +121,5 @@
             scrollbar-width: thin; /* Optional: for thinner scrollbars in Firefox */
         }
     }
+
 </style>

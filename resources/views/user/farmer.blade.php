@@ -1,6 +1,6 @@
 @extends('layouts.app') {{-- Extend the main parent layout --}}
 
-@section('title', 'Farmer Dashboard') {{-- Set the page title --}}
+@section('title', 'Home') {{-- Set the page title --}}
 
 @push('styles')
     <style>
