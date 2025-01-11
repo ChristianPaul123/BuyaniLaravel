@@ -33,15 +33,15 @@ class HomeController extends Controller
         $subcategories = SubCategory::all();
         $sponsorImages = SponsorImgs::all();
 
-        $seoData = new SEOData(
-            title: 'Consumer Dashboard | BuyAni',            // Title
-            description: 'Discover local farm produce and support Filipino farmers.', // Meta description
-            image: asset('img/stockImg3.png'),              // URL to a representative image
-            keywords: 'farmers, produce, fresh harvests',    // Optionally define keywords (not heavily used by Google, but still okay to set)
-        );
+        // $seoData = new SEOData(
+        //     title: 'Consumer Dashboard | BuyAni',            // Title
+        //     description: 'Discover local farm produce and support Filipino farmers.', // Meta description
+        //     image: asset('img/stockImg3.png'),              // URL to a representative image
+        //     // keywords: 'farmers, produce, fresh harvests',    // Optionally define keywords (not heavily used by Google, but still okay to set)
+        // );
 
-        // --- STEP 2: Pass your SEO data to the SEO singleton ---
-        seo()->setSEOData($seoData);
+        // // --- STEP 2: Pass your SEO data to the SEO singleton ---
+        // seo()->setSEOData($seoData);
 
        return view('user.consumer',compact('subcategories', 'sponsorImages', 'products', 'categories','isProfileIncomplete'));
     }
