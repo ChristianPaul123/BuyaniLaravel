@@ -107,7 +107,7 @@ new DataTable('#currentInventoryTable', {
     }
 });
 
-new DataTable(#productsalesTable, {
+new DataTable('#productsalesTable', {
     layout: {
         topStart: {
             buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
@@ -115,7 +115,7 @@ new DataTable(#productsalesTable, {
     }
 });
 
-new DataTable(#specificproductSalesTable, {
+new DataTable('#specificproductSalesTable', {
     layout: {
         topStart: {
             buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
