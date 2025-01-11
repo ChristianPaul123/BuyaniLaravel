@@ -8,6 +8,7 @@ use App\Models\OrderCancellation;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Models\OrderRating;
+use App\Models\Inventory;
 
 class OrderController extends Controller
 {
@@ -104,25 +105,39 @@ class OrderController extends Controller
         return redirect()->route('user.consumer.order')->with('message', 'Order has been successfully cancelled');
     }
 
-    public function confirmOrderReceived(Request $request) {
+    public function confirmOrderReceived(Request $request)
+    {
         if (!Auth::guard('user')->check()) {
             Session::flush();
             return redirect()->route('user.index')->with('message', 'Please log in to access this page');
         }
-    
+
         $user = Auth::guard('user')->user();
         $order = $user->orders()->where('id', $request->order_id)->first();
-    
+
         if (!$order) {
             return redirect()->route('user.consumer.order')->with('error', 'Order not found');
         }
-    
+
+        // Update the order status
         $order->update([
             'order_status' => Order::STATUS_COMPLETED,
         ]);
-    
+
+        // Deduct the ordered quantity from the inventory
+        foreach ($order->orderItems as $item) {
+            $inventory = Inventory::where('product_id', $item->product_id)->first();
+
+            if ($inventory) {
+                $inventory->update([
+                    'product_total_stock' => max(0, $inventory->product_total_stock - $item->overall_kg),
+                ]);
+            }
+        }
+
         return redirect()->route('user.consumer.order')->with('message', 'Order has been successfully marked as completed');
     }
+
 
     public function rateOrder($id)
     {
