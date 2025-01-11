@@ -150,7 +150,7 @@ class LoginIndex extends Component
                 // dd('something went wrong');
                 // $this->dispatch('sessionError', error: $error);
                 $this->reset('captcha');
-                session()->flash('error', 'Invalid email/phone number or password.');
+                session()->flash('errorpassword', 'Invalid email/phone number or password.');
             }
     }
 
