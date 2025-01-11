@@ -165,7 +165,7 @@
         }
 
         .hero {
-            /* background: url('{{ asset('img/farmer-home/farm-bg.jpg') }}') no-repeat center center/cover; */
+            background: url('{{ asset('img/title/farmer-bg.jpg') }}') no-repeat center center/cover;
             color: white;
             height: 100vh;
             display: flex;

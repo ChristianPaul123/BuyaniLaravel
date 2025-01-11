@@ -10,7 +10,7 @@
                 <div wire:key="{{ $user->id }}"
                     class="user-item {{ $selectedUser && $selectedUser->id === $user->id ? 'active' : '' }}"
                     wire:click="selectChat({{ $user->id }})">
-                    <img src="{{ $user->profile_pic ? asset($user->profile_pic) : 'https://via.placeholder.com/40' }}" alt="User Image">
+                    <img src="{{ $user->profile_pic ? asset($user->profile_pic) : asset('img/title/farmer.png') }}" alt="User Image">
                     <div class="details">
                         <div class="name">{{ $user->username }}</div>
                         <div class="last-message">
@@ -41,7 +41,7 @@
                     <!-- Left Side (User Message) -->
                     <div class="message left">
                         {{-- Display user profile image if available --}}
-                        <img src="{{ $selectedUser->profile_pic ? asset($selectedUser->profile_pic) : 'https://via.placeholder.com/40' }}" class="user-image" alt="User Image">
+                        <img src="{{ $selectedUser->profile_pic ? asset($selectedUser->profile_pic) : asset('img/title/farmer.png') }}" class="user-image" alt="User Image">
                         <div class="text-container">
                             <div class="user small text-muted">{{ $selectedUser->username }}</div>
                             <div class="text">{{ $message->message_info }}</div>
@@ -82,6 +82,7 @@
         </div>
     </div>
 </div>
+
 @script
 <script>
     document.addEventListener('livewire:initialized', function () {

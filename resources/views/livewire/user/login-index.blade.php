@@ -15,12 +15,15 @@
                 </h2>
             </div>
 
-            <form class="my-3 form-part" wire:submit.prevent="login" id="loginForm" autocomplete="off" style="margin: 100px  0px;">
+            <form class="my-3 a form-part" wire:submit.prevent="login" id="loginForm" autocomplete="off">
+                @if(session('errorpassword'))
+                <span class="text-warning">{{ session('errorpassword') }}</span>
+                @endif
                 <div class="form-group my-3">
                     <label for="email">Email or Phone Number:</label>
                     <input type="text" wire:model="email_phoneNum" class="form-control" id="email_phoneNum" placeholder="Enter email or phone number" required>
                     <small id="emailPhoneError" class="text-warning" style="display: none;">Invalid email or phone number format.</small>
-                    {{-- @error('email_phoneNum') <span class="text-danger">{{ $message }}</span> @enderror --}}
+                    @error('email_phoneNum') <span class="text-danger">{{ $message }}</span> @enderror
                 </div>
 
                 <div class="form-group mt-3 a">
