@@ -12,13 +12,13 @@ return [
     /**
      * Use this setting to specify the site name that will be used in OpenGraph tags.
      */
-    'site_name' => null,
+    'site_name' => 'Buyanicommerce',
 
     /**
      * Use this setting to specify the path to the sitemap of your website. This exact path will outputted, so
      * you can use both a hardcoded url and a relative path. We recommend the latter.
      *
-     * Example: '/storage/sitemap.xml'
+     * Example: 'https://Buyanicommerce.bsitcps.com'
      * Do not forget the slash at the start. This will tell the search engine that the path is relative
      * to the root domain and not relative to the current URL. The `spatie/laravel-sitemap` package
      * is a great package to generate sitemaps for your application.
