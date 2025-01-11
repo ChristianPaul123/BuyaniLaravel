@@ -37,7 +37,7 @@
         background-color: #fff8dd;
     }
 
-    ul{
+    .error-list{
         margin: 0 auto;
         width: fit-content;
     }
