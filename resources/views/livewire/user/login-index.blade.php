@@ -1,13 +1,7 @@
-
-<div class="row custom-font-content">
-    <div class="col-lg-6 col-sm-12 left-div">
-        <div class="left-side w-100">
-            <div>
-
-{{-- <div class="row mt-4 h-100" style="background-color: #48722e;">
+<div class="row mt-4 h-100" style="background-color: #48722e;">
     <div class="col-lg-6 col-sm-12 a d-flex align-items-center justify-content-center">
         <div class="left-side a w-100">
-            <div class="a mb-5"> --}}
+            <div class="a mb-5">
 
             @livewire('session-modal')
                 <h2 class="login-as">
