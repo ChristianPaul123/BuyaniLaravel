@@ -27,7 +27,7 @@
                         <td>{{ $order->customer_name }}</td>
                         <td>
                             <a class="btn btn-primary" href="{{ route('user.consumer.order.details', $order->id)}}">View</a>
-                            <a class="btn btn-secondary" href="{{ route('user.consumer.order.cancel', $order->id)}}">Cancel</a>
+                            <a class="btn btn-danger" href="{{ route('user.consumer.order.cancel', $order->id)}}">Cancel</a>
                         </td>
                     </tr>
                 @empty

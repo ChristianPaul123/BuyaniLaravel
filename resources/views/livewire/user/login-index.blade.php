@@ -11,33 +11,39 @@
 
             <form class="my-3 form-part" wire:submit.prevent="login" id="loginForm" autocomplete="off" style="margin: 100px  0px;">
                 <div class="form-group my-3">
-                    <label for="email">Email or Phone Number:</label>
-                    <input type="text" wire:model="email_phoneNum" class="form-control" id="email_phoneNum" placeholder="Enter email or phone number" required>
-                    <small id="emailPhoneError" class="text-warning" style="display: none;">Invalid email or phone number format.</small>
-                    {{-- @error('email_phoneNum') <span class="text-danger">{{ $message }}</span> @enderror --}}
+                    <label for="email_phoneNum">Email or Phone Number:</label>
+                    <input type="text" wire:model.lazy="email_phoneNum" class="form-control @error('email_phoneNum') is-invalid @enderror" id="email_phoneNum" placeholder="Enter email or phone number">
+                    @error('email_phoneNum')
+                        <small class="bg-danger text-white p-2 rounded">{{ $message }}</small>
+                    @enderror
                 </div>
-
-                <div class="form-group mt-3 a">
+            
+                <div class="form-group mt-3">
                     <label for="password">Password:</label>
                     <div class="input-group">
-                        <input type="password" wire:model="password" class="form-control" id="passwordField" placeholder="Enter password" required>
+                        <input type="password" wire:model.lazy="password" class="form-control @error('password') is-invalid @enderror" id="passwordField" placeholder="Enter password">
                         <div class="input-group-append z-10">
-                            <span class="input-group-text toggle-password fix-edge" id="togglePassword" style="height: 100%; width: 40px; border-top-left-radius: 0px; border-bottom-left-radius: 0px; display: flex; align-items: center; justify-content: center;">
+                            <span class="input-group-text toggle-password fix-edge" id="togglePassword" style="height: 100%; width: 40px;">
                                 <i class="fas fa-eye toggleEye"></i>
                             </span>
                         </div>
                     </div>
-                    <input type="hidden" wire:model="user_type" value="{{ $user_type }}" />
+                    @error('password')
+                        <small class="bg-danger text-white p-2 rounded">{{ $message }}</small>
+                    @enderror
                 </div>
-                <div id="captcha" wre:model="captcha" class="mt-4" wire:ignore></div>
+            
+                <input type="hidden" wire:model="user_type" value="{{ $user_type }}" />
+            
+                <div id="captcha" wire:model="captcha" class="mt-4" wire:ignore></div>
                 @error('captcha')
-                <div class="bg-red-300 text-red-700 p-3 rounded">{{ $message }}</div>
+                    <div class="bg-danger text-white p-2 rounded">{{ $message }}</div>
                 @enderror
-
+            
                 <div class="form-group d-flex justify-content-end mb-3">
-                    <a class="clickable-forgot-password" data-bs-toggle="modal" wire:click="showModal()"> Forgot Password?</a>
+                    <a class="clickable-forgot-password" data-bs-toggle="modal" wire:click="showModal()">Forgot Password?</a>
                 </div>
-
+            
                 <div class="container d-flex justify-content-center my-">
                     <button type="submit" class="button-login button my-1 px-4">LOGIN</button>
                 </div>
