@@ -85,7 +85,7 @@
                 </div>
 
                 {{-- Past Inventory Tab --}}
-                <div class="tab-pane fade" id="specfication-sales" role="tabpanel">
+                <div class="tab-pane fade" id="specification-sales" role="tabpanel">
                     @include('admin.report.tabs-sales.specification-sales',['specificProductSales' => $specificProductSales])
                 </div>
             </div>
