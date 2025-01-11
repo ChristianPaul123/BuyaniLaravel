@@ -19,7 +19,6 @@
              <span class="badge {{ $statusBadgeClass }}">{{ $adminStatusLabel }}</span>
          </div>
         @endif
-
         <div class="sidebar-scroll">
             <ul class="nav flex-column text-nowrap">
                 <!-- Dashboard -->

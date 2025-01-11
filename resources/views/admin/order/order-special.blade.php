@@ -66,7 +66,7 @@
                 <div class="container mt-4">
                     {{-- Back button --}}
                     <div class="d-flex justify-content-start flex-wrap flex-md-nowrap align-items-center pt-1 pb-2 mb-3 border-bottom">
-                        <button type="button" class="btn btn-primary" onclick="window.history.back()"> &#9754; Back to previous</button>
+                        <button type="button" class="btn btn-primary" onclick="window.history.back()"><i class="bi bi-arrow-left-circle"> </i>Back to previous</button>
                     </div>
 
                     <!-- Top Row: Customer Order Details -->

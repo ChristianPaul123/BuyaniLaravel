@@ -40,7 +40,7 @@
                             </div>
 
                             {{-- Back Button --}}
-                            <button type="button" class="btn btn-primary btn-back" onclick="window.history.back()">&#9754; Back to previous</button>
+                            <button type="button" class="btn btn-primary btn-back" onclick="window.history.back()"><i class="bi bi-arrow-left-circle"> </i>Back to previous</button>
 
                             {{-- Error Messages --}}
                             @if ($errors->any())

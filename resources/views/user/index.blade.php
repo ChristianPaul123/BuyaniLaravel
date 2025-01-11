@@ -1,6 +1,6 @@
 @extends('layouts.app') <!-- Extending the parent layout -->
 
-@section('title', 'Login Selection') <!-- Defining a title for this view -->
+@section('title', 'Login or Signup') <!-- Defining a title for this view -->
 
 @push('styles')
 <style>
