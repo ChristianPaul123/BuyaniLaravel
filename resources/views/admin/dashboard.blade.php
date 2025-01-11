@@ -73,7 +73,7 @@
                         @livewire('blocks.active-farmers')
                     </div>
                 </div>
-                <div class="table-container my-3" style="border: 1px solid #d2d2d2; padding: 20px; border-radius: 7px;">
+                <div class="table-container mt-4" style="border: 1px solid #d2d2d2; padding: 20px; border-radius: 7px;">
                     <div class="row g-5">
                         <div class="col-md-4 col-sm-12">
                             <table class="table table-bordered">
@@ -165,7 +165,7 @@
                     </div>
                 </div>
 
-                <div class="chart-container mt-2" style="border: 1px solid #d2d2d2; padding: 20px; border-radius: 7px; margin-bottom: 100px;">
+                <div class="chart-container my-4" style="border: 1px solid #d2d2d2; padding: 20px; border-radius: 7px;">
                     <div class="row g-5">
                         <div class="col-md-6">
                             <label class="chart-label">Top Sales Products</label>
@@ -180,11 +180,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <label class="chart-label">Total</label>
-                        <div class="chart">
-                            <canvas id="barChart3"></canvas>
-                        </div>
+                </div>
+                <div class="chart-container" style="border: 1px solid #d2d2d2; padding: 20px; border-radius: 7px; margin-bottom: 100px;">
+                    <label class="chart-label">Total</label>
+                    <div class="chart">
+                        <canvas id="barChart3"></canvas>
                     </div>
                 </div>
             </section>
