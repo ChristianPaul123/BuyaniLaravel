@@ -206,15 +206,22 @@ class LoginIndex extends Component
         if ($otpRecord && $otpRecord->otp == $this->otp) {
             $otpRecord->update(['is_verified' => true]);
 
-            //closes the other modal and show the password reset modal
+            // Close OTP modal and show password reset form
             $this->showOtpModal = false;
             $this->showPasswordResetForm = true;
 
-            session()->flash('success', 'OTP confirmed Please input your new password.');
+            session()->flash('success', 'OTP confirmed. Please input your new password.');
         } else {
-            session()->flash('error', 'Invalid or expired OTP. Please try again.');
+            // Clear OTP input on failure
+            $this->reset('otp');
+
+            // Show dynamic validation error under input
+            throw ValidationException::withMessages([
+                'otp' => 'Invalid or expired OTP. Please try again.',
+            ]);
         }
     }
+
 
     public function resetPassword()
     {
