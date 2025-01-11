@@ -158,4 +158,10 @@
         background-color: #f5a623;
     }
 
+    @media (max-width: 768px) {
+        .popup {
+            width: 90%;
+        }
+    }
+
 </style>
