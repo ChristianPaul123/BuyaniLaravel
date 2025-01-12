@@ -73,7 +73,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Shipped</title>
+    <title>Buyani</title>
     <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> -->
     <style>
         body {
@@ -152,13 +152,14 @@
 <body>
     <div class="container">
         <div class="header">
-            <img src="buyanicommece_logo.png" alt="Buyani Logo">
+            <img src="{{ asset('img/buyanicommece_logo.png') }}" alt="Buyani Logo">
             <h1>Buyanicommerce</h1>
         </div>
         <div class="content">
+            <h2>Hello Fellow Consumer</h2>
+            <h2>Password Reset</h2>
             <h4>Your one time password is:</h4>
                 <div class="code-box">{{ $otp }}</div>
-            <h5>Thank you for registering!</h5>
         </div>
         <hr>
         <div class="footer">

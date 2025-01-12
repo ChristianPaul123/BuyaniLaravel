@@ -3,7 +3,7 @@
      <!--Logo section-->
      <div class="container-fluid">
          <a class="navbar-brand" href="farmer-home.php">
-             <img src="{{ asset('img/logo1.svg') }}" style="width: 65px;">
+             <img src="{{ asset('img/buyanicommece_logo.png') }}" style="width: 65px;">
              <img src="{{ asset('img/logo2.svg') }}">
          </a>
 

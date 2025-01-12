@@ -354,9 +354,7 @@
                 <div class="container section-1">
                     <h1 style="margin-bottom: -10px;">WELCOME <span style="color:orange;font-weight:bold">FARMERS</span>
                     </h1>
-                    <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et lacinia dolor, ac varius massa.
-                        Interdum et malesuada fames ac ante ipsum primis in faucibus. Quisque dapibus orci eu tempor
-                        ullamcorper.</h4>
+                    <h4>At BuyAni, we connect local farmers with businesses and communities in Albay. Sell your produce with ease or enjoy the freshest vegetables straight from the fields. Together, we grow stronger.</h4>
                     <button>Sell Now!</button>
                 </div>
             </div>

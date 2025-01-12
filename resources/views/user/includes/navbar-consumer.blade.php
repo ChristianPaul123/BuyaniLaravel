@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <!-- Logo Section -->
         <a class="nav-link @if(request()->is('user/consumer')) active @endif" href="/user/consumer" data-page="home">
-            <img src="{{ asset('img/logo1.svg') }}" style="width: 65px;">
+            <img src="{{ asset('img/buyanicommece_logo.png') }}" style="width: 65px;">
             <img src="{{ asset('img/logo2.svg') }}">
         </a>
 

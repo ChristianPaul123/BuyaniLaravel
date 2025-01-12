@@ -8,7 +8,7 @@
             $statusBadgeClass = $admin->status ? 'bg-success' : 'bg-danger';
         @endphp
          <div class="admin-info text-center py-3 border-bottom">
-             <img src="{{ $admin->profile_pic ?  asset($admin->profile_pic)  : asset('img/logo1.svg') }}"
+             <img src="{{ $admin->profile_pic ?  asset($admin->profile_pic)  : asset('img/buyanicommece_logo.png') }}"
                   alt="Profile Picture"
                   class="rounded-circle"
                   width="80"

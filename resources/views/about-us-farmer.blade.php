@@ -140,6 +140,7 @@
     <div class="container mt-5">
         <!-- BuyAni Vision -->
         <h1 class="text-center mb-4">About Us Buyani</h1>
+        <p class="text-center mb-5" style="color: #00584e">Rooted in Quality, Growing with You - Let's Connect!</p>
         <div class="row align-items-center">
             <div class="col-md-6 text-center">
                 <img src="Images/fruit basket.png" alt="Basket of Produce" class="img-fluid">
