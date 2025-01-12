@@ -35,6 +35,7 @@
         justify-content: center; /* Centers content horizontally */
         align-items: center;     /* Centers content vertically */
         background-color: #fff8dd;
+        padding: 20px;
     }
 
     .error-list{

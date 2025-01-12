@@ -2,17 +2,17 @@
     <h4 class="shipping-title text-center">Shipping Addresses</h4>
     <section class="shipping-container">
     <!-- Display Success Message -->
-    @if (session()->has('message'))
+    {{-- @if (session()->has('message'))
         <div class="alert alert-success mx-3 my-2 px-3 py-2">
             <button type="button" class="close btn btn-success">
                 <span aria-hidden="true">&times;</span>
             </button>
             {{ session('message') }}
         </div>
-    @endif
+    @endif --}}
 
     <!-- Display Validation Errors -->
-    @if ($errors->any())
+    {{-- @if ($errors->any())
         <div class="alert alert-danger mx-3 my-2 px-3 py-2">
             <button type="button" class="close btn btn-danger">
                 <span aria-hidden="true">&times;</span>
@@ -23,7 +23,7 @@
                 @endforeach
             </ul>
         </div>
-    @endif
+    @endif --}}
 
     <div class="row mt-3">
         <div class="col-12">
@@ -60,12 +60,8 @@
                     <h5 class="modal-title">Add New Address</h5>
                 </div>
                 <div class="modal-body">
-                    @if (session()->has('modalmessage'))
-                    <div class="alert alert-success alert-dismissible fade show mx-3 my-2 px-3 py-3" role="alert">
-                        {{ session('modalmessage') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    @endif
+                    @include('user.includes.successBox')
+
                     <form wire:submit.prevent="addAddress">
                         <div class="row">
                             <div class="col-md-6">
@@ -134,12 +130,8 @@
                     <h5 class="modal-title">View Address</h5>
                 </div>
                 <div class="modal-body">
-                    @if (session()->has('modalmessage'))
-                    <div class="alert alert-success alert-dismissible fade show mx-3 my-2 px-3 py-3" role="alert">
-                        {{ session('modalmessage') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    @endif
+                    @include('user.includes.successBox')
+
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">

@@ -87,7 +87,7 @@ class ConsumerAddress extends Component
             'user_id' => $this->user->id,
             'shipping_name' => $this->shipping_name,
         ]);
-        session()->flash('modalmessage', 'New address added successfully.');
+        session()->flash('success', 'New address added successfully.');
     }
 
     public function enableAddressEdit()
@@ -122,7 +122,7 @@ class ConsumerAddress extends Component
             'zip_code' => $this->zip_code,
         ]);
 
-        session()->flash('modalmessage', 'Address updated successfully.');
+        session()->flash('success', 'Address updated successfully.');
         $this->isEditingAddress = false;
     }
 
