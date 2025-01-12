@@ -37,7 +37,7 @@
         </div>
 
         <div wire:ignore.self class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-            @include('user.includes.messageBox')
+            @include('user.includes.successBox')
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -48,7 +48,7 @@
                             <div class="mb-3">
                                 <label for="nameInput" class="form-label">Username</label>
                                 <input type="text" class="form-control" id="nameInput" wire:model="username">
-                                @error('username') <span class="text-danger">{{ $message }}</span> @enderror
+                                @error('username') <span  style="color: red; font-size: 14px;">{{ $message }}</span> @enderror
                             </div>
                             <div class="mb-3 text-center">
                                 @if ($profile_pic)
@@ -80,7 +80,7 @@
                             <div class="mb-3">
                                 <label for="phoneInput" class="form-label">Phone</label>
                                 <input type="tel" class="form-control" id="phoneInput" wire:model="phone_number">
-                                @error('phone1_number') <span class="text-danger">{{ $message }}</span> @enderror
+                                @error('phone_number') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                         </form>
                     </div>
@@ -108,8 +108,8 @@
                                     <span class="input-group-text" id="togglePassword" style="cursor: pointer;">
                                         <i class="bi bi-eye" id="toggleIcon"></i>
                                     </span>
-                                    @error('current_password') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
+                                @error('current_password') <span  style="color: red; font-size: 14px;">{{ $message }}</span> @enderror
                             </div>
                             <div class="mb-3">
                                 <label for="newPassword" class="form-label">New Password:</label>
@@ -122,7 +122,7 @@
                                     <span id="special" class="invalid">Special char | </span>
                                     <span id="length" class="invalid">8+ chars</span>
                                 </div>
-                                @error('new_password') <span class="text-danger">{{ $message }}</span> @enderror
+                                @error('new_password') <span  style="color: red; font-size: 14px;">{{ $message }}</span> @enderror
                             </div>
                             <div class="mb-3">
                                 <label for="confirmPassword" class="form-label">Confirm New Password:</label>
@@ -130,7 +130,7 @@
                                 <div style="color: red; font-size: 14px;">
                                     <span id="passwordMismatch" class="invalid">Password does not match</span>
                                 </div>
-                                @error('confirm_password') <span class="text-danger">{{ $message }}</span> @enderror
+                                @error('confirm_password') <span  style="color: red; font-size: 14px;">{{ $message }}</span> @enderror
                             </div>
                         </form>
                     </div>

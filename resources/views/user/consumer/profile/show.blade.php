@@ -104,10 +104,15 @@
         display: inline;
     }
 
+    *{
+        /* border: 1px solid black; */
+    }
+
 </style>
 @endpush
 @section('content')
     @include('user.includes.navbar-consumer')
+    @include('user.styles.messageBox_styles');
     <section style="min-height: 100vh;">
     <div class="container my-5">
         <!-- Tab Navigation -->
