@@ -21,8 +21,9 @@
                     <th>Category Name</th>
                     <th>Sub Category Name</th>
                     <th>Deactivated Date</th>
+                    <th>Deactivated Status</th>
                     <th>Edit</th>
-                    <th>Delete</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -39,16 +40,27 @@
                         <td><img src="{{ asset($product->product_pic) }}" alt="{{ $product->product_name }}" width="50"></td>
                         <td>{{ $product->category->category_name ?? 'N/A'  }}</td>
                         <td>{{ $product->subcategory->sub_category_name ?? 'N/A' }}</td>
-                        <td>{{ $product->product_deactivated }}</td>
+                        <td>{{ $product->deactivated_date }}</td>
+                        <td>{{ $product->deactivated_status == 1 ? 'Deactivated' : 'Active' }}</td>
                         <td>
                             <a href="{{ route('admin.product.edit', $encryptedId) }}" class="btn btn-primary">Edit</a>
                         </td>
                         <td>
-                            <form action="{{ route('admin.product.delete', $product->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this product?');">Delete</button>
-                            </form>
+                            @if ($product->deactivated_status)
+                                <form action="{{ route('admin.product.activate', $product->id) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    <button title="Activate" style="background:none;border:none;padding:0;cursor:pointer;">
+                                        <i class="fa fa-power-off" style="color:green;"></i>
+                                    </button>
+                                </form>
+                            @else
+                                <form action="{{ route('admin.product.deactivate', $product->id) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    <button title="Deactivate" style="background:none;border:none;padding:0;cursor:pointer;">
+                                        <i class="fa fa-power-off" style="color:red;"></i>
+                                    </button>
+                                </form>
+                            @endif
                         </td>
                     </tr>
                 @endforeach

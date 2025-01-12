@@ -37,9 +37,6 @@ class HomeController extends Controller
             title: 'Consumer Dashboard | Buyani',
             description: 'Discover fresh produce and support our hardworking farmers directly.',
             image: asset('img/stockImg3.png'),
-            // You can also add keywords or authors, like:
-            // keywords: 'farming, fresh produce, local farms',
-            // author: 'Buyani Team',
         );
 
        return view('user.consumer',compact('subcategories', 'sponsorImages', 'products', 'categories','isProfileIncomplete'));

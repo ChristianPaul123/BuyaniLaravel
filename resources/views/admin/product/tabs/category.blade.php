@@ -16,8 +16,10 @@
                     <th>Category Name</th>
                     <th>Created At</th>
                     <th>Updated At</th>
+                    <th>Deactivated Date</th>
+                    <th>Deactivated Status</th>
                     <th>Edit</th>
-                    <th>Delete</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -30,15 +32,27 @@
                         <td>{{ $category->category_name }}</td>
                         <td>{{ $category->created_at->format('l, d F Y') }}</td>
                         <td>{{ $category->updated_at->format('l, d F Y') }}</td>
+                        <td>{{ $category->deactivated_date }}</td>
+                        <td>{{ $category->deactivated_status == 1 ? 'Deactivated' : 'Active' }}</td>
                         <td>
                             <a href="{{ route('admin.category.edit', $encryptedId) }}" class="btn btn-primary">Edit</a>
                         </td>
                         <td>
-                            <form action="{{ route('admin.category.delete', $category->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this category?');">Delete</button>
-                            </form>
+                            @if ($category->deactivated_status)
+                                <form action="{{ route('admin.category.activate', $category->id) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    <button title="Activate" style="background:none;border:none;padding:0;cursor:pointer;">
+                                        <i class="fa fa-power-off" style="color:green;"></i>
+                                    </button>
+                                </form>
+                            @else
+                                <form action="{{ route('admin.category.deactivate', $category->id) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    <button title="Deactivate" style="background:none;border:none;padding:0;cursor:pointer;">
+                                        <i class="fa fa-power-off" style="color:red;"></i>
+                                    </button>
+                                </form>
+                            @endif
                         </td>
                     </tr>
                 @endforeach

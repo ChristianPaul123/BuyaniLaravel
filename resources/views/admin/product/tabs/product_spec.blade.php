@@ -17,8 +17,10 @@
                     <th>Price</th>
                     <th>Weight</th>
                     <th>Product</th>
+                    <th>Deactivated Date</th>
+                    <th>Deactivated Status</th>
                     <th>Edit</th>
-                    <th>Delete</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,15 +34,27 @@
                         <td>{{ $specification->product_price }}</td>
                         <td>{{ $specification->product_kg }} kg</td>
                         <td>{{ $specification->product->product_name ?? 'N/A'  }}</td>
+                        <td>{{ $specification->deactivated_date }}</td>
+                        <td>{{ $specification->deactivated_status == 1 ? 'Deactivated' : 'Active' }}</td>
                         <td>
                             <a href="{{ route('admin.product.specification.edit', $encryptedId) }}" class="btn btn-primary">Edit</a>
                         </td>
                         <td>
-                            <form action="{{ route('admin.product.specification.delete', $specification->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this specification?');">Delete</button>
-                            </form>
+                            @if ($specification->deactivated_status)
+                                <form action="{{ route('admin.product.specification.activate', $specification->id) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    <button title="Activate" style="background:none;border:none;padding:0;cursor:pointer;">
+                                        <i class="fa fa-power-off" style="color:green;"></i>
+                                    </button>
+                                </form>
+                            @else
+                                <form action="{{ route('admin.product.specification.deactivate', $specification->id) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    <button title="Deactivate" style="background:none;border:none;padding:0;cursor:pointer;">
+                                        <i class="fa fa-power-off" style="color:red;"></i>
+                                    </button>
+                                </form>
+                            @endif
                         </td>
                     </tr>
                 @endforeach

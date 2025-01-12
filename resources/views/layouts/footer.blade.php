@@ -147,7 +147,7 @@
     </footer>
 
     <div class="footer-bottom text-white">
-        <a href="#" class="text-white">Return & Refund Policy</a> |
+        <a href="{{ route('user.terms' }}" class="text-white">Terms & Condition</a> |
         <span class="text-white copyright">Copyright © 2024 buyanicommerce.ph All Rights Reserved.</span>
     </div>
 
