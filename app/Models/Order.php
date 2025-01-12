@@ -18,6 +18,7 @@ class Order extends Model
     const STATUS_COMPLETED = 4;
     const STATUS_CANCELLED = 5;
     const OUT_FOR_DELIVERY = 6;
+    const STATUS_ACHRIVED = 7;
 
     // Fillable attributes for the Order model
     protected $fillable = [
@@ -81,6 +82,7 @@ class Order extends Model
             self::STATUS_COMPLETED => 'Completed',
             self::STATUS_CANCELLED => 'Cancelled',
             self::OUT_FOR_DELIVERY => 'Out for Delivery',
+            SELF:: STATUS_ACHRIVED
         ];
 
         return $statuses[$this->order_status] ?? 'Unknown';

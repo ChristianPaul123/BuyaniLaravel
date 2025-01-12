@@ -34,6 +34,8 @@
                         <td>{{ $subcategory->category->category_name ?? 'N/A'  }}</td>
                         <td>{{ $subcategory->created_at }}</td>
                         <td>{{ $subcategory->updated_at }}</td>
+                        <td>{{ $subcategory->deactivated_date }}</td>
+                        <td>{{ $subcategory->deactivated_status == 1 ? 'Deactivated' : 'Active' }}</td>
                         <td>
                             <a href="{{ route('admin.subcategory.edit', $encryptedId) }}" class="btn btn-primary">Edit</a>
                         </td>
