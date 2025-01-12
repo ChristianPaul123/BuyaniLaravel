@@ -64,7 +64,13 @@
 
                             <div class="mb-3">
                                 <label for="profilePic" class="form-label">Profile Picture</label>
-                                <input type="file" accept="image/png, image/jpeg, image/jpg" class="form-control" id="profilePic" wire:model="profile_pic">
+                                <input 
+                                    type="file" 
+                                    accept="image/png, image/jpeg, image/jpg"
+                                    class="form-control" 
+                                    id="profilePic" 
+                                    wire:model="profile_pic"
+                                    onchange="validateFileSize(this)">
                                 @error('profile_pic') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             <div class="mb-3">
@@ -144,13 +150,22 @@
 </section>
     {{-- check --}}
 </div>
-
+{{--Temporary fix --}}
+<script>
+        function validateFileSize(input) {
+        console.log(input.files[0].size);
+        const file = input.files[0];
+        if (file && file.size > 2048 * 1024) { // 2048 KB in bytes (2 MB) // 2MB in bytes
+            alert('File size must not exceed 2MB.');
+            input.value = ''; // Clear the input
+        }
+    }
+</script>
 
 
 @script
 
 <script>
-
     // Toggle visibility for both password fields
     document.getElementById("togglePassword").addEventListener("click", function () {
         const password1 = document.getElementById("currentPassword");
@@ -173,7 +188,6 @@
             icon.classList.add("bi-eye");
         }
     });
-
 </script>
 
 <script>
