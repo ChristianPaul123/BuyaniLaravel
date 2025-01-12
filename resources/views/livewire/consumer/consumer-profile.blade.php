@@ -152,7 +152,7 @@
 </div>
 {{--Temporary fix --}}
 <script>
-        function validateFileSize(input) {
+    function validateFileSize(input) {
         console.log(input.files[0].size);
         const file = input.files[0];
         if (file && file.size > 2048 * 1024) { // 2048 KB in bytes (2 MB) // 2MB in bytes
