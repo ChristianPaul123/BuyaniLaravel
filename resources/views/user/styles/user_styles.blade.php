@@ -225,7 +225,7 @@
     }
 
 
-    #verification-logo{
+    #verification-logo-nav{
         position: absolute;
         font-size: 15px;
         margin-top: 35px;
