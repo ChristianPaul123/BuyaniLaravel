@@ -44,6 +44,9 @@
                 <li class="nav-item">
                     <a class="nav-link" id="order-cancelled-tab" data-bs-toggle="tab" href="#order-cancelled" role="tab">Order Cancelled</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="order-archived-tab" data-bs-toggle="tab" href="#order-archived" role="tab">Archived</a>
+                </li>
             </ul>
 
             <div class="tab-content mt-4" id="orderTabsContent">
@@ -65,7 +68,11 @@
                 <div class="tab-pane fade" id="order-cancelled" role="tabpanel">
                     @include('admin.order.tabs.order-cancelled',['ordersCancelled' => $ordersCancelled])
                 </div>
+                <div class="tab-pane fade" id="order-archived" role="tabpanel">
+                    @include('admin.order.tabs.order-archived',['ordersCancelled' => $ordersCancelled])
+                </div>
             </div>
+
         </section>
     </div>
 </div>

@@ -119,7 +119,8 @@ class AssignEmployee extends Component
             Order::STATUS_STANDBY,
             Order::STATUS_TO_PAY,
             Order::STATUS_COMPLETED,
-            Order::STATUS_CANCELLED
+            Order::STATUS_CANCELLED,
+            Order::STATUS_ARCHIVED,
         ]);
     }    
 }
