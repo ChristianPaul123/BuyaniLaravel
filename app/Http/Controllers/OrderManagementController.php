@@ -6,7 +6,8 @@ use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Models\OrderCancellation;
 use Illuminate\Support\Facades\Auth;
-
+use App\Mail\OrderDeclinedMail;
+use Illuminate\Support\Facades\Mail;
 class OrderManagementController extends Controller
 {
 
@@ -123,7 +124,7 @@ class OrderManagementController extends Controller
 
     public function cancelOrderProcess( Request $request, $id)
     {
-        $order = Order::findOrFail($id);
+        $order = Order::with('orderItems')->find($id);
 
         $validated = $request->validate([
             'reason' => 'required|string|max:255',
@@ -142,6 +143,8 @@ class OrderManagementController extends Controller
         $order->update([
             'order_status' => Order::STATUS_CANCELLED,
         ]);
+        
+        Mail::to($order->customer_email)->send(new OrderDeclinedMail($order, $order->orderItems));
 
         return redirect()->route('admin.orders.index', $order->id)->with('success', 'Order has been successfully cancelled.');
     }

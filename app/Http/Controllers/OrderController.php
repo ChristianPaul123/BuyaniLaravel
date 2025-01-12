@@ -7,8 +7,10 @@ use Illuminate\Http\Request;
 use App\Models\OrderCancellation;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Mail;
 use App\Models\OrderRating;
 use App\Models\Inventory;
+use App\Mail\OrderDeclinedMail;
 
 class OrderController extends Controller
 {
@@ -80,7 +82,7 @@ class OrderController extends Controller
 
         $user = Auth::guard('user')->user();
 
-        $order = $user->orders()->where('id', $id)->first();
+        $order = $user->orders()->where('id', $id)->with('order_items', 'product_specifications')->first();
         if (!$order) {
             return redirect()->route('user.consumer.order')->with('error', 'Order not found');
         }

@@ -17,9 +17,13 @@ class OrderConfirmationMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public $order;
+    public $items;
+
+    public function __construct($order, $items)
     {
-        //
+        $this->order = $order;
+        $this->items = $items;
     }
 
     /**
@@ -27,7 +31,7 @@ class OrderConfirmationMail extends Mailable
      */
     public function envelope(): Envelope
     {
-               return new Envelope(
+            return new Envelope(
             subject: 'Buyani: Order Confirmation Mail',
             from: new Address('buyanibusiness1@gmail.com','Buyani: Order Confirmation'),
         );
@@ -39,7 +43,7 @@ class OrderConfirmationMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'mail.order-confirmation',
         );
     }
 

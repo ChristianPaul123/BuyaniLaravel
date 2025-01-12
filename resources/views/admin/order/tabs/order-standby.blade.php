@@ -89,7 +89,7 @@
                             {{-- <a href="{{ route('admin.orders.reject', $order->id) }}" class="btn btn-danger btn-sm w-100 mb-2">
                                 <i class="fa fa-trash fa-sm"></i> Decline Order
                             </a> --}}
-                            <form id="declineOrderForm" action="{{ route('admin.orders.reject', $order->id) }}" method="POST" class="d-inline">
+                            <form id="declineOrderForm" action="{{ route('admin.orders.reject', $order->id) }}" class="d-inline">
                                 @csrf
                                 <button id="declineOrderModal" type="button" title="Decline" class="btn btn-danger btn-sm text-white w-100" data-bs-toggle="modal" data-bs-target="#confirmModal" data-action="decline" data-type="Order">
                                     <i class="fa fa-trash fa-sm"></i> Decline Order

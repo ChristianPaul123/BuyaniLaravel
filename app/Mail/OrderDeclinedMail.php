@@ -17,9 +17,13 @@ class OrderDeclinedMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+
+    public $order;
+    public $items;
+    public function __construct($order, $items)
     {
-        //
+        $this->order = $order;
+        $this->items = $items;
     }
 
     /**
@@ -39,7 +43,7 @@ class OrderDeclinedMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'mail.order-declined',
         );
     }
 

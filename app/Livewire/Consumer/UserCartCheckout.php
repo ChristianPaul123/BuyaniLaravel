@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Consumer;
 
+use App\Mail\OrderConfirmationMail;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Payment;
@@ -11,6 +12,8 @@ use App\Models\OrderItem;
 use App\Models\ShippingAddress;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\HelloMail;
 use App\Http\Controllers\StripePaymentController;
 use Illuminate\Http\JsonResponse;
 
@@ -203,7 +206,7 @@ class UserCartCheckout extends Component
 
             // Commit transaction
             DB::commit();
-
+            Mail::to($order->customer_email)->send(new OrderConfirmationMail($order, $this->cartItems));
             session()->flash('message', 'Order placed successfully!');
             return redirect()->route('user.consumer.order');
 

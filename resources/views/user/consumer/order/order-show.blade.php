@@ -137,9 +137,9 @@
                 <li class="nav-item" role="presentation">
                     <a class="nav-link active" id="standby-tab" data-bs-toggle="tab" href="#standby" role="tab">To Standby</a>
                 </li>
-                <li class="nav-item" role="presentation">
+                {{-- <li class="nav-item" role="presentation">
                     <a class="nav-link" id="to-pay-tab" data-bs-toggle="tab" href="#to-pay" role="tab">To Pay</a>
-                </li>
+                </li> --}}
                 <li class="nav-item" role="presentation">
                     <a class="nav-link" id="to-ship-tab" data-bs-toggle="tab" href="#to-ship" role="tab">To Ship</a>
                 </li>
@@ -162,9 +162,9 @@
                     </div>
 
                     <!-- To Pay Orders -->
-                    <div class="tab-pane fade" id="to-pay" role="tabpanel">
+                    {{-- <div class="tab-pane fade" id="to-pay" role="tabpanel">
                             @include('user.consumer.order.tabs.order-pay', ['order' => $ordersToPay])
-                    </div>
+                    </div> --}}
 
                     <!-- To Ship Orders -->
                     <div class="tab-pane fade" id="to-ship" role="tabpanel">
