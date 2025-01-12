@@ -29,7 +29,7 @@
             </div>
             {{-- Tabs Navigation --}}
             <ul class="nav nav-tabs" id="customizationTabs" role="tablist">
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" id="settings-tab" data-bs-toggle="tab" href="#settings" role="tab">Admin Settings</a>
                 </li>
                 <li class="nav-item">
@@ -44,7 +44,7 @@
             <div class="tab-content mt-4" id="customizationTabsContent">
 
                 {{-- Settings Tab --}}
-                <div class="tab-pane fade" id="settings" role="tabpanel">
+                <div class="tab-pane fade show active" id="settings" role="tabpanel">
                     @include('admin.customization.tabs.setting-admin', ['admin' => $admin])
                 </div>
 
@@ -54,9 +54,9 @@
                 </div>
 
                 {{-- Admin Payments Tab --}}
-                <div class="tab-pane fade" id="payments" role="tabpanel">
+                {{-- <div class="tab-pane fade" id="payments" role="tabpanel">
                     @include('admin.customization.tabs.payment-admin', ['admin' => $admin])
-                </div>
+                </div> --}}
             </div>
         </section>
     </div>
@@ -100,11 +100,11 @@
         var button = $(event.relatedTarget); // Button that triggered the modal
         var action = button.data('action'); // Extract info from data-* attributes
         var type = button.data('type');
-        
+
         var modalTitle = type +' Confirmation';
         var modalBody = 'Are you sure you want to ' + action + ' this ' + type.charAt(0).toLowerCase() + type.slice(1)+ '?';
         var formId = '#' + action + type + 'Form';
-        
+
         // Set modal title, body and button action
         $(this).find('.modal-title').text(modalTitle);
         $(this).find('.modal-body p').text(modalBody);
@@ -123,6 +123,28 @@
         // Handle form submission based on the selected action
         $('#confirm' + action.charAt(0).toUpperCase() + action.slice(1)).on('click', function() {
             $(formId).submit();
+        });
+    });
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const togglePasswordIcons = document.querySelectorAll(".toggle-password");
+
+        togglePasswordIcons.forEach(icon => {
+            icon.addEventListener('click', function() {
+                const targetId = this.dataset.target;            // e.g., "password" or "confirmation_password"
+                const passwordField = document.getElementById(targetId);
+
+                if (passwordField.type === 'password') {
+                    passwordField.type = 'text';
+                    this.classList.remove('fa-eye');
+                    this.classList.add('fa-eye-slash');
+                } else {
+                    passwordField.type = 'password';
+                    this.classList.remove('fa-eye-slash');
+                    this.classList.add('fa-eye');
+                }
+            });
         });
     });
 </script>

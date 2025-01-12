@@ -82,7 +82,8 @@
 <body>
     <div class="container">
         <div class="header">
-            <img src="{{ asset('img/buyanicommece_logo.png') }}" alt="Buyani Logo">
+            {{-- <img src="{{ url('https://buyanicommerce.bsitcps.com/public/img/buyanicommece_logo.png') }}" alt="Buyani Logo"> --}}
+            <img src="{{ asset('/public/img/buyanicommece_logo.png') }}" alt="Buyani Logo">
             <h1>Buyanicommerce</h1>
         </div>
         <div class="content">

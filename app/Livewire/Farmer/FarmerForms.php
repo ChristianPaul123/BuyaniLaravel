@@ -25,10 +25,13 @@ class FarmerForms extends Component
     public $existing_form_image; // Existing farmer form image
     public $existing_identification_front; // Existing front ID image
     public $existing_identification_back; // Existing back ID image
+    public $user;
 
     public function mount()
     {
         $user = Auth::guard('user')->user();
+
+        $this->user = $user; // Assign the user to the component property
 
         // Load existing farmer form data (if exists)
         if ($user->farmerforms->isNotEmpty()) {
@@ -54,7 +57,7 @@ class FarmerForms extends Component
         $user = Auth::guard('user')->user();
 
         $form = FarmerForm::firstOrCreate(['user_id' => $user->id]);
-        
+
         // Save farmer form image in the user's folder
         if ($this->form_image) {
             $this->handleImageUpload(
@@ -148,13 +151,13 @@ class FarmerForms extends Component
         if (!File::exists(public_path($directory))) {
             File::makeDirectory(public_path($directory), 0755, true);
         }
-    
+
         // Create a unique name for the uploaded file
         $imageName = time() . '.' . $image->getClientOriginalExtension();
-    
+
         // Use storeAs to save the file
         $storedPath = $image->storeAs($directory, $imageName, 'public_uploads');
-    
+
         // Return the relative path to store in the database
         return $storedPath;
     }

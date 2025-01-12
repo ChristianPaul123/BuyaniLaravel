@@ -206,9 +206,16 @@
 
                             <div class="card-body">
                                 <h5 class="card-title">{{ $product->product_name }}</h5>
-                                <p class="card-text">
-                                    {{ $product->product_details ?? 'No description available.' }}
-                                </p>
+                                @php
+                                $prices = $product->productSpecification()->pluck('product_price');
+                                @endphp
+                                @if ($prices->isNotEmpty())
+                                    <p class="mb-0 text-success fw-bold">
+                                        ₱{{ number_format($prices->min(), 2) }} ~ ₱{{ number_format($prices->max(), 2) }}
+                                    </p>
+                                @else
+                                    <p class="text-info fw-bold">NEW</p>
+                                @endif
                                 <!-- The “Low Stock” badge or button -->
                                 @if ($product->inventory && $product->inventory->product_total_stock < 50)
                                     <a href="#" class="btn-stock btn-primary">
@@ -437,7 +444,7 @@
             <button type="button" class="btn-close ms-2" onclick="this.parentElement.parentElement.style.display='none';" aria-label="Close"></button>
         </div>
     </div>
-    
+
 
     @include('user.includes.unverified-modal')
 @endsection
