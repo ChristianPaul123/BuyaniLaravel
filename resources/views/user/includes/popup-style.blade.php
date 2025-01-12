@@ -162,6 +162,10 @@
         .popup {
             width: 90%;
         }
+
+        .mobile-modal {
+            width: 95% !important;
+        }
     }
 
 </style>
