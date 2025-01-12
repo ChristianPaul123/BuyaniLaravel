@@ -29,9 +29,9 @@
                 <li class="nav-item">
                     <a class="nav-link active" id="order-standby-tab" data-bs-toggle="tab" href="#order-standby" role="tab">To Standby</a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link" id="order-pay-tab" data-bs-toggle="tab" href="#order-pay" role="tab">To Pay</a>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                     <a class="nav-link" id="order-ship-tab" data-bs-toggle="tab" href="#order-ship" role="tab">To Ship</a>
                 </li>
@@ -53,9 +53,9 @@
                 <div class="tab-pane fade show active" id="order-standby" role="tabpanel">
                     @include('admin.order.tabs.order-standby',['ordersToStandby' => $ordersToStandby])
                 </div>
-                <div class="tab-pane fade" id="order-pay" role="tabpanel">
+                {{-- <div class="tab-pane fade" id="order-pay" role="tabpanel">
                     @include('admin.order.tabs.order-pay',['ordersToPay' => $ordersToPay])
-                </div>
+                </div> --}}
                 <div class="tab-pane fade" id="order-ship" role="tabpanel">
                     @include('admin.order.tabs.order-ship',['ordersToShip' => $ordersToShip])
                 </div>
@@ -76,10 +76,64 @@
         </section>
     </div>
 </div>
+
+<!-- Modal for confirmation -->
+<div id="confirmModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header justify-content-between">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p></p>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
 @endsection
 
 @section('scripts')
 <script>
+    // Handle modal dynamic content
+    $('#confirmModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        var action = button.data('action'); // Extract info from data-* attributes
+        var type = button.data('type');
 
+        // var modalTitle = action === 'activate' ? 'Confirm ' + type + ' Activation' : 'Confirm ' + type + '  Deactivation';
+        // var modalBody = action === 'activate' ? 'Are you sure you want to activate this '+type.charAt(0).toLowerCase() + type.slice(1)+'?' : 'Are you sure you want to deactivate this '+type.charAt(0).toLowerCase() + type.slice(1)+'?';
+        // var formId = action === 'activate' ? '#activate'+type+'Form' : '#deactivate'+ type+'Form';
+        
+        var modalTitle = type +' Confirmation';
+        var modalBody = 'Are you sure you want to ' + action + ' this ' + type.charAt(0).toLowerCase() + type.slice(1)+ '?';
+        var formId = '#' + action + type + 'Form';
+        
+        // Set modal title, body and button action
+        $(this).find('.modal-title').text(modalTitle);
+        $(this).find('.modal-body p').text(modalBody);
+
+        if(action === 'accept'){
+            $(this).find('.modal-footer').html(`
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-success" id="confirm${action.charAt(0).toUpperCase() + action.slice(1)}">${action.charAt(0).toUpperCase() + action.slice(1)}</button>
+            `);
+        } else if(action === 'cancel'){
+            $(this).find('.modal-footer').html(`
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Go back</button>
+                <button type="button" class="btn btn-danger" id="confirm${action.charAt(0).toUpperCase() + action.slice(1)}">Confirm Cancel</button>
+            `);
+        } else {
+            $(this).find('.modal-footer').html(`
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" id="confirm${action.charAt(0).toUpperCase() + action.slice(1)}">${action.charAt(0).toUpperCase() + action.slice(1)}</button>
+            `);
+        }
+        // Handle form submission based on the selected action
+        $('#confirm' + action.charAt(0).toUpperCase() + action.slice(1)).on('click', function() {
+            $(formId).submit();
+        });
+    });
 </script>
 @endsection

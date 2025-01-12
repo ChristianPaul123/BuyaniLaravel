@@ -43,17 +43,17 @@
                     </td>
                     <td>
                         @if($admin->deactivated_status == 0)
-                            <form action="{{ route('admin.deactivate', $admin->id) }}" method="POST" class="d-inline" style="display:inline;">
+                            <form id="deactivateAdminForm" action="{{ route('admin.deactivate', $admin->id) }}" method="POST" class="d-inline" style="display:inline;">
                                 @csrf
-                                <button title="Deactivate" style="background:none;border:none;padding:0;cursor:pointer;">
-                                    <i class="fa fa-power-off" style="color:red;"></i>
+                                <button id="deactivateAdminModal" type="button" title="Accept" class="btn btn-danger btn-sm text-white w-100 mb-2" data-bs-toggle="modal" data-bs-target="#confirmModal" data-action="deactivate" data-type="Admin">
+                                    <i class="fa fa-power-off fa-sm"></i> Deactivate
                                 </button>
                             </form>
                         @else
-                            <form action="{{ route('admin.activate', $admin->id) }}" method="POST" class="d-inline" style="display:inline;">
+                            <form id="activateAdminForm"  action="{{ route('admin.activate', $admin->id) }}" method="POST" class="d-inline" style="display:inline;">
                                 @csrf
-                                <button title="Activate" style="background:none;border:none;padding:0;cursor:pointer;">
-                                    <i class="fa fa-power-off" style="color:green;"></i>
+                                <button id="activateAdminModal" type="button" title="Decline" class="btn btn-success btn-sm text-white w-100" data-bs-toggle="modal" data-bs-target="#confirmModal" data-action="activate" data-type="Admin">
+                                    <i class="fa fa-power-off fa-sm"></i> Activate
                                 </button>
                             </form>
                         @endif

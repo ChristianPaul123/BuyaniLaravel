@@ -43,6 +43,7 @@
                                 @elseif($order->order_status == \App\Models\Order::STATUS_TO_SHIP) bg-info
                                 @elseif($order->order_status == \App\Models\Order::STATUS_COMPLETED) bg-success
                                 @elseif($order->order_status == \App\Models\Order::STATUS_CANCELLED) bg-danger
+                                @elseif($order->order_status == \App\Models\Order::STATUS_ARCHIVED) bg-warning
                                 @else bg-primary @endif">
                                 {{ $order->status_label }}
                             </span>

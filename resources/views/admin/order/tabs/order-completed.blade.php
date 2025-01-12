@@ -84,14 +84,15 @@
                             </a> --}}
 
                             {{-- Delete Order --}}
-                            <form action="{{ route('admin.orders.archive', $order->id) }}" 
+                            <form id="archiveOrderForm" action="{{ route('admin.orders.archive', $order->id) }}" 
                                 method="POST" 
                                 class="d-inline">
                                 @csrf
-                                <button type="submit" class="btn btn-danger btn-sm w-100 btn-block">
-                                    <i class="fa fa-trash"></i> Archive Order
+                                <button id="archiveOrderModal" type="button" title="Archive" class="btn btn-danger btn-sm text-white w-100" data-bs-toggle="modal" data-bs-target="#confirmModal" data-action="archive" data-type="Order">
+                                    <i class="fa fa-trash fa-sm"></i> Archive Order
                                 </button>
                             </form>
+
                         </td>
                     </tr>
                     @endforeach

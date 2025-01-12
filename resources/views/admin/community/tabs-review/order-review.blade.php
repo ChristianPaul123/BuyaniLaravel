@@ -30,17 +30,17 @@
                         <td>{{ $rating->deactivated_status == 1 ? 'Deactivated' : 'Active' }}</td>
                         <td>
                             @if ($rating->deactivated_status)
-                                <form action="{{ route('admin.reviews.orderrating.activate', $rating->id) }}" method="POST" class="d-inline">
+                                <form id="activateOrderReviewForm" action="{{ route('admin.reviews.orderrating.activate', $rating->id) }}" method="POST" class="d-inline">
                                     @csrf
-                                    <button title="Activate" style="background:none;border:none;padding:0;cursor:pointer;">
-                                        <i class="fa fa-power-off" style="color:green;"></i>
+                                    <button id="activateOrderReviewModal" type="button" title="Activate" class="btn btn-success text-white w-100" data-bs-toggle="modal" data-bs-target="#confirmModal" data-action="activate" data-type="OrderReview">
+                                        <i class="fa fa-power-off fa-sm me-2"></i>Activate
                                     </button>
                                 </form>
                             @else
-                                <form action="{{ route('admin.reviews.orderrating.deactivate', $rating->id) }}" method="POST" class="d-inline">
+                                <form id="deactivateOrderReviewForm"  action="{{ route('admin.reviews.orderrating.deactivate', $rating->id) }}" method="POST" class="d-inline">
                                     @csrf
-                                    <button title="Deactivate" style="background:none;border:none;padding:0;cursor:pointer;">
-                                        <i class="fa fa-power-off" style="color:red;"></i>
+                                    <button id="deactivateOrderReviewModal" type="button" title="Deactivate" class="btn btn-danger text-white w-100" data-bs-toggle="modal" data-bs-target="#confirmModal" data-action="deactivate" data-type="OrderReview">
+                                        <i class="fa fa-power-off fa-sm me-2"></i>Deactivate
                                     </button>
                                 </form>
                             @endif

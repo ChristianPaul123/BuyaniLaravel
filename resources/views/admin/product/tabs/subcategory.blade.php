@@ -25,33 +25,38 @@
             </thead>
             <tbody>
                 @foreach ($subcategories as $subcategory)
-                @php
-                $encryptedId = Crypt::encrypt($subcategory->id);
-            @endphp
+                    @php
+                        $encryptedId = Crypt::encrypt($subcategory->id);
+                    @endphp
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $subcategory->sub_category_name ?? 'N/A'  }}</td>
-                        <td>{{ $subcategory->category->category_name ?? 'N/A'  }}</td>
+                        <td>{{ $subcategory->sub_category_name ?? 'N/A' }}</td>
+                        <td>{{ $subcategory->category->category_name ?? 'N/A' }}</td>
                         <td>{{ $subcategory->created_at }}</td>
                         <td>{{ $subcategory->updated_at }}</td>
                         <td>{{ $subcategory->deactivated_date }}</td>
                         <td>{{ $subcategory->deactivated_status == 1 ? 'Deactivated' : 'Active' }}</td>
                         <td>
-                            <a href="{{ route('admin.subcategory.edit', $encryptedId) }}" class="btn btn-primary">Edit</a>
+                            <a href="{{ route('admin.subcategory.edit', $encryptedId) }}"
+                                class="btn btn-primary">Edit</a>
                         </td>
                         <td>
                             @if ($subcategory->deactivated_status)
-                                <form action="{{ route('admin.subcategory.activate', $subcategory->id) }}" method="POST" class="d-inline">
+                                <form id="activateSubcategoryForm"
+                                    action="{{ route('admin.subcategory.activate', $subcategory->id) }}" method="POST"
+                                    class="d-inline">
                                     @csrf
-                                    <button title="Activate" style="background:none;border:none;padding:0;cursor:pointer;">
-                                        <i class="fa fa-power-off" style="color:green;"></i>
+                                    <button id="activateSubcategoryModal" type="button" title="Activate" class="btn btn-success text-white w-100" data-bs-toggle="modal" data-bs-target="#confirmModal" data-action="activate" data-type="Subcategory">
+                                        <i class="fa fa-power-off fa-sm me-2"></i>Activate
                                     </button>
+                                    
                                 </form>
                             @else
-                                <form action="{{ route('admin.subcategory.deactivate', $subcategory->id) }}" method="POST" class="d-inline">
+                                <form id="deactivateSubcategoryForm" action="{{ route('admin.subcategory.deactivate', $subcategory->id) }}"
+                                    method="POST" class="d-inline">
                                     @csrf
-                                    <button title="Deactivate" style="background:none;border:none;padding:0;cursor:pointer;">
-                                        <i class="fa fa-power-off" style="color:red;"></i>
+                                    <button id="deactivateSubcategoryModal" type="button" title="Deactivate" class="btn btn-danger text-white w-100" data-bs-toggle="modal" data-bs-target="#confirmModal" data-action="deactivate" data-type="Subcategory">
+                                        <i class="fa fa-power-off fa-sm me-2"></i>Deactivate
                                     </button>
                                 </form>
                             @endif
@@ -64,7 +69,8 @@
 </div>
 
 <!-- Add Subcategory Modal -->
-<div class="modal fade" id="addSubCategoryModal" tabindex="-1" aria-labelledby="addSubCategoryModalLabel" aria-hidden="true">
+<div class="modal fade" id="addSubCategoryModal" tabindex="-1" aria-labelledby="addSubCategoryModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -76,7 +82,8 @@
                     @csrf
                     <div class="form-group">
                         <label for="sub_category_name">Subcategory Name</label>
-                        <input type="text" class="form-control" id="sub_category_name" name="sub_category_name" required>
+                        <input type="text" class="form-control" id="sub_category_name" name="sub_category_name"
+                            required>
                     </div>
                     <div class="form-group mt-3">
                         <label for="category_id">Parent Category</label>
