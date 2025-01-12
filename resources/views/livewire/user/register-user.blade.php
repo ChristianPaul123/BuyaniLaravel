@@ -76,9 +76,7 @@
                                             </span>
                                         </div>
                                     </div>
-                                    @error('password')
-                                        <span class="text-warning">{{ $message }}</span>
-                                    @enderror
+                                    @error('password')<span class="text-warning">{{ $message }}</span>@enderror
                                     <input type="hidden" name="user_type" value="{{ $user_type }}">
                                 </div>
                                 <div class="form-group my-3">
@@ -196,11 +194,8 @@
                                             <i class="fas fa-eye"></i>
                                         </span>
                                     </div>
-                                    @error('password')
-                                        <span class="text-warning">{{ $message }}</span>
-                                    @enderror
-
                                 </div>
+                                @error('password')<span class="text-warning">{{ $message }}</span>@enderror
                             </div>
                             <input type="hidden" name="user_type" value="{{ $user_type }}">
                             <div class="form-group my-3">
