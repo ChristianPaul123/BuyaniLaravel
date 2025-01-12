@@ -39,7 +39,7 @@
                         <td><img src="{{ asset($product->product_pic) }}" alt="{{ $product->product_name }}" width="50"></td>
                         <td>{{ $product->category->category_name ?? 'N/A'  }}</td>
                         <td>{{ $product->subcategory->sub_category_name ?? 'N/A' }}</td>
-                        <td>{{ $product->product_deactivated }}</td>
+                        <td>{{ $product->product_deactivated ? $product->product_deactivated->format('Y-m-d') : 'N/A' }}</td>
                         <td>
                             <a href="{{ route('admin.product.edit', $encryptedId) }}" class="btn btn-primary">Edit</a>
                         </td>

@@ -33,7 +33,7 @@
 
                     <td>{{ $admin->status == 1 ? 'Active' : 'Inactive' }}</td>
                     <td>{{ $admin->last_online }}</td>
-                    <td>{{ $admin->deactivated_date }}</td>
+                    <td>{{ $admin->deactivated_date ? $admin->deactivated_date->format('M d, Y h:i A') : 'N/A' }}</td>
                     <td>{{ $admin->deactivated_status == 1 ? 'Deactivated' : 'Active' }}</td>
 
                     <td>

@@ -22,7 +22,7 @@
                         <td>{{ $rating->user->username ?? 'N/A' }}</td>
                         <td>{{ $rating->rating }}</td>
                         <td>{{ $rating->comment }}</td>
-                        <td>{{ $rating->deactivated_date }}</td>
+                        <td>{{ $rating->deactivated_date ? $rating->deactivated_date->format('M d, Y h:i A') : 'N/A' }}</td>
                         <td>{{ $rating->deactivated_status == 1 ? 'Deactivated' : 'Active' }}</td>
                         <td>
                             @if ($rating->deactivated_status)

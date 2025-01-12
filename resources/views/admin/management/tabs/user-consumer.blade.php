@@ -37,7 +37,7 @@
                         <td>{{ $user->phone_number }}</td>
                         <td>{{ $user->status == 1 ? 'Active' : 'Inactive' }}</td>
                         <td>{{ $user->last_online }}</td>
-                        <td>{{ $user->deactivated_date }}</td>
+                        <td>{{ $user->deactivated_date ? $user->deactivated_date->format('d-m-Y') : 'N/A' }}</td>
                         <td>{{ $user->deactivated_status == 1 ? 'Deactivated' : 'Active' }}</td>
                         <td class="table-action-buttons">
                             <a href="{{ route('admin.management.view', $user->id) }}" class="btn btn-primary btn-sm"><i class="fa-solid fa-eye"></i></a>
