@@ -43,9 +43,16 @@ Route::get('/generate-sitemap', [SitemapController::class, 'generate']);
 
 
 
-Route::get('/', function () {
+// Route::get('/', function () {
+//     return view('user.index');
+// })->name('user.index');
+
+Route::get('/', [HomeController::class, 'showCondashboard'])->name('user.consumer');
+
+Route::get('/login', function () {
     return view('user.index');
 })->name('user.index');
+
 
 Route::get('/charge', [StripePaymentController::class, 'showForm']);
 

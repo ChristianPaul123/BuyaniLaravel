@@ -82,7 +82,7 @@
                 <div class="card mb-3" style="border-radius: 8px; border: none; background-color: white; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
                     <div class="card-body d-flex align-items-start">
                         <!-- Profile Picture -->
-                        <img src="{{ $rating->user->profile_pic ? Storage::url($rating->user->profile_pic) : asset('img/title/consumer.png') }}" alt="Profile Picture"
+                        <img src="{{ $rating->user->profile_pic ? asset($rating->user->profile_pic) : asset('img/title/consumer.png') }}" alt="Profile Picture"
                              class="rounded-circle mr-3" style="width: 50px; height: 50px; object-fit: cover; border: 2px solid #ddd;">
 
                         <!-- Review Details -->

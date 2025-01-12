@@ -8,6 +8,7 @@ use App\Models\CartItem;
 use App\Models\Favorite;
 use App\Models\Inventory;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 
 class UserFavorites extends Component
 {
@@ -31,7 +32,8 @@ class UserFavorites extends Component
     public function viewProduct($productId)
     {
         // Redirect to the product detail page
-        return redirect()->route('user.consumer.product.view', $productId);
+        $encryptedId = Crypt::encrypt($productId);
+        $this->redirectRoute('user.consumer.product.view', $encryptedId);
     }
 
 
@@ -41,6 +43,8 @@ class UserFavorites extends Component
         try {
             $favorite = Favorite::findOrFail($favoriteId);
             $favorite->delete();
+
+            $this->dispatch('toggleFavorites'); // Emit an event to update the favorites count in the navbar
 
             $this->favorites = $this->favorites->filter(fn ($fav) => $fav->id !== $favoriteId);
             if ($this->favorites->isEmpty()) {

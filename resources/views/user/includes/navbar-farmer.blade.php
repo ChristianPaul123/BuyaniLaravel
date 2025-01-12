@@ -103,7 +103,7 @@
                      </li>
                  @else
                      <li class="nav-item px-1 position-relative">
-                         <a class="nav-link" @if (request()->is('user/farmer/login')) active @endif href="/"
+                         <a class="nav-link" @if (request()->is('user/farmer/login')) active @endif href="{{ route('user.index') }} "
                              data-page="login">LOGIN/SIGNUP<span class="sr-only">(current) </span></a>
                      </li>
                      {{-- <li class="nav-item px-1 position-relative">

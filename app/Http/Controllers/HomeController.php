@@ -33,11 +33,11 @@ class HomeController extends Controller
         $subcategories = SubCategory::all();
         $sponsorImages = SponsorImgs::all();
 
-        $seoData = new SEOData(
-            title: 'Consumer Dashboard | Buyani',
-            description: 'Discover fresh produce and support our hardworking farmers directly.',
-            image: asset('img/stockImg3.png'),
-        );
+        // $seoData = new SEOData(
+        //     title: 'Consumer Dashboard | Buyani',
+        //     description: 'Discover fresh produce and support our hardworking farmers directly.',
+        //     image: asset('img/stockImg3.png'),
+        // );
 
        return view('user.consumer',compact('subcategories', 'sponsorImages', 'products', 'categories','isProfileIncomplete'));
     }
