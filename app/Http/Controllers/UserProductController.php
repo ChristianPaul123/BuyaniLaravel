@@ -23,7 +23,9 @@ class UserProductController extends Controller
         try {
             $categories = Category::all();
             $subcategories = SubCategory::all();
-            $products = Product::where('product_status', 1)->get();
+            $products = Product::with('inventory')
+                ->where('product_status', 1)
+                ->get();
 
             if ($products->isEmpty()) {
                 return view('user.consumer.product.show', [
