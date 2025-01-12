@@ -225,6 +225,13 @@
     }
 
 
+    #verification-logo{
+        position: absolute;
+        font-size: 15px;
+        margin-top: 35px;
+        margin-left: -13px;
+    }
+
     @media (max-width: 768px) {
         .notif {
             display: flex;
@@ -234,5 +241,6 @@
             width: 90%;
         }
     }
+
 
 </style>
