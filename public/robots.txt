@@ -1,4 +1,2 @@
 User-agent: *
 Disallow:
-
- Sitemap => 'https://Buyanicommerce.bsitcps.com',

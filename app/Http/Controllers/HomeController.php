@@ -13,7 +13,7 @@ use App\Models\SuggestProduct;
 use App\Models\SpecificProductSales;
 use Illuminate\Support\Facades\Auth;
 use RalphJSmit\Laravel\SEO\Support\SEOData;
-use function RalphJSmit\Laravel\SEO\seo; // Import the helper function
+use function RalphJSmit\Laravel\SEO\seo;
 
 
 class HomeController extends Controller
@@ -33,15 +33,14 @@ class HomeController extends Controller
         $subcategories = SubCategory::all();
         $sponsorImages = SponsorImgs::all();
 
-        // $seoData = new SEOData(
-        //     title: 'Consumer Dashboard | BuyAni',            // Title
-        //     description: 'Discover local farm produce and support Filipino farmers.', // Meta description
-        //     image: asset('img/stockImg3.png'),              // URL to a representative image
-        //     // keywords: 'farmers, produce, fresh harvests',    // Optionally define keywords (not heavily used by Google, but still okay to set)
-        // );
-
-        // // --- STEP 2: Pass your SEO data to the SEO singleton ---
-        // seo()->setSEOData($seoData);
+        $seoData = new SEOData(
+            title: 'Consumer Dashboard | Buyani',
+            description: 'Discover fresh produce and support our hardworking farmers directly.',
+            image: asset('img/stockImg3.png'),
+            // You can also add keywords or authors, like:
+            // keywords: 'farming, fresh produce, local farms',
+            // author: 'Buyani Team',
+        );
 
        return view('user.consumer',compact('subcategories', 'sponsorImages', 'products', 'categories','isProfileIncomplete'));
     }

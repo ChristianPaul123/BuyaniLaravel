@@ -36,6 +36,10 @@ use App\Http\Controllers\ProductManagementController;
 use App\Http\Controllers\InventoryManagementController;
 use App\Http\Controllers\ProductSpecificationController;
 use App\Http\Controllers\VotedProductsManagementController;
+use App\Http\Controllers\SitemapController;
+
+//fore creating the sitemap
+Route::get('/generate-sitemap', [SitemapController::class, 'generate']);
 
 
 

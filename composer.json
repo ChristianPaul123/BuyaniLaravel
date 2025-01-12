@@ -17,6 +17,7 @@
         "livewire/livewire": "^3.5",
         "ralphjsmit/laravel-seo": "^1.6",
         "spatie/browsershot": "^5.0",
+        "spatie/laravel-sitemap": "^7.3",
         "stripe/stripe-php": "^16.4"
     },
     "require-dev": {

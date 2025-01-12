@@ -23,7 +23,7 @@ return [
      * to the root domain and not relative to the current URL. The `spatie/laravel-sitemap` package
      * is a great package to generate sitemaps for your application.
      */
-    'sitemap' => null,
+    'sitemap' => 'public/sitemap.xml',
 
     /**
      * Use this setting to specify whether you want self-referencing `<link rel="canonical" href="$url">` tags to
@@ -59,7 +59,7 @@ return [
      *
      * You can use the following filetypes: ico, png, gif, jpeg, svg.
      */
-    'favicon' => null,
+    'favicon' => '/public/img/logo1.svg',
 
     'title' => [
         /**
@@ -75,14 +75,14 @@ return [
          * Use this setting to provide a suffix that will be added after the title on each page.
          * If you don't want a suffix, you should specify an empty string.
          */
-        'suffix' => '',
+        'suffix' => ' | Buyanieccommerce',
 
         /**
          * Use this setting to provide a custom title for the homepage. We will not use the suffix on the homepage,
          * so you'll need to add the suffix manually if you want that. If set to null, we'll determine the title
          * just like the other pages.
          */
-        'homepage_title' => null,
+        'homepage_title' => 'Buyani',
     ],
 
     'description' => [
@@ -109,7 +109,7 @@ return [
          * Use this setting to specify a fallback author, which will be used on places where you
          * don't have an author set via an associated ->seo model or via the ->getDynamicSEOData() method.
          */
-        'fallback' => null,
+        'fallback' => 'The Buyanicommerce Team',
     ],
 
     'twitter' => [
@@ -117,6 +117,6 @@ return [
          * Use this setting to enter your username and include that with the Twitter Card tags.
          * Enter the username like 'yourUserName', so without the '@'.
          */
-        '@username' => null,
+        '@username' => 'buyaniecommercePH',
     ],
 ];
