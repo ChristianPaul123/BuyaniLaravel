@@ -25,6 +25,18 @@
             margin-bottom: 30px;
         }
 
+        .header img {
+            width: 100px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+        .header h1 {
+            font-size: 24px;
+            color: #ffffff;
+            margin: 0;
+            font-weight: bold;
+        }
+
         .header h2 {
             color: #e74c3c;
         }
@@ -72,9 +84,12 @@
 
     <div class="container">
         <div class="header">
+            <img src="{{ asset('img/buyanicommece_logo.png') }}" alt="Buyani Logo">
+            <h1>Buyanicommerce</h1><br>
             <h2>Order Declined</h2>
             <p>Dear {{ $order->customer_name }},</p>
-            <p>We regret to inform you that your order has been declined.</p>
+            <p>We regret to inform you that your order has been declined.</p><br>
+            <p>Reason for Decline: {{ $order->orderCancellation->reason }}</p>
         </div>
 
         <div class="order-details">

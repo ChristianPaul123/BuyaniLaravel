@@ -130,9 +130,25 @@
                         <h4>Payment Information</h4>
                     </div>
                     <div class="card-body">
-                        <p><strong>Payment Method:</strong> {{ $order->payment->payment_method ?? 'N/A' }}</p>
-                        <p><strong>Transaction ID:</strong> {{ $order->payment->payment_pic ?? 'N/A' }}</p>
-                        <p><strong>Payment Status:</strong> {{ $order->payment->payment_status ?? 'Refunded' }}</p>
+                        <p><strong>Payment Method:</strong> {{ ucfirst($order->payment->payment_method) }}</p>
+                        <p><strong>Payment Amount:</strong> ₱{{ number_format($order->payment->payment_amount, 2) }}</p>
+                        <p><strong>Payment Status:</strong>
+                            @if ($order->payment->payment_status === 0)
+                            @if ($order->order_status == 5)
+                            Cancelled
+                        @else
+                            Pending
+                        @endif
+                            @elseif ($order->payment->payment_status === 1)
+                                @if ($order->getStatusLabelAttribute() === 'Cancelled')
+                                    Refunded
+                                @else
+                                    Paid
+                                @endif
+                            @else
+                                Unknown
+                            @endif
+                        </p>
                     </div>
                 </div>
             </div>

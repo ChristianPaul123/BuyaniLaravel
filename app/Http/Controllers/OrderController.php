@@ -3,14 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Inventory;
+use App\Models\OrderRating;
 use Illuminate\Http\Request;
+use App\Mail\OrderDeclinedMail;
+use App\Mail\OrderCancelledMail;
+use App\Mail\OrderCompletedMail;
 use App\Models\OrderCancellation;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Mail;
-use App\Models\OrderRating;
-use App\Models\Inventory;
-use App\Mail\OrderDeclinedMail;
+use Illuminate\Support\Facades\Session;
 
 class OrderController extends Controller
 {
@@ -67,6 +69,7 @@ class OrderController extends Controller
         $user = Auth::guard('user')->user();
 
         $order = $user->orders()->where('id', $id)->first();
+
         if (!$order) {
             return redirect()->route('user.consumer.orders')->with('error', 'Order not found');
         }
@@ -82,7 +85,7 @@ class OrderController extends Controller
 
         $user = Auth::guard('user')->user();
 
-        $order = $user->orders()->where('id', $id)->with('order_items', 'product_specifications')->first();
+        $order = $user->orders()->where('id', $id)->with('orderItems')->first();
         if (!$order) {
             return redirect()->route('user.consumer.order')->with('error', 'Order not found');
         }
@@ -103,6 +106,8 @@ class OrderController extends Controller
         $order->update([
             'order_status' => Order::STATUS_CANCELLED,
         ]);
+
+        Mail::to($order->customer_email)->send(new OrderCancelledMail($order, $order->orderItems));
 
         return redirect()->route('user.consumer.order')->with('message', 'Order has been successfully cancelled');
     }
@@ -136,6 +141,8 @@ class OrderController extends Controller
                 ]);
             }
         }
+
+        Mail::to($order->customer_email)->send(new OrderCompletedMail($order, $order->orderItems));
 
         return redirect()->route('user.consumer.order')->with('message', 'Order has been successfully marked as completed');
     }
@@ -180,6 +187,6 @@ class OrderController extends Controller
 
         return redirect()->route('user.consumer.order')->with('message', 'Thank you for your feedback!');
     }
-    
+
 
 }

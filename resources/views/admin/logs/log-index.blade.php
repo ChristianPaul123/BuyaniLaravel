@@ -49,14 +49,14 @@
             {{-- Tab Content --}}
             <div class="tab-content mt-4" id="logmanagementTabsContent">
 
-                {{-- Manage Logs in  log index tab --}}
+                {{-- Manage Logs in  log index tab
                 <div class="tab-pane fade show active" id="product-logs" role="tabpanel">
                     @include('admin.logs.log-tab.product-log', ['userLogs' => $productLogs])
                 </div>
 
                 <div class="tab-pane fade" id="order-logs" role="tabpanel">
                     @include('admin.logs.log-tab.order-log', ['userLogs' => $orderLogs])
-                </div>
+                </div> --}}
 
                 <div class="tab-pane fade" id="user-logs" role="tabpanel">
                     @include('admin.logs.log-tab.user-log', ['userLogs' => $userLogs])

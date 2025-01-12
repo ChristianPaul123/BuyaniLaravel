@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
+use App\Mail\OrderProcessMail;
+use App\Mail\OrderDeclinedMail;
+use App\Mail\OrderDeliveredMail;
 use App\Models\OrderCancellation;
 use Illuminate\Support\Facades\Auth;
-use App\Mail\OrderDeclinedMail;
 use Illuminate\Support\Facades\Mail;
+
 class OrderManagementController extends Controller
 {
 
@@ -78,10 +81,7 @@ class OrderManagementController extends Controller
         return view('admin.order.order-view', compact('order'));
     }
 
-    public function showSpecial()
-    {
-        return view('admin.order.order-special');
-    }
+
 
     public function shipOrderProcess(Request $request)
     {
@@ -97,6 +97,8 @@ class OrderManagementController extends Controller
             'order_status' => Order::OUT_FOR_DELIVERY,
         ]);
 
+        Mail::to($order->customer_email)->send(new OrderDeliveredMail($order, $order->orderItems));
+
         return redirect()->route('admin.orders.index')->with('success', 'Order is now out for delivery.');
     }
 
@@ -109,7 +111,7 @@ class OrderManagementController extends Controller
         // Redirect to the order-rejected page to allow admin to provide cancellation details
         return view('admin.order.order-rejected', compact('order'));
     }
-    
+
 
     public function showCancelOrder($id)
     {
@@ -143,7 +145,7 @@ class OrderManagementController extends Controller
         $order->update([
             'order_status' => Order::STATUS_CANCELLED,
         ]);
-        
+
         Mail::to($order->customer_email)->send(new OrderDeclinedMail($order, $order->orderItems));
 
         return redirect()->route('admin.orders.index', $order->id)->with('success', 'Order has been successfully cancelled.');
@@ -168,6 +170,8 @@ class OrderManagementController extends Controller
         $message = $nextStatus === Order::STATUS_TO_SHIP
             ? 'Order has been accepted and moved to "To Ship" status (COD).'
             : 'Order has been accepted and moved to "To Pay" status.';
+
+        Mail::to($order->customer_email)->send(new OrderProcessMail($order, $order->orderItems));
 
         return redirect()->route('admin.orders.index',['tab' => 'order-standby'])->with('success', $message);
     }
