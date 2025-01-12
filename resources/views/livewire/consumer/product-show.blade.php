@@ -102,61 +102,78 @@
                     <h2 class="text-center my-4 fw-bold">{{ $title }}</h2>
                     <p class="text-center text-muted">{{ $message }}</p>
                     <div class="row g-4">
-                        @foreach ($products as $product)
-                            <div class="col-sm-6 col-md-4 col-lg-3" wire:key="{{ $product->id }}">
-                                <div class="card shadow-sm border-0 rounded">
-                                    <div class="card-img-top-wrapper position-relative" wire:click.prevent="viewProduct({{ $product->id }})">
-                                        <img src="{{ asset($product->product_pic) }}" class="card-img-top rounded-top" alt="{{ $product->product_name }}"  style="cursor: pointer;">
+                    @foreach ($products as $product)
+                        @php
+                            $stockStatus = $product->inventory->product_total_stock;
+                        @endphp
+                        <div class="col-sm-6 col-md-4 col-lg-3" wire:key="{{ $product->id }}">
+                            <div class="card shadow-sm border-0 rounded">
+                                <div class="card-img-top-wrapper position-relative">
+                                    @if ($stockStatus > 0)
+                                        <img src="{{ asset($product->product_pic) }}" class="card-img-top rounded-top" alt="{{ $product->product_name }}" style="cursor: pointer;" wire:click.prevent="viewProduct({{ $product->id }})">
+                                    @else
+                                        <img src="{{ asset($product->product_pic) }}" class="card-img-top rounded-top opacity-50" alt="{{ $product->product_name }}">
+                                        <div class="position-absolute top-50 start-50 translate-middle bg-danger text-white px-3 py-2 rounded">
+                                            Out of Stock
+                                        </div>
+                                    @endif
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title text-center text-truncate fw-bold">{{ $product->product_name }}</h5>
+                                    <div class="text-center mb-2">
+                                        @php
+                                            $averageRating = $product->productRatings()->avg('rating');
+                                        @endphp
+                                        @if ($averageRating)
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                <i class="fas fa-star {{ $i <= $averageRating ? 'text-warning' : 'text-muted' }}"></i>
+                                            @endfor
+                                            <span class="text-muted">({{ number_format($averageRating, 1) }})</span>
+                                        @else
+                                            <p class="text-muted">No ratings yet</p>
+                                        @endif
                                     </div>
-                                    <div class="card-body">
-                                        <h5 class="card-title text-center text-truncate fw-bold">{{ $product->product_name }}</h5>
-                                        <div class="text-center mb-2">
-                                            @php
-                                                $averageRating = $product->productRatings()->avg('rating');
-                                            @endphp
-                                            @if ($averageRating)
-                                                @for ($i = 1; $i <= 5; $i++)
-                                                    <i class="fas fa-star {{ $i <= $averageRating ? 'text-warning' : 'text-muted' }}"></i>
-                                                @endfor
-                                                <span class="text-muted">({{ number_format($averageRating, 1) }})</span>
-                                            @else
-                                                <p class="text-muted">No ratings yet</p>
-                                            @endif
-                                        </div>
 
-                                        <!-- Display Price Range -->
-                                        <div class="text-center mb-3">
-                                            @php
-                                                $prices = $product->productSpecification()->pluck('product_price');
-                                            @endphp
-                                            @if ($prices->isNotEmpty())
-                                                <p class="mb-0 text-success fw-bold">
-                                                    ₱{{ number_format($prices->min(), 2) }} ~ ₱{{ number_format($prices->max(), 2) }}
-                                                </p>
-                                            @else
-                                                <p class="text-info fw-bold">NEW</p>
-                                            @endif
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-center">
+                                    <!-- Display Price Range -->
+                                    <div class="text-center mb-3">
+                                        @php
+                                            $prices = $product->productSpecification()->pluck('product_price');
+                                        @endphp
+                                        @if ($prices->isNotEmpty())
+                                            <p class="mb-0 text-success fw-bold">
+                                                ₱{{ number_format($prices->min(), 2) }} ~ ₱{{ number_format($prices->max(), 2) }}
+                                            </p>
+                                        @else
+                                            <p class="text-info fw-bold">NEW</p>
+                                        @endif
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        @if ($stockStatus > 0)
                                             <button class="btn btn-sm btn-outline-primary" wire:click.prevent="viewProduct({{ $product->id }})">
                                                 View
                                             </button>
+                                        @else
+                                            <button class="btn btn-sm btn-outline-secondary disabled" disabled>
+                                                Unavailable
+                                            </button>
+                                        @endif
 
-                                            @if(Auth::guard('user')->check()) <!-- Check if the user is logged in -->
-                                                <button class="btn btn-sm btn-outline-danger {{ in_array($product->id, $userFavorites) ? 'active' : '' }}"
-                                                        wire:click.prevent="toggleFavorite({{ $product->id }})">
-                                                    <i class="fas fa-heart"></i>
-                                                </button>
-                                            @else
-                                                <button class="btn btn-sm btn-outline-secondary disabled" disabled>
-                                                    <i class="fas fa-heart"></i>
-                                                </button>
-                                            @endif
-                                        </div>
+                                        @if(Auth::guard('user')->check()) <!-- Check if the user is logged in -->
+                                            <button class="btn btn-sm btn-outline-danger {{ in_array($product->id, $userFavorites) ? 'active' : '' }}"
+                                                    wire:click.prevent="toggleFavorite({{ $product->id }})" {{ $stockStatus <= 0 ? 'disabled' : '' }}>
+                                                <i class="fas fa-heart"></i>
+                                            </button>
+                                        @else
+                                            <button class="btn btn-sm btn-outline-secondary disabled" disabled>
+                                                <i class="fas fa-heart"></i>
+                                            </button>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
+                        </div>
+                    @endforeach
+
                     </div>
 
                     <div class="mt-4">
