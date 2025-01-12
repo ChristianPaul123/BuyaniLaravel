@@ -1,3 +1,4 @@
+
 <div>
     <section>
     <div class="row mt-3">
@@ -10,7 +11,13 @@
                             <h3 class="mt-3">Farmer</h3>
                             <p class="text-muted">Profile Picture</p>
                             <h6 class="mt-3">{{ $user->username }}</h3>
-                            <img src="{{ asset($user->profile_pic) }}" alt="Profile Picture" class="profile-pic" width="150px" width="150px" onerror="this.onerror=null; this.src='{{ asset('img/title/farmer.png') }}';">
+                            <div class="profile-div" >
+                                <img src="{{ asset($user->profile_pic) }}" alt="Profile Picture" class="profile-pic" width="150px" onerror="this.onerror=null; this.src='{{ asset('img/title/farmer.png') }}';">
+                                {{-- verified icon --}}
+                                <i class="bi bi-check-circle-fill" id="verification-logo" style="color: #39ff14;"></i>
+                                {{-- unverified --}}
+                                <i class="bi bi-exclamation-circle-fill" id="verification-logo" style="color: #ffa500;"></i>
+                            </div>
                             {{-- <img src="{{ Storage::url($user->profile_pic) }}" alt="Profile Picture" class="profile-pic rounded-circle" width="150px" height="auto"> --}}
                             <p class="text-muted">{{ $user->email }}</p>
                             <button class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#editModal" wire:click="showProfileModal()">Edit Profile</button>

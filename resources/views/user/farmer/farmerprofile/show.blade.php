@@ -58,19 +58,32 @@
         color: #00aaff;
     }
 
+
+
     .profile-pic {
-      width: 100px;
-      height: 100px;
-      object-fit: cover;
-      border-radius: 50%;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 50%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
-    .profile-pic:hover {
-      transform: scale(1.1);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+
+    #verification-logo{
+        position: absolute;
+        font-size: 25px;
+        margin-top: 70px;
+        margin-left: -20px;
     }
+
+    .profile-div:hover {
+      transform: scale(1.1);
+    }
+
+    .profile-div{
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
 
 
     /* Password Validation */
