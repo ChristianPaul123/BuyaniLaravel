@@ -141,7 +141,7 @@
                                 <div class="text-start">
                                     <label for="newPassword" class="form-label">New Password:</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control password1" id="newPassword" wire:model="newPassword" placeholder="Enter your password" minlength="8"
+                                        <input type="password" class="form-control password1" id="newPassword" wire:model="newPassword" placeholder="Enter your password" minlength="8"
                                         pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                                         title="Minimum of 8 characters, a lower and upper case letter and a number.">
                                         <span class="input-group-text" id="togglePasswordOTP" style="cursor: pointer;">
@@ -159,7 +159,7 @@
                                     </div> --}}
 
                                     <label for="newPasswordConfirmation" class="form-label mt-3">Confirm New Password:</label>
-                                    <input type="text" class="form-control password2" id="newPasswordConfirmation" wire:model="newPassword_confirmation" placeholder="Confirm your password" minlength="8"
+                                    <input type="password" class="form-control password2" id="newPasswordConfirmation" wire:model="newPassword_confirmation" placeholder="Confirm your password" minlength="8"
                                     pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                                     title="Minimum of 8 characters, a lower and upper case letter and a number.">
                                     @error('newPasswordConfirmation') <span class="text-danger">{{ $message }}</span> @enderror
