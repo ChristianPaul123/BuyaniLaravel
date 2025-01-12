@@ -231,6 +231,14 @@
     document.getElementById('togglePassword').addEventListener('click', function () {
         togglePasswordVisibility('passwordField', this);
     });
+
+    document.getElementById('toggleIcon').addEventListener('click', function () {
+        togglePasswordVisibility('newPassword', this);
+        
+    });
+    document.getElementById('toggleIcon').addEventListener('click', function () {
+        togglePasswordVisibility('newPasswordConfirmation', this);
+    });
 </script>
 
 <script>
