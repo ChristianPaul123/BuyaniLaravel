@@ -145,7 +145,14 @@
                     </div>
                 </div>
                 @empty
-                <p>No cart items yet!</p>
+                <div class="text-center my-5">
+                    <div class="empty-cart">
+                        <i class="fas fa-shopping-cart fa-5x text-muted mb-4"></i>
+                        <h3 class="text-muted">Your cart is empty</h3>
+                        <p class="text-muted mb-4">Looks like you haven't added anything to your cart yet.</p>
+                        <button class="btn btn-danger btn-sm" wire:click="gotoProducts()">Start Shopping</button>
+                    </div>
+                </div>
                 @endforelse
             </div>
 

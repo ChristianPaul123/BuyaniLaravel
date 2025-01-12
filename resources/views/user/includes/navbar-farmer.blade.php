@@ -78,11 +78,14 @@
                                  <img src="{{ auth()->guard('user')->user()->profile_pic ? asset(auth()->guard('user')->user()->profile_pic) : asset('img/title/farmer.png') }}"
                                      alt="Profile Image" class="rounded-circle"
                                      style="width: 50px; height: 50px; object-fit: cover;">
+                                     @if(auth()->guard('user')->user()->is_verified)
                                     {{-- verified icon --}}
                                     <i class="bi bi-check-circle-fill" id="verification-logo" style="color: #39ff14;"></i>
+                                    @else
                                     {{-- unverified --}}
                                     <i class="bi bi-exclamation-circle-fill" id="verification-logo" style="color: #ffa500;"></i>
-                             </li>
+                                    @endif
+                                </li>
                              <li>
                                  <p class="dropdown-item text-muted text-center mb-0">
                                      {{ auth()->guard('user')->user()->username }}
