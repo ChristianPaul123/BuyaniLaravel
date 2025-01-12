@@ -8,7 +8,7 @@
                     <th>Overall Weight (KG)</th>
                     <th>Total Price</th>
                     <th>Order Status</th>
-                    <th>Customer Name</th>
+                    <th>Delivery Employee</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -24,7 +24,7 @@
                                 {{ $order->getStatusLabelAttribute() }}
                             </span>
                         </td>
-                        <td>{{ $order->customer_name }}</td>
+                        <td>{{ $order->delivery_employee }}</td>
                         <td>
                             <a class="btn btn-primary" href="{{ route('user.consumer.order.details', $order->id)}}">View</a>
                             <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#confirmOrderModal" data-order-id="{{ $order->id }}">Order Received</button>

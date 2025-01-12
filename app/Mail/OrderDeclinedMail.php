@@ -20,6 +20,7 @@ class OrderDeclinedMail extends Mailable
 
     public $order;
     public $items;
+
     public function __construct($order, $items)
     {
         $this->order = $order;

@@ -86,9 +86,10 @@
         <div class="header">
             <img src="{{ asset('img/buyanicommece_logo.png') }}" alt="Buyani Logo">
             <h1>Buyanicommerce</h1><br>
-            <h2>Order Confirmation</h2>
-            <p>Thank you for your order, {{ $order->customer_name }}!</p><br>
-            <p>Your order has been placed successfully.</p>
+            <h2>Order Processed</h2>
+            <p>Thank you for your order, {{ $order->customer_name }}!</p>
+            <p>We have received your order and are currently processing it. You will receive an email with further details once your order has been shipped.</p>
+        </div>
         </div>
 
         <div class="order-details">
@@ -100,24 +101,7 @@
                 </tr>
                 <tr>
                     <th>Order Status</th>
-                    @php
-                        if ($order->order_status == 1) {
-                            $order->order_status = 'Pending';
-                        } elseif ($order->order_status == 2) {
-                            $order->order_status = 'To Pay';
-                        } elseif ($order->order_status == 3) {
-                            $order->order_status = 'To Ship';
-                        } elseif ($order->order_status == 4) {
-                            $order->order_status = 'Completed';
-                        } elseif ($order->order_status == 5) {
-                            $order->order_status = 'Cancelled';
-                        } elseif ($order->order_status == 6) {
-                            $order->order_status = 'Out for Delivery';
-                        } elseif($order->order_status == 7) {
-                            $order->order_status = 'On Delivery';
-                        }
-                    @endphp
-                    <td>{{ $order->order_status }}</td>
+                    <td>Proccessed</td>
                 </tr>
                 <tr>
                     <th>Payment Method</th>

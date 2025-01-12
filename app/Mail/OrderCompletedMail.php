@@ -17,11 +17,14 @@ class OrderCompletedMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
-    {
-        //
-    }
+    public $order;
+    public $items;
 
+    public function __construct($order, $items)
+    {
+        $this->order = $order;
+        $this->items = $items;
+    }
     /**
      * Get the message envelope.
      */
@@ -39,8 +42,7 @@ class OrderCompletedMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.verifymail',
-            // with: ['otp' => $this->otp]
+            view: 'mail.order-completed',
         );
     }
 

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Confirmation</title>
+    <title>Order Delivered</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -38,7 +38,7 @@
         }
 
         .header h2 {
-            color: #4CAF50;
+            color: #e74c3c;
         }
 
         .order-details,
@@ -68,7 +68,7 @@
         .total-price {
             font-size: 1.2em;
             font-weight: bold;
-            color: #4CAF50;
+            color: #e74c3c;
         }
 
         .footer {
@@ -85,10 +85,11 @@
     <div class="container">
         <div class="header">
             <img src="{{ asset('img/buyanicommece_logo.png') }}" alt="Buyani Logo">
-            <h1>Buyanicommerce</h1><br>
-            <h2>Order Confirmation</h2>
-            <p>Thank you for your order, {{ $order->customer_name }}!</p><br>
-            <p>Your order has been placed successfully.</p>
+            <h1>Buyanicommerce</h1>
+            <h2>Order Delivered</h2>
+            <p>Dear {{ $order->customer_name }},</p>
+            <p>Your order Has now been accepted and will be delivered to you by our Delivery man: {{ $order->delivery_employee }}</p><br>
+            <p>If you have any questions please message us via our messagin system about your order information</p>
         </div>
 
         <div class="order-details">

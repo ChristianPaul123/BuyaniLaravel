@@ -14,12 +14,16 @@ class OrderCancelledMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
+      /**
      * Create a new message instance.
      */
-    public function __construct()
+    public $order;
+    public $items;
+
+    public function __construct($order, $items)
     {
-        //
+        $this->order = $order;
+        $this->items = $items;
     }
 
     /**
@@ -39,8 +43,7 @@ class OrderCancelledMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.verifymail',
-            // with: ['otp' => $this->otp]
+            view: 'mail.order-cancelled',
         );
     }
 

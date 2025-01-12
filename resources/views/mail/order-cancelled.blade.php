@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Confirmation</title>
+    <title>Order Declined</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -38,7 +38,7 @@
         }
 
         .header h2 {
-            color: #4CAF50;
+            color: #e74c3c;
         }
 
         .order-details,
@@ -68,7 +68,7 @@
         .total-price {
             font-size: 1.2em;
             font-weight: bold;
-            color: #4CAF50;
+            color: #e74c3c;
         }
 
         .footer {
@@ -86,9 +86,10 @@
         <div class="header">
             <img src="{{ asset('img/buyanicommece_logo.png') }}" alt="Buyani Logo">
             <h1>Buyanicommerce</h1><br>
-            <h2>Order Confirmation</h2>
-            <p>Thank you for your order, {{ $order->customer_name }}!</p><br>
-            <p>Your order has been placed successfully.</p>
+            <h2>Order Cancelled</h2>
+            <p>Dear {{ $order->customer_name }},</p>
+            <p>We are able to check your order and successfully cancelled your order</p><br>
+            <p>we hope that you hape a wonderful experience</p>
         </div>
 
         <div class="order-details">
@@ -189,7 +190,8 @@
 
         <div class="footer">
             <p>If you have any questions or concerns, feel free to contact us at <strong>support@buyani.com</strong></p>
-            <p>Thank you for shopping with Buyani!</p>
+            <p>We apologize for any inconvenience caused.</p>
+            <p>Thank you for your understanding, and we hope to serve you better in the future!</p>
         </div>
     </div>
 

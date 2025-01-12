@@ -3,23 +3,25 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
-use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Envelope;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\SerializesModels;
 
-class OrderShippedMail extends Mailable
+class OrderProcessMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     */
-    public function __construct()
+
+    public $order;
+    public $items;
+
+    public function __construct($order, $items)
     {
-        //
+        $this->order = $order;
+        $this->items = $items;
     }
 
     /**
@@ -28,8 +30,8 @@ class OrderShippedMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Buyani: Order Shipping Mail',
-            from: new Address('buyanibusiness1@gmail.com','Buyani: Order Shipment'),
+            subject: 'Buyani: Order Confirmation Mail',
+            from: new Address('buyanibusiness1@gmail.com','Buyani: Order Delivered'),
         );
     }
 
@@ -39,8 +41,7 @@ class OrderShippedMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.verifymail',
-            // with: ['otp' => $this->otp]
+            markdown: 'mail.order-process',
         );
     }
 

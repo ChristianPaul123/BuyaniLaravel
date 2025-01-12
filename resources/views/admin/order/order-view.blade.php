@@ -165,12 +165,28 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Payment Method</h4>
+                                <h5>Payment Information</h5>
                             </div>
                             <div class="card-body">
-                                <p><strong>Method:</strong> {{ $order->payment->payment_method ?? 'N/A' }}</p>
-                                <p><strong>Transaction ID:</strong> {{ $order->payment->payment_pic ?? 'N/A' }}</p>
-                                <p><strong>Payment Status:</strong> {{ $order->payment->payment_status ?? 'Pending' }}</p>
+                                    <p><strong>Payment Method:</strong> {{ ucfirst($order->payment->payment_method) }}</p>
+                                    <p><strong>Payment Amount:</strong> ₱{{ number_format($order->payment->payment_amount, 2) }}</p>
+                                    <p><strong>Payment Status:</strong>
+                                        @if ($order->payment->payment_status === 0)
+                                        @if ($order->order_status == 5)
+                                        Cancelled
+                                    @else
+                                        Pending
+                                    @endif
+                                        @elseif ($order->payment->payment_status === 1)
+                                            @if ($order->getStatusLabelAttribute() === 'Cancelled')
+                                                Refunded
+                                            @else
+                                                Paid
+                                            @endif
+                                        @else
+                                            Unknown
+                                        @endif
+                                    </p>
                             </div>
                         </div>
                     </div>
