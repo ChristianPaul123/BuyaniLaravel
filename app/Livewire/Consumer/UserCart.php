@@ -149,6 +149,10 @@ class UserCart extends Component
         }
     }
 
+    public function gotoProducts() {
+        return redirect()->route('user.consumer.product');
+    }
+
     public function selectItem($cartItemId)
     {
         $item = CartItem::find($cartItemId);

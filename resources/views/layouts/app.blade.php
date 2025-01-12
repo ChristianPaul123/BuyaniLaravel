@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="{{ asset('img/logo1.svg') }}" type="image/png">
-    {{-- <title>@yield('title', 'Default Title')</title> <!-- Default title fallback --> --}}
+    <title>@yield('title', 'Default Title')</title> <!-- Default title fallback -->
     <!-- Insert the SEO tags -->
-    {!! seo() !!}
+    {{-- {!! seo() !!} --}}
     @include('layouts.head')
     @include('user.styles.user_styles')
     @stack('styles')

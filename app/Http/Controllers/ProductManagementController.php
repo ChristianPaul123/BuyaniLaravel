@@ -166,19 +166,41 @@ return view('admin.product.product-index', [
         return redirect()->route('admin.product.index', ['tab' => 'products'])->with('success', 'Product updated successfully.');
     }
 
-    // Delete a product
-    public function deleteProduct($id)
-    {
-        $product = Product::findOrFail($id);
+    // // Delete a product
+    // public function deleteProduct($id)
+    // {
+    //     $product = Product::findOrFail($id);
 
-        // Delete the associated image if it exists
-        if ($product->product_pic) {
-            Storage::delete($product->product_pic);
-        }
+    //     // Delete the associated image if it exists
+    //     if ($product->product_pic) {
+    //         Storage::delete($product->product_pic);
+    //     }
 
-        $product->delete();
+    //     $product->delete();
 
-        return redirect()->route('admin.product.index', ['tab' => 'products'])->with('success', 'Product deleted successfully.');
+    //     return redirect()->route('admin.product.index', ['tab' => 'products'])->with('success', 'Product deleted successfully.');
+    // }
+
+    //deactivate a product
+    public function deactivateProduct($id) {
+        $product = Product::find($id);
+        $product->deactivated_status = 1;
+        $product->deactivated_date = now();
+        $product->save();
+
+        return redirect()->route('admin.product.index')
+            ->with('success', 'Product Deactivated Successfully');
+    }
+
+    //activate a product
+    public function activateProduct($id) {
+        $product = Product::find($id);
+        $product->deactivated_status = 0;
+        $product->deactivated_date = null;
+        $product->save();
+
+        return redirect()->route('admin.product.index')
+            ->with('success', 'Product Activated Successfully');
     }
 
     // Add a product specification
@@ -232,14 +254,36 @@ return view('admin.product.product-index', [
         return redirect()->route('admin.product.index', ['tab' => 'specifications'])->with('success', 'Product Specification updated successfully.');
     }
 
-    // Delete a product specification
-    public function deleteProductSpecification($id)
-    {
-        $specification = ProductSpecification::findOrFail($id);
-        $specification->delete();
+    public function deactivateProductSpecification($id) {
+        $productSpecification = ProductSpecification::find($id);
+        $productSpecification->deactivated_status = 1;
+        $productSpecification->deactivated_date = now();
+        $productSpecification->save();
 
-        return redirect()->route('admin.product.index', ['tab' => 'specifications'])->with('success', 'Product Specification deleted successfully.');
+        return redirect()->route('admin.product.index')
+            ->with('success', 'Product Specification Deactivated Successfully');
     }
+
+    public function activateProductSpecification($id) {
+        $productSpecification = ProductSpecification::find($id);
+        $productSpecification->deactivated_status = 0;
+        $productSpecification->deactivated_date = null;
+        $productSpecification->save();
+
+        return redirect()->route('admin.product.index')
+            ->with('success', 'Product Specification Activated Successfully');
+    }
+
+
+    // // Delete a product specification
+    // public function deleteProductSpecification($id)
+    // {
+    //     $specification = ProductSpecification::findOrFail($id);
+    //     $specification->delete();
+
+    //     return redirect()->route('admin.product.index', ['tab' => 'specifications'])->with('success', 'Product Specification deleted successfully.');
+    // }
+
 
     public function addCategory(Request $request)
     {
@@ -289,12 +333,32 @@ return view('admin.product.product-index', [
         return redirect()->route('admin.product.index', ['tab' => 'categories'])->with('success', 'Category updated successfully.');
     }
 
-    public function deleteCategory($id)
-    {
-        $category = Category::findOrFail($id);
-        $category->delete();
+    // public function deleteCategory($id)
+    // {
+    //     $category = Category::findOrFail($id);
+    //     $category->delete();
 
-        return redirect()->route('admin.product.index', ['tab' => 'categories'])->with('success', 'Category deleted successfully.');
+    //     return redirect()->route('admin.product.index', ['tab' => 'categories'])->with('success', 'Category deleted successfully.');
+    // }
+
+    public function deactivateCategory($id) {
+        $category = Category::find($id);
+        $category->deactivated_status = 1;
+        $category->deactivated_date = now();
+        $category->save();
+
+        return redirect()->route('admin.product.index')
+            ->with('success', 'Category Deactivated Successfully');
+    }
+
+    public function activateCategory($id) {
+        $category = Category::find($id);
+        $category->deactivated_status = 0;
+        $category->deactivated_date = null;
+        $category->save();
+
+        return redirect()->route('admin.product.index')
+            ->with('success', 'Category Activated Successfully');
     }
 
     // =================== SubCategory Management ===================
@@ -342,13 +406,34 @@ return view('admin.product.product-index', [
         return redirect()->route('admin.product.index', ['tab' => 'subcategories'])->with('success', 'SubCategory updated successfully.');
     }
 
-    public function deleteSubCategory($id)
-    {
-        $subcategory = SubCategory::findOrFail($id);
-        $subcategory->delete();
+    // public function deleteSubCategory($id)
+    // {
+    //     $subcategory = SubCategory::findOrFail($id);
+    //     $subcategory->delete();
 
-        return redirect()->route('admin.product.index', ['tab' => 'subcategories'])->with('success', 'SubCategory deleted successfully.');
+    //     return redirect()->route('admin.product.index', ['tab' => 'subcategories'])->with('success', 'SubCategory deleted successfully.');
+    // }
+
+    public function deactivateSubCategory($id) {
+        $subCategory = SubCategory::find($id);
+        $subCategory->deactivated_status = 1;
+        $subCategory->deactivated_date = now();
+        $subCategory->save();
+
+        return redirect()->route('admin.product.index')
+            ->with('success', 'SubCategory Deactivated Successfully');
     }
+
+    public function activateSubCategory($id) {
+        $subCategory = SubCategory::find($id);
+        $subCategory->deactivated_status = 0;
+        $subCategory->deactivated_date = null;
+        $subCategory->save();
+
+        return redirect()->route('admin.product.index')
+            ->with('success', 'SubCategory Activated Successfully');
+    }
+
 
     /**
      * Handles the saving of the product image.

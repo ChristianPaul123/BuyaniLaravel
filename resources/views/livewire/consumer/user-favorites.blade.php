@@ -16,7 +16,7 @@
 
                 @if ($favorites->isEmpty())
                     <div class="text-center my-4">
-                        <p>Your wishlist is empty. Add some products to see them here!</p>
+                        <p>Your Favorites is empty. Add some products to see them here!</p>
                     </div>
                 @else
                     <!-- Wishlist Table -->

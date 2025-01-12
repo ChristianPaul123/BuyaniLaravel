@@ -17,8 +17,10 @@
                     <th>Category</th>
                     <th>Created At</th>
                     <th>Updated At</th>
+                    <th>Deactivated Date</th>
+                    <th>Deactivated Status</th>
                     <th>Edit</th>
-                    <th>Delete</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,15 +34,27 @@
                         <td>{{ $subcategory->category->category_name ?? 'N/A'  }}</td>
                         <td>{{ $subcategory->created_at }}</td>
                         <td>{{ $subcategory->updated_at }}</td>
+                        <td>{{ $subcategory->deactivated_date }}</td>
+                        <td>{{ $subcategory->deactivated_status == 1 ? 'Deactivated' : 'Active' }}</td>
                         <td>
                             <a href="{{ route('admin.subcategory.edit', $encryptedId) }}" class="btn btn-primary">Edit</a>
                         </td>
                         <td>
-                            <form action="{{ route('admin.subcategory.delete', $subcategory->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this subcategory?');">Delete</button>
-                            </form>
+                            @if ($subcategory->deactivated_status)
+                                <form action="{{ route('admin.subcategory.activate', $subcategory->id) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    <button title="Activate" style="background:none;border:none;padding:0;cursor:pointer;">
+                                        <i class="fa fa-power-off" style="color:green;"></i>
+                                    </button>
+                                </form>
+                            @else
+                                <form action="{{ route('admin.subcategory.deactivate', $subcategory->id) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    <button title="Deactivate" style="background:none;border:none;padding:0;cursor:pointer;">
+                                        <i class="fa fa-power-off" style="color:red;"></i>
+                                    </button>
+                                </form>
+                            @endif
                         </td>
                     </tr>
                 @endforeach
