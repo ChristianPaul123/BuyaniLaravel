@@ -128,7 +128,7 @@
 
     <section class="min-height">
         <div class="container my-5">
-            <h1 class="text-center py-4">Our Blogs</h1>
+            <h1 class="text-center py-4" style="color: #00cc1a; font-weight: bold;">Our Blogs</h1>
             <!-- Latest Blog -->
             <div class="row d-flex justify-content-center">
                 @if ($latestBlog)

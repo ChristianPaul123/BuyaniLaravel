@@ -123,6 +123,14 @@
             margin-bottom: 8rem;
             margin-top: 8rem; /* Add some space above the first FAQ item */
         }
+
+        .section-title{
+            color: #00cc1a;
+        }
+        .section-content{
+            color: #00584e;
+        }
+
 </style>
 @endpush
 
@@ -134,16 +142,16 @@
 <section class="min-height">
     <div class="container mt-5">
         <!-- BuyAni Vision -->
-        <h1 class="text-center pt-3 mb-4">About Us Buyani</h1>
+        <h1 class="text-center pt-3 mb-4" style="color: #00cc1a; font-weight: bold;">About Us Buyani</h1>
         <div class="row align-items-center">
             <div class="col-md-6 text-center">
                 <img src="{{ asset('img/blog/fruit basket.png') }}" alt="Basket of Produce" class="img-fluid">
             </div>
             <div class="col-md-6">
                 <h2 class="section-title">BuyAni Vision</h2>
-                <p class="text-justify">We dream of a world where each purchase becomes a ray of hope for our local farmers and inspires them to continue their efforts by giving the people the goods they grew and showing that their position in society is a respectable profession.</p>
-                <p class="text-justify">We entice in nurturing a community-driven journey towards sustainable and ecological prospect.</p>
-                <p class="text-justify">Our passion is to turn simple transactions into a powerful force for positive change, creating moments that inspire wonder and make a lasting impact.</p>
+                <p class="text-justify section-content">We dream of a world where each purchase becomes a ray of hope for our local farmers and inspires them to continue their efforts by giving the people the goods they grew and showing that their position in society is a respectable profession.</p>
+                <p class="text-justify section-content">We entice in nurturing a community-driven journey towards sustainable and ecological prospect.</p>
+                <p class="text-justify section-content">Our passion is to turn simple transactions into a powerful force for positive change, creating moments that inspire wonder and make a lasting impact.</p>
             </div>
         </div>
 
@@ -151,9 +159,9 @@
         <div class="row align-items-center vision-mission">
             <div class="col-md-6">
                 <h2 class="section-title">BuyAni Mission</h2>
-                <p class="text-justify">We're focused on building a connection between discerning consumers with the exceptional produce of local farmers, ensuring fair compensation and recognition for their hard work.</p>
-                <p class="text-justify">We serve both farmers seeking a way to showcase their goods and consumers looking for high-quality, ethically sourced products.</p>
-                <p class="text-justify">Through our transparent and community-driven approach, we facilitate sustainable transactions that empower farmers and nurture a stronger, more equitable food ecosystem.</p>
+                <p class="text-justify section-content">We're focused on building a connection between discerning consumers with the exceptional produce of local farmers, ensuring fair compensation and recognition for their hard work.</p>
+                <p class="text-justify section-content">We serve both farmers seeking a way to showcase their goods and consumers looking for high-quality, ethically sourced products.</p>
+                <p class="text-justify section-content">Through our transparent and community-driven approach, we facilitate sustainable transactions that empower farmers and nurture a stronger, more equitable food ecosystem.</p>
             </div>
             <div class="col-md-6">
                 <img src="{{ asset('img/blog/stockimage.jpg') }}" alt="Produce Showcase" class="img-fluid">
@@ -228,7 +236,7 @@
 
             {{-- <div class="contact-section pb-5" style="margin-bottom: 50px;"> <!-- Added inline margin for spacing --> --}}
             <div class="container faq-container pb-5" >
-                <h2 class="faq-header">Frequently Asked Questions</h2>
+                <h2 class="faq-header" style="color: #fff8dd;">Frequently Asked Questions</h2>
                 <div class="accordion" id="faqAccordion">
                     <!-- FAQ Item 1 -->
                     <div class="accordion-item">
