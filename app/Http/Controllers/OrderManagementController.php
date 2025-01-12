@@ -19,6 +19,7 @@ class OrderManagementController extends Controller
             'ordersToDeliver' => Order::with(['user', 'payment'])->where('order_status', Order::OUT_FOR_DELIVERY)->get(),
             'ordersCompleted' => Order::with(['user', 'payment'])->where('order_status', Order::STATUS_COMPLETED)->get(),
             'ordersCancelled' => Order::with(['user', 'payment'])->where('order_status', Order::STATUS_CANCELLED)->get(),
+            'ordersArchived' => Order::with(['user', 'payment'])->where('order_status', Order::STATUS_ARCHIVED)->get(),
         ]);
     }
 
@@ -56,6 +57,12 @@ class OrderManagementController extends Controller
     {
         $ordersCancelled = Order::where('order_status', Order::STATUS_CANCELLED)->get();
         return view('admin.order.tabs.order-cancelled', compact('ordersCancelled'));
+    }
+
+    public function archived()
+    {
+        $ordersArchived = Order::where('order_status', Order::STATUS_ARCHIVED)->get();
+        return view('admin.order.tabs.order-archived', compact('ordersArchived'));
     }
 
 
@@ -160,6 +167,34 @@ class OrderManagementController extends Controller
             : 'Order has been accepted and moved to "To Pay" status.';
 
         return redirect()->route('admin.orders.index',['tab' => 'order-standby'])->with('success', $message);
+    }
+
+    /**
+     * Archive the specified order.
+     *
+     * This method updates the status of the order to 'archived' if the order is in 'completed' status.
+     * If the order is not in 'completed' status, it redirects back with an error message.
+     *
+     * @param int $id The ID of the order to be archived.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function archiveOrder($id)
+    {
+        $order = Order::findOrFail($id);
+
+        if ($order->order_status != Order::STATUS_COMPLETED) {
+            return redirect()->back()
+                ->withErrors('Order cannot be archived as it is not in Completed status.');
+        }
+
+        $order->update([
+            'order_status' => Order::STATUS_ARCHIVED,
+        ]);
+
+        return redirect()
+            ->route('admin.orders.index',['tab' => 'order-completed'])
+            ->with('success', 'Order has been archived.');
     }
 
 }

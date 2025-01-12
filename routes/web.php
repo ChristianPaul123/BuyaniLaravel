@@ -138,6 +138,7 @@ Route::get('admin/orders/cancel/{id}', [OrderManagementController::class, 'cance
 Route::get('admin/orders/cancelled/{id}', [OrderManagementController::class, 'showCancelOrder'])->name('admin.orders.reject.view');
 Route::post('admin/orders/ship', [OrderManagementController::class, 'shipOrderProcess'])->name('admin.orders.ship');
 Route::post('admin/orders/cancelprocess/{id}', [OrderManagementController::class, 'cancelOrderProcess'])->name('admin.orders.processCancel');
+Route::post('admin/orders/archive/{id}', [OrderManagementController::class, 'archiveOrder'])->name('admin.orders.archive');
 Route::post('admin/orders/accept/{id}', [OrderManagementController::class, 'acceptOrder'])->name('admin.orders.accept');
 // Route::get('admin/product/special', [OrderManagementController::class, 'showSpecial'])->name('admin.product.special');
 

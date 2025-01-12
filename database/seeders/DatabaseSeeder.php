@@ -76,6 +76,7 @@ class DatabaseSeeder extends Seeder
             ProductImgSeeder::class,
             ProductSpecificationsSeeder::class,
             FarmerProduceSeeder::class,
+            OrderSeeder::class,
         ]);
     }
 }

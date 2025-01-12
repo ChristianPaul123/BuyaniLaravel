@@ -1,9 +1,9 @@
 <div class="card overflow-x-scroll">
     <div class="card-header">
-        <h3 class="card-title">Completed Orders</h3>
+        <h3 class="card-title">Archived Orders</h3>
     </div>
     <div class="card-body">
-        <table id="ordercompletedTable" class="table table-bordered table-striped">
+        <table id="ordercancelledTable" class="table table-bordered table-striped">
                 <thead>
                     <tr>
                         <th>Order Number</th>
@@ -17,7 +17,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($ordersCompleted as $order)
+                    @foreach ($ordersArchived as $order)
                     <tr>
                         {{-- ORDER NUMBER --}}
                         <td>{{ $order->order_number }}</td>
@@ -38,7 +38,7 @@
                         {{-- ORDER STATUS --}}
                         <td>
                             <span class="badge
-                                  @if($order->order_status == \App\Models\Order::STATUS_STANDBY) bg-secondary
+                               @if($order->order_status == \App\Models\Order::STATUS_STANDBY) bg-secondary
                                 @elseif($order->order_status == \App\Models\Order::STATUS_TO_PAY) bg-warning
                                 @elseif($order->order_status == \App\Models\Order::STATUS_TO_SHIP) bg-info
                                 @elseif($order->order_status == \App\Models\Order::STATUS_COMPLETED) bg-success
@@ -72,26 +72,11 @@
                         </td>
 
                         {{-- ACTIONS --}}
-                        <td style="width: 150px">
-                            {{-- View Order --}}
-                            <a href="{{ route('admin.orders.view', $order->id) }}" class="btn btn-primary btn-sm w-100 mb-2">
-                                <i class="fa fa-eye fa-sm"></i> View
-                            </a>
-
-                            {{-- Edit Order --}}
-                            {{-- <a href="{{ route('admin.orders.edit', $order->id) }}" class="btn btn-warning btn-sm w-100 mb-2">
-                                <i class="fa fa-edit fa-sm"></i> Edit
-                            </a> --}}
-
-                            {{-- Delete Order --}}
-                            <form action="{{ route('admin.orders.archive', $order->id) }}" 
-                                method="POST" 
-                                class="d-inline">
-                                @csrf
-                                <button type="submit" class="btn btn-danger btn-sm w-100 btn-block">
-                                    <i class="fa fa-trash"></i> Archive Order
-                                </button>
-                            </form>
+                        <td>
+                                {{-- View Order --}}
+                                <a href="{{ route('admin.orders.view', $order->id) }}" class="btn btn-primary btn-sm">
+                                    <i class="fa fa-eye"></i> View Order
+                                </a>
                         </td>
                     </tr>
                     @endforeach
