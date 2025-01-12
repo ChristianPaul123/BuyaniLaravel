@@ -29,7 +29,7 @@
 
 @if(session('success')) <!-- Check for flash message -->
 <div class="notif success d-flex alert alert-dismissible fade show notif-success" role="alert" id="flashMessage">
-    <div class="container1 container-error">
+    <div class="container1 container-success">
         <i class="fa-solid fa-info icon-modal"></i>
     </div>
     <div class="container2">
