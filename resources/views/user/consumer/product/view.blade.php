@@ -1,6 +1,7 @@
 @extends('layouts.app') <!-- Extend your main layout -->
 
 @section('title', 'Orders') <!-- Define the title for this page -->
+<title>Buyani | {{ $product->product_name }}</title>
 
 @push('styles')
     <style>
