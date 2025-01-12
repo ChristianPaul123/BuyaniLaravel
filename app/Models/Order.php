@@ -82,7 +82,7 @@ class Order extends Model
             self::STATUS_COMPLETED => 'Completed',
             self::STATUS_CANCELLED => 'Cancelled',
             self::OUT_FOR_DELIVERY => 'Out for Delivery',
-            SELF:: STATUS_ARCHIVED
+            self:: STATUS_ARCHIVED => 'Archived',
         ];
 
         return $statuses[$this->order_status] ?? 'Unknown';

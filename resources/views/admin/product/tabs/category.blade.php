@@ -35,21 +35,23 @@
                         <td>{{ $category->deactivated_date }}</td>
                         <td>{{ $category->deactivated_status == 1 ? 'Deactivated' : 'Active' }}</td>
                         <td>
-                            <a href="{{ route('admin.category.edit', $encryptedId) }}" class="btn btn-primary">Edit</a>
+                            <a href="{{ route('admin.category.edit', $encryptedId) }}" class="btn btn-primary w-100">
+                                <i class="fa fa-edit fa-sm me-2"></i>Edit
+                            </a>
                         </td>
                         <td>
                             @if ($category->deactivated_status)
-                                <form action="{{ route('admin.category.activate', $category->id) }}" method="POST" class="d-inline">
+                                <form id="activateCategoryForm" action="{{ route('admin.category.activate', $category->id) }}" method="POST" class="d-inline">
                                     @csrf
-                                    <button title="Activate" style="background:none;border:none;padding:0;cursor:pointer;">
-                                        <i class="fa fa-power-off" style="color:green;"></i>
+                                    <button id="activateCategoryModal" type="button" title="Activate" class="btn btn-success text-white w-100" data-bs-toggle="modal" data-bs-target="#confirmModal" data-action="activate" data-type="Category">
+                                        <i class="fa fa-power-off fa-sm me-2"></i>Activate
                                     </button>
                                 </form>
                             @else
-                                <form action="{{ route('admin.category.deactivate', $category->id) }}" method="POST" class="d-inline">
+                                <form id="deactivateCategoryForm" action="{{ route('admin.category.deactivate', $category->id) }}" method="POST" class="d-inline">
                                     @csrf
-                                    <button title="Deactivate" style="background:none;border:none;padding:0;cursor:pointer;">
-                                        <i class="fa fa-power-off" style="color:red;"></i>
+                                    <button id="deactivateCategoryModal" type="button" title="Deactivate" class="btn btn-danger text-white w-100" data-bs-toggle="modal" data-bs-target="#confirmModal" data-action="deactivate" data-type="Category">
+                                        <i class="fa fa-power-off fa-sm me-2"></i>Deactivate
                                     </button>
                                 </form>
                             @endif

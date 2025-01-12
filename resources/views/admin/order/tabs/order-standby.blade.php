@@ -71,24 +71,31 @@
                         </td>
 
                         {{-- ACTIONS --}}
-                        <td style="width: 100px">
+                        <td style="width: 150px">
                             {{-- View Order --}}
                             <a href="{{ route('admin.orders.view', $order->id) }}" class="btn btn-primary btn-sm w-100 mb-2">
                                 <i class="fa fa-eye fa-sm"></i> View Order
                             </a>
 
                             {{-- Accept Order --}}
-                            <form action="{{ route('admin.orders.accept', $order->id) }}" method="POST">
+                            <form id="acceptOrderForm" action="{{ route('admin.orders.accept', $order->id) }}" method="POST" class="d-inline">
                                 @csrf
-                                <button class="btn btn-sm btn-success w-100 mb-2">
-                                    <i class="fa fa-check fa-sm"> </i> Accept Order
+                                <button id="acceptOrderModal" type="button" title="Accept" class="btn btn-success btn-sm text-white w-100 mb-2" data-bs-toggle="modal" data-bs-target="#confirmModal" data-action="accept" data-type="Order">
+                                    <i class="fa fa-check fa-sm"></i> Accept Order
                                 </button>
                             </form>
 
                             {{-- Decline Order --}}
-                             <a href="{{ route('admin.orders.reject', $order->id) }}" class="btn btn-danger btn-sm w-100 mb-2">
+                            {{-- <a href="{{ route('admin.orders.reject', $order->id) }}" class="btn btn-danger btn-sm w-100 mb-2">
                                 <i class="fa fa-trash fa-sm"></i> Decline Order
-                            </a>
+                            </a> --}}
+                            <form id="declineOrderForm" action="{{ route('admin.orders.reject', $order->id) }}" method="POST" class="d-inline">
+                                @csrf
+                                <button id="declineOrderModal" type="button" title="Decline" class="btn btn-danger btn-sm text-white w-100" data-bs-toggle="modal" data-bs-target="#confirmModal" data-action="decline" data-type="Order">
+                                    <i class="fa fa-trash fa-sm"></i> Decline Order
+                                </button>
+                            </form>
+
                         </td>
                     </tr>
                     @endforeach

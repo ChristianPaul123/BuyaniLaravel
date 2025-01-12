@@ -72,14 +72,14 @@
                         </td>
 
                         {{-- ACTIONS --}}
-                        <td>
+                        <td style="width: 150px">
                                 {{-- View Order --}}
-                                <a href="{{ route('admin.orders.view', $order->id) }}" class="btn btn-primary btn-sm">
-                                    <i class="fa fa-eye"></i> View Order
+                                <a href="{{ route('admin.orders.view', $order->id) }}" class="btn btn-primary btn-sm w-100 mb-2">
+                                    <i class="fa fa-eye fa-sm"></i> View Order
                                 </a>
 
-                                <a href="{{ route('admin.orders.reject.view', $order->id) }}" class="btn btn-primary btn-sm">
-                                    <i class="fa fa-eye"></i> View Cancellation
+                                <a href="{{ route('admin.orders.reject.view', $order->id) }}" class="btn btn-primary btn-sm w-100 mb-2">
+                                    <i class="fa fa-eye fa-sm"></i> View Cancellation
                                 </a>
                         </td>
                     </tr>
