@@ -71,6 +71,16 @@ class User extends Authenticatable
         return $this->hasMany(FarmerForm::class); // 'user_id' is the foreign key in the farmerforms table
     }
 
+    //helper methods for farmerforms
+    public function getIsVerifiedAttribute()
+{
+    $farmerForm = $this->farmerforms()->latest()->first();
+    if ($farmerForm) {
+        return $farmerForm->id_verified && $farmerForm->form_verified;
+    }
+    return false; // Default to unverified if no farmer form exists
+}
+
     // Define a relationship with the Cart model
     public function cart() {
         return $this->hasOne(Cart::class); // 'user_id' is the foreign key in the cart table
