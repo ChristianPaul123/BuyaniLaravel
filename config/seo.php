@@ -12,7 +12,7 @@ return [
     /**
      * Use this setting to specify the site name that will be used in OpenGraph tags.
      */
-    'site_name' => 'Buyanicommerce',
+    'site_name' => 'BuyaniEcommerce',
 
     /**
      * Use this setting to specify the path to the sitemap of your website. This exact path will outputted, so
@@ -117,6 +117,6 @@ return [
          * Use this setting to enter your username and include that with the Twitter Card tags.
          * Enter the username like 'yourUserName', so without the '@'.
          */
-        '@username' => 'buyaniecommercePH',
+        '@username' => 'buyaniEcommercePH',
     ],
 ];
