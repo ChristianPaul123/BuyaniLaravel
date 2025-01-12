@@ -751,7 +751,7 @@
                         <input type="email" class="form-control subscribe-input" placeholder="Email Address">
                         <button type="submit" class="btn subscribe-button">Subscribe</button>
                     </form> --}}
-                    <a href="{{ route('user.consumer.contact') }}" class="btn subscribe-button">Contact Us</a>
+                    <a href="{{ route('user.consumer.contact') }}" class="btn subscribe-button" style="border-radius: 7px;">Contact Us</a>
                 </div>
             </div>
         </div>
