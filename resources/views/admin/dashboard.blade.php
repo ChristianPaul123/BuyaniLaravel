@@ -148,6 +148,7 @@
 
                         <!-- Pie Chart (Total Stocks, Sold, Damaged) -->
                         <div class="col-md-4 col-sm-12">
+                            <label class="mb-2" style="color: #62b613; font-size: 25px; font-weight: bold;">Monthly Stocks</label>
                             <canvas id="myPieChart"></canvas>
                         </div>
 
