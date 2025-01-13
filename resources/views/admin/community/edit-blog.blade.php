@@ -40,7 +40,7 @@
     <div class="container mt-4">
                 {{-- Header Section --}}
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Edit Blog</h1>
+                    <h1 class="h2" style="font-weight: bold;">Edit Blog</h1>
                 </div>
 
                 {{-- Back Button --}}

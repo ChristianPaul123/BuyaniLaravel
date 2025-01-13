@@ -47,7 +47,7 @@
 
         {{-- Page Header --}}
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-1 pb-2 mb-3 border-bottom">
-            <h1 class="h2">Sponsor Images</h1>
+            <h1 class="h2" style="font-weight: bold;">Sponsor Images</h1>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addSponsorImageModal">
                 Add Sponsor Image
             </button>

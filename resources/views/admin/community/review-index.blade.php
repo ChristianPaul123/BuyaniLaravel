@@ -23,7 +23,7 @@
 
         <section class="col-md-10 ml-sm-auto col-lg-10 px-3 py-2 overflow-y-scroll main-section">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Reviews Management</h1>
+                <h1 class="h2" style="font-weight: bold;">Reviews Management</h1>
             </div>
             {{-- Tabs Navigation --}}
             <ul class="nav nav-tabs" id="reviewsTabs" role="tablist">
@@ -76,7 +76,7 @@
         var action = button.data('action'); // Extract info from data-* attributes
         var type = button.data('type');
 
-        
+
 
         // Update modal content based on the action
         if(type === 'OrderReview'){
@@ -88,7 +88,7 @@
             var modalBody = action === 'activate' ? 'Are you sure you want to activate this product review?' : 'Are you sure you want to deactivate this product review?';
             var formId = action === 'activate' ? '#activate'+type+'Form' : '#deactivate'+ type+'Form';
         }
-        
+
         // Set modal title, body and button action
         $(this).find('.modal-title').text(modalTitle);
         $(this).find('.modal-body p').text(modalBody);
