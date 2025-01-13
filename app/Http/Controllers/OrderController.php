@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Order;
 use App\Models\Inventory;
 use App\Models\OrderRating;
+use App\Models\ProductSales;
 use Illuminate\Http\Request;
 use App\Mail\OrderDeclinedMail;
 use App\Mail\OrderCancelledMail;
 use App\Mail\OrderCompletedMail;
 use App\Models\OrderCancellation;
+use App\Models\SpecificProductSales;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
@@ -112,6 +115,7 @@ class OrderController extends Controller
         return redirect()->route('user.consumer.order')->with('message', 'Order has been successfully cancelled');
     }
 
+    //MAIN CONTENT FOR THE PRODUCT SALES AND PRODUCT SPECIFICATIONS SALES
     public function confirmOrderReceived(Request $request)
     {
         if (!Auth::guard('user')->check()) {
@@ -141,6 +145,63 @@ class OrderController extends Controller
                 ]);
             }
         }
+
+            // ------------------------------------------------------------------
+        // 1) Add logic to record product sales and specific product sales
+        // ------------------------------------------------------------------
+
+        // Example: use today's date or you can use $order->created_at->format('Y-m-d')
+        // depending on how you want to track the sales date.
+        $salesDate = Carbon::now()->format('Y-m-d');
+
+        foreach ($order->orderItems as $item) {
+            // ----------------------------------------------------
+            // A) Update/create the ProductSales entry
+            // ----------------------------------------------------
+            $productSales = ProductSales::where('product_id', $item->product_id)
+                                        ->where('date', $salesDate)
+                                        ->first();
+
+            if (!$productSales) {
+                // Create a new record for this product and date
+                $productSales = ProductSales::create([
+                    'product_id'  => $item->product_id,
+                    'order_count' => 1, // first order item for this product on this date
+                    'total_sales' => ($item->price * $item->quantity),
+                    'date'        => $salesDate,
+                ]);
+            } else {
+                // Update existing record
+                $productSales->order_count += 1;
+                $productSales->total_sales += ($item->price * $item->quantity);
+                $productSales->save();
+            }
+
+            // ----------------------------------------------------
+            // B) Update/create the SpecificProductSales entry
+            // ----------------------------------------------------
+            $specificProductSales = SpecificProductSales::where('product_specification_id', $item->product_specification_id)
+                                                    ->where('product_sale_id', $productSales->id) // Link to the productSales record
+                                                    ->where('date', $salesDate)
+                                                    ->first();
+
+            if (!$specificProductSales) {
+                // Create a new record for this product specification and date
+                $specificProductSales = SpecificProductSales::create([
+                    'product_specification_id' => $item->product_specification_id,
+                    'product_sale_id'         => $productSales->id, // link to ProductSales
+                    'order_quantity'          => $item->quantity,
+                    'total_sales'             => ($item->price * $item->quantity),
+                    'date'                    => $salesDate,
+                ]);
+            } else {
+                // Update existing record
+                $specificProductSales->order_quantity += $item->quantity;
+                $specificProductSales->total_sales    += ($item->price * $item->quantity);
+                $specificProductSales->save();
+            }
+        }
+
 
         Mail::to($order->customer_email)->send(new OrderCompletedMail($order, $order->orderItems));
 

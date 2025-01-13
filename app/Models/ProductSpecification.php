@@ -41,4 +41,8 @@ class ProductSpecification extends Model
     public function productSpecificationLogs() {
         return $this->hasMany(ProductSpecificationLog::class, 'productSpecificationLogs');
     }
+
+    public function specificProductSales() {
+        return $this->hasMany(SpecificProductSales::class, 'specificProductSales');
+    }
 }

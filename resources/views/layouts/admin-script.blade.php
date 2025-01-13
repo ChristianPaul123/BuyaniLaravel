@@ -115,7 +115,7 @@ new DataTable('#productsalesTable', {
     }
 });
 
-new DataTable('#specificproductSalesTable', {
+new DataTable('#specificproductsalesTable', {
     layout: {
         topStart: {
             buttons: ['copy', 'csv', 'excel', 'pdf', 'print']

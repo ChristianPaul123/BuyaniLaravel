@@ -20,9 +20,11 @@ class ProductSales extends Model
     // Relationship with Product
     public function product()
     {
-        return $this->belongsTo(Product::class);
+        // If product_sales table has column 'product_id'
+        // and products table has primary key 'id',
+        // the default is fine. Or you can be explicit:
+        return $this->belongsTo(Product::class, 'product_id', 'id');
     }
-
     public function SpecificProductSales() {
         return $this->hasMany(ProductSales::class);
     }
