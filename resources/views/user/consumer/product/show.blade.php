@@ -43,11 +43,6 @@
     background-color: #ffffff;
     }
 
-    .header-title h1 {
-        font-size: 1.8rem;
-        color: #28a745;
-    }
-
     .header-title p {
         font-size: 0.9rem;
         color: #6c757d;

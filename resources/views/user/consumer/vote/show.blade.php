@@ -176,7 +176,7 @@
     <div class="container my-5">
         <!-- Voting Header -->
         <div class="voting-header">
-            <h1 style="color: #00cc1a; font-weight: bold;">Product Voting - {{ \Carbon\Carbon::now()->format('F Y') }}</h1>
+            <h1 class="text-center pt-3 mb-4" style="color: #00cc1a; font-weight: bold;">Product Voting - {{ \Carbon\Carbon::now()->format('F Y') }}</h1>
             <p>Vote for your requested products!</p>
         </div>
         @livewire('consumer.suggested-product-ranking')

@@ -83,7 +83,7 @@
 
 <div class="container mt-5 mb-5">
     <section class="container-fluid min-height">
-        <h2 class="mb-4">Shopping Cart</h2>
+        <h1 class="text-center pt-3 mb-4" style="color: #00cc1a; font-weight: bold;">Shopping Cart</h1>
         @include('user.includes.messageBox')
 
         <div class="row">

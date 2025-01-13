@@ -21,8 +21,8 @@
     @else
         <div class="row container my-4">
             <div class="header-title">
-                <h1 class="fw-bold text-success mb-0">Product Catalog</h1>
-                <p class="text-muted small">Explore our wide range of products</p>
+                <h1 class="text-center fw-bold  mb-0" style="color: #00cc1a; font-weight: bold;">Product Catalog</h1>
+                <p class="text-center text-muted small">Explore our wide range of products</p>
             </div>
             <div class="header-wrapper bg-light rounded shadow-sm px-4 py-3">
                 <div class="d-flex justify-content-between align-items-center">

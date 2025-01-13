@@ -131,8 +131,7 @@
     <section class="p-3">
 
         <div class="container mt-5 mb-5">
-            <h2 class="mb-4">Pending Orders</h2>
-
+            <h1 class="text-center pt-3 mb-4" style="color: #00cc1a; font-weight: bold;">Pending Orders</h1>
             <ul class="nav nav-tabs" id="orderTabs" role="tablist">
                 <li class="nav-item" role="presentation">
                     <a class="nav-link active" id="standby-tab" data-bs-toggle="tab" href="#standby" role="tab">To Standby</a>

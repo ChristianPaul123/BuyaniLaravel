@@ -18,9 +18,9 @@
     }
 
     .wishlist-header h1 {
-        margin-top: 0.5rem;
+        /* margin-top: 0.5rem;
         font-size: 2rem;
-        font-weight: bold;
+        /* font-weight: bold; */
     }
 
     .wishlist-container {

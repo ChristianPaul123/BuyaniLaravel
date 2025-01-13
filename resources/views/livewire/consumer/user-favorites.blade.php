@@ -4,8 +4,8 @@
         <div class="m-auto h-100 d-flex align-items-center">
             <div class="container">
                 <div class="wishlist-header text-center my-4">
-                    <i class="fas fa-heart" style="font-size: 3rem; color: #f39c12;"></i>
-                    <h1>My Favorites</h1>
+                    {{-- <i class="fas fa-heart" style="font-size: 3rem; color: #f39c12;"></i> --}}
+                    <h1 class="text-center pt-3 mb-4" style="color: #00cc1a; font-weight: bold;">My Favorites</h1>
                 </div>
 
                 @if ($message)

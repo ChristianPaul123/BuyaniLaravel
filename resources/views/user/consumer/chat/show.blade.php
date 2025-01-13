@@ -114,13 +114,13 @@
 @section('content')
 @include('user.includes.navbar-consumer')
 
-<div class="main-content-wrapper h-100">
+<div class="main-content-wrapper mt-5 mb-5">
     <div class="h-100">
     <div class="m-auto h-100 d-flex align-items-center">
         <div class="container">
             <!-- Chat Header -->
             <div class="text-center mb-3">
-                <h3 class="text-center" style="color: green;">Buy<span style="color: orange;">Ani</span> Support Chat</h3>
+                <h1 class="text-center pt-3 mb-4" style="color: #00cc1a; font-weight: bold;">Buy<span style="color: orange;">Ani</span> Support Chat</h1>
             </div>
             @livewire('user.user-chat-system',['chatID' => Auth::guard('user')->user()->id])
         </div>
