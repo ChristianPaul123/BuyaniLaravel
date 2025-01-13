@@ -179,9 +179,10 @@
                            background-color: white; border: 1px solid #ccc; border-radius: 5px;
                            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); text-align: center;">
                     <li>
-                        <a class="dropdown-item" href="#" onclick="confirmLogout()"
-                           style="display: block; padding: 10px; color: black; text-decoration: none; font-size: 14px; font-weight: bold; color: red;">
-                           Logout
+                        <a class="dropdown-item" href= " {{ route('admin.logout') }}"
+                            onclick="return confirm('Are you sure you want to log out?');"
+                            style="display: block; padding: 10px; color: black; text-decoration: none; font-size: 14px; font-weight: bold; color: red;">
+                            Logout
                         </a>
                     </li>
                 </ul>
