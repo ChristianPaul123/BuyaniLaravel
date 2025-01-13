@@ -799,8 +799,8 @@
 
     <div class="container mb-5">
         <div class="contact-header text-center">
-            <h1>Contact Us</h1>
-            <p>We would love to hear from you!</p>
+            <h1 style="color: #28a745;">Contact Us</h1>
+            <p style="color: #106416;">We would love to hear from you!</p>
         </div>
 
         <!-- Contact Form and Info -->
