@@ -72,10 +72,9 @@ Route::get('admin/logout', [AdminController::class,'logout'])->name('admin.logou
 Route::get('admin/dashboard', [AdminController::class, 'showdashboard'])->name('admin.dashboard');
 
 //CUSTOMIZATION - like settings for owner or something -_(-_-)_-
-Route::post('admin/store', [AdminController::class, 'storenewAdmin'])->name('admin.store'); // Store New Admin
-Route::get('admin/{admin}/edit', [AdminController::class, 'showeditAdmin'])->name('admin.edit'); // Edit Admin Page
-Route::put('/admin/update/{admin}', [AdminController::class, 'updateAdmin'])->name('admin.update');
-// Route::put('admin/{admin}/update', [AdminController::class, 'update'])->name('admin.update'); // Update Admin Info
+Route::post('admin/store', [AdminController::class, 'store'])->name('admin.store'); // Store New Admin
+Route::get('admin/{admin}/edit', [AdminController::class, 'edit'])->name('admin.edit'); // Edit Admin Page
+Route::put('admin/{admin}/update', [AdminController::class, 'update'])->name('admin.update'); // Update Admin Info
 Route::post('admin/{admin}/deactivate', [AdminController::class, 'deactivate'])->name('admin.deactivate');
 Route::post('admin/{admin}/activate', [AdminController::class, 'activate'])->name('admin.activate');
 Route::get('admin/customization', [AdminController::class, 'showCustomization'])->name('admin.customization');
