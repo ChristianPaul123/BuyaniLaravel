@@ -270,4 +270,15 @@
         border-radius: 50%;
     }
 
+    .dropdown-menu{
+        margin-left:-100px;
+    }
+
+    @media (max-width: 768px) {
+        .dropdown-menu{
+            margin-left: 0;
+        }
+    }
+
+
 </style>

@@ -164,6 +164,25 @@
                 <i class="fas fa-calendar-alt me-2 text-primary"></i>
                 <span id="currentDate" class="fw-bold text-primary fs-5"></span>
             </div>
+
+            <div class="logout-div dropdown" style="position: relative; display: inline-block;">
+                <i class="bi bi-power dropdown-toggle" id="logoutDropdown"
+                   style="font-size: 30px; color: red; font-weight: bold; cursor: pointer;"
+                   data-bs-toggle="dropdown" aria-expanded="false"></i>
+                <ul class="dropdown-menu" aria-labelledby="logoutDropdown"
+                    style="position: absolute; top: 40px; right: 0; min-width: 120px; padding: 5px 0;
+                           background-color: white; border: 1px solid #ccc; border-radius: 5px;
+                           box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); text-align: center;">
+                    <li>
+                        <a class="dropdown-item" href="#" onclick="confirmLogout()"
+                           style="display: block; padding: 10px; color: black; text-decoration: none; font-size: 14px; font-weight: bold; color: red;">
+                           Logout
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+
         </div>
     </div>
 </nav>
