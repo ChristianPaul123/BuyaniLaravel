@@ -29,7 +29,7 @@
                 <tr>
                     {{-- Adjust colspan or positioning as needed --}}
                     <th colspan="3" class="text-end">Total:</th>
-                    <th>${{ $sale->sum('total_sales') }}</th>
+                    <th>${{ $productSales->sum('total_sales') }}</th>
                     <th></th>
                 </tr>
             </tfoot>
