@@ -96,7 +96,18 @@
         <div class="text-center mt-4">
             <button wire:click="saveForm" wire:loading.attr="disabled" class="btn btn-primary">Save Changes</button>
         </div>
-    </section>
+    </div>
+
+    <!-- Save Button -->
+    @if($user->is_verified)
+    @else
+    <div class="text-center mt-4">
+        <button wire:click="saveForm" wire:loading.attr="disabled" class="btn btn-primary">Save Changes</button>
+    </div>
+    @endif
+
+
+</section>
 </div>
 
 <script>

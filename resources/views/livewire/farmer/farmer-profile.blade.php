@@ -13,10 +13,11 @@
                             <h6 class="mt-3">{{ $user->username }}</h3>
                             <div class="profile-div" >
                                 <img src="{{ asset($user->profile_pic) }}" alt="Profile Picture" class="profile-pic" width="150px" onerror="this.onerror=null; this.src='{{ asset('img/title/farmer.png') }}';">
-                                {{-- verified icon --}}
-                                <i class="bi bi-check-circle-fill" id="verification-logo" style="color: #39ff14;"></i>
-                                {{-- unverified --}}
-                                <i class="bi bi-exclamation-circle-fill" id="verification-logo" style="color: #ffa500;"></i>
+                                @if($user->is_verified)
+                                <i class="bi bi-check-circle-fill" id="verification-logo" style="color: #39ff14;" title="Verified"></i>
+                                @else
+                                    <i class="bi bi-exclamation-circle-fill" id="verification-logo" style="color: #ffa500;" title="Not Verified"></i>
+                                @endif
                             </div>
                             {{-- <img src="{{ Storage::url($user->profile_pic) }}" alt="Profile Picture" class="profile-pic rounded-circle" width="150px" height="auto"> --}}
                             <p class="text-muted">{{ $user->email }}</p>

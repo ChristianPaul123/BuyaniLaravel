@@ -30,7 +30,7 @@
             </div>
             {{-- Tabs Navigation --}}
             <ul class="nav nav-tabs" id="customizationTabs" role="tablist">
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" id="settings-tab" data-bs-toggle="tab" href="#settings" role="tab">Admin Settings</a>
                 </li>
                 <li class="nav-item">
@@ -45,7 +45,7 @@
             <div class="tab-content mt-4" id="customizationTabsContent">
 
                 {{-- Settings Tab --}}
-                <div class="tab-pane fade" id="settings" role="tabpanel">
+                <div class="tab-pane fade show active" id="settings" role="tabpanel">
                     @include('admin.customization.tabs.setting-admin', ['admin' => $admin])
                 </div>
 
@@ -124,6 +124,28 @@
         // Handle form submission based on the selected action
         $('#confirm' + action.charAt(0).toUpperCase() + action.slice(1)).on('click', function() {
             $(formId).submit();
+        });
+    });
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const togglePasswordIcons = document.querySelectorAll(".toggle-password");
+
+        togglePasswordIcons.forEach(icon => {
+            icon.addEventListener('click', function() {
+                const targetId = this.dataset.target;            // e.g., "password" or "confirmation_password"
+                const passwordField = document.getElementById(targetId);
+
+                if (passwordField.type === 'password') {
+                    passwordField.type = 'text';
+                    this.classList.remove('fa-eye');
+                    this.classList.add('fa-eye-slash');
+                } else {
+                    passwordField.type = 'password';
+                    this.classList.remove('fa-eye-slash');
+                    this.classList.add('fa-eye');
+                }
+            });
         });
     });
 </script>
