@@ -252,8 +252,28 @@
                                                 @if ($form->farmer_form)
                                                     <div class="col-md-4 d-flex justify-content-center">
                                                         <div class="text-center">
-                                                            <h6>Farmer Form:</h6>
-                                                            <img src="{{ asset($form->farmer_form) }}" alt="Farmer Form" class="img-fluid rounded mb-3">
+                                                            <button type="button" class="" data-bs-toggle="modal" data-bs-target="#farmerFormModal{{ $form->id }}">
+                                                                <h6>Farmer Form:</h6>
+                                                                <img src="{{ asset($form->farmer_form) }}" alt="Farmer Form" class="img-fluid rounded mb-3">
+                                                            </button>
+                                                        </div>
+                                                    </div>
+
+                                                    {{-- Add modal for farmer form --}}
+                                                    <div class="modal fade" id="farmerFormModal{{ $form->id }}" tabindex="-1" aria-labelledby="farmerFormModalLabel{{ $form->id }}" aria-hidden="true">
+                                                        <div class="modal-dialog modal-lg">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="farmerFormModalLabel{{ $form->id }}">Farmer Form</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <img src="{{ asset($form->farmer_form) }}" alt="Farmer Form" class="img-fluid">
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 @endif
@@ -261,8 +281,28 @@
                                                 @if ($form->identification_card_front)
                                                     <div class="col-md-4 d-flex justify-content-center">
                                                         <div class="text-center">
-                                                            <h6>ID Card Front:</h6>
-                                                            <img src="{{ asset($form->identification_card_front) }}" alt="ID Front" class="img-fluid rounded mb-3">
+                                                            <button type="button" class="" data-bs-toggle="modal" data-bs-target="#idCardFrontModal{{ $form->id }}">
+                                                                <h6>ID Card Front:</h6>
+                                                                <img src="{{ asset($form->identification_card_front) }}" alt="ID Front" class="img-fluid rounded mb-3">
+                                                            </button>
+                                                        </div>
+                                                    </div>
+
+                                                    {{-- Add modal for ID Card Front --}}
+                                                    <div class="modal fade" id="idCardFrontModal{{ $form->id }}" tabindex="-1" aria-labelledby="idCardFrontModalLabel{{ $form->id }}" aria-hidden="true">
+                                                        <div class="modal-dialog modal-lg">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="idCardFrontModalLabel{{ $form->id }}">ID Card Front</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <img src="{{ asset($form->identification_card_front) }}" alt="ID Front" class="img-fluid">
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 @endif
@@ -270,10 +310,31 @@
                                                 @if ($form->identification_card_back)
                                                     <div class="col-md-4 d-flex justify-content-center">
                                                         <div class="text-center">
-                                                            <h6>ID Card Back:</h6>
-                                                            <img src="{{ asset($form->identification_card_back) }}" alt="ID Back" class="img-fluid rounded mb-3">
+                                                            <button type="button" class="" data-bs-toggle="modal" data-bs-target="#idCardBackModal{{ $form->id }}">
+                                                                <h6>ID Card Back:</h6>
+                                                                <img src="{{ asset($form->identification_card_back) }}" alt="ID Back" class="img-fluid rounded mb-3">
+                                                            </button>
                                                         </div>
                                                     </div>
+
+                                                    {{-- Add modal for ID Card Back --}}
+                                                    <div class="modal fade" id="idCardBackModal{{ $form->id }}" tabindex="-1" aria-labelledby="idCardBackModalLabel{{ $form->id }}" aria-hidden="true">
+                                                        <div class="modal-dialog modal-lg">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="idCardBackModalLabel{{ $form->id }}">ID Card Back</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <img src="{{ asset($form->identification_card_back) }}" alt="ID Back" class="img-fluid">
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
                                                 @endif
                                             </div>
 

@@ -4,11 +4,11 @@
             <thead>
                 <tr>
                     <th>Order Number</th>
-                    <th>Total Quantity</th>
-                    <th>Overall Weight (KG)</th>
-                    <th>Total Price</th>
-                    <th>Order Status</th>
-                    <th>Customer Name</th>
+                    <th class="d-none d-lg-table-cell">Total Quantity</th>
+                    <th class="d-none d-lg-table-cell">Overall Weight (KG)</th>
+                    <th class="d-none d-lg-table-cell">Total Price</th>
+                    <th class="d-none d-lg-table-cell">Order Status</th>
+                    <th class="d-none d-lg-table-cell">Customer Name</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -16,15 +16,15 @@
                 @forelse($ordersToShip as $order)
                     <tr>
                         <td>{{ $order->order_number }}</td>
-                        <td>{{ number_format($order->total_amount) }}</td>
-                        <td>{{ $order->overall_orderKG }} KG</td>
-                        <td>₱{{ number_format($order->total_price, 2) }}</td>
-                        <td>
+                        <td class="d-none d-lg-table-cell">{{ number_format($order->total_amount) }}</td>
+                        <td class="d-none d-lg-table-cell">{{ $order->overall_orderKG }} KG</td>
+                        <td class="d-none d-lg-table-cell">₱{{ number_format($order->total_price, 2) }}</td>
+                        <td class="d-none d-lg-table-cell">
                             <span class="badge status-to-ship text-white">
                                 {{ $order->getStatusLabelAttribute() }}
                             </span>
                         </td>
-                        <td>{{ $order->customer_name }}</td>
+                        <td class="d-none d-lg-table-cell">{{ $order->customer_name }}</td>
                         <td>
                             <a class="btn btn-primary"
                                 href="{{ route('user.consumer.order.details', $order->id) }}">View</a>
