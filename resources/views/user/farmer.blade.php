@@ -352,7 +352,7 @@
         <section class="hero">
             <div class="container text-center">
                 <div class="container section-1">
-                    <h1 style="margin-bottom: -10px;">WELCOMEdfsdfffds<span style="color:orange;font-weight:bold">FARMERS</span>
+                    <h1 style="margin-bottom: -10px;">WELCOME<span style="color:orange;font-weight:bold">FARMERS</span>
                     </h1>
                     <h4>At BuyAni, we connect local farmers with businesses and communities in Albay. Sell your produce with ease or enjoy the freshest vegetables straight from the fields. Together, we grow stronger.</h4>
                     <button>Sell Now!</button>
@@ -366,10 +366,10 @@
             <div class="best-selling">
                 @forelse ($bestSellingProducts as $index => $productSale)
                     <div class="card product-card">
-                        <img src="{{ asset($productSale->product->image ?? 'img/placeholder.png') }}" class="card-img-top"
-                            alt="{{ $productSale->product->name ?? 'Unknown Product' }}">
+                        <img src="{{ asset($productSale->product->product_pic ?? 'img/placeholder.png') }}" class="card-img-top"
+                            alt="{{ $productSale->product->product_name ?? 'Unknown Product' }}">
                         <div class="card-body">
-                            <h5>#{{ $index + 1 }} {{ $productSale->product->name ?? 'Unknown Product' }}</h5>
+                            <h5>#{{ $index + 1 }} {{ $productSale->product->product_name ?? 'Unknown Product' }}</h5>
                             <p>Amount: {{ $productSale->total_sales }} kg</p>
                         </div>
                     </div>
@@ -383,11 +383,11 @@
             <div class="best-selling">
                 @forelse ($bestSellingVariants as $index => $variantSale)
                     <div class="card product-card">
-                        <img src="{{ asset($variantSale->productSpecification->product->image ?? 'img/placeholder.png') }}"
+                        <img src="{{ asset($variantSale->productSpecification->product->product_pic ?? 'img/placeholder.png') }}"
                             class="card-img-top"
-                            alt="{{ $variantSale->productSpecification->product->name ?? 'Unknown Variant' }}">
+                            alt="{{ $variantSale->productSpecification->product->product_name ?? 'Unknown Variant' }}">
                         <div class="card-body">
-                            <h5>#{{ $index + 1 }} {{ $variantSale->productSpecification->name ?? 'Unknown Variant' }}
+                            <h5>#{{ $index + 1 }} {{ $variantSale->productSpecification->specification_name ?? 'Unknown Variant' }}
                             </h5>
                             <p>Amount: {{ $variantSale->total_sales }} kg</p>
                         </div>
