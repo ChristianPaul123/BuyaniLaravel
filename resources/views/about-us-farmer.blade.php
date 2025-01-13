@@ -171,10 +171,15 @@
 
         <!-- Video Section -->
         <div class="text-center my-5 px-3">
-            <video controls class="w-100">
-                <source src="{{ asset('img/blog/vid.mp4') }}" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+            <iframe
+                class="w-100"
+                height="500"
+                src="https://www.youtube.com/embed/UJjpP3z8JUw"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
         </div>
 
 
