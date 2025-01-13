@@ -100,32 +100,59 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th class="table-head" style="background-color: #62b613; color: #ffffff; font-weight:bold;">PRODUCT NAME</th>
+                                        <th class="table-head" style="background-color: #62b613; color: #ffffff; font-weight:bold;">
+                                            LATEST PRODUCT
+                                        </th>
                                     </tr>
                                 </thead>
-                                <tbody style="display: block; max-height: 200px; overflow-y: auto; width: 100%; height: auto;scrollbar-width: thin;">
+                                <tbody style="display: block; max-height: 200px; overflow-y: auto; width: 100%; height: auto; scrollbar-width: thin;">
+                                    @if($latestProduct)
                                     <tr>
-                                        <td>APPLE</td>
+                                        <td>{{ $latestProduct->product_name }}</td>
                                     </tr>
+                                    @else
                                     <tr>
-                                        <td>&nbsp;</td>
+                                        <td>No Latest Product Found</td>
                                     </tr>
-                                    <tr>
-                                        <td>&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td>&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td>&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td>&nbsp;</td>
-                                    </tr>
+                                    @endif
                                 </tbody>
                             </table>
                         </div>
+
+                        <!-- Product Specifications Older Than 1 Month Table -->
                         <div class="col-md-4 col-sm-12">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th class="table-head" style="background-color: #62b613; color: #ffffff; font-weight:bold;">
+                                            PRODUCT SPECS (1+ Month Old)
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody style="display: block; max-height: 200px; overflow-y: auto; width: 100%; height: auto; scrollbar-width: thin;">
+                                    @forelse($olderSpecs as $spec)
+                                    <tr>
+                                        <td>
+                                            {{ $spec->specification_name }}
+                                            (Price: {{ $spec->product_price }})
+                                        </td>
+                                    </tr>
+                                    @empty
+                                    <tr>
+                                        <td>No old specifications found</td>
+                                    </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Pie Chart (Total Stocks, Sold, Damaged) -->
+                        <div class="col-md-4 col-sm-12">
+                            <canvas id="myPieChart"></canvas>
+                        </div>
+
+
+                        {{-- <div class="col-md-4 col-sm-12">
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
@@ -153,36 +180,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
-                        <div class="col-md-4 col-sm-12">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th class="table-head" style="background-color: #62b613; color: #ffffff; font-weight:bold;">PRODUCT NAME</th>
-                                    </tr>
-                                </thead>
-                                <tbody style="display: block; max-height: 200px; overflow-y: auto; width: 100%; height: auto;scrollbar-width: thin;">
-                                    <tr>
-                                        <td>APPLE</td>
-                                    </tr>
-                                    <tr>
-                                        <td>&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td>&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td>&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td>&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td>&nbsp;</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
 
@@ -294,6 +292,39 @@
     new Chart(document.getElementById('barChart1').getContext('2d'), {...configBar, data: data1});
     new Chart(document.getElementById('barChart2').getContext('2d'), {...configBar, data: data2});
     new Chart(document.getElementById('barChart3').getContext('2d'), {...configLine, data: data3});
+</script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const ctx = document.getElementById('myPieChart').getContext('2d');
+
+        const data = {
+            labels: [
+                'Total Stock',
+                'Sold Stock',
+                'Damaged Stock'
+            ],
+            datasets: [{
+                label: 'Inventory',
+                data: [
+                    {{ $inventoryData->total_stocks ?? 0 }},
+                    {{ $inventoryData->sold_stocks ?? 0 }},
+                    {{ $inventoryData->damaged_stocks ?? 0 }},
+                ],
+                backgroundColor: [
+                    '#42A5F5',
+                    '#66BB6A',
+                    '#FFCA28'
+                ]
+            }]
+        };
+
+        new Chart(ctx, {
+            type: 'pie',
+            data: data
+        });
+    });
 </script>
 
 @endsection

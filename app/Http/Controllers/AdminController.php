@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 use App\Models\Admin;
+use App\Models\Product;
+use App\Models\Inventory;
 use PharIo\Manifest\Email;
 use App\Models\SponsorImgs;
 use App\Models\ProductSales;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\Models\ProductSpecification;
 use App\Models\SpecificProductSales;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Auth;
@@ -34,6 +37,12 @@ class AdminController extends Controller
             ->orderBy('order_count', 'desc') // or 'total_sales'
             ->take(5)
             ->get();
+
+              // Fetch products added at least a month ago
+        $products = Product::whereDate('created_at', '<=', now()->subMonth())->orderBy('created_at', 'desc')->get();
+
+        // Fetch product specifications added at least a month ago
+        $productSpecifications = ProductSpecification::whereDate('created_at', '<=', now()->subMonth())->orderBy('created_at', 'desc')->get();
 
         // Transform them into arrays suitable for Chart.js
         $productLabels = $topProducts->map(function ($item) {
@@ -85,10 +94,31 @@ class AdminController extends Controller
         $monthLabels = $months->values();  // e.g. ['Aug 2024', 'Sep 2024', ...]
         $monthData   = $totals->values();  // e.g. [30, 45, ...]
 
+
+            // 1. Get the latest added product
+            //    If you want strictly "within the last month", you can do ->where('created_at', '>=', now()->subMonth())
+            //    But if you literally just want the single most recently added, do this:
+        $latestProduct = Product::orderBy('created_at', 'desc')->first();
+
+            // 2. Get product specifications older than 1 month
+            //    We check the ProductSpecification's `created_at` field
+        $olderSpecs = ProductSpecification::where('created_at', '<=', now()->subMonth())->get();
+
+        // 3. Get total/sold/damaged stocks for the pie chart
+        //    Summing across the entire Inventory table
+        $inventoryData = Inventory::selectRaw('
+            SUM(product_total_stock) as total_stocks,
+            SUM(product_sold_stock) as sold_stocks,
+            SUM(product_damage_stock) as damaged_stocks
+        ')->first();
+
+
         return view('admin.dashboard', compact(
             'productLabels', 'productData',
             'specLabels', 'specData',
-            'monthLabels', 'monthData'
+            'monthLabels', 'monthData',
+            'products', 'productSpecifications',
+            'inventoryData','latestProduct','olderSpecs'
         ));
 
     }

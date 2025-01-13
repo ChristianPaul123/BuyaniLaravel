@@ -136,15 +136,28 @@ class OrderController extends Controller
         ]);
 
         // Deduct the ordered quantity from the inventory
+        // ALSO: Increase product_sold_stock and total_profit
         foreach ($order->orderItems as $item) {
             $inventory = Inventory::where('product_id', $item->product_id)->first();
 
             if ($inventory) {
+                // Calculate how much to deduct and add
+                $orderedKgOrUnits = $item->overall_kg;
+                // or use $item->quantity if you prefer the "pieces" or "units" measure
+
+                $totalSaleAmount = $item->price;
+
                 $inventory->update([
-                    'product_total_stock' => max(0, $inventory->product_total_stock - $item->overall_kg),
+                    // Subtract from current stock
+                    'product_total_stock' => max(0, $inventory->product_total_stock - $orderedKgOrUnits),
+
+                    // Add to sold stock
+                    'product_sold_stock'  => $inventory->product_sold_stock + $orderedKgOrUnits,
+
+                    // Accumulate total profit
+                    'total_profit'        => $inventory->total_profit + $totalSaleAmount,
                 ]);
             }
-        }
 
             // ------------------------------------------------------------------
         // 1) Add logic to record product sales and specific product sales
@@ -176,6 +189,7 @@ class OrderController extends Controller
                 $productSales->total_sales += ($item->price * $item->quantity);
                 $productSales->save();
             }
+        }
 
             // ----------------------------------------------------
             // B) Update/create the SpecificProductSales entry
