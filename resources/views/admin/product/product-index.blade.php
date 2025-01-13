@@ -46,7 +46,7 @@
                     <a class="nav-link" id="subcategories-tab" data-bs-toggle="tab" href="#subcategories" role="tab">Subcategories</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="products-tab" data-bs-toggle="tab" href="#products" role="tab">Products</a>
+                    <a class="nav-link active" id="products-tab" data-bs-toggle="tab" href="#products" role="tab">Products</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="specifications-tab" data-bs-toggle="tab" href="#specifications" role="tab">Product Specifications</a>
@@ -67,7 +67,7 @@
                 </div>
 
                 <!-- Products Tab -->
-                <div class="tab-pane fade" id="products" role="tabpanel">
+                <div class="tab-pane fade show active" id="products" role="tabpanel">
                     @include('admin.product.tabs.products')
                 </div>
 
@@ -95,7 +95,7 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
 </div>
 @endsection
@@ -108,7 +108,7 @@
         var action = button.data('action'); // Extract info from data-* attributes
         var type = button.data('type');
 
-        
+
 
         // Update modal content based on the action
         if(type === 'ProductSpecification'){
@@ -120,7 +120,7 @@
             var modalBody = action === 'activate' ? 'Are you sure you want to activate this '+type.charAt(0).toLowerCase() + type.slice(1)+'?' : 'Are you sure you want to deactivate this '+type.charAt(0).toLowerCase() + type.slice(1)+'?';
             var formId = action === 'activate' ? '#activate'+type+'Form' : '#deactivate'+ type+'Form';
         }
-        
+
 
         // Set modal title, body and button action
         $(this).find('.modal-title').text(modalTitle);
