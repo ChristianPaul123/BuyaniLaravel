@@ -150,7 +150,7 @@
                                             <td>{{ $item->product->subcategory->sub_category_name }}</td>
                                             <td>{{  $item->product->product_details ?? 'N/A' }}</td>
                                             <td>{{ $item->quantity }}</td>
-                                            <td>${{ number_format($item->price, 2) }}</td>
+                                            <td>₱{{ number_format($item->price, 2) }}</td>
                                         </tr>
                                         @endforeach
                                     </tbody>

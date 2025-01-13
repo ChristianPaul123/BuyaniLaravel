@@ -104,6 +104,69 @@
         display: inline;
     }
 </style>
+<style>
+    .dropdown {
+        position: relative;
+        display: inline-block;
+        margin-bottom: 20px;
+    }
+
+    .dropdown-button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px;
+        font-size: 15px;
+        border: none;
+        cursor: pointer;
+        text-align: left;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%; /* Ensures it adjusts to the parent's width */
+        box-sizing: border-box;
+    }
+
+    .dropdown-button .icon {
+        margin-left: 10px;
+        font-size: 12px;
+        transition: transform 0.3s;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 100%; /* At least as wide as the button */
+        max-width: 100%; /* Prevent it from overflowing the parent */
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+        box-sizing: border-box;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #f1f1f1;
+    }
+
+    .dropdown.show .dropdown-content {
+        display: block;
+    }
+
+    .dropdown.show .icon {
+        transform: rotate(180deg);
+    }
+</style>
+
 @endpush
 @section('content')
     @include('user.includes.navbar-farmer')
