@@ -136,7 +136,7 @@
         </div>
 
         <!-- Submit Button -->
-        <button wire:click="submitRating" class="btn btn-primary btn-block mt-2"
+        <button wire:click="submitRating" class="btn btn-primary btn-block mt-2 mb-3"
             style="background-color: #4CAF50; border: none; font-size: 1rem; font-weight: bold; color: white; border-radius: 8px;">
             Submit
         </button>
