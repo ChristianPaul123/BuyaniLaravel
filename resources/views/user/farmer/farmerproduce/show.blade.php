@@ -201,7 +201,7 @@
                     @foreach ($lowStockProducts as $product)
                         <div class="card">
                             <!-- If you have a product_pic or similar field -->
-                            <img class="card-img-top item" src="{{ $product->product_pic ?? 'img/default.png' }}"
+                            <img class="card-img-top item" src="{{ asset( $product->product_pic ) ?? asset('img/title/buyanicommece_logo.png') }}"
                                 alt="{{ $product->product_name }}">
 
                             <div class="card-body">
