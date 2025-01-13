@@ -126,6 +126,16 @@ class LoginIndex extends Component
 
         $loginField = filter_var($validatedData['email_phoneNum'], FILTER_VALIDATE_EMAIL) ? 'email' : 'phone_number';
 
+        $user = User::where($loginField, $validatedData['email_phoneNum'])
+        ->where('user_type', $validatedData['user_type'])
+        ->first();
+
+        if ($user && $user->deactivated_status) {
+            throw ValidationException::withMessages([
+                'email_phoneNum' => 'Your account has been deactivated. Please contact support for assistance.',
+            ]);
+        }
+
         if (Auth::guard('user')->attempt([
             $loginField => $validatedData['email_phoneNum'],
             'password' => $validatedData['password'],
