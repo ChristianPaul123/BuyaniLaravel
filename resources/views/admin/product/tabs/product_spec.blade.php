@@ -37,7 +37,7 @@
                         <td>{{ $specification->deactivated_date }}</td>
                         <td>{{ $specification->deactivated_status == 1 ? 'Deactivated' : 'Active' }}</td>
                         <td>
-                            <a href="{{ route('admin.product.specification.edit', $encryptedId) }}" class="btn btn-primary">Edit</a>
+                            <a href="{{ route('admin.product.specification.edit', $encryptedId) }}" class="btn btn-primary"><i class="fa fa-edit fa-sm me-2"></i>Edit</a>
                         </td>
                         <td>
                             @if ($specification->deactivated_status)

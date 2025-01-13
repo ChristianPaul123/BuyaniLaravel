@@ -42,8 +42,8 @@
                     <td>{{ $admin->deactivated_date ? $admin->deactivated_date->format('M d, Y h:i A') : 'N/A' }}</td>
                     <td>{{ $admin->deactivated_status == 1 ? 'Deactivated' : 'Active' }}</td>
                     <td>
-                        <a href="{{ route('admin.edit', $admin->id) }}" title="Edit">
-                            <i class="fa fa-edit"></i>
+                        <a href="{{ route('admin.edit', $admin->id) }}" title="Edit" class="btn btn-primary btn-sm w-100">
+                            <i class="fa fa-edit"> </i><span> Edit</span>
                         </a>
                     </td>
                     <td>
