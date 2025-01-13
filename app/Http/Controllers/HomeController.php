@@ -12,9 +12,6 @@ use Illuminate\Http\Request;
 use App\Models\SuggestProduct;
 use App\Models\SpecificProductSales;
 use Illuminate\Support\Facades\Auth;
-use RalphJSmit\Laravel\SEO\Support\SEOData;
-use function RalphJSmit\Laravel\SEO\seo;
-
 
 class HomeController extends Controller
 {
@@ -32,13 +29,6 @@ class HomeController extends Controller
         $categories = Category::all();
         $subcategories = SubCategory::all();
         $sponsorImages = SponsorImgs::all();
-
-        // $seoData = new SEOData(
-        //     title: 'Consumer Dashboard | Buyani',
-        //     description: 'Discover fresh produce and support our hardworking farmers directly.',
-        //     image: asset('img/stockImg3.png'),
-        // );
-
        return view('user.consumer',compact('subcategories', 'sponsorImages', 'products', 'categories','isProfileIncomplete'));
     }
 

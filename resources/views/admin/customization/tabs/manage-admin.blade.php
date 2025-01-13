@@ -1,5 +1,12 @@
 <!-- Manage Admins Tab -->
 <section class="min-height">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3>Manage Admins</h3>
+        <!-- Add Admin Button -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addAdminModal">
+            <i class="fa fa-plus"></i> Add Admin
+        </button>
+    </div>
 <div>
     <div class="table-responsive">
         <table id="adminTable" class="table table-bordered">
@@ -39,7 +46,7 @@
                     <td>{{ $admin->admin_type_label }}</td>
                     <td>{{ $admin->status == 1 ? 'Active' : 'Inactive' }}</td>
                     <td>{{ $admin->last_online }}</td>
-                    <td>{{ $admin->deactivated_date ? $admin->deactivated_date->format('M d, Y h:i A') : 'N/A' }}</td>
+                    <td>{{ $admin->deactivated_date }}</td>
                     <td>{{ $admin->deactivated_status == 1 ? 'Deactivated' : 'Active' }}</td>
                     <td>
                         <a href="{{ route('admin.edit', $admin->id) }}" title="Edit" class="btn btn-primary btn-sm w-100">

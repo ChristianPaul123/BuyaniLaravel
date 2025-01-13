@@ -4,11 +4,11 @@
             <thead>
                 <tr>
                     <th>Order Number</th>
-                    <th>Total Quantity</th>
-                    <th>Overall Weight (KG)</th>
-                    <th>Total Price</th>
-                    <th>Order Status</th>
-                    <th>Delivery Employee</th>
+                    <th class="d-none d-lg-table-cell">Total Quantity</th>
+                    <th class="d-none d-lg-table-cell">Overall Weight (KG)</th>
+                    <th class="d-none d-lg-table-cell">Total Price</th>
+                    <th class="d-none d-lg-table-cell">Order Status</th>
+                    <th class="d-none d-lg-table-cell">Delivery Employee</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -16,15 +16,15 @@
                 @forelse($ordersToDeliver as $order)
                     <tr>
                         <td>{{ $order->order_number }}</td>
-                        <td>{{ number_format($order->total_amount) }}</td>
-                        <td>{{ $order->overall_orderKG }} KG</td>
-                        <td>₱{{ number_format($order->total_price, 2) }}</td>
-                        <td>
+                        <td class="d-none d-lg-table-cell">{{ number_format($order->total_amount) }}</td>
+                        <td class="d-none d-lg-table-cell">{{ $order->overall_orderKG }} KG</td>
+                        <td class="d-none d-lg-table-cell">₱{{ number_format($order->total_price, 2) }}</td>
+                        <td class="d-none d-lg-table-cell">
                             <span class="badge status-out-for-delivery text-white">
                                 {{ $order->getStatusLabelAttribute() }}
                             </span>
                         </td>
-                        <td>{{ $order->delivery_employee }}</td>
+                        <td class="d-none d-lg-table-cell">{{ $order->delivery_employee }}</td>
                         <td>
                             <a class="btn btn-primary" href="{{ route('user.consumer.order.details', $order->id)}}">View</a>
                             <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#confirmOrderModal" data-order-id="{{ $order->id }}">Order Received</button>

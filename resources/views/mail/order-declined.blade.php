@@ -89,7 +89,8 @@
             <h2>Order Declined</h2>
             <p>Dear {{ $order->customer_name }},</p>
             <p>We regret to inform you that your order has been declined.</p><br>
-            <p>Reason for Decline: {{ $order->orderCancellation->reason }}</p>
+            <p>Reason for Decline: {{ $order->orderCancellation->reason ?? 'No Reason'  }}</p>
+            <p>Addtional Notes: {{ $order->orderCancellation->notes ?? 'No Notes'  }}</p>
         </div>
 
         <div class="order-details">

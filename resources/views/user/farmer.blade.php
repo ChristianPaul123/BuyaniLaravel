@@ -366,10 +366,10 @@
             <div class="best-selling">
                 @forelse ($bestSellingProducts as $index => $productSale)
                     <div class="card product-card">
-                        <img src="{{ asset($productSale->product->image ?? 'img/placeholder.png') }}" class="card-img-top"
-                            alt="{{ $productSale->product->name ?? 'Unknown Product' }}">
+                        <img src="{{ asset($productSale->product->product_pic ?? 'img/placeholder.png') }}" class="card-img-top"
+                            alt="{{ $productSale->product->product_name ?? 'Unknown Product' }}">
                         <div class="card-body">
-                            <h5>#{{ $index + 1 }} {{ $productSale->product->name ?? 'Unknown Product' }}</h5>
+                            <h5>#{{ $index + 1 }} {{ $productSale->product->product_name ?? 'Unknown Product' }}</h5>
                             <p>Amount: {{ $productSale->total_sales }} kg</p>
                         </div>
                     </div>
@@ -379,15 +379,15 @@
             </div>
 
             <!-- Best Selling Product Variants -->
-            <h1 class="text-center section1 mb-4 mt-5">Best Selling Product Variants This Month</h1>
+            <h1 class="text-center section1 mb-4 mt-5">Best Selling Product Specifications This Month</h1>
             <div class="best-selling">
                 @forelse ($bestSellingVariants as $index => $variantSale)
                     <div class="card product-card">
-                        <img src="{{ asset($variantSale->productSpecification->product->image ?? 'img/placeholder.png') }}"
+                        <img src="{{ asset($variantSale->productSpecification->product->product_pic ?? 'img/placeholder.png') }}"
                             class="card-img-top"
-                            alt="{{ $variantSale->productSpecification->product->name ?? 'Unknown Variant' }}">
+                            alt="{{ $variantSale->productSpecification->product->product_name ?? 'Unknown Variant' }}">
                         <div class="card-body">
-                            <h5>#{{ $index + 1 }} {{ $variantSale->productSpecification->name ?? 'Unknown Variant' }}
+                            <h5>#{{ $index + 1 }} {{ $variantSale->productSpecification->specification_name ?? 'Unknown Variant' }}
                             </h5>
                             <p>Amount: {{ $variantSale->total_sales }} kg</p>
                         </div>
