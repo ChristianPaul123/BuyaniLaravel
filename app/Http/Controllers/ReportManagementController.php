@@ -27,7 +27,10 @@ class ReportManagementController extends Controller
 public function showSalesReports()
 {
     $productSales = ProductSales::with('product')->get();
-    $specificProductSales = SpecificProductSales::with('productSales','productSpecification')->get();
+    $specificProductSales = SpecificProductSales::with([
+        'productSales.product',
+        'productSpecification',
+    ])->get();
 
     return view('admin.report.sales-index', compact('productSales', 'specificProductSales'));
 }

@@ -19,14 +19,23 @@
                 @foreach($specificProductSales as $sale)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $sale->productSpecification->specific_name ?? 'No Specific Product' }}</td>
+                    <td>{{ $sale->productSpecification->specification_name ?? 'No Specific Product' }}</td>
                     <td>{{ $sale->productSales->product->product_name ?? 'No Product' }}</td>
-                    <td>{{ $sale->order_count }}</td>
+                    <td>{{ $sale->order_quantity }}</td>
                     <td>${{ $sale->total_sales }}</td>
                     <td>{{ \Carbon\Carbon::parse($sale->date)->format('M d, Y') }}</td>
                 </tr>
                 @endforeach
             </tbody>
+            <tfoot>
+                <tr>
+                    {{-- Adjust colspan or positioning as needed --}}
+                    <th colspan="3" class="text-end">Total:</th>
+                    <th>{{ $specificProductSales->sum('order_quantity') }}</th>
+                    <th>${{ $specificProductSales->sum('total_sales') }}</th>
+                    <th></th>
+                </tr>
+            </tfoot>
         </table>
     </div>
 </div>

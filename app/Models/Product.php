@@ -80,8 +80,13 @@ class Product extends Model
         return $statuses[$this->product_status] ?? 'Unknown Status';
     }
 
-    public function Product_Logs() {
+    public function productLogs() {
         $this->hasMany(ProductLog::class);
+    }
+
+    public function productSales() {
+        $this->hasMany(ProductSales::class,'ProductSales');
+
     }
 
 }

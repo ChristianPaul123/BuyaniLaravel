@@ -19,12 +19,15 @@ class SpecificProductSales extends Model
     ];
 
     // Relationship with Product Specification
-    public function productSpecification()
+// The foreign key is 'product_sale_id' in your DB table,
+    // and the local key is 'id' in product_sales.
+    public function productSales()
     {
-        return $this->belongsTo(ProductSpecification::class);
+        return $this->belongsTo(ProductSales::class, 'product_sale_id', 'id');
     }
 
-    public function productSales() {
-        return $this->belongsTo(ProductSales::class);
+    public function productSpecification()
+    {
+        return $this->belongsTo(ProductSpecification::class, 'product_specification_id', 'id');
     }
 }
