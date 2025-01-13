@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ProductSpecification extends Model
 {
     use HasFactory;
+    protected $table = 'product_specifications'; // Explicitly set the table name
 
     public $timestamp = true;
 

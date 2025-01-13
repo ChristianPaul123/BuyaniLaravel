@@ -12,6 +12,8 @@ class AdminPendingPayments extends Component
 
     public function mount()
     {
+
+        //Changed into Order
         $this->pendingPayments = Payment::where('payment_status', 'pending')->count();
     }
     public function render()

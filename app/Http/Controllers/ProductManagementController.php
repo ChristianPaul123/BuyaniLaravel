@@ -208,7 +208,7 @@ return view('admin.product.product-index', [
     {
         $validatedData = $request->validate([
             'product_id' => ['required', 'exists:products,id'],
-            'specification_name' => ['required', 'string', 'max:255', 'unique:productSpecifications,specification_name'],
+            'specification_name' => ['required', 'string', 'max:255', 'unique:product_specifications,specification_name'],
             'product_price' => ['required', 'numeric', 'min:0'],
             'product_kg' => ['required', 'numeric', 'min:0'],
             'admin_id' => ['required', 'exists:admins,id'],
