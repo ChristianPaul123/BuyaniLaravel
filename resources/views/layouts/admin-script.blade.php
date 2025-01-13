@@ -82,15 +82,15 @@ new DataTable('#currentInventoryTable', {
             buttons: [
                 {
                     extend: 'copy',
-                    title: 'Current Inventory Report' // Custom title
+                    title: 'Buyani Current Inventory Report', // Custom title
                 },
                 {
                     extend: 'csv',
-                    title: 'Current Inventory Report' // Custom title
+                    title: 'Buyani Current Inventory Report', // Custom title
                 },
                 {
                     extend: 'excel',
-                    title: 'Current Inventory Report' // Custom title
+                    title: 'Buyani Current Inventory Report', // Custom title
                 },
                 {
                     extend: 'pdf',
@@ -100,7 +100,7 @@ new DataTable('#currentInventoryTable', {
                 },
                 {
                     extend: 'print',
-                    title: 'Current Inventory Report' // Custom title
+                    title: 'Buyani Current Inventory Report', // Custom title
                 }
             ]
         }
@@ -110,7 +110,30 @@ new DataTable('#currentInventoryTable', {
 new DataTable('#productsalesTable', {
     layout: {
         topStart: {
-            buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+            buttons: [
+                {
+                    extend: 'copy',
+                    title: 'Buyani Product Sales Report', // Custom title
+                },
+                {
+                    extend: 'csv',
+                    title: 'Buyani Product Sales Report', // Custom title
+                },
+                {
+                    extend: 'excel',
+                    title: 'Buyani Product Sales Report', // Custom title
+                },
+                {
+                    extend: 'pdf',
+                    title: 'Buyani Product Sales Report', // Custom title
+                    orientation: 'portrait', // Example of additional customization
+                    pageSize: 'A4' // Example of additional customization
+                },
+                {
+                    extend: 'print',
+                    title: 'Buyani Product Sales Report', // Custom title
+                }
+            ]
         }
     }
 });
@@ -118,7 +141,30 @@ new DataTable('#productsalesTable', {
 new DataTable('#specificproductsalesTable', {
     layout: {
         topStart: {
-            buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+            buttons: [
+                {
+                    extend: 'copy',
+                    title: 'Buyani Specific Product Sales Report', // Custom title
+                },
+                {
+                    extend: 'csv',
+                    title: 'Buyani Specific Product Sales Report', // Custom title
+                },
+                {
+                    extend: 'excel',
+                    title: 'Buyani Specific Product Sales Report', // Custom title
+                },
+                {
+                    extend: 'pdf',
+                    title: 'Buyani Specific Product Sales Report', // Custom title
+                    orientation: 'portrait', // Example of additional customization
+                    pageSize: 'A4' // Example of additional customization
+                },
+                {
+                    extend: 'print',
+                    title: 'Buyani Specific Product Sales Report', // Custom title
+                }
+            ]
         }
     }
 });

@@ -31,14 +31,14 @@
             </div>
             {{-- Tabs Navigation --}}
             <ul class="nav nav-tabs" id="logmanagementTabs" role="tablist">
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link active" id="product-logs-tab" data-bs-toggle="tab" href="#product-logs" role="tab">Product Logs</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="order-logs-tab" data-bs-toggle="tab" href="#order-logs" role="tab">Order Logs</a>
-                </li>
+                </li> --}}
                 <li class="nav-item">
-                    <a class="nav-link" id="user-logs-tab" data-bs-toggle="tab" href="#user-logs" role="tab">User Logs</a>
+                    <a class="nav-link active" id="user-logs-tab" data-bs-toggle="tab" href="#user-logs" role="tab">User Logs</a>
                 </li>
 
                 <li class="nav-item">
@@ -58,7 +58,7 @@
                     @include('admin.logs.log-tab.order-log', ['userLogs' => $orderLogs])
                 </div> --}}
 
-                <div class="tab-pane fade" id="user-logs" role="tabpanel">
+                <div class="tab-pane fade show active" id="user-logs" role="tabpanel">
                     @include('admin.logs.log-tab.user-log', ['userLogs' => $userLogs])
                 </div>
 
