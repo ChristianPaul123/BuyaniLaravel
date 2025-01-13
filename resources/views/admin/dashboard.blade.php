@@ -50,9 +50,6 @@
         font-weight: bold;
     }
 
-
-
-
     .text-title-container{
         text-align: center;
         font-size: 35px;
@@ -68,6 +65,17 @@
     *{
         /* border: 1px solid black; */
     }
+
+    .pie-contain{
+        margin-top: -10px;
+    }
+
+    @media (max-width: 768px) {
+        .pie-contain{
+            margin-top: -100px;
+        }
+    }
+
 
 </style>
 @endpush
@@ -155,34 +163,12 @@
                             </table>
                         </div>
                         <div class="col-md-4 col-sm-12">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th class="table-head" style="background-color: #62b613; color: #ffffff; font-weight:bold;">PRODUCT NAME</th>
-                                    </tr>
-                                </thead>
-                                <tbody style="display: block; max-height: 200px; overflow-y: auto; width: 100%; height: auto;scrollbar-width: thin;">
-                                    <tr>
-                                        <td>APPLE</td>
-                                    </tr>
-                                    <tr>
-                                        <td>&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td>&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td>&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td>&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td>&nbsp;</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div class="pie-contain" style="height: 230px; display: flex; justify-content: top; align-items: center; flex-direction: column;">
+                                <label class="mb-2" style="color: #62b613; font-size: 25px; font-weight: bold;">Monthly Stocks</label>
+                                <canvas id="myPieChart" width="400" height="200"></canvas>
+                            </div>
                         </div>
+
                     </div>
                 </div>
 
@@ -295,5 +281,54 @@
     new Chart(document.getElementById('barChart2').getContext('2d'), {...configBar, data: data2});
     new Chart(document.getElementById('barChart3').getContext('2d'), {...configLine, data: data3});
 </script>
+<script>
+    // Get the canvas element
+    const ctx = document.getElementById('myPieChart').getContext('2d');
 
+    // Data for the chart
+    const data = {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+            label: 'Dataset 1',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.7)',
+                'rgba(54, 162, 235, 0.7)',
+                'rgba(255, 206, 86, 0.7)',
+                'rgba(75, 192, 192, 0.7)',
+                'rgba(153, 102, 255, 0.7)',
+                'rgba(255, 159, 64, 0.7)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    };
+
+    // Configuration options
+    const config = {
+        type: 'pie',
+        data: data,
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    enabled: true
+                }
+            }
+        }
+    };
+
+    // Create the chart
+    const myPieChart = new Chart(ctx, config);
+</script>
 @endsection
