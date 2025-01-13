@@ -111,11 +111,12 @@
                                 <td>{{ $image->admin->username }}</td>
                                 <td>{{ $image->created_at->format('d-m-Y') }}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('admin.customization.sponsor.edit', $encryptedId) }}" class="btn btn-primary">Edit</a>
+                                    <a href="{{ route('admin.customization.sponsor.edit', $encryptedId) }}" class="btn btn-primary"><i class="fa fa-edit"> </i><span> Edit</span></a>
                                     <form action="{{ route('admin.customization.sponsor.delete', $image->id) }}" method="POST" style="display: inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this image?')">Delete</button>
+                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this image?')"><i class="fa fa-trash"> </i><span> Delete</span>
+                                        </button>
                                     </form>
                                 </td>
                             </tr>
