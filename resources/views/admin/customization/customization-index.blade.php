@@ -23,6 +23,7 @@
     <div class="row">
         @include('admin.includes.sidebar')
 
+
         <section class="col-md-10 ml-sm-auto col-lg-10 px-3 py-2 overflow-y-scroll main-section">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">Customization</h1>
@@ -146,6 +147,47 @@
                 }
             });
         });
+    });
+</script>
+
+{{-- this is the script for adding admins --}}
+<script>
+    // Toggle password visibility
+    document.querySelectorAll('.toggle-password').forEach((el) => {
+        el.addEventListener('click', function(e) {
+            const targetId = e.currentTarget.getAttribute('data-target');
+            const input = document.getElementById(targetId);
+            if (input.type === 'password') {
+                input.type = 'text';
+                e.currentTarget.classList.remove('fa-eye');
+                e.currentTarget.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                e.currentTarget.classList.add('fa-eye');
+                e.currentTarget.classList.remove('fa-eye-slash');
+            }
+        });
+    });
+
+    // Show the confirmation modal when user clicks "Add Admin"
+    const addAdminModalEl = document.getElementById('addAdminModal');
+    const confirmAddAdminModalEl = document.getElementById('confirmAddAdminModal');
+
+    // Reference to the bootstrap modals
+    const bootstrapAddAdminModal = new bootstrap.Modal(addAdminModalEl);
+    const bootstrapConfirmAddAdminModal = new bootstrap.Modal(confirmAddAdminModalEl);
+
+    document.getElementById('btnShowConfirmModal').addEventListener('click', function () {
+        // Optionally do front-end validation checks here before showing confirm modal
+        // ...
+        // Hide the add-admin modal, show the confirmation
+        bootstrapAddAdminModal.hide();
+        bootstrapConfirmAddAdminModal.show();
+    });
+
+    // If user confirms "Yes", submit the form
+    document.getElementById('confirmYesBtn').addEventListener('click', function () {
+        document.getElementById('addAdminForm').submit();
     });
 </script>
 
