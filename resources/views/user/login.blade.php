@@ -232,13 +232,25 @@
         togglePasswordVisibility('passwordField', this);
     });
 
-    document.getElementById('toggleIcon').addEventListener('click', function () {
-        togglePasswordVisibility('newPassword', this);
+    function togglePasswords() {
+        // Toggle the visibility of both password fields
+        togglePasswordVisibility('newPassword');
+        togglePasswordVisibility('newPasswordConfirmation');
 
-    });
-    document.getElementById('toggleIcon').addEventListener('click', function () {
-        togglePasswordVisibility('newPasswordConfirmation', this);
-    });
+        const icon = document.getElementById('toggleIcon');
+        if (icon) {
+            icon.classList.toggle('fa-eye');
+            icon.classList.toggle('fa-eye-slash');
+        }
+    }
+
+    function togglePasswordVisibility(inputId) {
+        const input = document.getElementById(inputId);
+        if (input) {
+            // Toggle the input type between password and text
+            input.type = input.type === "password" ? "text" : "password";
+        }
+    }
 </script>
 
 <script>

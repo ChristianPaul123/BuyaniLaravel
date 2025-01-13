@@ -41,7 +41,7 @@
                 @enderror
             
                 <div class="form-group d-flex justify-content-end mb-3">
-                    <a class="clickable-forgot-password" data-bs-toggle="modal" wire:click="showModal()">Forgot Password?</a>
+                    <a class="clickable-forgot-password" wire:click="showModal()">Forgot Password?</a>
                 </div>
             
                 <div class="container d-flex justify-content-center my-">
@@ -144,9 +144,9 @@
                                         <input type="password" class="form-control password1" id="newPassword" wire:model="newPassword" placeholder="Enter your password" minlength="8"
                                         pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                                         title="Minimum of 8 characters, a lower and upper case letter and a number.">
-                                        <span class="input-group-text" id="togglePasswordOTP" style="cursor: pointer;">
-                                            <i class="bi bi-eye" id="toggleIcon"></i>
-                                        </span>
+                                        <button type="button" class="input-group-text" id="togglePasswordOTP" style="cursor: pointer;" onclick="togglePasswords()">
+                                            <i class="fa fa-eye" id="toggleIcon"></i>
+                                        </button>
                                     </div>
                                     @error('newPassword') <span class="text-danger">{{ $message }}</span> @enderror
                                     {{-- <div style="color: red; font-size: 14px;">
@@ -174,6 +174,7 @@
                 </div>
             </div>
             @endif
+            
     {{-- </div> --}}
 </div>
 
