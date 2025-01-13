@@ -86,9 +86,10 @@
         <div class="header">
             <img src="{{ url('https://buyanicommerce.bsitcps.com/public/img/buyanicommece_logo.png') }}" alt="Buyani Logo">
             <h1>Buyanicommerce</h1>
-            <h2>Order Delivered</h2>
+            <h2>Order is out for Delivery</h2>
             <p>Dear {{ $order->customer_name }},</p>
-            <p>Your order Has now been accepted and will be delivered to you by our Delivery man: {{ $order->delivery_employee }}</p><br>
+            alt="{{ $product->product_name }}">
+            <p>Your order Has now been accepted and will be delivered to you by our Delivery man: <strong>{{ $order->delivery_employee }}</strong></p><br>
             <p>If you have any questions please message us via our messagin system about your order information</p>
         </div>
 
