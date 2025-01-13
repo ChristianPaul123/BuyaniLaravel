@@ -118,10 +118,15 @@
     {{-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// --}}
             @elseif ((auth()->guard('admin')->check() && auth()->guard('admin')->user()->admin_type == 3))
 
-            <li class="nav-item">
-                <a class="nav-link d-flex justify-content-between @if(request()->is('admin/tracking')) active @endif" href="#">
-                    <i class="fas fa-comments"></i>Trackings <span>/</</span>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle @if(request()->is('admin/community*')) active @endif" href="#" id="communityDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-users"></i> Community
                 </a>
+                <ul class="dropdown-menu" aria-labelledby="communityDropdown">
+                    <li><a class="dropdown-item @if(request()->is('admin/community/reviews')) active @endif" href="/admin/community/reviews?tab=productreviews"> <i class="fas fa-star me-2"></i> Reviews</a></li>
+                    <li><a class="dropdown-item @if(request()->is('admin/community/blog')) active @endif" href="/admin/community/blog?tab=settings">  <i class="fas fa-blog me-2"></i> Blogs</a></li>
+                    <li><a class="dropdown-item @if(request()->is('admin/community/votes')) active @endif" href="/admin/community/votes?tab=managevotes">  <i class="fas fa-poll me-2"></i> Votes</a></li>
+                </ul>
             </li>
             @endif
             <hr class="hr hr-blurry" />
