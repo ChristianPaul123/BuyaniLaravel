@@ -1,7 +1,7 @@
 <div>
     @if($favoritesCount > 0)
-    <span class="badge bg-danger position-absolute top-0 start-100 translate-middle">
-        {{ $favoritesCount }}
-    </span>
+        <span style="height: 25px; width: 25px; display: flex; justify-content: center; align-items: center; position: absolute; color: white; margin-top: -45px; margin-left: 23px; font-size: 15px; z-index: 8888; border-radius: 5px; background-color: red; opacity: 80%;">
+            {{ $favoritesCount }}
+        </span>
     @endif
 </div>
