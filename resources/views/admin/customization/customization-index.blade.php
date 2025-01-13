@@ -30,8 +30,8 @@
             </div>
             {{-- Tabs Navigation --}}
             <ul class="nav nav-tabs" id="customizationTabs" role="tablist">
-                <li class="nav-item active">
-                    <a class="nav-link" id="settings-tab" data-bs-toggle="tab" href="#settings" role="tab">Admin Settings</a>
+                <li class="nav-item">
+                    <a class="nav-link active" id="settings-tab" data-bs-toggle="tab" href="#settings" role="tab">Admin Settings</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="admins-tab" data-bs-toggle="tab" href="#admins" role="tab">Manage Admins</a>
