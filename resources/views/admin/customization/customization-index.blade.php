@@ -35,9 +35,9 @@
                 <li class="nav-item">
                     <a class="nav-link" id="admins-tab" data-bs-toggle="tab" href="#admins" role="tab">Manage Admins</a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link" id="payments-tab" data-bs-toggle="tab" href="#payments" role="tab">Admin Payments</a>
-                </li>
+                </li> --}}
             </ul>
 
             {{-- Tab Content --}}
@@ -54,9 +54,9 @@
                 </div>
 
                 {{-- Admin Payments Tab --}}
-                <div class="tab-pane fade" id="payments" role="tabpanel">
+                {{-- <div class="tab-pane fade" id="payments" role="tabpanel">
                     @include('admin.customization.tabs.payment-admin', ['admin' => $admin])
-                </div>
+                </div> --}}
             </div>
         </section>
     </div>
@@ -100,11 +100,11 @@
         var button = $(event.relatedTarget); // Button that triggered the modal
         var action = button.data('action'); // Extract info from data-* attributes
         var type = button.data('type');
-        
+
         var modalTitle = type +' Confirmation';
         var modalBody = 'Are you sure you want to ' + action + ' this ' + type.charAt(0).toLowerCase() + type.slice(1)+ '?';
         var formId = '#' + action + type + 'Form';
-        
+
         // Set modal title, body and button action
         $(this).find('.modal-title').text(modalTitle);
         $(this).find('.modal-body p').text(modalBody);
