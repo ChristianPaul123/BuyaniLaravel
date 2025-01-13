@@ -35,9 +35,9 @@
                 <li class="nav-item">
                     <a class="nav-link" id="admins-tab" data-bs-toggle="tab" href="#admins" role="tab">Manage Admins</a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link" id="payments-tab" data-bs-toggle="tab" href="#payments" role="tab">Admin Payments</a>
-                </li>
+                </li> --}}
             </ul>
 
             {{-- Tab Content --}}
