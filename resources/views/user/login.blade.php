@@ -198,7 +198,7 @@
 
 @include('user.includes.popup-style')
 {{-- @include('user.includes.notif-style') --}}
-@include('user.styles.messageBox_styles');
+{{-- @include('user.styles.messageBox_styles'); --}}
 
 @endpush
 @section('x-content')
@@ -234,7 +234,7 @@
 
     document.getElementById('toggleIcon').addEventListener('click', function () {
         togglePasswordVisibility('newPassword', this);
-        
+
     });
     document.getElementById('toggleIcon').addEventListener('click', function () {
         togglePasswordVisibility('newPasswordConfirmation', this);
