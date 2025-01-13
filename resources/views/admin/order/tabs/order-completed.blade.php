@@ -33,7 +33,7 @@
                         <td>{{ number_format($order->total_amount, 2) }} KG</td>
 
                         {{-- TOTAL PRICE --}}
-                        <td>${{ number_format($order->total_price, 2) }}</td>
+                        <td>₱{{ number_format($order->total_price, 2) }}</td>
 
                         {{-- ORDER STATUS --}}
                         <td>
@@ -84,8 +84,8 @@
                             </a> --}}
 
                             {{-- Delete Order --}}
-                            <form id="archiveOrderForm" action="{{ route('admin.orders.archive', $order->id) }}" 
-                                method="POST" 
+                            <form id="archiveOrderForm" action="{{ route('admin.orders.archive', $order->id) }}"
+                                method="POST"
                                 class="d-inline">
                                 @csrf
                                 <button id="archiveOrderModal" type="button" title="Archive" class="btn btn-danger btn-sm text-white w-100" data-bs-toggle="modal" data-bs-target="#confirmModal" data-action="archive" data-type="Order">

@@ -22,7 +22,7 @@
            @include('admin.includes.messageBox')
 
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-1 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Order Management</h1>
+                <h1 class="h2" style="font-weight: bold;">Order Management</h1>
             </div>
 
             <ul class="nav nav-tabs" id="orderTabs" role="tablist">
@@ -105,11 +105,11 @@
         // var modalTitle = action === 'activate' ? 'Confirm ' + type + ' Activation' : 'Confirm ' + type + '  Deactivation';
         // var modalBody = action === 'activate' ? 'Are you sure you want to activate this '+type.charAt(0).toLowerCase() + type.slice(1)+'?' : 'Are you sure you want to deactivate this '+type.charAt(0).toLowerCase() + type.slice(1)+'?';
         // var formId = action === 'activate' ? '#activate'+type+'Form' : '#deactivate'+ type+'Form';
-        
+
         var modalTitle = type +' Confirmation';
         var modalBody = 'Are you sure you want to ' + action + ' this ' + type.charAt(0).toLowerCase() + type.slice(1)+ '?';
         var formId = '#' + action + type + 'Form';
-        
+
         // Set modal title, body and button action
         $(this).find('.modal-title').text(modalTitle);
         $(this).find('.modal-body p').text(modalBody);

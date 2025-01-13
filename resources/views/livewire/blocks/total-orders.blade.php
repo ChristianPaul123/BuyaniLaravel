@@ -1,6 +1,9 @@
-<div class="card">
-    <div class="card-body">
-        <h4>Total Orders</h4>
-        <p>{{ $totalOrders }}</p>
+<div class="card" style="color: #FF8F00;">
+    <div class="card-body text-title-container">
+        <h4 class="text-title">Total Orders</h4>
+        <div class="cont" style="margin-bottom: -20px; color:#FFC107;">
+            <i class="bi bi-box-seam-fill"></i>
+            <p class="counter">{{ $totalOrders }}</p>
+        </div>
     </div>
 </div>

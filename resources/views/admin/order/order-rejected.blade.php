@@ -171,7 +171,7 @@
                                         <label for="notes">Additional Notes:</label>
                                         <textarea id="notes" name="notes" class="form-control" rows="4"></textarea>
                                     </div>
-                                    <button type="submit" class="btn btn-danger">Submit Cancellation</button>
+                                    <button type="submit" class="btn btn-danger mt-3">Submit Cancellation</button>
                                 </form>
                             </div>
                         </div>

@@ -39,6 +39,7 @@
         max-height: 100vh; /* Set a max height for the scrollable container */
         overflow-y: auto; /* Enable vertical scrolling */
         padding: 20px; /* Optional: add padding for spacing */
+        scrollbar-width: thin;
     }
     .chart {
         width: 100%;
@@ -48,6 +49,26 @@
         font-size: 25px;
         font-weight: bold;
     }
+
+
+
+
+    .text-title-container{
+        text-align: center;
+        font-size: 35px;
+    }
+    .text-title{
+        font-weight: bold;
+    }
+    .counter{
+        display: inline-block;
+        font-weight: bold;
+    }
+
+    *{
+        /* border: 1px solid black; */
+    }
+
 </style>
 @endpush
 
@@ -55,11 +76,11 @@
      <div class="container-fluid">
         <div class="row">
         @include('admin.includes.sidebar')
-            <section role="main" class="col-md-10 ml-sm-auto col-lg-10 px-4 min-height" style="overflow-y: auto;max-height: 500px;">
+            <section role="main" class="col-md-10 ml-sm-auto col-lg-10 px-4 min-height" style="overflow-y: auto;max-height: 500px; scrollbar-width: thin;">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Dashboard</h1>
+                    <h1 class="h2" style="font-weight: bold;">Dashboard</h1>
                 </div>
-                <div class="row g-2">
+                <div class="row g-1">
                     <div class="col-md-3 col-sm-12">
                         @livewire('blocks.total-users')
                     </div>
@@ -79,10 +100,10 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th class="table-head" style="background-color: #62b613; color: white;">PRODUCT NAME</th>
+                                        <th class="table-head" style="background-color: #62b613; color: #ffffff; font-weight:bold;">PRODUCT NAME</th>
                                     </tr>
                                 </thead>
-                                <tbody style="display: block; max-height: 200px; overflow-y: auto; width: 100%; height: auto;">
+                                <tbody style="display: block; max-height: 200px; overflow-y: auto; width: 100%; height: auto;scrollbar-width: thin;">
                                     <tr>
                                         <td>APPLE</td>
                                     </tr>
@@ -108,10 +129,10 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th class="table-head" style="background-color: #62b613; color: white;">PRODUCT NAME</th>
+                                        <th class="table-head" style="background-color: #62b613; color: #ffffff; font-weight:bold;">PRODUCT NAME</th>
                                     </tr>
                                 </thead>
-                                <tbody style="display: block; max-height: 200px; overflow-y: auto; width: 100%; height: auto;">
+                                <tbody style="display: block; max-height: 200px; overflow-y: auto; width: 100%; height: auto;scrollbar-width: thin;">
                                     <tr>
                                         <td>APPLE</td>
                                     </tr>
@@ -137,10 +158,10 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th class="table-head" style="background-color: #62b613; color: white;">PRODUCT NAME</th>
+                                        <th class="table-head" style="background-color: #62b613; color: #ffffff; font-weight:bold;">PRODUCT NAME</th>
                                     </tr>
                                 </thead>
-                                <tbody style="display: block; max-height: 200px; overflow-y: auto; width: 100%; height: auto;">
+                                <tbody style="display: block; max-height: 200px; overflow-y: auto; width: 100%; height: auto;scrollbar-width: thin;">
                                     <tr>
                                         <td>APPLE</td>
                                     </tr>

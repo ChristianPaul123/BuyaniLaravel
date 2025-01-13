@@ -32,7 +32,7 @@
                         <td>{{ number_format($order->total_amount, 2) }} KG</td>
 
                         {{-- TOTAL PRICE --}}
-                        <td>${{ number_format($order->total_price, 2) }}</td>
+                        <td>₱{{ number_format($order->total_price, 2) }}</td>
 
                         {{-- ORDER STATUS --}}
                         <td>
