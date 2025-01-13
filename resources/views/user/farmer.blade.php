@@ -379,7 +379,7 @@
             </div>
 
             <!-- Best Selling Product Variants -->
-            <h1 class="text-center section1 mb-4 mt-5">Best Selling Product Variants This Month</h1>
+            <h1 class="text-center section1 mb-4 mt-5">Best Selling Product Specifications This Month</h1>
             <div class="best-selling">
                 @forelse ($bestSellingVariants as $index => $variantSale)
                     <div class="card product-card">
