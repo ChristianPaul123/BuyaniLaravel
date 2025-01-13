@@ -93,11 +93,6 @@
         </div>
 
         <!-- Save Button -->
-        <div class="text-center mt-4">
-            <button wire:click="saveForm" wire:loading.attr="disabled" class="btn btn-primary">Save Changes</button>
-        </div>
-    </div>
-
     <!-- Save Button -->
     @if($user->is_verified)
     @else
@@ -105,7 +100,6 @@
         <button wire:click="saveForm" wire:loading.attr="disabled" class="btn btn-primary">Save Changes</button>
     </div>
     @endif
-
 
 </section>
 </div>
