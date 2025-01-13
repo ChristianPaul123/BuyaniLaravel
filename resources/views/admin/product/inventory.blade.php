@@ -130,9 +130,8 @@
                                 <td>{{ $inventory->product_sold_stock }}</td>
                                 <td>{{ $inventory->product_damage_stock }}</td>
                                 <td>{{ $inventory->product_total_stock }}</td>
-                                <td>{{ $inventory->created_at }}</td>
-                                <td>{{ $inventory->updated_at }}</td>
-
+                                <td>{{ $inventory->created_at ? $inventory->created_at->format('Y-m-d') : 'N/A' }}</td>
+                                <td>{{ $inventory->updated_at ? $inventory->updated_at->format('Y-m-d') : 'N/A' }}</td>
                                 <td class="text-center d-flex justify-content-center align-items-center">
                                     <a href="{{ route('admin.product.inventory.edit', $inventory->id) }}" class="btn btn-primary">Edit</a>
                                 </td>

@@ -80,10 +80,10 @@
                                      style="width: 50px; height: 50px; object-fit: cover;">
                                      @if(auth()->guard('user')->user()->is_verified)
                                     {{-- verified icon --}}
-                                    <i class="bi bi-check-circle-fill" id="verification-logo" style="color: #39ff14;"></i>
+                                    <i class="bi bi-check-circle-fill" id="verification-logo-nav" style="color: #39ff14;"></i>
                                     @else
                                     {{-- unverified --}}
-                                    <i class="bi bi-exclamation-circle-fill" id="verification-logo" style="color: #ffa500;"></i>
+                                    <i class="bi bi-exclamation-circle-fill" id="verification-logo-nav" style="color: #ffa500;"></i>
                                     @endif
                                 </li>
                              <li>

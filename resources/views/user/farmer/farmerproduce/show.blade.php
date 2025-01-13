@@ -613,29 +613,58 @@
 
 
         // Input validation for bad words
+        // $('#productTitle').on('input', function() {
+        //     const badWords = /fuck|butt|tangina|nigga|shit|nig|fck|butsalo|tanga|tanginamo/gi;
+        //     const sanitized = $(this).val().replace(badWords, '***********');
+        //     $('#liveTitle').text(sanitized);
+        // });
+
+        // $('#productTitle2').on('input', function() {
+        //     const badWords = /fuck|butt|tangina|nigga|shit|nig|fck|butsalo|tanga|tanginamo/gi;
+        //     const sanitized = $(this).val().replace(badWords, '***********');
+        //     $('#liveTitle2').text(sanitized);
+        // });
+
+        // $('#productDescription').on('input', function() {
+        //     const badWords = /fuck|butt|tangina|nigga|shit|nig|fck|butsalo|tanga|tanginamo/gi;
+        //     const sanitized = $(this).val().replace(badWords, '**********');
+        //     $('#liveDescription').text(sanitized);
+        // });
+
+        // $('#productDescription2').on('input', function() {
+        //     const badWords = /fuck|butt|tangina|nigga|shit|nig|fck|butsalo|tanga|tanginamo/gi;
+        //     const sanitized = $(this).val().replace(badWords, '**********');
+        //     $('#liveDescription2').text(sanitized);
+        // });
+
+        // Define the bad words regex once
+        const badWords = /fuck|butt|tangina|nigga|shit|nig|fck|butsalo|tanga|tanginamo|bitch|asshole|crap|dumb|slut|whore|bastard|piss|dick|cock|pussy|damn|hell|cunt|retard|idiot|jerk|prick/gi;
+
+        // Event listener for productTitle
         $('#productTitle').on('input', function() {
-            const badWords = /fuck|butt|tangina|nigga|shit|nig|fck|butsalo|tanga|tanginamo/gi;
             const sanitized = $(this).val().replace(badWords, '***********');
             $('#liveTitle').text(sanitized);
         });
 
+        // Event listener for productTitle2
         $('#productTitle2').on('input', function() {
-            const badWords = /fuck|butt|tangina|nigga|shit|nig|fck|butsalo|tanga|tanginamo/gi;
             const sanitized = $(this).val().replace(badWords, '***********');
             $('#liveTitle2').text(sanitized);
         });
 
+        // Event listener for productDescription
         $('#productDescription').on('input', function() {
-            const badWords = /fuck|butt|tangina|nigga|shit|nig|fck|butsalo|tanga|tanginamo/gi;
             const sanitized = $(this).val().replace(badWords, '**********');
             $('#liveDescription').text(sanitized);
         });
 
+        // Event listener for productDescription2
         $('#productDescription2').on('input', function() {
-            const badWords = /fuck|butt|tangina|nigga|shit|nig|fck|butsalo|tanga|tanginamo/gi;
             const sanitized = $(this).val().replace(badWords, '**********');
             $('#liveDescription2').text(sanitized);
         });
+
+
 
         $('#productPrice').on('input', function() {
             let price = parseFloat($(this).val());

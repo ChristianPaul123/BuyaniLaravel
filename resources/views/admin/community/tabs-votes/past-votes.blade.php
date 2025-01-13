@@ -36,7 +36,7 @@
                         <td>{{ $record->total_vote_count }}</td>
 
                         {{-- TRANSFER DATE --}}
-                        <td>{{ $record->transfer_date }}</td>
+                        <td>{{ $record->transfer_date ? $record->transfer_date->format('M d, Y h:i A') : 'N/A' }}</td>
                     </tr>
                     @endforeach
                 </tbody>

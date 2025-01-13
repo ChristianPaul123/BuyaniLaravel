@@ -26,7 +26,7 @@
                         <td>{{ $rating->reviewed_by }}</td>
                         <td>{{ $rating->delivery_rating }}</td>
                         <td>{{ $rating->rating }}</td>
-                        <td>{{ $rating->deactivated_date }}</td>
+                        <td>{{ $rating->deactivated_date ? $rating->deactivated_date->format('M d, Y h:i A') : 'N/A' }}</td>
                         <td>{{ $rating->deactivated_status == 1 ? 'Deactivated' : 'Active' }}</td>
                         <td>
                             @if ($rating->deactivated_status)

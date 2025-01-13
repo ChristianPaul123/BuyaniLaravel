@@ -82,8 +82,8 @@
                                     <td>{{ $blog->blog_title }}</td>
                                     <td>{{ $blog->blog_info }}</td>
                                     <td><img src="{{ asset($blog->blog_pic) }}" alt="{{ $blog->blog_title }}" width="50"></td>
-                                    <td>{{ $blog->created_at }}</td>
-                                    <td>{{ $blog->removed_date }}</td>
+                                    <td>{{ $blog->created_at->format('M d, Y h:i A') }}</td>
+                                    <td>{{ $blog->removed_date ? $blog->removed_date->format('M d, Y h:i A') : 'N/A' }}</td>
                                     <td>{{ $blog->admin->username }}</td>
                                     <td>
                                         <a href="{{ route('admin.blog.edit', $blog->id) }}" title="Edit">

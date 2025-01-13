@@ -40,8 +40,12 @@
                         <td><img src="{{ asset($product->product_pic) }}" alt="{{ $product->product_name }}" width="50"></td>
                         <td>{{ $product->category->category_name ?? 'N/A'  }}</td>
                         <td>{{ $product->subcategory->sub_category_name ?? 'N/A' }}</td>
+<<<<<<< HEAD
+                        <td>{{ $product->product_deactivated ? $product->product_deactivated->format('Y-m-d') : 'N/A' }}</td>
+=======
                         <td>{{ $product->deactivated_date }}</td>
                         <td>{{ $product->deactivated_status == 1 ? 'Deactivated' : 'Active' }}</td>
+>>>>>>> master--branch--clone
                         <td>
                             <a href="{{ route('admin.product.edit', $encryptedId) }}" class="btn btn-primary">Edit</a>
                         </td>
