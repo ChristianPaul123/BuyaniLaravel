@@ -1,9 +1,16 @@
 <!-- Manage Admins Tab -->
 <section class="min-height">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3>Manage Admins</h3>
+        <!-- Add Admin Button -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addAdminModal">
+            <i class="fa fa-plus"></i> Add Admin
+        </button>
+    </div>
 <div>
     <div class="table-responsive">
         <table id="adminTable" class="table table-bordered">
-            <thead>dsdddsd
+            <thead>
                 <tr>
                     <th>#</th>
                     <th>Profile Pic</th>
