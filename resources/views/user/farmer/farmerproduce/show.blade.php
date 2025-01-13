@@ -194,7 +194,12 @@
 
 @section('content')
     @include('user.includes.navbar-farmer')
-    <div class="container mt-5">
+    <div class="container mt-0 pt-5">
+        <div class="contact-header text-center" style="color: #dfba14;">
+            <h1>Farmer Product Suggestion
+                Showcase Your Produce When Stocks Are Low, Maximize Your Market Reach!</h1>
+            <p>We would love to hear from you!</p>
+        </div>
         <div class="carousel-container">
             <div class="carousel-view">
                 <div id="item-list" class="item-list">
@@ -243,7 +248,7 @@
                         <th>PRODUCT NAME</th>
                         <th>DESCRIPTION</th>
                         <th>IMAGE</th>
-                        <th>SUGGESTED PRICE</th>
+                        <th>SUGGESTED PRICE (KG)</th>
                         <th>ACTION</th>
                     </tr>
                 </thead>
@@ -257,7 +262,7 @@
                                 echo '<td><img src="' .
                                     asset('farmer_produce_images/' . $produce->produce_image) .
                                     '" alt="Product Image" style="width: 100px; height: 100px;"></td>';
-                                echo '<td>' . $produce->suggested_price . '</td>';
+                                echo '<td>₱' . $produce->suggested_price . '</td>';
                                 echo '<td>
                                     <a class="btn btn-primary" onclick=editProduct("' .
                                     $produce->id .
@@ -319,7 +324,7 @@
                                         placeholder="Enter product description" name="produce_description"></textarea>
                                 </div>
                                 <div class="form-group mb-2">
-                                    <label for="productPrice">Suggested Price:</label>
+                                    <label for="productPrice">Suggested Price (per Kilogram):</label>
                                     <input type="number" class="form-control" id="productPrice"
                                         placeholder="Enter suggested price" step="0.01" name="suggested_price">
                                 </div>
@@ -332,7 +337,7 @@
                                     <h5 class="mb-4">Live Preview</h5>
                                     <p class="mb-4"><strong>Title:</strong> <span id="liveTitle"></span></p>
                                     <p class="mb-4"><strong>Description:</strong> <span id="liveDescription"></span></p>
-                                    <p class="mb-4"><strong>Suggested Price:</strong> <span id="livePrice"></span></p>
+                                    <p class="mb-4"><strong>Suggested Price (KG) :</strong> <span id="livePrice"></span></p>
                                     <p class="mb-4"><strong>Image Preview:</strong></p>
                                     <img id="liveImage" src="#" alt="Image Preview" class="img-fluid"
                                         style="max-height: 200px;">
@@ -386,7 +391,7 @@
                                         placeholder="Enter product description" name="produce_description"></textarea>
                                 </div>
                                 <div class="form-group mb-2">
-                                    <label for="productPrice">Suggested Price:</label>
+                                    <label for="productPrice">Suggested Price (Per Kilogram):</label>
                                     <input type="number" class="form-control" id="productPrice2"
                                         placeholder="Enter suggested price" step="0.01" name="suggested_price">
                                 </div>
