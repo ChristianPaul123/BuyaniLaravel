@@ -195,7 +195,7 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label class="chart-label">Top Sales Products Specifications</label>
+                            <label class="chart-label">Top Sales Product Specifications</label>
                             <div class="chart">
                                 <canvas id="barChart2"></canvas>
                             </div>
@@ -203,7 +203,7 @@
                     </div>
                 </div>
                 <div class="chart-container" style="border: 1px solid #d2d2d2; padding: 20px; border-radius: 7px; margin-bottom: 100px;">
-                    <label class="chart-label">Total</label>
+                    <label class="chart-label">Monthly Total Sales</label>
                     <div class="chart">
                         <canvas id="barChart3"></canvas>
                     </div>
@@ -216,73 +216,84 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
-    // Data for the charts
+    // These arrays come from the controller
+    const productLabels = @json($productLabels);
+    const productData   = @json($productData);
+
+    const specLabels    = @json($specLabels);
+    const specData      = @json($specData);
+
+    const monthLabels   = @json($monthLabels);
+    const monthData     = @json($monthData);
+
+    // -- BAR CHART for Top Sales Products --
     const data1 = {
-        labels: ['A', 'B', 'C', 'D'],
+        labels: productLabels,
         datasets: [{
-            label: 'Chart 1 Values',
-            data: [10, 25, 15, 30],
-            backgroundColor: ['blue', 'green', 'orange', 'red'],
-            borderColor: ['darkblue', 'darkgreen', 'darkorange', 'darkred'],
+            label: 'Top Products',
+            data: productData,
+            backgroundColor: ['blue','green','orange','red','purple'], // or generate dynamically
+            borderColor: ['darkblue','darkgreen','darkorange','darkred','darkpurple'],
             borderWidth: 1
         }]
     };
 
+    // -- BAR CHART for Top Sales Product Specs --
     const data2 = {
-        labels: ['X', 'Y', 'Z', 'W'],
+        labels: specLabels,
         datasets: [{
-            label: 'Chart 2 Values',
-            data: [20, 40, 25, 35],
-            backgroundColor: ['purple', 'cyan', 'yellow', 'pink'],
-            borderColor: ['darkpurple', 'darkcyan', 'darkyellow', 'darkpink'],
+            label: 'Top Product Specs',
+            data: specData,
+            backgroundColor: ['purple', 'cyan', 'yellow', 'pink', 'teal'],
+            borderColor: ['#4b0082','#008b8b','#cccc00','#ffc0cb','#008080'],
             borderWidth: 1
         }]
     };
 
+    // -- LINE CHART (or BAR) for Monthly Totals --
     const data3 = {
-        labels: ['P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y'],
+        labels: monthLabels,
         datasets: [{
-            label: 'Chart 3 Values',
-            data: [30, 15, 45, 20, 25, 40, 35, 10, 50, 30],
-            backgroundColor: ['brown', 'teal', 'grey', 'violet', 'cyan', 'magenta', 'yellow', 'lime', 'purple', 'red'],
-            borderColor: ['darkbrown', 'darkteal', 'darkgrey', 'darkviolet', 'darkcyan', 'darkmagenta', 'darkyellow', 'darklime', 'darkpurple', 'darkred'],
-            borderWidth: 1
+            label: 'Monthly Total Sales',
+            data: monthData,
+            // For a line chart:
+            backgroundColor: 'rgba(75,192,192,0.2)',
+            borderColor: 'rgba(75,192,192,1)',
+            fill: true,
+            tension: 0.1,
+            borderWidth: 2
         }]
     };
 
-    // Configuration for the charts
-    const config = {
+    // Configuration for the bar charts
+    const configBar = {
         type: 'bar',
         options: {
             responsive: true,
+            maintainAspectRatio	: false,
             scales: {
-                y: {
-                    beginAtZero: true
-                }
+                y: { beginAtZero: true }
             }
         }
     };
 
-    // Rendering the charts
-    new Chart(document.getElementById('barChart1').getContext('2d'), {...config, data: data1});
-    new Chart(document.getElementById('barChart2').getContext('2d'), {...config, data: data2});
+    // Configuration for the line chart
+    const configLine = {
+        type: 'line',
+        options: {
+            responsive: true,
+            maintainAspectRatio	: false,
 
-
-    // Configuration for the line chart (change 'type' to 'line')
-    const lineChartConfig = {
-            type: 'line',
-            options: {
-                responsive: true,
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
+            scales: {
+                y: { beginAtZero: true }
             }
-        };
+        }
+    };
 
-        // Rendering the line chart
-        new Chart(document.getElementById('barChart3').getContext('2d'), {...lineChartConfig, data: data3});
+    // Render Charts
+    new Chart(document.getElementById('barChart1').getContext('2d'), {...configBar, data: data1});
+    new Chart(document.getElementById('barChart2').getContext('2d'), {...configBar, data: data2});
+    new Chart(document.getElementById('barChart3').getContext('2d'), {...configLine, data: data3});
 </script>
 
 @endsection

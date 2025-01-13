@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use PharIo\Manifest\Email;
 use App\Models\SponsorImgs;
+use App\Models\ProductSales;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\Models\SpecificProductSales;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -27,9 +29,69 @@ class AdminController extends Controller
 
     public function showdashboard()
     {
-        return view('admin.dashboard');
-    }
+        // 1) Get the top 5 products
+        $topProducts = ProductSales::with('product')
+            ->orderBy('order_count', 'desc') // or 'total_sales'
+            ->take(5)
+            ->get();
 
+        // Transform them into arrays suitable for Chart.js
+        $productLabels = $topProducts->map(function ($item) {
+            return optional($item->product)->product_name ?? 'Unknown';
+        });
+        $productData = $topProducts->map(function ($item) {
+            return $item->order_count; // or $item->total_sales
+        });
+
+        // 2) Get the top 5 product specs
+        $topProductSpecs = SpecificProductSales::with('productSpecification.product')
+            ->orderBy('order_quantity', 'desc') // or 'total_sales'
+            ->take(5)
+            ->get();
+
+        $specLabels = $topProductSpecs->map(function ($item) {
+            // e.g. "ProductName - SpecName"
+            // $productName = optional($item->productSpecification->product)->product_name ?? 'Unknown Product';
+            $specName = optional($item->productSpecification)->specification_name ?? 'Unknown Spec';
+            return $specName;
+        });
+        $specData = $topProductSpecs->map(function ($item) {
+            return $item->order_quantity; // or $item->total_sales
+        });
+
+        // 3) Fetch monthly totals for the last 6 months (example)
+        // Let's group by month-year. This can be done in multiple ways,
+        // e.g. DB::raw queries or using Carbon. This is just an example:
+        $months = collect();
+        $totals = collect();
+
+        // For the sake of example, let's do 6 months back:
+        for ($i = 0; $i < 6; $i++) {
+            $dateObj = now()->subMonths($i);
+            $yearMonth = $dateObj->format('Y-m');
+
+            // Sum from product_sales table:
+            $sumForMonth = ProductSales::where('date', 'like', "$yearMonth%")->sum('total_sales');
+
+            // Or, if your 'date' column is a proper date/datetime, you can do:
+            // ->whereMonth('date', $dateObj->month)
+            // ->whereYear('date',  $dateObj->year)
+
+            $months->prepend($dateObj->format('M Y'));
+            $totals->prepend($sumForMonth);
+        }
+
+        // Pass arrays for Chart.js
+        $monthLabels = $months->values();  // e.g. ['Aug 2024', 'Sep 2024', ...]
+        $monthData   = $totals->values();  // e.g. [30, 45, ...]
+
+        return view('admin.dashboard', compact(
+            'productLabels', 'productData',
+            'specLabels', 'specData',
+            'monthLabels', 'monthData'
+        ));
+
+    }
 
     public function register (Request $request) {
 
