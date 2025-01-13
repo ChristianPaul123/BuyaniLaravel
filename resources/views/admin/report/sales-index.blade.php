@@ -64,7 +64,7 @@
 
             {{-- Page Header --}}
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-1 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Sales Reports</h1>
+                <h1 class="h2" style="font-weight: bold;">Sales Reports</h1>
             </div>
 
             {{-- Tabs for Navigation --}}

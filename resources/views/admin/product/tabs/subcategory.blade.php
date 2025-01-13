@@ -38,7 +38,7 @@
                         <td>{{ $subcategory->deactivated_status == 1 ? 'Deactivated' : 'Active' }}</td>
                         <td>
                             <a href="{{ route('admin.subcategory.edit', $encryptedId) }}"
-                                class="btn btn-primary">Edit</a>
+                                class="btn btn-primary"><i class="fa fa-edit fa-sm me-2"></i>Edit</a>
                         </td>
                         <td>
                             @if ($subcategory->deactivated_status)
@@ -49,7 +49,7 @@
                                     <button id="activateSubcategoryModal" type="button" title="Activate" class="btn btn-success text-white w-100" data-bs-toggle="modal" data-bs-target="#confirmModal" data-action="activate" data-type="Subcategory">
                                         <i class="fa fa-power-off fa-sm me-2"></i>Activate
                                     </button>
-                                    
+
                                 </form>
                             @else
                                 <form id="deactivateSubcategoryForm" action="{{ route('admin.subcategory.deactivate', $subcategory->id) }}"

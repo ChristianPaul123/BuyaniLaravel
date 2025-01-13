@@ -48,7 +48,7 @@
     @endif
 
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-1 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Inventory</h1>
+        <h1 class="h2" style="font-weight: bold;">Inventory</h1>
     </div>
 
         <!--Add the more part here
@@ -133,7 +133,7 @@
                                 <td>{{ $inventory->created_at ? $inventory->created_at->format('Y-m-d') : 'N/A' }}</td>
                                 <td>{{ $inventory->updated_at ? $inventory->updated_at->format('Y-m-d') : 'N/A' }}</td>
                                 <td class="text-center d-flex justify-content-center align-items-center">
-                                    <a href="{{ route('admin.product.inventory.edit', $inventory->id) }}" class="btn btn-primary">Edit</a>
+                                    <a href="{{ route('admin.product.inventory.edit', $inventory->id) }}" class="btn btn-primary"><i class="fa fa-edit fa-sm me-2"></i>Edit</a>
                                 </td>
                             </tr>
                         @endforeach

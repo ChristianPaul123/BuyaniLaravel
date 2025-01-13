@@ -43,7 +43,7 @@
                         <td>{{ $product->deactivated_date }}</td>
                         <td>{{ $product->deactivated_status == 1 ? 'Deactivated' : 'Active' }}</td>
                         <td>
-                            <a href="{{ route('admin.product.edit', $encryptedId) }}" class="btn btn-primary">Edit</a>
+                            <a href="{{ route('admin.product.edit', $encryptedId) }}" class="btn btn-primary"><i class="fa fa-edit fa-sm me-2"></i>Edit</a>
                         </td>
                         <td>
                             @if ($product->deactivated_status)

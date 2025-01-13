@@ -26,7 +26,7 @@
 
         <section class="col-md-10 ml-sm-auto col-lg-10 px-3 py-2 overflow-y-scroll main-section">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Customization</h1>
+                <h1 class="h2" style="font-weight: bold;">Customization</h1>
             </div>
             {{-- Tabs Navigation --}}
             <ul class="nav nav-tabs" id="customizationTabs" role="tablist">

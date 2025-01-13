@@ -86,16 +86,16 @@
                                     <td>{{ $blog->removed_date ? $blog->removed_date->format('M d, Y h:i A') : 'N/A' }}</td>
                                     <td>{{ $blog->admin->username }}</td>
                                     <td>
-                                        <a href="{{ route('admin.blog.edit', $blog->id) }}" title="Edit">
-                                            <i class="fa fa-edit"></i>
+                                        <a href="{{ route('admin.blog.edit', $blog->id) }}" title="Edit" class="btn btn-primary btn-sm w-100">
+                                            <i class="fa fa-edit"> </i><span> Edit</span>
                                         </a>
                                     </td>
                                     <td>
                                         <form action="{{ route('admin.blog.delete', $blog->id) }}" method="POST" style="display:inline;">
                                             @csrf
                                             @method('DELETE')
-                                            <button onclick="return confirm('Are you sure you want to delete this blog?');" title="Delete" style="background:none;border:none;padding:0;cursor:pointer;">
-                                                <i class="fa fa-trash" style="color:red;"></i>
+                                            <button onclick="return confirm('Are you sure you want to delete this blog?');" title="Delete" class="btn btn-danger btn-sm w-100">
+                                                    <i class="fa fa-trash"> </i><span> Delete</span>
                                             </button>
                                         </form>
                                     </td>
