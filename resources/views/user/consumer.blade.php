@@ -526,6 +526,10 @@
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
 
+    .contact-info{
+        height:325px;
+    }
+
 
 
 
@@ -825,11 +829,18 @@
 
                 <div class="col-md-5 offset-md-1 contact-info" style="background-color: #5f8d4e; color: #f8f9fa;">
                     <h3>Contact Information</h3>
-                    <p class="mb-3" style="font-size: 13px">We'd love to assist you in any way we can! For order updates or questions about any of our products or services, you may contact us through:</p>
-                    <p class="mb-3"><strong>Email:</strong> buyani@gmail.com</p>
-                    <p class="mb-3"><strong>Phone:</strong> +1 (234) 567-890</p>
-                    <p class="mb-3"><strong>Facebook:</strong> vky</p>
-                    <p class="mb-0"><strong>Address:</strong> 123 Maroroy St, Daraga, Albay, PH</p>
+                    <p class="mb-2" style="font-size: 13px">We'd love to assist you in any way we can! For order updates or questions about any of our products or services, you may contact us through:</p>
+                    <p class="mb-2"><strong>Email:</strong> buyanibussiness1@gmail.com</p>
+                    <p class="mb-2"><strong>Phone:</strong> 09519349830</p>
+                    <p class="mb-3"><strong>Address:</strong> 123 Maroroy St, Daraga, Albay, PH</p>
+
+                    <div class="social-icons">
+                        <h5 style="color: #f8f9fa;"> Other Links:</h5>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
                 </div>
             </div>
         </div>

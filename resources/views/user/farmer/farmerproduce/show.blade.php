@@ -196,10 +196,10 @@
     @include('user.includes.navbar-farmer')
     <div class="container mt-0 pt-5">
         <div class="contact-header text-center" style="color: #dfba14;">
-            <h1>Farmer Product Suggestion
-                Showcase Your Produce When Stocks Are Low, Maximize Your Market Reach!</h1>
-            <p>We would love to hear from you!</p>
+            <h1 class="text-center pt-3 mb-2" style="color: #f39634; font-weight: bold;">Farmer Product Suggestion</h1>
+            <p class="text-center mb-5" style="color: #907a0b">Rooted in Quality, Growing with You - Let's Connect!</p>
         </div>
+
         <div class="carousel-container">
             <div class="carousel-view">
                 <div id="item-list" class="item-list">
@@ -248,7 +248,7 @@
                         <th>PRODUCT NAME</th>
                         <th>DESCRIPTION</th>
                         <th>IMAGE</th>
-                        <th>SUGGESTED PRICE (KG)</th>
+                        <th>SUGGESTED PRICE (/KG)</th>
                         <th>ACTION</th>
                     </tr>
                 </thead>
