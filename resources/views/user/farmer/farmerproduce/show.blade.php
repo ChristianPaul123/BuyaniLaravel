@@ -222,9 +222,9 @@
                                     <p class="text-info fw-bold">NEW</p>
                                 @endif
                                 <!-- The “Low Stock” badge or button -->
-                                @if ($product->inventory && $product->inventory->product_total_stock < 50)
+                                @if ($product->inventory && $product->inventory->product_total_stock < 25)
                                     <a href="#" class="btn-stock btn-primary">
-                                        Low Stock ({{ $product->inventory->product_total_stock }})
+                                        Low Stock
                                     </a>
                                 @endif
                             </div>

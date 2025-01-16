@@ -14,7 +14,7 @@
                 <tr>
                     <th>#</th>
                     <th>Product Name</th>
-                    <th>Product Details</th>
+                    {{-- <th>Product Details</th> --}}
                     <th>Product Status</th>
                     <th>Product Stocks</th>
                     <th>Product Image</th>
@@ -34,8 +34,18 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $product->product_name ?? 'N/A'  }}</td>
-                        <td>{{ $product->product_details ?? 'N/A' }}</td>
-                        <td>{{ $product->status_label?? 'N/A' }}</td>
+                        {{-- <td>{{ $product->product_details ?? 'N/A' }}</td> --}}
+                        <td>
+                            @if ($product->inventory && $product->inventory->product_total_stock > 50)
+                                <span class="text-success">In Stock</span>
+                            @elseif ($product->inventory && $product->inventory->product_total_stock >= 1 && $product->inventory->product_total_stock <= 50)
+                                <span class="text-warning">Low Stock</span>
+                            @elseif ($product->inventory && $product->inventory->product_total_stock === 0)
+                                <span class="text-danger">Out of Stock</span>
+                            @else
+                                <span class="text-danger">Out of Stock</span>
+                            @endif
+                        </td>
                         <th>{{ $product->inventory->product_total_stock ?? 'N/A' }}</th>
                         <td><img src="{{ asset($product->product_pic) }}" alt="{{ $product->product_name }}" width="50"></td>
                         <td>{{ $product->category->category_name ?? 'N/A'  }}</td>
@@ -118,11 +128,11 @@
     </div>
 </div>
 
-<div class="chart-contaner mt-4" style="border: 1px solid #d2d2d2; padding: 20px; border-radius: 7px;">
+{{-- <div class="chart-contaner mt-4" style="border: 1px solid #d2d2d2; padding: 20px; border-radius: 7px;">
     <div class="bar-chart">
         <label class="chart-label text-center d-block">Products</label>
         <div class="chart">
             <canvas id="product_bar"></canvas>
         </div>
     </div>
-</div>
+</div> --}}

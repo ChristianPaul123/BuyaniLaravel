@@ -29,3 +29,16 @@
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 @endif
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Clear session flash messages after rendering
+        const flashMessage = document.getElementById('flashMessage');
+        if (flashMessage) {
+            // Clear message after the alert is dismissed or navigated back
+            flashMessage.addEventListener('closed.bs.alert', function () {
+                window.history.replaceState({}, document.title, window.location.pathname);
+            });
+        }
+    });
+</script>

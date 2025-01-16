@@ -35,6 +35,22 @@
 
                 </div>
                 <div class="col-md-6">
+                        @php
+                        $stockStatus = $product->inventory->product_total_stock;
+                        $statusLabel = '';
+                        $statusClass = '';
+
+                        if ($stockStatus > 50) {
+                            $statusLabel = 'In Stock';
+                            $statusClass = 'text-success'; // Green for normal stock
+                        } elseif ($stockStatus >= 1 && $stockStatus <= 50) {
+                            $statusLabel = 'Low Stock';
+                            $statusClass = 'text-warning'; // Yellow for low stock
+                        } else {
+                            $statusLabel = 'Out of Stock';
+                            $statusClass = 'text-danger'; // Red for out of stock
+                        }
+                        @endphp
                     <h2 class="product-title">{{ $product->product_name }}</h2>
                     <p style="color: #777;">Tags: <span class="font-weight-bold">{{ $categories->category_name }}, {{ $subcategories->sub_category_name }}</span></p>
 
@@ -56,9 +72,12 @@
                         @endif
                     </p>
                     <p><strong>Quantity:</strong> <span class="font-weight-bold">{{ $product->inventory->product_total_stock }}</span></p>
-                    <p><strong>Availability:</strong> <span class="font-weight-bold text-success">{{ $product->status_label }}</span></p>
+                    <p>
+                        <strong>Availability:</strong>
+                        <span class="font-weight-bold {{ $statusClass }}">{{ $statusLabel }}</span>
+                    </p>
 
-
+                    @auth('user')
                     <div class="row">
                         @forelse ($specifications as $specification)
                             <div class="col-12 col-md-6 mb-3" wire:key="{{ $specification->id }}">
@@ -92,6 +111,9 @@
                     <div class="d-flex justify-content-center mt-3">
                         {{ $specifications->links() }}
                     </div>
+                    @else
+                    <p class="text-center" style="color: #777;">Please <a href="{{ route('user.index') }}" style="color: #4CAF50;">log in</a> to buy a product.</p>
+                    @endauth
 
                     <div class="mt-4">
                         <p><strong>Product Features:</strong></p>

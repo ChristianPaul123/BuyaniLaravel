@@ -34,7 +34,7 @@ class OrderController extends Controller
         'ordersToStandby' => $user->orders()->where('order_status', Order::STATUS_STANDBY)->get(),
         'ordersToPay' => $user->orders()->where('order_status', Order::STATUS_TO_PAY)->get(),
         'ordersToShip' => $user->orders()->where('order_status', Order::STATUS_TO_SHIP)->get(),
-        'ordersCompleted' => $user->orders()->where('order_status', Order::STATUS_COMPLETED)->with('rating')->get(),
+        'ordersCompleted' => $user->orders()->whereIn('order_status', [Order::STATUS_COMPLETED, Order::STATUS_ARCHIVED])->with('rating')->get(),
         'ordersCancelled' => $user->orders()->where('order_status', Order::STATUS_CANCELLED)->get(),
         'ordersToDeliver' => $user->orders()->where('order_status', Order::OUT_FOR_DELIVERY)->get(),
     ]);

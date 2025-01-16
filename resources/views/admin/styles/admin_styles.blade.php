@@ -207,6 +207,7 @@
         z-index: 1000;
         animation: fadeInDown 0.15s ease-out forwards; /* Faster appearance */
         font-weight: bold;
+        max-width: 50rem;
         color: #d97a18;
         overflow: hidden;
         display: none; /* Default hidden */

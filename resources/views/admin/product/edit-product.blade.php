@@ -108,7 +108,7 @@
                                 </div>
 
                                 {{-- Product Status --}}
-                                <div class="form-group my-3">
+                                {{-- <div class="form-group my-3">
                                     <label for="product_status">Product Status</label>
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="product_status" id="product_status_available" value="1" {{ $product->product_status == 1 ? 'checked' : '' }}>
@@ -122,7 +122,7 @@
                                         <input class="form-check-input" type="radio" name="product_status" id="product_status_unavailable" value="3" {{ $product->product_status == 3 ? 'checked' : '' }}>
                                         <label class="form-check-label" for="product_status_unavailable">Unavailable</label>
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 {{-- Category Dropdown --}}
                                 <div class="form-group my-3">

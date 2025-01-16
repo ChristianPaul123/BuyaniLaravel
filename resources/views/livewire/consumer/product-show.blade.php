@@ -109,10 +109,28 @@
                         <div class="col-sm-6 col-md-4 col-lg-3" wire:key="{{ $product->id }}">
                             <div class="card shadow-sm border-0 rounded">
                                 <div class="card-img-top-wrapper position-relative">
-                                    @if ($stockStatus > 0)
-                                        <img src="{{ asset($product->product_pic) }}" class="card-img-top rounded-top" alt="{{ $product->product_name }}" style="cursor: pointer;" wire:click.prevent="viewProduct({{ $product->id }})">
+                                    @if ($stockStatus > 50)
+                                    {{-- Normal Stock --}}
+                                    <img src="{{ asset($product->product_pic) }}"
+                                         class="card-img-top rounded-top"
+                                         alt="{{ $product->product_name }}"
+                                         style="cursor: pointer;"
+                                         wire:click.prevent="viewProduct({{ $product->id }})">
+                                    @elseif ($stockStatus >= 1 && $stockStatus <= 50)
+                                        {{-- Low Stock --}}
+                                        <img src="{{ asset($product->product_pic) }}"
+                                            class="card-img-top rounded-top opacity-75"
+                                            alt="{{ $product->product_name }}"
+                                            style="cursor: pointer;"
+                                            wire:click.prevent="viewProduct({{ $product->id }})">
+                                        <div class="position-absolute top-50 start-50 translate-middle bg-warning text-dark px-3 py-2 rounded">
+                                            Low Stock
+                                        </div>
                                     @else
-                                        <img src="{{ asset($product->product_pic) }}" class="card-img-top rounded-top opacity-50" alt="{{ $product->product_name }}">
+                                        {{-- Out of Stock --}}
+                                        <img src="{{ asset($product->product_pic) }}"
+                                            class="card-img-top rounded-top opacity-50"
+                                            alt="{{ $product->product_name }}">
                                         <div class="position-absolute top-50 start-50 translate-middle bg-danger text-white px-3 py-2 rounded">
                                             Out of Stock
                                         </div>
@@ -148,11 +166,18 @@
                                         @endif
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center">
-                                        @if ($stockStatus > 0)
+                                        @if ($stockStatus > 50)
+                                            {{-- Normal Stock --}}
                                             <button class="btn btn-sm btn-outline-primary" wire:click.prevent="viewProduct({{ $product->id }})">
                                                 View
                                             </button>
+                                        @elseif ($stockStatus >= 1 && $stockStatus <= 50)
+                                            {{-- Low Stock --}}
+                                            <button class="btn btn-sm btn-outline-warning" wire:click.prevent="viewProduct({{ $product->id }})">
+                                                Low Stock - View
+                                            </button>
                                         @else
+                                            {{-- Out of Stock --}}
                                             <button class="btn btn-sm btn-outline-secondary disabled" disabled>
                                                 Unavailable
                                             </button>

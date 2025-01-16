@@ -27,25 +27,39 @@
 
             <ul class="nav nav-tabs" id="orderTabs" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="order-standby-tab" data-bs-toggle="tab" href="#order-standby" role="tab">To Standby</a>
+                    <a class="nav-link active" id="order-standby-tab" data-bs-toggle="tab" href="#order-standby" role="tab">
+                        To Standby ({{ $ordersToStandby->count() }})
+                    </a>
                 </li>
                 {{-- <li class="nav-item">
-                    <a class="nav-link" id="order-pay-tab" data-bs-toggle="tab" href="#order-pay" role="tab">To Pay</a>
+                    <a class="nav-link" id="order-pay-tab" data-bs-toggle="tab" href="#order-pay" role="tab">
+                        To Pay ({{ $ordersToPay->count() }})
+                    </a>
                 </li> --}}
                 <li class="nav-item">
-                    <a class="nav-link" id="order-ship-tab" data-bs-toggle="tab" href="#order-ship" role="tab">To Ship</a>
+                    <a class="nav-link" id="order-ship-tab" data-bs-toggle="tab" href="#order-ship" role="tab">
+                        To Ship ({{ $ordersToShip->count() }})
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="order-deliver-tab" data-bs-toggle="tab" href="#order-deliver" role="tab">Out For Delivery</a>
+                    <a class="nav-link" id="order-deliver-tab" data-bs-toggle="tab" href="#order-deliver" role="tab">
+                        Out For Delivery ({{ $ordersToDeliver->count() }})
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="order-completed-tab" data-bs-toggle="tab" href="#order-completed" role="tab">Order Completed</a>
+                    <a class="nav-link" id="order-completed-tab" data-bs-toggle="tab" href="#order-completed" role="tab">
+                        Order Completed ({{ $ordersCompleted->count() }})
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="order-cancelled-tab" data-bs-toggle="tab" href="#order-cancelled" role="tab">Order Cancelled</a>
+                    <a class="nav-link" id="order-cancelled-tab" data-bs-toggle="tab" href="#order-cancelled" role="tab">
+                        Order Cancelled ({{ $ordersCancelled->count() }})
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="order-archived-tab" data-bs-toggle="tab" href="#order-archived" role="tab">Archived</a>
+                    <a class="nav-link" id="order-archived-tab" data-bs-toggle="tab" href="#order-archived" role="tab">
+                        Archived ({{ $ordersArchived->count() }})
+                    </a>
                 </li>
             </ul>
 

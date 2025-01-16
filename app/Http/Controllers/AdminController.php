@@ -152,8 +152,8 @@ class AdminController extends Controller
 
     }
 
-    public function login(Request $request) {
-
+    public function login(Request $request)
+    {
         $validatedData = $request->validate([
             'username' => ['required'],
             'password' => ['required'],
@@ -163,15 +163,24 @@ class AdminController extends Controller
             'username' => $validatedData['username'],
             'password' => $validatedData['password'],
         ])) {
+            // Check if the admin account is active
+            $admin = auth()->guard('admin')->user();
 
-        $request->session()->regenerate();
-        //$admin = auth()->guard('admin')->user();
+            if ($admin->deactivated_status == 1) {
+                // Log the admin out and redirect to login page with a message
+                auth()->guard('admin')->logout();
 
-        //dd($admin);
-        return redirect()->route('admin.dashboard')->with('message', 'login successfull');
-        } else {
-        return redirect()->route('admin.login')->with('message', 'invalid email or password');
+                return redirect()->route('admin.login')->with('message', 'Your account has been deactivated. Please contact support.');
+            }
+
+            // Regenerate session and redirect to dashboard
+            $request->session()->regenerate();
+
+            return redirect()->route('admin.dashboard')->with('message', 'Login successful');
         }
+
+        // Redirect back with an error message if credentials are invalid
+        return redirect()->route('admin.login')->with('message', 'Invalid username or password');
     }
 
     public function logout(Request $request)
@@ -190,31 +199,31 @@ class AdminController extends Controller
     }
 
 
-    public function updateAdminPayment(Request $request)
-    {
-        $request->validate([
-            'admin_payment' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+    // public function updateAdminPayment(Request $request)
+    // {
+    //     $request->validate([
+    //         'admin_payment' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    //     ]);
 
-        $admin = auth()->guard('admin')->user();
+    //     $admin = auth()->guard('admin')->user();
 
-        if ($request->hasFile('admin_payment')) {
-            // Remove the old file if exists
-            if ($admin->admin_payment && file_exists(public_path($admin->admin_payment))) {
-                unlink(public_path($admin->admin_payment));
-            }
+    //     if ($request->hasFile('admin_payment')) {
+    //         // Remove the old file if exists
+    //         if ($admin->admin_payment && file_exists(public_path($admin->admin_payment))) {
+    //             unlink(public_path($admin->admin_payment));
+    //         }
 
-            // Save the new file
-            $fileName = time() . '.' . $request->admin_payment->extension();
-            $request->admin_payment->move(public_path('img/admin_payments'), $fileName);
+    //         // Save the new file
+    //         $fileName = time() . '.' . $request->admin_payment->extension();
+    //         $request->admin_payment->move(public_path('img/admin_payments'), $fileName);
 
-            // Update the database
-            $admin->update(['admin_payment' => 'img/admin_payments/' . $fileName]);
-        }
+    //         // Update the database
+    //         $admin->update(['admin_payment' => 'img/admin_payments/' . $fileName]);
+    //     }
 
-        return redirect()->route('admin.customization', ['tab' => 'payments'])
-        ->with('message', 'Payment picture updated successfully.');
-    }
+    //     return redirect()->route('admin.customization', ['tab' => 'payments'])
+    //     ->with('message', 'Payment picture updated successfully.');
+    // }
 
     public function storenewAdmin(Request $request)
 {
@@ -313,6 +322,13 @@ class AdminController extends Controller
 
     public function deactivate(Admin $admin)
     {
+        // Check if the admin is trying to deactivate themselves
+        if (Auth::guard('admin')->id() === $admin->id) {
+            return redirect()->route('admin.customization', ['tab' => 'admins'])
+                ->with('message', 'Sorry, you cannot deactivate yourself, silly!');
+        }
+
+        // Proceed to deactivate the admin
         $admin->update([
             'deactivated_status' => 1,
             'deactivated_date' => now(),

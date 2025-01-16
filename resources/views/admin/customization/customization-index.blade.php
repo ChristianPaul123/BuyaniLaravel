@@ -22,6 +22,7 @@
 <div class="container-fluid">
     <div class="row">
         @include('admin.includes.sidebar')
+        @include('admin.includes.messageBox')
 
 
         <section class="col-md-10 ml-sm-auto col-lg-10 px-3 py-2 overflow-y-scroll main-section">

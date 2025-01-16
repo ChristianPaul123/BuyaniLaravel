@@ -3,7 +3,7 @@
         <h3 class="card-title">Archived Orders</h3>
     </div>
     <div class="card-body">
-        <table id="ordercancelledTable" class="table table-bordered table-striped">
+        <table id="orderarchivedTable" class="table table-bordered table-striped">
                 <thead>
                     <tr>
                         <th>Order Number</th>

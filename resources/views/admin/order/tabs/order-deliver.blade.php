@@ -3,7 +3,7 @@
         <h3 class="card-title">Out for Delivery Orders</h3>
     </div>
     <div class="card-body">
-        <table class="table table-bordered table-striped">
+        <table id="orderdeliverTable" class="table table-bordered table-striped">
             <thead class="table-light">
                 <tr>
                     <th>Order Number</th>

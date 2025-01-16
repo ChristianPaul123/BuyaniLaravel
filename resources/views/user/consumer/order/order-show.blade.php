@@ -135,22 +135,34 @@
 
             <ul class="nav nav-tabs" id="orderTabs" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link active" id="standby-tab" data-bs-toggle="tab" href="#standby" role="tab">To Standby</a>
+                    <a class="nav-link active" id="standby-tab" data-bs-toggle="tab" href="#standby" role="tab">
+                        To Standby ({{ $ordersToStandby->count() }})
+                    </a>
                 </li>
                 {{-- <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="to-pay-tab" data-bs-toggle="tab" href="#to-pay" role="tab">To Pay</a>
+                    <a class="nav-link" id="to-pay-tab" data-bs-toggle="tab" href="#to-pay" role="tab">
+                        To Pay ({{ $ordersToPay->count() }})
+                    </a>
                 </li> --}}
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="to-ship-tab" data-bs-toggle="tab" href="#to-ship" role="tab">To Ship</a>
+                    <a class="nav-link" id="to-ship-tab" data-bs-toggle="tab" href="#to-ship" role="tab">
+                        To Ship ({{ $ordersToShip->count() }})
+                    </a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="completed-tab" data-bs-toggle="tab" href="#order-deliver" role="tab">Out for Delivery</a>
+                    <a class="nav-link" id="completed-tab" data-bs-toggle="tab" href="#order-deliver" role="tab">
+                        Out for Delivery ({{ $ordersToDeliver->count() }})
+                    </a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="order-deliver-tab" data-bs-toggle="tab" href="#completed" role="tab">Completed</a>
+                    <a class="nav-link" id="order-deliver-tab" data-bs-toggle="tab" href="#completed" role="tab">
+                        Completed ({{ $ordersCompleted->count() }})
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="cancelled-tab" data-bs-toggle="tab" href="#cancelled" role="tab">Cancelled</a>
+                    <a class="nav-link" id="cancelled-tab" data-bs-toggle="tab" href="#cancelled" role="tab">
+                        Cancelled ({{ $ordersCancelled->count() }})
+                    </a>
                 </li>
             </ul>
 

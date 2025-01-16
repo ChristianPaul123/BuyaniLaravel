@@ -34,6 +34,6 @@
     <h1 class="error-code">419</h1>
     <p>Page Expired</p>
     <p>Your session has expired. Please refresh the page or go back to continue.</p>
-    <button onclick="location.reload()" class="btn btn-primary btn-home">Refresh</button>
+    <button onclick="history.back()" class="btn btn-primary btn-home">Refresh</button>
 </div>
 @endsection

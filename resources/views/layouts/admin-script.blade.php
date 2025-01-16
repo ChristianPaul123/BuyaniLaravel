@@ -50,6 +50,8 @@ new DataTable('#ordercompletedTable');
 new DataTable('#orderstandbyTable');
 new DataTable('#orderpayTable');
 new DataTable('#ordershipTable');
+new DataTable('#orderarchivedTable');
+new DataTable('#orderdeliverTable');
 
 
 //Tables for the Admin
