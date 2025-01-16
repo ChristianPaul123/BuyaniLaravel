@@ -13,8 +13,7 @@ class TotalOrders extends Component
     {
 
         //this changes to order deliver
-        $this->totalOrders = Order::where('order_status', 3)
-                                  ->where('order_type', 1)
+        $this->totalOrders = Order::where('order_status', 1)
                                   ->count();
     }
     public function render()

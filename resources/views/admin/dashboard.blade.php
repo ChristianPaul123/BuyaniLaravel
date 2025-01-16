@@ -88,7 +88,7 @@
                         @livewire('blocks.total-orders')
                     </div>
                     <div class="col-md-3 col-sm-12">
-                        @livewire('blocks.admin-pending-payments')
+                        @livewire('blocks.monthly-sales')
                     </div>
                     <div class="col-md-3 col-sm-12">
                         @livewire('blocks.active-farmers')
