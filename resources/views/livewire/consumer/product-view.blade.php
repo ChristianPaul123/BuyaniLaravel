@@ -40,10 +40,10 @@
                         $statusLabel = '';
                         $statusClass = '';
 
-                        if ($stockStatus > 50) {
+                        if ($stockStatus > 25) {
                             $statusLabel = 'In Stock';
                             $statusClass = 'text-success'; // Green for normal stock
-                        } elseif ($stockStatus >= 1 && $stockStatus <= 50) {
+                        } elseif ($stockStatus >= 1 && $stockStatus <= 25) {
                             $statusLabel = 'Low Stock';
                             $statusClass = 'text-warning'; // Yellow for low stock
                         } else {

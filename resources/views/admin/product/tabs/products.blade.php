@@ -36,9 +36,9 @@
                         <td>{{ $product->product_name ?? 'N/A'  }}</td>
                         {{-- <td>{{ $product->product_details ?? 'N/A' }}</td> --}}
                         <td>
-                            @if ($product->inventory && $product->inventory->product_total_stock > 50)
+                            @if ($product->inventory && $product->inventory->product_total_stock > 25)
                                 <span class="text-success">In Stock</span>
-                            @elseif ($product->inventory && $product->inventory->product_total_stock >= 1 && $product->inventory->product_total_stock <= 50)
+                            @elseif ($product->inventory && $product->inventory->product_total_stock >= 1 && $product->inventory->product_total_stock <= 25)
                                 <span class="text-warning">Low Stock</span>
                             @elseif ($product->inventory && $product->inventory->product_total_stock === 0)
                                 <span class="text-danger">Out of Stock</span>

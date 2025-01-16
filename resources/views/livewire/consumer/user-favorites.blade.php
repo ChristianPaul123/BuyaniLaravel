@@ -43,9 +43,9 @@
                                         </td> --}}
                                         <td>
                                            {{-- Stock Status Message --}}
-                                        @if ($favorite->product->inventory && $favorite->product->inventory->product_total_stock > 50)
+                                        @if ($favorite->product->inventory && $favorite->product->inventory->product_total_stock > 25)
                                         <span class="stock-status text-success">In Stock</span>
-                                        @elseif ($favorite->product->inventory && $favorite->product->inventory->product_total_stock >= 1 && $favorite->product->inventory->product_total_stock <= 50)
+                                        @elseif ($favorite->product->inventory && $favorite->product->inventory->product_total_stock >= 1 && $favorite->product->inventory->product_total_stock <= 25)
                                         <span class="stock-status text-warning">Low Stock</span>
                                         @else
                                         <span class="out-of-stock text-danger">Out of Stock</span>
@@ -55,9 +55,9 @@
                                            {{-- Button to View Product --}}
                                                 <button wire:click.prevent="viewProduct({{ $favorite->product_id }})"
                                                     class="btn btn-sm
-                                                    @if ($favorite->product->inventory && $favorite->product->inventory->product_total_stock > 50)
+                                                    @if ($favorite->product->inventory && $favorite->product->inventory->product_total_stock > 25)
                                                         btn-primary
-                                                    @elseif ($favorite->product->inventory && $favorite->product->inventory->product_total_stock >= 1 && $favorite->product->inventory->product_total_stock <= 50)
+                                                    @elseif ($favorite->product->inventory && $favorite->product->inventory->product_total_stock >= 1 && $favorite->product->inventory->product_total_stock <= 25)
                                                         btn-warning
                                                     @else
                                                         btn-secondary disabled

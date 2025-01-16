@@ -109,14 +109,14 @@
                         <div class="col-sm-6 col-md-4 col-lg-3" wire:key="{{ $product->id }}">
                             <div class="card shadow-sm border-0 rounded">
                                 <div class="card-img-top-wrapper position-relative">
-                                    @if ($stockStatus > 50)
+                                    @if ($stockStatus > 25)
                                     {{-- Normal Stock --}}
                                     <img src="{{ asset($product->product_pic) }}"
                                          class="card-img-top rounded-top"
                                          alt="{{ $product->product_name }}"
                                          style="cursor: pointer;"
                                          wire:click.prevent="viewProduct({{ $product->id }})">
-                                    @elseif ($stockStatus >= 1 && $stockStatus <= 50)
+                                    @elseif ($stockStatus >= 1 && $stockStatus <= 25)
                                         {{-- Low Stock --}}
                                         <img src="{{ asset($product->product_pic) }}"
                                             class="card-img-top rounded-top opacity-75"
@@ -166,12 +166,12 @@
                                         @endif
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center">
-                                        @if ($stockStatus > 50)
+                                        @if ($stockStatus > 25)
                                             {{-- Normal Stock --}}
                                             <button class="btn btn-sm btn-outline-primary" wire:click.prevent="viewProduct({{ $product->id }})">
                                                 View
                                             </button>
-                                        @elseif ($stockStatus >= 1 && $stockStatus <= 50)
+                                        @elseif ($stockStatus >= 1 && $stockStatus <= 25)
                                             {{-- Low Stock --}}
                                             <button class="btn btn-sm btn-outline-warning" wire:click.prevent="viewProduct({{ $product->id }})">
                                                 Low Stock - View
