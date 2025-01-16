@@ -104,6 +104,12 @@ class AdminChatConsumer extends Component
             'is_edited' => 0,
         ]);
 
+        // Increment the message count for the user
+        $chat = Chat::find($this->chatId);
+        if ($chat) {
+            $chat->increment('is_message_count');
+        }
+
         // Reload messages and reset input
         $this->loadMessages();
         $this->reset(['messageInput']);

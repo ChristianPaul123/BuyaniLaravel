@@ -41,41 +41,41 @@ class UserController extends Controller
 
 
 
-    public function register (Request $request) {
-        $validatedData = $request->validate([
-            'username' => ['required',  Rule::unique('users','username')],
-            'email' => ['required', Rule::unique('users','email')],
-            'password' => ['required', 'min:8', 'max:200', 'confirmed'],
-            'user_type' => ['required','numeric'],
-        ],
-        [
-            'username.required' => 'The username field is required.',
-            'username.unique' => 'This username is already taken.',
-            'email.required' => 'The email field is required.',
-            'email.unique' => 'This email is already registered.',
-            'password.required' => 'The password field is required.',
-            'password.min' => 'The password must be at least 8 characters.',
-            'password.max' => 'The password may not be greater than 200 characters.',
-            'password.confirmed' => 'The password is not the as confirmed password.',
-            'user_type.required' => 'The admin type field is required.',
-            'user_type.numeric' => 'The user_type is not a number.',
-        ]);
-        //Encryption for password validatedData
-        $validatedData['password'] = bcrypt($validatedData['password']);
+    // public function register (Request $request) {
+    //     $validatedData = $request->validate([
+    //         'username' => ['required',  Rule::unique('users','username')],
+    //         'email' => ['required', Rule::unique('users','email')],
+    //         'password' => ['required', 'min:8', 'max:200', 'confirmed'],
+    //         'user_type' => ['required','numeric'],
+    //     ],
+    //     [
+    //         'username.required' => 'The username field is required.',
+    //         'username.unique' => 'This username is already taken.',
+    //         'email.required' => 'The email field is required.',
+    //         'email.unique' => 'This email is already registered.',
+    //         'password.required' => 'The password field is required.',
+    //         'password.min' => 'The password must be at least 8 characters.',
+    //         'password.max' => 'The password may not be greater than 200 characters.',
+    //         'password.confirmed' => 'The password is not the as confirmed password.',
+    //         'user_type.required' => 'The admin type field is required.',
+    //         'user_type.numeric' => 'The user_type is not a number.',
+    //     ]);
+    //     //Encryption for password validatedData
+    //     $validatedData['password'] = bcrypt($validatedData['password']);
 
-        //checks for user type field if numeric otherwise bitch it out
-        $validatedData['user_type'] = is_numeric($validatedData['user_type']) ? (int) $validatedData['user_type'] : 0;
-
-
+    //     //checks for user type field if numeric otherwise bitch it out
+    //     $validatedData['user_type'] = is_numeric($validatedData['user_type']) ? (int) $validatedData['user_type'] : 0;
 
 
 
-        if (User::create($validatedData)) {
-            return redirect('/')->with('message', 'user was created successfully');
-        } else {
-            return redirect()->route('user.register')->with('message', 'invalid login problems');
-        };
-    }
+
+
+    //     if (User::create($validatedData)) {
+    //         return redirect('/')->with('message', 'user was created successfully');
+    //     } else {
+    //         return redirect()->route('user.register')->with('message', 'invalid login problems');
+    //     };
+    // }
 
 
 

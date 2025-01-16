@@ -56,7 +56,7 @@
                  </li>
                  <li class="nav-item px-1 position-relative">
                      <a class="nav-link" href="/user/farmer/chat" data-page="chat">
-                         <i class="fas fa-comment-dots" style="font-size: 25px;"></i>
+                         <i class="fas fa-comment-dots" style="font-size: 25px;">@livewire('counter.chat-counter')</i>
                      </a>
                  </li>
 
