@@ -38,7 +38,7 @@
         }
 
         .header h2 {
-            color: #e74c3c;
+            color: #6de73c;
         }
 
         .order-details,
@@ -86,7 +86,8 @@
         <div class="header">
             <img src="{{ url('https://buyanicommerce.bsitcps.com/public/img/buyanicommece_logo.png') }}" alt="Buyani Logo">
             <h1>Buyanicommerce</h1><br>
-            <h2>Order Declined</h2>
+            <h2>Order Success</h2><br>
+            <h3>Thank you for buying!!</h3><br>
             <p>Dear {{ $order->customer_name }},</p>
             <p>Your order {{ $order->order_number }} has been successfully completed</p><br>
             <p>Thank You for your patience!</p>

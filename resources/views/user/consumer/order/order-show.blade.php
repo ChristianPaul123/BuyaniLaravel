@@ -129,6 +129,7 @@
     <div class="container container-fluid mt-1">
     <!-- Navbar -->
     <section class="p-3">
+        @include('user.includes.messageBox')
 
         <div class="container mt-5 mb-5">
             <h2 class="mb-4">Pending Orders</h2>
