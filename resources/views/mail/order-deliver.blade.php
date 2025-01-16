@@ -89,6 +89,7 @@
             <h2>Order is out for Delivery</h2>
             <p>Dear {{ $order->customer_name }},</p>
             <p>Your order Has now been accepted and will be delivered to you by our Delivery man: <strong> {{ $order->delivery_employee }}</strong></p><br>
+            <p>The Estimated Time of Arrival is: 3 to 5 Days</p><br>
             <p>If you have any questions please message us via our messaging system about your order information</p><br>
             <p>Once you received you order, click order received to register that your order is completed. Thank you</p>
         </div>
