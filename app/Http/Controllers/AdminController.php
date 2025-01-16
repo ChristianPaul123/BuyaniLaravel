@@ -38,11 +38,11 @@ class AdminController extends Controller
             ->take(5)
             ->get();
 
-              // Fetch products added at least a month ago
-        $products = Product::whereDate('created_at', '<=', now()->subMonth())->orderBy('created_at', 'desc')->get();
+        //       // Fetch products added at least a month ago
+        // $products = Product::whereDate('created_at', '<=', now()->subMonth())->orderBy('created_at', 'desc')->get();
 
-        // Fetch product specifications added at least a month ago
-        $productSpecifications = ProductSpecification::whereDate('created_at', '<=', now()->subMonth())->orderBy('created_at', 'desc')->get();
+        // // Fetch product specifications added at least a month ago
+        // $productSpecifications = ProductSpecification::whereDate('created_at', '<=', now()->subMonth())->orderBy('created_at', 'desc')->get();
 
         // Transform them into arrays suitable for Chart.js
         $productLabels = $topProducts->map(function ($item) {
@@ -98,11 +98,12 @@ class AdminController extends Controller
             // 1. Get the latest added product
             //    If you want strictly "within the last month", you can do ->where('created_at', '>=', now()->subMonth())
             //    But if you literally just want the single most recently added, do this:
-        $latestProduct = Product::orderBy('created_at', 'desc')->first();
+        $latestProduct = Product::orderBy('created_at', 'desc')->where('created_at', '>=', now()->subMonth())->get();
 
-            // 2. Get product specifications older than 1 month
+
+            // 2. Get product specifications 1 month
             //    We check the ProductSpecification's `created_at` field
-        $olderSpecs = ProductSpecification::where('created_at', '<=', now()->subMonth())->get();
+        $latestProductSpec = ProductSpecification::where('created_at', '>=', now()->subMonth())->get();
 
         // 3. Get total/sold/damaged stocks for the pie chart
         //    Summing across the entire Inventory table
@@ -117,8 +118,8 @@ class AdminController extends Controller
             'productLabels', 'productData',
             'specLabels', 'specData',
             'monthLabels', 'monthData',
-            'products', 'productSpecifications',
-            'inventoryData','latestProduct','olderSpecs'
+            // 'products', 'productSpecifications',
+            'inventoryData','latestProduct','latestProductSpec'
         ));
 
     }

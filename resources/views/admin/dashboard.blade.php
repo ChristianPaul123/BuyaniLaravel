@@ -106,7 +106,7 @@
                                     </tr>
                                 </thead>
                                 <tbody style="display: block; max-height: 200px; overflow-y: auto; width: 100%; height: auto; scrollbar-width: thin;">
-                                    @if($latestProduct)
+                                    {{-- @if($latestProduct)
                                     <tr>
                                         <td>{{ $latestProduct->product_name }}</td>
                                     </tr>
@@ -114,7 +114,18 @@
                                     <tr>
                                         <td>No Latest Product Found</td>
                                     </tr>
-                                    @endif
+                                    @endif --}}
+                                    @forelse($latestProduct as $product)
+                                    <tr>
+                                        <td>
+                                            {{ $product->product_name }}
+                                        </td>
+                                    </tr>
+                                    @empty
+                                    <tr>
+                                        <td>No Latest Product Found</td>
+                                    </tr>
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>
@@ -125,12 +136,12 @@
                                 <thead>
                                     <tr>
                                         <th class="table-head" style="background-color: #62b613; color: #ffffff; font-weight:bold;">
-                                            PRODUCT SPECS (1+ Month Old)
+                                            LATEST PRODUCT SPECIFICATIONS
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody style="display: block; max-height: 200px; overflow-y: auto; width: 100%; height: auto; scrollbar-width: thin;">
-                                    @forelse($olderSpecs as $spec)
+                                    @forelse($latestProductSpec as $spec)
                                     <tr>
                                         <td>
                                             {{ $spec->specification_name }}
