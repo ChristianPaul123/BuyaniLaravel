@@ -146,6 +146,7 @@
                                     </select>
                                 </div>
                                 <input type="hidden" name="removed_images" id="removed_images">
+                                <input type="hidden" name="product_status" value="1">
 
                                 {{-- Submit Button --}}
                                 <div class="form-group">
