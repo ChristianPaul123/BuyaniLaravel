@@ -22,12 +22,12 @@ public function showConsumerBlogs()
     }
 
     // Fetch the latest blog for the main display
-    $latestBlog = Blog::orderBy('created_at', 'desc')->first();
+    $latestBlog = Blog::where('deactivated_status', 0)->orderBy('created_at', 'desc')->first();
 
     // Check if there are any blogs
     if (!$latestBlog) {
         // Return an empty paginator with the correct page settings
-        $blogs = Blog::paginate(2); // This will give a paginator, but with no results.
+        $blogs = Blog::where('deactivated_status', 0)->paginate(2); // This will give a paginator, but with no results.
         return view('blogs-consumer', [
             'latestBlog' => null,
             'blogs' => $blogs,
@@ -59,7 +59,7 @@ public function showFarmerBlogs()
     }
 
     // Fetch the latest blog for the main display and paginate the rest
-    $latestBlog = Blog::orderBy('created_at', 'desc')->first();
+    $latestBlog = Blog::where('deactivated_status', 0)->orderBy('created_at', 'desc')->first();
     if (!$latestBlog) {
         // Return an empty paginator with the correct page settings
         $blogs = Blog::paginate(2); // This will give a paginator, but with no results.
@@ -69,7 +69,7 @@ public function showFarmerBlogs()
             'message' => 'No blogs are currently available. Check back later!',
         ]);
     }
-    $blogs = Blog::where('id', '!=', $latestBlog->id)->orderBy('created_at', 'desc')->paginate(2);
+    $blogs = Blog::where('deactivated_status', 0)->where('id', '!=', $latestBlog->id)->orderBy('created_at', 'desc')->paginate(2);
 
     return view('blogs-farmer', [
         'latestBlog' => $latestBlog,
