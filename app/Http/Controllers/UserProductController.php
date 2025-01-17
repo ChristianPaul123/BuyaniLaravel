@@ -49,7 +49,7 @@ class UserProductController extends Controller
     public function viewConsumerProduct($encryptedId) {
         try {
             $id = Crypt::decrypt($encryptedId);
-            $product = Product::with('category', 'subcategory', 'productImages', 'productSpecification', 'inventory')->findOrFail($id);
+            $product = Product::with('category', 'subcategory', 'productImages', 'productSpecification', 'inventory')->where('deactivated_status', 0)->findOrFail($id);
             $categories = Category::all();
             $subcategories = SubCategory::all();
 
