@@ -129,18 +129,6 @@
                                 <!-- Individual Checkbox -->
                                 <input type="checkbox" wire:click="selectItem({{ $item->id }})" value="{{ $item->id }}" {{ in_array($item->id, $selectedItems) ? 'checked' : '' }}>
                             </div>
-
-                            <div>
-                                <h5>Selected Items:</h5>
-                                @foreach ($selectedItems as $selectedItemId)
-                                    @php
-                                        $selectedItem = $cartItems->firstWhere('id', $selectedItemId);
-                                    @endphp
-                                    @if($selectedItem)
-                                        <p>{{ $selectedItem->productSpecification->specification_name }}</p>
-                                    @endif
-                                @endforeach
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -200,6 +188,22 @@
 
                     </div>
                 </div>
+                <div class="card text-start">
+                    <div class="card-body">
+                        <div>
+                            <h5>Selected Items:</h5>
+                            @foreach ($selectedItems as $selectedItemId)
+                                @php
+                                    $selectedItem = $cartItems->firstWhere('id', $selectedItemId);
+                                @endphp
+                                @if($selectedItem)
+                                    <p>{{ $selectedItem->productSpecification->specification_name }} - {{ $selectedItem->quantity }}x</p>
+                                @endif
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>

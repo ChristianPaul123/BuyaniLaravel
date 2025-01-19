@@ -89,11 +89,11 @@ class UserController extends Controller
 
     // Check user_type and redirect accordingly
     if ($user->user_type == 1) {
-        return redirect('/user/login?user_type=1')->with('message', 'Successfully logged out');
+        return redirect('/user/login?user_type=1')->with('success', 'Successfully logged out');
     } elseif ($user->user_type == 2) {
-        return redirect('/user/login?user_type=2')->with('message', 'Successfully logged out');
+        return redirect('/user/login?user_type=2')->with('success', 'Successfully logged out');
     } else {
-        return redirect('/')->with('message', 'Successfully logged out');
+        return redirect('/')->with('success', 'Successfully logged out');
     }
     }
 

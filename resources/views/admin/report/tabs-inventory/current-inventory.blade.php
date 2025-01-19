@@ -28,7 +28,7 @@
                     <td>{{ $inventory->product_total_stock }}</td>
                     <td>{{ $inventory->product_sold_stock }}</td>
                     <td>{{ $inventory->product_damage_stock }}</td>
-                    <td>${{ $inventory->total_profit }}</td>
+                    <td>₱{{ $inventory->total_profit }}</td>
                     <td>{{ $inventory->created_at->format('F Y') }}</td>
                 </tr>
                 @endforeach

@@ -163,26 +163,26 @@ class ProductShow extends Component
 
         // If a category is filtered
         if ($this->action == 1) {
-            $query->where('product_status', 1)
+            $query->where('product_status', 1)->where('deactivated_status',0)
                   ->where('category_id', $this->filteredCategoryId);
             $this->title = "Products in {$this->category->category_name}";
         }
         // If a subcategory is filtered
         else if ($this->action == 2) {
-            $query->where('product_status', 1)
+            $query->where('product_status', 1)->where('deactivated_status',0)
                   ->where('subcategory_id', $this->filteredSubcategoryId);
             $this->title = "Products in {$this->subcategory->sub_category_name}";
         }
         // If a search filter is applied
         else if ($this->action == 3) {
             $this->reset(['subcategory', 'category','filteredSubcategoryId','filteredCategoryId']);
-            $query->where('product_status', 1)
+            $query->where('product_status', 1)->where('deactivated_status',0)
                   ->where('product_name', 'like', '%' . $this->searchFilter . '%');
             $this->title = "Search results for '{$this->searchFilter}'";// Clear search query after applying filter
         }
         // Default: Show all products
         else {
-            $query->where('product_status', 1);
+            $query->where('product_status', 1)->where('deactivated_status',0);
             $this->title = "All Products";
         }
 

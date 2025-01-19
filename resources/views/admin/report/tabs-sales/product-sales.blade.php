@@ -20,7 +20,7 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $sale->product->product_name ?? 'No Product' }}</td>
                     <td>{{ $sale->order_count }}</td>
-                    <td>${{ $sale->total_sales }}</td>
+                    <td>₱{{ $sale->total_sales }}</td>
                     <td>{{ \Carbon\Carbon::parse($sale->date)->format('M d, Y') }}</td>
                 </tr>
                 @endforeach
@@ -29,7 +29,7 @@
                 <tr>
                     {{-- Adjust colspan or positioning as needed --}}
                     <th colspan="3" class="text-end">Total:</th>
-                    <th>${{ $productSales->sum('total_sales') }}</th>
+                    <th>₱{{ $productSales->sum('total_sales') }}</th>
                     <th></th>
                 </tr>
             </tfoot>

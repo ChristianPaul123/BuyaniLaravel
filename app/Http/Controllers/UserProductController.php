@@ -20,30 +20,30 @@ class UserProductController extends Controller
 {
     public function showConsumerProduct()
     {
-        try {
-            $categories = Category::all();
-            $subcategories = SubCategory::all();
-            $products = Product::with('inventory')
-                ->where('product_status', 1)
-                ->get();
+        // try {
+        //     $categories = Category::all();
+        //     $subcategories = SubCategory::all();
+        //     $products = Product::with('inventory')
+        //         ->where('product_status', 1)
+        //         ->get();
 
-            if ($products->isEmpty()) {
-                return view('user.consumer.product.show', [
-                    'products' => $products,
-                    'categories' => $categories,
-                    'subcategories' => $subcategories,
-                    // 'message' => 'Sorry, there are no products available at the moment.'
-                ]);
-            }
+        //     if ($products->isEmpty()) {
+        //         return view('user.consumer.product.show', [
+        //             'products' => $products,
+        //             'categories' => $categories,
+        //             'subcategories' => $subcategories,
+        //             // 'message' => 'Sorry, there are no products available at the moment.'
+        //         ]);
+        //     }
 
             return view('user.consumer.product.show', [
-                'products' => $products,
-                'categories' => $categories,
-                'subcategories' => $subcategories
+                // 'products' => $products,
+                // 'categories' => $categories,
+                // 'subcategories' => $subcategories
             ]);
-        } catch (\Exception $e) {
-            return back()->with('error', 'An error occurred while retrieving products.');
-        }
+        // } catch (\Exception $e) {
+        //     return back()->with('error', 'An error occurred while retrieving products.');
+        // }
     }
 
     public function viewConsumerProduct($encryptedId) {

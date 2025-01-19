@@ -22,7 +22,7 @@
                     <td>{{ $record->product_sold_stock }}</td>
                     <td>{{ $record->product_damage_stock }}</td>
                     <td>{{ $record->product_total_stock }}</td>
-                    <td>${{ $record->total_profit }}</td>
+                    <td>₱{{ $record->total_profit }}</td>
                     <td>{{ \Carbon\Carbon::parse($record->transfer_date)->format('F Y') }}</td>
                 </tr>
                 @endforeach
