@@ -142,7 +142,7 @@
                             <h5 class="card-title">{{ $latestBlog->blog_title }}</h5>
                             <p class="card-text">{{ Str::limit($latestBlog->blog_info, 100) }}</p>
                             <p class="text-muted">{{ $latestBlog->admin->username }} |
-                                {{ \Carbon\Carbon::parse($latestBlog->created_at)->format('M d, Y') }}</p>
+                                {{ $latestBlog->created_at->diffForHumans() }}</p>
                         </div>
                     </div>
                 @else
