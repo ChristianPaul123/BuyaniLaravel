@@ -235,12 +235,11 @@
                     </div>
                 @endif
                 {{-- Seventh Row: Actions --}}
-                @if ($order->order_type == 1 &&
+                {{-- @if ($order->order_type == 1 &&
                         ($order->order_status === \App\Models\Order::STATUS_TO_PAY
                             || $order->order_status === \App\Models\Order::STATUS_TO_SHIP
-                            || $order->order_status === \App\Models\Order::OUT_FOR_DELIVERY
                         )
-                    ) {{-- Delivery --}}
+                    )
                     <div class="row mb-4">
                         <div class="col-12 text-center">
                             <form action="{{ route('admin.orders.reject', $order->id) }}" method="GET" style="display:inline-block;">
@@ -249,7 +248,7 @@
                             </form>
                         </div>
                     </div>
-                @endif
+                @endif --}}
         </section>
     </div>
 </div>

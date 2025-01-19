@@ -83,7 +83,7 @@
                                 <i class="fa fa-edit fa-sm"></i> Edit
                             </a> --}}
 
-                            {{-- Delete Order --}}
+                            {{-- Archive Order --}}
                             <form id="archiveOrderForm" action="{{ route('admin.orders.archive', $order->id) }}"
                                 method="POST"
                                 class="d-inline">

@@ -32,7 +32,7 @@ class GenerateMonthlySuggestProductReports extends Command
     VotingCount::query()->update([
         'max_vote_count' => 5,
         'remaining_vote_count' => 5,
-        'suggest_count' => 1,
+        'suggest_count' => 3,
     ]);
 
     // Fetch top 10 suggest products with the highest vote count

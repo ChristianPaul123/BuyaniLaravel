@@ -128,7 +128,7 @@ class VotedProductsController extends Controller
             [ // Default values if the instance is created
                 'max_vote_count' => 5,
                 'remaining_vote_count' => 5,
-                'suggest_count' => 1,
+                'suggest_count' => 3, //setting the max count to three instead of 1
             ]
         );
 

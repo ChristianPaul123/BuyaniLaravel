@@ -168,7 +168,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{ $blog->blog_title }}</h5>
                                 <p class="text-muted">{{ $blog->admin->username }} |
-                                    {{ \Carbon\Carbon::parse($blog->created_at)->format('M d, Y') }}</p>
+                                    {{ $blog->created_at->diffForHumans() }}</p>
                             </div>
                         </div>
                     </div>
